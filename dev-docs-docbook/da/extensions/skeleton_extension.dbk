@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>phpBB Skeleton Extension</title>
+  </articleinfo>
+  <para>
+    Skeleton Extension er et værktøj til extension-udviklere. Dets
+    formål er at give dine extension-udviklingsprojekter en hurtig
+    start.
+  </para>
+  <para>
+    Hvad er et skeleton? Det er en fungerende boilerplate-extension. Når
+    du vil begynde udviklingen af en extension, genererer oprettelsen af
+    et skeleton de fleste af de indledende filer, du har brug for, så du
+    ikke selv skal gøre det.
+  </para>
+  <para>
+    Det betyder, at du kan springe direkte ud i at skrive kode til din
+    extension og springe over den kedelige opgave med selv at oprette de
+    indledende filer, metoder og docblocks.
+  </para>
+  <para>
+    Har du aldrig skrevet en extension før, giver et skeleton en ideel
+    måde at komme i gang med din første. Erfarne udviklere vil også
+    elske det, da de ikke længere skal kopiere og indsætte kode fra
+    deres eksisterende extensions for at starte nye.
+  </para>
+  <para>
+    Al kode, der genereres af Skeleton Extension, er fuldt dokumenteret
+    og repræsenterer phpBB Extension Teams bedste praksis for
+    extension-kodning.
+  </para>
+  <para>
+    Sørg for at kigge på og gøre dig fortrolig med phpBB's
+    <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/">valideringspolitikker
+    for extensions</ulink> og
+    <ulink url="https://area51.phpbb.com/docs/dev/master/development/index.html">kodningsretningslinjer</ulink>.
+  </para>
+  <sect1 id="how-to-install">
+    <title>Sådan installeres den</title>
+    <para>
+      phpBB's Skeleton Extension er ligesom enhver anden extension og
+      installeres i et phpBB-board på nøjagtig samme måde som enhver
+      anden extension.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Skeleton Extension er beregnet til at blive installeret i et
+        phpBB-board, der bruges til offline/lokal udvikling af
+        extensions. Den er ikke nødvendigvis beregnet til at blive
+        installeret på live/produktionswebsteder.
+      </para>
+    </note>
+    <sect2 id="installation">
+      <title>Installation</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <ulink url="https://www.phpbb.com/customise/db/official_tool/ext_skeleton/">Download
+            den seneste udgivelse</ulink>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Udpak den, og installer den i din phpBB-mappe
+            <literal>ext/</literal>, f.eks.
+            <literal>phpBB/ext/phpbb/skeleton</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Gå i phpBB til &quot;ACP&quot; &gt; &quot;Customise&quot;
+            &gt; &quot;Extensions&quot;, og aktivér &quot;phpBB Skeleton
+            Extension&quot;.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="create-an-extension">
+    <title>Opret en extension</title>
+    <important>
+      <title>Vigtigt</title>
+      <para>
+        Skeleton Extension genererer fungerende klasser og metoder, som
+        er beregnet til at gøre skeletonet nominelt funktionelt og, endnu
+        vigtigere, instruktivt.
+      </para>
+      <para>
+        Denne dokumentation antager, at vi opretter Acme
+        Demo-extensionen med vendor/pakke-navngivningsstrukturen
+        <literal>acme/demo</literal>. De fleste fil-, funktions-, klasse-,
+        tabel- og variabelnavne udfyldes med de angivne vendor- og
+        pakkenavne.
+      </para>
+      <para>
+        Det genererede skeleton er kun et udgangspunkt! Du bør altid
+        gennemgå den skeleton-kode, du genererer, og opdatere, redigere
+        eller fjerne den kode, du ikke har brug for, når du begynder at
+        udvikle din extension.
+      </para>
+    </important>
+    <sect2 id="phpbb-web-interface">
+      <title>phpBB's webinterface</title>
+      <para>
+        Den nemmeste måde at bruge Skeleton Extension på er fra dens
+        webbaserede brugerinterface (UI).
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/skeleton-web-ui.png" width="500px" />
+          </imageobject>
+          <textobject>
+            <phrase>image</phrase>
+          </textobject>
+        </inlinemediaobject>
+      </para>
+      <para>
+        For at oprette en extension via webinterfacet skal du åbne det
+        phpBB-board, du har installeret denne extension i, og besøge
+        linket &quot;Create skeleton extension&quot; i boardets
+        navigationslinje.
+      </para>
+      <para>
+        Du vil blive præsenteret for en formular, hvor du kan indtaste
+        information om den extension, du vil oprette. Udfyld formularen,
+        og indsend den.
+      </para>
+      <para>
+        En pakket ZIP-fil begynder at blive downloadet i din browser.
+        Derudover kan en kopi findes i
+        <literal>phpBB/store/tmp-ext/</literal>.
+      </para>
+      <para>
+        Udpak dit skeleton-extension, og begynd at skrive din egen kode.
+      </para>
+    </sect2>
+    <sect2 id="command-line-interface">
+      <title>Kommandolinjegrænseflade</title>
+      <para>
+        Skeleton Extension kan også bruges af de brugere, der foretrækker
+        at arbejde fra en kommandolinjegrænseflade (Command Line
+        Interface, CLI).
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/skeleton-cli.png" width="500px" />
+          </imageobject>
+          <textobject>
+            <phrase>image</phrase>
+          </textobject>
+        </inlinemediaobject>
+      </para>
+      <para>
+        For at oprette en extension via CLI'en skal du åbne en konsol på
+        din server og bruge <literal>cd</literal> til at gå til rodmappen
+        for det phpBB-board, hvor du har installeret denne extension:
+      </para>
+      <programlisting>
+$ cd ./path/to/phpBB
+</programlisting>
+      <para>
+        For at oprette en extension skal du køre:
+      </para>
+      <programlisting>
+$ ./bin/phpbbcli.php extension:create
+</programlisting>
+      <para>
+        Du bliver bedt om at indtaste information om den extension, du
+        vil oprette.
+      </para>
+      <para>
+        Din extension gemmes i <literal>phpBB/store/tmp-ext/</literal>.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="documentation">
+    <title>Dokumentation</title>
+    <para>
+      Følgende dokumentation beskriver, hvordan du bruger Skeleton
+      Extension til at konfigurere og generere et skeleton, der passer
+      til dine behov, så du kan springe direkte ud i at skrive din egen
+      kode.
+    </para>
+    <sect2 id="extension-packaging">
+      <title>Pakning af extensions</title>
+      <para>
+        Extensions pakkes i en mappestruktur som følger:
+        <literal>vendorname/extensionname</literal>. Acme
+        Demo-extensionen bruger f.eks. en pakkestruktur, der ser sådan
+        ud: <literal>acme/demo</literal>.
+      </para>
+      <sect3 id="vendor-name">
+        <title>Vendor-navn</title>
+        <para>
+          Vendor-navnet kan være dit brugernavn eller et hvilket som
+          helst andet navn, du vælger at forbinde dine extensions med.
+          Gyldige navngivningskonventioner skal starte med et bogstav og
+          kun indeholde bogstaver og tal. I tilfældet med Acme
+          Demo-extensionen ville dette være <literal>acme</literal>.
+          <emphasis role="strong">Dette felt er obligatorisk.</emphasis>
+        </para>
+      </sect3>
+      <sect3 id="package-name">
+        <title>Pakkenavn</title>
+        <para>
+          Pakkenavnet er navnet på extensionen. Gyldige
+          navngivningskonventioner skal starte med et bogstav og kun
+          indeholde bogstaver og tal. I tilfældet med Acme
+          Demo-extensionen ville dette være <literal>demo</literal>.
+          <emphasis role="strong">Dette felt er obligatorisk.</emphasis>
+        </para>
+      </sect3>
+      <sect3 id="display-name">
+        <title>Visningsnavn</title>
+        <para>
+          Dette er navnet (eller titlen) på din extension på almindeligt
+          engelsk. Dette er det, brugeren ser, når din extension vises i
+          phpBB's ACP Extension Manager. I tilfældet med Acme
+          Demo-extensionen ville dette være
+          <literal>Acme Demo</literal>. <emphasis role="strong">Dette
+          felt er obligatorisk.</emphasis>
+        </para>
+      </sect3>
+      <sect3 id="description">
+        <title>Beskrivelse</title>
+        <para>
+          En kort beskrivelse af din extension. Denne vises for brugere
+          på detaljesiden for din extension i phpBB's ACP Extension
+          Manager.
+        </para>
+      </sect3>
+      <sect3 id="version">
+        <title>Version</title>
+        <para>
+          Versionen af din extension. phpBB's kodningsretningslinjer
+          kræver et semantisk versioneringsformat
+          <literal>x.y.z</literal>, med valgfrie suffikser for
+          pre-release: <literal>-dev</literal>,
+          <literal>-alpha</literal>, <literal>-beta</literal> og
+          <literal>-RC</literal>. Efterlades feltet tomt, bruger
+          Skeleton Extension som standard
+          <literal>1.0.0-dev</literal>.
+        </para>
+      </sect3>
+      <sect3 id="date-of-the-extension">
+        <title>Extensionens dato</title>
+        <para>
+          Den dato, extensionen udgives på. Datoer skal være i formatet
+          <literal>YYYY-MM-DD</literal>. Efterlades feltet tomt, bruger
+          Skeleton Extension som standard den aktuelle dato.
+        </para>
+      </sect3>
+      <sect3 id="homepage-of-the-extension">
+        <title>Extensionens hjemmeside</title>
+        <para>
+          Et valgfrit link til din extensions hjemmeside. Dette kan
+          f.eks. være en extensions GitHub-repository eller et andet
+          websted relateret til din extension.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="authors">
+      <title>Forfattere</title>
+      <para>
+        Her kan du angive navnet på din extensions forfatter(e). Brug
+        knappen <literal>Add author</literal> til at tilføje flere
+        forfattere.
+      </para>
+      <sect3 id="author-name">
+        <title>Forfatternavn</title>
+        <para>
+          Navnet på en extensions forfatter. Må ikke stå tomt.
+        </para>
+      </sect3>
+      <sect3 id="author-email">
+        <title>Forfatterens e-mail</title>
+        <para>
+          E-mailadressen for en extensions forfatter. (valgfri)
+        </para>
+      </sect3>
+      <sect3 id="author-homepage">
+        <title>Forfatterens hjemmeside</title>
+        <para>
+          URL'en til hjemmesiden for en extensions forfatter. (valgfri)
+        </para>
+      </sect3>
+      <sect3 id="author-role">
+        <title>Forfatterens rolle</title>
+        <para>
+          Rollen for en extensions forfatter. For eksempel lead
+          developer, bidragyder, oversætter osv. (valgfri)
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="requirements">
+      <title>Krav</title>
+      <para>
+        Under Krav definerer du de mindste (og højeste) PHP- og
+        phpBB-versioner, din extension skal kunne fungere med.
+      </para>
+      <sect3 id="minimum-phpbb-requirement-of-the-extension">
+        <title>Extensionens mindste phpBB-krav</title>
+        <para>
+          Dette bør typisk sættes til den version af phpBB, du udvikler
+          og tester din extension i.
+        </para>
+        <para>
+          Versionen bør defineres ved hjælp af
+          <ulink url="https://getcomposer.org/doc/articles/versions.md">Composers
+          versionsbegrænsninger</ulink>.
+        </para>
+        <para>
+          For eksempel, for at kræve phpBB 3.1.4 eller nyere, bruges
+          <literal>&gt;=3.1.4</literal>.
+        </para>
+      </sect3>
+      <sect3 id="maximum-phpbb-requirement-of-the-extension">
+        <title>Extensionens højeste phpBB-krav</title>
+        <para>
+          For at afbøde kompatibilitetsbrud er det almindeligt at sætte
+          den højeste version til den næste hovedudgivelsesversion af
+          phpBB.
+        </para>
+        <para>
+          Hvis din extension f.eks. udvikles til phpBB 3.1.x, kan du
+          sætte det højeste krav til phpBB 3.2.x ved at bruge
+          <literal>&lt;3.2.0@dev</literal>.
+        </para>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            I øjeblikket håndhæver phpBB ikke automatisk de mindste og
+            højeste krav. Dette vil dog begynde at blive håndhævet i en
+            fremtidig udgivelse. I mellemtiden er det muligt at bruge
+            metoden <literal>is_enableable()</literal> i klassen
+            <literal>ext.php</literal> til at
+            <ulink url="https://github.com/phpbb-extensions/boardrules/blob/master/ext.php#L29-L43">håndhæve
+            de mindste og højeste krav</ulink>.
+          </para>
+        </note>
+      </sect3>
+      <sect3 id="php-requirement-of-the-extension">
+        <title>Extensionens PHP-krav</title>
+        <para>
+          Da din extension vil køre inden for phpBB, er det ofte sikkert
+          at antage, at din extension vil dele samme minimums-PHP-krav
+          som phpBB. Som standard bruger dette felt derfor
+          <literal>&gt;=5.3.3</literal>, medmindre du angiver en anden
+          version.
+        </para>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            Du kan finde phpBB's PHP-krav ved at kigge i dens
+            composer.json-fil.
+          </para>
+        </note>
+      </sect3>
+    </sect2>
+    <sect2 id="components">
+      <title>Komponenter</title>
+      <para>
+        Standard Skeleton Extension genererer en licensfil og
+        composer.json. I sektionen Components kan du vælge mellem en
+        række typiske komponenter, en extension kan have brug for, såsom
+        et ACP-modul, migrations, events og opgaver som cron, CLI og
+        notifikationer. Filerne, der genereres til disse komponenter, er
+        enkle, men fuldt fungerende eksempler baseret på Acme
+        Demo-extensionen. De er beregnet til at give dig et konsistent og
+        phpBB-kodeklart udgangspunkt, så du kan fokusere mere på at
+        skrive din kode og mindre på filstruktur og organisering.
+      </para>
+    </sect2>
+    <sect2 id="php-event-listeners">
+      <title>PHP-event-listeners</title>
+      <para>
+        PHP-event-listeners arbejder med kerneevents for at indsprøjte
+        kode i phpBB. Kerneevents er som hooks og findes overalt i phpBB's
+        kodebase på nøglepunkter. De giver din extension adgang til
+        phpBB's variabler og lader dig bruge og ændre dem eller
+        indsprøjte yderligere PHP-kode under phpBB's afvikling.
+      </para>
+      <para>
+        Skeleton Extension genererer en eksempel-PHP-fil med en
+        event-listener og den nødvendige YAML-fil med services:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config                 # The config dir contains all service config files
+│   │   ├── services.yml       # A config YAML file
+│   │   └── ...
+│   ├── event                  # The event dir contains all PHP event listeners
+│   │   ├── main_listener.php  # A sample PHP event listener
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="style-event-listeners">
+      <title>Typografi-event-listeners</title>
+      <para>
+        Typografi-listeners bruger skabelon-events til at indsprøjte
+        HTML, JS og CSS i phpBB's typografifiler. Typografi-listeners
+        skal ligge i en mappe ved navn <literal>event</literal> for at
+        blive genkendt som et skabelonevent. Alle filer uden for mappen
+        <literal>event</literal> betragtes som almindelige
+        typografifiler.
+      </para>
+      <para>
+        Mappen <literal>all/</literal> indeholder typografifiler, der
+        kan bruges af alle/enhver typografi.
+      </para>
+      <para>
+        Mappen <literal>prosilver/</literal> indeholder typografifiler
+        specifikt til prosilver (og enhver typografi, der nedarver fra
+        prosilver).
+      </para>
+      <para>
+        Mappen <literal>subsilver2/</literal> indeholder typografifiler
+        specifikt til subsilver2 (og enhver typografi, der nedarver fra
+        subsilver2).
+      </para>
+      <para>
+        Skeleton Extension genererer en eksempel-HTML-fil med en
+        skabelon-event-listener til prosilver:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── styles                         # The styles dir
+│   │   ├── prosilver                  # Dir containing prosilver style files
+│   │   │   ├── template               # Dir containing HTML template files
+│   │   │   │   ├── event              # Dir containing template event files
+│   │   │   │   │   ├── overall_header_navigation_prepend.html  # A template event
+│   │   │   │   │   └── ...
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="administration-control-panel-acp">
+      <title>Administration Control Panel (ACP)</title>
+      <para>
+        Tilføj et fungerende ACP-modul for en extension til ACP'ens
+        Extensions-fane.
+      </para>
+      <para>
+        Skeleton Extension genererer alle de filer, der er nødvendige
+        for et fungerende ACP-modul, herunder dets migration, sprog,
+        typografi og PHP-filer:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── acp                          # Dir containing ACP module PHP files
+│   │   ├── main_info.php            # Module information
+│   │   ├── main_module.php          # Module execution logic
+│   │   └── ...
+│   ├── adm                          # Dir containing ACP module HTML templates
+│   │   ├── style                    # ACP templates are loaded from the style dir
+│   │   │   ├── acp_demo_body.html   # Sample ACP HTML template file
+│   │   │   └── ...
+│   │   └── ...
+│   ├── controller                   # Dir containing controller files
+│   │   ├── acp_controller.php       # A sample ACP controller class
+│   │   └── ...
+│   ├── language                     # Dir containing language files
+│   │   ├── en                       # English language files (required)
+│   │   │   ├── common.php           # A language file used by the extension
+│   │   │   ├── info_acp_demo.php    # An auto-loaded lang file for ACP modules
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations                   # Dir containing migration files
+│   │   ├── install_acp_module.php   # A migration installing the ACP module
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          ACP'en er endnu ikke en del af phpBB's containerbaserede
+          dependency-injection-system, så den bruger ikke en YAML-fil
+          med services.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="moderator-control-panel-mcp">
+      <title>Moderator Control Panel (MCP)</title>
+      <para>
+        Tilføj et fungerende MCP-modul for en extension til MCP'en.
+      </para>
+      <para>
+        Skeleton Extension genererer alle de filer, der er nødvendige
+        for et fungerende MCP-modul, herunder dets migration, sprog,
+        typografi og PHP-filer:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── controller                      # Dir containing controller files
+│   │   ├── mcp_controller.php          # A sample MCP controller class
+│   │   └── ...
+│   ├── language                        # Dir containing language files
+│   │   ├── en                          # English language files (required)
+│   │   │   ├── info_mcp_demo.php       # An auto-loaded lang file for MCP modules
+│   │   │   └── ...
+│   │   └── ...
+│   ├── mcp                             # Dir containing MCP module PHP files
+│   │   ├── main_info.php               # Module information
+│   │   ├── main_module.php             # Module execution logic
+│   │   └── ...
+│   ├── migrations                      # Dir containing migration files
+│   │   ├── install_mcp_module.php      # A migration installing the MCP module
+│   │   └── ...
+│   ├── styles                          # The styles dir
+│   │   ├── prosilver                   # Dir containing prosilver style files
+│   │   │   ├── template                # Dir containing HTML template files
+│   │   │   │   ├── mcp_demo_body.html  # Sample MCP HTML template file
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          MCP'en er endnu ikke en del af phpBB's containerbaserede
+          dependency-injection-system, så den bruger ikke en YAML-fil
+          med services.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="user-control-panel-ucp">
+      <title>User Control Panel (UCP)</title>
+      <para>
+        Tilføj et fungerende UCP-modul for en extension til UCP'en.
+      </para>
+      <para>
+        Skeleton Extension genererer alle de filer, der er nødvendige
+        for et fungerende UCP-modul, herunder dets migration, sprog,
+        typografi og PHP-filer:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── controller                      # Dir containing controller files
+│   │   ├── ucp_controller.php          # A sample UCP controller class
+│   │   └── ...
+│   ├── language                        # Dir containing language files
+│   │   ├── en                          # English language files (required)
+│   │   │   ├── info_ucp_demo.php       # An auto-loaded lang file for UCP modules
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations                      # Dir containing migration files
+│   │   ├── install_ucp_module.php      # A migration installing the UCP module
+│   │   ├── install_sample_schema.php   # Contains changes used in the new module
+│   │   └── ...
+│   ├── styles                          # The styles dir
+│   │   ├── prosilver                   # Dir containing prosilver style files
+│   │   │   ├── template                # Dir containing HTML template files
+│   │   │   │   ├── ucp_demo_body.html  # Sample UCP HTML template file
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   ├── ucp                             # Dir containing UCP module PHP files
+│   │   ├── main_info.php               # Module information
+│   │   ├── main_module.php             # Module execution logic
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          UCP'en er endnu ikke en del af phpBB's containerbaserede
+          dependency-injection-system, så den bruger ikke en YAML-fil
+          med services.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="database-migration">
+      <title>Databasemigration</title>
+      <para>
+        Migrationsfiler bruges til at foretage databaseændringer. Dette
+        omfatter tilføjelse af data til tabeller og skemaændringer
+        (som er ændringer af databasens tabeller og kolonner).
+      </para>
+      <para>
+        Skeleton Extension genererer alle sine eksempelmigrationsfiler:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── migrations                      # Dir containing migration files
+│   │   ├── install_acp_module.php      # A migration installing the ACP module
+│   │   ├── install_mcp_module.php      # A migration installing the MCP module
+│   │   ├── install_ucp_module.php      # A migration installing the UCP module
+│   │   ├── install_sample_schema.php   # Sample schema changes to the database
+│   │   ├── install_sample_data.php     # Sample data changes to the database
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="service">
+      <title>Service</title>
+      <para>
+        Service-komponenten er en PHP-klasse, der gør noget bag
+        kulisserne. Det er en klasse, der kan tilgås af controllere,
+        event-listeners eller kontrolpanelmoduler.
+      </para>
+      <para>
+        Skeleton Extension genererer en eksempelklasse, der blot
+        returnerer det aktuelle brugerobjekt. Den viser, hvordan
+        dependency injection bruges til services og parametre, og
+        indeholder derfor eksempel-YAML-filer med config og parametre:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config              # The config dir contains all service config files
+│   │   ├── parameters.yml  # A parameter YAML file
+│   │   ├── services.yml    # A config YAML file
+│   │   └── ...
+│   ├── service.php         # A sample PHP file that contains a class/object
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="controller-front-page">
+      <title>Controller (forside)</title>
+      <para>
+        Controllere bruges typisk til brugervendte filer/klasser. De
+        kører den kode, der producerer en ny og fuldstændig side, som
+        brugeren skal interagere med. Eksempler på brugervendte sider,
+        en extension kan bruge, omfatter en nyhedsside, en blog, en FAQ
+        osv.
+      </para>
+      <para>
+        Skeleton Extension genererer en brugervendt side, der viser en
+        "Hello world"-besked til brugeren. Denne komponent inkluderer
+        HTML-skabelonfilen til siden, PHP- og
+        skabelon-event-listeners (der demonstrerer, hvordan man
+        tilføjer et link til den nye side i navigationslinjen),
+        sprogfilen samt YAML-filerne til config og routing:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config              # The config dir contains all service config files
+│   │   ├── routing.yml     # A routing YAML file
+│   │   ├── services.yml    # A config YAML file
+│   │   └── ...
+│   ├── controller               # Dir containing controller files
+│   │   ├── main_controller.php  # A sample controller class
+│   │   └── ...
+│   ├── event                  # The event dir contains all PHP event listeners
+│   │   ├── main_listener.php  # A sample PHP event listener
+│   │   └── ...
+│   ├── language               # Dir containing language files
+│   │   ├── en                 # English language files (required)
+│   │   │   ├── common.php     # A language file used by the extension
+│   │   │   └── ...
+│   │   └── ...
+│   ├── styles                      # The styles dir
+│   │   ├── prosilver               # Dir containing prosilver style files
+│   │   │   ├── template            # Dir containing HTML template files
+│   │   │   │   ├── demo_body.html  # An HTML template used by the controller
+│   │   │   │   ├── event           # Dir containing template event files
+│   │   │   │   │   ├── overall_header_navigation_prepend.html  # A template event
+│   │   │   │   │   └── ...
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="extension-base-ext.php">
+      <title>Extension-basis (ext.php)</title>
+      <para>
+        Den valgfrie fil <literal>ext.php</literal> kan bruges til at
+        køre kode før eller under installations- og
+        fjernelsesoperationer for extensionen. Dette er mest nyttigt,
+        hvis din extension skal køre kode, når den aktiveres,
+        deaktiveres eller renses. Extensions har også brugt den til at
+        kontrollere, om phpBB opfylder extensionens krav, før
+        installationen fortsætter, til at definere klassekonstanter og
+        mere.
+      </para>
+      <para>
+        Skeleton Extension genererer en eksempelklasse
+        <literal>ext.php</literal>. Denne klasse er som standard tom, men
+        kan udfyldes med metoder, når den bruges sammen med andre
+        komponenter (såsom Notifications):
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── ext.php  # A sub class. The class and file name can not be changed.
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="console-command">
+      <title>Konsolkommando</title>
+      <para>
+        Extensions kan tilføje deres egne kommandoer til phpBB's
+        kommandolinjegrænseflade (CLI). Dette er nyttigt for extensions,
+        der kan tilbyde yderligere terminalkommandoer til at udføre
+        bestemte handlinger.
+      </para>
+      <para>
+        Skeleton Extension genererer en simpel CLI-kommando, inklusive
+        de nødvendige sprog- og config-filer:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── console            # Dir containing CLI related classes
+│   │   ├── command        # Dir containing CLI command classes
+│   │   │   ├── sample.php # A sample CLI command class
+│   │   │   └── ...
+│   │   └── ...
+│   ├── language           # Dir containing language files
+│   │   ├── en             # English language files (required)
+│   │   │   ├── cli.php    # A language file used by the extension
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="cron-task">
+      <title>Cron-opgave</title>
+      <para>
+        En cron-opgave gør det muligt for en extension at planlægge og
+        køre handlinger med bestemte tidsintervaller.
+      </para>
+      <para>
+        Skeleton Extension genererer en simpel cron-opgave, inklusive de
+        nødvendige migrations- og config-filer:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── cron               # Dir containing cron related classes
+│   │   ├── task           # Dir containing cron task classes
+│   │   │   ├── sample.php # A sample cron task class
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations            # Dir containing migration files
+│   │   ├── install_cron.php  # A migration installing cron related data
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="notifications">
+      <title>Notifikationer</title>
+      <para>
+        Notifikationer gør det muligt for en extension at notificere
+        brugere om specifikke aktiviteter gennem phpBB's
+        notifikationssystem.
+      </para>
+      <para>
+        Skeleton Extension genererer en eksempelnotifikation, inklusive
+        de nødvendige sprog- og config-filer. Derudover genereres en fil
+        <literal>ext.php</literal> med vigtige handlinger, der skal
+        køre under extensionens aktiverings-, deaktiverings- og
+        rensetrin:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── ext.php                   # Contains enable, disable and purge steps
+│   ├── language                  # Dir containing language files
+│   │   ├── en                    # English language files (required)
+│   │   │   ├── common.php        # A language file used by the extension
+│   │   │   ├── info_ucp_demo.php # A UCP language file used by the notification
+│   │   │   └── ...
+│   │   └── ...
+│   ├── notification       # Dir containing notification related classes
+│   │   ├── type           # Dir containing notification types
+│   │   │   ├── sample.php # A sample notification type class
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="permissions">
+      <title>Tilladelser</title>
+      <para>
+        Tilladelser kan bruges til at give brugere, grupper og roller
+        adgang til specifikke funktioner og funktionalitet i
+        extensionen.
+      </para>
+      <para>
+        Skeleton Extension genererer en migrationsfil, der viser
+        installationen af tilladelser på administrator-, redaktør- og
+        brugerniveau, og tildeler dem til nogle roller og brugergrupper.
+        Derudover oprettes den nødvendige sprogfil for tilladelser, samt
+        et PHP-event, der viser, hvordan tilladelser tildeles deres
+        respektive sprognøgler og tilladelseskategorier:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── event                  # The event dir contains all PHP event listeners
+│   │   ├── main_listener.php  # A sample PHP event listener
+│   │   └── ...
+│   ├── language                      # Dir containing language files
+│   │   ├── en                        # English language files (required)
+│   │   │   ├── permissions_demo.php  # A language file specifically for permissions
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations                    # Dir containing migration files
+│   │   ├── install_sample_data.php   # Sample data changes to the database
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="tests-phpunit">
+      <title>Tests (PHPUnit)</title>
+      <para>
+        Unit-tests kan teste en extension for at verificere, at bestemte
+        dele af dens kildekode fungerer korrekt. Dette hjælper med at
+        sikre grundlæggende kodeintegritet og forhindre regressioner,
+        mens en extension udvikles og fejlsøges.
+      </para>
+      <para>
+        Skeleton Extension genererer nogle grundlæggende eksempler på
+        unit- og funktionelle tests:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── phpunit.xml.dist          # A PHPUnit configuration file (do not edit)
+│   ├── tests                     # Dir containing test scripts
+│   │   ├── controller            # Example dir containing controller tests
+│   │   │   ├── main_test.php     # A simple unit test (tests a controller class)
+│   │   │   └── ...
+│   │   ├── dbal                  # Example dir containing dbal tests
+│   │   │   ├── fixtures          # Dir containing database test fixtures
+│   │   │   │   ├── config.xml    # A database test fixture of the config table
+│   │   │   │   └── ...
+│   │   │   ├── simple_test.php   # A simple test (tests a database interaction)
+│   │   │   └── ...
+│   │   ├── functional            # Dir containing functional tests
+│   │   │   ├── view_test.php     # A simple functional test
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="github-actions-ci-configuration">
+      <title>Konfiguration af GitHub Actions CI</title>
+      <para>
+        GitHub Actions giver en platform til automatisk at køre dine
+        PHPUnit-tests ved hver commit og pull request i din repository.
+      </para>
+      <para>
+        Skeleton Extension kan generere to typer af workflow-scripts,
+        alt efter dine behov:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <emphasis role="strong">GitHub Actions workflow
+            (standard):</emphasis>
+          </term>
+          <listitem>
+            <para>
+              Genererer et forenklet, genanvendeligt workflow, der
+              indeholder nogle få justerbare variabler. Du kan nemt
+              aktivere eller deaktivere de typer af tests, du vil køre.
+              Dette workflow vedligeholdes af phpBB og er designet til at
+              teste din extension mod alle de samme PHP-versioner og
+              databaser, som phpBB understøtter.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <emphasis role="strong">GitHub Actions custom workflow
+            (valgfri):</emphasis>
+          </term>
+          <listitem>
+            <para>
+              Genererer et fuldt redigerbart, selvstændigt workflow til
+              din repository. Denne mulighed giver dig fuld kontrol over
+              jobs og trin, hvilket gør den ideel, hvis du planlægger at
+              tilpasse eller udvide testprocessen.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      <programlisting>
+vendor
+├── package
+│   ├── .github            # A hidden directory to contain GitHub related files
+│   │   ├── workflows      # A directory to contain any GitHub workflows
+│   |   |   ├── tests.yml  # The test configuration script in YAML format
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Mappen <literal>.github</literal> er en skjult mappe. Du kan
+          se og tilgå den ved hjælp af et tekstredigeringsprogram eller
+          en IDE, der kan vise skjulte mapper.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="build-script-phing">
+      <title>Build-script (phing)</title>
+      <para>
+        Der genereres et phing-build-script til din extension, som kan
+        bruges til at generere build-pakker, der hjælper med at
+        forenkle udgivelses- eller udrulningsprocessen.
+      </para>
+      <para>
+        Når du f.eks. er klar til at udgive en version af din extension,
+        pakker kørsel af build-scriptet din extension i det korrekte
+        vendor/pakke-format og genererer en ZIP-fil, klar til indsendelse
+        til phpBB's Customisation Database. Det kan også rydde op i
+        filer, der ikke er beregnet til distribution, såsom unit-tests
+        og skjulte Git-filer.
+      </para>
+      <para>
+        For at køre build-scriptet skal du bruge følgende
+        konsolkommandoer:
+      </para>
+      <programlisting language="bash">
+# Navigate to the root of your extension
+$ cd ./path/to/phpBB/vendor/package
+
+# If you don't already have phing installed, get from composer:
+$ php ./path/to/composer.phar install
+
+# Run phing:
+$ ./vendor/bin/phing
+</programlisting>
+      <para>
+        Når phing har fuldført sin proces korrekt, tilføjes en mappe
+        <literal>build</literal> til din repository:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── build.xml     # A phing build configuration file
+│   ├── build         # Dir used by the build process
+│   │   ├── checkout  # A zipped archive of your current Git repository
+│   │   ├── package   # The packaged extension, as built by phing
+│   │   ├── upload    # The packaged extension, zipped for distribution
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Committer aldrig build-mappen til Git eller din repository. Du
+          bør tilføje <literal>build/</literal> til din
+          <literal>.gitignore</literal>, så Git ignorerer denne mappe.
+        </para>
+      </warning>
+    </sect2>
+  </sect1>
+</article>

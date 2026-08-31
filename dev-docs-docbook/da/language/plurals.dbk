@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Flertalsformer</title>
+  </articleinfo>
+  <sect1 id="short-example">
+    <title>Kort eksempel</title>
+    <para>
+      Det engelske sprog er meget enkelt, når det kommer til
+      flertalsformer:
+    </para>
+    <blockquote>
+      <para>
+        <emphasis>You have 0 elephants, 1 elephant, or 2+
+        elephants.</emphasis>
+      </para>
+    </blockquote>
+    <para>
+      Så grundlæggende har du 2 forskellige former: én ental og én
+      flertal.
+    </para>
+    <para>
+      Men for nogle andre sprog er dette en hel del mere kompliceret.
+      Lad os tage bosnisk som et andet eksempel:
+    </para>
+    <blockquote>
+      <para>
+        <emphasis>You have [1/21/31] slon, [2/3/4] slona, [0/5/6]
+        slonova and [7/8/9/11] ...</emphasis>
+      </para>
+    </blockquote>
+    <para>
+      Problemet med det gamle system for flertalsformer var, at man
+      skulle angive dem alle sammen og have en løkke ind i det.
+    </para>
+    <para>
+      Da vi ikke er de første udviklere, der står over for dette
+      problem, var det ikke særlig svært at finde en passende løsning.
+      Vi besluttede at bruge systemet fra
+      <ulink url="https://www.unicode.org/cldr/charts/43/supplemental/language_plural_rules.html">Unicode.org</ulink>,
+      som f.eks. bruges af Mozilla.
+    </para>
+  </sect1>
+  <sect1 id="plural-rules">
+    <title>Regler for flertalsformer</title>
+    <para>
+      Vi har derfor defineret følgende 16 regler for flertalsformer.
+      Første punkt er sprogfamilien, herefter følger en række rækker med
+      følgende format: <emphasis role="strong">&lt;key&gt; -
+      &lt;rule&gt;: &lt;example-numbers&gt;</emphasis>
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        0 håndteres som et specialtilfælde. Hvis du tilføjer en nøgle 0
+        til dit array, bruges denne i tilfælde af 0, uafhængigt af
+        flertalsreglen.
+      </para>
+    </note>
+    <sect2 id="rule-0">
+      <title>Regel #0</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Asiatisk (kinesisk, japansk, koreansk,
+            vietnamesisk), persisk, tyrkisk/altaisk (tyrkisk), thai, lao
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - alt: 0, 1, 2, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-1">
+      <title>Regel #1</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Germansk (dansk, hollandsk, engelsk, færøsk,
+            frisisk, tysk, norsk, svensk), finsk-ugrisk (estisk, finsk,
+            ungarsk), isoleret sprog (baskisk), latinsk/græsk (græsk),
+            semitisk (hebraisk), romansk (italiensk, portugisisk,
+            spansk, catalansk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - alt andet: 0, 2, 3, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-2">
+      <title>Regel #2</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Romansk (fransk, portugisisk, brasiliansk
+            portugisisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 0, 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - alt andet: 2, 3, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-3">
+      <title>Regel #3</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Baltisk (lettisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 0
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 1, undtagen 11: 1, 21, ... 101, 121, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 2, 3, ... 10, 11, 12, ... 20, 22, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-4">
+      <title>Regel #4</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Keltisk (skotsk gælisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - er 1 eller 11: 1, 11
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - er 2 eller 12: 2, 12
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - andre mellem 3 og 19: 3, 4, ... 10, 13, ... 18, 19
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - alt andet: 0, 20, 21, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-5">
+      <title>Regel #5</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Romansk (rumænsk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - er 0 eller slutter på 01-19, undtagen 1: 0, 2, 3, ... 19,
+            101, 102, ... 119, 201, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 20, 21, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-6">
+      <title>Regel #6</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Baltisk (litauisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - slutter på 1, undtagen 11: 1, 21, 31, ... 101, 121, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 0 eller slutter på 10-20: 0, 10, 11, 12, ...
+            19, 20, 30, 40, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 2, 3, ... 8, 9, 22, 23, ... 29, 32, 33, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-7">
+      <title>Regel #7</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Slavisk (bosnisk, kroatisk, serbisk, russisk,
+            ukrainsk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - slutter på 1, undtagen 11: 1, 21, 31, ... 101, 121, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 2-4, undtagen 12-14: 2, 3, 4, 22, 23, 24, 32,
+            ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+            17, 18, 19, 20, 25, 26, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-8">
+      <title>Regel #8</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Slavisk (slovakisk, tjekkisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - 2, 3, 4
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 0, 5, 6, 7, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-9">
+      <title>Regel #9</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Slavisk (polsk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 2-4, undtagen 12-14: 2, 3, 4, 22, 23, 24, 32,
+            ... 104, 122, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 0, 5, 6, ... 11, 12, 13, 14, 15, ... 20, 21,
+            25, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-10">
+      <title>Regel #10</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Slavisk (slovensk, sorbisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - slutter på 01: 1, 101, 201, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 02: 2, 102, 202, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - slutter på 03-04: 3, 4, 103, 104, 203, 204, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - alt andet: 0, 5, 6, 7, 8, 9, 10, 11, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-11">
+      <title>Regel #11</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Keltisk (irsk gælisk/gaeilge)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - 2
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - er 3-6: 3, 4, 5, 6
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - er 7-10: 7, 8, 9, 10
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            5 - alt andet: 0, 11, 12, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-12">
+      <title>Regel #12</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Semitisk (arabisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - 2
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - slutter på 03-10: 3, 4, ... 10, 103, 104, ... 110, 203,
+            204, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - slutter på 11-99: 11, ... 99, 111, 112, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            5 - alt andet: 100, 101, 102, 200, 201, 202, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            6 - 0
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-13">
+      <title>Regel #13</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Semitisk (maltesisk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 01-10: 0, 2, 3, ... 9, 10, 101, 102, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - slutter på 11-19: 11, 12, ... 18, 19, 111, 112, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - alt andet: 20, 21, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-14">
+      <title>Regel #14</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Slavisk (makedonsk)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - slutter på 1: 1, 11, 21, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - slutter på 2: 2, 12, 22, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alt andet: 0, 3, 4, ... 10, 13, 14, ... 20, 23, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-15">
+      <title>Regel #15</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familier: Islandsk
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - slutter på 1, undtagen 11: 1, 21, 31, ... 101, 121, 131,
+            ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - alt andet: 0, 2, 3, ... 10, 11, 12, ... 20, 22, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="how-to-use-the-rules">
+    <title>Sådan bruges reglerne</title>
+    <para>
+      Det første, din sprogpakke skal have, er en definition af, hvilken
+      regel din pakke skal bruge. Dette gøres i sprogfilen
+      <literal>language/xy/common.php</literal> i begyndelsen af
+      arrayet (regel #1 er reglen for det engelske sprog og bruges som
+      standard, hvis du ikke angiver en):
+    </para>
+    <programlisting>
+'PLURAL_RULE' =&gt; 1,
+</programlisting>
+    <para>
+      Følgende eksempel bruger regel
+      <emphasis role="strong">#13</emphasis>:
+    </para>
+    <para>
+      Den har følgende rækker:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          1 - 1
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          2 - slutter på 01-10: 2, 3, ... 9, 10, 101, 102, ...
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          3 - slutter på 11-19: 11, 12, ... 18, 19, 111, 112, ...
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          4 - alt andet: 20, 21, ...
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Mens det engelske sprog kun har 2 rækker i sit array:
+    </para>
+    <programlisting>
+'EXAMPLE' =&gt; [
+    1 =&gt; '1 example',
+    2 =&gt; '2 or more examples',
+],
+</programlisting>
+    <para>
+      Skal du angive nul-rækken og 4 rækker for
+      &quot;flertalsformerne&quot;:
+    </para>
+    <programlisting>
+'EXAMPLE' =&gt; [
+    1 =&gt; '1 example',
+    2 =&gt; '[0 or number ending with 01-10] examples',
+    3 =&gt; '[number ending with 11-19] example',
+    4 =&gt; 'even more examples',
+],
+</programlisting>
+    <para>
+      Hvis du har brug for separat håndtering af 0, kan du blot tilføje
+      0-tilfældet:
+    </para>
+    <programlisting>
+'EXAMPLE' =&gt; [
+    0 =&gt; 'No example',
+    1 =&gt; '1 example',
+    2 =&gt; '[zero is not handled here anymore! Only number ending with 01-10] examples',
+    3 =&gt; '[number ending with 11-19] example',
+    4 =&gt; 'even more examples',
+],
+</programlisting>
+    <para>
+      Hvis du glemmer en linje, vil systemet automatisk bruge den
+      foregående række. Så hvis du glemmer at tilføje
+      <emphasis>3</emphasis>-rækken, bruges <emphasis>2</emphasis>-rækken
+      også for 11-19. Hvis der ikke er nogen foregående række, bruges den
+      sidste række i arrayet.
+    </para>
+    <para>
+      <emphasis role="strong">Sørg for, at dine tilfælde er i stigende
+      rækkefølge</emphasis>, ellers kan systemet give uventede
+      resultater, hvis nogen nøgler mangler eller er i forkert
+      rækkefølge.
+    </para>
+  </sect1>
+  <sect1 id="credits">
+    <title>Kreditering</title>
+    <para>
+      Systemet er baseret på
+      <ulink url="https://developer.mozilla.org/en/Localization_and_Plurals">Mozilla</ulink>,
+      som bruger &quot;Plural Rules and Families&quot; fra
+      <ulink url="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html#Plural-forms">GNU
+      gettext-dokumentationen</ulink>.
+    </para>
+  </sect1>
+</article>

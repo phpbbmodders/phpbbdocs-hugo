@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Les classes files</title>
+  </articleinfo>
+  <para>
+    phpBB 3.2 introduit deux nouvelles classes pour le téléchargement
+    de fichiers : filespec et upload. Elles ont été refactorisées et
+    sont basées sur les classes filespec et fileupload précédemment
+    disponibles. De plus, il existe également une classe factory qui
+    peut être utilisée pour un accès facile aux classes files.
+  </para>
+  <warning>
+    <title>Avertissement</title>
+    <para>
+      Le fichier <literal>functions_upload.php</literal>
+      précédemment utilisé n'existe plus. À la place, les classes
+      nouvellement ajoutées doivent être transmises à vos classes,
+      contrôleurs, etc. à l'aide de l'infrastructure de conteneur.
+    </para>
+  </warning>
+  <sect1 id="overview-of-available-classes">
+    <title>Aperçu des classes disponibles</title>
+    <sect2 id="factory">
+      <title>factory</title>
+      <para>
+        <literal>\phpbb\files\factory</literal>
+      </para>
+      <para>
+        Fournit un accès plus facile aux classes files, par exemple
+        au sein même des classes files.
+      </para>
+    </sect2>
+    <sect2 id="filespec">
+      <title>filespec</title>
+      <para>
+        <literal>\phpbb\files\filespec</literal>
+      </para>
+      <para>
+        Responsable de la conservation de toutes les informations
+        relatives aux fichiers, ainsi que de l'exécution des
+        opérations spécifiques aux fichiers.
+      </para>
+    </sect2>
+    <sect2 id="upload">
+      <title>upload</title>
+      <para>
+        <literal>\phpbb\files\upload</literal>
+      </para>
+      <para>
+        Utilisée pour les téléchargements de fichiers proprement
+        dits. Également utilisée pour vérifier la validité des
+        fichiers et pour les déplacer.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-container-to-retrieve-the-classes">
+    <title>Utiliser le conteneur pour récupérer les classes</title>
+    <para>
+      Les classes files peuvent facilement être récupérées à l'aide
+      du conteneur :
+    </para>
+    <programlisting>
+$factory = $phpbb_container-&gt;get('files.factory');
+$upload = $phpbb_container-&gt;get('files.upload');
+$filespec = $phpbb_container-&gt;get('files.filespec');
+</programlisting>
+    <para>
+      Les classes filespec et upload sont définies avec la portée
+      prototype. Il en résulte que le conteneur retourne une nouvelle
+      instance de ces classes à chaque appel de la méthode get().
+    </para>
+    <warning>
+      <title>Avertissement</title>
+      <para>
+        Si une classe en dehors de la portée prototype reçoit une
+        instance de la classe upload ou filespec, cette classe
+        utilisera toujours la même instance. Par conséquent, il est
+        recommandé d'utiliser la factory pour récupérer une nouvelle
+        instance de la ou des classe(s) requise(s) pendant
+        l'exécution.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-the-factory-to-retrieve-the-classes">
+    <title>Utiliser la factory pour récupérer les classes</title>
+    <para>
+      La classe factory peut être utilisée pour récupérer les classes
+      files sans avoir besoin d'utiliser le conteneur lui-même. Elle
+      peut être transmise comme service à une classe :
+    </para>
+    <programlisting language="yaml">
+myclass:
+    class: some\namespace\myclass
+    arguments:
+        - '@files.factory'
+</programlisting>
+    <para>
+      Bien entendu, la classe peut également être instanciée
+      manuellement :
+    </para>
+    <programlisting>
+$files_factory = new phpbb\files\factory($phpbb_container);
+</programlisting>
+    <para>
+      Une fois la factory disponible, l'autre classe peut être
+      récupérée à l'aide de la méthode <literal>get()</literal> :
+    </para>
+    <programlisting>
+$filespec = $files_factory-&gt;get('files.filespec');
+</programlisting>
+  </sect1>
+</article>

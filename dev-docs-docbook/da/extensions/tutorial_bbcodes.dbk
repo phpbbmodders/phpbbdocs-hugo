@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Arbejde med BBkoder</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      phpBB 3.2 introducerede en helt ny BBkode-motor drevet af
+      biblioteket s9e/TextFormatter. Denne tutorial forklarer flere
+      måder, hvorpå extensions kan tilgå den nye BBkode-motor for at
+      manipulere og oprette mere kraftfulde BBkoder.
+    </para>
+    <para>
+      Denne tutorial forklarer:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <link linkend="toggle-bbcodes-on-off">Slå BBkoder til/fra</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="executing-php-code-with-bbcodes">Afvikling af
+          PHP-kode med BBkoder</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="template-parameters">Skabelonparametre</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="registering-custom-variables">Registrering af
+          brugerdefinerede variabler</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="enable-text-formatter-plugins">Aktivering af
+          Text Formatter-plugins</link>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="toggle-bbcodes-on-off">
+    <title>Slå BBkoder til/fra</title>
+    <para>
+      BBkoder og andre tags kan slås til eller fra før eller efter
+      parsing ved hjælp af et hvilket som helst af følgende events:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Event
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parser_setup</literal>
+            </entry>
+            <entry>
+              Udløses én gang, når Parser-servicen for tekst først
+              oprettes.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parse_before</literal>
+            </entry>
+            <entry>
+              Udløses hver gang tekst parses, før parsingen begynder.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parse_after</literal>
+            </entry>
+            <entry>
+              Udløses hver gang tekst parses,
+              <emphasis role="strong">efter</emphasis> parsingen er
+              fuldført. Dette kan f.eks. bruges til at gendanne værdier
+              til deres oprindelige tilstand.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      De fleste almindelige operationer er tilgængelige gennem
+      Parser-servicen ved hjælp af API'et
+      <literal>phpbb\textformatter\parser_interface</literal>. Dette
+      omfatter funktionerne:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Funktion
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>disable_bbcode($name)</literal>
+            </entry>
+            <entry>
+              Deaktiverer en BBkode
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_bbcodes()</literal>
+            </entry>
+            <entry>
+              Deaktiverer BBkoder generelt
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_censor()</literal>
+            </entry>
+            <entry>
+              Deaktiverer censuren
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_magic_url()</literal>
+            </entry>
+            <entry>
+              Deaktiverer magiske URL'er
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_smilies()</literal>
+            </entry>
+            <entry>
+              Deaktiverer smileys
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_bbcode($name)</literal>
+            </entry>
+            <entry>
+              Aktiverer en bestemt BBkode
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_bbcodes()</literal>
+            </entry>
+            <entry>
+              Aktiverer BBkoder generelt
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_censor()</literal>
+            </entry>
+            <entry>
+              Aktiverer censuren
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_magic_url()</literal>
+            </entry>
+            <entry>
+              Aktiverer magiske URL'er
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_smilies()</literal>
+            </entry>
+            <entry>
+              Aktiverer smileys
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Til mere avancerede funktioner kan instansen af
+      <literal>s9e\TextFormatter\Parser</literal> hentes via
+      <literal>get_parser()</literal> for at tilgå dens API.
+    </para>
+    <para>
+      Følgende eksempelkode viser, hvordan BBkoder kan slås til/fra og
+      manipuleres ved hjælp af en PHP-event-listener:
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_parse_before' =&gt; 'toggle_bbcodes',
+        ];
+    }
+
+    public function toggle_bbcodes($event)
+    {
+        // Get the parser service: \phpbb\textformatter\parser_interface
+        $service = $event['parser'];
+
+        // Disable the [color] BBCode through the parser service
+        $service-&gt;disable_bbcode('color');
+
+        // Set the [url] BBCode to only parse the first occurrence.
+        // Note this requires an instance of \s9e\TextFormatter\Parser
+        $service-&gt;get_parser()-&gt;setTagLimit('URL', 1);
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://area51.phpbb.com/docs/code/3.3.x/phpbb/textformatter/parser_interface.html">phpBB's
+          API-dokumentation</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Getting_started/Runtime_configuration/">Runtime
+          configuration - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="executing-php-code-with-bbcodes">
+    <title>Afvikling af PHP-kode med BBkoder</title>
+    <para>
+      Extensions kan konfigurere BBkoder til at afvikle PHP-funktioner.
+      Dette gør det muligt at oprette BBkoder, der gør meget mere end
+      blot generisk at formatere tekst.
+    </para>
+    <para>
+      I følgende enkle eksempel omkonfigurerer vi tagget
+      <literal>QUOTE</literal> (som håndterer BBkoden
+      <literal>[quote]</literal>) til at køre en PHP-metode, der læser og
+      ændrer dets attributter under parsing, baseret på hvem der citeres
+      i BBkoden.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after' =&gt; 'configure_quotes'
+        ];
+    }
+
+    public function configure_quotes($event)
+    {
+        // Add self::filter_quote() to filter the QUOTE tag that handles quotes
+        $event['configurator']-&gt;tags['QUOTE']-&gt;filterChain
+            -&gt;append([__CLASS__, 'filter_quote']);
+    }
+
+    static public function filter_quote(\s9e\TextFormatter\Parser\Tag $tag)
+    {
+        if (!$tag-&gt;hasAttribute('author'))
+        {
+            // If the author is empty, we attribute the quote to Mark Twain
+            $tag-&gt;setAttribute('author', 'Mark Twain');
+        }
+        elseif (stripos($tag-&gt;getAttribute('author'), 'Gary Oak') !== false)
+        {
+            // If the author is Gary Oak we invalidate the tag to disallow it
+            $tag-&gt;invalidate();
+
+            // Return FALSE for backward compatibility
+            return false;
+        }
+
+        // We return TRUE for backward compatibility, to indicate that the tag is allowed
+        return true;
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Attribute_filters/">Attribute
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Tag_filters/">Tag
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Callback_signature/">Callback
+          signatures - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="template-parameters">
+    <title>Skabelonparametre</title>
+    <para>
+      Nogle af phpBB's skabelonvariabler kan bruges i BBkoder til at
+      producere dynamisk output. For eksempel til at oprette en BBkode,
+      der kun viser sit indhold for registrerede brugere.
+    </para>
+    <para>
+      Standard phpBB-skabelonparametre:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Variabel
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>S_IS_BOT</literal>
+            </entry>
+            <entry>
+              Om den aktuelle bruger er en bot.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_REGISTERED_USER</literal>
+            </entry>
+            <entry>
+              Om den aktuelle bruger er registreret.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_USER_LOGGED_IN</literal>
+            </entry>
+            <entry>
+              Om den aktuelle bruger er logget ind.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWCENSORS</literal>
+            </entry>
+            <entry>
+              Om den aktuelle brugers indstillinger er sat til at skjule
+              censurerede ord.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWFLASH</literal>
+            </entry>
+            <entry>
+              Om den aktuelle brugers indstillinger er sat til at vise
+              Flash-objekter.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWIMG</literal>
+            </entry>
+            <entry>
+              Om den aktuelle brugers indstillinger er sat til at vise
+              billeder.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWSMILIES</literal>
+            </entry>
+            <entry>
+              Om den aktuelle brugers indstillinger er sat til at vise
+              smileys.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>STYLE_ID</literal>
+            </entry>
+            <entry>
+              ID på den aktuelle typografi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>T_SMILIES_PATH</literal>
+            </entry>
+            <entry>
+              Sti til mappen med smileys.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      I følgende eksempel bruger vi Configurator til dynamisk at oprette
+      en brugerdefineret BBkode, hvis indhold kun registrerede brugere
+      kan se:
+    </para>
+    <programlisting>
+[noguests]{TEXT}[/noguests]
+</programlisting>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after'   =&gt; 'configure_noguests',
+        ];
+    }
+
+    public function configure_noguests($event)
+    {
+        // Get the BBCode configurator
+        $configurator = $event['configurator'];
+
+        // Let's unset any existing BBCode that might already exist
+        unset($configurator-&gt;BBCodes['noguests']);
+        unset($configurator-&gt;tags['noguests']);
+
+        // Let's create the new BBCode
+        $configurator-&gt;BBCodes-&gt;addCustom(
+            '[noguests]{TEXT}[/noguests]',
+            '&lt;xsl:choose&gt;
+                &lt;xsl:when test=&quot;$S_USER_LOGGED_IN and not($S_IS_BOT)&quot;&gt;
+                    &lt;div&gt;{TEXT}&lt;/div&gt;
+                &lt;/xsl:when&gt;
+                &lt;xsl:otherwise&gt;
+                    &lt;div&gt;Only registered users can read this content&lt;/div&gt;
+                &lt;/xsl:otherwise&gt;
+            &lt;/xsl:choose&gt;'
+        );
+    }
+}
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Bemærk, at der i koden ovenfor bruges en test til at kontrollere
+        værdien af skabelonvariablen
+        <literal>S_USER_LOGGED_IN</literal>, og at der genereres det
+        passende BBkode-HTML-output.
+      </para>
+    </note>
+    <para>
+      Skabelonparametre kan også sættes ved hjælp af et hvilket som helst
+      af følgende events:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Event
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_renderer_setup</literal>
+            </entry>
+            <entry>
+              Udløses én gang, når renderer-servicen oprettes.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_render_before</literal>
+            </entry>
+            <entry>
+              Udløses hver gang en tekst gengives, før HTML'en
+              produceres.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_render_after</literal>
+            </entry>
+            <entry>
+              Udløses hver gang en tekst gengives,
+              <emphasis>efter</emphasis> HTML'en er produceret. Kan
+              bruges til at gendanne værdier til deres oprindelige
+              tilstand.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      I følgende enkle eksempel sætter vi en skabelonparameter til at
+      generere et tilfældigt tal i hver tekst. Tallet ændrer sig, hver
+      gang en ny tekst gengives. Selvom dette ikke tjener noget praktisk
+      formål, illustrerer det, hvordan dette kan bruges sammen med
+      ovenstående events og teknikker til pragmatisk at oprette dine
+      egne skabelonparametre, ud over dem, der allerede er tilgængelige i
+      phpBB som standard.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_render_before' =&gt; 'set_random'
+        ];
+    }
+
+    public function set_random($event)
+    {
+        $event['renderer']-&gt;get_renderer()-&gt;setParameter('RANDOM', mt_rand());
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Templating/Template_parameters/">Template
+          parameters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Plugins/BBCodes/Use_template_parameters/">Use
+          template parameters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="registering-custom-variables">
+    <title>Registrering af brugerdefinerede variabler</title>
+    <para>
+      Det er muligt at registrere brugerdefinerede variabler, der skal
+      bruges under parsing. phpBB bruger f.eks.
+      <literal>max_font_size</literal> til dynamisk at begrænse de
+      værdier, der bruges i tagget <literal>[font]</literal>.
+      Callbacks, der bruges under parsing, skal være statiske og
+      serialiserbare, da selve parseren mellemlagres i serialiseret form.
+      Brugerdefinerede variabler sættes dog under parsingen og er ikke
+      begrænset til skalare typer. De kan f.eks. bruges til at tilgå det
+      aktuelle brugerobjekt under parsing.
+    </para>
+    <para>
+      I følgende eksempel tilføjer vi et attributfilter til at ændre
+      URL'er, der bruges i BBkoderne <literal>[url]</literal> og links.
+      Ud over attributtens værdi (URL'en) beder vi om, at den
+      brugerdefinerede variabel <literal>my.id</literal> sendes som den
+      anden parameter. Det er en god idé at namespace
+      variabelnavnene for at undgå konflikter med andre extensions eller
+      phpBB selv.
+    </para>
+    <para>
+      Eventet <literal>core.text_formatter_s9e_parser_setup</literal>
+      bruger <literal>$event['parser']-&gt;set_var()</literal> til at
+      sætte en værdi for variablen <literal>my.id</literal> én gang pr.
+      initialisering. Eventet
+      <literal>core.text_formatter_s9e_parse_before</literal> kunne
+      bruges til at sætte værdien før hver parsing.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after' =&gt; 'configure_links',
+            'core.text_formatter_s9e_parser_setup'    =&gt; 'set_random_id'
+        ];
+    }
+
+    static public function add_link_id($url, $my_id)
+    {
+        return $url . '#' . $my_id;
+    }
+
+    public function configure_links($event)
+    {
+        // Add self::add_link_id() to filter the attribute value of [url] BBCodes and links
+        $event['configurator']-&gt;tags['url']-&gt;attributes['url']-&gt;filterChain
+            -&gt;append([__CLASS__, 'add_link_id'])
+            -&gt;resetParameters()
+            -&gt;addParameterByName('attrValue')
+            -&gt;addParameterByName('my.id');
+    }
+
+    public function set_random_id($event)
+    {
+        // We set my.id to a random number in this example
+        $event['parser']-&gt;set_var('my.id', mt_rand(111, 999));
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://area51.phpbb.com/docs/code/3.3.x/phpbb/textformatter/parser_interface.html">phpBB's
+          API-dokumentation</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Callback_signature/">Callback
+          signature - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Attribute_filters/">Attribute
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Tag_filters/">Tag
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="enable-text-formatter-plugins">
+    <title>Aktivering af Text Formatter-plugins</title>
+    <para>
+      Text Formatter-biblioteket har en samling af plugins, der kan
+      aktiveres gennem en extension, såsom MediaEmbed, Pipe Tables osv.
+    </para>
+    <para>
+      Plugins kan slås til/fra via variablen
+      <literal>configurator</literal>, som er tilgængelig gennem eventene
+      <literal>core.text_formatter_s9e_configure_before</literal> og
+      <literal>core.text_formatter_s9e_configure_after</literal>, som
+      henholdsvis udløses før og efter standardindstillingerne
+      konfigureres.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after' =&gt; 'configure'
+        ];
+    }
+
+    public function configure($event)
+    {
+        $configurator = $event['configurator'];
+
+        // Disable the Autolink plugin
+        unset($configurator-&gt;Autolink);
+
+        // Enable the PipeTables plugin
+        $configurator-&gt;PipeTables;
+
+        // Do something if the MediaEmbed plugin is enabled
+        $is_enabled = isset($configurator-&gt;MediaEmbed);
+        if ($is_enabled)
+        {
+            // ...
+        }
+
+        // Get the names of all loaded plugins
+        $names = [];
+        foreach ($configurator-&gt;plugins as $plugin_name =&gt; $plugin_configurator)
+        {
+            $names[] = $plugin_name;
+        }
+    }
+}
+</programlisting>
+    <para>
+      <ulink url="https://s9etextformatter.readthedocs.io">s9e\TextFormatter</ulink>
+    </para>
+  </sect1>
+</article>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Unit-testning</title>
+  </articleinfo>
+  <para>
+    Unit-tests verificerer blot, at bestemte dele af kildekoden fungerer
+    korrekt. Disse tests findes i phpBB's hovedrepository i
+    <literal>tests/</literal> og er grupperet i mapper baseret på
+    fællestræk mellem den funktionalitet, de tester. Tests, der f.eks.
+    skal teste konfigurationen, findes i
+    <literal>tests/config/</literal>.
+  </para>
+  <sect1 id="running-unit-tests">
+    <title>Kørsel af unit-tests</title>
+    <para>
+      Information om, hvordan tests køres, findes i GitHub-repositoryet
+      på
+      <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md">https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md</ulink>.
+      Du kan skifte branch for at se instruktioner for en bestemt version
+      af phpBB.
+    </para>
+  </sect1>
+  <sect1 id="writing-unit-tests">
+    <title>Skrivning af unit-tests</title>
+    <para>
+      Filer, der indeholder tests, bør have suffikset
+      <literal>_test</literal>, f.eks.:
+      <literal>tests/demo/demo_test.php</literal>
+    </para>
+    <para>
+      Inden for unit-tests findes der to kategorier: tests, der kræver en
+      database, og tests, der ikke gør.
+      <emphasis role="strong">Hvis en test ikke kræver en database, så
+      brug den ikke!</emphasis>
+    </para>
+    <sect2 id="without-a-database">
+      <title>Uden en database</title>
+      <programlisting>
+&lt;?php
+// tests/demo/demo_test.php
+
+require_once dirname(__FILE__) . '/../phpBB/includes/functions.php';
+
+class phpbb_demo_demo_test extends phpbb_test_case
+{
+    public function phpbb_email_hash_data()
+    {
+        return [
+            ['wiki@phpbb.com', 126830126620],
+            ['', 0],
+        ];
+    }
+
+    /**
+     * @dataProvider phpbb_email_hash_data
+     */
+    public function test_phpbb_email_hash($email, $expected)
+    {
+        $this-&gt;assertEquals($expected, phpbb_email_hash($email));
+    }
+}
+</programlisting>
+      <para>
+        Du har måske bemærket, at der i selve test-funktionen faktisk
+        ikke er nogen data. Der er angivet en dataProvider-funktion i
+        kommentaren, som bruges til testen. Testen køres derefter med
+        hvert array i dataProvider-arrayet, hvor værdierne bruges som
+        parametre til kaldet af test-funktionen.
+      </para>
+    </sect2>
+    <sect2 id="using-a-database">
+      <title>Brug af en database</title>
+      <programlisting>
+&lt;?php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+class phpbb_demo_db_demo_test extends phpbb_database_test_case
+{
+    public function getDataSet()
+    {
+        return $this-&gt;createXMLDataSet(dirname(__FILE__) . '/fixtures/three_users.xml');
+    }
+
+    public function fetchrow_data()
+    {
+        return [
+            ['', [['username_clean' =&gt; 'barfoo'],
+                ['username_clean' =&gt; 'foobar'],
+                ['username_clean' =&gt; 'bertie']]],
+            ['user_id = 2', [['username_clean' =&gt; 'foobar']]],
+            [&quot;username_clean = 'bertie'&quot;, [['username_clean' =&gt; 'bertie']]],
+            [&quot;username_clean = 'phpBB'&quot;, []],
+        ];
+    }
+
+    /**
+     * @dataProvider fetchrow_data
+     */
+    public function test_fetchrow($where, $expected)
+    {
+        // The function from phpbb_test_case_helpers returns a new db for every test.
+        $db = $this-&gt;new_dbal();
+
+        $result = $db-&gt;sql_query('SELECT username_clean
+            FROM phpbb_users
+            ' . (($where) ? ' WHERE ' . $where : '') . '
+            ORDER BY user_id ASC');
+
+        $ary = [];
+        while ($row = $db-&gt;sql_fetchrow($result))
+        {
+            $ary[] = $row;
+        }
+        $db-&gt;sql_freeresult($result);
+
+        $this-&gt;assertEquals($expected, $ary);
+    }
+}
+</programlisting>
+      <para>
+        Det vigtigste, du skal vide om db-tests, er:
+      </para>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            Alle data i databasen tømmes først.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Dataene fra funktionen getDataSet indlæses i databasen.
+            <emphasis role="strong">Ingen data fra andre tests er
+            tilgængelige!</emphasis>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Hvis du bruger en tabel med en kolonne, der ikke har nogen
+            standardværdi angivet (såsom tekstkolonner), skal du sørge
+            for at angive dem. (se
+            <ulink url="http://tracker.phpbb.com/browse/PHPBB3-10667">PHPBB3-10667</ulink>)
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="code-of-a-db-dataset">
+      <title>Kode for et DB-datasæt</title>
+      <programlisting language="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;dataset&gt;
+    &lt;table name=&quot;table_name&quot;&gt;
+        &lt;column&gt;column_name_1&lt;/column&gt;
+        &lt;column&gt;column_name_2&lt;/column&gt;
+        &lt;row&gt;
+            &lt;value&gt;value for column 1&lt;/value&gt;
+            &lt;value&gt;value for column 2&lt;/value&gt;
+        &lt;/row&gt;
+        &lt;row&gt;
+            &lt;value&gt;another row, value for column 1&lt;/value&gt;
+            &lt;value&gt;another row, value for column 2&lt;/value&gt;
+        &lt;/row&gt;
+    &lt;/table&gt;
+&lt;/dataset&gt;
+</programlisting>
+    </sect2>
+    <sect2 id="using-permissions-auth">
+      <title>Brug af tilladelser ($auth)</title>
+      <para>
+        Når du skal bruge auth-klassen, bør du bruge et mock-objekt for
+        den. Her er et kort eksempel på, hvordan den bruges. Bemærk, at
+        du skal angive resultatet for hver funktion og alle de værdier,
+        du bruger. Når forum_id desuden ikke castes til int, skal du
+        angive en ekstra række for hver tilladelse. (Markeret med
+        <literal>// Called without int cast</literal> nedenfor) For mere
+        information om, hvordan disse test doubles fungerer, se:
+        <ulink url="https://phpunit.de/manual/current/en/test-doubles.html">https://phpunit.de/manual/current/en/test-doubles.html</ulink>
+      </para>
+      <programlisting>
+&lt;?php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+require_once dirname(__FILE__) . '/../phpBB/includes/auth.php';
+
+class phpbb_demo_demo_test extends phpbb_test_case
+{
+    public function test_auth_mock_hash($email, $expected)
+
+        $auth = $this-&gt;getMock('auth');
+        $acl_get_map = [
+            ['f_read', 23, true],
+            ['f_read', '23', true],// Called without int cast
+            ['m_', 23, true],
+            ['m_', '23', true],// Called without int cast
+        ];
+
+        $auth-&gt;expects($this-&gt;any())
+            -&gt;method('acl_get')
+            -&gt;with($this-&gt;stringContains('_'),
+                $this-&gt;anything())
+            -&gt;will($this-&gt;returnValueMap($acl_get_map));
+        $this-&gt;assertTrue($auth-&gt;acl_get('f_read', 23));
+        $this-&gt;assertTrue($auth-&gt;acl_get('f_read', '23'));
+        $this-&gt;assertFalse($auth-&gt;acl_get('f_read', 12));
+        $this-&gt;assertFalse($auth-&gt;acl_get('f_read', '12'));
+    }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

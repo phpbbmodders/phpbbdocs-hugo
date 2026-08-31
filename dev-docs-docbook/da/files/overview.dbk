@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Filklasserne</title>
+  </articleinfo>
+  <para>
+    phpBB 3.2 introducerer to nye klasser til upload af filer: filespec
+    og upload. Disse er blevet omskrevet og er baseret på de tidligere
+    tilgængelige klasser filespec og fileupload. Derudover findes der
+    også en factory-klasse, som kan bruges til nem adgang til
+    filklasserne.
+  </para>
+  <warning>
+    <title>Advarsel</title>
+    <para>
+      Den tidligere anvendte fil <literal>functions_upload.php</literal>
+      findes ikke længere. I stedet bør de nyligt tilføjede klasser
+      sendes til dine klasser, controllere osv. ved hjælp af
+      containerinfrastrukturen.
+    </para>
+  </warning>
+  <sect1 id="overview-of-available-classes">
+    <title>Oversigt over tilgængelige klasser</title>
+    <sect2 id="factory">
+      <title>factory</title>
+      <para>
+        <literal>\phpbb\files\factory</literal>
+      </para>
+      <para>
+        Giver nemmere adgang til filklasserne, f.eks. inde i selve
+        filklasserne.
+      </para>
+    </sect2>
+    <sect2 id="filespec">
+      <title>filespec</title>
+      <para>
+        <literal>\phpbb\files\filespec</literal>
+      </para>
+      <para>
+        Ansvarlig for at holde styr på al relevant filinformation samt
+        for at udføre filspecifikke operationer.
+      </para>
+    </sect2>
+    <sect2 id="upload">
+      <title>upload</title>
+      <para>
+        <literal>\phpbb\files\upload</literal>
+      </para>
+      <para>
+        Bruges til de egentlige filuploads. Bruges også til at
+        kontrollere for gyldige filer og til at flytte filer.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-container-to-retrieve-the-classes">
+    <title>Brug af containeren til at hente klasserne</title>
+    <para>
+      Filklasserne kan nemt hentes ved hjælp af containeren:
+    </para>
+    <programlisting>
+$factory = $phpbb_container-&gt;get('files.factory');
+$upload = $phpbb_container-&gt;get('files.upload');
+$filespec = $phpbb_container-&gt;get('files.filespec');
+</programlisting>
+    <para>
+      Klasserne filespec og upload er defineret med prototype-scope.
+      Det betyder, at containeren returnerer en ny instans af disse
+      klasser, hver gang metoden get() kaldes.
+    </para>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Hvis en klasse uden for prototype-scopet får sendt en instans af
+        klassen upload eller filespec, vil klassen altid bruge den samme
+        instans. Som følge heraf anbefales det at bruge factory-klassen
+        til at hente en ny instans af den/de nødvendige klasse(r) under
+        afvikling.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-the-factory-to-retrieve-the-classes">
+    <title>Brug af factory-klassen til at hente klasserne</title>
+    <para>
+      Factory-klassen kan bruges til at hente filklasserne uden at skulle
+      bruge selve containeren. Den kan sendes som en service til en
+      klasse:
+    </para>
+    <programlisting language="yaml">
+myclass:
+    class: some\namespace\myclass
+    arguments:
+        - '@files.factory'
+</programlisting>
+    <para>
+      Klassen kan selvfølgelig også instantieres manuelt:
+    </para>
+    <programlisting>
+$files_factory = new phpbb\files\factory($phpbb_container);
+</programlisting>
+    <para>
+      Når factory-klassen er tilgængelig, kan den anden klasse hentes ved
+      hjælp af metoden <literal>get()</literal>:
+    </para>
+    <programlisting>
+$filespec = $files_factory-&gt;get('files.filespec');
+</programlisting>
+  </sect1>
+</article>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Skemaændringer</title>
+  </articleinfo>
+  <para>
+    Skemaændringer udføres i Migrationer ved at oprette et array, der
+    fortolkes af
+    <literal>\phpbb\db\tools::perform_schema_changes()</literal>.
+  </para>
+  <sect1 id="basics">
+    <title>Grundlæggende</title>
+    <para>
+      Når du foretager skemaændringer, bør din Migrations-klasse
+      indeholde to funktioner, <literal>update_schema</literal> og
+      <literal>revert_schema</literal>.
+    </para>
+    <sect2 id="update_schema">
+      <title>update_schema</title>
+      <para>
+        <literal>update_schema()</literal> kaldes som det
+        <emphasis role="strong">første</emphasis> trin, når en migration
+        installeres. Dette foretager de databaseskemaændringer, du har
+        brug for, når migrationen installeres.
+      </para>
+      <programlisting>
+public function update_schema()
+{
+    return [];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="revert_schema">
+      <title>revert_schema</title>
+      <para>
+        <literal>revert_schema()</literal> kaldes, når en Migration skal
+        afinstalleres (dette kan ske, hvis brugeren vil/skal fortryde
+        ændringerne fra Migrationen, en afhængighed fortrydes, eller
+        installationen fejler, og hele Migrationen fjernes).
+      </para>
+      <para>
+        Instruktionerne i <literal>revert_schema()</literal> bør reelt
+        gøre præcis det modsatte af, hvad
+        <literal>update_schema()</literal> gør (f.eks. hvis en tabel
+        droppes, bør revert tilføje tabellen igen med præcis de samme
+        kolonner/nøgler, som den havde, før den blev droppet)
+      </para>
+      <programlisting>
+public function revert_schema()
+{
+    return [];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="what-to-return">
+    <title>Hvad der skal returneres</title>
+    <para>
+      Det returnerede array sendes direkte, som det er, til
+      <literal>\phpbb\db\tools::perform_schema_changes();</literal>
+    </para>
+    <sect2 id="examples">
+      <title>Eksempler</title>
+      <para>
+        <emphasis role="strong">Fra 3_1_0_dev:</emphasis>
+      </para>
+      <programlisting>
+public function update_schema()
+{
+    return [
+        'add_columns'        =&gt; [
+            $this-&gt;table_prefix . 'groups'        =&gt; [
+                'group_teampage'    =&gt; ['UINT', 0, 'after' =&gt; 'group_legend'],
+            ],
+            $this-&gt;table_prefix . 'styles'        =&gt; [
+                'style_path'             =&gt; ['VCHAR:100', ''],
+                'bbcode_bitfield'        =&gt; ['VCHAR:255', 'kNg='],
+                'style_parent_id'        =&gt; ['UINT:4', 0],
+                'style_parent_tree'      =&gt; ['TEXT', ''],
+            ],
+        ],
+        'change_columns'    =&gt; [
+            $this-&gt;table_prefix . 'groups'        =&gt; [
+                'group_legend'        =&gt; ['UINT', 0],
+            ],
+        ],
+    ];
+}
+
+public function revert_schema()
+{
+    return [
+        'drop_columns'        =&gt; [
+            $this-&gt;table_prefix . 'groups'        =&gt; [
+                'group_teampage',
+            ],
+            $this-&gt;table_prefix . 'styles'        =&gt; [
+                'style_path',
+                'bbcode_bitfield',
+                'style_parent_id',
+                'style_parent_tree',
+            ],
+        ],
+    ];
+}
+</programlisting>
+      <para>
+        <emphasis role="strong">Fra style_update_p2:</emphasis>
+      </para>
+      <programlisting>
+public function update_schema()
+{
+    return [
+        'drop_columns'    =&gt; [
+            $this-&gt;table_prefix . 'styles'        =&gt; [
+                'imageset_id',
+                'template_id',
+                'theme_id',
+            ],
+        ],
+
+        'drop_tables'    =&gt; [
+            $this-&gt;table_prefix . 'styles_imageset',
+            $this-&gt;table_prefix . 'styles_imageset_data',
+        ],
+    ];
+}
+
+public function revert_schema()
+{
+    return [
+        'add_columns'    =&gt; [
+            $this-&gt;table_prefix . 'styles' =&gt; [
+                'imageset_id'    =&gt; ['UINT', 0],
+                'template_id'    =&gt; ['UINT', 0],
+                'theme_id'       =&gt; ['UINT', 0],
+            ],
+        ],
+
+        'add_tables'    =&gt; [
+            $this-&gt;table_prefix . 'styles_imageset' =&gt; [
+                'COLUMNS' =&gt; [
+                    'imageset_id'                =&gt; ['UINT', NULL, 'auto_increment'],
+                    'imageset_name'              =&gt; ['VCHAR_UNI:255', ''],
+                    'imageset_copyright'         =&gt; ['VCHAR_UNI', ''],
+                    'imageset_path'              =&gt; ['VCHAR:100', ''],
+                ],
+                'PRIMARY_KEY' =&gt; 'imageset_id',
+                'KEYS' =&gt; [
+                    'imgset_nm'            =&gt; ['UNIQUE', 'imageset_name'],
+                ],
+            ],
+            $this-&gt;table_prefix . 'styles_imageset_data' =&gt; [
+                'COLUMNS' =&gt; [
+                    'image_id'              =&gt; ['UINT', NULL, 'auto_increment'],
+                    'image_name'            =&gt; ['VCHAR:200', ''],
+                    'image_filename'        =&gt; ['VCHAR:200', ''],
+                    'image_lang'            =&gt; ['VCHAR:30', ''],
+                    'image_height'          =&gt; ['USINT', 0],
+                    'image_width'           =&gt; ['USINT', 0],
+                    'imageset_id'           =&gt; ['UINT', 0],
+                ],
+                'PRIMARY_KEY' =&gt; 'image_id',
+                'KEYS' =&gt; [
+                    'i_d'            =&gt; ['INDEX', 'imageset_id'],
+                ],
+            ],
+        ],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

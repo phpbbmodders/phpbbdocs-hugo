@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutoriel : Prise en main</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduction</title>
+    <para>
+      Bienvenue dans le tutoriel et la documentation de développement
+      d'extensions de phpBB.
+    </para>
+    <para>
+      Ces pages de tutoriel sont basées sur l'extension
+      <ulink url="https://github.com/phpbb/phpbb-ext-acme-demo">Acme
+      Demo</ulink> de phpBB. Cette extension simple démontre de nombreuses
+      fonctionnalités courantes d'une extension, notamment l'utilisation
+      d'une page frontale (front-controller), la modification de phpBB
+      via des événements du noyau et des événements de template, la
+      modification de la base de données à l'aide de migrations, et la
+      mise en place d'un module ACP pour les réglages de configuration.
+    </para>
+    <para>
+      Ce tutoriel couvre la création de base des extensions :
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="extension-folder">Dossier de l'extension</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="composer-json">Composer JSON</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Le <literal>skeleton_extension</literal> est un outil pour aider
+      les développeurs à générer rapidement les fichiers et composants
+      initiaux nécessaires pour commencer le développement de nouvelles
+      extensions pour phpBB.
+    </para>
+  </sect1>
+  <sect1 id="extension-folder">
+    <title>Dossier de l'extension</title>
+    <para>
+      Toutes les extensions doivent se trouver dans le dossier
+      <literal>ext/</literal> que l'on peut trouver dans le dossier
+      racine de phpBB.
+    </para>
+    <para>
+      Les extensions sont empaquetées en utilisant une structure de
+      dossiers de la forme : <literal>vendor/extname</literal>.
+    </para>
+    <para>
+      Ainsi, une extension devrait se trouver dans le dossier phpBB de
+      la manière suivante : <literal>phpBB/ext/vendor/extname</literal>.
+    </para>
+    <para>
+      Le nom du vendor peut être le nom d'utilisateur de l'auteur ou
+      tout autre nom que vous choisissez pour regrouper vos extensions.
+      Le nom d'extension est le nom de l'extension. Dans ce tutoriel,
+      nous utiliserons <literal>acme</literal> comme nom de vendor et
+      <literal>demo</literal> comme nom d'extension.
+    </para>
+    <important>
+      <title>Important</title>
+      <para>
+        Le nom de vendor et le nom d'extension doivent tous deux
+        commencer par une lettre minuscule, suivie uniquement de lettres
+        minuscules et de chiffres.
+        <emphasis role="strong">Les lettres majuscules, les tirets bas,
+        les tirets et les autres caractères ne sont pas autorisés.</emphasis>
+        Voici un exemple de nom de vendor et d'extension autorisé :
+        <literal>iamuser1/iamanextension</literal>.
+      </para>
+    </important>
+  </sect1>
+  <sect1 id="composer-json">
+    <title>Composer JSON</title>
+    <para>
+      Chaque extension nécessite un fichier de métadonnées nommé
+      <literal>composer.json</literal> pour que phpBB puisse identifier
+      votre extension. Ce fichier contient des informations de base sur
+      une extension ainsi que ses dépendances. Il est écrit au format
+      JSON et doit être stocké dans le dossier racine de l'extension,
+      par exemple <literal>phpBB/ext/acme/demo/composer.json</literal>.
+    </para>
+    <para>
+      Les informations dans <literal>composer.json</literal> seront
+      utilisées par le gestionnaire d'extensions dans l'ACP. Les détails
+      des métadonnées sont expliqués sous l'exemple, mais pour l'instant
+      examinons le fichier complet :
+    </para>
+    <programlisting language="json">
+{
+    &quot;name&quot;: &quot;acme/demo&quot;,
+    &quot;type&quot;: &quot;phpbb-extension&quot;,
+    &quot;description&quot;: &quot;Acme Demo Extension for phpBB 3.2&quot;,
+    &quot;homepage&quot;: &quot;https://github.com/phpbb/phpbb-ext-acme-demo&quot;,
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;time&quot;: &quot;2013-11-05&quot;,
+    &quot;keywords&quot;: [&quot;phpbb&quot;, &quot;extension&quot;, &quot;acme&quot;, &quot;demo&quot;],
+    &quot;license&quot;: &quot;GPL-2.0-only&quot;,
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;Nickv&quot;,
+            &quot;email&quot;: &quot;nickvergessen@localhost&quot;,
+            &quot;homepage&quot;: &quot;https://github.com/nickvergessen/&quot;,
+            &quot;role&quot;: &quot;Lead Developer&quot;
+        }
+    ],
+    &quot;require&quot;: {
+        &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
+        &quot;composer/installers&quot;: &quot;~1.0&quot;
+    },
+    &quot;require-dev&quot;: {
+        &quot;phpbb/epv&quot;: &quot;dev-master&quot;
+    },
+    &quot;extra&quot;: {
+        &quot;display-name&quot;: &quot;Acme Demo Extension&quot;,
+        &quot;soft-require&quot;: {
+            &quot;phpbb/phpbb&quot;: &quot;~3.2&quot;
+        }
+    }
+}
+</programlisting>
+    <note>
+      <title>Remarque</title>
+      <para>
+        Il est important de se rappeler que le dernier élément ou objet
+        dans un tableau JSON ne doit pas contenir de virgule finale.
+      </para>
+    </note>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec align="left" />
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Champ
+            </entry>
+            <entry>
+              Requis
+            </entry>
+            <entry>
+              Contenu
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>name</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              Le nom du vendor et le nom de l'extension, séparés par
+              <literal>/</literal>, correspondant à la structure de
+              dossiers.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>type</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              Le type de package. Il doit toujours être
+              <literal>phpbb-extension</literal>.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>description</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              Une courte description de votre extension, peut être vide
+              (mais pas omise).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>homepage</literal>
+            </entry>
+            <entry>
+              Non
+            </entry>
+            <entry>
+              Une URL valide. Il est recommandé d'utiliser le lien vers
+              la contribution dans la customisation database, ou vers
+              le dépôt de votre extension (si vous en utilisez un
+              public comme GitHub).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>version</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              La version de votre extension. Elle devrait suivre le
+              format X.Y.Z avec un suffixe optionnel -dev, -patch,
+              -alpha, -beta ou -RC.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>time</literal>
+            </entry>
+            <entry>
+              Non
+            </entry>
+            <entry>
+              La date de sortie de votre extension. Doit être au format
+              YYYY-MM-DD ou YYYY-MM-DD HH:MM:SS.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>keywords</literal>
+            </entry>
+            <entry>
+              Non
+            </entry>
+            <entry>
+              Un tableau de mots-clés liés à l'extension.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>license</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              La licence du package. Cela peut être soit une chaîne,
+              soit un tableau de chaînes. Typiquement, les extensions
+              devraient être sous la même licence GPL-2.0 que phpBB.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>authors</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              Un tableau des auteurs de l'extension. Voir
+              <link linkend="authors">authors</link> pour plus de
+              détails.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>require</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              Un tableau des prérequis de l'extension. Voir
+              <link linkend="require">require</link> pour plus de
+              détails.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>require-dev</literal>
+            </entry>
+            <entry>
+              Non
+            </entry>
+            <entry>
+              Un tableau des prérequis de développement de l'extension.
+              Voir <link linkend="require-dev">require-dev</link> pour
+              plus de détails.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>extra</literal>
+            </entry>
+            <entry>
+              Oui
+            </entry>
+            <entry>
+              Un tableau de données supplémentaires arbitraires. Voir
+              <link linkend="extra">extra</link> pour plus de détails.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <sect2 id="authors">
+      <title>authors</title>
+      <para>
+        Vous pouvez avoir un nombre illimité d'auteurs. Au moins un
+        auteur est fortement recommandé.
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Champ
+              </entry>
+              <entry>
+                Requis
+              </entry>
+              <entry>
+                Contenu
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>name</literal>
+              </entry>
+              <entry>
+                Oui
+              </entry>
+              <entry>
+                Le nom d'un auteur.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>email</literal>
+              </entry>
+              <entry>
+                Non
+              </entry>
+              <entry>
+                Une adresse e-mail de l'auteur.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>homepage</literal>
+              </entry>
+              <entry>
+                Non
+              </entry>
+              <entry>
+                Une URL pointant vers le site web de l'auteur.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>role</literal>
+              </entry>
+              <entry>
+                Non
+              </entry>
+              <entry>
+                Le rôle peut être utilisé pour préciser ce que l'auteur
+                a fait pour l'extension (par ex. Développeur,
+                Traducteur, Support, etc.)
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="require">
+      <title>require</title>
+      <para>
+        Listez les dépendances requises par l'extension, c.-à-d. la
+        version de PHP et les
+        <ulink url="https://packagist.org/">bibliothèques tierces</ulink>.
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Champ
+              </entry>
+              <entry>
+                Contenu
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>php</literal>
+              </entry>
+              <entry>
+                La version de stabilité minimale de PHP requise par
+                l'extension. phpBB 3.2 requiert PHP 5.4.0 ou supérieur,
+                donc la comparaison de version est
+                <literal>&gt;= 5.4.0</literal>.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>composer/installers</literal>
+              </entry>
+              <entry>
+                Recommandé par phpBB. Cela installera les extensions au
+                bon endroit dans phpBB lorsqu'elles sont installées via
+                Composer.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="require-dev">
+      <title>require-dev</title>
+      <para>
+        Dans la section optionnelle <literal>require-dev</literal>, vous
+        pouvez lister les dépendances de l'extension qui ne sont
+        requises que pour le développement. Acme Demo utilise
+        l'<ulink url="https://packagist.org/packages/phpbb/epv">Extension
+        Pre Validator Tool</ulink> de la phpBB Extensions Team pour
+        effectuer une validation de base lors de l'exécution des tests
+        sur Travis CI (voir <literal>tutorial_testing</literal>). Comme
+        nous voulons toujours avoir la version la plus récente, nous
+        exigeons <literal>dev-master</literal>.
+      </para>
+    </sect2>
+    <sect2 id="extra">
+      <title>extra</title>
+      <para>
+        Cette section peut contenir pratiquement n'importe quelle donnée
+        arbitraire selon la spécification composer. Cependant, phpBB
+        requiert deux entrées spéciales dans ce tableau pour les
+        extensions :
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Champ
+              </entry>
+              <entry>
+                Contenu
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>display-name</literal>
+              </entry>
+              <entry>
+                Le nom de votre extension, par ex. Acme Demo Extension.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>soft-require</literal>
+              </entry>
+              <entry>
+                La version de stabilité minimale de phpBB requise par
+                l'extension. Dans ce cas, nous exigeons n'importe quelle
+                version 3.1, ce qui se fait en la préfixant par un
+                <literal>~</literal> :
+                <literal>&quot;phpbb/phpbb&quot;: &quot;~3.2&quot;</literal>.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        Une explication complète de tous les champs du schéma JSON
+        disponibles dans un fichier composer.json peut être trouvée ici :
+        <ulink url="https://getcomposer.org/doc/04-schema.md">https://getcomposer.org/doc/04-schema.md</ulink>
+      </para>
+      <para>
+        Plus d'informations sur la spécification des contraintes de
+        version de package peuvent être trouvées ici :
+        <ulink url="https://getcomposer.org/doc/articles/versions.md#basic-constraints">https://getcomposer.org/doc/articles/versions.md#basic-constraints</ulink>
+      </para>
+      <para>
+        Jusqu'à présent, notre extension n'a encore aucune
+        fonctionnalité. Poursuivez avec les sections suivantes pour en
+        savoir plus sur la façon d'écrire une extension qui fera
+        quelque chose d'utile.
+      </para>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Nouveautés de phpBB 3.3</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduction</title>
+    <para>
+      phpBB 3.3 (Proteus) n'est qu'une mise à jour mineure par rapport à
+      la 3.2. Il y a, cependant, quelques changements dont les
+      développeurs d'extensions doivent être conscients. Les plus gros
+      changements apportés par la 3.3 sont des mises à jour de nombreuses
+      dépendances sous-jacentes de phpBB, mettant à jour Symfony, Twig,
+      jQuery et PHP.
+    </para>
+    <para>
+      Cette documentation explique :
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="php-7">PHP 7</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="symfony-3.4">Symfony 3.4</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="twig-2">Twig 2</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="jquery-3">jQuery 3</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="extension-installation-error-messages">Messages
+            d'erreur d'installation d'extension</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="php-7">
+    <title>PHP 7</title>
+    <para>
+      PHP 7.2.0 est la version minimale requise par phpBB 3.3. Il est
+      peu probable que cela pose des problèmes aux extensions. Si votre
+      code PHP fonctionnait dans phpBB 3.1 ou 3.2, il devrait également
+      fonctionner dans phpBB 3.3.
+    </para>
+    <para>
+      Si vous avez l'intention de commencer à utiliser certaines des
+      nouvelles constructions de langage introduites dans PHP 7, vous
+      devez faire connaître à vos utilisateurs le prérequis PHP minimum
+      de votre extension. Cela peut inclure la définition de la version
+      PHP minimale dans le fichier <literal>composer.json</literal> de
+      votre extension, ainsi que la désignation de phpBB 3.3 comme
+      prérequis minimum. Vous pouvez également utiliser le fichier
+      <literal>ext.php</literal> pour vérifier que les prérequis de
+      version minimale de PHP et de phpBB sont satisfaits dans la
+      méthode <literal>is_enableable()</literal>, ce qui empêchera les
+      utilisateurs ne répondant pas aux prérequis d'installer
+      accidentellement votre extension. Des exemples de ceci peuvent
+      être trouvés
+      <ulink url="tutorial_advanced.html#using-installation-commands-in-ext-php">ici</ulink>.
+    </para>
+    <note>
+      <title>Remarque</title>
+      <para>
+        La version minimale requise de PHP a été portée à 7.2.0 avec la
+        sortie de phpBB 3.3.11. Les versions antérieures de phpBB 3.3
+        prenaient également en charge une version PHP minimale de
+        7.1.3.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="symfony-3.4">
+    <title>Symfony 3.4</title>
+    <para>
+      Symfony a été mis à jour vers la 3.4 (depuis la 2.8). Les
+      changements suivants sont dus à des dépréciations introduites
+      dans Symfony 2 qui ont été retirées de Symfony 3. Les changements
+      suivants sont <emphasis role="strong">requis</emphasis> pour
+      phpBB 3.3 et les versions ultérieures.
+    </para>
+    <note>
+      <title>Remarque</title>
+      <para>
+        Bien que les changements suivants soient requis pour phpBB 3.3,
+        ils sont rétrocompatibles et fonctionneront donc toujours avec
+        phpBB 3.2 et 3.1.
+      </para>
+    </note>
+    <sect2 id="deprecated-special-characters-at-the-beginning-of-unquoted-strings">
+      <title>Dépréciation des caractères spéciaux en début de chaînes non
+      citées</title>
+      <para>
+        Selon la spécification Yaml, les chaînes non citées ne peuvent
+        pas commencer par <literal>@</literal>, <literal>%</literal>,
+        <literal></literal>, | ou &gt;`. Vous devez entourer ces chaînes
+        de guillemets simples ou doubles :
+      </para>
+      <programlisting language="yaml">
+vendor.package.class:
+   class: vendor\package\classname
+   arguments:
+      - '@dbal.conn'
+      - '%custom.tables%'
+   calls:
+      - [set_controller_helper, ['@controller.helper']]
+</programlisting>
+    </sect2>
+    <sect2 id="deprecated-route-pattern">
+      <title>Dépréciation du Route Pattern</title>
+      <para>
+        Les versions plus anciennes de Symfony et de phpBB permettaient
+        de définir des routes en utilisant le mot-clé
+        <literal>pattern</literal> :
+      </para>
+      <programlisting language="yaml">
+vendor.package.route:
+   pattern: /{value}
+</programlisting>
+      <para>
+        Pour phpBB 3.3, les chemins de route doivent désormais être
+        définis en utilisant le mot-clé <literal>path</literal> :
+      </para>
+      <programlisting language="yaml">
+vendor.package.route:
+   path: /{value}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="twig-2">
+    <title>Twig 2</title>
+    <para>
+      Twig a été mis à jour de la version 1 à la version 2. Ce
+      changement ne devrait affecter aucune syntaxe de template Twig
+      que vous pourriez utiliser dans vos extensions.
+    </para>
+  </sect1>
+  <sect1 id="jquery-3">
+    <title>jQuery 3</title>
+    <para>
+      phpBB 3.3 est fourni avec jQuery 3.4.1, mis à jour depuis la
+      version bien plus ancienne 1.12.4 fournie avec phpBB 3.2.
+    </para>
+    <para>
+      Les développeurs de jQuery sont très soucieux de maintenir la
+      compatibilité ascendante, ce qui signifie que la majeure partie
+      de votre code jQuery devrait continuer à fonctionner. Les plus
+      gros changements introduits par les versions 2 et 3 de jQuery
+      sont l'abandon de la prise en charge des navigateurs anciens, en
+      particulier Internet Explorer.
+    </para>
+    <para>
+      Bien qu'il ne soit pas toujours facile de vérifier si le code
+      jQuery d'une extension fonctionne correctement, jQuery fournit un
+      Migration PlugIn sur son site web. Vous pouvez ajouter la version
+      non compressée de ce PlugIn à votre forum phpBB de développement,
+      ce qui affichera dans la console d'erreur de votre navigateur
+      tout problème qu'il trouve dans votre code jQuery.
+    </para>
+    <para>
+      La majorité des problèmes que vous pourriez voir signalés par le
+      Migration PlugIn seront des avertissements liés à l'utilisation
+      de fonctions jQuery obsolètes (généralement des raccourcis ou des
+      alias tels que <literal>click()</literal> ou
+      <literal>focus()</literal> qui devraient plutôt être remplacés
+      par le gestionnaire d'événement de délégation
+      <literal>on()</literal>). Même si vous utilisez des fonctions
+      obsolètes, elles fonctionneront très probablement encore
+      correctement, bien qu'il soit préférable d'apporter toute mise à
+      jour recommandée au cas où jQuery finirait par supprimer les
+      fonctions obsolètes.
+    </para>
+  </sect1>
+  <sect1 id="extension-installation-error-messages">
+    <title>Messages d'erreur d'installation d'extension</title>
+    <para>
+      Une fonctionnalité souvent demandée par les auteurs d'extensions
+      fait enfin ses débuts dans phpBB 3.3 : l'affichage de messages
+      d'erreur aux utilisateurs lorsqu'une extension ne peut pas être
+      activée !
+    </para>
+    <para>
+      Typiquement, les auteurs d'extensions utilisent le fichier
+      <literal>ext.php</literal> de leur extension pour définir des
+      tests conditionnels afin de vérifier si un forum phpBB répond
+      aux prérequis de base de leur extension. En cas d'échec,
+      l'extension n'est pas activée. Cependant, les utilisateurs ne
+      reçoivent qu'un message d'erreur indiquant que leur forum n'a pas
+      satisfait les prérequis de l'extension.
+    </para>
+    <para>
+      Désormais, les auteurs d'extensions peuvent expliquer quels sont
+      les prérequis spécifiques qui ont causé l'échec de l'installation
+      de l'extension.
+    </para>
+    <para>
+      Cela peut se faire dans le même fichier <literal>ext.php</literal>
+      et la même méthode <literal>is_enableable()</literal> qu'avant.
+      Sauf que désormais, au lieu de ne pouvoir retourner qu'un booléen
+      vrai ou faux, la méthode vous permet de retourner un tableau de
+      messages d'erreur pour chaque raison pour laquelle une extension
+      ne peut pas être activée/installée.
+    </para>
+    <note>
+      <title>Remarque</title>
+      <para>
+        Pour rester rétrocompatible avec phpBB 3.2 et 3.1, vérifiez que
+        phpBB 3.3 ou une version plus récente est utilisée avant
+        d'utiliser le nouveau système de messages. Sinon, pour les
+        forums phpBB plus anciens, vous devez utiliser la méthode
+        originale consistant à retourner un simple booléen vrai/faux.
+      </para>
+    </note>
+    <programlisting>
+/**
+ * Check if extension can be enabled
+ *
+ * @return bool|array True if enableable, false (or an array of error messages) if not.
+ */
+public function is_enableable()
+{
+    // Only install extension if PHP ZipArchive is present
+    $enableable = class_exists('ZipArchive');
+
+    // If the test failed and phpBB 3.3 is detected, return error message explaining why
+    if (!$enableable &amp;&amp; phpbb_version_compare(PHPBB_VERSION, '3.3.0', '&gt;='))
+    {
+        // Import my extension's language file
+        $language = $this-&gt;container-&gt;get('language');
+        $language-&gt;add_lang('my_install_lang_file', 'myvendor/myextension');
+
+        // Return message 'PHP ZipArchive is required to enable and use this extension.'
+        return [$language-&gt;lang('INSTALL_FAILED_MESSAGE')];
+    }
+
+    // Return the boolean result of the test, either true (or false for phpBB 3.2 and 3.1)
+    return $enableable;
+}
+</programlisting>
+  </sect1>
+</article>

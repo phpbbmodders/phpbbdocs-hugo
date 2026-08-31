@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Events og Listeners</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      phpBB 3.1 introducerede et system af events gennem hele kodebasen
+      og skabelonfilerne, som giver extensions mulighed for at bruge
+      listeners til at tilføje funktioner, indsprøjte kode og ændre
+      eksisterende funktionalitet og opførsel.
+    </para>
+    <para>
+      Denne tutorial forklarer, hvordan events og listeners bruges:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="template-events-listeners">Skabelon-events og
+            -listeners</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="php-core-events-listeners">PHP-kerneevents og
+            -listeners</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="template-events-label">
+    <title>Skabelon-events og -listeners</title>
+    <para>
+      Skabelon-events giver extensions mulighed for at indsprøjte kode i
+      skabelonfilerne. Events findes overalt i skabelonstrukturen for
+      phpBB's typografier og giver flere nyttige indsprøjtningspunkter.
+      Et typisk skabelonevent ser sådan ud:
+    </para>
+    <programlisting>
+{% EVENT event_name_and_position %}
+</programlisting>
+    <para>
+      Se den fulde liste over
+      <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html#template-events">skabelon-events</ulink>.
+    </para>
+    <sect2 id="listening-for-an-event">
+      <title>Lytning efter et event</title>
+      <para>
+        For at <emphasis>abonnere</emphasis> på et skabelonevent skal vi
+        oprette en <emphasis>listener</emphasis>, en skabelonfil med
+        præcis samme navn som identifikatoren for det skabelonevent, vi
+        ønsker at bruge, og placere den i undermappen
+        <literal>event/</literal> i en typografis skabelonmappe.
+      </para>
+      <para>
+        Vi vil f.eks. bruge eventet
+        <literal>overall_header_navigation_prepend</literal> til at
+        tilføje et nyt link før de eksisterende links i boardets
+        navigationslinje. Listeneren til dette event bliver:
+      </para>
+      <programlisting>
+acme/demo/styles/prosilver/template/event/overall_header_navigation_prepend.html
+</programlisting>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Hvis du vil have en skabelonlistener til at blive brugt af alle
+          typografier, bør den placeres i typografimappen
+          <literal>all/</literal>, f.eks.
+          <literal>vendor/extname/styles/all/template/event/</literal>.
+          Dette hjælper med at forhindre kodeduplikering og letter
+          håndteringen af typografifiler.
+        </para>
+        <para>
+          Mapperne prosilver og subsilver2 bør bruges til skabelonfiler,
+          der skal skræddersys til hver typografi. På samme måde bør der
+          inkluderes en mappe til den pågældende typografi med de
+          tilhørende skabelonfiler, hvis en tredjepartstypografi kræver
+          yderligere tilpasning for at bevare kompatibiliteten.
+        </para>
+        <para>
+          For at tilføje ACP-skabelonlisteners skal disse filer placeres
+          i <literal>vendor/extname/adm/style/event/</literal>.
+        </para>
+      </tip>
+      <para>
+        Inde i skabelonlisteneren opretter vi et link til
+        navigationslinjen. Dette består af et simpelt listeelement med
+        et link og en beskrivelse:
+      </para>
+      <programlisting language="html">
+&lt;li class=&quot;small-icon icon-faq no-bulletin&quot;&gt;
+    &lt;a href=&quot;{{ U_DEMO_PAGE }}&quot;&gt;
+        {{ lang('DEMO_PAGE') }}
+    &lt;/a&gt;
+&lt;/li&gt;
+</programlisting>
+      <para>
+        Når skabelonlisteneren er oprettet, bør du kunne se det nye link
+        i boardets navigationslinje med FAQ-linkets ikon og teksten
+        <literal>DEMO_PAGE</literal>. Vi retter linkteksten i næste
+        afsnit.
+      </para>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Hvis linket ikke vises, kan det være nødvendigt at rydde
+          boardets mellemlager fra ACP'ens hovedside. Du kan også
+          aktivere <literal>DEBUG_MODE</literal> i din
+          <literal>config.php</literal>-fil, hvilket tvinger
+          skabelonmotoren til altid at kigge efter skabelonlisteners, når
+          en side genereres.
+        </para>
+      </tip>
+      <para>
+        Det er vigtigt at forstå, at når phpBB kompilerer skabelonerne,
+        findes der i øjeblikket ikke noget system til at bestemme
+        prioriteten, hvormed skabelonlisteners fra forskellige
+        extensions, der abonnerer på det samme event, kompileres. I
+        sjældne tilfælde kan nogle extensions forårsage en konflikt, og i
+        så fald anbefales det, at extension-forfatterne samarbejder om en
+        løsning på deres modstridende skabelonlisteners.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="php-core-events-listeners">
+    <title>PHP-kerneevents og -listeners</title>
+    <para>
+      Events giver extensions mulighed for at afvikle kode mange steder
+      i phpBB's kernekode uden at ændre nogen af koden. På den måde kan
+      extensions nemt tilføje funktioner, fjerne funktionalitet eller
+      ændre opførsel, samtidig med at kompatibilitet og enkle
+      opdateringsprocedurer bevares.
+    </para>
+    <sect2 id="terminology">
+      <title>Terminologi</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            Events
+          </term>
+          <listitem>
+            <para>
+              Events udløses forskellige steder i phpBB's kernekode.
+              Listeners i extensions abonnerer på disse events. De kan
+              afvikle kode, når det pågældende event indtræffer. Et
+              alternativt navn for events er "hook-placeringer".
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Listeners
+          </term>
+          <listitem>
+            <para>
+              Listeners udløses af events. De er metoder, der kan
+              behandle indkommende data og manipulere variabler inden for
+              eventets scope. På den måde kan de ændre phpBB's opførsel,
+              tilføje ny funktionalitet, eller - hvis de bruges i
+              sammenhæng med skabeloner - ændre outputtet. Adskillige
+              listeners udgør en del af en subscriber. Et alternativt
+              navn for listeners er "hooks".
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      <para>
+        Se den fulde liste over understøttede
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html#php-events">PHP-events</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="the-event-listener">
+      <title>Event-listeneren</title>
+      <para>
+        I forrige afsnit oprettede vi en skabelonlistener, der tilføjer
+        et link til Acme Demo-extensionen i phpBB's navigationslinje. Vi
+        vil nu bruge PHP-events til at indlæse en sprogfil, der
+        indeholder sprognøglen <literal>DEMO_PAGE</literal>, så vores
+        link i navigationslinjen vises med den korrekte tekst.
+      </para>
+      <para>
+        For at gøre dette skal vi oprette en PHP-event-listener-klasse
+        (også kaldet en subscriber-klasse). Denne klasse indeholder et
+        sæt listener-metoder, som hver især kan
+        <emphasis>abonnere</emphasis> på PHP-events i phpBB's kodebase.
+        Listener-klassen skal oprettes i undermappen
+        <literal>event/</literal> i extension-mappen, ellers virker den
+        ikke. Den skal også overholde følgende krav:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Følg konventionerne for extensionens klasse-namespacing:
+            <literal>vendor\extname\event\subscribername.php</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Implementér Symfonys interface
+            <literal>Symfony\Component\EventDispatcher\EventSubscriberInterface</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Brug den statiske metode
+            <literal>getSubscribedEvents()</literal> til at abonnere
+            metoder i listeneren på specifikke events, hvor nøglerne
+            indeholder eventnavne, og værdierne indeholder
+            listener-funktionsnavne.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        I Acme Demo-extensionen ønsker vi at indlæse vores sprogfil
+        overalt. Vi abonnerer derfor en listener-funktion på phpBB's
+        event <literal>core.user_setup</literal>:
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\event;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+    /**
+     * Assign functions defined in this class to event listeners in the core
+     *
+     * @return array
+     */
+    static public function getSubscribedEvents()
+    {
+        return [
+            'core.user_setup' =&gt; 'load_language_on_setup',
+        ];
+    }
+
+    /**
+     * Load the Acme Demo language file
+     *     acme/demo/language/en/demo.php
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_language_on_setup($event)
+    {
+        $lang_set_ext = $event['lang_set_ext'];
+        $lang_set_ext[] = [
+            'ext_name' =&gt; 'acme/demo',
+            'lang_set' =&gt; 'demo',
+        ];
+        $event['lang_set_ext'] = $lang_set_ext;
+    }
+}
+</programlisting>
+      <para>
+        Så hvad gør klassen <literal>main_listener.php</literal> ovenfor
+        egentlig?
+      </para>
+      <para>
+        Metoden <literal>getSubscribedEvents()</literal> abonnerer vores
+        listener-funktion <literal>load_language_on_setup()</literal> på
+        eventet ved navn <literal>core.user_setup</literal>. Det betyder,
+        at når dette event indtræffer, afvikles vores funktion.
+      </para>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Du kan tildele flere listener-funktioner til et enkelt event
+          ved hjælp af et array:
+        </para>
+        <programlisting>
+'core.user_setup' =&gt; [['foo_method'], ['bar_method']]
+</programlisting>
+      </tip>
+      <para>
+        Listener-metoden <literal>load_language_on_setup()</literal>
+        tilføjer blot vores sprogfil til phpBB's sprogdataarray. Generelt
+        set er en listener blot en offentlig funktion i
+        subscriber-klassen, der refereres til i det array, der returneres
+        af <literal>getSubscribedEvents()</literal>. Den tager ét
+        argument, <literal>$event</literal>. Denne parameter giver dig
+        mulighed for at tilgå og ændre de variabler, der gives til
+        eventet fra kernekoden. I dette tilfælde ændrer vi variablen
+        <literal>lang_set_ext</literal> ved at tilføje Acme Demos
+        sprogfil til den.
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Bemærk, hvordan eventvariablen
+          <literal>lang_set_ext</literal> først kopieres ved at tildele
+          den til en lokal variabel, derefter ændres, og derefter kopieres
+          tilbage. Denne genvej fungerer ikke:
+          <literal>$event['foo']['bar'] = $baz;</literal> Dette skyldes,
+          at eventvariablerne er overloaded, hvilket er en begrænsning i
+          PHP.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="registering-the-listener">
+      <title>Registrering af listeneren</title>
+      <para>
+        For at få phpBB til automatisk at indlæse og afvikle vores
+        event-listener-klasse skal vi oprette en servicedefinition for
+        den. Dette gøres ved at oprette en fil
+        <literal>config/services.yml</literal> i extensionen:
+      </para>
+      <programlisting language="yaml">
+services:
+    acme.demo.listener:
+        class: acme\demo\event\main_listener
+        tags:
+            - { name: event.listener }
+</programlisting>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          YAML-filer er følsomme over for indrykning. De kræver en
+          indrykningsstørrelse på 4 mellemrum pr. niveau,
+          <emphasis role="strong">brug ikke tabulatorer</emphasis>.
+        </para>
+      </warning>
+      <para>
+        Den første linje fortæller phpBB, at en liste af services
+        registreres. På næste linje angiver vi navnet på servicen, som i
+        dette tilfælde er for vores event-listener.
+      </para>
+      <important>
+        <title>Vigtigt</title>
+        <para>
+          Servicenavne skal have din vendor og dit extension-navn som
+          præfiks.
+        </para>
+      </important>
+      <para>
+        Attributten <literal>class</literal> skal indeholde namespacet og
+        klassenavnet for den service, der registreres. Namespacet
+        afhænger af filens placering inden for mappen
+        <literal>ext/</literal>. Filen
+        <literal>ext/acme/demo/event/main_listener.php</literal> har
+        derfor namespacet <literal>acme\demo\event</literal> og
+        klassenavnet <literal>main_listener</literal>. Klassens fulde
+        navn er derfor
+        <literal>acme\demo\event\main_listener</literal>, hvilket er
+        det, vi skal angive her.
+      </para>
+      <para>
+        Attributten <literal>tags</literal> fortæller phpBB, at servicen
+        er en event-listener.
+      </para>
+      <para>
+        Når YAML-filen med services er oprettet (eller ændret), skal
+        phpBB's mellemlager ryddes. Efter rydning af mellemlageret i
+        ACP'en bør beskrivelsen af linket i navigationslinjen nu vise
+        <literal>Demo</literal> i stedet for
+        <literal>DEMO_PAGE</literal>.
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          phpBB's PHP-kernefiler og skabelonfiler er forberedt med snesevis
+          af eventplaceringer. Men hvis der ikke findes nogen events, hvor
+          din extension måtte have brug for et, byder phpBB's
+          udviklingsteam anmodninger om events velkommen på forummet
+          <ulink url="https://area51.phpbb.com/phpBB/viewforum.php?f=111">area51.com
+          Event Requests</ulink>.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="prioritising-event-listeners-optional">
+      <title>Prioritering af event-listeners (valgfrit)</title>
+      <para>
+        Nogle gange kan forskellige extensions støde på problemer, når de
+        konkurrerer om brugen af de samme PHP-kerneevents. Når
+        extension-udvikleren forsøger at løse disse problemer, ønsker de
+        måske at prioritere deres extension over andre, så deres
+        extension udløses før andre extensions.
+      </para>
+      <para>
+        I sådanne tilfælde giver metoden
+        <literal>getSubscribedEvents()</literal> et argument til at sætte
+        en prioritet for event-listener-metoder. For eksempel:
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup' =&gt; ['foo_method', $priority]
+    ];
+}
+</programlisting>
+      <para>
+        I dette eksempel er <literal>$priority</literal> et heltal,
+        hvis værdi som standard er 0. Hvis dette heltal sættes til
+        højere værdier, betyder det højere prioritet, og derfor udløses
+        denne listener tidligere end andre, der abonnerer på dette
+        event.
+      </para>
+      <para>
+        Vi har nu brugt events og listeners til at ændre phpBB og indsætte
+        et fint link i navigationslinjen. Linket virker dog stadig ikke
+        endnu. Fortsæt til næste afsnit for at lære, hvordan controllere
+        og routing bruges til at få vores link i navigationslinjen til at
+        åbne en brugerdefineret, brugervendt side.
+      </para>
+    </sect2>
+  </sect1>
+</article>

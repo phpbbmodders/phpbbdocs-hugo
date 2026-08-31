@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Udviklingsprocesser</title>
+  </articleinfo>
+  <sect1 id="new-features">
+    <title>Nye funktioner</title>
+    <para>
+      Dette dokument beskriver den proces, der er på plads for at
+      foreslå nye funktioner, som kan tilføjes til phpBB. phpBB bruger
+      dette system til at sikre, at en given funktion tilføjes som
+      foreslået, og for at sikre, at anmodninger om funktioner håndteres
+      gennemsigtigt ved at basere sig på input fra fællesskabet.
+    </para>
+    <para>
+      Når du foreslår funktioner eller ændringer til phpBB, er der to
+      mulige veje at følge:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">Ideas (idéer)</emphasis>
+            </term>
+            <listitem>
+              <para>
+                Generelt mere uformelle idéer set fra en brugers
+                perspektiv. Normalt korte beskrivelser uden for meget
+                teknisk detalje.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">Feature Requests
+              (funktionsanmodninger)</emphasis>
+            </term>
+            <listitem>
+              <para>
+                Mere tekniske forslag til nye funktioner. Bør se dybere
+                på den tekniske baggrund og måder at implementere denne
+                nye funktion på. Grundlag for videre diskussioner med
+                udviklingsteamet.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+    <para>
+      I sidste ende følger begge disse den samme overordnede proces:
+    </para>
+    <para>
+      <inlinemediaobject>
+        <imageobject>
+          <imagedata fileref="images/new_feature_process.svg" />
+        </imageobject>
+        <textobject>
+          <phrase>image</phrase>
+        </textobject>
+      </inlinemediaobject>
+    </para>
+    <sect2 id="ideas">
+      <title>Ideas (idéer)</title>
+      <para>
+        Ideas er generelt mere uformelle idéer, der beskriver ønsket om
+        en ny funktion set fra brugerens perspektiv. De har til formål
+        hurtigt at indsamle nye idéer baseret på den daglige brug af
+        phpBB.
+      </para>
+      <para>
+        Uformelle idéer bør foreslås på
+        <ulink url="https://www.phpbb.com/community/ideas">phpBB
+        Ideas</ulink>. Der er det muligt både at indsamle feedback og
+        opbakning fra andre brugere.
+      </para>
+      <para>
+        Mere detaljerede tekniske diskussioner bør dog foregå i en
+        <emphasis>Feature Request</emphasis>.
+      </para>
+    </sect2>
+    <sect2 id="feature-requests">
+      <title>Feature Requests (funktionsanmodninger)</title>
+      <para>
+        I modsætning til de ovennævnte <emphasis>Ideas</emphasis> bør en
+        <emphasis>Feature Request</emphasis> fokusere mere på den
+        tekniske løsning for den foreslåede funktion. De kan være
+        baseret på en <emphasis>Idea</emphasis>, men det er ikke et
+        krav.
+      </para>
+      <para>
+        Nye funktionsanmodninger kan enten startes ved at oprette en sag
+        i <ulink url="https://tracker.phpbb.com/">phpBB Tracker</ulink>
+        eller ved at oprette et nyt diskussionsemne på
+        <ulink url="https://area51.phpbb.com/phpBB/">Area51-forummene</ulink>.
+      </para>
+      <para>
+        Forsøg at beskrive de tekniske detaljer for de foreslåede
+        funktioner, hvordan de vil blive brugt, og anbefalinger til en
+        mulig implementering. Angiv dine forventninger til omfanget af
+        de ændringer, der er nødvendige, og forsøg at diskutere
+        forslagets kompleksitet.
+      </para>
+      <para>
+        Medlemmer af fællesskabet vil kunne deltage i diskussionen, give
+        deres feedback og hjælpe med at udarbejde en plan for, hvordan
+        funktionen bedst implementeres i små og letoverskuelige trin.
+      </para>
+    </sect2>
+    <sect2 id="feature-acceptance">
+      <title>Godkendelse af funktioner</title>
+      <para>
+        Efter en funktion er blevet godkendt af
+        <emphasis>phpBB-udviklingsteamet</emphasis>, bør der være mindst
+        én sag i <ulink url="https://tracker.phpbb.com/">phpBB
+        Tracker</ulink>. En ny funktion bør opdeles i mindre,
+        mellemliggende trin for at lette implementeringen og
+        gennemgangen af de foreslåede ændringer. Det er også muligt at
+        bruge <emphasis>Epics</emphasis> i trackeren for at få et bedre
+        overblik over de nødvendige trin.
+      </para>
+      <para>
+        Hvert trin i en funktion kan derefter gennemgås og integreres
+        separat. Som følge heraf bliver kodegennemgange nemmere,
+        hurtigere og bør også resultere i bedre kode og funktioner
+        generelt.
+      </para>
+    </sect2>
+    <sect2 id="implementation-review">
+      <title>Implementering og gennemgang</title>
+      <para>
+        Implementeringen af en funktion eller dens mellemliggende trin
+        følger normalt efter godkendelsen fra
+        <emphasis>phpBB-udviklingsteamet</emphasis>. Al kode skal følge
+        vores
+        <ulink url="coding_guidelines.html">kodningsretningslinjer</ulink>.
+        Selve implementeringen kan udføres af den, der har fremsat
+        anmodningen, af et medlem af
+        <emphasis>phpBB-udviklingsteamet</emphasis>, eller af enhver
+        anden udvikler. Godkendelse af en funktion fra
+        <emphasis>phpBB-udviklingsteamet</emphasis> betyder ikke, at
+        implementeringen af den er obligatorisk, eller at den skal
+        implementeres af <emphasis>phpBB-udviklingsteamet</emphasis>
+        selv.
+      </para>
+      <para>
+        Når du bruger eksterne biblioteker, skal du sikre dig, at de er
+        kompatible med vores licens. Hvis du er i tvivl om, hvorvidt en
+        bestemt licenstype er acceptabel, bedes du spørge
+        <emphasis>phpBB-udviklingsteamet</emphasis>. PHP-biblioteker
+        <emphasis role="strong">SKAL</emphasis> installeres med composer
+        og bør generelt anses for at være velvedligeholdte.
+      </para>
+      <para>
+        Når koden er klar til gennemgang, bør der oprettes en pull
+        request i vores
+        <ulink url="https://github.com/phpbb/phpbb/pulls">GitHub-repository</ulink>.
+        Målversioner bør vælges i overensstemmelse med
+        <link linkend="target-versions">Målversioner</link>.
+      </para>
+    </sect2>
+    <sect2 id="finalisation-feature-merge">
+      <title>Færdiggørelse / merging af funktionen</title>
+      <para>
+        Efter koden er blevet gennemgået af
+        <emphasis>phpBB-udviklingsteamet</emphasis>, godkendes og merges
+        den typisk. Hvis der er problemer med koden, bør disse løses som
+        en del af kodegennemgangen. Det kan dog også give mening at
+        oprette opfølgende sager for at tage sig af yderligere arbejde
+        eller justeringer af den foreslåede funktion.
+      </para>
+      <para>
+        Når en pull request er blevet merget, vil typisk opfølgningsarbejde
+        være at tilføje dokumentation for den nye funktion, oprette
+        blogindlæg som en form for forhåndsannoncering, eller
+        påbegynde arbejdet med det næste mellemliggende trin.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="target-versions">
+    <title>Målversioner</title>
+    <para>
+      Den passende målversion for en given ændring eller funktion
+      afhænger normalt af følgende egenskaber:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          Type: Fejlrettelse, adfærdsændring eller ny funktion
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Størrelse og kompleksitet
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Bagudkompatibilitet (BC)
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Baseret på disse og den semantiske versioneringsmodel bør følgende
+      generelle regler gælde:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist spacing="compact">
+          <varlistentry>
+            <term>
+              Udgivelser af <emphasis role="strong">PATCH</emphasis>-versioner:
+            </term>
+            <listitem>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Fejlrettelser uden BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Sikkerhedsrettelser inkl. BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Mindre adfærdsændringer uden BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Mindre nye funktioner uden BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Opdateringer af tredjepartskomponenter uden BC-brud
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              Udgivelser af <emphasis role="strong">MINOR</emphasis>-versioner:
+            </term>
+            <listitem>
+              <para>
+                Samme som ved udgivelser af
+                <emphasis role="strong">PATCH</emphasis>-versioner, med
+                tilføjelse af:
+              </para>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Fejlrettelser inkl. BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Større adfærdsændringer uden BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Større nye funktioner uden BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Opdateringer af tredjepartskomponenter uden
+                    <emphasis>væsentlige</emphasis> BC-brud
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              Udgivelser af <emphasis role="strong">MAJOR</emphasis>-versioner:
+            </term>
+            <listitem>
+              <para>
+                Samme som ved udgivelser af
+                <emphasis role="strong">PATCH</emphasis>- og
+                <emphasis role="strong">MINOR</emphasis>-versioner, med
+                tilføjelse af:
+              </para>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Større adfærdsændringer inkl. BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Større nye funktioner inkl. BC-brud
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Opdateringer af tredjepartskomponenter inkl.
+                    <emphasis>væsentlige</emphasis> BC-brud,
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+</article>

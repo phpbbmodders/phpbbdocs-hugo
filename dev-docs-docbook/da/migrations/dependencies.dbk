@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Afhængigheder</title>
+  </articleinfo>
+  <para>
+    Afhængigheder fortæller Migratoren, i hvilken rækkefølge Migrationer
+    skal installeres.
+  </para>
+  <sect1 id="declaring-dependencies">
+    <title>Angivelse af afhængigheder</title>
+    <para>
+      Tilføj en statisk, offentlig funktion ved navn depends_on() i din
+      migrationsfil, der returnerer et array.
+    </para>
+    <programlisting>
+static public function depends_on()
+{
+    return [];
+}
+</programlisting>
+    <para>
+      Alt, der kræves, er at tilføje klassenavnet/-navnene på den/de
+      Migration(er), som den aktuelle Migration afhænger af.
+    </para>
+    <para>
+      Migrationen <literal>phpbb\db\migration\data\v310\dev</literal>
+      afhænger f.eks. af, at migrationerne for extensions, style-opdatering,
+      visning af rapporterede indlæg og tidszoner allerede er installeret.
+    </para>
+    <programlisting>
+static public function depends_on()
+{
+    return [
+        '\phpbb\db\migration\data\v310\extensions',
+        '\phpbb\db\migration\data\v310\style_update_p2',
+        '\phpbb\db\migration\data\v310\timezone_p2',
+        '\phpbb\db\migration\data\v310\reported_posts_display',
+        '\phpbb\db\migration\data\v310\migrations_table',
+    ];
+}
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Det anbefales kraftigt at tilføje en afhængighed for alle
+        migrationer. Hvis migrationen er den første migration i din
+        extension, skal du blot afhænge af udgivelsesmigrationen for det
+        mindste phpBB-krav for din extension, f.eks. 3.1.4:
+      </para>
+    </note>
+    <programlisting>
+static public function depends_on()
+{
+    return [
+        '\phpbb\db\migration\data\v31x\v314',
+    ];
+}
+</programlisting>
+  </sect1>
+  <sect1 id="depends_on-creates-a-tree">
+    <title>depends_on opretter et træ</title>
+    <para>
+      Forestil dig følgende situation:
+    </para>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec align="left" />
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Migration
+            </entry>
+            <entry>
+              Afhængigheder
+            </entry>
+            <entry>
+              Bemærkning
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              <literal>phpbb\db\migration\data\\v310\\dev</literal>
+            </entry>
+            <entry>
+              Første udgivelse, 1.0.0, kræver phpBB 3.1.0
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_2</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              Ny funktion til 1.0.1 (under udvikling)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_3</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              Endnu en ny funktion til 1.0.1 (under udvikling)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_4</literal>
+            </entry>
+            <entry>
+              <literal>migration_2</literal>
+            </entry>
+            <entry>
+              Ændrer funktionen i <literal>migration_2</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_5</literal>
+            </entry>
+            <entry>
+              <literal>migration_3</literal>,
+              <literal>migration_4</literal>
+            </entry>
+            <entry>
+              Udgivelse 1.0.1
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Denne afhængighedsopsætning ville forårsage, at følgende
+      Migrationer også blev installeret, når en enkelt Migration blev
+      installeret manuelt. <emphasis>Forudsætter, at</emphasis>
+      <literal>phpbb\db\migration\data\v310\dev</literal>
+      <emphasis>allerede er installeret.</emphasis>
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Installer
+            </entry>
+            <entry>
+              Migrationer, der installeres
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_2</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_2</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_3</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_3</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_4</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_2</literal>,
+              <literal>migration_4</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_5</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_2</literal>,
+              <literal>migration_4</literal>,
+              <literal>migration_3</literal>,
+              <literal>migration_5</literal>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="what-does-this-mean-for-me">
+    <title>Hvad betyder det for mig?</title>
+    <para>
+      Du skal angive alle afhængigheder, den aktuelle Migration har, men
+      ikke dem, som afhængighederne selv angiver som afhængigheder for
+      deres egen installation.
+    </para>
+    <para>
+      Det betyder, at <literal>migration_5</literal> ikke behøver at
+      angive <literal>migration_1</literal> til
+      <literal>migration_4</literal> som afhængighed, kun
+      <literal>migration_3</literal> og <literal>migration_4</literal>,
+      fordi disse Migrationer allerede kræver
+      <literal>migration_1</literal> og <literal>migration_2</literal>.
+    </para>
+    <para>
+      Dette betyder også, at den ønskede rækkefølge for operationerne
+      bevares. I eksemplet ovenfor ændrer
+      <literal>migration_4</literal> funktionen i
+      <literal>migration_2</literal> og skal anvendes, efter
+      <literal>migration_2</literal> er installeret. På samme måde er
+      <literal>migration_5</literal> i eksemplet ovenfor udgivelsen af
+      1.0.1, som kræver, at begge de nye funktioner er installeret, før
+      det er 1.0.1.
+    </para>
+  </sect1>
+</article>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Modifications de schéma</title>
+  </articleinfo>
+  <para>
+    Les modifications de schéma sont effectuées dans les Migrations en
+    créant un tableau qui sera analysé par
+    <literal>\phpbb\db\tools::perform_schema_changes()</literal>.
+  </para>
+  <sect1 id="basics">
+    <title>Notions de base</title>
+    <para>
+      Lors de l'exécution de modifications de schéma, votre classe de
+      Migration doit contenir deux fonctions,
+      <literal>update_schema</literal> et
+      <literal>revert_schema</literal>.
+    </para>
+    <sect2 id="update_schema">
+      <title>update_schema</title>
+      <para>
+        <literal>update_schema()</literal> sera appelée comme
+        <emphasis role="strong">première</emphasis> étape lors de
+        l'installation d'une migration. Elle effectue les
+        modifications de schéma de base de données nécessaires lors de
+        l'installation de la migration.
+      </para>
+      <programlisting>
+public function update_schema()
+{
+    return [];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="revert_schema">
+      <title>revert_schema</title>
+      <para>
+        <literal>revert_schema()</literal> sera appelée lorsqu'une
+        Migration doit être désinstallée (cela peut se produire si
+        l'utilisateur souhaite/doit annuler les modifications
+        apportées par la Migration, si une dépendance est annulée, ou
+        si l'installation échoue et que la Migration entière est
+        supprimée).
+      </para>
+      <para>
+        Les instructions dans <literal>revert_schema()</literal>
+        doivent effectivement faire l'exact opposé de ce que fait
+        <literal>update_schema()</literal> (par exemple, si une table
+        est supprimée, la fonction d'annulation doit ajouter la table
+        avec exactement les mêmes colonnes/clés qu'elle avait avant
+        d'être supprimée)
+      </para>
+      <programlisting>
+public function revert_schema()
+{
+    return [];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="what-to-return">
+    <title>Que retourner</title>
+    <para>
+      Le tableau retourné est transmis directement, tel quel, à
+      <literal>\phpbb\db\tools::perform_schema_changes();</literal>
+    </para>
+    <sect2 id="examples">
+      <title>Exemples</title>
+      <para>
+        <emphasis role="strong">Extrait de 3_1_0_dev :</emphasis>
+      </para>
+      <programlisting>
+public function update_schema()
+{
+    return [
+        'add_columns'        =&gt; [
+            $this-&gt;table_prefix . 'groups'        =&gt; [
+                'group_teampage'    =&gt; ['UINT', 0, 'after' =&gt; 'group_legend'],
+            ],
+            $this-&gt;table_prefix . 'styles'        =&gt; [
+                'style_path'             =&gt; ['VCHAR:100', ''],
+                'bbcode_bitfield'        =&gt; ['VCHAR:255', 'kNg='],
+                'style_parent_id'        =&gt; ['UINT:4', 0],
+                'style_parent_tree'      =&gt; ['TEXT', ''],
+            ],
+        ],
+        'change_columns'    =&gt; [
+            $this-&gt;table_prefix . 'groups'        =&gt; [
+                'group_legend'        =&gt; ['UINT', 0],
+            ],
+        ],
+    ];
+}
+
+public function revert_schema()
+{
+    return [
+        'drop_columns'        =&gt; [
+            $this-&gt;table_prefix . 'groups'        =&gt; [
+                'group_teampage',
+            ],
+            $this-&gt;table_prefix . 'styles'        =&gt; [
+                'style_path',
+                'bbcode_bitfield',
+                'style_parent_id',
+                'style_parent_tree',
+            ],
+        ],
+    ];
+}
+</programlisting>
+      <para>
+        <emphasis role="strong">Extrait de style_update_p2 :</emphasis>
+      </para>
+      <programlisting>
+public function update_schema()
+{
+    return [
+        'drop_columns'    =&gt; [
+            $this-&gt;table_prefix . 'styles'        =&gt; [
+                'imageset_id',
+                'template_id',
+                'theme_id',
+            ],
+        ],
+
+        'drop_tables'    =&gt; [
+            $this-&gt;table_prefix . 'styles_imageset',
+            $this-&gt;table_prefix . 'styles_imageset_data',
+        ],
+    ];
+}
+
+public function revert_schema()
+{
+    return [
+        'add_columns'    =&gt; [
+            $this-&gt;table_prefix . 'styles' =&gt; [
+                'imageset_id'    =&gt; ['UINT', 0],
+                'template_id'    =&gt; ['UINT', 0],
+                'theme_id'       =&gt; ['UINT', 0],
+            ],
+        ],
+
+        'add_tables'    =&gt; [
+            $this-&gt;table_prefix . 'styles_imageset' =&gt; [
+                'COLUMNS' =&gt; [
+                    'imageset_id'                =&gt; ['UINT', NULL, 'auto_increment'],
+                    'imageset_name'              =&gt; ['VCHAR_UNI:255', ''],
+                    'imageset_copyright'         =&gt; ['VCHAR_UNI', ''],
+                    'imageset_path'              =&gt; ['VCHAR:100', ''],
+                ],
+                'PRIMARY_KEY' =&gt; 'imageset_id',
+                'KEYS' =&gt; [
+                    'imgset_nm'            =&gt; ['UNIQUE', 'imageset_name'],
+                ],
+            ],
+            $this-&gt;table_prefix . 'styles_imageset_data' =&gt; [
+                'COLUMNS' =&gt; [
+                    'image_id'              =&gt; ['UINT', NULL, 'auto_increment'],
+                    'image_name'            =&gt; ['VCHAR:200', ''],
+                    'image_filename'        =&gt; ['VCHAR:200', ''],
+                    'image_lang'            =&gt; ['VCHAR:30', ''],
+                    'image_height'          =&gt; ['USINT', 0],
+                    'image_width'           =&gt; ['USINT', 0],
+                    'imageset_id'           =&gt; ['UINT', 0],
+                ],
+                'PRIMARY_KEY' =&gt; 'image_id',
+                'KEYS' =&gt; [
+                    'i_d'            =&gt; ['INDEX', 'imageset_id'],
+                ],
+            ],
+        ],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

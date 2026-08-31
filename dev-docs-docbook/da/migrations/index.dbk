@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Migrationer</title>
+  </articleinfo>
+  <para>
+    Fra og med phpBB 3.1 udføres databaseopdateringer ved hjælp af
+    Migrationer.
+  </para>
+  <para>
+    Migrationer blev udviklet på grund af de udfordringer, der er
+    forbundet med distribueret udvikling og med at holde en opdateret
+    databaseopsætning ved lige på tværs af alle udviklere.
+  </para>
+  <para>
+    RFC-emne, hvis du er interesseret i baggrunden:
+    <ulink url="http://area51.phpbb.com/phpBB/viewtopic.php?t=41337">http://area51.phpbb.com/phpBB/viewtopic.php?t=41337</ulink>
+  </para>
+  <para>
+    getting_started dependencies schema_changes data_changes tools/index
+  </para>
+  <sect1 id="what-do-migrations-mean-for-me">
+    <title>Hvad betyder Migrationer for mig?</title>
+    <sect2 id="as-a-user">
+      <title>Som bruger</title>
+      <para>
+        Migrationer påvirker ikke brugen af phpBB, kun skrivning af kode
+        til det, så administratorer skal ikke gøre noget anderledes.
+      </para>
+      <para>
+        Databaseopdateringer mellem phpBB-versioner og
+        extension-opdateringer bliver mere sikre, og i det usandsynlige
+        tilfælde, at noget går galt under databaseændringer, bliver det
+        meget nemmere at fejlsøge og rette.
+      </para>
+    </sect2>
+    <sect2 id="as-an-extension-author">
+      <title>Som extension-forfatter</title>
+      <para>
+        Funktionalitet (svarende til UMIL for phpBB 3.0) indbygget i
+        phpBB til nemmere håndtering af databaseændringer mellem
+        versioner samt nyttige værktøjer til at hjælpe med at foretage
+        databaseændringer.
+      </para>
+    </sect2>
+    <sect2 id="as-a-developer">
+      <title>Som udvikler</title>
+      <para>
+        Nemmere samarbejde med andre, mindre tid brugt på at håndtere
+        databaseændringer mellem forskellige branches og pull requests.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="how-do-i-use-migrations">
+    <title>Hvordan bruger jeg Migrationer?</title>
+    <sect2 id="getting-started-with-migrations">
+      <title>Kom godt i gang med Migrationer</title>
+      <para>
+        Sådan opretter du en grundlæggende migrationsfil
+        <literal>getting_started</literal>
+      </para>
+    </sect2>
+    <sect2 id="migration-helpers">
+      <title>Migrationshjælpere</title>
+      <para>
+        Sådan bruger du migrationshjælpere til at foretage grundlæggende
+        databaseændringer
+        <literal>tools/index</literal>
+      </para>
+    </sect2>
+  </sect1>
+</article>

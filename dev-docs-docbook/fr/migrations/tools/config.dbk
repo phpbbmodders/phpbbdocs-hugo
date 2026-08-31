@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Config Tool</title>
+  </articleinfo>
+  <para>
+    L'outil config aide à ajouter, mettre à jour et supprimer des
+    paramètres de configuration.
+  </para>
+  <sect1 id="add-config-setting">
+    <title>Ajouter un paramètre de configuration</title>
+    <para>
+      Ajouter un nouveau paramètre de configuration
+    </para>
+    <programlisting>
+['config.add', [config name, config value, is dynamic (default: false) ]],
+</programlisting>
+    <sect2 id="example">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.add', ['foo', 'bar']], // $config['foo'] = 'bar';
+         ['config.add', ['foo2', 1, true]], // $config['foo2'] = '1'; Dynamic, do not cache
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="update-config-setting">
+    <title>Mettre à jour un paramètre de configuration</title>
+    <para>
+      Mettre à jour un paramètre de configuration
+    </para>
+    <programlisting>
+['config.update', [config name, new config value]],
+</programlisting>
+    <sect2 id="example-1">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.update', ['foo', 'bar']], // $config['foo'] = 'bar';
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="update-if-current-value-equals-specific-value">
+    <title>Mettre à jour si la valeur actuelle est égale à une valeur
+    spécifique</title>
+    <para>
+      Mettre à jour un paramètre de configuration si la valeur de
+      configuration actuelle est égale à une valeur spécifiée
+    </para>
+    <programlisting>
+['config.update_if_equals', [compare to, config name, new config value]],
+</programlisting>
+    <sect2 id="example-2">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.update_if_equals', ['bar', 'foo', 'bar2']], // if ($config['foo'] == 'bar') { $config['foo'] = 'bar2'; }
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="delete-config-setting">
+    <title>Supprimer un paramètre de configuration</title>
+    <para>
+      Supprimer un paramètre de configuration
+    </para>
+    <programlisting>
+['config.remove', [config name]],
+</programlisting>
+    <sect2 id="example-3">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.remove', ['foo']], // unset($config['foo']);
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

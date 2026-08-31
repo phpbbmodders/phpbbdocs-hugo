@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Skabelonsyntaks</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Fra og med version 3.1 bruger phpBB skabelonmotoren Twig. Denne
+      tutorial dækker nogle af detaljerne omkring implementeringen af
+      Twigs syntaks i phpBB og dets extensions, men mere udførlig
+      dokumentation for Twig kan findes her:
+      <ulink url="https://twig.symfony.com/doc/2.x/">Twig
+      Documentation</ulink>.
+    </para>
+  </sect1>
+  <sect1 id="assigning-data-in-php">
+    <title>Tildeling af data i PHP</title>
+    <sect2 id="variables">
+      <title>Variabler</title>
+      <para>
+        Tildeling af en enkelt variabel:
+      </para>
+      <programlisting>
+$template-&gt;assign_var('FOO', $foo);
+</programlisting>
+      <para>
+        Tildeling af flere variabler:
+      </para>
+      <programlisting>
+$template-&gt;assign_vars([
+    'FOO' =&gt; $foo,
+    'BAR' =&gt; $bar,
+    'BAZ' =&gt; $baz
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="default-template-variables">
+      <title>Standardskabelonvariabler</title>
+      <para>
+        Der findes nogle variabler, der sættes i phpBB's
+        page_header-funktion, som er fælles for alle skabeloner, og som
+        kan være nyttige for en typografi- eller extension-forfatter.
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec colwidth="20*" align="left" />
+          <colspec colwidth="60*" align="left" />
+          <colspec colwidth="20*" align="left" />
+          <thead>
+            <row>
+              <entry>
+                Skabelonvariabel
+              </entry>
+              <entry>
+                Beskrivelse
+              </entry>
+              <entry>
+                Eksempel på output
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>T_ASSETS_PATH</literal>
+              </entry>
+              <entry>
+                Stien til assets-filer (mappen
+                <literal>assets</literal> i roden af
+                phpBB-installationen)
+              </entry>
+              <entry>
+                <literal>./assets</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_THEME_PATH</literal>
+              </entry>
+              <entry>
+                Stien til den aktuelt valgte typografis theme-mappe
+                (hvor alle CSS-filerne gemmes)
+              </entry>
+              <entry>
+                <literal>./styles/prosilver/theme</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_TEMPLATE_PATH</literal>
+              </entry>
+              <entry>
+                Stien til den aktuelt valgte typografis skabelonmappe
+              </entry>
+              <entry>
+                <literal>./styles/prosilver/template</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_IMAGES_PATH</literal>
+              </entry>
+              <entry>
+                Stien til phpBB's billedmappe
+              </entry>
+              <entry>
+                <literal>./images</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_SMILIES_PATH</literal>
+              </entry>
+              <entry>
+                Stien til mappen med smileys
+              </entry>
+              <entry>
+                <literal>./images/similies</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_AVATAR_PATH</literal>
+              </entry>
+              <entry>
+                Stien til mappen for upload af avatarer
+              </entry>
+              <entry>
+                <literal>./images/avatars/upload</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_AVATAR_GALLERY_PATH</literal>
+              </entry>
+              <entry>
+                Stien til avatargalleriets mappe
+              </entry>
+              <entry>
+                <literal>./images/avatars/gallery</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_ICONS_PATH</literal>
+              </entry>
+              <entry>
+                Stien til mappen med emneikoner
+              </entry>
+              <entry>
+                <literal>./images/icons</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_RANKS_PATH</literal>
+              </entry>
+              <entry>
+                Stien til rangbillederne
+              </entry>
+              <entry>
+                <literal>./images/ranks</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_UPLOAD_PATH</literal>
+              </entry>
+              <entry>
+                Stien til phpBB's uploadmappe (bør ikke bruges direkte).
+              </entry>
+              <entry>
+                <literal>./files</literal>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="blocks">
+      <title>Blokke</title>
+      <para>
+        Blokke bruges til at tildele et vilkårligt antal elementer af
+        samme type, f.eks. emner eller indlæg ("foreach-løkke").
+      </para>
+      <programlisting>
+while ($row = $db-&gt;sql_fetchrow($result))
+{
+    $template-&gt;assign_block_vars('loopname', [
+        'FOO' =&gt; $row['foo'],
+        'BAR' =&gt; $row['bar']
+    ]);
+}
+</programlisting>
+      <para>
+        Indlejrede løkker:
+      </para>
+      <programlisting>
+while ($topic = $db-&gt;sql_fetchrow($result))
+{
+    $template-&gt;assign_block_vars('topic', [
+        'TOPIC_ID' =&gt; $topic['topic_id']
+    ]);
+
+    while ($post = $db-&gt;sql_fetchrow($result))
+    {
+        $template-&gt;assign_block_vars('topic.post', [
+            'POST_ID' =&gt; $post['post_id']
+        ]);
+    }
+}
+</programlisting>
+      <para>
+        Blokkene og de indlejrede løkker kan derefter bruges tilsvarende
+        i HTML-filer (se <link linkend="syntax-elements">Syntakselementer</link>).
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="syntax-elements">
+    <title>Syntakselementer</title>
+    <para>
+      Dette afsnit fremhæver Twig-syntakselementer i skabelonmotoren.
+      Den ældre, phpBB-specifikke syntaks bliver forældet i en senere
+      version af phpBB. Det anbefales derfor at bruge den dokumenterede
+      Twig-syntaks i stedet:
+    </para>
+    <sect2 id="comments">
+      <title>Kommentarer</title>
+      <para>
+        For at skrive kommentarer inde i skabelonen kan du bruge
+        <literal>{# #}</literal>:
+      </para>
+      <programlisting>
+{# Your comments can go here. #}
+</programlisting>
+    </sect2>
+    <sect2 id="variables-1">
+      <title>Variabler</title>
+      <para>
+        Variabler i phpBB har formen <literal>{{ X_YYYYY }}</literal>,
+        hvor dataene tildeles fra kilden. De fleste sprogstrenge tildeles
+        dog ikke fra kilden. Når en sprogvariabel findes, angivet som
+        <literal>{{ lang('YYYYYY') }}</literal>, kontrollerer phpBB
+        først, om der findes en tildelt variabel med det navn. Hvis det
+        er tilfældet, bruges den. Hvis ikke, kontrollerer den, om der
+        findes en eksisterende streng defineret i sprogfilen.
+      </para>
+      <para>
+        Ved at bruge sprogvariabelformatet giver phpBB mulighed for
+        større fleksibilitet i tilpasningen af sprogstrenge. Dette gør
+        det nemt at ændre sprogstrenge i sprogfilerne uden at skulle
+        ændre kildekoden direkte.
+      </para>
+    </sect2>
+    <sect2 id="blocks-1">
+      <title>Blokke</title>
+      <para>
+        Den grundlæggende blokniveau-løkke har formen:
+      </para>
+      <programlisting>
+{% for item in loops.loopname %}
+    markup, {{ item.xyyyy }}, etc.
+{% endfor %}
+</programlisting>
+      <para>
+        En yderligere udvidelse er at bruge <literal>else</literal> i en
+        løkke:
+      </para>
+      <programlisting>
+{% for item in loops.loopname %}
+    markup, {{ item.xyyyy }}, etc.
+{% else %}
+    alternate markup
+{% endfor %}
+</programlisting>
+      <para>
+        Dette gør, at markup'en mellem <literal>else</literal> og
+        <literal>endfor</literal> udskrives, hvis løkken ikke indeholder
+        nogen værdier. Dette er nyttigt for f.eks. fora uden emner ...
+        på nogle måder erstatter det "dele af" den eksisterende
+        "switch"-lignende kontrolstruktur (resten erstattes af
+        betingelser, se nedenfor).
+      </para>
+      <para>
+        Du kan også kontrollere, om din løkke har noget indhold, svarende
+        til at bruge <literal>count()</literal> i PHP:
+      </para>
+      <programlisting>
+{% if loops.loopname|length %}
+    {% for item in loops.loopname %}
+        {{ item.xyyyy }}
+    {% endfor %}
+{% endif %}
+</programlisting>
+      <para>
+        <literal>loops.loopname|length</literal> udskriver størrelsen af
+        blokarrayet. Dette giver mening, hvis du f.eks. vil forhindre et
+        tomt <literal>&lt;select&gt;</literal>-tag, som ikke ville være
+        gyldig HTML.
+      </para>
+      <para>
+        Du kan også tilgå bestemte iterationer af en løkke ved hjælp af
+        følgende specielle variabler:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec colwidth="20*" align="left" />
+          <colspec colwidth="80*" align="left" />
+          <tbody>
+            <row>
+              <entry>
+                <literal>loop.index</literal>
+              </entry>
+              <entry>
+                Den aktuelle iteration af løkken. (1-indekseret)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.index0</literal>
+              </entry>
+              <entry>
+                Den aktuelle iteration af løkken. (0-indekseret)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.revindex</literal>
+              </entry>
+              <entry>
+                Antallet af iterationer fra slutningen af løkken
+                (1-indekseret)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.revindex0</literal>
+              </entry>
+              <entry>
+                Antallet af iterationer fra slutningen af løkken
+                (0-indekseret)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.first</literal>
+              </entry>
+              <entry>
+                True ved første iteration
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.last</literal>
+              </entry>
+              <entry>
+                True ved sidste iteration
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.length</literal>
+              </entry>
+              <entry>
+                Antallet af elementer i sekvensen
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.parent</literal>
+              </entry>
+              <entry>
+                Den overordnede kontekst
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="including-files">
+      <title>Inkludering af filer</title>
+      <para>
+        phpBB har mulighed for at inkludere andre HTML-, JavaScript- og
+        CSS-filer:
+      </para>
+      <programlisting>
+{% INCLUDE 'filename.html' %}
+{% INCLUDEJS 'filename.js' %}
+{% INCLUDECSS 'filename.css' %}
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Du kan introducere nye skabeloner (dvs. andre end dem i
+          standardsættet) ved hjælp af dette system og inkludere dem,
+          som du ønsker ... måske nyttigt til en fælles "menu"-bjælke
+          eller lignende.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="conditionalscontrol-structures">
+      <title>Betingelser/kontrolstrukturer</title>
+      <para>
+        Betingelser og kontrolstrukturer kan bruges på samme måde som i
+        Twig. Et enkelt eksempel på dette er:
+      </para>
+      <programlisting>
+{% if expr %}
+    markup
+{% endif %}
+</programlisting>
+      <para>
+        Udtrykket kan have mange former:
+      </para>
+      <programlisting>
+{% if loop.index is even %}
+    markup
+{% endif %}
+</programlisting>
+      <para>
+        Dette udskriver markup'en, hvis den aktuelle iteration af en
+        løkke er en lige værdi. Du kan bruge forskellige
+        sammenligningsmetoder (standardmetoder samt tilsvarende tekstuelle
+        versioner angivet i kantede parenteser), herunder:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>==</literal> [<literal>eq</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>!=</literal> [<literal>neq</literal>,
+            <literal>ne</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;&gt;</literal> (samme som <literal>!=</literal>)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>!==</literal> (ikke ens i værdi og type)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>===</literal> (ens i værdi og type)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&gt;</literal> [<literal>gt</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;</literal> [<literal>lt</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&gt;=</literal> [<literal>gte</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;=</literal> [<literal>lte</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&amp;&amp;</literal> [<literal>and</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>||</literal> [<literal>or</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>%</literal> [<literal>mod</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>!</literal> [<literal>not</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>+</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>-</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>*</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>/</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;&lt;</literal> (bitvis venstreskift)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&gt;&gt;</literal> (bitvis højreskift)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>|</literal> (bitvis or)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>^</literal> (bitvis xor)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&amp;</literal> (bitvis and)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>~</literal> (bitvis not)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>is</literal> (kan bruges til at forbinde
+            sammenligningsoperationer)
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Almindelige parenteser kan også bruges til at gennemtvinge de
+        gode gamle regnereglers rækkefølge. Derudover er nogle
+        grundlæggende sammenligningstyper defineret:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>even</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>odd</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>div</literal>
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Ud over den simple brug af IF kan du også lave en sekvens af
+        sammenligninger ved hjælp af følgende:
+      </para>
+      <programlisting>
+{% if expr1 %}
+    markup
+{% elseif expr2 %}
+    markup
+    .
+    .
+    .
+{% elseif exprN %}
+    markup
+{% else %}
+    markup
+{% endif %}
+</programlisting>
+      <para>
+        Hver sætning testes efter tur, og det relevante output genereres,
+        når et match (hvis der er et match) findes. Det er ikke
+        nødvendigt altid at bruge <literal>elseif</literal>;
+        <literal>else</literal> kan bruges alene til at matche "alt
+        andet".
+      </para>
+      <para>
+        Dette kan f.eks. også bruges til at tildele forskellige
+        stylesheets til lige rækketal i forhold til ulige:
+      </para>
+      <programlisting>
+&lt;table&gt;
+{% if loop.index is even %}
+    &lt;tr class=&quot;row1&quot;&gt;
+{% else %}
+    &lt;tr class=&quot;row2&quot;&gt;
+{% endif %}
+        &lt;td&gt;HELLO!&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</programlisting>
+      <para>
+        Andre elementer kan også tilføjes:
+      </para>
+      <programlisting>
+&lt;table&gt;
+{% if loop.index &gt; 10 %}
+    &lt;tr bgcolor=&quot;#FF0000&quot;&gt;
+{% elseif loop.index &gt; 5 %}
+    &lt;tr bgcolor=&quot;#00FF00&quot;&gt;
+{% elseif loop.index &gt; 2 %}
+    &lt;tr bgcolor=&quot;#0000FF&quot;&gt;
+{% else %}
+    &lt;tr bgcolor=&quot;#FF00FF&quot;&gt;
+{% endif %}
+        &lt;td&gt;hello!&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</programlisting>
+      <para>
+        Dette udskriver rækkecellen i lilla for de to første rækker, blå
+        for rækker 2 til 5, grøn for rækker 5 til 10 og rød for resten.
+        Så du kunne f.eks. skabe en "pæn" farveovergangseffekt.
+      </para>
+      <para>
+        Du kunne bruge <literal>if</literal> til at foretage almindelige
+        kontroller af f.eks. en brugers loginstatus:
+      </para>
+      <programlisting>
+{% if S_USER_LOGGED_IN %}
+    markup
+{% endif %}
+</programlisting>
+    </sect2>
+    <sect2 id="user-variables">
+      <title>Brugervariabler</title>
+      <para>
+        Du kan også definere simple variabler (boolesk, heltal eller
+        double) inde fra skabelonen. Dette er f.eks. nyttigt, hvis du
+        ikke ønsker at kopiere og indsætte komplekse
+        <literal>if</literal>-udtryk igen og igen:
+      </para>
+      <programlisting>
+{% if expr1 %}
+    {% DEFINE $COLSPAN = 3 %}
+{% elseif expr2 %}
+    {% DEFINE $COLSPAN = 4 %}
+{% else %}
+    {% DEFINE $COLSPAN = 1 %}
+{% endif %}
+
+&lt;tr&gt;&lt;td colspan=&quot;{{ $COLSPAN }}&quot;&gt;...&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan=&quot;{{ $COLSPAN }}&quot;&gt;...&lt;/td&gt;&lt;/tr&gt;
+</programlisting>
+      <para>
+        Nøgleordet <literal>DEFINE</literal> har nogle begrænsninger for
+        sin brug:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Der <emphasis role="strong">SKAL</emphasis> være præcis ét
+            mellemrum før og efter <literal>=</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Du <emphasis role="strong">SKAL</emphasis> bruge enkelte
+            anførselstegn
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Et eksempel på dette:
+      </para>
+      <programlisting>
+{% DEFINE $COLSPAN = 3 %}   //GOOD
+{% DEFINE $COLSPAN=3 %}     //BAD
+{% DEFINE $COLSPAN  =  3 %} //BAD
+
+
+{% DEFINE $CLASS = 'class1' %}  //GOOD
+{% DEFINE $CLASS = &quot;class1&quot; %}  //BAD
+</programlisting>
+      <para>
+        Brugervariabler kan ryddes (fjernes) ved hjælp af:
+      </para>
+      <programlisting>
+{% UNDEFINE $COLSPAN %}
+</programlisting>
+    </sect2>
+    <sect2 id="language-variables">
+      <title>Sprogvariabler</title>
+      <para>
+        Du kan bruge og interagere med sprogvariabler på flere måder.
+        phpBB udvider standard Twig-syntaksen med følgende funktioner for
+        at kunne bruge sprogvariabler i Twig-baseret skabelonkode:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang</literal>
+              </term>
+              <listitem>
+                <para>
+                  Henter output for en sprogvariabel, svarende til at
+                  bruge <literal>{{ L_FOO }}</literal>. Følgende to
+                  linjer giver samme resultat:
+                </para>
+                <programlisting>
+{{ lang('FOO') }}
+{{ L_FOO }}
+</programlisting>
+                <para>
+                  Den understøtter den samme parametersyntaks som
+                  <literal>$language-&gt;lang()</literal>:
+                </para>
+                <programlisting>
+{{ lang('SOME_VAR', param1, param2) }}
+</programlisting>
+                <para>
+                  For sprogvariabler i JavaScript, brug venligst
+                  <literal>lang_js</literal>.
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang_js</literal>
+              </term>
+              <listitem>
+                <para>
+                  Henter output for en sprogvariabel i JS-kode. Denne bør
+                  bruges i stedet for det tidligere anvendte
+                  <literal>LA_</literal>-præfiks. Følgende to linjer
+                  giver samme resultat:
+                </para>
+                <programlisting>
+{{ lang_js('FOO') }}
+{{ LA_FOO }}
+</programlisting>
+                <para>
+                  Den understøtter den samme parametersyntaks som
+                  <literal>$language-&gt;lang()</literal>:
+                </para>
+                <programlisting>
+{{ lang_js('SOME_VAR', param1, param2) }}
+</programlisting>
+                <para>
+                  Dette svarer i bund og grund til:
+                </para>
+                <programlisting>
+{{ lang('SOME_VAR', param1, param2) | escape('js') }}
+</programlisting>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang_defined</literal>
+              </term>
+              <listitem>
+                <para>
+                  Kontrollerer, om en sprogvariabel er defineret. Kan
+                  bruges til at kontrollere, om en sprogvariabel findes,
+                  før <literal>lang</literal> eller
+                  <literal>lang_js</literal> kaldes.
+                </para>
+                <programlisting>
+{% if lang_defined('MY_LANG_VAR') %}
+    &lt;span&gt;{{ lang('MY_LANG_VAR') }}&lt;/span&gt;
+{% endif %}
+</programlisting>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang_raw</literal>
+              </term>
+              <listitem>
+                <para>
+                  Udskriver den rå værdi af en sprogvariabel, f.eks. en
+                  streng eller et array. Kan bruges til at tilgå
+                  indgange i et sprogarray i skabelonkoden.
+                </para>
+                <programlisting>
+{% for step in lang_raw('EXTENSION_UPDATING_EXPLAIN') %}
+    &lt;li&gt;{{ step }}&lt;/li&gt;
+{% endfor %}
+</programlisting>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Opdatering af en phpBB 3.0-modifikation til en extension</title>
+  </articleinfo>
+  <sect1 id="extension-structure">
+    <title>Extension-struktur</title>
+    <para>
+      Den mest åbenlyse ændring bør være placeringen, hvor MODs/extensions
+      gemmes. I phpBB 3.0 blev alle filer placeret i kernens rodmappe. I
+      phpBB 3.1 er der oprettet en speciel mappe til extensions. Den
+      hedder <literal>ext/</literal>.
+    </para>
+    <sect2 id="directory">
+      <title>Mappe</title>
+      <para>
+        Hver extension har sin egen mappe. Du skal dog også bruge en
+        ekstra vendor-mappe (med dit forfatternavn eller
+        forfattergruppenavn). I tilfældet med min Newspage vil filerne
+        være i
+      </para>
+      <programlisting>
+phpBB/ext/nickvergessen/newspage/
+</programlisting>
+      <para>
+        Der bør ikke være behov for at have filer placeret uden for
+        denne mappe. Uanset hvilke filer, det gælder - typografier,
+        sprog eller ACP-modulfiler. Alle bør flyttes ind i din
+        extensions mappe:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                ny mappe
+              </entry>
+              <entry>
+                nuværende mappe
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>acp/*_module.php</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/includes/acp/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>acp/*_info.php</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/includes/acp/info/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>adm/style/</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/adm/style/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>config/</literal>
+              </entry>
+              <entry>
+                ---
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>controller/</literal>
+              </entry>
+              <entry>
+                <literal>*.php</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>event/</literal>
+              </entry>
+              <entry>
+                ---
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>language/</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/language/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>migrations/</literal>
+              </entry>
+              <entry>
+                ---
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>styles/</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/styles/</literal>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        De nyligt tilføjede, ekstra mapper er allerede blevet oplistet.
+        Deres anvendelse forklares i de følgende afsnit.
+      </para>
+    </sect2>
+    <sect2 id="important-new-files">
+      <title>Vigtige nye filer</title>
+      <para>
+        Der findes en ny fil, din extension har brug for, for at blive
+        genkendt af systemet. Den hedder
+        <literal>composer.json</literal>: den angiver din extensions
+        krav samt en del forfatterinformation. Layoutet er et simpelt
+        JSON-array, og nøglerne bør forklare det meste selv.
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Du må ikke ændre elementet <literal>type</literal>.
+        </para>
+      </note>
+      <para>
+        I sektionen <literal>require</literal> kan du også angive andre
+        extensions, der kræves for at installere denne. (<emphasis>Validering
+        af dette er endnu ikke implementeret, men bør være det i
+        3.3.0</emphasis>)
+      </para>
+      <programlisting language="json">
+{
+    &quot;name&quot;: &quot;nickvergessen/newspage&quot;,
+    &quot;type&quot;: &quot;phpbb-extension&quot;,
+    &quot;description&quot;: &quot;Adds a extra-page to the board where a switchable number of news are displayed. The text can be shorten to a certain number of chars. Also the Icons can be switched of (post icons, user icons)&quot;,
+    &quot;homepage&quot;: &quot;https://github.com/nickvergessen/phpbb3-mod-newspage&quot;,
+    &quot;version&quot;: &quot;1.1.0&quot;,
+    &quot;time&quot;: &quot;2013-03-16&quot;,
+    &quot;license&quot;: &quot;GPL-2.0&quot;,
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;Joas Schilling&quot;,
+            &quot;email&quot;: &quot;nickvergessen@gmx.de&quot;,
+            &quot;homepage&quot;: &quot;http://www.flying-bits.org&quot;,
+            &quot;role&quot;: &quot;Lead Developer&quot;
+        }
+    ],
+    &quot;require&quot;: {
+        &quot;php&quot;: &quot;&gt;=5.3.3&quot;
+    },
+    &quot;extra&quot;: {
+        &quot;display-name&quot;: &quot;phpBB 3.1 NV Newspage Extension&quot;,
+        &quot;soft-require&quot;: {
+            &quot;phpbb/phpbb&quot;: &quot;&gt;=3.1.0-RC2,&lt;3.2.*@dev&quot;
+        }
+    }
+ }
+</programlisting>
+      <para>
+        Den anden nye fil hedder <literal>ext.php</literal>. Den kan
+        bruges til at udvide funktionaliteten, mens din extension
+        installeres/afinstalleres:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/ext.php
+
+// this file is not really needed, when empty it can be ommitted
+// however you can override the default methods and add custom
+// installation logic
+
+namespace nickvergessen\newspage;
+
+class ext extends \phpbb\extension\base
+{
+}
+</programlisting>
+    </sect2>
+    <sect2 id="front-facing-files-routes-and-services">
+      <title>Brugervendte filer, routes og services</title>
+      <para>
+        Mens du i 3.0 blot oprettede en ny fil i phpBB's rodmappe, skal
+        du i 3.1 bruge det nye controller-system til extensions. Dine
+        links ændres fra noget i stil med
+        <literal>phpBB/newspage.php</literal> til
+        <literal>phpBB/app.php/newspage</literal>. Har boardet aktiveret
+        URL rewriting, ser dine links lidt pænere ud, som
+        <literal>phpBB/newspage</literal>.
+      </para>
+      <para>
+        For at forbinde en bestemt routing-regel med din extension skal
+        du definere routen i din extensions
+        <literal>config/routing.yml</literal>.
+      </para>
+      <para>
+        For en nem start på Newspage er to regler nok. Den første regel
+        er til den grundlæggende side, i øjeblikket
+        <literal>newspage.php</literal>. Den anden er til pagineringen,
+        som <literal>newspage.php?start=5</literal>. Den første regel
+        sætter en standardside (1), mens den anden regel kræver, at
+        anden del af URL'en er et heltal.
+      </para>
+      <programlisting language="yaml">
+# ext/nickvergessen/newspage/config/routing.yml
+newspage_base_controller:
+    pattern: /newspage
+    defaults: { _controller: nickvergessen.newspage.controller:base, page: 1 }
+
+newspage_page_controller:
+    pattern: /newspage/{page}
+    defaults: { _controller: nickvergessen.newspage.controller:base }
+    requirements:
+        page:  \d+
+</programlisting>
+      <para>
+        Strengen, vi definerer for <literal>_controller</literal>,
+        definerer en service
+        (<literal>nickvergessen.newspage.controller</literal>) og en
+        metode (<literal>base</literal>) i den klasse, der derefter
+        kaldes. Services defineres i din extensions
+        <literal>config/services.yml</literal>. Services er instanser af
+        klasser. Services bruges, så der kun er én instans af klassen,
+        som bruges hele tiden. Du kan også definere argumenterne til
+        konstruktøren i din klasse. Eksempeldefinitionen på
+        Newspage-controllerens service ville være noget i stil med:
+      </para>
+      <programlisting language="yaml">
+# ext/nickvergessen/newspage/config/services.yml
+services:
+    nickvergessen.newspage.controller:
+        class: nickvergessen\newspage\controller\main
+        arguments:
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@controller.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+</programlisting>
+      <para>
+        Enhver service, der tidligere er defineret i din fil, eller i
+        phpBB-kernens fil <literal>phpBB/config/services.yml</literal>,
+        kan også bruges som et argument, ligesom nogle foruddefinerede
+        strenge (som <literal>core.root_path</literal> her).
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Klasserne fra <literal>phpBB/ext/</literal> autoindlæses
+          automatisk ud fra deres namespace og klassenavne, hvor
+          backslash (<literal>\</literal>) repræsenterer mapper. I dette
+          tilfælde ville klassen
+          <literal>nickvergessen\newspage\controller\main</literal>
+          befinde sig i
+          <literal>phpBB/ext/nickvergessen/newspage/controller/main.php</literal>
+        </para>
+      </note>
+      <para>
+        For mere forklaring om
+        <ulink url="https://area51.phpbb.com/docs/dev/master/extensions/tutorial_controllers.html#routing">Routing</ulink>
+        og
+        <ulink url="https://area51.phpbb.com/docs/dev/master/extensions/tutorial_controllers.html#dependencies">Services</ulink>,
+        se vores dokumentation.
+      </para>
+      <para>
+        I dette eksempel ville min
+        <emphasis role="strong">controller/main.php</emphasis> se sådan
+        ud:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/controller/main.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+namespace nickvergessen\newspage\controller;
+
+class main
+{
+   /**
+    * Constructor
+    * NOTE: The parameters of this method must match in order and type with
+    * the dependencies defined in the services.yml file for this service.
+    *
+    * @param \phpbb\config            $config    Config object
+    * @param \phpbb\template          $template  Template object
+    * @param \phpbb\user              $user      User object
+    * @param \phpbb\controller\helper $helper    Controller helper object
+    * @param string                   $root_path phpBB root path
+    * @param string                   $php_ext   phpEx
+    */
+   public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user, \phpbb\controller\helper $helper, $root_path, $php_ext)
+   {
+       $this-&gt;config = $config;
+       $this-&gt;template = $template;
+       $this-&gt;user = $user;
+       $this-&gt;helper = $helper;
+       $this-&gt;root_path = $root_path;
+       $this-&gt;php_ext = $php_ext;
+   }
+
+   /**
+    * Base controller to be accessed with the URL /newspage/{page}
+    * (where {page} is the placeholder for a value)
+    *
+    * @param int    $page    Page number taken from the URL
+    * @return Symfony\Component\HttpFoundation\Response A Symfony Response object
+    */
+   public function base($page = 1)
+   {
+       /*
+       * Do some magic here,
+       * load your data and send it to the template.
+       */
+
+       /*
+       * The render method takes up to three other arguments
+       * @param    string        Name of the template file to display
+       *                        Template files are searched for two places:
+       *                        - phpBB/styles/&lt;style_name&gt;/template/
+       *                        - phpBB/ext/&lt;all_active_extensions&gt;/styles/&lt;style_name&gt;/template/
+       * @param    string        Page title
+       * @param    int            Status code of the page (200 - OK [ default ], 403 - Unauthorised, 404 - Page not found, etc.)
+       */
+       return $this-&gt;helper-&gt;render('newspage_body.html');
+   }
+}
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Rækkefølgen af argumenter i services.yml bør matche
+          rækkefølgen af argumenter, der sendes til klassens konstruktør
+          <literal>public function __construct()</literal>. Ellers
+          kastes en fejl, og boardet vil være i stykker, hvis du forsøger
+          at aktivere extensionen.
+        </para>
+      </note>
+      <para>
+        Du kan også have flere forskellige metoder i én controller,
+        samt flere controllere, for at organisere din kode lidt bedre.
+      </para>
+    </sect2>
+    <sect2 id="acp-modules">
+      <title>ACP-moduler</title>
+      <para>
+        Dette afsnit gælder også for MCP- og UCP-moduler.
+      </para>
+      <para>
+        Som nævnt tidligere flyttes disse filer også ind i din
+        extensions mappe. Info-filen, der i øjeblikket ligger i
+        <literal>phpBB/includes/acp/info/acp_newspage.php</literal>,
+        bliver til
+        <literal>ext/nickvergessen/newspage/acp/main_info.php</literal>,
+        og selve modulet flyttes fra
+        <literal>phpBB/includes/acp/acp_newspage.php</literal> til
+        <literal>ext/nickvergessen/newspage/acp/main_module.php</literal>.
+        For at kunne autoindlæse filerne ud fra deres klassenavne skal
+        vi foretage nogle justeringer af selve klasserne.
+      </para>
+      <para>
+        For <literal>main_info.php</literal> skal vi justere klassenavnet
+        fra <literal>acp_newspage_info</literal> til
+        <literal>main_info</literal> og også ændre værdien af
+        <literal>'filename'</literal> i det returnerede array.
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/acp/main_info.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+namespace nickvergessen\newspage\acp;
+
+class main_info
+{
+   function module()
+   {
+       return [
+           'filename' =&gt; '\nickvergessen\newspage\acp\main_module',
+           'title'    =&gt; 'ACP_NEWSPAGE_TITLE',
+           'modes'    =&gt; [
+               'config_newspage' =&gt; [
+                   'title' =&gt; 'ACP_NEWSPAGE_CONFIG',
+                   'auth'  =&gt; 'acl_a_board',
+                   'cat'   =&gt; ['ACP_NEWSPAGE_TITLE']
+               ],
+           ],
+       ];
+   }
+}
+</programlisting>
+      <para>
+        For modulet skal du blot justere klassenavnet:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/acp/main_module.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+/**
+ * @ignore
+ */
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+namespace nickvergessen\newspage\acp;
+
+class main_module
+{
+   var $u_action;
+
+   function main($id, $mode)
+   {
+       // Your magic stuff here
+   }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="database-changes-umil-replaced-by-migrations">
+    <title>Databaseændringer, UMIL erstattet af Migrations</title>
+    <para>
+      For mere dokumentation om migrations, se
+      <literal>../migrations/index</literal>-API'et og dokumentationen
+      <literal>tutorial_migrations</literal>
+    </para>
+    <para>
+      Grundlæggende gør migrations det samme, som dine 3.0
+      UMIL-filer gjorde. De udfører databaseændringerne for din
+      MOD/extension. Den største forskel mellem migrations og UMIL er,
+      at hvor du havde én fil med ét array i UMIL for alle dine
+      ændringer, kan du have flere filer i Migrations. Du opretter
+      normalt en ny migrationsfil, hver gang du skal indføre nye
+      databaseændringer. Men lad os se på Newspage igen.
+    </para>
+    <programlisting>
+$versions = [
+   '1.0.0'    =&gt; [
+       'config_add' =&gt; [
+           ['news_number', 5],
+           ['news_forums', '0'],
+           ['news_char_limit', 500],
+           ['news_user_info', 1],
+           ['news_post_buttons', 1],
+       ],
+       'module_add' =&gt; [
+           ['acp', 'ACP_CAT_DOT_MODS', 'NEWS'],
+
+           ['acp', 'NEWS', [
+                   'module_basename'    =&gt; 'newspage',
+                   'module_langname'    =&gt; 'NEWS_CONFIG',
+                   'module_mode'        =&gt; 'overview',
+                   'module_auth'        =&gt; 'acl_a_board',
+               ],
+           ],
+       ],
+   ],
+   '1.0.1'    =&gt; [
+       'config_add' =&gt; [
+           ['news_pages', 1],
+       ],
+   ],
+   '1.0.2'    =&gt; [],
+   '1.0.3' =&gt; [
+       'config_add' =&gt; [
+           ['news_attach_show', 1],
+           ['news_cat_show', 1],
+           ['news_archive_per_year', 1],
+       ],
+   ],
+];
+</programlisting>
+    <sect2 id="schema-changes">
+      <title>Skemaændringer</title>
+      <para>
+        Newspage har ingen databaseskemaændringer, så jeg vil bruge
+        eksemplet fra <literal>../migrations/schema_changes</literal> i
+        dokumentationen. Grundlæggende skal du have to metoder i din
+        migrationsklassefil:
+      </para>
+      <programlisting>
+public function update_schema()
+</programlisting>
+      <para>
+        og
+      </para>
+      <programlisting>
+public function revert_schema()
+</programlisting>
+      <para>
+        hvorved begge metoder returnerer et array med ændringerne:
+      </para>
+      <programlisting>
+public function update_schema()
+{
+   return [
+       'add_columns'        =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_teampage'    =&gt; ['UINT', 0, 'after' =&gt; 'group_legend'],
+           ],
+           $this-&gt;table_prefix . 'profile_fields'    =&gt; [
+               'field_show_on_pm'        =&gt; ['BOOL', 0],
+           ],
+       ],
+       'change_columns'    =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_legend'        =&gt; ['UINT', 0],
+           ],
+       ],
+   ];
+}
+
+public function revert_schema()
+{
+   return [
+       'drop_columns'        =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_teampage',
+           ],
+           $this-&gt;table_prefix . 'profile_fields'    =&gt; [
+               'field_show_on_pm',
+           ],
+       ],
+       'change_columns'    =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_legend'        =&gt; ['BOOL', 0],
+           ],
+       ],
+   ];
+}
+</programlisting>
+      <para>
+        <literal>revert_schema()</literal> bør derved fortryde alle
+        ændringer foretaget af <literal>update_schema()</literal>.
+      </para>
+    </sect2>
+    <sect2 id="data-changes">
+      <title>Dataændringer</title>
+      <para>
+        Dataændringerne, som at tilføje moduler, tilladelser og configs,
+        angives med funktionen <literal>update_data()</literal>.
+      </para>
+      <para>
+        Denne funktion returnerer også et array. Eksemplet for
+        opdateringen til version 1.0.0 for Newspage ville se sådan ud:
+      </para>
+      <programlisting>
+public function update_data()
+{
+   return [
+       ['config.add', ['news_number', 5]],
+       ['config.add', ['news_forums', '0']],
+       ['config.add', ['news_char_limit', 500]],
+       ['config.add', ['news_user_info', 1]],
+       ['config.add', ['news_post_buttons', 1]],
+
+       ['module.add', [
+           'acp',
+           'ACP_CAT_DOT_MODS',
+           'ACP_NEWSPAGE_TITLE'
+       ]],
+       ['module.add', [
+           'acp',
+           'ACP_NEWSPAGE_TITLE',
+           [
+               'module_basename'    =&gt; '\nickvergessen\newspage\acp\main_module',
+               'modes'                =&gt; ['config_newspage'],
+           ],
+       ]],
+
+       ['config.add', ['newspage_mod_version', '1.0.0']],
+   ];
+}
+</programlisting>
+      <para>
+        Mere information om disse dataopdateringsværktøjer kan findes i
+        <literal>../migrations/tools/index</literal>.
+      </para>
+    </sect2>
+    <sect2 id="dependencies-and-finishing-up-migrations">
+      <title>Afhængigheder og færdiggørelse af migrations</title>
+      <para>
+        Nu er der kun to ting tilbage, din migrationsfil skal bruge. Det
+        første er en kontrol, der giver phpBB mulighed for at se, om
+        migrationen allerede er installeret, selvom den endnu ikke er
+        kørt (f.eks. ved opdatering fra en 3.0-MOD til en 3.1-extension).
+      </para>
+      <para>
+        Den nemmeste måde at kontrollere dette på kunne være MOD'ens
+        version, men når du tilføjer kolonner til tabeller, kan du også
+        kontrollere, om de findes:
+      </para>
+      <programlisting>
+public function effectively_installed()
+{
+   return isset($this-&gt;config['newspage_mod_version']) &amp;&amp; version_compare($this-&gt;config['newspage_mod_version'], '1.0.0', '&gt;=');
+}
+</programlisting>
+      <para>
+        Da migrationsfiler kan have næsten ethvert navn, kan phpBB
+        muligvis ikke sortere dine migrationsfiler korrekt. For at undgå
+        dette problem kan du definere et sæt afhængigheder, der skal
+        installeres, før din migration kan installeres. phpBB forsøger
+        at installere dem, før din migration installeres. Kan de ikke
+        findes eller installeres, fejler din installation også. For
+        1.0.0-migrationen vil jeg kun kræve phpBB's
+        <literal>3.1.0-a1</literal>-migration:
+      </para>
+      <programlisting>
+static public function depends_on()
+{
+   return ['\phpbb\db\migration\data\v310\alpha1'];
+}
+</programlisting>
+      <para>
+        Alle yderligere Newspage-migrations kan nu kræve Newspages
+        første migrationsfil, og dermed vil de alle også være
+        afhængige af phpBB's 3.1.0-a1-migration.
+      </para>
+      <para>
+        En komplet fil kunne se sådan ud:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/migrations/v10x/release_1_0_0.php
+/**
+ *
+ * @package migration
+ * @copyright (c) 2013 phpBB Group
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License v2
+ *
+ */
+
+namespace nickvergessen\newspage\migrations\v10x;
+
+class release_1_0_0 extends \phpbb\db\migration\migration
+{
+   public function effectively_installed()
+   {
+       return isset($this-&gt;config['newspage_mod_version']) &amp;&amp; version_compare($this-&gt;config['newspage_mod_version'], '1.0.0', '&gt;=');
+   }
+
+   static public function depends_on()
+   {
+       return ['phpbb_db_migration_data_310_dev'];
+   }
+
+   public function update_data()
+   {
+       return [
+           ['config.add', ['news_number', 5]],
+           ['config.add', ['news_forums', '0']],
+           ['config.add', ['news_char_limit', 500]],
+           ['config.add', ['news_user_info', 1]],
+           ['config.add', ['news_post_buttons', 1]],
+
+           ['module.add', [
+               'acp',
+               'ACP_CAT_DOT_MODS',
+               'ACP_NEWSPAGE_TITLE'
+           ]],
+           ['module.add', [
+               'acp',
+               'ACP_NEWSPAGE_TITLE',
+               [
+                   'module_basename'    =&gt; '\nickvergessen\newspage\acp\main_module',
+                   'modes'                =&gt; ['config_newspage'],
+               ],
+           ]],
+
+           ['config.add', ['newspage_mod_version', '1.0.0']],
+       ];
+   }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="include-extensions-language-files">
+    <title>Inkludering af extensionens sprogfiler</title>
+    <para>
+      Da sprogfilerne i din extension ikke længere registreres af
+      <literal>$user-&gt;add_lang()</literal>, skal du bruge metoden
+      <literal>$user-&gt;add_lang_ext()</literal>. Denne metode tager to
+      argumenter, det første er extensionens fulde navn (inklusive
+      vendor), og det andet er filnavnet eller et array af filnavne. For
+      at indlæse Newspage-sprogfilen kalder vi derfor:
+    </para>
+    <programlisting>
+$user-&gt;add_lang_ext('nickvergessen/newspage', 'newspage');
+</programlisting>
+    <para>
+      for at indlæse sprogfilen
+      <literal>phpBB/ext/nickvergessen/newspage/language/en/newspage.php</literal>
+    </para>
+  </sect1>
+  <sect1 id="file-edits---dont-edit-use-events-and-listeners">
+    <title>Filredigering - Rediger ikke! Brug Events og Listeners!</title>
+    <para>
+      For Newspage-modifikationen er det eneste, der nu mangler for at
+      være færdig, linket i headersektionen, så du kan begynde at browse
+      Newspage.
+    </para>
+    <para>
+      For at gøre dette blev skabelonvariablen tidligere defineret i
+      phpBB's funktion <literal>page_header()</literal>, sammen med en
+      redigering i skabelonen
+      <literal>overall_header.html</literal>. Men dette er ikke phpBB
+      3.0, så vi redigerer ikke længere filer og bruger i stedet
+      <emphasis role="strong">events</emphasis>. Med events kan du hooke
+      ind i flere steder og afvikle din kode uden at redigere dem.
+    </para>
+    <sect2 id="php-events">
+      <title>PHP-events</title>
+      <para>
+        Så i stedet for at tilføje
+      </para>
+      <programlisting>
+$template-&gt;assign_vars([
+   'U_NEWSPAGE'    =&gt; append_sid($phpbb_root_path . 'app.' . $phpEx, 'controller=newspage/'),
+]);
+</programlisting>
+      <para>
+        til <literal>page_header()</literal>, sætter vi det ind i en
+        event-listener, som derefter kaldes, hver gang
+        <literal>page_header()</literal> selv kaldes.
+      </para>
+      <para>
+        Vi tilføjer derfor filen
+        <emphasis role="strong">event/main_listener.php</emphasis> til
+        vores extension, som implementerer en Symfony-klasse:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/event/main_listener.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+/**
+ * @ignore
+ */
+
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+namespace nickvergessen\newspage\event;
+
+/**
+ * Event listener
+ */
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+   /**
+    * Instead of using &quot;global $user;&quot; in the function, we use dependencies again.
+    */
+   public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+   {
+       $this-&gt;helper = $helper;
+       $this-&gt;template = $template;
+       $this-&gt;user = $user;
+   }
+}
+</programlisting>
+      <para>
+        I metoden <literal>getSubscribedEvents()</literal> fortæller vi
+        systemet, hvilke events vi vil abonnere vores nye,
+        brugerdefinerede funktioner på. I vores tilfælde vil vi abonnere
+        på to events: eventet <literal>core.page_header</literal> og
+        eventet <literal>core.user_setup</literal> (en fuldstændig liste
+        over events kan findes
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html">her</ulink>):
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup'    =&gt; 'load_language_on_setup',
+        'core.page_header'   =&gt; 'add_page_header_link',
+    ];
+}
+</programlisting>
+      <para>
+        Nu tilføjer vi de to funktioner, der kaldes med hvert event:
+      </para>
+      <programlisting>
+public function load_language_on_setup($event)
+{
+    $lang_set_ext = $event['lang_set_ext'];
+    $lang_set_ext[] = [
+        'ext_name' =&gt; 'nickvergessen/newspage',
+        'lang_set' =&gt; 'newspage',
+    ];
+    $event['lang_set_ext'] = $lang_set_ext;
+}
+
+public function add_page_header_link($event)
+{
+    // I use a second language file here, so I only load the strings global which are required globally.
+    // This includes the name of the link, aswell as the ACP module names.
+    $this-&gt;user-&gt;add_lang_ext('nickvergessen/newspage', 'newspage_global');
+
+    $this-&gt;template-&gt;assign_vars([
+        'U_NEWSPAGE'    =&gt; $this-&gt;helper-&gt;route('newspage_base_controller'),
+    ]);
+}
+</programlisting>
+      <para>
+        Som sidste trin skal vi registrere event-listeneren i systemet.
+        Dette gøres ved hjælp af tagget
+        <literal>event.listener</literal> i
+        <literal>config/service.yml</literal>:
+      </para>
+      <programlisting language="yaml">
+# ext/nickvergessen/newspage/config/service.yml
+nickvergessen.newspage.listener:
+    class: nickvergessen\newspage\event\main_listener
+    arguments:
+        - '@controller.helper'
+        - '@template'
+        - '@user'
+    tags:
+        - { name: event.listener }
+</programlisting>
+      <para>
+        Når dette er tilføjet, kaldes din listener, og vi er færdige med
+        PHP-redigeringen.
+      </para>
+      <para>
+        Ligesom med controllere kan du have flere listeners i mappen
+        <literal>event/</literal>, samt abonnere på flere events med én
+        listener.
+      </para>
+    </sect2>
+    <sect2 id="template-event">
+      <title>Skabelonevent</title>
+      <para>
+        Nu er det eneste, der mangler, at tilføje koden til
+        HTML-outputtet. For skabeloner har du brug for én fil pr.
+        skabelonevent.
+      </para>
+      <para>
+        Filnavnet indeholder eventnavnet. For at tilføje
+        Newspage-linket ved siden af FAQ-linket skal vi bruge eventet
+        <literal>'overall_header_navigation_prepend'</literal> (en
+        fuldstændig liste over events kan findes
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html">her</ulink>).
+      </para>
+      <para>
+        Vi tilføjer derfor
+        <literal>styles/prosilver/template/event/overall_header_navigation_prepend_listener.html</literal>
+        til vores extensions mappe og tilføjer vores HTML-kode i den.
+      </para>
+      <programlisting language="html">
+&lt;li class=&quot;icon-newspage&quot;&gt;&lt;a href=&quot;{{ U_NEWSPAGE }}&quot;&gt;{{ lang('NEWSPAGE') }}&lt;/a&gt;&lt;/li&gt;
+</programlisting>
+      <para>
+        Og det er det. Heller ingen filredigering nødvendig for
+        skabelonfilerne.
+      </para>
+    </sect2>
+    <sect2 id="adding-events">
+      <title>Tilføjelse af events</title>
+      <para>
+        Der findes allerede talrige tilgængelige events. Men hvis din
+        extension har brug for at bruge et event, der endnu ikke findes
+        i phpBB-koden, kan du anmode om, at eventet tilføjes til kernen,
+        ved at oprette en sag i
+        <ulink url="https://tracker.phpbb.com/projects/PHPBB3">phpBB
+        Bug Tracker</ulink>, og vi vil bestræbe os på at inkludere det i
+        den næste udgivelse.
+      </para>
+    </sect2>
+    <sect2 id="basics-finished">
+      <title>Grundlaget er færdigt!</title>
+      <para>
+        Og det er det - 3.0-modifikationen er nu succesfuldt konverteret
+        til en 3.1-extension.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="compatibility">
+    <title>Kompatibilitet</title>
+    <para>
+      I nogle tilfælde kunne kompatibiliteten af funktioner og klasser
+      ikke bevares, samtidig med at deres muligheder blev udvidet til
+      3.1.
+    </para>
+    <sect2 id="pagination">
+      <title>Paginering</title>
+      <para>
+        Når du bruger din gamle 3.0-kode, modtager du en fejl i stil med
+        følgende:
+      </para>
+      <programlisting>
+Fatal error: Call to undefined function generate_pagination() in .../phpBB3/ext/nickvergessen/newspage/controller/main.php on line 534
+</programlisting>
+      <para>
+        Problemet er, at pagineringen ikke længere returneres af
+        funktionen, men i stedet automatisk indsættes i skabelonen.
+        Desuden er funktionsnavnet blevet opdateret med et
+        phpbb-præfiks.
+      </para>
+      <para>
+        Den gamle pagineringskode lignede:
+      </para>
+      <programlisting>
+$pagination = generate_pagination(append_sid(&quot;{$phpbb_root_path}app.$phpEx&quot;, 'controller=newspage/'), $total_paginated, $config['news_number'], $start);
+
+$this-&gt;template-&gt;assign_vars([
+    'PAGINATION'        =&gt; $pagination,
+    'PAGE_NUMBER'        =&gt; on_page($total_paginated, $config['news_number'], $start),
+    'TOTAL_NEWS'        =&gt; $this-&gt;user-&gt;lang('VIEW_TOPIC_POSTS', $total_paginated),
+]);
+</programlisting>
+      <para>
+        Den nye kode bør se sådan ud:
+      </para>
+      <programlisting>
+$pagination = $phpbb_container-&gt;get('pagination');
+$pagination-&gt;generate_template_pagination(
+    [
+        'routes' =&gt; [
+            'newspage_base_controller',
+            'newspage_page_controller',
+        ],
+        'params' =&gt; [],
+    ], 'pagination', 'page', $total_paginated, $this-&gt;config['news_number'], $start);
+
+$this-&gt;template-&gt;assign_vars([
+    'PAGE_NUMBER'        =&gt; $pagination-&gt;on_page($total_paginated, $this-&gt;config['news_number'], $start),
+    'TOTAL_NEWS'        =&gt; $this-&gt;user-&gt;lang('VIEW_TOPIC_POSTS', $total_paginated),
+]);
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

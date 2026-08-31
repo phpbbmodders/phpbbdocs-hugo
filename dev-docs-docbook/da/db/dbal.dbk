@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Database Abstraction Layer</title>
+  </articleinfo>
+  <para>
+    phpBB bruger et
+    <emphasis role="strong">D</emphasis>ata<emphasis role="strong">B</emphasis>ase
+    <emphasis role="strong">A</emphasis>bstraction
+    <emphasis role="strong">L</emphasis>ayer til at tilgå databasen i
+    stedet for at kalde f.eks.
+    <ulink url="http://php.net/manual/en/function.mysql-query.php">mysql_query</ulink>-funktionerne
+    direkte. Du tilgår som regel
+    <literal>DBAL'en (Database Abstraction Layer)</literal> ved hjælp af
+    den globale variabel <literal>$db</literal>. Denne variabel
+    inkluderes fra <literal>common.php</literal> via
+    <literal>includes/compatibility_globals.php</literal>:
+  </para>
+  <programlisting>
+/** @var \phpbb\db\driver\driver_interface $db */
+$db = $phpbb_container-&gt;get('dbal.conn');
+</programlisting>
+  <para>
+    Nogle databasefunktioner findes i den grundlæggende driver, mens
+    andre findes i de specifikke databasedrivere. Hver funktion nedenfor
+    angiver, om den er defineret i den grundlæggende driver eller i hver
+    specifik driver. Den <emphasis>MySQLi</emphasis>-specifikke
+    databasedriver bruges i eksemplerne gennem hele denne side. <br/>
+    Alle drivere befinder sig i namespacet
+    <literal>\\phpbb\\db\\driver</literal>. <br/> Den grundlæggende
+    driver findes i
+    <literal>\\phpbb\\db\\driver\\driver.php</literal> <br/> Den
+    specifikke driver findes i
+    <literal>\\phpbb\\db\\driver\\mysqli.php</literal>
+  </para>
+  <sect1 id="connecting-and-disconnecting">
+    <title>Oprettelse og afbrydelse af forbindelse</title>
+    <para>
+      Brug kun disse metoder, hvis du ikke kan inkludere
+      <literal>common.php</literal> (for at oprette forbindelse) eller
+      køre <literal>garbage_collection()</literal> (for at afbryde
+      forbindelsen; du kan også bruge andre funktioner, der kører denne
+      funktion, f.eks. <literal>page_footer()</literal>).
+    </para>
+    <sect2 id="sql_connect">
+      <title>sql_connect</title>
+      <para>
+        Opretter forbindelse til databasen. Defineret i de specifikke
+        drivere.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+// We're using bertie and bertiezilla as our example user credentials.
+// You need to fill in your own ;D
+$db = new \phpbb\db\driver\mysqli();
+$db-&gt;sql_connect('localhost', 'bertie', 'bertiezilla', 'phpbb', '', false, false);
+</programlisting>
+      <para>
+        Eksempel ved brug af <literal>config.php</literal>:
+      </para>
+      <programlisting>
+// Extract the config.php file's data
+$phpbb_config_php_file = new \phpbb\config_php_file($phpbb_root_path, $phpEx);
+extract($phpbb_config_php_file-&gt;get_all());
+
+$db = new $dbms();
+$db-&gt;sql_connect($dbhost, $dbuser, $dbpasswd, $dbname, $dbport, false, false);
+
+// We do not need this any longer, unset for safety purposes
+unset($dbpasswd);
+</programlisting>
+      <sect3 id="parameters">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Host
+                </entry>
+                <entry>
+                  Databasens host. <br/> Ved brug af config.php bør du i
+                  stedet bruge $dbhost.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Databasebruger
+                </entry>
+                <entry>
+                  Databasebrugeren, der bruges til at oprette forbindelse
+                  til databasen. <br/> Ved brug af config.php bør du i
+                  stedet bruge $dbuser.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Databaseadgangskode
+                </entry>
+                <entry>
+                  Adgangskoden for brugeren, der opretter forbindelse til
+                  databasen. <br/> Ved brug af config.php bør du i stedet
+                  bruge $dbpasswd.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Databasenavn
+                </entry>
+                <entry>
+                  Databasen, hvor phpBB's tabeller er placeret. <br/> Ved
+                  brug af config.php bør du i stedet bruge $dbname.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Databaseport (valgfri)
+                </entry>
+                <entry>
+                  Porten til databaseserveren. <br/> Lad stå tom/false
+                  for at bruge standardporten. <br/> Ved brug af
+                  config.php bør du i stedet bruge $dbport.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Persistens (valgfri)
+                </entry>
+                <entry>
+                  Persistens for databaseforbindelsen, standardværdien er
+                  false.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Nyt link (valgfri)
+                </entry>
+                <entry>
+                  Brug en ny forbindelse til databasen for denne instans
+                  af DBAL'en. <br/> Standardværdien er false.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_close">
+      <title>sql_close</title>
+      <para>
+        Afbryder forbindelsen til databasen. Defineret i den
+        grundlæggende driver (<literal>_sql_close</literal> er defineret
+        i de specifikke drivere).
+      </para>
+      <para>
+        Eksempel: <literal>$db-&gt;sql_close();</literal>
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="preparing-sql-queries">
+    <title>Forberedelse af SQL-forespørgsler</title>
+    <sect2 id="sql_build_query">
+      <title>sql_build_query</title>
+      <para>
+        Bygger en fuldstændig SQL-sætning ud fra et array. Denne funktion
+        bør bruges, hvis du skal lave JOIN på mere end én tabel, for at
+        sikre, at den resulterende sætning fungerer på alle understøttede
+        databaser. Defineret i den grundlæggende driver.
+      </para>
+      <para>
+        Mulige forespørgselstyper: SELECT, SELECT_DISTINCT. <br/>
+        Obligatoriske nøgler er SELECT og FROM. <br/> Valgfrie nøgler er
+        LEFT_JOIN, WHERE, GROUP_BY og ORDER_BY.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+// Array with data for the full SQL statement
+$sql_array = [
+    'SELECT'    =&gt; 'f.*, ft.mark_time',
+
+    'FROM'      =&gt; [
+        FORUMS_WATCH_TABLE  =&gt; 'fw',
+        FORUMS_TABLE        =&gt; 'f',
+    ],
+
+    'LEFT_JOIN' =&gt; [
+        [
+            'FROM'  =&gt; [FORUMS_TRACK_TABLE =&gt; 'ft'],
+            'ON'    =&gt; 'ft.forum_id = f.forum_id
+                AND ft.user_id = ' . (int) $user-&gt;data['user_id'],
+        ],
+    ],
+
+    'WHERE'     =&gt; 'f.forum_id = fw.forum_id
+        AND fw.user_id = ' . (int) $user-&gt;data['user_id'],
+
+    'ORDER_BY'  =&gt; 'f.left_id',
+];
+
+// Build the SQL statement
+$sql = $db-&gt;sql_build_query('SELECT', $sql_array);
+
+// Now run the query...
+$result = $db-&gt;sql_query($sql);
+</programlisting>
+      <sect3 id="parameters-1">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Forespørgselstype
+                </entry>
+                <entry>
+                  Typen af forespørgsel, der skal oprettes (SELECT,
+                  SELECT_DISTINCT)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Associativt array
+                </entry>
+                <entry>
+                  Et associativt array med de elementer, der skal
+                  tilføjes til forespørgslen. <br/> SELECT og FROM er
+                  obligatoriske. <br/> LEFT_JOIN, WHERE, GROUP_BY og
+                  ORDER_BY er valgfrie.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_build_array">
+      <title>sql_build_array</title>
+      <para>
+        Bygger en del af en SQL-sætning ud fra et array. Mulige
+        forespørgselstyper: INSERT, INSERT_SELECT, UPDATE, SELECT.
+        Defineret i den grundlæggende driver.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+// Array with the data to build
+$data = [
+    'username'  =&gt; 'Bertie',
+    'email'     =&gt; 'bertie@example.com',
+];
+
+// First executing a SELECT query.
+// Note: By using the SELECT type, it always uses AND in the conditions.
+$sql = 'SELECT user_password
+    FROM ' . USERS_TABLE . '
+    WHERE ' . $db-&gt;sql_build_array('SELECT', $data);
+$result = $db-&gt;sql_query($sql);
+
+// And executing an UPDATE query: (Using the same data as for SELECT)
+$sql = 'UPDATE ' . USERS_TABLE . '
+    SET ' . $db-&gt;sql_build_array('UPDATE', $data) . '
+    WHERE user_id = ' . (int) $user_id;
+$db-&gt;sql_query($sql);
+
+// And lastly, executing an INSERT query
+$sql = 'INSERT INTO ' . USERS_TABLE . ' ' . $db-&gt;sql_build_array('INSERT', $data);
+$db-&gt;sql_query($sql);
+</programlisting>
+      <sect3 id="parameters-2">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Forespørgselstype
+                </entry>
+                <entry>
+                  Typen af forespørgsel, der skal oprettes (UPDATE,
+                  INSERT, INSERT_SELECT eller SELECT)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Associativt array (valgfri)
+                </entry>
+                <entry>
+                  Et associativt array med de elementer, der skal
+                  tilføjes til forespørgslen. <br/> Nøglen i arrayet er
+                  feltnavnet, værdien i arrayet er værdien for dette
+                  felt. <br/> Hvis det efterlades tomt, returneres
+                  ''false''.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_in_set">
+      <title>sql_in_set</title>
+      <para>
+        Bygger en IN-, NOT IN-, =- og &lt;&gt;-SQL-sammenligningsstreng.
+        Defineret i den grundlæggende driver.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql_in = [2, 58, 62];
+
+$sql = 'SELECT *
+    FROM ' . USERS_TABLE . '
+    WHERE ' . $db-&gt;sql_in_set('user_id', $sql_in);
+</programlisting>
+      <sect3 id="parameters-3">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Kolonne
+                </entry>
+                <entry>
+                  Navnet på den SQL-kolonne, der skal sammenlignes
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Array
+                </entry>
+                <entry>
+                  Array af værdier, der er tilladte (IN) eller ikke
+                  tilladte (NOT IN)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Negér (valgfri)
+                </entry>
+                <entry>
+                  true for NOT IN (), false for IN () (standard)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Tillad tomt sæt (valgfri)
+                </entry>
+                <entry>
+                  Hvis true, tillades det, at $array er tomt, og denne
+                  funktion returnerer så 1=1 eller 1=0. Standardværdien
+                  er false.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_escape">
+      <title>sql_escape</title>
+      <para>
+        Escaper en streng i en SQL-forespørgsel.
+        <literal>sql_escape</literal> er forskellig for hver DBAL-driver
+        og er skrevet specielt til den pågældende driver for at sikre,
+        at alle tegn, der skal escapes, rent faktisk bliver det.
+        Defineret i de specifikke drivere.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE post_id = ' . (int) $integer . &quot;
+        AND post_text = '&quot; . $db-&gt;sql_escape($string) . &quot;'&quot;;
+</programlisting>
+      <sect3 id="parameters-4">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Streng
+                </entry>
+                <entry>
+                  Strengen, der skal escapes.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_like_expression">
+      <title>sql_like_expression</title>
+      <para>
+        Justerer korrekt LIKE-sætninger for specialtegn. Dette bør
+        bruges for at sikre, at den resulterende sætning fungerer på
+        alle databaser. Defineret i den grundlæggende driver
+        (<literal>_sql_like_expression</literal> er defineret i de
+        specifikke drivere).
+      </para>
+      <para>
+        <literal>sql_not_like_expression</literal> er identisk med
+        <literal>sql_like_expression</literal>, bortset fra at den bygger
+        en NOT LIKE-sætning.
+      </para>
+      <sect3 id="parameters-5">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Udtryk
+                </entry>
+                <entry>
+                  Udtrykket, der skal bruges. Alle jokertegn escapes,
+                  bortset fra $db-&gt;get_any_char() og
+                  $db-&gt;get_one_char()
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+      <sect3 id="get_one_char">
+        <title>get_one_char</title>
+        <para>
+          Jokertegn til at matche præcis ét (<literal>_</literal>) tegn
+          inden i LIKE-udtryk.
+        </para>
+      </sect3>
+      <sect3 id="get_any_char">
+        <title>get_any_char</title>
+        <para>
+          Jokertegn til at matche et vilkårligt (<literal>%</literal>)
+          tegn inden i LIKE-udtryk
+        </para>
+        <para>
+          Eksempel:
+        </para>
+        <programlisting>
+$username = 'Bert';
+
+// Lets try to find &quot;Bertie&quot;
+$sql = 'SELECT username, user_id, user_colour
+    FROM ' . USERS_TABLE . '
+    WHERE username_clean ' . $db-&gt;sql_like_expression(utf8_clean_string($username) . $db-&gt;get_any_char());
+$result = $db-&gt;sql_query($sql);
+</programlisting>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_lower_text">
+      <title>sql_lower_text</title>
+      <para>
+        Til at køre LOWER på en tekstkolonne i databasen, så den
+        returnerer tekststrenge med små bogstaver. Defineret i den
+        grundlæggende driver.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$keyword = 'Bertie';
+$keyword = strtolower($keyword);
+
+$like = $db-&gt;sql_like_expression($db-&gt;get_any_char() . $keyword . $db-&gt;get_any_char());
+
+$sql = 'SELECT *
+    FROM ' . LOGS_TABLE . '
+    WHERE ' . $db-&gt;sql_lower_text('log_data') . ' ' . $like;
+$result = $db-&gt;sql_query_limit($sql, 10);
+</programlisting>
+      <sect3 id="parameters-6">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Kolonnenavn
+                </entry>
+                <entry>
+                  Kolonnenavnet, der skal have LOWER kørt på værdien.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="running-sql-queries">
+    <title>Afvikling af SQL-forespørgsler</title>
+    <sect2 id="sql_query">
+      <title>sql_query</title>
+      <para>
+        Til at hente grundlæggende data fra databasen er funktionen
+        <literal>sql_query()</literal> tilstrækkelig. Hvis du vil bruge
+        en variabel i din forespørgsel, bør du (hvis det ikke er et
+        heltal) bruge <literal>$db-&gt;sql_escape()</literal> for at
+        sikre, at dataene er sikre. Defineret i de specifikke drivere.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$integer = 0;
+$string = &quot;This is ' some string&quot;;
+
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE post_id = ' . (int) $integer . &quot;
+        AND post_text = '&quot; . $db-&gt;sql_escape($string) . &quot;'&quot;;
+$result = $db-&gt;sql_query($sql);
+</programlisting>
+      <sect3 id="parameters-7">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Forespørgsel
+                </entry>
+                <entry>
+                  Indeholder den SQL-forespørgsel, der skal afvikles
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Mellemlager (valgfri)
+                </entry>
+                <entry>
+                  Enten 0 for at undgå mellemlagring, eller antallet af
+                  sekunder resultatet skal beholdes i mellemlageret.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_query_limit">
+      <title>sql_query_limit</title>
+      <para>
+        Henter/ændrer/sletter kun et udvalgt antal rækker. Defineret i
+        den grundlæggende driver (<literal>_sql_query_limit</literal> er
+        defineret i de specifikke drivere).
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$start = 25;
+
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE topic_id = 1045';
+$result = $db-&gt;sql_query_limit($sql, $config['topics_per_page'], $start);
+</programlisting>
+      <sect3 id="parameters-8">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Forespørgsel
+                </entry>
+                <entry>
+                  Indeholder den SQL-forespørgsel, der skal afvikles.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Total
+                </entry>
+                <entry>
+                  Antal rækker, der skal udvælges,
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Offset (valgfri)
+                </entry>
+                <entry>
+                  Antal rækker, der skal springes over, før udvælgelsen
+                  af rækker påbegyndes.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Mellemlager (valgfri)
+                </entry>
+                <entry>
+                  Enten 0 for at undgå mellemlagring, eller antallet af
+                  sekunder resultatet skal beholdes i mellemlageret.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_multi_insert">
+      <title>sql_multi_insert</title>
+      <para>
+        Bygger og afvikler mere end én INSERT-sætning. Defineret i den
+        grundlæggende driver.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+// Users which will be added to group
+$users = [11, 57, 87, 98, 154, 211];
+$sql_ary = [];
+
+foreach ($users as $user_id)
+{
+    $sql_ary[] = [
+        'user_id'   =&gt; (int) $user_id,
+        'group_id'  =&gt; 154,
+        'group_leader'  =&gt; 0,
+        'user_pending'  =&gt; 0,
+    ];
+}
+
+$db-&gt;sql_multi_insert(USER_GROUP_TABLE, $sql_ary);
+</programlisting>
+      <sect3 id="parameters-9">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Tabelnavn
+                </entry>
+                <entry>
+                  Tabelnavnet, sætningerne skal afvikles på.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Data
+                </entry>
+                <entry>
+                  Flerdimensionelt array med data til sætningerne.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="methods-useful-after-running-insert-and-update-queries">
+    <title>Metoder, der er nyttige efter afvikling af INSERT- og
+    UPDATE-forespørgsler</title>
+    <para>
+      Alle metoder i denne del af artiklen er defineret i de specifikke
+      drivere.
+    </para>
+    <sect2 id="sql_affectedrows">
+      <title>sql_affectedrows</title>
+      <para>
+        Henter antallet af berørte rækker fra den seneste INSERT-,
+        UPDATE-, REPLACE- eller DELETE-forespørgsel.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql = 'DELETE FROM ' . TOPICS_TRACK_TABLE . &quot;
+    WHERE user_id = {$user-&gt;data['user_id']}&quot;;
+$db-&gt;sql_query($sql);
+
+$affected_rows = $db-&gt;sql_affectedrows();
+</programlisting>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Vær forsigtig, når du bruger
+          <literal>sql_affectedrows()</literal> til at bestemme antallet
+          af rækker, der er berørt af din forespørgsel, især ved
+          <emphasis role="strong">SELECT</emphasis>-forespørgsler. Denne
+          funktions opførsel kan variere afhængigt af den anvendte
+          databasedriver, og om forespørgslen blev mellemlagret.
+        </para>
+        <para>
+          Stol ikke udelukkende på <literal>sql_affectedrows()</literal>
+          til at bekræfte antallet af berørte rækker. Overvej alternative
+          fremgangsmåder, såsom at kontrollere antallet af rækker, der
+          returneres af <link linkend="sql_fetchrow">sql_fetchrow</link>
+          eller <link linkend="sql_fetchrowset">sql_fetchrowset</link>.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="sql_nextid">
+      <title>sql_nextid</title>
+      <para>
+        Henter det ID, der blev genereret for en
+        AUTO_INCREMENT-kolonne af den forrige INSERT-forespørgsel.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql = 'INSERT INTO ' . USERS_TABLE . ' ' . $db-&gt;sql_build_array('INSERT', $user_ary);
+$db-&gt;sql_query($sql);
+
+$user_id = $db-&gt;sql_nextid();
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="methods-useful-after-running-select-queries">
+    <title>Metoder, der er nyttige efter afvikling af
+    SELECT-forespørgsler</title>
+    <sect2 id="sql_fetchfield">
+      <title>sql_fetchfield</title>
+      <para>
+        Henter et felt. Defineret i den grundlæggende driver.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql = 'SELECT COUNT(post_id) AS num_posts
+    FROM ' . POSTS_TABLE . &quot;
+    WHERE topic_id = $topic_id
+        AND post_time &gt;= $min_post_time
+        &quot; . (($auth-&gt;acl_get('m_approve', $forum_id)) ? '' : 'AND post_approved = 1');
+$result = $db-&gt;sql_query($sql);
+
+$total_posts = (int) $db-&gt;sql_fetchfield('num_posts');
+</programlisting>
+      <sect3 id="parameters-10">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Felt
+                </entry>
+                <entry>
+                  Navnet på det felt, der skal hentes.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Rækkenummer (valgfri)
+                </entry>
+                <entry>
+                  Hvis false, bruges den aktuelle række, ellers peger det
+                  på rækken (nul-indekseret).
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Resultat (valgfri)
+                </entry>
+                <entry>
+                  Resultatet, der evalueres. <br/> Dette resultat kommer
+                  fra et kald til metoden sql_query. <br/> Hvis det
+                  efterlades tomt, bruges det seneste resultat.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_fetchrowset">
+      <title>sql_fetchrowset</title>
+      <para>
+        Returnerer et array med resultatet af at bruge metoden
+        <literal>sql_fetchrow</literal> på hver række. Defineret i den
+        grundlæggende driver.
+      </para>
+      <sect3 id="parameters-11">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Resultat (valgfri)
+                </entry>
+                <entry>
+                  Resultatet, der evalueres. <br/> Dette resultat kommer
+                  fra et kald til metoden sql_query. <br/> Hvis det
+                  efterlades tomt, bruges det seneste resultat.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_fetchrow">
+      <title>sql_fetchrow</title>
+      <para>
+        Henter den aktuelle række. Defineret i de specifikke drivere.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql = 'SELECT *
+    FROM ' . TOPICS_TABLE . '
+    WHERE topic_id = 1045';
+$result = $db-&gt;sql_query($sql);
+
+$topic_data = $db-&gt;sql_fetchrow($result);
+</programlisting>
+      <para>
+        Eksempel med en while-løkke:
+      </para>
+      <programlisting>
+$sql = 'SELECT config_name, config_value
+    FROM ' . CONFIG_TABLE;
+$result = $db-&gt;sql_query($sql);
+
+while ($row = $db-&gt;sql_fetchrow($result))
+{
+    $config[$row['config_name']] = $row['config_value'];
+}
+</programlisting>
+      <sect3 id="parameters-12">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Resultat (valgfri)
+                </entry>
+                <entry>
+                  Resultatet, der evalueres. <br/> Resultatet kommer fra
+                  et kald til metoden sql_query. <br/> Hvis det
+                  efterlades tomt, bruges det seneste resultat.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_rowseek">
+      <title>sql_rowseek</title>
+      <para>
+        Går til det angivne rækkenummer. Rækkenummeret er
+        nul-indekseret. Defineret i de specifikke drivere.
+      </para>
+      <sect3 id="parameters-13">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Rækkenummer
+                </entry>
+                <entry>
+                  Nummeret på den række, der skal findes
+                  (nul-indekseret).
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Resultat
+                </entry>
+                <entry>
+                  Resultatet, der evalueres. <br/> Dette resultat kommer
+                  fra et kald til metoden sql_query. <br/> Hvis det
+                  efterlades tomt, bruges det seneste resultat.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_freeresult">
+      <title>sql_freeresult</title>
+      <para>
+        Rydder resultatet af en SELECT-forespørgsel. Defineret i de
+        specifikke drivere.
+      </para>
+      <para>
+        Eksempel:
+      </para>
+      <programlisting>
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE post_id = ' . (int) $integer . &quot;
+        AND post_text = '&quot; . $db-&gt;sql_escape($string) . &quot;'&quot;;
+$result = $db-&gt;sql_query($sql);
+
+// Fetch the data
+$post_data = $db-&gt;sql_fetchrow($result);
+
+// We don't need to do anything with our query anymore, so lets set it free
+$db-&gt;sql_freeresult($result);
+</programlisting>
+      <sect3 id="parameters-14">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Anvendelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Resultat (valgfri)
+                </entry>
+                <entry>
+                  Resultatet, der evalueres. <br/> Dette resultat kommer
+                  fra et kald til metoden sql_query. <br/> Hvis det
+                  efterlades tomt, bruges det seneste resultat.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+</article>

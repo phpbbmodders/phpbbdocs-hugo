@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutoriel : Permissions</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduction</title>
+    <para>
+      Le système de permissions dans phpBB est utilisé pour contrôler
+      l'accès aux différentes parties du logiciel. Il fonctionne en
+      permettant aux administrateurs d'assigner certaines permissions à
+      des groupes d'utilisateurs ou à des utilisateurs individuels, ce
+      qui détermine les actions qu'ils sont autorisés à effectuer.
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="create-permissions">Créer des
+            permissions</link> avec une migration.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="define-permissions">Définir des
+            permissions</link> avec des clés de langue.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="wire-up-permissions">Câbler les
+            permissions</link> avec des événements.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="checking-permissions">Vérifier les
+            permissions</link> avec PHP.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="understanding-permissions">Comprendre les
+            permissions</link> dans phpBB.
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="create-permissions">
+    <title>Créer des permissions</title>
+    <para>
+      Il existe quatre types de permissions :
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>a_*</literal> Administrateur
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>m_*</literal> Modérateur
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>u_*</literal> Utilisateur
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>f_*</literal> Forum
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Vous pouvez créer de nouvelles permissions pour chacun de ces
+      types et les assigner à des groupes d'utilisateurs ou à des rôles
+      de permission. Vous pouvez également définir de nouveaux rôles
+      auxquels assigner vos permissions si vous le souhaitez.
+    </para>
+    <para>
+      Les permissions doivent d'abord être créées dans une migration en
+      utilisant le
+      <literal>../migrations/tools/permission</literal>. Il aide à
+      ajouter, retirer, définir et annuler des permissions, et à ajouter
+      ou retirer des rôles de permission. Par exemple, pour créer une
+      nouvelle permission Utilisateur <literal>u_foo_bar</literal> et la
+      définir à <literal>YES</literal> pour le groupe Registered Users
+      et le rôle Standard User :
+    </para>
+    <programlisting>
+return [
+    ['permission.add', ['u_foo_bar']],
+    ['permission.permission_set', ['REGISTERED', 'u_foo_bar', 'group']],
+    ['permission.permission_set', ['ROLE_USER_STANDARD', 'u_foo_bar']],
+];
+</programlisting>
+  </sect1>
+  <sect1 id="define-permissions">
+    <title>Définir des permissions</title>
+    <para>
+      Les permissions doivent avoir une définition de clé de langue
+      correspondante. Toutes les clés de langue pour les permissions
+      devraient être placées dans un fichier de langue qui commence par
+      <literal>permissions_</literal>, et les clés seront automatiquement
+      chargées dans le tableau de langue de l'ACP. Par exemple, le
+      fichier de langue <literal>permissions_foobar.php</literal> :
+    </para>
+    <programlisting>
+$lang = array_merge($lang, [
+    'ACL_U_FOOBAR' =&gt; 'Can post foobars',
+]);
+</programlisting>
+  </sect1>
+  <sect1 id="wire-up-permissions">
+    <title>Câbler les permissions</title>
+    <para>
+      Câbler les permissions consiste simplement à rendre phpBB
+      conscient de vos nouvelles permissions en les ajoutant au tableau
+      de données de permissions. Le tableau utilise le nom de la
+      permission comme clé et une valeur de tableau définissant la clé
+      de langue de la permission et la catégorie à laquelle elle devrait
+      appartenir.
+    </para>
+    <para>
+      Ceci se fait dans un écouteur d'événement en utilisant l'événement
+      <literal>core.permissions</literal> pour ajouter vos nouvelles
+      permissions au tableau de données de permissions de phpBB :
+    </para>
+    <programlisting>
+$event-&gt;update_subarray('permissions', 'u_foo_bar', ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post']);
+</programlisting>
+    <warning>
+      <title>Avertissement</title>
+      <para>
+        Afin de prendre en charge phpBB 3.2.1 ou des versions
+        antérieures, vous ne pouvez pas utiliser la méthode
+        <literal>update_subarray()</literal>, et devez plutôt utiliser
+        l'ancien style de code suivant :
+      </para>
+      <programlisting>
+# Wiring permissions the correct way for phpBB 3.1.0 - 3.2.1
+$permissions = $event['permissions'];
+$permissions['u_foo_bar'] = ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post'];
+$event['permissions'] = $permissions;
+
+# Notice that the above permissions $event variable must first be copied by assigning it to a
+# local variable, then modified, and then copied back. This is because the event variables are
+# overloaded, which is a limitation in PHP. For example, this shortcut will not work:
+$event['permissions']['u_foo_bar'] = ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post'];
+</programlisting>
+    </warning>
+  </sect1>
+  <sect1 id="checking-permissions">
+    <title>Vérifier les permissions</title>
+    <para>
+      La permission d'un utilisateur peut être vérifiée en appelant
+      <literal>$auth-&gt;acl_get()</literal> :
+    </para>
+    <programlisting>
+// Check a user's permissions
+$auth-&gt;acl_get('u_foo_bar');
+</programlisting>
+    <para>
+      Si elle est spécifique à un forum (c.-à-d. locale), passez-lui
+      alors l'ID du forum comme second argument :
+    </para>
+    <programlisting>
+// Check a user's permission in the forum with ID 3
+$auth-&gt;acl_get('u_foo_bar', 3);
+</programlisting>
+    <para>
+      Pour les forums, on peut utiliser l'appel spécifique aux forums
+      <literal>$auth-&gt;acl_getf()</literal> :
+    </para>
+    <programlisting>
+// Check a forum's permissions
+$auth-&gt;acl_getf('f_your_permission');
+</programlisting>
+    <para>
+      Il est également possible de vérifier plus d'une option avec
+      <literal>acl_gets()</literal> :
+    </para>
+    <programlisting>
+$auth-&gt;acl_gets('permission1'[, 'permission2', ..., 'permissionNth'], $forumId);
+</programlisting>
+    <note>
+      <title>Remarque</title>
+      <para>
+        Lors de la vérification des permissions, il est également
+        important de garder à l'esprit si les permissions globales ou
+        locales doivent être vérifiées. Si <literal>acl_get</literal>
+        est appelé sans ID de forum, les permissions globales seront
+        utilisées. À l'inverse, passer un ID de forum vérifiera
+        également les permissions locales, qui peuvent alors
+        potentiellement remplacer un <literal>NO</literal> par un
+        <literal>YES</literal>. Après avoir vérifié toutes les
+        permissions utilisateur, groupe, forum et globales, la
+        permission retournée est toujours soit <literal>YES</literal>,
+        soit <literal>NO</literal> ; <literal>NEVER</literal> n'est
+        utilisé que pour imposer un <literal>NO</literal>.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="understanding-permissions">
+    <title>Comprendre les permissions</title>
+    <para>
+      Les permissions dans phpBB contrôlent les actions que les
+      utilisateurs sont autorisés à effectuer sur le forum, comme créer
+      un nouveau sujet, répondre à un message, ou modifier le profil
+      d'un utilisateur. Chaque permission se voit assigner une valeur
+      <literal>YES</literal>, <literal>NO</literal>, ou
+      <literal>NEVER</literal>.
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>YES</literal> signifie que l'utilisateur ou le
+          groupe est autorisé à effectuer l'action.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>NO</literal> signifie que l'utilisateur ou le groupe
+          n'est pas autorisé à effectuer l'action, mais cela peut être
+          annulé par un <literal>YES</literal> provenant d'un groupe ou
+          d'un rôle auquel il est assigné.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>NEVER</literal> signifie que l'utilisateur ou le
+          groupe n'est pas autorisé à effectuer l'action et ne peut pas
+          être annulé par un <literal>YES</literal> provenant d'un
+          groupe ou d'un rôle auquel il est assigné.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Lorsqu'un utilisateur demande à effectuer une action, phpBB
+      combine toutes les permissions assignées à l'utilisateur via ses
+      groupes, rôles et assignations de permissions directes. Si une
+      permission est définie à <literal>NEVER</literal>, elle prévaut
+      sur toutes les autres permissions et refuse à l'utilisateur
+      l'accès à cette action. Si une permission est définie à
+      <literal>NO</literal>, elle peut être annulée par une permission
+      <literal>YES</literal> provenant d'un autre groupe ou rôle.
+    </para>
+    <sect2 id="permission-types">
+      <title>Types de permissions</title>
+      <para>
+        Il existe quatre types de permissions dans phpBB :
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>a_*</literal> Administrateur : ces permissions
+            sont appliquées aux utilisateurs auxquels des rôles
+            d'administrateur sont assignés.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>f_*</literal> Forum : ces permissions sont
+            appliquées à des forums individuels et peuvent être
+            définies pour chaque groupe d'utilisateurs ou utilisateur
+            individuel.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>m_*</literal> Modérateur : ces permissions sont
+            appliquées aux utilisateurs auxquels des rôles de modérateur
+            sont assignés pour des forums spécifiques.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>u_*</literal> Utilisateur : ces permissions sont
+            appliquées à des utilisateurs individuels et remplacent les
+            permissions définies pour leur groupe d'utilisateurs.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="local-and-global-permissions">
+      <title>Permissions locales et globales</title>
+      <para>
+        Les permissions peuvent être définies pour s'appliquer
+        localement ou globalement. Les permissions locales sont
+        spécifiques à un seul forum, tandis que les permissions
+        globales s'appliquent à l'ensemble du forum (board). Par
+        défaut, les permissions de forum sont définies comme locales.
+        Les permissions Administrateur et Utilisateur sont
+        typiquement définies comme globales.
+      </para>
+      <para>
+        Les options de permission peuvent également être définies pour
+        s'appliquer à la fois localement et globalement, ce qui est
+        typique pour les permissions Modérateur. Cela permet à certains
+        utilisateurs de se voir accorder la permission sur un seul
+        forum, tandis que d'autres pourraient se voir accorder la
+        permission pour l'ensemble du forum (board-wide).
+      </para>
+    </sect2>
+    <sect2 id="roles">
+      <title>Rôles</title>
+      <para>
+        Les rôles sont un ensemble prédéfini d'options de permission
+        qui peuvent être appliquées à des utilisateurs ou des groupes.
+        Lorsque les options de permission d'un rôle sont modifiées, les
+        utilisateurs ou groupes auxquels ce rôle est assigné sont
+        automatiquement mis à jour.
+      </para>
+      <para>
+        La permission effective pour toute option est déterminée par
+        une combinaison de l'appartenance aux groupes de l'utilisateur,
+        des rôles assignés, et des assignations de permissions
+        directes. Dans certains cas, des permissions opposées peuvent
+        exister, ce qui peut entraîner des résultats inattendus. Il est
+        important de considérer attentivement les réglages de
+        permission afin de s'assurer que les utilisateurs se voient
+        accorder le niveau d'accès approprié sur le forum.
+      </para>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>UI-testning</title>
+  </articleinfo>
+  <para>
+    UI-tests udvider funktionelle tests ved også at understøtte afvikling
+    af JavaScript og jQuery ud over ren HTML-afvikling. De bør bruges i
+    tilfælde, hvor funktionalitet, der kun udføres med jQuery eller JS,
+    skal testes. phpBB giver dig mulighed for at skrive den slags tests.
+    Dette dokument fortæller dig hvordan.
+  </para>
+  <sect1 id="running-ui-tests">
+    <title>Kørsel af UI-tests</title>
+    <para>
+      Information om, hvordan UI-tests køres, findes i
+      GitHub-repositoryet på
+      <ulink url="https://github.com/phpbb/phpbb/blob/3.3.x/tests/RUNNING_TESTS.md">https://github.com/phpbb/phpbb/blob/3.3.x/tests/RUNNING_TESTS.md</ulink>.
+      Du kan skifte branch for at se instruktioner for en bestemt version
+      af phpBB.
+    </para>
+  </sect1>
+  <sect1 id="writing-ui-tests">
+    <title>Skrivning af UI-tests</title>
+    <para>
+      Din testcase skal nedarve fra klassen
+      <literal>phpbb_ui_test_case</literal>. Du vil da kunne foretage
+      forespørgsler til en ny phpBB-installation. Sørg desuden for at
+      placere filen i mappen <literal>tests/ui/</literal> og at tilføje
+      dokumentationsblokken <literal>@group ui</literal> over klassen, så
+      tests udføres korrekt.
+    </para>
+    <programlisting>
+&lt;?php
+// tests/ui/my_test.php
+
+/**
+ * @group ui
+ */
+class phpbb_ui_my_test extends phpbb_ui_test_case
+{
+    public function setUp()
+    {
+        parent::setUp();
+        // setup code
+    }
+
+    public function test_index()
+    {
+        // test code
+    }
+}
+</programlisting>
+    <para>
+      Der findes en metode <literal>setUp()</literal>, hvor du kan
+      placere kode, der køres, før testen udføres. Her kan du sætte nogle
+      objekter op efter installationen, som er nødvendige for din test.
+      Herefter kan du definere dine tests, ligesom du normalt ville, ved
+      at give metoderne præfikset <literal>test_</literal>. I dette
+      tilfælde tester vi indekssiden.
+    </para>
+    <sect2 id="webdriver-and-assertions">
+      <title>WebDriver og assertions</title>
+      <para>
+        Frameworket til UI-testning er bygget med
+        <ulink url="https://github.com/facebook/php-webdriver">Facebooks
+        PHP WebDriver</ulink>, som foretager HTTP-forespørgsler og giver
+        os mulighed for at interagere med siden. Den fjerne WebDriver er
+        tilgængelig i dine tests via
+        <literal>$this-&gt;visit($url)</literal>. Alternativt kan du også
+        bruge den direkte via <literal>$this-&gt;getDriver()</literal>.
+        PHP WebDriver tilbyder en wiki med flere eksempler på, hvordan
+        WebDriver bruges:
+        <ulink url="https://github.com/facebook/php-webdriver/wiki">PHP
+        WebDriver Wiki</ulink>
+      </para>
+      <para>
+        Her er et eksempel på brug af WebDriver:
+      </para>
+      <programlisting>
+&lt;?php
+// tests/ui/my_test.php
+
+/**
+ * @group ui
+ */
+class phpbb_ui_my_test extends phpbb_ui_test_case
+{
+    public function test_index()
+    {
+        $this-&gt;visit('index.php');
+        $this-&gt;assertGreaterThan(0, count($this-&gt;getDriver()-&gt;findElements(WebDriverBy::cssSelector('.topiclist'))));
+    }
+}
+</programlisting>
+      <para>
+        Vi udfører en GET-forespørgsel til <literal>index.php</literal>
+        og finder derefter elementer, der matcher CSS-selektoren.
+        Derefter sikrer vi os, at vores forespørgsel matchede noget.
+      </para>
+      <para>
+        Hvis boardets indeksside var i stykker, ville vores test opdage
+        det, hvilket giver os mulighed for at opdage problemet og rette
+        det. Jo flere ting du tester, jo flere fejl opdager du tidligt.
+      </para>
+    </sect2>
+    <sect2 id="authentication">
+      <title>Godkendelse</title>
+      <para>
+        Mange UI-tests kræver, at brugeren er logget ind. For at gøre
+        dette kan du bruge metoderne <literal>login()</literal> og
+        <literal>admin_login()</literal>, der nedarves fra klassen
+        <literal>phpbb_ui_test_case</literal>. Denne metode tildeler
+        brugerens SID til den nedarvede klasseegenskab
+        <literal>$this-&gt;sid</literal>. Du skal tilføje denne til de
+        URL'er, som den indloggede bruger navigerer til, for at bevare
+        sessionen. For brugseksempler, se testen af tilladelsesroller i
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.3.x/tests/ui/permission_roles_test.php">tests/ui/permission_roles_test.php</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="localisation">
+      <title>Oversættelse</title>
+      <para>
+        I tests, ligesom i phpBB selv, bør du ikke bruge hardkodet sprog,
+        medmindre det er absolut nødvendigt. Brug i stedet metoderne
+        <literal>$this-&gt;add_lang()</literal> og
+        <literal>$this-&gt;lang()</literal>. Begge opfører sig meget
+        ligesom deres modstykker i klassen
+        <literal>\phpbb\user</literal>. Bemærk, at
+        <literal>language/en/common.php</literal> automatisk indlæses af
+        testframeworket.
+      </para>
+      <programlisting>
+public function test_example()
+{
+    // include the file at ./phpBB/language/en/ucp.php
+    $this-&gt;add_lang('ucp');
+
+    // we can also include multiple ones:
+    $this-&gt;add_lang(['memberlist', 'mcp']);
+
+    // Let's use a language key
+    $this-&gt;assertEquals('Login', $this-&gt;lang('LOGIN'));
+
+    // And let's use a language key formatted for use with sprintf
+    $this-&gt;assertEquals('Logout [ user ]', $this-&gt;lang('LOGOUT_USER', 'user'));
+}
+</programlisting>
+      <para>
+        For flere brugseksempler, se venligst
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.3.x/tests/ui/permission_roles_test.php">tests/ui/permission_roles_test.php</ulink>.
+      </para>
+    </sect2>
+  </sect1>
+</article>

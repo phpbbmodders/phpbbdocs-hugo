@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutoriel : Syntaxe de template</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduction</title>
+    <para>
+      Depuis la version 3.1, phpBB utilise le moteur de template Twig. Ce
+      tutoriel abordera certains détails sur l'implémentation de la
+      syntaxe de Twig dans phpBB et ses extensions, mais une
+      documentation plus complète sur Twig est disponible ici :
+      <ulink url="https://twig.symfony.com/doc/2.x/">Twig
+      Documentation</ulink>.
+    </para>
+  </sect1>
+  <sect1 id="assigning-data-in-php">
+    <title>Assigner des données en PHP</title>
+    <sect2 id="variables">
+      <title>Variables</title>
+      <para>
+        Assigner une seule variable :
+      </para>
+      <programlisting>
+$template-&gt;assign_var('FOO', $foo);
+</programlisting>
+      <para>
+        Assigner plusieurs variables :
+      </para>
+      <programlisting>
+$template-&gt;assign_vars([
+    'FOO' =&gt; $foo,
+    'BAR' =&gt; $bar,
+    'BAZ' =&gt; $baz
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="default-template-variables">
+      <title>Variables de template par défaut</title>
+      <para>
+        Certaines variables sont définies dans la fonction
+        page_header de phpBB, communes à tous les templates, et qui
+        peuvent être utiles à l'auteur d'un style ou d'une extension.
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec colwidth="20*" align="left" />
+          <colspec colwidth="60*" align="left" />
+          <colspec colwidth="20*" align="left" />
+          <thead>
+            <row>
+              <entry>
+                Variable de template
+              </entry>
+              <entry>
+                Description
+              </entry>
+              <entry>
+                Exemple de sortie
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>T_ASSETS_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers les fichiers assets (répertoire
+                <literal>assets</literal> à la racine de l'installation
+                de phpBB)
+              </entry>
+              <entry>
+                <literal>./assets</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_THEME_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier theme du style actuellement
+                sélectionné (où sont stockés tous les fichiers css)
+              </entry>
+              <entry>
+                <literal>./styles/prosilver/theme</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_TEMPLATE_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier de template du style
+                actuellement sélectionné
+              </entry>
+              <entry>
+                <literal>./styles/prosilver/template</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_IMAGES_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier d'images de phpBB
+              </entry>
+              <entry>
+                <literal>./images</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_SMILIES_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier des smileys
+              </entry>
+              <entry>
+                <literal>./images/similies</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_AVATAR_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier de téléversement des avatars
+              </entry>
+              <entry>
+                <literal>./images/avatars/upload</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_AVATAR_GALLERY_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier de la galerie d'avatars
+              </entry>
+              <entry>
+                <literal>./images/avatars/gallery</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_ICONS_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier des icônes de sujet
+              </entry>
+              <entry>
+                <literal>./images/icons</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_RANKS_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers les images de rang
+              </entry>
+              <entry>
+                <literal>./images/ranks</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>T_UPLOAD_PATH</literal>
+              </entry>
+              <entry>
+                Le chemin vers le dossier de téléversement de phpBB (ne
+                devrait pas être utilisé directement).
+              </entry>
+              <entry>
+                <literal>./files</literal>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="blocks">
+      <title>Blocs</title>
+      <para>
+        Les blocs sont utilisés pour assigner un nombre quelconque
+        d'éléments du même type, par exemple des sujets ou des messages
+        (« boucle foreach »).
+      </para>
+      <programlisting>
+while ($row = $db-&gt;sql_fetchrow($result))
+{
+    $template-&gt;assign_block_vars('loopname', [
+        'FOO' =&gt; $row['foo'],
+        'BAR' =&gt; $row['bar']
+    ]);
+}
+</programlisting>
+      <para>
+        Boucles imbriquées :
+      </para>
+      <programlisting>
+while ($topic = $db-&gt;sql_fetchrow($result))
+{
+    $template-&gt;assign_block_vars('topic', [
+        'TOPIC_ID' =&gt; $topic['topic_id']
+    ]);
+
+    while ($post = $db-&gt;sql_fetchrow($result))
+    {
+        $template-&gt;assign_block_vars('topic.post', [
+            'POST_ID' =&gt; $post['post_id']
+        ]);
+    }
+}
+</programlisting>
+      <para>
+        Les blocs et les boucles imbriquées peuvent ensuite être utilisés
+        en conséquence dans les fichiers HTML (voir
+        <link linkend="syntax-elements">Éléments de
+        syntaxe</link>).
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="syntax-elements">
+    <title>Éléments de syntaxe</title>
+    <para>
+      Cette section mettra en avant les éléments de syntaxe Twig dans le
+      moteur de template. L'ancienne syntaxe spécifique à phpBB sera
+      dépréciée dans une version ultérieure de phpBB. Il est donc
+      recommandé d'utiliser à la place la syntaxe Twig documentée :
+    </para>
+    <sect2 id="comments">
+      <title>Commentaires</title>
+      <para>
+        Pour insérer des commentaires à l'intérieur du template, vous
+        pouvez utiliser <literal>{# #}</literal> :
+      </para>
+      <programlisting>
+{# Your comments can go here. #}
+</programlisting>
+    </sect2>
+    <sect2 id="variables-1">
+      <title>Variables</title>
+      <para>
+        Les variables dans phpBB prennent la forme
+        <literal>{{ X_YYYYY }}</literal>, où les données sont assignées
+        depuis la source. Cependant, la plupart des chaînes de langue ne
+        sont pas assignées depuis la source. Lorsqu'une variable de
+        langue est trouvée, désignée sous la forme
+        <literal>{{ lang('YYYYYY') }}</literal>, phpBB vérifie d'abord si
+        une variable assignée portant ce nom existe. Si c'est le cas,
+        elle est utilisée. Sinon, il vérifie si une chaîne existante
+        définie dans le fichier de langue existe.
+      </para>
+      <para>
+        En utilisant le format de variable de langue, phpBB offre une
+        plus grande flexibilité dans la personnalisation des chaînes de
+        langue. Cela permet de modifier facilement les chaînes de langue
+        dans les fichiers de langue sans avoir à modifier directement le
+        code source.
+      </para>
+    </sect2>
+    <sect2 id="blocks-1">
+      <title>Blocs</title>
+      <para>
+        La boucle de bloc de base prend la forme :
+      </para>
+      <programlisting>
+{% for item in loops.loopname %}
+    markup, {{ item.xyyyy }}, etc.
+{% endfor %}
+</programlisting>
+      <para>
+        Une extension supplémentaire consiste à utiliser
+        <literal>else</literal> dans une boucle :
+      </para>
+      <programlisting>
+{% for item in loops.loopname %}
+    markup, {{ item.xyyyy }}, etc.
+{% else %}
+    alternate markup
+{% endfor %}
+</programlisting>
+      <para>
+        Cela fera en sorte que le balisage entre <literal>else</literal>
+        et <literal>endfor</literal> soit affiché si la boucle ne
+        contient aucune valeur. Ceci est utile pour les forums sans sujet
+        (par exemple) ... d'une certaine manière, cela remplace « une
+        partie » de l'ancienne structure de contrôle de type « switch »
+        (le reste étant remplacé par des conditions, voir ci-dessous).
+      </para>
+      <para>
+        Vous pouvez également vérifier si votre boucle contient du
+        contenu, de manière similaire à l'utilisation de
+        <literal>count()</literal> en PHP :
+      </para>
+      <programlisting>
+{% if loops.loopname|length %}
+    {% for item in loops.loopname %}
+        {{ item.xyyyy }}
+    {% endfor %}
+{% endif %}
+</programlisting>
+      <para>
+        <literal>loops.loopname|length</literal> affichera la taille du
+        tableau de bloc. Cela a du sens si vous voulez éviter, par
+        exemple, une balise <literal>&lt;select&gt;</literal> vide, qui
+        ne serait pas valide en HTML.
+      </para>
+      <para>
+        Vous pouvez également accéder à des itérations spécifiques d'une
+        boucle à l'aide des variables spéciales suivantes :
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec colwidth="20*" align="left" />
+          <colspec colwidth="80*" align="left" />
+          <tbody>
+            <row>
+              <entry>
+                <literal>loop.index</literal>
+              </entry>
+              <entry>
+                L'itération actuelle de la boucle. (indexée à partir de
+                1)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.index0</literal>
+              </entry>
+              <entry>
+                L'itération actuelle de la boucle. (indexée à partir de
+                0)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.revindex</literal>
+              </entry>
+              <entry>
+                Le nombre d'itérations depuis la fin de la boucle
+                (indexé à partir de 1)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.revindex0</literal>
+              </entry>
+              <entry>
+                Le nombre d'itérations depuis la fin de la boucle
+                (indexé à partir de 0)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.first</literal>
+              </entry>
+              <entry>
+                True lors de la première itération
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.last</literal>
+              </entry>
+              <entry>
+                True lors de la dernière itération
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.length</literal>
+              </entry>
+              <entry>
+                Le nombre d'éléments dans la séquence
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>loop.parent</literal>
+              </entry>
+              <entry>
+                Le contexte parent
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="including-files">
+      <title>Inclure des fichiers</title>
+      <para>
+        phpBB a la capacité d'inclure d'autres fichiers HTML, Javascript
+        et CSS :
+      </para>
+      <programlisting>
+{% INCLUDE 'filename.html' %}
+{% INCLUDEJS 'filename.js' %}
+{% INCLUDECSS 'filename.css' %}
+</programlisting>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Vous pouvez introduire de nouveaux templates (c'est-à-dire
+          autres que ceux de l'ensemble par défaut) grâce à ce système et
+          les inclure comme vous le souhaitez ... utile par exemple pour
+          une barre de « menu » commune ou similaire.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="conditionalscontrol-structures">
+      <title>Conditions/structures de contrôle</title>
+      <para>
+        Les conditions et les structures de contrôle peuvent être
+        utilisées de manière similaire à Twig. Un exemple simple de ceci
+        est :
+      </para>
+      <programlisting>
+{% if expr %}
+    markup
+{% endif %}
+</programlisting>
+      <para>
+        L'expression peut prendre de nombreuses formes :
+      </para>
+      <programlisting>
+{% if loop.index is even %}
+    markup
+{% endif %}
+</programlisting>
+      <para>
+        Ceci affichera le balisage si l'itération actuelle d'une boucle
+        est une valeur paire. Vous pouvez utiliser diverses méthodes de
+        comparaison (les formes standards ainsi que les versions
+        textuelles équivalentes indiquées entre crochets), notamment :
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>==</literal> [<literal>eq</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>!=</literal> [<literal>neq</literal>,
+            <literal>ne</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;&gt;</literal> (identique à <literal>!=</literal>)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>!==</literal> (non équivalent en valeur et en type)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>===</literal> (équivalent en valeur et en type)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&gt;</literal> [<literal>gt</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;</literal> [<literal>lt</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&gt;=</literal> [<literal>gte</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;=</literal> [<literal>lte</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&amp;&amp;</literal> [<literal>and</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>||</literal> [<literal>or</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>%</literal> [<literal>mod</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>!</literal> [<literal>not</literal>]
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>+</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>-</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>*</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>/</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;&lt;</literal> (décalage binaire à gauche)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&gt;&gt;</literal> (décalage binaire à droite)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>|</literal> (ou binaire)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>^</literal> (ou exclusif binaire)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&amp;</literal> (et binaire)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>~</literal> (non binaire)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>is</literal> (peut être utilisé pour combiner des
+            opérations de comparaison)
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        De simples parenthèses peuvent également être utilisées pour
+        imposer les bonnes vieilles règles de priorité des opérateurs. De
+        plus, certains types de comparaison de base sont définis :
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>even</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>odd</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>div</literal>
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Au-delà de la simple utilisation de IF, vous pouvez également
+        effectuer une séquence de comparaisons à l'aide de ce qui suit :
+      </para>
+      <programlisting>
+{% if expr1 %}
+    markup
+{% elseif expr2 %}
+    markup
+    .
+    .
+    .
+{% elseif exprN %}
+    markup
+{% else %}
+    markup
+{% endif %}
+</programlisting>
+      <para>
+        Chaque instruction sera testée tour à tour et la sortie
+        correspondante générée lorsqu'une correspondance (le cas échéant)
+        est trouvée. Il n'est pas nécessaire d'utiliser systématiquement
+        <literal>elseif</literal> ; <literal>else</literal> peut être
+        utilisé seul pour correspondre à « tout le reste ».
+      </para>
+      <para>
+        Ceci peut également être utilisé, par exemple, pour assigner des
+        feuilles de style différentes aux lignes de rang pair par rapport
+        aux lignes de rang impair :
+      </para>
+      <programlisting>
+&lt;table&gt;
+{% if loop.index is even %}
+    &lt;tr class=&quot;row1&quot;&gt;
+{% else %}
+    &lt;tr class=&quot;row2&quot;&gt;
+{% endif %}
+        &lt;td&gt;HELLO!&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</programlisting>
+      <para>
+        D'autres éléments peuvent également être ajoutés :
+      </para>
+      <programlisting>
+&lt;table&gt;
+{% if loop.index &gt; 10 %}
+    &lt;tr bgcolor=&quot;#FF0000&quot;&gt;
+{% elseif loop.index &gt; 5 %}
+    &lt;tr bgcolor=&quot;#00FF00&quot;&gt;
+{% elseif loop.index &gt; 2 %}
+    &lt;tr bgcolor=&quot;#0000FF&quot;&gt;
+{% else %}
+    &lt;tr bgcolor=&quot;#FF00FF&quot;&gt;
+{% endif %}
+        &lt;td&gt;hello!&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</programlisting>
+      <para>
+        Ceci affichera la cellule de ligne en violet pour les deux
+        premières lignes, en bleu pour les lignes 2 à 5, en vert pour les
+        lignes 5 à 10 et en rouge pour le reste. Vous pourriez ainsi
+        produire un « joli » effet de dégradé, par exemple.
+      </para>
+      <para>
+        Vous pourriez utiliser <literal>if</literal> pour effectuer des
+        vérifications courantes, par exemple sur l'état de connexion d'un
+        utilisateur :
+      </para>
+      <programlisting>
+{% if S_USER_LOGGED_IN %}
+    markup
+{% endif %}
+</programlisting>
+    </sect2>
+    <sect2 id="user-variables">
+      <title>Variables utilisateur</title>
+      <para>
+        Vous pouvez également définir de simples variables (booléen,
+        entier ou double) depuis l'intérieur du template. Ceci est utile,
+        par exemple, si vous ne voulez pas copier-coller des expressions
+        <literal>if</literal> complexes encore et encore :
+      </para>
+      <programlisting>
+{% if expr1 %}
+    {% DEFINE $COLSPAN = 3 %}
+{% elseif expr2 %}
+    {% DEFINE $COLSPAN = 4 %}
+{% else %}
+    {% DEFINE $COLSPAN = 1 %}
+{% endif %}
+
+&lt;tr&gt;&lt;td colspan=&quot;{{ $COLSPAN }}&quot;&gt;...&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan=&quot;{{ $COLSPAN }}&quot;&gt;...&lt;/td&gt;&lt;/tr&gt;
+</programlisting>
+      <para>
+        Le mot-clé <literal>DEFINE</literal> comporte certaines
+        restrictions d'utilisation :
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Il <emphasis role="strong">DOIT</emphasis> y avoir exactement
+            un espace avant et après le <literal>=</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Vous <emphasis role="strong">DEVEZ</emphasis> utiliser des
+            guillemets simples
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Un exemple de ceci :
+      </para>
+      <programlisting>
+{% DEFINE $COLSPAN = 3 %}   //GOOD
+{% DEFINE $COLSPAN=3 %}     //BAD
+{% DEFINE $COLSPAN  =  3 %} //BAD
+
+
+{% DEFINE $CLASS = 'class1' %}  //GOOD
+{% DEFINE $CLASS = &quot;class1&quot; %}  //BAD
+</programlisting>
+      <para>
+        Les variables utilisateur peuvent être effacées (unset) à l'aide
+        de :
+      </para>
+      <programlisting>
+{% UNDEFINE $COLSPAN %}
+</programlisting>
+    </sect2>
+    <sect2 id="language-variables">
+      <title>Variables de langue</title>
+      <para>
+        Vous pouvez utiliser et interagir avec les variables de langue de
+        plusieurs façons. phpBB étend la syntaxe Twig standard avec les
+        fonctions suivantes afin de pouvoir utiliser les variables de
+        langue dans le code de template basé sur Twig :
+      </para>
+      <itemizedlist>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang</literal>
+              </term>
+              <listitem>
+                <para>
+                  Récupère la sortie d'une variable de langue, de manière
+                  similaire à l'utilisation de
+                  <literal>{{ L_FOO }}</literal>. Les deux lignes
+                  suivantes donnent le même résultat :
+                </para>
+                <programlisting>
+{{ lang('FOO') }}
+{{ L_FOO }}
+</programlisting>
+                <para>
+                  Elle prend en charge la même syntaxe de paramètres que
+                  <literal>$language-&gt;lang()</literal> :
+                </para>
+                <programlisting>
+{{ lang('SOME_VAR', param1, param2) }}
+</programlisting>
+                <para>
+                  Pour les variables de langue en Javascript, veuillez
+                  utiliser <literal>lang_js</literal>.
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang_js</literal>
+              </term>
+              <listitem>
+                <para>
+                  Récupère la sortie d'une variable de langue en code JS.
+                  Ceci doit être utilisé à la place du préfixe
+                  <literal>LA_</literal> utilisé précédemment. Les deux
+                  lignes suivantes donnent le même résultat :
+                </para>
+                <programlisting>
+{{ lang_js('FOO') }}
+{{ LA_FOO }}
+</programlisting>
+                <para>
+                  Elle prend en charge la même syntaxe de paramètres que
+                  <literal>$language-&gt;lang()</literal> :
+                </para>
+                <programlisting>
+{{ lang_js('SOME_VAR', param1, param2) }}
+</programlisting>
+                <para>
+                  Ceci équivaut essentiellement à :
+                </para>
+                <programlisting>
+{{ lang('SOME_VAR', param1, param2) | escape('js') }}
+</programlisting>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang_defined</literal>
+              </term>
+              <listitem>
+                <para>
+                  Vérifie si une variable de langue est définie. Peut
+                  être utilisé pour vérifier l'existence d'une variable
+                  de langue avant d'appeler <literal>lang</literal> ou
+                  <literal>lang_js</literal>.
+                </para>
+                <programlisting>
+{% if lang_defined('MY_LANG_VAR') %}
+    &lt;span&gt;{{ lang('MY_LANG_VAR') }}&lt;/span&gt;
+{% endif %}
+</programlisting>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>lang_raw</literal>
+              </term>
+              <listitem>
+                <para>
+                  Affiche la valeur brute d'une variable de langue, par
+                  exemple une chaîne ou un tableau. Peut être utilisé
+                  pour accéder aux entrées d'un tableau de langue dans le
+                  code du template.
+                </para>
+                <programlisting>
+{% for step in lang_raw('EXTENSION_UPDATING_EXPLAIN') %}
+    &lt;li&gt;{{ step }}&lt;/li&gt;
+{% endfor %}
+</programlisting>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+</article>

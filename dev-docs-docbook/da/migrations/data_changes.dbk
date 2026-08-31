@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Dataændringer</title>
+  </articleinfo>
+  <para>
+    Dataændringer udføres i Migrationer ved at oprette et array, der
+    fortolkes af <literal>\phpbb\db\migrator::run_step()</literal>
+  </para>
+  <sect1 id="basics">
+    <title>Grundlæggende</title>
+    <para>
+      Når du foretager dataændringer, bør din Migrations-klasse mindst
+      indeholde én funktion, update_data(). Du kan valgfrit angive en
+      funktion revert_data(), som køres, når migrationen fjernes.
+    </para>
+  </sect1>
+  <sect1 id="update_data">
+    <title>update_data</title>
+    <para>
+      <literal>update_data()</literal> kaldes som det
+      <emphasis role="strong">andet</emphasis> trin, efter
+      <literal>update_schema()</literal>, når en migration installeres.
+      Dette foretager de databasedataændringer, du har brug for, når
+      migrationen installeres.
+    </para>
+    <programlisting>
+public function update_data()
+{
+    return [];
+}
+</programlisting>
+  </sect1>
+  <sect1 id="revert_data">
+    <title>revert_data</title>
+    <para>
+      <literal>revert_data()</literal> kaldes, når en Migration skal
+      afinstalleres (dette kan ske, hvis brugeren vil/skal fortryde
+      ændringerne fra Migrationen, en afhængighed fortrydes, eller
+      installationen fejler, og hele Migrationen fjernes).
+    </para>
+    <para>
+      Denne funktion er helt valgfri,
+      <emphasis role="strong">det meste af dataen fortrydes
+      automatisk.</emphasis> Alle kald til Migration Tools fortrydes
+      automatisk. Det eneste, denne funktion skal håndtere, er at
+      fortryde eventuelle brugerdefinerede funktioner, der blev kørt,
+      hvis det er absolut nødvendigt.
+    </para>
+    <programlisting>
+public function revert_data()
+{
+    return [];
+}
+</programlisting>
+  </sect1>
+  <sect1 id="what-to-return">
+    <title>Hvad der skal returneres</title>
+    <para>
+      Et array af arrays, der indeholder instruktioner.
+    </para>
+    <para>
+      Disse instruktioner kan omfatte kald til Tools. For alle
+      konfigurationsindstillinger, tilladelsesrelaterede kommandoer og
+      moduler, se venligst den tilhørende dokumentation under
+      <literal>tools/index</literal>.
+    </para>
+  </sect1>
+  <sect1 id="if-conditional">
+    <title>If (betinget)</title>
+    <para>
+      Kaldet if giver dig mulighed for at oprette en grundlæggende
+      if-sætning, som kontrolleres, og hvis den er sand, fortolkes den
+      tilknyttede sætning.
+    </para>
+    <sect2 id="how-it-works">
+      <title>Sådan fungerer det</title>
+      <programlisting>
+['if', [
+    true, // Some statement that is either true or false
+    [/* Call to make if the statement is true */],
+]],
+</programlisting>
+    </sect2>
+    <sect2 id="examples">
+      <title>Eksempler</title>
+      <para>
+        hvis konfigurationen &quot;captcha_gd&quot; er sand, opdater
+        &quot;captcha_plugin&quot; med &quot;phpbb_captcha_gd&quot;
+      </para>
+      <programlisting>
+['if', [
+    ($this-&gt;config['captcha_gd']),
+    ['config.update', ['captcha_plugin', 'phpbb_captcha_gd']],
+]],
+</programlisting>
+      <para>
+        hvis konfigurationen &quot;allow_avatar_upload&quot; eller
+        &quot;allow_avatar_local&quot; er sand, opdater
+        &quot;allow_avatar&quot; med værdien &quot;1&quot;
+      </para>
+      <programlisting>
+['if', [
+    ($this-&gt;config['allow_avatar_upload'] || $this-&gt;config['allow_avatar_local']),
+    ['config.update', ['allow_avatar', 1]],
+]],
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Kald til Migration Tools, der er pakket ind i den betingede
+          if-sætning, vil <emphasis role="strong">ikke</emphasis> blive
+          fortrudt automatisk, da if-sætninger ignoreres af metoden
+          <literal>revert_data()</literal>. Du skal selv definere en
+          <literal>revert_data()</literal>-metode for om nødvendigt at
+          fortryde disse dataændringer.
+        </para>
+      </note>
+    </sect2>
+  </sect1>
+  <sect1 id="custom">
+    <title>Custom</title>
+    <para>
+      Custom-kald giver dig mulighed for at angive den callable, der
+      peger på din egen funktion, som skal kaldes.
+    </para>
+    <sect2 id="how-it-works-1">
+      <title>Sådan fungerer det</title>
+      <programlisting>
+['custom', [
+    [/* Callable function */]
+]],
+</programlisting>
+    </sect2>
+    <sect2 id="example">
+      <title>Eksempel</title>
+      <para>
+        Kald en funktion i migrationsfilen ved navn some_function
+      </para>
+      <programlisting>
+['custom', [
+    [$this, 'some_function']
+]],
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Den kaldte funktion skal være offentligt tilgængelig
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="multi-step-processes">
+      <title>Flertrinsprocesser</title>
+      <para>
+        Hvis du har en funktion, der skal kaldes flere gange for at
+        fuldføres, vil det, at returnere andet end null eller true, få
+        funktionen til at blive kaldt igen, indtil null eller true
+        returneres.
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Dette bør bruges, når noget skal køres, der kan tage længere
+          tid end tidsgrænsen (f.eks. gensynkronisering af emner).
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="example-1">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        ['custom', [
+            [$this, 'some_function']
+        ]],
+    ];
+}
+
+// $value is equal to the value returned on the previous call (false if this is the first time it is run)
+public function some_function($value)
+{
+    $limit = 500;
+    $i = 0;
+
+    // Select all topics, starting at $value, limit $limit
+    while ($topic = fetchrow)
+    {
+        $i++;
+
+        // Do something
+    }
+
+    if ($i &lt; $limit)
+    {
+        // There are no more topics, we are done
+        return;
+    }
+
+    // There are still more topics to query, return the next start value
+    return $value + $limit;
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="examples-1">
+    <title>Eksempler</title>
+    <para>
+      Fra <literal>\phpbb\db\migration\data\v310\dev</literal>
+    </para>
+    <programlisting>
+public function update_data()
+{
+    return [
+        ['config.update', ['search_type', 'phpbb_search_' . $this-&gt;config['search_type']]],
+
+        ['config.add', ['fulltext_postgres_ts_name', 'simple']],
+        ['config.add', ['fulltext_postgres_min_word_len', 4]],
+        ...
+
+        ['permission.add', ['u_chgprofileinfo', true, 'u_sig']],
+
+        ['module.add', [
+            'acp',
+            'ACP_GROUPS',
+            [
+                'module_basename'    =&gt; 'acp_groups',
+                'modes'                =&gt; ['position'],
+            ],
+        ]],
+        ...
+
+        // Module will be renamed later
+        ['module.add', [
+            'acp',
+            'ACP_CAT_STYLES',
+            'ACP_LANGUAGE'
+        ]],
+
+        ['module.remove', [
+            'acp',
+            false,
+            'ACP_TEMPLATES',
+        ]],
+
+        ['custom', [[$this, 'rename_module_basenames']]],
+        ['custom', [[$this, 'rename_styles_module']]],
+        ...
+
+        ['config.update', ['version', '3.1.0-dev']],
+    ];
+}
+
+public function rename_styles_module()
+{
+    // Rename styles module to Customise
+    $sql = 'UPDATE ' . MODULES_TABLE . &quot;
+        SET module_langname = 'ACP_CAT_CUSTOMISE'
+        WHERE module_langname = 'ACP_CAT_STYLES'&quot;;
+    $this-&gt;sql_query($sql);
+}
+
+public function rename_module_basenames()
+{
+    // rename all module basenames to full classname
+    $sql = 'SELECT module_id, module_basename, module_class
+        FROM ' . MODULES_TABLE;
+    $result = $this-&gt;db-&gt;sql_query($sql);
+
+    while ($row = $this-&gt;db-&gt;sql_fetchrow($result))
+    {
+        $module_id = (int) $row['module_id'];
+        unset($row['module_id']);
+
+        if (!empty($row['module_basename']) &amp;&amp; !empty($row['module_class']))
+        {
+            // all the class names start with class name or with phpbb_ for auto loading
+            if (strpos($row['module_basename'], $row['module_class'] . '_') !== 0 &amp;&amp;
+                strpos($row['module_basename'], 'phpbb_') !== 0)
+            {
+                $row['module_basename'] = $row['module_class'] . '_' . $row['module_basename'];
+
+                $sql_update = $this-&gt;db-&gt;sql_build_array('UPDATE', $row);
+
+                $sql = 'UPDATE ' . MODULES_TABLE . '
+                    SET ' . $sql_update . '
+                    WHERE module_id = ' . $module_id;
+                $this-&gt;sql_query($sql);
+            }
+        }
+    }
+
+    $this-&gt;db-&gt;sql_freeresult($result);
+}
+</programlisting>
+  </sect1>
+</article>

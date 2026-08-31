@@ -1,0 +1,1961 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Notifikationer</title>
+  </articleinfo>
+  <para>
+    Denne tutorial forklarer:
+  </para>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Notifikationssystemet blev introduceret med udgivelsen af phpBB
+      <literal>3.1</literal>. Siden da har det gennemgået yderligere
+      udvikling og forbedringer for brugere og extension-udviklere. I
+      <literal>3.2</literal> blev notifikationssystemet grundigt
+      omskrevet, hvilket gjorde det hurtigere og mere effektivt.
+    </para>
+    <para>
+      phpBB-brugere har fuld kontrol over deres personlige
+      notifikationsinteraktioner. De kan angive deres egne præferencer
+      for notifikationsmetoder eller deaktivere dem alle sammen.
+      Markere notifikationer som læste, når det er nødvendigt, selvom
+      dette i mange tilfælde sker automatisk.
+    </para>
+    <para>
+      I phpBB findes der to standardnotifikationsmetoder:
+      e-mailbaserede og boardbaserede notifikationer. E-mailmetoden er
+      kun tilgængelig, når indstillingen "board-wide emails" er blevet
+      aktiveret af boardadministratoren i ACP'en. Extensions kan dog
+      oprette og tilføje deres egne notifikationsmetoder.
+    </para>
+    <para>
+      Denne tutorial dokumenterer, hvordan en extension kan udnytte
+      notifikationssystemet ved at oprette en notifikation baseret på en
+      form for udløsende event (såsom at besvare et indlæg), sende
+      notifikationen via enten boardet, e-mail eller andre
+      brugerdefinerede metoder, samt håndtere dens notifikationer.
+    </para>
+    <sect2 id="file-structure">
+      <title>Filstruktur</title>
+      <para>
+        Dette er en oversigt over den filstruktur, der er nødvendig, for
+        at en notifikation kan fungere inden for en extension. I alt er
+        der 7 filer, der gennemgås i denne tutorial, for at oprette og
+        sende notifikationer. Der refereres til disse filer gennem hele
+        denne tutorial.
+      </para>
+      <literallayout><i class="fa fa-user fa-fw" aria-hidden="true"></i>
+      vendor
+      └─ <i class="fa fa-puzzle-piece fa-fw" aria-hidden="true"></i>
+      extension
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      config
+       &#160; │ &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> services.yml
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      event
+       &#160; │ &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> listener.php
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      language
+       &#160; │ &#160; &#160; └─
+      <i class="fa fa-folder fa-fw" aria-hidden="true"></i> en
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; └─
+      <i class="fa fa-folder fa-fw" aria-hidden="true"></i> email
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; │ &#160;
+      &#160; └─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      short
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; │ &#160;
+      &#160; │ &#160; &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> sample.txt
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; │ &#160;
+      &#160; └─ <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>
+      sample.txt
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>
+      extension_common.php
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      notification
+       &#160; │ &#160; &#160; └─
+      <i class="fa fa-folder fa-fw" aria-hidden="true"></i> type
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> sample.php
+       &#160; └─ <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>
+      ext.php</literallayout>
+    </sect2>
+  </sect1>
+  <sect1 id="creating-a-notification-type">
+    <title>Oprettelse af en notifikationstype</title>
+    <para>
+      Det første er at fastlægge et navn for den type notifikation, vi
+      opretter. I denne tutorial kalder vi den "sample". Alle extensions
+      bør altid bruge deres vendor- og navnepræfiks, så det
+      notifikationstypenavn, vi bruger, er:
+      <literal>vendor.extension.notification.type.sample</literal>.
+    </para>
+    <sect2 id="registering-as-a-symfony-service">
+      <title>Registrering som en Symfony-service</title>
+      <para>
+        Nu skal vores notifikationstype registreres som en
+        Symfony-service i vores extensions
+        <literal>services.yml</literal>. Som med enhver
+        service-erklæring kræver den en service-identifikator og
+        class-argumentet (vi diskuterer, hvad der skal med i vores
+        klasse <literal>sample</literal>, lidt senere). Notifikationstyper
+        kræver dog også tre yderligere parametre:
+        <literal>parent</literal>, <literal>shared</literal> og
+        <literal>tags</literal>.
+      </para>
+      <para>
+        Parameteren <literal>parent</literal> angiver den overordnede
+        service for vores notifikation. Med andre ord bliver vores
+        notifikation en underklasse og nedarver fra en
+        phpBB-kernenotifikationsservice, i dette tilfælde phpBB's
+        grundlæggende notifikationsklasse/-service.
+      </para>
+      <para>
+        Parameteren <literal>shared</literal> bør sættes til
+        <literal>flase</literal>, hvilket sikrer, at der oprettes en ny
+        instans, hver gang denne notifikationstype forespørges. Dette
+        forhindrer, at data fra én notifikationsinstans utilsigtet
+        blandes sammen med en anden.
+      </para>
+      <para>
+        Endelig bruges <literal>tags</literal> til at tagge vores
+        service som en notifikationstype. Sådan ved phpBB, at dette er
+        en del af dets notifikationssystem.
+      </para>
+      <programlisting language="yaml">
+services:
+    vendor.extension.notification.type.sample:
+        class: vendor\extension\notification\type\sample
+        parent: notification.type.base
+        shared: false
+        tags: [{ name: notification.type }]
+</programlisting>
+      <para>
+        I denne tutorial har vi dog brug for to yderligere services i
+        vores notifikationstype. Vi vil bruge Controller
+        helper-objektet (<literal>\\phpbb\\controller\\helper</literal>)
+        til at oprette en route (se
+        <link linkend="get_url">get_url</link>) og User loader-objektet
+        (<literal>\\phpbb\\user_loader</literal>) til at vise en brugers
+        detaljer (se <link linkend="get_title">get_title</link> og
+        <link linkend="get_avatar">get_avatar</link>). Men fordi vi
+        definerer en <literal>parent</literal>, kan vi ikke også bruge
+        parameteren <literal>arguments</literal>. Vi skal enten
+        definere alle <literal>arguments</literal>, inklusive dem fra
+        parent'en, eller vi kan bruge parameteren
+        <literal>calls</literal> til at kalde funktioner, når vores
+        notifikation instantieres, som indlæser disse yderligere
+        objektfunktioner, som vist nedenfor. Du kan læse mere om dette
+        i <link linkend="additional-services">Yderligere services</link>.
+      </para>
+      <para>
+        Det første argument i kaldet er navnet på
+        <literal>set_</literal>-funktionen, vi kalder og opretter i
+        vores klasse <literal>sample</literal>. Det andet argument er et
+        array med servicedefinitioner, som vores
+        <literal>set_</literal>-funktioner tilføjer til vores klasse
+        <literal>sample</literal>.
+      </para>
+      <programlisting language="yaml">
+services:
+    vendor.extension.notification.type.sample:
+        class: vendor\extension\notification\type\sample
+        parent: notification.type.base
+        shared: false
+        tags: [{ name: notification.type }]
+        calls:
+            - ['set_helper', ['@controller.helper']]
+            - ['set_user_loader', ['@user_loader']]
+</programlisting>
+    </sect2>
+    <sect2 id="altering-an-extensions-state">
+      <title>Ændring af en extensions tilstand</title>
+      <para>
+        Det næste, vi skal gøre, er lidt oprydningsarbejde, der er
+        nødvendigt for enhver extension, der opretter sine egne
+        notifikationer: aktivering, deaktivering og rensning af vores
+        notifikationstype, når vores extensions tilstand ændres. Med
+        andre ord, når en extension aktiveres/deaktiveres, skal
+        notifikationstypen også aktiveres/deaktiveres. Eller når
+        extensionens data slettes, skal notifikationstypens data også
+        renses fra databasen. Gøres dette ikke, eller sættes det ikke
+        korrekt op, kastes der ufangede exceptions, hvilket gør boardet
+        utilgængeligt.
+      </para>
+      <para>
+        For at opnå dette skal tre funktioner tilføjes til
+        <literal>ext.php</literal>. Hver funktion henter
+        notifikationsmanageren fra service-containeren og udfører den
+        pågældende handling.
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace vendor\extension;
+
+class ext extends \phpbb\extension\base
+{
+    /**
+     * Enable notifications for the extension.
+     *
+     * @param mixed  $old_state  State returned by previous call of this method
+     * @return mixed             Returns false after last step, otherwise temporary state
+     * @access public
+     */
+    public function enable_step($old_state)
+    {
+        if ($old_state === false)
+        {
+            /** @var \phpbb\notification\manager $notification_manager */
+            $notification_manager = $this-&gt;container-&gt;get('notification_manager');
+
+            $notification_manager-&gt;enable_notifications('vendor.extension.notification.type.sample');
+            return 'notification';
+        }
+
+        return parent::enable_step($old_state);
+    }
+
+    /**
+     * Disable notifications for the extension.
+     *
+     * @param mixed  $old_state  State returned by previous call of this method
+     * @return mixed             Returns false after last step, otherwise temporary state
+     * @access public
+     */
+    public function disable_step($old_state)
+    {
+        if ($old_state === false)
+        {
+            /** @var \phpbb\notification\manager $notification_manager */
+            $notification_manager = $this-&gt;container-&gt;get('notification_manager');
+
+            $notification_manager-&gt;disable_notifications('vendor.extension.notification.type.sample');
+
+            return 'notification';
+        }
+
+        return parent::disable_step($old_state);
+    }
+
+    /**
+     * Purge notifications for the extension.
+     *
+     * @param mixed  $old_state  State returned by previous call of this method
+     * @return mixed             Returns false after last step, otherwise temporary state
+     * @access public
+     */
+    public function purge_step($old_state)
+    {
+        if ($old_state === false)
+        {
+            /** @var \phpbb\notification\manager $notification_manager */
+            $notification_manager = $this-&gt;container-&gt;get('notification_manager');
+
+            $notification_manager-&gt;purge_notifications('vendor.extension.notification.type.sample');
+
+            return 'notification';
+        }
+
+        return parent::purge_step($old_state);
+    }
+}
+</programlisting>
+    </sect2>
+    <sect2 id="defining-language-strings">
+      <title>Definering af sprogstrenge</title>
+      <para>
+        Dernæst kan vi begynde at definere nogle sprogstrenge, der bruges
+        af notifikationen. Denne specifikke sprogfil indeholder alle
+        mulige sprogstrenge, der kan bruges i en notifikation. Du kan
+        fjerne de strenge, du ikke får brug for.
+      </para>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Denne sprogfil inkluderes senere i denne tutorial under en
+          brugers opsætning, hvilket betyder, at de bliver globalt
+          tilgængelige. Der er dog nogle få strenge, der kun er
+          nødvendige i <literal>UCP (User Control Panel)</literal>.
+          Ideelt set bør disse strenge defineres i en separat fil,
+          nemlig <literal>info_ucp_extension.php</literal>. Bruges denne
+          navngivningskonvention (<literal>info_ucp_*.php</literal>),
+          inkluderes filen automatisk kun i UCP'en. Men for denne
+          tutorials skyld defineres de alle i denne ene sprogfil.
+        </para>
+      </tip>
+      <programlisting>
+&lt;?php
+
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
+if (empty($lang) || !is_array($lang))
+{
+    $lang = [];
+}
+
+// Some characters you may want to copy&amp;paste: ’ » “ ” …
+$lang = array_merge($lang, [
+    'VENDOR_EXTENSION_NOTIFICATION_REASON'       =&gt; 'This is a sample reason',
+    'VENDOR_EXTENSION_NOTIFICATION_TITLE'        =&gt; '&lt;strong&gt;Received a sample notification&lt;/strong&gt; from %s',
+
+    // These strings should ideally be defined in a info_ucp_*.php language file
+    'VENDOR_EXTENSION_NOTIFICATIONS'     =&gt; 'Sample notifications category',
+    'VENDOR_EXTENSION_NOTIFICATION_SAMPLE'       =&gt; 'Someone sends you a sample notification',
+]);
+</programlisting>
+      <para>
+        Lad os nu oprette eksempel-e-mailskabelonfilen, som også ligger i
+        sprogmappen. Variablerne, der bruges i denne fil, er defineret i
+        <link linkend="get_email_template_variables">get_email_template_variables</link>.
+        Filens første linje skal begynde med
+        <literal>Subject:</literal>, efterfulgt af selve e-mailens emne
+        og en tom linje. Det er også muligt at bruge variabler i
+        emnelinjen.
+      </para>
+      <programlisting>
+Subject: New sample private message has arrived
+
+Hello {USERNAME},
+
+You have received a new sample private message from &quot;{AUTHOR}&quot; to your account on &quot;{SITENAME}&quot; with the following subject:
+{SUBJECT}
+
+You can view your new message by clicking on the following link:
+{U_REGULAR}
+
+You have requested that you be notified on this event, remember that you can always choose not to be notified of new messages by changing the appropriate setting in your profile.
+{U_NOTIFICATION_SETTINGS}
+
+{EMAIL_SIG}
+</programlisting>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Det er god praksis altid at bruge følgende layout:
+        </para>
+        <programlisting>
+Subject: The email subject
+
+Hello {USERNAME},
+
+The content for this email.
+
+{EMAIL_SIG}
+</programlisting>
+      </tip>
+    </sect2>
+    <sect2 id="the-notification-type-class">
+      <title>Notifikationstype-klassen</title>
+      <para>
+        Følgende eksempel viser, hvad der som minimum kræves for en
+        notifikationstype-klasse.
+        <link linkend="notification-type-class-functions">Alle
+        funktionerne</link> gennemgås senere.
+      </para>
+      <para>
+        Vi har defineret <literal>base</literal>-notifikationstype-klassen
+        som en <literal>parent</literal>, da vi
+        <link linkend="registering-as-a-symfony-service">registrerede
+        den som en Symfony-service</link>. Det er derfor vigtigt, at
+        vores notifikationstype-klasse udvider klassen
+        <literal>base</literal>.
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace vendor\extension\notification\type;
+
+class sample extends \phpbb\notification\type\base
+{
+    // All the functions
+}
+</programlisting>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Det er også muligt at udvide andre notifikationstyper i stedet
+          for klassen <literal>base</literal>. <br/> Hvis du f.eks. vil
+          udvide notifikationstypen <literal>post</literal> i stedet:
+          <br/> skal du registrere den som servicens parent:
+          <literal>parent: notification.type.post</literal> <br/> og
+          udvide den klasse i stedet:
+          <literal>class sample extends \phpbb\notification\type\post</literal>
+        </para>
+      </tip>
+    </sect2>
+  </sect1>
+  <sect1 id="notification-type-class-functions">
+    <title>Funktioner i notifikationstype-klassen</title>
+    <para>
+      Nu er det tid til at dykke ned i den vidunderlige verden, der er
+      vores notifikationstype-klasse. Vi forsøger at gennemgå alle de
+      funktioner, du kan bruge. Vi nævner også, om hver funktion er
+      obligatorisk eller valgfri at bruge.
+    </para>
+    <sect2 id="base-services">
+      <title>Grundlæggende services</title>
+      <para>
+        Den grundlæggende notifikationstype-klasse
+        (<literal>\\phpbb\\notification\\type\\base</literal>) har
+        allerede nogle få tilgængelige services, som kan bruges i vores
+        klasses funktioner.
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Objekt
+              </entry>
+              <entry>
+                Klasse
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>$auth</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\auth\\auth</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$db</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\db\\driver\\driver_interface</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$language</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\language\\language</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$user</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\user</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$phpbb_root_path</literal>
+              </entry>
+              <entry>
+                <literal>string</literal> phpBB's rodsti
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$php_ext</literal>
+              </entry>
+              <entry>
+                <literal>string</literal> PHP-filendelsen
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$user_notifications_table</literal>
+              </entry>
+              <entry>
+                <literal>string</literal> Tabellen for
+                brugernotifikationer
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="additional-services">
+      <title>Yderligere services</title>
+      <para>
+        Som nævnt tidligere i
+        <link linkend="registering-as-a-symfony-service">Registrering
+        som en Symfony-service</link> vil vi gerne bruge to yderligere
+        services. Og fordi vi bruger konstruktionen
+        <literal>calls</literal> i stedet for at overskrive parent'ens
+        <literal>__construct()</literal>, skal vi definere de funktioner,
+        der kaldes. Du kan bruge denne konstruktion til enhver
+        registreret Symfony-service, du måtte have brug for at
+        indsprøjte.
+      </para>
+      <programlisting>
+/** @var \phpbb\controller\helper */
+protected $helper;
+
+/** @var \phpbb\user_loader */
+protected $user_loader;
+
+/**
+ * Set controller helper.
+ *
+ * @param \phpbb\controller\helper  $helper  Controller helper object
+ * @return void
+ */
+public function set_helper(\phpbb\controller\helper $helper)
+{
+    $this-&gt;helper = $helper;
+}
+
+/**
+ * Set user loader.
+ *
+ * @param \phpbb\user_loader  $user_loader  User loader object
+ * @return void
+ */
+public function set_user_loader(\phpbb\user_loader $user_loader)
+{
+    $this-&gt;user_loader = $user_loader;
+}
+</programlisting>
+    </sect2>
+    <sect2 id="required-class-functions">
+      <title>Obligatoriske klassefunktioner</title>
+      <para>
+        Følgende funktioner skal implementeres i enhver
+        notifikationstype-klasse.
+      </para>
+    </sect2>
+    <sect2 id="get_type">
+      <title>get_type</title>
+      <para>
+        Denne bør returnere service-identifikatoren, som defineret i
+        <link linkend="registering-as-a-symfony-service">Registrering
+        som en Symfony-service</link>.
+      </para>
+      <programlisting>
+/**
+ * Get notification type name.
+ *
+ * @return string  The notification name as defined in services.yml
+ */
+public function get_type()
+{
+    return 'vendor.extension.notification.type.sample';
+}
+</programlisting>
+    </sect2>
+    <sect2 id="notification_option">
+      <title>notification_option</title>
+      <para>
+        Dette variabel-array definerer to sprogstrenge fra vores
+        notifikation, der vises i <literal>UCP (User Control
+        Panel)</literal>. <br/> <literal>group</literal> er til den
+        kategori, som notifikationstypen vises under. <br/>
+        <literal>lang</literal> er til selve notifikationstypen.
+      </para>
+      <para>
+        Det er også muligt at definere et <literal>id</literal> i disse
+        valgmuligheder. Normalt er dette ikke nødvendigt for de fleste
+        extensions. Variablen <literal>id</literal> bruges til at
+        sammenkæde flere notifikationstyper til én. Så hvis du har flere
+        notifikationstyper, der bør vises som én enkelt type i brugerens
+        præferencer, kan du sætte det samme <literal>id</literal> på
+        alle disse typer.
+      </para>
+      <para>
+        Hvis du ikke ønsker at vise denne notifikation i brugerens
+        præferencer, kan du udelade denne variabel og også sørge for at
+        sætte funktionen <link linkend="is_available">is_available</link>
+        til at returnere <literal>false</literal>.
+      </para>
+      <programlisting>
+/**
+ * Notification option data (for outputting to the user).
+ *
+ * @var bool|array  False if the service should use it's default data
+ *                  Array of data (including keys 'id', 'lang', and 'group')
+ * @static
+ */
+static public $notification_option = [
+    'lang'   =&gt; 'VENDOR_EXTENSION_NOTIFICATION_SAMPLE',
+    'group'  =&gt; 'VENDOR_EXTENSION_NOTIFICATIONS',
+];
+</programlisting>
+    </sect2>
+    <sect2 id="is_available">
+      <title>is_available</title>
+      <para>
+        Denne funktion afgør, om denne notifikationstype skal vises i
+        <literal>UCP (User Control Panel)</literal>. Du kan blot sætte
+        den til <literal>true</literal> eller kontrollere en
+        konfigurations- eller autentificeringsindstilling, eller hvad
+        som helst andet, så længe den altid returnerer enten en
+        <literal>true</literal>- eller <literal>false</literal>-boolesk
+        værdi. I eksemplet nedenfor gør vi visningen af notifikationen i
+        UCP'en afhængig af, om private beskeder er aktiveret, og om
+        brugeren har tilladelse til at læse dem.
+      </para>
+      <para>
+        Returnerer denne funktion <literal>false</literal>, vises
+        notifikationstypen ikke i UCP'en. Det betyder blot, at en bruger
+        ikke kan ændre sine præferencer med hensyn til denne
+        notifikationstype og dermed ikke kan aktivere/deaktivere den.
+        Husk, at hvis denne funktion kan returnere
+        <literal>false</literal>, skal du sørge for, at arrayet
+        <link linkend="notification_option">notification_option</link>
+        er sat.
+      </para>
+      <programlisting>
+/**
+ * Is this type available to the current user.
+ *
+ * Defines whether or not it will be shown in the UCP &quot;Edit notification options&quot;.
+ *
+ * @return bool  Whether or not this is available to the user
+ */
+public function is_available()
+{
+    return $this-&gt;config['allow_privmsg'] &amp;&amp; $this-&gt;auth-&gt;acl_get('u_readpm');
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_item_id">
+      <title>get_item_id</title>
+      <para>
+        Denne funktion bør returnere identifikatoren for det element,
+        denne notifikation hører til. Dette henviser normalt til en
+        form for entitet, såsom et forum, emne, indlæg osv. Hvis du ikke
+        har noget specifikt element, kan du kigge på
+        <link linkend="custom-item-identifier">Brugerdefineret
+        elementidentifikator</link>.
+      </para>
+      <para>
+        For en ordens skyld: denne identifikator er ikke selve
+        notifikationsidentifikatoren
+        (<literal>notification_id</literal>). Den bruges dog - sammen
+        med <link linkend="get_item_parent_id">den overordnede
+        identifikator</link> - til at oprette et indeks. Når en
+        notifikation med et element-/overordnet-ID f.eks. sendes til en
+        bruger, og den bruger stadig ikke har læst en tidligere
+        notifikation med samme element-/overordnet-ID-kombination,
+        sendes den nye notifikation ikke. Dette forhindrer, at brugeren
+        spammes med notifikationer om det samme element igen og igen.
+      </para>
+      <programlisting>
+/**
+ * Get the id of the item.
+ *
+ * @param array  $data  The notification type specific data
+ * @return int          Identifier of the notification
+ * @static
+ */
+public static function get_item_id($data)
+{
+    return $data['message_id'];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_item_parent_id">
+      <title>get_item_parent_id</title>
+      <para>
+        Denne funktion bør returnere identifikatoren for den
+        overordnede enhed for det element, denne notifikation hører
+        til. Dette henviser normalt til en form for overordnet enhed for
+        <link linkend="get_item_id">elementidentifikatoren</link>,
+        såsom et forum, emne, indlæg osv. Når elementet f.eks. er et
+        emne, er den overordnede enhed forummet. Når elementet er et
+        indlæg, er den overordnede enhed emnet. Og så videre. Hvis der
+        ikke er nogen overordnet enhed for elementet, kan du lade denne
+        returnere nul: <literal>return 0;</literal>.
+      </para>
+      <programlisting>
+/**
+ * Get the id of the parent.
+ *
+ * @param array  $data  The type notification specific data
+ * @return int          Identifier of the parent
+ * @static
+ */
+public static function get_item_parent_id($data)
+{
+    return 0;
+}
+</programlisting>
+    </sect2>
+    <sect2 id="find_users_for_notification">
+      <title>find_users_for_notification</title>
+      <para>
+        Denne funktion er ansvarlig for at finde de brugere, der skal
+        notificeres. Den bør returnere et array med brugeridentifikatorer
+        som nøgler og notifikationsmetoderne som værdier. Der findes
+        forskellige hjælpefunktioner, der hjælper dig med at opnå det
+        ønskede resultat.
+      </para>
+      <sect3 id="check_user_notification_options">
+        <title>check_user_notification_options</title>
+        <para>
+          Du kan sende et array af brugeridentifikatorer til denne
+          funktion. Den kontrollerer derefter de tilgængelige
+          notifikationsmetoder for hver bruger. Hvis notifikationstypen
+          er tilgængelig i <literal>UCP (User Control Panel)</literal>,
+          kontrollerer den brugerens præferencer. Ellers bruges
+          standardnotifikationsmetoderne; boardmetoden og
+          e-mailmetoden (hvis <emphasis>board-wide emails</emphasis> er
+          aktiveret). Arrayet, denne funktion returnerer, kan bruges som
+          returværdi for
+          <link linkend="find_users_for_notification">find_users_for_notification</link>.
+        </para>
+      </sect3>
+      <sect3 id="get_authorised_recipients">
+        <title>get_authorised_recipients</title>
+        <para>
+          Hvis din notifikation gælder et event inden for et bestemt
+          forum, vil du måske kontrollere brugernes autentificering.
+          Dette kan gøres med denne funktion, som kontrollerer alle
+          brugeres tilladelse <literal>f_read</literal> for det angivne
+          <literal>forum_id</literal>. Arrayet, denne funktion
+          returnerer, er allerede sendt igennem
+          <link linkend="check_user_notification_options">check_user_notification_options</link>.
+        </para>
+        <programlisting>
+/**
+ * Find the users who want to receive notifications.
+ *
+ * @param array  $data     The type specific data
+ * @param array  $options  Options for finding users for notification
+ *                           ignore_users =&gt; array of users and user types that should not receive notifications from this type
+ *                           because they've already been notified
+ *                           e.g.: array(2 =&gt; array(''), 3 =&gt; array('', 'email'), ...)
+ * @return array           Array of user identifiers with their notification method(s)
+ */
+public function find_users_for_notification($data, $options = [])
+{
+    return $this-&gt;check_user_notification_options([$data['user_id']], $options);
+}
+</programlisting>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            Variablen <literal>forum_id</literal> nedenfor er ikke sat i
+            denne tutorial, men blot vist som et eksempel.
+          </para>
+        </note>
+        <programlisting>
+public function find_users_for_notification($data, $options = [])
+{
+    return $this-&gt;get_authorised_recipients([$data['user_id']], $data['forum_id'], $options);
+}
+</programlisting>
+      </sect3>
+    </sect2>
+    <sect2 id="users_to_query">
+      <title>users_to_query</title>
+      <para>
+        Denne funktion bør returnere et array af brugeridentifikatorer
+        for de brugere, hvis brugernavn skal vises, eller for brugere,
+        hvis avatar vises ved siden af notifikationsteksten. Bag
+        kulisserne henter Notification manager-objektet
+        (<literal>\\phpbb\\notification\\manager</literal>) alle
+        identifikatorer fra alle de notifikationer, der skal vises. Det
+        bruger derefter en enkelt SQL-forespørgsel til at hente alle
+        data for disse brugere, i stedet for at hver notifikation skal
+        forespørge en brugers data separat.
+      </para>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Som tommelfingerregel bør alle de bruger-ID'er, der bruges i
+          <literal>$user_loader</literal>, returneres her.
+        </para>
+      </tip>
+      <programlisting>
+/**
+ * Users needed to query before this notification can be displayed.
+ *
+ * @return array  Array of user identifiers to query.
+ */
+public function users_to_query()
+{
+    return [$this-&gt;get_data('sender_id')];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_title">
+      <title>get_title</title>
+      <para>
+        Denne bør returnere hovedteksten for notifikationen. Normalt den
+        handling, der resulterede i denne notifikation. Ofte er
+        handlingen skrevet med fed skrift, og alt andet er normal
+        skrift, som vist i <ulink url="">sprogfilen</ulink>.
+      </para>
+      <para>
+        Bemærk, at vores sprogstreng har en strengpladsholder
+        <literal>%s</literal>, hvorfor vi også sender afsenderens
+        brugernavn som det andet argument. Brugernavnet kan nemt hentes
+        fra objektet <literal>$user_loader</literal>. Alle data for
+        denne bruger er allerede blevet forespurgt, da vi angav
+        brugeridentifikatoren i funktionen
+        <link linkend="users_to_query">users_to_query</link>. Der køres
+        derfor ingen yderligere SQL-forespørgsler.
+      </para>
+      <programlisting>
+/**
+ * Get the title of this notification.
+ *
+ * @return string  The notification's title
+ */
+public function get_title()
+{
+    return $this-&gt;language-&gt;lang(
+        'VENDOR_EXTENSION_NOTIFICATION_SAMPLE_TITLE',
+        $this-&gt;user_loader-&gt;get_username($this-&gt;get_data('sender_id'), 'no_profile')
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_url">
+      <title>get_url</title>
+      <para>
+        Denne bør returnere den URL, brugeren sendes til, når der
+        klikkes på notifikationen. Denne funktion er obligatorisk i din
+        notifikationstype, selv hvis der ikke er nogen URL at sende
+        brugeren til, i hvilket tilfælde den bør returnere en tom
+        streng: <literal>return '';</literal>.
+      </para>
+      <para>
+        Der er normalt to måder at oprette den nødvendige URL på. Enten
+        gennem <literal>append_sid()</literal> eller ved hjælp af
+        <emphasis>Controller helper-objektet</emphasis>. Den første
+        bruges typisk, når en bruger sendes til en side inden for
+        phpBB's kerne, såsom viewforum, viewtopic eller UCP'en. Den
+        anden bruges typisk, når en bruger sendes til en side inden for
+        en extension, som ofte bruger routes.
+      </para>
+      <programlisting>
+/**
+ * Get the URL to this item.
+ *
+ * @return string  The notification's URL
+ */
+public function get_url()
+{
+    return append_sid(&quot;{$this-&gt;phpbb_root_path}ucp.{$this-&gt;php_ext}&quot;, [
+        'mode' =&gt; 'view',
+        'i'    =&gt; 'pm'
+        'p'    =&gt; $this-&gt;get_data('message_id'),
+    ]);
+}
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Vi har tilføjet <emphasis>Controller
+          helper-objektet</emphasis> i afsnittet
+          <link linkend="additional-services">Yderligere
+          services</link>.
+        </para>
+      </note>
+      <programlisting>
+public function get_url()
+{
+    return $this-&gt;helper-&gt;route('vendor_extension_route', [
+        'subject'    =&gt; $this-&gt;get_data('message_subject'),
+    ]);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_email_template">
+      <title>get_email_template</title>
+      <para>
+        Hvis du ikke ønsker at bruge e-mailnotifikationsmetoden, bør
+        denne returnere <literal>false</literal>, og brugere vil ikke
+        kunne vælge e-mailmetoden i deres notifikationspræferencer.
+      </para>
+      <para>
+        Vil du dog gerne bruge e-mailnotifikationsmetoden, bør du
+        returnere e-mail-<emphasis>skabelonfilen</emphasis> her. Det er
+        ikke en skabelonfil, som du måske er vant til, da den ikke
+        ligger i mappen <literal>styles/all/template</literal>. Den
+        ligger i stedet i sprogets mappe <literal>email</literal>, som
+        vist i Filstrukturen.
+      </para>
+      <para>
+        Du kan, eller bør snarere, bruge præfikset
+        <literal>@vendor_extension/</literal> til at angive din
+        extensions sti. <emphasis>Standard</emphasis>-mappen er, som
+        nævnt, mappen <literal>email</literal>, og i vores tilfælde er
+        filnavnet <literal>sample</literal>. Filnavnet bør derfor
+        tilføjes efter præfikset, hvilket giver
+        <literal>@vendor_extension/sample</literal>. Hvis din
+        e-mailskabelon ligger i en undermappe til mappen
+        <literal>email</literal>, skal du angive det i stien, f.eks.:
+        <literal>@vendor_extension/subdirectory/sample</literal>.
+      </para>
+      <programlisting>
+/**
+ * Get email template.
+ *
+ * @return string|false  This notification's template file or false if there is none
+ */
+public function get_email_template()
+{
+    return '@vendor_extension/sample';
+}
+</programlisting>
+      <para>
+        Der findes også en tredje notifikationsmetode, Jabber, som
+        bruger mappen <literal>email/short</literal> til sine
+        skabelonfiler. Denne notifikationsmetode er tæt knyttet til
+        e-mailmetoden, så det er vigtigt også at levere den
+        skabelonfil, selvom indholdet muligvis er identisk med
+        e-mailskabelonen.
+      </para>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Sørg for at have både
+          <literal>language/en/email/sample.txt</literal> og
+          <literal>language/en/email/short/sample.txt</literal> i din
+          extensions sprogmappe for at undgå fejl.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="get_email_template_variables">
+      <title>get_email_template_variables</title>
+      <para>
+        Bruger du ikke e-mailnotifikationsmetoden, bør denne returnere
+        et tomt <literal>array()</literal>. Bruger du derimod
+        e-mailmetoden, bør du bruge denne funktion til at definere de
+        variabler, der bruges i din
+        <ulink url="">e-mailskabelon</ulink>. Bemærk dog, at phpBB's
+        kerne allerede definerer nogle <emphasis>standard</emphasis>-variabler
+        for dig:
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Variabel
+              </entry>
+              <entry>
+                Beskrivelse
+              </entry>
+              <entry>
+                Defineret i
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>USERNAME</literal>
+              </entry>
+              <entry>
+                Modtagerens brugernavn
+              </entry>
+              <entry>
+                <literal>\\phpbb\\notification\\method\\messenger_base</literal>
+                <literal>notify_using_messenger()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>U_NOTIFICATION_SETTINGS</literal>
+              </entry>
+              <entry>
+                URL'en til modtagerens notifikationspræferencer
+              </entry>
+              <entry>
+                <literal>\\phpbb\\notification\\method\\messenger_base</literal>
+                <literal>notify_using_messenger()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>EMAIL_SIG</literal>
+              </entry>
+              <entry>
+                Boardets e-mailsignatur
+              </entry>
+              <entry>
+                <literal>includes/functions_messenger.php</literal>
+                <literal>send()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>SITENAME</literal>
+              </entry>
+              <entry>
+                Boardets sidenavn
+              </entry>
+              <entry>
+                <literal>includes/functions_messenger.php</literal>
+                <literal>send()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>U_BOARD</literal>
+              </entry>
+              <entry>
+                Boardets URL
+              </entry>
+              <entry>
+                <literal>includes/functions_messenger.php</literal>
+                <literal>send()</literal>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        Når du angiver yderligere skabelonvariabler, såsom URL'er, skal
+        du sørge for, at de er absolutte URL'er. De skal indeholde den
+        <emphasis>fulde</emphasis> URL:
+        <literal>https://www.example.com/forum/ucp.php</literal> i
+        stedet for blot <literal>./ucp.php</literal>. Eksemplet
+        nedenfor viser dig, hvordan du opnår dette for både
+        almindelige URL'er og URL'er genereret fra Symfony-routes.
+      </para>
+      <programlisting>
+/**
+ * Get email template variables.
+ *
+ * @return array  Array of variables that can be used in the email template
+ */
+public function get_email_template_variables()
+{
+    return [
+        'AUTHOR' =&gt; htmlspecialchars_decode($this-&gt;user_loader-&gt;get_username($this-&gt;get_data('sender_id'), 'username')),
+        'SUBJECT'    =&gt; htmlspecialchars_decode(censor_text($this-&gt;get_data('message_subject')),
+
+        // Absolute URL: regular
+        'U_REGULAR'     =&gt; generate_board_url() . '/ucp.' . $this-&gt;php_ext . '?i=pm&amp;mode=view&amp;p=' . $this-&gt;get_data('message_id'),
+
+        // Absolute URL: route
+        'U_ROUTE'       =&gt; generate_board_url(false) . $this-&gt;helper-&gt;route('vendor_extension_route'),
+    ];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="optional-class-functions">
+      <title>Valgfrie klassefunktioner</title>
+      <para>
+        Følgende funktioner er valgfrie og kan udelades, hvis din
+        notifikation ikke har brug for dem.
+      </para>
+    </sect2>
+    <sect2 id="get_avatar">
+      <title>get_avatar</title>
+      <para>
+        Brugeridentifikatorerne, der returneres af funktionen
+        <link linkend="users_to_query">users_to_query</link>, tilføjes
+        til User loader-objektet. Dette objekt er desværre ikke
+        tilgængeligt som standard i
+        <link linkend="base-services">Grundlæggende services</link>.
+        Det var derfor, vi tilføjede det i afsnittet
+        <link linkend="additional-services">Yderligere services</link>.
+      </para>
+      <para>
+        Vi bruger derfor den praktiske funktion, passende nok kaldet
+        <literal>get_avatar()</literal>, som er tilgængelig fra User
+        loaderen. Og vi angiver tre parametre. Den første er
+        brugeridentifikatoren for den bruger, hvis avatar vi vil vise.
+        Den anden er en boolesk værdi, der angiver, at brugeren ikke
+        behøver at blive forespurgt fra databasen, da det allerede er
+        gjort. Den tredje er også en boolesk værdi, der angiver, at
+        avatarbilledet skal lazy-loades i HTML'en. Da
+        notifikationsbrugerfladen er en dropdown-menu og ikke synlig med
+        det samme, er lazy loading mere fordelagtigt for en sides
+        indlæsningstid.
+      </para>
+      <para>
+        Ønsker du ikke at vise en avatar ved siden af
+        notifikationsteksten, kan du helt udelade denne funktion.
+      </para>
+      <programlisting>
+/**
+ * Get the user's avatar.
+ *
+ * @return string  The HTML formatted avatar
+ */
+public function get_avatar()
+{
+    return $this-&gt;user_loader-&gt;get_avatar($this-&gt;get_data('sender_id'), false, true);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_forum">
+      <title>get_forum</title>
+      <para>
+        Ønsker du at angive navnet på det forum, der udløste denne
+        notifikation, er det muligt via denne funktion. F.eks. når et
+        nyt emne oprettes i et forum. Denne funktion kan udelades, hvis
+        der ikke er brug for eller adgang til noget forumnavn. Den får
+        strengen <emphasis>Forum:</emphasis> som præfiks:
+      </para>
+      <blockquote>
+        <para>
+          <emphasis>Forum:</emphasis> Forumnavnet
+        </para>
+      </blockquote>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Variablen <literal>forum_name</literal> nedenfor er ikke sat i
+          denne tutorial, men blot vist som et eksempel.
+        </para>
+      </note>
+      <programlisting>
+/**
+ * Get the forum name for this notification.
+ *
+ * @return string  The notification's forum name
+ */
+public function get_forum()
+{
+    return $this-&gt;language-&gt;lang(
+        'NOTIFICATION_FORUM',
+        $this-&gt;get_data('forum_name')
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_reason">
+      <title>get_reason</title>
+      <para>
+        Ønsker du at angive en konkret årsag til denne notifikation, er
+        det muligt via denne funktion. F.eks. den årsag, der angives,
+        når en rapport oprettes eller lukkes, eller ved redigering
+        eller sletning af et indlæg. Denne funktion kan udelades, hvis
+        der ikke er brug for nogen årsag. Den får strengen
+        <emphasis>Reason:</emphasis> som præfiks:
+      </para>
+      <blockquote>
+        <para>
+          <emphasis>Reason:</emphasis> This is a sample reason
+        </para>
+      </blockquote>
+      <programlisting>
+/**
+ * Get the reason for this notification.
+ *
+ * @return string  The notification's reason
+ */
+public function get_reason()
+{
+    return $this-&gt;language-&gt;lang(
+        'NOTIFICATION_REASON',
+        $this-&gt;language-&gt;lang('VENDOR_EXTENSION_NOTIFICATION_SAMPLE_REASON'))
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_reference">
+      <title>get_reference</title>
+      <para>
+        Ønsker du at angive en yderligere reference for denne
+        notifikation, er det muligt via denne funktion. F.eks. emnet for
+        en privat besked, et indlæg eller et emne. Denne funktion kan
+        udelades, hvis der ikke er brug for nogen reference. Den
+        omsluttes af dobbelte anførselstegn:
+      </para>
+      <blockquote>
+        <para>
+          &quot;The message subject&quot;
+        </para>
+      </blockquote>
+      <programlisting>
+/**
+ * Get the reference for this notification.
+ *
+ * @return string  The notification's reference
+ */
+public function get_reference()
+{
+    return $this-&gt;language-&gt;lang(
+        'NOTIFICATION_REFERENCE',
+        censor_text($this-&gt;get_data('message_subject'))
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_style_class">
+      <title>get_style_class</title>
+      <para>
+        Det er også muligt at tilføje en brugerdefineret CSS-klasse til
+        notifikationsrækken. Dette kan være nyttigt, hvis du vil ændre
+        standardstylingen for notifikationsteksten. F.eks. når
+        notifikationen handler om en rapport eller en afvisning. Angives
+        en streng med klasser her, tilføjes de til notifikationen. Denne
+        funktion kan udelades, hvis der ikke er brug for en yderligere
+        CSS-klasse.
+      </para>
+      <programlisting>
+/**
+ * Get the CSS style class for this notification.
+ *
+ * @return string  The notification's CSS class
+ */
+public function get_style_class()
+{
+    return 'sample-notification-class and-another-class';
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_redirect_url">
+      <title>get_redirect_url</title>
+      <para>
+        Denne funktion kan returnere en anden URL end
+        <link linkend="get_url">get_url</link>. URL'en, denne funktion
+        returnerer, bruges til at <literal>redirect()</literal>e
+        brugeren, efter de har markeret notifikationen som læst. Som
+        standard er denne URL den samme som URL'en, der returneres af
+        <link linkend="get_url">get_url</link>. Har du ikke brug for at
+        angive en anden "mark read"-URL, kan du udelade denne funktion.
+      </para>
+      <para>
+        Notifikationstypen <literal>post</literal> bruger f.eks. dette
+        til at sende brugeren til det første ulæste indlæg i et emne.
+      </para>
+      <programlisting>
+/**
+ * Get the URL to redirect to after the item has been marked as read.
+ *
+ * @return string  The notification's &quot;mark read&quot;-URL
+ */
+public function get_redirect_url()
+{
+    return append_sid(&quot;{$this-&gt;phpbb_root_path}viewtopic.{$this-&gt;php_ext}&quot;, &quot;t={$this-&gt;item_parent_id}&amp;amp;view=unread#unread&quot;);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_data">
+      <title>get_data</title>
+      <para>
+        Dette er en hjælpefunktion, der ofte bruges i funktioner, der
+        kaldes, når denne notifikationstype vises. Disse
+        <emphasis>visningsfunktioner</emphasis> skal ofte tilgå nogle
+        data, der er specifikke for en bestemt notifikation, såsom et
+        <literal>message_id</literal>. For at hente disse datavariabler
+        kan du bruge denne funktion med variabelnavnet som argument:
+        <literal>$this-&gt;get_data('key')</literal>.
+      </para>
+      <important>
+        <title>Vigtigt</title>
+        <para>
+          Alle data, du skal hente, skal indsættes, når notifikationen
+          oprettes. <br/> Dette gøres via funktionen
+          <link linkend="create_insert_array">create_insert_array</link>.
+        </para>
+      </important>
+      <programlisting>
+$this-&gt;get_data('sender_id');
+$this-&gt;get_data('message_id');
+$this-&gt;get_data('message_subject');
+</programlisting>
+    </sect2>
+    <sect2 id="create_insert_array">
+      <title>create_insert_array</title>
+      <para>
+        Denne funktion er ansvarlig for at indsætte data, der er
+        specifikke for denne notifikationstype. Disse data gemmes i
+        databasen og bruges, når notifikationen vises.
+      </para>
+      <para>
+        Parameteren <literal>$data</literal> indeholder det array, der
+        sendes, når notifikationen
+        <link linkend="sending-a-notification">sendes</link>. Alle de
+        data, der er nødvendige for at oprette og vise notifikationen,
+        skal derfor inkluderes.
+      </para>
+      <para>
+        Kun de data, der er nødvendige for at vise notifikationen, skal
+        dog indsættes. Har du lagt godt mærke til det, vil du have
+        bemærket, at vi bruger fire datavariabler. Nemlig
+        <literal>user_id</literal>, <literal>sender_id</literal>,
+        <literal>message_id</literal> og
+        <literal>message_subject</literal>. Men <literal>user_id</literal>
+        er kun nødvendig, når notifikationen oprettes, og ikke, når den
+        vises. Denne variabel behøver derfor ikke gemmes i databasen.
+        Alle andre variabler kan indsættes ved hjælp af hjælpefunktionen
+        <literal>set_data('key', 'value')</literal>.
+      </para>
+      <para>
+        Tip
+      </para>
+      <para>
+        Som tommelfingerregel skal kun de data, du henter via
+        <literal>get_data()</literal>, sættes via
+        <literal>set_data()</literal>.
+      </para>
+      <programlisting>
+/**
+ * Function for preparing the data for insertion in an SQL query.
+ * (The service handles insertion)
+ *
+ * @param array  $data             The type specific data
+ * @param array  $pre_create_data  Data from pre_create_insert_array()
+ * @return void
+ */
+public function create_insert_array($data, $pre_create_data = [])
+{
+    $this-&gt;set_data('sender_id', $data['sender_id']);
+    $this-&gt;set_data('message_id', $data['message_id']);
+    $this-&gt;set_data('message_subject', $data['message_subject']);
+
+    parent::create_insert_array($data, $pre_create_data);
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="sending-a-notification">
+    <title>Afsendelse af en notifikation</title>
+    <para>
+      Nu hvor vi har sat vores notifikationstype-klasse op, er det tid
+      til at begynde at sende notifikationen. Vi ved, hvilke data vi
+      har brug for, så vi kan indsamle dem, når eventet udløses.
+    </para>
+    <para>
+      Afsendelse af en notifikation sker med Notification
+      manager-objektet (<literal>\\phpbb\\notification\\manager</literal>).
+      Denne service kan indsprøjtes med servicedeklarationen
+      <literal>- '@notification_manager'</literal>.
+    </para>
+    <para>
+      Derefter kan du bruge notifikationsmanageren til at sende
+      notifikationen. Dette gøres med funktionen
+      <literal>add_notifications</literal>. Notifikationstypen
+      (<literal>vendor.extension.notification.type.sample</literal>)
+      bør angives som første argument, og alle de
+      <literal>$data</literal>, vi har brug for i vores
+      notifikationstype, som andet argument.
+    </para>
+    <para>
+      Nedenfor finder du et simpelt eksempel på, hvordan notifikationen
+      sendes. Det er muligt at sende en notifikation hvor som helst fra.
+      Dette eksempel bruger en event-listener, men det er også muligt
+      at sende den fra en controller.
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace vendor\extension\event;
+
+class listener implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
+{
+    static public function getSubscribedEvents()
+    {
+        return ['core.submit_pm_after' =&gt; 'send_sample_notification'];
+    }
+
+    /** @var \phpbb\notification\manager */
+    protected $notification_manager;
+
+    public function __construct(\phpbb\notification\manager $notication_manager)
+    {
+        $this-&gt;notification_manager   = $notification_manager;
+    }
+
+    public function send_sample_notification(\phpbb\event\data $event)
+    {
+        // For the sake of this tutorial, we assume that the PM is send to a single user
+        $this-&gt;notification_manager-&gt;add_notifications('vendor.extension.notification.type.sample', [
+            'user_id'         =&gt; array_key_first($event['pm_data']['recipients']),
+            'sender_id'       =&gt; $event['data']['from_user_id'],
+            'message_id'      =&gt; $event['data']['msg_id'],
+            'message_subject' =&gt; $event['subject'],
+        ]);
+    }
+}
+</programlisting>
+  </sect1>
+  <sect1 id="updating-a-notification">
+    <title>Opdatering af en notifikation</title>
+    <para>
+      Opdatering af en notifikation sker med Notification
+      manager-objektet (<literal>\\phpbb\\notification\\manager</literal>).
+      Denne service kan indsprøjtes med servicedeklarationen
+      <literal>- '@notification_manager'</literal>.
+    </para>
+    <para>
+      Derefter kan du bruge notifikationsmanageren til at opdatere
+      notifikationen. Dette gøres med funktionen
+      <literal>update_notifications</literal>. Notifikationstypen
+      (<literal>vendor.extension.notification.type.sample</literal>)
+      bør angives som første argument, og alle de
+      <literal>$data</literal>, vi har brug for i vores
+      notifikationstype, som andet argument. Du kan eventuelt sende et
+      tredje argument, <literal>$options</literal>, for at angive,
+      hvilken notifikation der skal opdateres. Valgmulighederne, der kan
+      defineres, er anført nedenfor:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Objekt
+            </entry>
+            <entry>
+              Klasse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>item_id</literal>
+            </entry>
+            <entry>
+              Elementidentifikatoren for notifikationen. <br/> Standard
+              er <link linkend="get_item_id">get_item_id</link>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>item_parent_id</literal>
+            </entry>
+            <entry>
+              Elementets overordnede identifikator for notifikationen.
+              <br/> Valgfri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>user_id</literal>
+            </entry>
+            <entry>
+              Brugeridentifikatoren for den, der modtog notifikationen.
+              <br/> Valgfri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>read</literal>
+            </entry>
+            <entry>
+              En boolesk værdi, der angiver, om notifikationen er blevet
+              læst. <br/> Valgfri
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <programlisting>
+// For the sake of this tutorial, we assume that the PM is send to a single user
+$user_id = array_key_first($event['pm_data']['recipients']);
+
+$data = [
+    'user_id'         =&gt; $user_id,
+    'sender_id'       =&gt; $event['data']['from_user_id'],
+    'message_id'      =&gt; $event['data']['msg_id'],
+    'message_subject' =&gt; $event['data']['subject'],
+];
+
+// Just the item identifier is sufficient to update this notification as it is unique
+// But lets include some options to demonstrate how that can be done as well.
+$options = [
+    'user_id'  =&gt; $user_id,
+    'item_id'  =&gt; $event['data']['msg_id'],
+    'read'     =&gt; false, // Only update when user has not read it yet
+];
+
+$this-&gt;notification_manager-&gt;update_notifications('vendor.extension.notification.type.sample', $data, $options);
+</programlisting>
+    <para>
+      Lad os nu gennemgå, hvordan eksemplet ovenfor fungerer.
+      Notifikationstypen oprettes, som om den skulle sendes. Derefter,
+      i stedet for at indsætte notifikationen, hentes de data, der
+      oprettes af funktionen
+      <link linkend="create_insert_array">create_insert_array</link>.
+      Disse data omdannes til en SQL <literal>UPDATE</literal>-sætning
+      <literal>$db-&gt;sql_create_array('UPDATE', $data)</literal>. Og
+      de angivne <literal>$options</literal> omdannes til en SQL
+      <literal>WHERE</literal>-sætning.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        De data, der hentes fra
+        <link linkend="create_insert_array">create_insert_array</link>,
+        er ikke databasekolonner. <br/> Dataene sendes gennem
+        <literal>serialize()</literal> og gemmes i kolonnen
+        <literal>notification_data</literal>.
+      </para>
+    </note>
+    <para>
+      Dataene hentes af funktionen
+      <literal>create_update_array</literal> i notifikationstypens
+      klasse <literal>base</literal>. Den opretter først
+      indsættelsesarrayet og fjerner derefter nogle få variabler, der
+      ikke bør opdateres: <literal>user_id</literal>,
+      <literal>notification_id</literal>,
+      <literal>notification_time</literal> og
+      <literal>notification_read</literal> <emphasis>(som er
+      indikatoren for, om notifikationen allerede er blevet
+      læst)</emphasis>. Vil du også opdatere nogen af disse variabler,
+      skal du overskrive funktionen
+      <literal>create_update_array</literal> i klassen
+      <literal>base</literal>.
+    </para>
+    <para>
+      Det er også muligt selv fuldt ud at håndtere
+      opdateringsprocessen for din notifikationstype. Dette gøres ved
+      at oprette en funktion <literal>update_notifications</literal> i
+      din notifikationstype-klasse. Se på typen
+      <literal>quote</literal> for at se et eksempel.
+    </para>
+  </sect1>
+  <sect1 id="deleting-a-notification">
+    <title>Sletning af en notifikation</title>
+    <para>
+      Nogle gange er det nødvendigt at slette en notifikation. F.eks.
+      når en privat besked slettes, før den er læst, eller et emne med
+      notifikationer om ikke-godkendte indlæg slettes. I hvert af disse
+      tilfælde er årsagen til notifikationen blevet slettet, hvilket gør
+      notifikationen irrelevant.
+    </para>
+    <para>
+      Sletning af en notifikation håndteres ved hjælp af funktionen
+      <literal>delete_notifications</literal>, som findes i
+      notifikationsmanager-objektet
+      (<literal>\\phpbb\\notification\\manager</literal>). Typisk vil
+      du bruge en passende event-listener til at kalde
+      <literal>delete_notifications</literal>, f.eks. når der
+      indtræffer en handling, der gør din notifikation irrelevant.
+    </para>
+    <para>
+      Denne funktion er meget enkel at bruge og kræver kun nogle få
+      grundlæggende parametre:
+    </para>
+    <sect2 id="delete_notifications">
+      <title>delete_notifications</title>
+      <sect3 id="parameters">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_type</emphasis>
+                </entry>
+                <entry>
+                  Notifikationens service-identifikator. <br/> Kan være
+                  en enkelt streng eller et array af
+                  service-identifikatorer. <br/> I dette eksempel:
+                  <literal>vendor.extension.notification.type.sample</literal>.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">item_id</emphasis>
+                </entry>
+                <entry>
+                  Elementidentifikator(erne). <br/> Elementets ID, hvis
+                  notifikationer du vil slette. <br/> Kan være et
+                  enkelt heltal eller et array af heltal. Kun
+                  elementidentifikatorer for de angivne <br/>
+                  notifikationstype(r) slettes.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">parent_id</emphasis>
+                </entry>
+                <entry>
+                  Den overordnede identifikator/identifikatorer. <br/>
+                  Det overordnede ID, hvis notifikationer du vil
+                  slette. <br/> Kan være et enkelt heltal eller et array
+                  af heltal. Brug dette argument til at slette de <br/>
+                  notifikationer, der kun hører til det/de angivne
+                  overordnede ID(er). Standard er <br/> false, hvilket
+                  ignorerer overordnede identifikatorer.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">user_id</emphasis>
+                </entry>
+                <entry>
+                  Brugeridentifikator(erne). <br/> Bruger-ID'et, hvis
+                  notifikationer du vil slette. <br/> Kan være et
+                  enkelt heltal eller et array af heltal. Brug dette
+                  argument til at slette <br/> notifikationer for en
+                  given bruger eller samling af brugere. Standard er
+                  false, hvilket ignorerer <br/> bestemte brugere.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <programlisting>
+// Let's take a look at a PM that was deleted.
+// Say the item ID(s) for our notification come from the deleted PM's message IDs.
+$item_ids = $event['data']['msg_ids'];
+
+// Just the item identifier is sufficient to delete this notification as it is unique
+// But you could include user_id or parent_id's if they were relevant as well.
+$this-&gt;notification_manager-&gt;delete_notifications('vendor.extension.notification.type.sample', $item_ids);
+</programlisting>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="marking-a-notification">
+    <title>Markering af en notifikation</title>
+    <para>
+      Notifikationer markeres automatisk som læst, når der klikkes på
+      dem i notifikationsdropdownen. Eller når fora eller emner
+      markeres som læst, markeres de tilhørende notifikationer også.
+      Nogle gange kan det dog være at foretrække manuelt at markere en
+      notifikation som læst eller ulæst.
+    </para>
+    <para>
+      Der findes tre metoder til at markere en notifikation, som alle
+      findes i Notification Manager-objektet
+      (<literal>\\phpbb\\notification\\manager</literal>). Den
+      afgørende forskel mellem disse metoder er, hvordan de bestemmer,
+      hvilke notifikationer der skal markeres. Enten via deres
+      element-ID, overordnede ID eller selve notifikations-ID'et. Når
+      notifikationer markeres ud fra deres element-ID eller overordnede
+      ID, markeres de automatisk for alle tilgængelige
+      notifikationsmetoder. Men når notifikationer markeres ud fra
+      deres eget ID, skal du selv angive den specifikke
+      notifikationsmetode.
+    </para>
+    <para>
+      Forældet
+    </para>
+    <para>
+      Følgende funktioner er forældede siden phpBB
+      <literal>3.2.0</literal>: <br/>
+      <literal>mark_notifications_read</literal> <br/>
+      <literal>mark_notifications_read_by_parent</literal>
+    </para>
+    <para>
+      Nedenfor er et hurtigt resumé af de tre tilgængelige metoder til
+      at markere notifikationer og deres argumenter.
+    </para>
+    <sect2 id="mark_notifications">
+      <title>mark_notifications</title>
+      <sect3 id="parameters-1">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_type</emphasis>
+                </entry>
+                <entry>
+                  Kan være en enkelt streng eller et array af
+                  service-identifikatorer. <br/> I dette eksempel:
+                  <literal>vendor.extension.notification.type.sample</literal>.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">item_id</emphasis>
+                </entry>
+                <entry>
+                  Elementidentifikator(erne). <br/> Element-ID'et/ID'erne
+                  for de notifikationer, du vil markere som læst. <br/>
+                  Kan være et enkelt heltal eller et array af heltal.
+                  Alternativt er det også muligt at sende <br/> false
+                  for at markere alle element-ID'er som læst.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">user_id</emphasis>
+                </entry>
+                <entry>
+                  Brugeridentifikator(erne). <br/> Bruger-ID'et/ID'erne
+                  for de brugere, hvis notifikationer du vil markere
+                  som læst. <br/> Kan være et enkelt heltal eller et
+                  array af heltal. Alternativt er det også muligt at
+                  sende <br/> false for at markere som læst for alle
+                  bruger-ID'er.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">time</emphasis>
+                </entry>
+                <entry>
+                  UNIX-tidsstempel til brug som skæringspunkt. <br/>
+                  Markér notifikationer, der er sendt før dette
+                  tidspunkt, som læst. Alle notifikationer oprettet
+                  efter dette <br/> tidspunkt markeres ikke som læst.
+                  Standardværdien er false, hvilket markerer alle som
+                  læst.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">mark_read</emphasis>
+                </entry>
+                <entry>
+                  Om notifikationen skal markeres som
+                  <emphasis>læst</emphasis> eller
+                  <emphasis>ulæst</emphasis>. <br/> Standard er
+                  <emphasis>læst</emphasis>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="mark_notifications_by_parent">
+      <title>mark_notifications_by_parent</title>
+      <sect3 id="parameters-2">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_type</emphasis>
+                </entry>
+                <entry>
+                  Kan være en enkelt streng eller et array af
+                  service-identifikatorer. <br/> I dette eksempel:
+                  <literal>vendor.extension.notification.type.sample</literal>.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">parent_id</emphasis>
+                </entry>
+                <entry>
+                  Den overordnede identifikator/identifikatorer. <br/>
+                  Elementets overordnede ID/ID'er for de notifikationer,
+                  du vil markere som læst. <br/> Kan være et enkelt
+                  heltal eller et array af heltal. Alternativt er det
+                  også muligt at sende <br/> false for at markere alle
+                  overordnede ID'er som læst.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">user_id</emphasis>
+                </entry>
+                <entry>
+                  Brugeridentifikator(erne). <br/> Bruger-ID'et/ID'erne
+                  for de brugere, hvis notifikationer du vil markere som
+                  læst. <br/> Kan være et enkelt heltal eller et array
+                  af heltal. Alternativt er det også muligt at sende
+                  <br/> false for at markere som læst for alle
+                  bruger-ID'er.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">time</emphasis>
+                </entry>
+                <entry>
+                  UNIX-tidsstempel til brug som skæringspunkt. <br/>
+                  Markér notifikationer, der er sendt før dette
+                  tidspunkt, som læst. Alle notifikationer oprettet
+                  efter dette <br/> tidspunkt markeres ikke som læst.
+                  Standardværdien er false, hvilket markerer alle som
+                  læst.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">mark_read</emphasis>
+                </entry>
+                <entry>
+                  Om notifikationen skal markeres som
+                  <emphasis>læst</emphasis> eller
+                  <emphasis>ulæst</emphasis>. <br/> Standard er
+                  <emphasis>læst</emphasis>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="mark_notifications_by_id">
+      <title>mark_notifications_by_id</title>
+      <para>
+        Indtil videre har vi ikke skullet arbejde med selve
+        notifikationens faktiske identifikator, men i stedet brugt
+        notifikationens element- og overordnede ID'er. Dette skyldes
+        normalt, at vi i kernen af phpBB's afvikling måske aldrig
+        kender til eller har adgang til notifikationens faktiske ID, da
+        størstedelen af notifikationshåndteringen sker gennem de
+        adskilte element- og/eller overordnede ID'er. Der kan dog være
+        tilfælde, hvor det er mere bekvemt eller præcist at arbejde
+        direkte med notifikationens unikke ID. Det gælder f.eks., når
+        notifikationerne vises i <literal>UCP (User Control
+        Panel)</literal>, og en bruger kan vælge specifikke
+        notifikationer, der skal markeres som læst.
+      </para>
+      <sect3 id="parameters-3">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">method_name</emphasis>
+                </entry>
+                <entry>
+                  Service-identifikatoren for notifikationsmetoden
+                  <br/> F.eks.: <literal>notification.method.board</literal>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_id</emphasis>
+                </entry>
+                <entry>
+                  Notifikationsidentifikator(erne) <br/> Kan være et
+                  heltal eller et array af heltal.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">time</emphasis>
+                </entry>
+                <entry>
+                  UNIX-tidsstempel til brug som skæringspunkt. <br/>
+                  Markér notifikationer, der er sendt før dette
+                  tidspunkt, som læst. Alle notifikationer oprettet
+                  efter dette <br/> tidspunkt markeres ikke som læst.
+                  Standardværdien er false, hvilket markerer alle som
+                  læst.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">mark_read</emphasis>
+                </entry>
+                <entry>
+                  Om notifikationen skal markeres som
+                  <emphasis>læst</emphasis> eller
+                  <emphasis>ulæst</emphasis>. <br/> Standard er
+                  <emphasis>læst</emphasis>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="advanced-lessons">
+    <title>Avancerede lektioner</title>
+    <sect2 id="custom-item-identifier">
+      <title>Brugerdefineret elementidentifikator</title>
+      <para>
+        Nogle gange kan du ikke bruge en "normal" elementidentifikator,
+        såsom et <literal>topic_id</literal>, <literal>post_id</literal>
+        eller <literal>msg_id</literal>. I dette tilfælde skal du
+        oprette en brugerdefineret notifikationstæller i din extension.
+        Du tilføjer den gennem en migration, hvor den tilføjes til
+        config-tabellen. For eksempel med følgende kode:
+        <literal>['config.add', ['vendor_extension_notification_id', 0]]</literal>.
+      </para>
+      <para>
+        Læs mere om dette i afsnittet
+        <ulink url="../migrations/tools/config.html#add-config-setting">Tilføj
+        konfigurationsindstilling</ulink>.
+      </para>
+      <para>
+        Når du sender en notifikation, skal du derefter øge
+        identifikatoren og bruge den som element-ID. Du kan bruge
+        Config-objektets (<literal>\\phpbb\\config\\config</literal>)
+        funktion <literal>increment()</literal> til at opnå dette.
+      </para>
+      <programlisting>
+// Increment the notification identifier by 1
+$this-&gt;config-&gt;increment('vendor_extension_notification_id', 1);
+
+$this-&gt;notification_manager-&gt;add_notification('vendor.extension.notification.type.sample', [
+    'item_id'   =&gt; $this-&gt;config['vendor_extension_notification_id'],
+]);
+</programlisting>
+      <para>
+        Du kan bruge denne brugerdefinerede notifikationsidentifikator i
+        funktionen <link linkend="get_item_id">get_item_id</link>.
+      </para>
+      <programlisting>
+public static function get_item_id($data)
+{
+    return $data['item_id'];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

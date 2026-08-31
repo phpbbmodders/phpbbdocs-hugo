@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Interface en ligne de commande</title>
+  </articleinfo>
+  <para>
+    phpBB est fourni avec un ensemble d'outils d'interface en ligne de
+    commande (Command Line Interface, CLI) qui permettent de contrôler
+    facilement les fonctions administratives et de développement via
+    une console ou une application terminal.
+  </para>
+  <para>
+    getting_started
+  </para>
+</article>

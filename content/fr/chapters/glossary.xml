@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="glossary">
+	<?dbhtml dir="glossary" filename="index.html" ?>
+	<title>Glossaire</title>
+	<section id="terms">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+
+				<author>
+					<othername>pentapenguin</othername>
+				</author>
+
+				<author>
+					<othername>Techie-Micheal</othername>
+				</author>
+
+				<author>
+					<othername>ameeck</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Termes</title>
+		<para>Il existe un certain nombre de termes couramment utilisés dans phpBB et sur les forums de support. Voici quelques informations sur ces termes.</para>
+
+		<!-- TODO: Add links to sections on the respective item for whichever terms need it. For example, the ACP bit needs to link to the section of the Admin Guide. -->
+
+		<variablelist>
+			<varlistentry>
+				<term>ACP</term>
+				<listitem>
+					<para>L'<link linkend="admin_control_panel"><acronym>ACP</acronym></link>, qui signifie « Administration Control Panel » (panneau de contrôle de l'administration), est l'endroit principal depuis lequel vous, l'administrateur, pouvez contrôler tous les aspects de votre forum.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>ASCII</term>
+				<listitem>
+					<para><acronym>ASCII</acronym>, ou « American Standard Code for Information Interchange », est une méthode courante d'encodage des données pour les transférer vers un autre ordinateur. Les clients <acronym>FTP</acronym> proposent l'ASCII comme mode de transfert de fichiers. Tous les fichiers phpBB (fichiers avec les extensions .php, .inc, .sql, .cfg, .htm et .tpl), à l'exception des fichiers image, doivent être téléversés en mode ASCII.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Pièces jointes</term>
+				<listitem>
+					<para>Les <link linkend="acp_board_attachments">pièces jointes</link> sont des fichiers qui peuvent être joints aux messages, comme les pièces jointes d'un e-mail. Certaines restrictions, définies par l'administrateur du forum, contrôlent ce que les utilisateurs peuvent joindre.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Avatar</term>
+				<listitem>
+					<para>Les <link linkend="ucp_avatar">avatars</link> sont de petites images affichées à côté d'un nom d'utilisateur. Les avatars peuvent être modifiés dans le profil de l'utilisateur, et les paramètres associés (comme autoriser/interdire le téléversement) sont modifiables depuis l'<acronym>ACP</acronym>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>BBCode</term>
+				<listitem>
+					<para>Le <link linkend="posting_bbcodes">BBCode</link> est une méthode spéciale de mise en forme des messages offrant un grand contrôle sur ce qui est affiché et comment. La syntaxe du BBCode est similaire à celle du HTML.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Binaire</term>
+				<listitem>
+					<para>Dans phpBB, « binaire » désigne généralement une autre méthode courante d'encodage des données pour le transfert (l'autre étant l'<acronym>ASCII</acronym>). Ce mode se retrouve souvent dans les clients <acronym>FTP</acronym> pour téléverser des fichiers. Toutes les images de phpBB (situées principalement dans le répertoire images/ et les répertoires des styles) doivent être téléversées en mode binaire. </para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Cache</term>
+				<listitem>
+					<para>Le cache est une méthode de stockage des données fréquemment consultées. En stockant ces données, votre serveur subit une charge réduite, ce qui lui permet de traiter d'autres tâches. Par défaut, phpBB met en cache ses modèles, une fois compilés et utilisés, ainsi que les requêtes SQL statiques courantes.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Catégorie</term>
+				<listitem>
+					<para>Une catégorie est un regroupement d'éléments similaires ; par exemple, des forums.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>chmod</term>
+				<listitem>
+					<para><abbrev>chmod</abbrev> est une méthode permettant de modifier les permissions d'un fichier sur un serveur *nix (UNIX, Linux, etc.). Les fichiers de phpBB doivent être en chmod 644. Les répertoires doivent être en chmod 755. Les répertoires de téléversement d'avatars et les répertoires de cache des modèles doivent être en chmod 777. Pour plus d'informations sur chmod, veuillez consulter la documentation de votre client <acronym>FTP</acronym>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Client</term>
+				<listitem>
+					<para>Un client est un ordinateur qui accède au(x) service(s) d'un autre ordinateur via un réseau.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Cookie</term>
+				<listitem>
+					<para>Un cookie est un petit fragment de données déposé sur l'ordinateur de l'utilisateur. Les cookies sont utilisés par phpBB pour stocker les informations de connexion (utilisées pour les connexions automatiques).</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Base de données</term>
+				<listitem>
+					<para>Une base de données est une collection de données stockée de manière structurée et organisée (avec différentes tables, lignes, colonnes, etc.). Les bases de données offrent un moyen rapide et flexible de stocker des données, contrairement à l'autre système de stockage couramment utilisé, les fichiers plats, où les données sont stockées dans un fichier. phpBB 3.3 prend en charge un certain nombre de <acronym>SGBD</acronym> différents et utilise la base de données pour stocker des informations telles que les détails des utilisateurs, les messages et les catégories. Les données stockées dans une base de données peuvent généralement être sauvegardées et restaurées facilement.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>DBAL</term>
+				<listitem>
+					<para>Le <acronym>DBAL</acronym>, ou « Database Abstraction Layer » (couche d'abstraction de base de données), est un système qui permet à phpBB 3.3 d'accéder à de nombreux <acronym>SGBD</acronym> différents avec peu de surcharge. Tout code destiné à phpBB (y compris les MODs) doit utiliser le <acronym>DBAL</acronym> de phpBB pour des raisons de compatibilité et de performance.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>SGBD</term>
+				<listitem>
+					<para>Un <acronym>SGBD</acronym>, ou « Système de Gestion de Base de Données », est un système ou un logiciel conçu pour gérer une base de données. phpBB 3.3 prend en charge les SGBD suivants : Microsoft SQL Server, MySQL, Oracle, PostgreSQL et SQLite.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Événement</term>
+				<listitem>
+					<para>Les événements sont des points d'injection dans le code central de phpBB, semblables à une ancre. Lorsque l'événement est déclenché, un <glossterm>listener</glossterm> (écouteur) dans une <glossterm>extension</glossterm> abonnée à l'événement injecte du code à cet endroit, sans pour autant modifier le fichier central.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Extension</term>
+				<listitem>
+					<para>Est le successeur d'un <glossterm>MOD</glossterm>. Comme les MODs, les extensions servent à ajouter ou supprimer des fonctionnalités, ou à modifier d'une autre manière le comportement du logiciel standard. Elles se distinguent des MODs en ce qu'elles sont contenues dans leurs propres répertoires et ne modifient pas le logiciel central. Elles utilisent plutôt les <glossterm>événements</glossterm> et les <glossterm>listeners</glossterm> (écouteurs).</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>FTP</term>
+				<listitem>
+					<para><acronym>FTP</acronym> signifie « File Transfer Protocol » (protocole de transfert de fichiers). C'est un protocole qui permet de transférer des fichiers entre ordinateurs. Les clients <acronym>FTP</acronym> sont des programmes utilisés pour transférer des fichiers via <acronym>FTP</acronym>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Fondateur</term>
+				<listitem>
+					<para>Un fondateur est un administrateur de forum spécial qui ne peut être ni modifié ni supprimé.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>GZip</term>
+				<listitem>
+					<para>GZip est une méthode de compression souvent utilisée dans les applications web et les logiciels tels que phpBB pour améliorer la vitesse. La plupart des navigateurs modernes prennent en charge cet algorithme à la volée. Gzip est également utilisé pour compresser une archive de fichiers. Des niveaux de compression plus élevés, cependant, augmenteront la charge du serveur.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Adresse IP</term>
+				<listitem>
+					<para>Une adresse IP, ou adresse de protocole Internet, est une adresse unique qui identifie un ordinateur ou un utilisateur spécifique.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Jabber</term>
+				<listitem>
+					<para>Jabber est l'ancien nom du protocole Extensible Messaging and Presence Protocol (XMPP), un protocole open source pouvant être utilisé pour la messagerie instantanée. Pour plus d'informations sur le rôle de XMPP dans phpBB, voir <xref linkend="acp_client_jabber" />.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Listener</term>
+				<listitem>
+					<para>Un listener (écouteur) est déclenché par un <glossterm>événement</glossterm>. Il peut être utilisé par une <glossterm>extension</glossterm> pour traiter les données entrantes et manipuler des variables dans le contexte de l'événement. Ainsi, il peut modifier le comportement de phpBB, ajouter ou supprimer des fonctionnalités, ou, s'il est utilisé dans le contexte des modèles, modifier la sortie. Un autre nom pour un listener est « hook ».</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>MCP</term>
+				<listitem>
+					<para>Le <acronym>MCP</acronym>, ou Panneau de contrôle de modération, est le point central depuis lequel tous les modérateurs peuvent modérer leurs forums. Toutes les fonctionnalités liées à la modération sont regroupées dans ce panneau de contrôle.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>MD5</term>
+				<listitem>
+					<para><acronym>MD5</acronym> (Message Digest algorithm 5) est une fonction de hachage couramment utilisée par phpBB. MD5 est un algorithme qui prend en entrée des données de longueur quelconque et produit en sortie une empreinte de longueur fixe (128 bits, 32 caractères). MD5 est utilisé dans phpBB pour transformer les mots de passe des utilisateurs en un hachage à sens unique, ce qui signifie que vous ne pouvez pas « déchiffrer » (inverser) un hachage MD5 pour retrouver les mots de passe des utilisateurs. Les mots de passe des utilisateurs sont stockés sous forme de hachages MD5 dans la base de données.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>MOD</term>
+				<listitem>
+					<para>Un <abbrev>MOD</abbrev> est une modification de code pour phpBB qui ajoute, modifie, ou améliore d'une autre manière phpBB. Les <abbrev>MODs</abbrev> sont écrits par des auteurs tiers ; en tant que tels, le phpBB Group n'assume aucune responsabilité concernant les MODs.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Notifications</term>
+				<listitem>
+					<para>Lorsque les utilisateurs effectuent certaines actions sur le forum, des notifications sont générées pour les utilisateurs concernés. Par exemple, les modérateurs peuvent choisir d'être avertis lorsqu'un message nécessite une approbation. Les méthodes de notification incluent la notification sur le forum et la notification par e-mail.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>PHP</term>
+				<listitem>
+					<para><acronym>PHP</acronym>, ou « PHP: Hypertext Preprocessor », est un langage de script open source couramment utilisé. phpBB est écrit en <acronym>PHP</acronym> et nécessite que le moteur d'exécution <acronym>PHP</acronym> soit installé et correctement configuré sur le serveur où phpBB est exécuté. Pour plus d'informations sur <acronym>PHP</acronym>, veuillez consulter la page d'accueil de <ulink url="http://www.php.net">PHP</ulink>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>phpMyAdmin</term>
+				<listitem>
+					<para>phpMyAdmin est un programme open source populaire utilisé pour gérer les bases de données MySQL. Lorsque vous modifiez phpBB via un MOD ou d'une autre manière, il se peut que vous deviez modifier votre base de données. phpMyAdmin est l'un des outils qui vous permet de le faire. Pour plus d'informations sur phpMyAdmin, veuillez consulter la <ulink url="http://www.phpmyadmin.net">page d'accueil du projet phpMyAdmin</ulink>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Messages privés</term>
+				<listitem>
+					<para>Les messages privés permettent aux membres inscrits de communiquer en privé via votre forum, sans avoir besoin de recourir à l'e-mail ou à la messagerie instantanée. Ils peuvent être envoyés entre utilisateurs (ils peuvent aussi être transférés et faire l'objet de copies) et ne peuvent être consultés par personne d'autre que le destinataire prévu. Le guide de l'utilisateur contient davantage d'informations sur <link linkend="user_pm">l'utilisation du système de messagerie privée de phpBB3</link>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Rang</term>
+				<listitem>
+					<para>Un rang est une sorte de titre attribué à un utilisateur. Les rangs peuvent être ajoutés, modifiés et supprimés par les administrateurs.</para>
+
+					<note>
+						<para>Lorsque vous attribuez un nom de rang spécial à un utilisateur, rappelez-vous qu'aucune permission n'y est associée. Par exemple, si vous créez un rang « Modérateur de support » et l'attribuez à un utilisateur, cet utilisateur n'obtiendra pas automatiquement les permissions de modérateur. Vous devez attribuer séparément les permissions spéciales à l'utilisateur.</para>
+					</note>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Accessible en écriture par le serveur</term>
+				<listitem>
+					<para>Un élément de votre serveur qui est accessible en écriture par le serveur signifie que le ou les fichiers ou dossiers en question ont leurs permissions correctement définies afin que le serveur puisse y écrire. Certaines fonctions de phpBB3 pouvant nécessiter que des fichiers et/ou dossiers soient accessibles en écriture par le serveur incluent la mise en cache et l'installation même de phpBB3 (le fichier config.php doit être écrit pendant le processus d'installation). Rendre des fichiers ou dossiers accessibles en écriture par le serveur dépend toutefois du système d'exploitation sous lequel le serveur fonctionne. Sur les serveurs basés sur *nix, les utilisateurs peuvent configurer les permissions de fichiers et de dossiers via l'utilitaire <glossterm>CHMOD</glossterm>, tandis que les serveurs Windows proposent leur propre système de permissions. Il est également possible, avec certains clients <glossterm>FTP</glossterm>, de modifier les permissions de fichiers et de dossiers.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Session</term>
+				<listitem>
+					<para>Une session est une visite sur vos forums phpBB. Pour phpBB, une session correspond à la durée que vous passez sur les forums. Elle est créée lorsque vous vous connectez et supprimée lorsque vous vous déconnectez. Les <acronym>ID</acronym> de session sont généralement stockés dans un cookie, mais si phpBB ne parvient pas à obtenir les informations de cookie de votre ordinateur, un <acronym>ID</acronym> de session est alors ajouté à l'URL (par exemple index.php?sid=999). Cet <acronym>ID</acronym> de session préserve la session de l'utilisateur sans utiliser de cookie. Si les sessions n'étaient pas préservées, vous vous retrouveriez déconnecté à chaque fois que vous cliqueriez sur un lien du forum.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Signature</term>
+				<listitem>
+					<para>Une signature est un message affiché à la fin d'un message d'un utilisateur. Les signatures sont définies par l'utilisateur. L'affichage ou non d'une signature après un message dépend des paramètres du profil de l'utilisateur.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>SMTP</term>
+				<listitem>
+					<para><acronym>SMTP</acronym> signifie « Simple Mail Transfer Protocol » (protocole simple de transfert de courrier). C'est un protocole pour l'envoi d'e-mails. Par défaut, phpBB utilise la fonction intégrée <ulink url="http://www.php.net/manual/en/function.mail.php">mail()</ulink> de <acronym>PHP</acronym> pour envoyer des e-mails. Cependant, phpBB utilisera <acronym>SMTP</acronym> pour envoyer des e-mails si les données <acronym>SMTP</acronym> requises sont correctement configurées.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Style</term>
+				<listitem>
+					<para>Un style se compose d'un jeu de modèles, d'un jeu d'images et d'une feuille de style. Un style contrôle l'apparence générale de votre forum.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Sous-forum</term>
+				<listitem>
+					<para>Les sous-forums sont des forums imbriqués dans, ou situés à l'intérieur, d'autres forums.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Modèle</term>
+				<listitem>
+					<para>Un modèle contrôle la mise en page d'un style. Les fichiers de modèle de phpBB 3.3 portent l'extension .html. Ces fichiers de modèle contiennent essentiellement du <acronym>HTML</acronym> (mais pas de <acronym>PHP</acronym>), avec quelques variables utilisées par phpBB (contenues entre accolades : { et }).</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Twig</term>
+				<listitem>
+					<para>phpBB utilise le moteur de modèles <ulink url="http://twig.sensiolabs.org/">Twig</ulink> pour combiner les données et les fichiers de <glossterm>modèle</glossterm> afin de générer des pages web dynamiques à la demande.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>UCP</term>
+				<listitem>
+					<para>Le <acronym>UCP</acronym>, ou Panneau de contrôle utilisateur, est le point central depuis lequel les utilisateurs peuvent gérer tous les paramètres et fonctionnalités relatifs à leur compte.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Horodatage UNIX</term>
+				<listitem>
+					<para>phpBB stocke toutes les heures au format <ulink url="http://en.wikipedia.org/wiki/Unix_time">horodatage UNIX</ulink>, pour faciliter la conversion vers d'autres fuseaux horaires et formats d'heure.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Groupe d'utilisateurs</term>
+				<listitem>
+					<para>Les groupes d'utilisateurs sont un moyen de regrouper des utilisateurs. Cela facilite la définition des permissions pour de nombreuses personnes à la fois (par exemple, créer un groupe de modérateurs et lui attribuer des permissions de modération pour un certain forum, au lieu d'accorder individuellement des permissions de modération à de nombreuses personnes séparément). Un groupe d'utilisateurs possède un modérateur de groupe d'utilisateurs (essentiellement un chef de groupe), qui a la capacité d'ajouter ou de supprimer des utilisateurs du groupe. Les groupes d'utilisateurs peuvent être définis comme cachés, fermés ou ouverts. Si un groupe d'utilisateurs est ouvert, les utilisateurs peuvent essayer de demander à en devenir membres via la page appropriée du <link linkend="user_control_panel">panneau de contrôle des groupes</link>. phpBB 3.3 dispose de six groupes d'utilisateurs prédéfinis.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+</chapter>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Config Text Tool</title>
+  </articleinfo>
+  <para>
+    config_text-værktøjet hjælper med at tilføje, opdatere og fjerne
+    config_text-indstillinger. Tabellen config_text bruges til at gemme
+    indstillinger med en værdi af vilkårlig længde i en
+    TEXT-kolonne. I modsætning til config-værdier bliver config_text ikke
+    mellemlagret eller forudhentet.
+  </para>
+  <sect1 id="add-config_text-setting">
+    <title>Tilføj config_text-indstilling</title>
+    <para>
+      Tilføj en ny config_text-indstilling
+    </para>
+    <programlisting>
+['config_text.add', [config name, config value]],
+</programlisting>
+    <sect2 id="example">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config_text.add', ['foo', 'bar']], // Add Config_Text 'foo' with value 'bar';
+         ['config_text.add', ['foo2', 1]], // Add Config_Text 'foo2' with value '1';
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="update-config_text-setting">
+    <title>Opdater config_text-indstilling</title>
+    <para>
+      Opdater en config_text-indstilling
+    </para>
+    <programlisting>
+['config_text.update', [config name, new config value]],
+</programlisting>
+    <sect2 id="example-1">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config_text.update', ['foo', 'bar'], // Config_Text 'foo' updated to 'bar';
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="delete-config_text-setting">
+    <title>Slet config_text-indstilling</title>
+    <para>
+      Slet en config_text-indstilling
+    </para>
+    <programlisting>
+['config_text.remove', [config name]],
+</programlisting>
+    <sect2 id="example-2">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config_text.remove', ['foo']], // Config_Text 'foo' removed;
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

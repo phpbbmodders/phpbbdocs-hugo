@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Parsing af tekst</title>
+  </articleinfo>
+  <sect1 id="database-fields">
+    <title>Databasefelter</title>
+    <para>
+      phpBB bruger følgende databasefelter, hvor BBkode er tilladt
+      (forumbeskrivelse, forumregler, indlægsindhold, ...):
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <emphasis role="strong">foo</emphasis> - selve teksten
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_bbcode_uid</emphasis> - en
+          tilfældigt genereret unik identifikator, der bruges til at
+          markere BBkoderne og bruges til hurtigere parsing
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_bbcode_bitfield</emphasis> - et
+          <ulink url="https://en.wikipedia.org/wiki/Bit_field">bitfelt</ulink>,
+          der indeholder informationen om, hvilken bbkode der bruges i
+          teksten, så kun de relevante skal indlæses fra databasen.
+          <emphasis role="strong">BEMÆRK: Bruges ikke længere i indlæg,
+          der genereres i phpBB 3.2+</emphasis>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_options</emphasis> - et bitfelt,
+          der indeholder informationen om, hvorvidt bbkode, smileys og
+          magiske URL'er er aktiveret (OPTION_FLAG_BBCODE,
+          OPTION_FLAG_SMILIES og OPTION_FLAG_LINKS). Nogle gange finder
+          du dette opdelt i enable_bbcode, enable_smilies og
+          enable_magic_url
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Kolonnenavne varierer; erstat <literal>foo</literal> med det
+      pågældende kolonnenavn (f.eks. <literal>text</literal>,
+      <literal>text_bbcode_uid</literal>, ...).
+    </para>
+  </sect1>
+  <sect1 id="parsing-text-with-bbcodes-smilies">
+    <title>Parsing af tekst med BBkoder og smileys</title>
+    <sect2 id="inserting-text-into-db">
+      <title>Indsættelse af tekst i databasen</title>
+      <programlisting>
+$text = $this-&gt;request-&gt;variable('text', '', true);
+$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+$allow_bbcode = $allow_urls = $allow_smilies = true;
+generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+
+$sql_ary = array(
+    'text'              =&gt; $text,
+    'bbcode_uid'        =&gt; $uid,
+    'bbcode_bitfield'   =&gt; $bitfield,
+    'bbcode_options'    =&gt; $options,
+);
+
+$sql = 'INSERT INTO ' . YOUR_TABLE . ' ' . $this-&gt;db-&gt;sql_build_array('INSERT', $sql_ary);
+$this-&gt;db-&gt;sql_query($sql);
+</programlisting>
+      <para>
+        Metoden ovenfor bruger databasefeltet bbcode options, som bruges
+        mange steder i stedet for enable_smiles, enable_bbcode og
+        enable_magic_url. Her er, hvordan du indsætter det i databasen
+        ved hjælp af tabellerne enable_smilies, enable_bbcode og
+        enable_magic_url.
+      </para>
+      <programlisting>
+$text = $this-&gt;request-&gt;variable('text', '', true);
+$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+$allow_bbcode = $allow_urls = $allow_smilies = true;
+generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+
+$sql_ary = array(
+    'text'              =&gt; $text,
+    'bbcode_uid'        =&gt; $uid,
+    'bbcode_bitfield'   =&gt; $bitfield,
+    'enable_bbcode'     =&gt; $allow_bbcode,
+    'enable_magic_url'  =&gt; $allow_urls,
+    'enable_smilies'    =&gt; $allow_smilies,
+);
+
+$sql = 'INSERT INTO ' . YOUR_TABLE . ' ' . $this-&gt;db-&gt;sql_build_array('INSERT', $sql_ary);
+$this-&gt;db-&gt;sql_query($sql);
+</programlisting>
+    </sect2>
+    <sect2 id="displaying-text-from-db">
+      <title>Visning af tekst fra databasen</title>
+      <para>
+        Dette eksempel bruger feltet bbcode_options, som bruges ved
+        parsing af beskrivelser til fora og grupper:
+      </para>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_bitfield, bbcode_options
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query($sql);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'TEXT'  =&gt; $text,
+]);
+</programlisting>
+      <para>
+        Det næste eksempel bruger flagene enable_bbcode, enable_smilies
+        og enable_magic_url, som kan bruges i stedet for metoden
+        ovenfor, og som bruges ved parsing af indlæg:
+      </para>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_bitfield, enable_bbcode, enable_smilies, enable_magic_url
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query($sql);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$row['bbcode_options'] = (($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
+    (($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
+    (($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'TEXT'  =&gt; $text,
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="generating-text-for-editing">
+      <title>Generering af tekst til redigering</title>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_options
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query_limit($sql, 1);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$post_data = generate_text_for_edit($row['text'], $row['bbcode_uid'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'POST_TEXT'         =&gt; $post_data['text'],
+    'S_ALLOW_BBCODES'   =&gt; $post_data['allow_bbcode'],
+    'S_ALLOW_SMILIES'   =&gt; $post_data['allow_smilies'],
+    'S_ALLOW_URLS'      =&gt; $post_data['allow_urls'],
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="database-fields-for-bbcode">
+      <title>Databasefelter til BBkode</title>
+      <para>
+        Følgende kolonnedefinitioner forventes til BBkoder:
+      </para>
+      <programlisting>
+&quot;text&quot;: [
+    &quot;MTEXT_UNI&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_uid&quot;: [
+    &quot;VCHAR:8&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_bitfield&quot;: [
+    &quot;VCHAR:255&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_options&quot;: [
+    &quot;UINT:11&quot;,
+    7 // Default all enabled
+],
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

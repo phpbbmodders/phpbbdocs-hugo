@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Git</title>
+  </articleinfo>
+  <para>
+    phpBB bruger Git som versionsstyringssystem. phpBB's Git-repository
+    hostes på GitHub på
+    <ulink url="https://github.com/phpbb/phpbb">https://github.com/phpbb/phpbb</ulink>.
+  </para>
+  <para>
+    Denne dokumentation forklarer, hvordan du bidrager til
+    phpBB-udviklingen:
+  </para>
+  <itemizedlist spacing="compact">
+    <listitem>
+      <para>
+        <link linkend="basics">Grundlæggende</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="branch-names">Branchnavne</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="commit-messages">Commit-beskeder</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="developers">Udviklere</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="windows">Windows</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="further-reading">Yderligere læsning</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="external-links">Eksterne links</link>
+      </para>
+    </listitem>
+  </itemizedlist>
+  <sect1 id="basics">
+    <title>Grundlæggende</title>
+    <sect2 id="phpbb-repository">
+      <title>phpBB's repository</title>
+      <sect3 id="forking-and-cloning">
+        <title>Forking og kloning</title>
+        <para>
+          For at bidrage til phpBB-udviklingen bør du oprette en
+          <ulink url="https://github.com">GitHub</ulink>-brugerkonto,
+          hvis du ikke allerede har en.
+        </para>
+        <para>
+          Begynd med at forke
+          <ulink url="https://github.com/phpbb/phpbb">phpBB's
+          repository</ulink> til din konto ved at klikke på
+          &quot;Fork&quot;-knappen på phpBB's repository.
+        </para>
+        <para>
+          Klon din fork af phpBB's repository til din computer:
+          <literal>git clone git://github.com/&lt;my_github_name&gt;/phpbb.git</literal>
+        </para>
+        <para>
+          Se
+          <ulink url="https://help.github.com/articles/set-up-git">Set
+          Up Git</ulink> for hjælp til opsætning af Git.
+        </para>
+      </sect3>
+      <sect3 id="branches">
+        <title>Branches</title>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/master">master</ulink>
+              - Den seneste ustabile udviklingsversion med nye funktioner
+              osv.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.3.x">3.3.x</ulink>
+              - Udviklingsbranch for 3.3-linjen. Fejlrettelser og mindre
+              funktionsændringer anvendes her.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.2.x">3.2.x</ulink>
+              - Udviklingsbranch for 3.2-linjen. Fejlrettelser og mindre
+              funktionsændringer anvendes her.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.1.x">3.1.x</ulink>
+              - Udviklingsbranch for den stabile 3.1-linje. phpBB 3.1 har
+              nået sin End of Life og vedligeholdes derfor ikke længere.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.0.x">3.0.x</ulink>
+              - Udviklingsbranch for den stabile 3.0-linje. phpBB 3.0 har
+              nået sin End of Life og vedligeholdes derfor ikke længere.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/2.0.x">2.0.x</ulink>
+              - Udviklingsbranch for den forældede 2.0-linje.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+      <sect3 id="tags">
+        <title>Tags</title>
+        <para>
+          Tags er udgivne versioner. Stabile tags merges ind i
+          master-branchen.
+        </para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              release-3.Y.Z-aX - Alpha-udgivelse X af 3.Y.Z-linjen.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-3.Y.Z-bX - Beta-udgivelse X af 3.Y.Z-linjen.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-3.Y.Z-RCX - Release candidate X af den stabile
+              3.Y.Z-udgivelse.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-3.Y.Z - Stabil 3.Y.Z-udgivelse.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-2.0.X - Forældet stabil 2.0.X-udgivelse.
+            </para>
+          </listitem>
+        </itemizedlist>
+        <para>
+          Det betyder, at al udvikling af fejlrettelser bør foregå på
+          3.2.x-branchen og vil blive merget ind i højere branches,
+          inklusive master. Al funktionsudvikling bør foregå i master.
+          Læs mere om workflowet i næste afsnit.
+        </para>
+      </sect3>
+      <sect3 id="how-to-contribute">
+        <title>Hvordan bidrager man?</title>
+        <para>
+          Når du retter en fejl, bedes du skrive i
+          <ulink url="https://tracker.phpbb.com">fejlsporingssystemet</ulink>.
+          Når du tilføjer en funktion til 3.x, skal du poste dit patch
+          til gennemgang i et nyt emne på
+          <ulink url="https://area51.phpbb.com/phpBB/viewforum.php?f=81">[3.x]
+          Discussion-forummet</ulink> på Area51. Angiv enten et link til
+          dit commit eller din branch på GitHub, eller vedhæft et patch
+          oprettet med <literal>git format-patch</literal>. Overvej for
+          større funktioner eller ændringer at tilføje det som en idé på
+          <ulink url="https://www.phpbb.com/community/ideas">phpBB
+          Ideas</ulink>, eller at poste et RFC på Area51 først.
+        </para>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="branch-names">
+    <title>Branchnavne</title>
+    <para>
+      Branchnavne skal have et præfiks, der ender med en skråstreg. Der
+      er kun 3 tilladte typer af præfikser:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>feature/</literal> efterfulgt af et funktionsnavn for
+          branches, der tilføjer en funktion.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>task/</literal> efterfulgt af et opgavenavn for
+          branches, der hverken tilføjer en funktion eller retter fejl.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>ticket/</literal> efterfulgt af et sagsnummer for
+          branches, der retter fejl.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Eksempler på branchnavngivning:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>feature/feature-name</literal> for funktioner.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>task/task-name</literal> for opgaver.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>ticket/12345</literal> for fejlrettelser.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <literallayout>Når branches kommer ind i phpBB's hovedrepository,
+    omdøbes de til
+    <emphasis role="strong">&lt;category&gt;/&lt;user&gt;/&lt;name-or-id&gt;</emphasis>
+    eller
+    <emphasis role="strong">user/&lt;category&gt;/&lt;name-or-id&gt;</emphasis>
+    for at gøre det tydeligt, fra hvilken udviklers repository branchen
+    blev merget.</literallayout>
+  </sect1>
+  <sect1 id="commit-messages">
+    <title>Commit-beskeder</title>
+    <para>
+      Du bør altid <ulink url="https://tracker.phpbb.com">oprette en
+      sag</ulink>, før du begynder at arbejde. Det er vigtigt, at hver
+      commit refererer til en sag. Det er ligegyldigt, hvilken tilstand
+      denne sag er i. Ingen linje bør indeholde mere end 79 tegn. Den
+      første linje bør efterfølges af en tom linje. Det betyder, at du
+      ikke bør bryde den første sætning i din besked! Formålet med dette
+      er at bevare nyttige --oneline-logs, som kun viser den første linje
+      af hver besked. En god commit-besked ser derfor sådan ud:
+    </para>
+    <programlisting>
+[branch you are working on] A short explanation of the change.
+
+A more detailed explanation of which things exactly were changed and for
+what reasons.
+
+This can span multiple paragraphs for a bigger change. And
+it should really make clear all the changes to anyone reading this commit
+message without further context.
+
+TICKET-ID
+</programlisting>
+    <para>
+      Et eksempel:
+    </para>
+    <programlisting>
+[feature/request-class] Adding request class ported from ascraeus-experiment.
+
+The well known request_var function is now a wrapper that calls a method
+on a phpbb_request object. The class provides additional functionality.
+It can replace all super globals with special objects that throw errors
+when being accessed. They still allow isset operations to keep backward
+compatibility with isset($_POST['var']) checks. The phpbb_request class
+implements the phpbb_request_interface which is available for easy mocking
+of input in tests.
+
+PHPBB-1234
+</programlisting>
+    <para>
+      Strukturen for en commit-besked, som verificeres af
+      commit-msg-hooket, er som følger:
+    </para>
+    <programlisting>
+[&lt;branch&gt;] &lt;summary&gt;
+
+&lt;description&gt;
+
+&lt;ticket1&gt;
+&lt;ticketn&gt;
+</programlisting>
+    <para>
+      De obligatoriske komponenter er resuméet, branchen og listen over
+      sager; beskrivelsen er valgfri. Både beskrivelsen og saglisten skal
+      efterkommes af en <emphasis role="strong">enkelt</emphasis> tom
+      linje. Beskrivelseselementet har ubegrænset længde og kan indeholde
+      et vilkårligt antal tomme linjer til at adskille afsnit; hver sag i
+      listen skal stå på sin egen linje. Hvis branchen er en
+      [ticket/]-branch, skal saglisten indeholde en matchende sag, og
+      endelig må saglisten ikke indeholde dubletter.
+    </para>
+  </sect1>
+  <sect1 id="developers">
+    <title>Udviklere</title>
+    <para>
+      Se afsnittet <link linkend="forking-and-cloning">Forking og
+      kloning</link>.
+    </para>
+    <sect2 id="configuration">
+      <title>Konfiguration</title>
+      <sect3 id="git-1">
+        <title>Git</title>
+        <para>
+          Tilføj dit brugernavn til Git på dit system:
+        </para>
+        <programlisting>
+git config --global user.name &quot;Your Name Here&quot;
+</programlisting>
+        <para>
+          Tilføj din e-mailadresse til Git på dit system:
+        </para>
+        <programlisting>
+git config --add user.email username@phpbb.com
+</programlisting>
+        <para>
+          Tilføj upstream-remoten (du kan ændre 'upstream' til, hvad du
+          vil):
+        </para>
+        <programlisting>
+git remote add upstream git://github.com/phpbb/phpbb.git
+</programlisting>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            <emphasis>upstream</emphasis>-remotens URL
+            <emphasis role="strong">er</emphasis> phpBB's GitHub-repo.
+            Din klonede fork af phpBB's GitHub-repo bruger som standard
+            <emphasis>origin</emphasis>-remotens URL.
+          </para>
+        </note>
+      </sect3>
+      <sect3 id="composer">
+        <title>Composer</title>
+        <para>
+          For at kunne køre en installation fra repoet (og ikke fra en
+          færdigbygget pakke) skal du køre følgende shell-kommandoer for
+          at installere phpBB's afhængigheder.
+        </para>
+        <programlisting>
+cd phpBB
+php ../composer.phar install
+</programlisting>
+        <para>
+          Ignorér eventuelle <emphasis>abandoned package</emphasis>-advarsler.
+        </para>
+        <para>
+          <ulink url="https://getcomposer.org/doc/00-intro.md">Introduction
+          - Composer</ulink> for yderligere information.
+        </para>
+      </sect3>
+      <sect3 id="hooks">
+        <title>Hooks</title>
+        <para>
+          phpBB's repository indeholder nogle klientside-hooks, der kan
+          hjælpe med udviklingen. De findes i mappen
+          <literal>git-tools/hooks</literal>. Disse hooks gør ting som at
+          forberede og validere commit-beskeder og kontrollere for
+          PHP-syntaksfejl. Der findes et script til at sætte dem op (som
+          symlinker dem ind i <literal>.git/hooks</literal>).
+        </para>
+        <programlisting>
+cd git-tools/hooks
+./install
+</programlisting>
+        <para>
+          Hvis du får en fejl, der angiver, at hooksene allerede
+          eksisterer, skal du blot fjerne alle filer fra
+          <literal>.git/hooks</literal> og køre installationskommandoen
+          igen.
+        </para>
+        <para>
+          Når disse hooks er installeret, skal du blot køre
+          <literal>git commit</literal> for at committe nye ændringer.
+          Afhængigt af dit miljø bliver du bedt om at tilføje en
+          commit-besked ved hjælp af
+          <ulink url="http://vimdoc.sourceforge.net/htmldoc/">Vim</ulink>
+          eller
+          <ulink url="https://www.gnu.org/software/emacs/manual/html_node/emacs/Help.html">Emacs</ulink>.
+          Hooksene sørger for at formatere hele din commit-besked i det
+          krævede format (se
+          <link linkend="commit-messages">Commit-beskeder</link>).
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="creating-local-branches">
+      <title>Oprettelse af lokale branches</title>
+      <para>
+        For at arbejde på phpBB skal du oprette lokale branches af den
+        udviklingsbranch (f.eks. <emphasis>master</emphasis>), du har
+        brug for. Kør følgende kommando for at udføre denne handling:
+      </para>
+      <programlisting>
+git checkout -b master origin/master
+</programlisting>
+    </sect2>
+    <sect2 id="workflow">
+      <title>Workflow</title>
+      <sect3 id="pulling-in-upstream-changes">
+        <title>Hentning af upstream-ændringer</title>
+        <para>
+          Du skal merge ændringer, der er foretaget i upstream-repositoryet,
+          for at de vises i din fork. Trinene til at gøre dette følger
+          her. Vi antager, at du udfører dette på
+          <emphasis role="strong">master</emphasis>-branchen, men det
+          kunne også være en fejlrettelsesbranch eller en
+          udviklingsudgivelsesbranch, så sørg for, at du er på den
+          korrekte branch ved hjælp af <literal>git branch</literal>, og
+          skift med <literal>git checkout</literal>, hvis nødvendigt.
+        </para>
+        <blockquote>
+          <para>
+            1. Hent ændringerne fra upstream-
+            <emphasis role="strong">master</emphasis>-branchen: :
+          </para>
+          <programlisting>
+git pull upstream master
+</programlisting>
+          <para>
+            2. Push ændringerne tilbage til din fork (erstat master med
+            den aktuelle branch): :
+          </para>
+          <programlisting>
+git push origin master
+</programlisting>
+        </blockquote>
+        <para>
+          Følgende billede visualiserer phpBB's branchingmodel. Det kan
+          hjælpe dig med at forstå de forskellige branches, dette afsnit
+          henviser til senere.
+        </para>
+        <para>
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/Phpbb-git-workflow.png" />
+            </imageobject>
+            <textobject>
+              <phrase>image</phrase>
+            </textobject>
+          </inlinemediaobject>
+        </para>
+      </sect3>
+      <sect3 id="bug-fixing">
+        <title>Fejlrettelse</title>
+        <para>
+          Sørg først for, at du bruger den korrekte udviklingsbranch
+          (f.eks. <emphasis>3.2.x</emphasis>) og ikke
+          <emphasis>master</emphasis>-branchen. I dette eksempel bruger
+          vi 3.2.x.
+        </para>
+        <programlisting>
+git checkout 3.2.x # Checkout the base branch 3.2.x
+git branch ticket/12345 # Create a new branch for your bug fix
+git checkout ticket/12345 # Switch to the new branch
+# Make your changes
+git add &lt;files&gt; # Stage the files
+git commit # Commit staged files - please use a correct commit message
+# Make more changes &amp; commits if necessary
+git push origin ticket/12345 # Push the branch back to GitHub
+</programlisting>
+      </sect3>
+      <sect3 id="starting-a-new-feature">
+        <title>Start på en ny funktion</title>
+        <para>
+          Sørg først for, at du bruger den korrekte udviklingsbranch
+          (f.eks. <emphasis>master</emphasis>). I dette eksempel bruger
+          vi master.
+        </para>
+        <programlisting>
+git checkout master # Checkout the base branch
+git checkout -b feature/my-fancy-new-feature # Create a new branch for your feature &amp; switch to it
+# Make your changes
+git add &lt;files&gt; # Stage the files
+git commit # Commit staged files - please use a correct commit message
+# Make more changes &amp; commits
+git push origin feature/my-fancy-new-feature # Push the branch back to GitHub
+</programlisting>
+      </sect3>
+      <sect3 id="collaborating-with-other-developers-on-a-feature">
+        <title>Samarbejde med andre udviklere om en funktion</title>
+        <para>
+          Du har pushet en ny funktion til GitHub, og en anden udvikler
+          har arbejdet videre på den. Sådan integrerer du deres ændringer
+          i din egen feature-branch.
+        </para>
+        <programlisting>
+git remote add otherdeveloper git://github.com/otherdeveloper/phpbb.git # Add the other developer's repository as a remote
+git fetch otherdeveloper # Fetch otherdeveloper's changes
+git checkout feature/my-fancy-new-feature # Switch to the feature branch
+git merge otherdeveloper/feature/my-fancy-new-feature # Merge otherdeveloper's changes into your feature branch
+# If necessary resolve conflicts &amp; commit
+git push origin feature/my-fancy-new-feature # Push the branch back to GitHub
+</programlisting>
+      </sect3>
+      <sect3 id="merging-a-feature-or-bugfix-branch">
+        <title>Merging af en feature- eller bugfix-branch</title>
+        <para>
+          Når en funktion eller fejlrettelse er færdig, kan den merges
+          tilbage ind i master-branchen. For at bevare historikken laver
+          vi aldrig fast-forward for den slags merges. I dette eksempel
+          merger vi den tidligere oprettede fejlrettelse ind i 3.2.x.
+          Derefter merger vi ændringerne ind i 3.3.x og merger så 3.3.x
+          ind i master for at holde disse branches opdaterede.
+        </para>
+        <programlisting>
+git checkout 3.2.x # Branch we want to merge into, pull in upstream changes first.
+git merge --no-ff remote/ticket/12345 # Merge remote branch without fast forward
+git checkout 3.3.x # Branch we want to merge into, pull in upstream changes first.
+git merge --no-ff 3.2.x # Merge to keep the 3.3.x branch in sync
+git checkout master # Branch we want to merge into, pull in upstream changes first.
+git merge --no-ff 3.3.x # Merge to keep the master branch in sync
+git push origin 3.2.x 3.3.x master # Push the three changed branches back to GitHub
+</programlisting>
+        <para>
+          Derudover er Gits konfigurationsindstilling merge.log sat til
+          true, hvilket giver et resumé af de mergede commits.
+        </para>
+      </sect3>
+      <sect3 id="merging-into-phpbb-repository">
+        <title>Merging ind i phpBB's repository</title>
+        <para>
+          Dette gælder <emphasis>kun</emphasis> for medlemmer af
+          udviklingsteamet. Følgende trin bør følges, når en emnebranch
+          merges ind i phpBB's repository.
+        </para>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            Bemærk, at tests bør køres, før der merges ind i det
+            officielle repository. Tests køres for hver push til en pull
+            request af
+            <ulink url="https://github.com/phpbb/phpbb/actions">Github
+            Actions</ulink>, men det er en god idé også selv at køre dem.
+            For mere information, læs
+            <literal>../testing/index</literal>.
+          </para>
+        </note>
+      </sect3>
+      <sect3 id="merging-only-to-master">
+        <title>Merging kun til master</title>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            <emphasis>upstream</emphasis>-remoten nedenfor peger på det
+            officielle phpBB-repository, og <emphasis>origin</emphasis>
+            peger på din fork.
+          </para>
+        </note>
+        <programlisting>
+git remote update upstream
+git checkout master
+git reset --hard upstream/master
+git merge --no-ff &lt;author&gt;/&lt;branch&gt; # example: git merge --no-ff naderman/ticket/000000
+git push origin master
+# Before continuing, look at your commit list in your fork to make sure it looks correct.
+# If unsure, ask.
+git push upstream master
+</programlisting>
+      </sect3>
+      <sect3 id="merging-to-3.3.x">
+        <title>Merging til 3.3.x</title>
+        <warning>
+          <title>Advarsel</title>
+          <para>
+            <emphasis role="strong">ALLE</emphasis> merges til 3.3.x
+            <emphasis role="strong">skal</emphasis> også merges til
+            master!
+          </para>
+        </warning>
+        <programlisting>
+git remote update upstream
+git checkout 3.3.x
+git reset --hard upstream/3.3.x
+git merge --no-ff &lt;author&gt;/&lt;branch&gt; # example: git merge --no-ff naderman/ticket/000000
+git push origin 3.3.x
+git checkout master
+git reset --hard upstream/master
+git merge --no-ff 3.3.x
+git push origin master
+# Before continuing, look at your commit list in your fork to make sure it looks correct.
+# If unsure, ask.
+git push upstream 3.3.x
+git push upstream master
+</programlisting>
+      </sect3>
+      <sect3 id="merging-to-3.2.x">
+        <title>Merging til 3.2.x</title>
+        <warning>
+          <title>Advarsel</title>
+          <para>
+            <emphasis role="strong">ALLE</emphasis> merges til 3.2.x
+            <emphasis role="strong">skal</emphasis> også merges til 3.3.x
+            og master!
+          </para>
+        </warning>
+        <programlisting>
+git remote update upstream
+git checkout 3.2.x
+git reset --hard upstream/3.2.x
+git merge --no-ff &lt;author&gt;/&lt;branch&gt; # example: git merge --no-ff naderman/ticket/000000
+git push origin 3.2.x
+git checkout 3.3.x
+git reset --hard upstream/3.3.x
+git merge --no-ff 3.2.x
+git push origin 3.3.x
+git checkout master
+git reset --hard upstream/master
+git merge --no-ff 3.3.x
+git push origin master
+# Before continuing, look at your commit list in your fork to make sure it looks correct.
+# If unsure, ask.
+git push upstream 3.2.x
+git push upstream 3.3.x
+git push upstream master
+</programlisting>
+      </sect3>
+      <sect3 id="merging-to-3.3.x-and-master-with-different-patches">
+        <title>Merging til 3.3.x og master med forskellige
+        patches</title>
+        <warning>
+          <title>Advarsel</title>
+          <para>
+            <emphasis role="strong">ALLE</emphasis> merges til 3.3.x
+            <emphasis role="strong">skal</emphasis> også merges til
+            master!
+          </para>
+        </warning>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              Patch-forfatteren opretter fix-3.3
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren merger sin fix-3.3 ind i en
+              fix-master-branch
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren ændrer fix-master, indtil den fungerer
+              som forventet
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren sender 2 pull requests
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger forfatterens fix-3.3 ind i sin 3.3.x
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger forfatterens fix-master ind i sin master
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger sin 3.3.x ind i master (bør fungere som
+              fast-forward)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren verificerer resultaterne
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren pusher 3.3.x og master til phpbb
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+      <sect3 id="merging-to-3.2.x-3.3.x-and-master-with-different-patches">
+        <title>Merging til 3.2.x, 3.3.x og master med forskellige
+        patches</title>
+        <warning>
+          <title>Advarsel</title>
+          <para>
+            <emphasis role="strong">ALLE</emphasis> merges til 3.2.x
+            <emphasis role="strong">skal</emphasis> også merges til 3.3.x
+            og master!
+          </para>
+        </warning>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              Patch-forfatteren opretter fix-3.2
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren merger sin fix-3.2 ind i en
+              fix-3.3-branch
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren ændrer fix-3.3, indtil den fungerer som
+              forventet
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren merger sin fix-3.3 ind i en
+              fix-master-branch
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren ændrer fix-master, indtil den fungerer
+              som forventet
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Patch-forfatteren sender 3 pull requests
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger forfatterens fix-3.2 ind i sin 3.2.x
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger forfatterens fix-3.3 ind i sin 3.3.x
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger forfatterens fix-master ind i sin master
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger sin 3.2.x ind i 3.3.x (bør fungere som
+              fast-forward)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren merger sin 3.3.x ind i master (bør fungere som
+              fast-forward)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren verificerer resultaterne
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Mergeren pusher 3.2.x, 3.3.x og master til phpbb
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+      <sect3 id="fixing-merge-conflicts">
+        <title>Løsning af mergekonflikter</title>
+        <para>
+          Mergekonflikter <emphasis role="strong">skal</emphasis> altid
+          løses ved hjælp af git's rebase-funktionalitet.
+          <emphasis role="strong">Merge ikke</emphasis> basisbranchen,
+          f.eks. master, for at løse potentielle mergekonflikter eller
+          for at opdatere din branch.
+        </para>
+        <para>
+          For at opdatere din branch kan du ofte blot køre en simpel
+          rebase:
+        </para>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              Checkout din feature- eller bugfix-branch
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Sørg for, at der ikke er nogen ustagede ændringer, og at
+              din branch allerede er blevet pushet til din remote (dette
+              gør det senere muligt at fortryde dine rebase-ændringer)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Kør git rebase
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Force-push din branch til din remote
+            </para>
+          </listitem>
+        </orderedlist>
+        <para>
+          Kommandoerne til dette er som følger:
+        </para>
+        <programlisting>
+git checkout ticket/12345
+git fetch upstream                      # ensure upstream is up to date
+git rebase upstream/3.3.x               # rebase on top of upstream's 3.3.x branch
+git push origin ticket/12345 -f
+</programlisting>
+        <para>
+          Hvis du tror, at noget gik galt, eller der er for mange
+          mergekonflikter, kan du afbryde rebasen ved at køre:
+        </para>
+        <programlisting>
+git rebase --abort
+</programlisting>
+        <para>
+          Ved vanskeligere rebaser, og når basisbranchen skiftes, giver
+          det mening at bruge den tredelte --onto til rebasing:
+        </para>
+        <programlisting>
+git rebase --onto new_base_branch old_base_branch ticket/12345
+</programlisting>
+        <para>
+          Hvor
+        </para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              new_base_branch er den nye basisbranch, din bugfix-branch
+              skal baseres på
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              old_base_branch er den gamle basisbranch, din bugfix-branch
+              er baseret på før rebasen
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              ticket/12345 er navnet på din bugfix- eller feature-branch
+            </para>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="windows">
+    <title>Windows</title>
+    <para>
+      <emphasis role="strong">Hvis du bruger git på Windows</emphasis>,
+      bør du deaktivere <literal>AutoCrlf</literal>, som automatisk
+      oversætter <literal>\n</literal> til <literal>\r\n</literal>.
+    </para>
+    <para>
+      <emphasis role="strong">Hvis du ikke bruger TortoiseGit:</emphasis>
+      For at gøre det skal du bruge følgende kommando:
+    </para>
+    <programlisting>
+git config core.autocrlf input
+</programlisting>
+    <para>
+      Hvis du ønsker, at dette skal gælde for alle repositories, kan du
+      bruge tilvalget <literal>--global</literal>. Sådan her:
+    </para>
+    <programlisting>
+git config --global core.autocrlf input
+</programlisting>
+    <para>
+      Forskellen er, at hvis du ikke bruger det globale tilvalg, vil
+      ethvert nyt repository, du opretter, ikke have denne indstilling
+      korrekt sat til phpBB-udvikling, hvilket kan medføre fejl under
+      commit eller ved kørsel af en PHP-fil.
+    </para>
+    <para>
+      <emphasis role="strong">For dem, der bruger</emphasis>
+      <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink>
+      <emphasis role="strong">(og plejede at arbejde med
+      TortoiseSVN):</emphasis>
+    </para>
+    <para>
+      Når du bruger TortoiseGit for første gang, skal du deaktivere
+      <literal>AutoCrlf</literal> under <emphasis>Settings</emphasis>
+      &gt; <emphasis>Git</emphasis> &gt; <emphasis>Config</emphasis>, så
+      dine linjeafslutninger ikke ændres fra LF til CR-LF. Du skal også
+      redigere den lokale <literal>.git/config</literal> og tilføje
+      følgende kode, så du korrekt kan merge branches (<emphasis>dette
+      skal gøres på ethvert git-repository, du har</emphasis>):
+    </para>
+    <programlisting>
+[merge]
+    log = True
+</programlisting>
+    <sect2 id="create-your-own-ssh-key">
+      <title>Opret din egen SSH-nøgle</title>
+      <para>
+        <ulink url="http://help.github.com/win-set-up-git/">http://help.github.com/win-set-up-git/</ulink>
+      </para>
+      <para>
+        TortoiseGit bruger automatisk SSH-nøglen
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Jeg brugte OpenSSH-tilvalget under installationen, så jeg er
+          ikke sikker på, om dette virker for den anden mulighed, eller
+          om man skal gøre det på en anden måde.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="clone">
+      <title>Klon</title>
+      <para>
+        Klon derefter blot repositoryet til dit lokale system, og resten
+        foregår stort set som med TortoiseSVN.
+      </para>
+    </sect2>
+    <sect2 id="commands">
+      <title>Kommandoer</title>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <tbody>
+            <row>
+              <entry>
+                <emphasis role="strong">Pull</emphasis>
+              </entry>
+              <entry>
+                Hent opdateringerne fra upstream
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="strong">Commit</emphasis>
+              </entry>
+              <entry>
+                Committer ændringerne <emphasis role="strong">lokalt</emphasis>
+                (du skal Push'e eller Sync'e for at committe ændringerne
+                til repositoryet)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="strong">Push</emphasis>
+              </entry>
+              <entry>
+                Pusher de ændringer, der blev foretaget lokalt, til det
+                online repository
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="strong">Sync</emphasis>
+              </entry>
+              <entry>
+                Pusher/pull'er ændringer med flere valgmuligheder
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Kør altid <emphasis role="strong">Pull</emphasis> først, så
+          <emphasis role="strong">Commit</emphasis>, og derefter
+          <emphasis role="strong">Push</emphasis>; dette hjælper dig med
+          ikke at ende med mergekonflikter.
+        </para>
+      </tip>
+    </sect2>
+  </sect1>
+  <sect1 id="further-reading">
+    <title>Yderligere læsning</title>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="http://book.git-scm.com/">Git Community Book
+          (online)</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://progit.org/book/">Pro Git Book
+          (online)</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://gitcasts.com/">GitCasts</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://www.techscreencast.com/tool/versioncontrol/railsconf-git-talk/810">Getting
+          Git</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://en.oreilly.com/rails2008/public/content/home">RailsConf
+          2008</ulink> Git-foredrag af Scott Chacon
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://git-scm.com/documentation">Officiel
+          Git-dokumentation</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://git-scm.com/course/svn.html">Git Crash
+          Course for SVN users</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://github.com/guides/home">GitHub
+          Guides</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://learn.github.com/">Learn.GitHub</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://www.spheredev.org/wiki/Git_for_the_lazy">Git
+          for the lazy</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="external-links">
+    <title>Eksterne links</title>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://git-scm.com/">Officiel Git-hjemmeside</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/">GitHub</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/phpbb">phpBB's GitHub-konto</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/phpbb-extensions">phpBB
+          Extensions' GitHub-konto</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://tortoisegit.org/">TortoiseGit</ulink> - En
+          Git-klient til Windows baseret på TortoiseSVN
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/TortoiseGit/TortoiseGit/">TortoiseGit
+          på GitHub</ulink> - GitHub-repository
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://tirania.org/blog/archive/2010/Dec-31.html">Open
+          Source Contribution Etiquette</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+</article>

@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Hvad er nyt i phpBB 3.2</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      phpBB 3.2 (Rhea) introducerer mange nye og opdaterede komponenter,
+      som extensions kan drage fordel af. Nogle af disse ændringer kan
+      kræve, at extensions foretager opdateringer for at bevare
+      kompatibiliteten med phpBB 3.2 (nogle ændringer giver et lag af
+      bagudkompatibilitet med 3.1). Extension-forfattere bør gennemgå de
+      ændringer, der er dokumenteret nedenfor, for at se, hvordan deres
+      extensions kan blive påvirket.
+    </para>
+    <para>
+      Denne dokumentation forklarer:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="new-language-object">Nyt Language-objekt</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="new-bbcode-engine">Ny BBkode-motor</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="new-text-reparser">Ny Text Reparser</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="new-file-uploader">Ny filuploader</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="new-font-awesome-icons">Nye Font
+            Awesome-ikoner</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="updated-notifications">Opdaterede
+            notifikationer</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="updated-twig-syntax">Opdateret
+            Twig-syntaks</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="updated-symfony-services">Opdaterede
+            Symfony-services</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="updated-includecss">Opdateret INCLUDECSS</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="additional-helpers">Yderligere hjælpere</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="new-language-object">
+    <title>Nyt Language-objekt</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende gælder for phpBB 3.2 og senere versioner. Hvis du skal
+        bevare bagudkompatibilitet med phpBB 3.1, bør du fortsat bruge de
+        forældede sprogmetoder fra User-objektet.
+      </para>
+    </warning>
+    <para>
+      Der er introduceret et nyt Language-objekt, som adskiller
+      sprogfunktioner fra User-objektet. Det vil sige, at følgende
+      sprogfunktioner nu hører til klassen
+      <literal>\phpbb\language\language</literal>:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Funktion
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>lang</literal>
+            </entry>
+            <entry>
+              Avanceret sprogsubstitution.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>add_lang</literal>
+            </entry>
+            <entry>
+              Tilføj sprogelementer.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>get_plural_form</literal>
+            </entry>
+            <entry>
+              Bestem, hvilken flertalsform der skal bruges.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>set_user_language</literal>
+            </entry>
+            <entry>
+              Funktion til at sætte det sprog, brugeren skal have vist.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>set_default_language</literal>
+            </entry>
+            <entry>
+              Funktion til at sætte boardets standardsprog til visning.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Language-objektet er tilgængeligt som en service fra
+      DI-containeren og kan tilføjes til en extensions services som et
+      argument:
+    </para>
+    <programlisting language="yaml">
+arguments:
+    - '@language'
+</programlisting>
+    <para>
+      Sprognøgler kan oversættes ved at kalde metoden
+      <literal>lang()</literal> fra Language-objektet:
+    </para>
+    <programlisting>
+$language-&gt;lang('SOME_LANGUAGE_KEY');
+</programlisting>
+    <para>
+      Sprogfiler kan tilføjes ved at kalde metoden
+      <literal>add_lang()</literal> fra Language-objektet:
+    </para>
+    <programlisting>
+// Load a core language file
+$language-&gt;add_lang('posting');
+</programlisting>
+    <para>
+      Extension-udviklere bør bemærke, at metoden
+      <literal>add_lang()</literal> nu understøtter tilføjelse af
+      sprogfiler fra extensions, hvilket erstatter den forældede metode
+      <literal>add_lang_ext()</literal> fra User-objektet:
+    </para>
+    <programlisting>
+// Load an extension's language file
+$language-&gt;add_lang('demo', 'acme/demo');
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Bemærk argumentrækkefølgen for metoden
+        <literal>add_lang()</literal>. Den tager sprogfilens navn som
+        første argument, og det valgfrie andet argument er
+        pakkenavnet på en extension. Dette er den omvendte rækkefølge af
+        argumenter i forhold til den forældede
+        <literal>add_lang_ext()</literal> fra User-objektet.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="new-bbcode-engine">
+    <title>Ny BBkode-motor</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende gælder for phpBB 3.2 og senere versioner. Det er ikke
+        bagudkompatibelt med phpBB 3.1.
+      </para>
+    </warning>
+    <para>
+      Fra og med phpBB 3.2 er der integreret en ny og mere kraftfuld
+      BBkode-formateringsmotor. Den nye motor er
+      tredjepartsbiblioteket
+      <ulink url="https://github.com/s9e/TextFormatter/">s9e/TextFormatter</ulink>.
+      Dets integrationsklasser findes i
+      <literal>phpBB/phpbb/textformatter</literal>.
+    </para>
+    <para>
+      Den nye motor er allerede blevet udstyret med mange PHP-events,
+      hvilket gør det endnu nemmere end før for extensions at konfigurere
+      BBkoder og BBkode-formateret tekst. Følgende er de nye PHP-events:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Event
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_configure_before</literal>
+            </entry>
+            <entry>
+              Ændrer s9eTextFormatter-configuratoren, før
+              standardindstillingerne sættes.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_configure_after</literal>
+            </entry>
+            <entry>
+              Ændrer s9eTextFormatter-configuratoren, efter
+              standardindstillingerne er sat.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parser_setup</literal>
+            </entry>
+            <entry>
+              Konfigurerer parser-servicen. Kan bruges til at: slå
+              funktioner eller BBkoder til/fra, registrere variabler
+              eller brugerdefinerede parsere i s9eTextFormatter-parseren,
+              konfigurere s9eTextFormatter-parserens
+              runtime-indstillinger.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parse_before</literal>
+            </entry>
+            <entry>
+              Ændrer en tekst, før den parses.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parse_after</literal>
+            </entry>
+            <entry>
+              Ændrer en parset tekst i dens XML-form.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_renderer_setup</literal>
+            </entry>
+            <entry>
+              Konfigurerer renderer-servicen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_render_before</literal>
+            </entry>
+            <entry>
+              Ændrer en parset tekst, før den gengives.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_render_after</literal>
+            </entry>
+            <entry>
+              Ændrer en gengivet tekst.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Heldigvis er integrationen ret sømløs, og de fleste eksisterende
+      extensions, der håndterer beskeder behandlet af BBkode-motoren, bør
+      fortsætte med at virke uden behov for ændringer. For eksempel
+      fortsætter følgende phpBB-funktioner med at virke, som de gjorde i
+      phpBB 3.1:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>decode_message()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>generate_text_for_display()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>generate_text_for_edit()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>generate_text_for_storage()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>strip_bbcode()</literal>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Nogle enkle eksempler på, hvad der kan gøres med det nye bibliotek,
+      omfatter:
+    </para>
+    <programlisting>
+// Let's get the parser service from the container in this example
+$parser = $container-&gt;get('text_formatter.parser');
+
+// Disable or enable a BBCode
+$parser-&gt;disable_bbcode($name);
+$parser-&gt;enable_bbcode($name);
+
+// Disable or enable BBCodes in general
+$parser-&gt;disable_bbcodes();
+$parser-&gt;enable_bbcodes();
+
+// Let's get the text formatter utils from the container in this example
+$text_formatter_utils = $container-&gt;get('text_formatter.utils');
+
+// Remove a BBCode and its content from a message
+$text_formatter_utils-&gt;remove_bbcode($message, $bbcode);
+
+// Un-parse text back to its original form
+$text_formatter_utils-&gt;unparse($message);
+</programlisting>
+    <para>
+      En stor ændring, som den nye motor introducerer, er, hvordan tekst
+      (i indlæg, PB'er, signaturer osv.) gemmes. I phpBB 3.1 gemmes tekst
+      som HTML, hvor BBkoder og nogle andre funktioner erstattes ved
+      gengivelsestidspunktet. Fra og med phpBB 3.2 gemmes tekst som XML
+      og omdannes til HTML ved gengivelsestidspunktet. phpBB 3.2 har en
+      <link linkend="new-text-reparser">ny Text Reparser</link>-klasse,
+      som konverterer alle indlæg, PB'er, signaturer osv. til det nye
+      format kort tid efter opdatering til 3.2 (dette håndteres for det
+      meste af inkrementelle cron-jobs).
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Beskeder gemt i det gamle HTML-format vises stadig normalt, selv
+        før de konverteres til det nye XML-format. Dette sikrer en
+        sømløs oplevelse for et boards brugere.
+      </para>
+    </note>
+    <para>
+      Extensions, der gemmer deres egne beskeder med BBkoder og smileys,
+      bør overveje at tilføje en TextReparser-klasse for at sikre, at
+      deres beskeder opdateres til det nye XML-format. Se
+      <link linkend="new-text-reparser">Ny Text Reparser</link> for mere
+      information.
+    </para>
+    <para>
+      s9e/TextFormatter-bibliotekets
+      <ulink url="https://s9etextformatter.readthedocs.io">dokumentation
+      og kogebog</ulink>.
+    </para>
+  </sect1>
+  <sect1 id="new-text-reparser">
+    <title>Ny Text Reparser</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende gælder for phpBB 3.2 og senere versioner. Det er ikke
+        bagudkompatibelt med phpBB 3.1.
+      </para>
+    </warning>
+    <para>
+      phpBB 3.2 introducerer klassen
+      <literal>\phpbb\textreparser</literal> til at genparse gemt tekst i
+      databasen. Ved genparsning genopbygges BBkoder, smileys og anden
+      tekstformatering i indlæg, private beskeder, signaturer og alle
+      andre steder, hvor BBkoder bruges.
+    </para>
+    <para>
+      Klassen blev udtænkt for at give en måde at genparse BBkoder til
+      det nye XML-lagringsformat, der introduceres af
+      <link linkend="new-bbcode-engine">den nye BBkode-motor</link>. Når
+      et board opdateres fra 3.1 til 3.2, tages reparseren i brug på to
+      måder. Først bruges migrations til at genparse nogle af de mindre
+      databaseelementer (f.eks. forumbeskrivelser). Dernæst bruges
+      cron-opgaver til inkrementelt at genparse de større
+      databaseelementer (indlæg og PB'er).
+    </para>
+    <para>
+      Extensions, der gemmer deres egen tekst med BBkoder, smileys osv.,
+      bør overveje at bruge text reparseren for at sikre, at de også
+      opdateres til det nye XML-format. Extensions kan udvide text
+      reparseren. Det mindste, der kræves, er metoden
+      <literal>get_columns()</literal>, som returnerer et array, der
+      afbilder kolonnenavnene i tabellen, der gemmer den tekst, der skal
+      genparses, for eksempel:
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\textreparser\plugins;
+
+class demo_text extends \phpbb\textreparser\row_based_plugin
+{
+    public function get_columns()
+    {
+        return [
+            'id'            =&gt; 'demo_id',
+            'text'          =&gt; 'demo_message',
+            'bbcode_uid'    =&gt; 'demo_message_bbcode_uid',
+            'options'       =&gt; 'demo_message_bbcode_options',
+        ];
+    }
+}
+</programlisting>
+    <para>
+      Bemærk, at tabelnavnet endnu ikke er blevet angivet. Tabelnavnet
+      defineres faktisk som et argument i servicedefinitionen for
+      extensionens reparser-klasse:
+    </para>
+    <programlisting language="yaml">
+text_reparser.acme_demo_text:
+    class: acme\demo\textreparser\plugins\demo_text
+    arguments:
+        - '@dbal.conn'
+        - '%acme.demo.tables.demo_messages%'
+    tags:
+        - { name: text_reparser.plugin }
+</programlisting>
+    <para>
+      Næste trin er at tilføje vores reparser til phpBB's kø af
+      cron-jobs. Det gør vi ved blot at definere en cron-opgaveservice
+      for vores reparser på følgende måde:
+    </para>
+    <programlisting language="yaml">
+cron.task.text_reparser.acme_demo_text:
+    class: phpbb\cron\task\text_reparser\reparser
+    arguments:
+        - '@config'
+        - '@config_text'
+        - '@text_reparser.lock'
+        - '@text_reparser.manager'
+        - '@text_reparser_collection'
+    calls:
+        - [set_name, [cron.task.text_reparser.acme_demo_text]]
+        - [set_reparser, [text_reparser.acme_demo_text]]
+    tags:
+        - { name: cron.task }
+</programlisting>
+    <para>
+      Bemærk, at servicen bruger phpBB's cron-opgaveklasse til reparsere,
+      og derefter bruger tilvalget <literal>calls</literal> til at
+      inkludere vores reparser. Sørg for at sætte calls-tilvalgene til
+      de cron- og reparser-services, vi lige har defineret.
+    </para>
+    <para>
+      Til sidst, for at fuldføre opsætningen af cron-jobbene, skal vi
+      tilføje to nye configs til config-tabellen ved hjælp af en
+      migration:
+    </para>
+    <programlisting>
+public function update_data()
+{
+    return [
+        ['config.add', ['text_reparser.acme_demo_text_cron_interval', 10]],
+        ['config.add', ['text_reparser.acme_demo_text_last_cron', 0]],
+    ];
+}
+</programlisting>
+    <para>
+      Bemærk, at disse configs er navnet på vores text_reparser.plugin
+      <literal>text_reparser.acme_demo_text</literal> plus
+      <literal>_cron_interval</literal> og
+      <literal>_last_cron</literal>. <literal>cron_interval</literal> bør
+      være en værdi i sekunder, der skal ventes mellem jobs, i dette
+      tilfælde "10", og <literal>last_cron</literal> bør altid sættes til
+      "0".
+    </para>
+    <tip>
+      <title>Tip</title>
+      <para>
+        I nogle tilfælde vil du måske køre din reparser fra en
+        migration. Du har f.eks. brug for, at din gemte tekst genparses
+        med det samme under extension-opdateringen, og du vil ikke vente
+        på, at den går gennem cron-opgavekøen.
+      </para>
+      <para>
+        Hvis mængden af rækker, der skal genparses, er stor, skal den
+        genparses inkrementelt, i bidder, for at minimere risikoen for en
+        PHP-timeout eller databasekorruption. Følgende er et eksempel på
+        en brugerdefineret funktion i en migration, der arbejder i
+        inkrementelle bidder og behandler 50 rækker ad gangen:
+      </para>
+      <programlisting>
+/**
+ * Run the Acme Demo text reparser
+ *
+ * @param int $current A message id
+ *
+ * @return bool|int A message id or true if finished
+ */
+public function reparse($current = 0)
+{
+    // Get our reparser
+    $reparser = new \acme\demo\textreparser\plugins\demo_text(
+        $this-&gt;db,
+        $this-&gt;container-&gt;getParameter('core.table_prefix') . 'demo_messages'
+    );
+
+    // If $current id is empty, get the highest id from the db
+    if (empty($current))
+    {
+        $current = $reparser-&gt;get_max_id();
+    }
+
+    $limit = 50; // Reparse in chunks of 50 rows at a time
+    $start = max(1, $current + 1 - $limit);
+    $end   = max(1, $current);
+
+    // Run the reparser
+    $reparser-&gt;reparse_range($start, $end);
+
+    // Update the $current id
+    $current = $start - 1;
+
+    // Return the $current id, or true when finished
+    return ($current === 0) ? true : $current;
+}
+</programlisting>
+    </tip>
+  </sect1>
+  <sect1 id="new-file-uploader">
+    <title>Ny filuploader</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende er en <emphasis role="strong">påkrævet</emphasis>
+        ændring for phpBB 3.2 og senere versioner. Den er ikke
+        bagudkompatibel med phpBB 3.1. Extensions, der foretager denne
+        ændring, skal udgive en ny hovedversion, der dropper
+        understøttelsen af 3.1.
+      </para>
+    </warning>
+    <para>
+      phpBB 3.2 introducerer to nye klasser til upload af filer:
+      <literal>filespec</literal> og <literal>upload</literal>. Disse er
+      blevet omskrevet og er baseret på de tidligere tilgængelige klasser
+      <literal>filespec</literal> og <literal>fileupload</literal>.
+    </para>
+    <para>
+      For information om de nye klasser, læs dokumentationen
+      <literal>../files/overview</literal>.
+    </para>
+    <para>
+      For at opdatere en extension til at bruge den nye klasse, læs
+      dokumentationen
+      <ulink url="../files/upload.html#converting-uses-of-fileupload-class">Konvertering
+      af brug af klassen fileupload</ulink>.
+    </para>
+  </sect1>
+  <sect1 id="new-font-awesome-icons">
+    <title>Nye Font Awesome-ikoner</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende gælder for phpBB 3.2 og senere versioner. Det er ikke
+        bagudkompatibelt med phpBB 3.1.
+      </para>
+    </warning>
+    <para>
+      phpBB 3.2 inkluderer Font Awesome-værktøjskassen. Den bruges af
+      standardtypografien Prosilver og har erstattet næsten alle
+      gif/png-ikoner med et fontikon.
+    </para>
+    <para>
+      Resultatet af dette er betydelige skabelonændringer i Prosilver,
+      herunder nogle nye CSS-klasser. Extensions skrevet til phpBB 3.1,
+      der bruger nogen af Prosilvers ikoner, kan have brug for
+      justeringer for at være kompatible med phpBB 3.2.
+    </para>
+    <para>
+      Fordelen ved de nye
+      <ulink url="https://fontawesome.com">Font Awesome-ikoner</ulink> er,
+      at de gør det nemt at forbedre GUI-elementerne i din extension.
+      Hvis en extension f.eks. har et "Delete"-link eller en
+      "Delete"-knap, kan du nemt tilføje et pænt lille
+      skraldespandsikon til linket eller knappen:
+    </para>
+    <programlisting language="html">
+&lt;a href=&quot;#&quot;&gt;
+    &lt;i class=&quot;icon fa-trash fa-fw&quot;&gt;&lt;/i&gt;&lt;span&gt;Delete&lt;/span&gt;
+&lt;/a&gt;
+</programlisting>
+  </sect1>
+  <sect1 id="updated-notifications">
+    <title>Opdaterede notifikationer</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende er en <emphasis role="strong">påkrævet</emphasis>
+        ændring for phpBB 3.2 og senere versioner. Den er ikke
+        bagudkompatibel med phpBB 3.1. Extensions, der foretager denne
+        ændring, skal udgive en ny hovedversion, der dropper
+        understøttelsen af 3.1.
+      </para>
+    </warning>
+    <para>
+      Extensions, der bruger phpBB's indbyggede notifikationssystem, skal
+      om nødvendigt foretage følgende opdateringer af deres
+      notifikationsklasser. De væsentligste ændringer er foretaget i
+      metoderne <literal>find_users_for_notification()</literal> og
+      <literal>create_insert_array()</literal>.
+    </para>
+    <sect2 id="find_users_for_notification">
+      <title>find_users_for_notification()</title>
+      <para>
+        Denne metode skal returnere et array af brugere, der kan se
+        notifikationen. Selvom det er extension-forfatterens ansvar at
+        afgøre, hvordan dette array af brugere opbygges, kunne et
+        eksempel på brug i phpBB 3.1 se sådan ud:
+      </para>
+      <programlisting>
+public function find_users_for_notification($data, $options = [])
+{
+    // run code to query a group of users from the database...
+
+    while ($row = $this-&gt;db-&gt;sql_fetchrow($result))
+    {
+        $users[$row['user_id']] = [''];
+    }
+
+    // do any additional processing...
+
+    return $users;
+}
+</programlisting>
+      <para>
+        Fra og med phpBB 3.2 er en ny hjælper til at hente listen over
+        metoder, der er aktiveret som standard, tilgængelig fra
+        manager-klassen, til at tildele som array-værdierne i
+        brugerarrayet:
+      </para>
+      <programlisting>
+public function find_users_for_notification($data, $options = [])
+{
+    // run code to query a group of users from the database...
+
+    while ($row = $this-&gt;db-&gt;sql_fetchrow($result))
+    {
+        $users[$row['user_id']] = $this-&gt;notification_manager-&gt;get_default_methods();
+    }
+
+    // do any additional processing...
+
+    return $users;
+}
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Bemærk, at vi blot har erstattet den tomme værdi
+          <literal>['']</literal>, der blev tildelt til hver bruger, med
+          det nye metodekald
+          <literal>$this-&gt;notification_manager-&gt;get_default_methods()</literal>.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="create_insert_array">
+      <title>create_insert_array()</title>
+      <para>
+        I phpBB 3.1 returnerede denne metode et array af data, klar til
+        at blive indsat i databasen, fra den overordnede klasse:
+      </para>
+      <programlisting>
+public function create_insert_array($data, $pre_create_data = [])
+{
+    // prepare some data...
+
+    return parent::create_insert_array($data, $pre_create_data);
+}
+</programlisting>
+      <para>
+        I phpBB 3.2 tilføjes dataene nu til klassens data-egenskab, så
+        det ikke længere er nødvendigt at bruge et
+        <literal>return</literal>. Kald blot metoden fra den overordnede
+        klasse til sidst:
+      </para>
+      <programlisting>
+public function create_insert_array($data, $pre_create_data = [])
+{
+    // prepare some data...
+
+    parent::create_insert_array($data, $pre_create_data);
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="updated-twig-syntax">
+    <title>Opdateret Twig-syntaks</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende gælder for phpBB 3.2 og senere versioner. Hvis du skal
+        bevare bagudkompatibilitet med phpBB 3.1, kan du se bort fra
+        dette afsnit.
+      </para>
+    </warning>
+    <para>
+      Hvis du allerede bruger Twig-skabelonsyntaksen og har brugt
+      løkkestrukturer i dine skabeloner, er du sikkert bekendt med den
+      mærkelige brug af præfikset <literal>loops</literal>, som er
+      påkrævet i phpBB 3.1:
+    </para>
+    <programlisting>
+{# phpBB 3.1 and 3.2 compatible #}
+{% for item in loops.items %}
+   item.MY_VAR
+{% endfor %}
+</programlisting>
+    <para>
+      Fra og med phpBB 3.2 er dette krav fjernet, hvilket giver dig
+      mulighed for at bruge naturlig Twig-syntaks til løkkestrukturer
+      (dvs. præfikset <literal>loops</literal> er ikke længere
+      nødvendigt):
+    </para>
+    <programlisting>
+{# phpBB 3.2 or later only #}
+{% for item in items %}
+   item.MY_VAR
+{% endfor %}
+</programlisting>
+    <para>
+      Hvis du ønsker at bevare bagudkompatibilitet med phpBB 3.1, skal du
+      fortsat bruge præfikset <literal>loops</literal>.
+    </para>
+  </sect1>
+  <sect1 id="updated-symfony-services">
+    <title>Opdaterede Symfony-services</title>
+    <para>
+      Følgende ændringer skyldes forældelser introduceret i Symfony 2.8
+      (som bruges i phpBB 3.2). Disse forældelser fjernes i Symfony 3
+      (som bruges i phpBB 3.3).
+    </para>
+    <sect2 id="deprecating-special-characters-at-the-beginning-of-unquoted-strings">
+      <title>Forældelse af specialtegn i begyndelsen af strenge uden
+      anførselstegn</title>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Følgende anbefales for phpBB 3.1 og senere versioner. Det
+          bliver påkrævet fra phpBB 3.3 og senere.
+        </para>
+      </warning>
+      <para>
+        Ifølge Yaml-specifikationen må strenge uden anførselstegn ikke
+        starte med <literal>@</literal>, <literal>%</literal>,
+        <literal></literal>, | eller &gt;`. Du skal omslutte disse
+        strenge med enkelte eller dobbelte anførselstegn:
+      </para>
+      <programlisting language="yaml">
+vendor.package.class:
+   class: vendor\package\classname
+   arguments:
+      - '@dbal.conn'
+      - '%custom.tables%'
+   calls:
+      - [set_controller_helper, ['@controller.helper']]
+</programlisting>
+    </sect2>
+    <sect2 id="deprecating-scopes-and-introducing-shared-services">
+      <title>Forældelse af scopes og introduktion af delte services</title>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Følgende er en <emphasis role="strong">påkrævet</emphasis>
+          ændring for phpBB 3.2 og senere versioner. Den er ikke
+          bagudkompatibel med phpBB 3.1. Extensions, der foretager denne
+          ændring, skal udgive en ny hovedversion, der dropper
+          understøttelsen af 3.1.
+        </para>
+      </warning>
+      <para>
+        Som standard er alle services delte services. Det betyder, at en
+        klasse instantieres én gang og bruges, hver gang du beder om den
+        fra service-containeren.
+      </para>
+      <para>
+        I nogle tilfælde er det dog ønsket at gøre en klasse
+        <emphasis>ikke-delt</emphasis>, hvor en ny instans oprettes, hver
+        gang du beder om servicen. Et eksempel på dette er
+        Notifications-klasserne.
+      </para>
+      <para>
+        I phpBB 3.1 blev dette defineret i
+        <literal>services.yml</literal> ved at sætte tilvalget
+        <literal>scope</literal> til <literal>prototype</literal>:
+      </para>
+      <programlisting language="yaml">
+vendor.package.class:
+   class: vendor\package\classname
+   scope: prototype
+</programlisting>
+      <para>
+        For phpBB 3.2 skal servicedefinitioner i stedet for
+        <literal>scope</literal> nu konfigurere et tilvalg
+        <literal>shared</literal> og sætte det til
+        <literal>false</literal> for at opnå samme resultat som det
+        tidligere prototype-scope:
+      </para>
+      <programlisting language="yaml">
+vendor.package.class:
+   class: vendor\package\classname
+   shared: false
+</programlisting>
+    </sect2>
+    <sect2 id="deprecating-route-pattern">
+      <title>Forældelse af Route Pattern</title>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Følgende anbefales for phpBB 3.1 og senere versioner. Det
+          bliver påkrævet fra phpBB 3.3 og senere.
+        </para>
+      </warning>
+      <para>
+        Ældre versioner af Symfony og phpBB har tilladt, at routes blev
+        defineret ved hjælp af nøgleordet <literal>pattern</literal>:
+      </para>
+      <programlisting language="yaml">
+vendor.package.route:
+   pattern: /{value}
+</programlisting>
+      <para>
+        For phpBB 3.2 skal route-stier i stedet defineres ved hjælp af
+        nøgleordet <literal>path</literal>:
+      </para>
+      <programlisting language="yaml">
+vendor.package.route:
+   path: /{value}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="updated-includecss">
+    <title>Opdateret INCLUDECSS</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Følgende gælder for phpBB 3.2 og senere versioner. Hvis du skal
+        bevare bagudkompatibilitet med phpBB 3.1, kan du se bort fra
+        dette afsnit.
+      </para>
+    </warning>
+    <para>
+      Fra og med phpBB 3.2 kan skabelontagget
+      <literal>INCLUDECSS</literal> nu kaldes hvor som helst i en
+      skabelon, hvilket gør det lige så nemt og fleksibelt at
+      implementere fra ethvert skabelonevent eller enhver fil som tagget
+      <literal>INCLUDEJS</literal>.
+    </para>
+    <para>
+      Tidligere, i phpBB 3.1, kunne extensions kun bruge dette tag i
+      skabeloneventet <literal>overall_header_head_append</literal>,
+      eller før inkludering af
+      <literal>overall_header.html</literal> i en brugerdefineret
+      skabelonfil.
+    </para>
+  </sect1>
+  <sect1 id="additional-helpers">
+    <title>Yderligere hjælpere</title>
+    <sect2 id="new-group-helper">
+      <title>Ny gruppehjælper</title>
+      <para>
+        phpBB 3.2 tilføjer en ny hjælper, der forenkler opgaven med at
+        vise brugergruppenavne.
+      </para>
+      <para>
+        I phpBB 3.1 krævede visning af et brugergruppenavn ordrig kode
+        som:
+      </para>
+      <programlisting>
+// phpbb 3.1 and 3.2 compatible:
+($row['group_type'] == GROUP_SPECIAL) ? $user-&gt;lang('G_' . $row['group_name']) : $row['group_name'];
+</programlisting>
+      <para>
+        Dette er enklere i phpBB 3.2 med metoden
+        <literal>get_name()</literal> i klassen
+        <literal>\phpbb\group\helper\</literal>:
+      </para>
+      <programlisting>
+// phpBB 3.2 only:
+$group_helper-&gt;get_name($row['group_name']);
+</programlisting>
+    </sect2>
+    <sect2 id="bbcode-faq-controller-route">
+      <title>Route til BBCode FAQ-controlleren</title>
+      <para>
+        phpBB 3.2 har nu en indbygget routing-definition for
+        BBCode-FAQ-siden. At linke til denne side er almindeligt for
+        extensions, der har deres egen BBkode-beskedredigering.
+      </para>
+      <para>
+        I phpBB 3.1 så et link til BBCode-FAQ'en sådan ud:
+      </para>
+      <programlisting>
+// phpBB 3.1 and 3.2 compatible:
+$u_bbcode_faq = append_sid(&quot;{$phpbb_root_path}faq.{$phpEx}&quot;, 'mode=bbcode');
+</programlisting>
+      <para>
+        I phpBB 3.2 kan links til BBCode-FAQ'en håndteres ved hjælp af
+        routing-systemet:
+      </para>
+      <programlisting>
+// phpBB 3.2 only:
+$u_bbcode_faq = $controller_helper-&gt;route('phpbb_help_bbcode_controller');
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

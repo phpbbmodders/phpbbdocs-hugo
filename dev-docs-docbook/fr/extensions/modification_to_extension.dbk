@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Mettre à jour une modification phpBB 3.0 vers une extension</title>
+  </articleinfo>
+  <sect1 id="extension-structure">
+    <title>Structure de l'extension</title>
+    <para>
+      Le changement le plus évident devrait être l'emplacement où les
+      MODs / Extensions sont stockées. Dans phpBB 3.0, tous les fichiers
+      étaient placés dans le dossier racine du noyau. Dans phpBB 3.1, un
+      dossier spécial pour les extensions a été créé. Il s'appelle
+      <literal>ext/</literal>.
+    </para>
+    <sect2 id="directory">
+      <title>Dossier</title>
+      <para>
+        Chaque extension possède son propre dossier. Cependant, vous
+        devez également utiliser un dossier vendor supplémentaire (avec
+        votre nom d'auteur ou nom de groupe d'auteurs). Dans le cas de
+        mon Newspage, les fichiers seront dans
+      </para>
+      <programlisting>
+phpBB/ext/nickvergessen/newspage/
+</programlisting>
+      <para>
+        Il ne devrait pas être nécessaire d'avoir des fichiers situés
+        hors de ce dossier. Peu importe les fichiers, qu'il s'agisse de
+        styles, de langue ou de fichiers de module ACP. Tous devraient
+        être déplacés dans le dossier de votre extension :
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                nouveau dossier
+              </entry>
+              <entry>
+                dossier actuel
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>acp/*_module.php</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/includes/acp/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>acp/*_info.php</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/includes/acp/info/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>adm/style/</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/adm/style/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>config/</literal>
+              </entry>
+              <entry>
+                ---
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>controller/</literal>
+              </entry>
+              <entry>
+                <literal>*.php</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>event/</literal>
+              </entry>
+              <entry>
+                ---
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>language/</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/language/</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>migrations/</literal>
+              </entry>
+              <entry>
+                ---
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>styles/</literal>
+              </entry>
+              <entry>
+                <literal>phpBB/styles/</literal>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        Les dossiers nouvellement ajoutés ont déjà été listés. Leur
+        utilisation sera expliquée dans les paragraphes suivants.
+      </para>
+    </sect2>
+    <sect2 id="important-new-files">
+      <title>Nouveaux fichiers importants</title>
+      <para>
+        Il y a un nouveau fichier dont votre extension a besoin afin
+        d'être reconnue par le système. Il s'appelle
+        <literal>composer.json</literal> : il spécifie les prérequis de
+        votre extension ainsi que quelques informations sur l'auteur. La
+        mise en page est un simple tableau json, les clés devraient
+        suffisamment s'expliquer d'elles-mêmes.
+      </para>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Vous ne devez pas modifier l'élément <literal>type</literal>.
+        </para>
+      </note>
+      <para>
+        Dans la section <literal>require</literal>, vous pouvez également
+        spécifier d'autres extensions requises pour installer celle-ci.
+        (<emphasis>La validation pour cela n'est pas encore implémentée,
+        mais devrait l'être dans la 3.3.0</emphasis>)
+      </para>
+      <programlisting language="json">
+{
+    &quot;name&quot;: &quot;nickvergessen/newspage&quot;,
+    &quot;type&quot;: &quot;phpbb-extension&quot;,
+    &quot;description&quot;: &quot;Adds a extra-page to the board where a switchable number of news are displayed. The text can be shorten to a certain number of chars. Also the Icons can be switched of (post icons, user icons)&quot;,
+    &quot;homepage&quot;: &quot;https://github.com/nickvergessen/phpbb3-mod-newspage&quot;,
+    &quot;version&quot;: &quot;1.1.0&quot;,
+    &quot;time&quot;: &quot;2013-03-16&quot;,
+    &quot;license&quot;: &quot;GPL-2.0&quot;,
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;Joas Schilling&quot;,
+            &quot;email&quot;: &quot;nickvergessen@gmx.de&quot;,
+            &quot;homepage&quot;: &quot;http://www.flying-bits.org&quot;,
+            &quot;role&quot;: &quot;Lead Developer&quot;
+        }
+    ],
+    &quot;require&quot;: {
+        &quot;php&quot;: &quot;&gt;=5.3.3&quot;
+    },
+    &quot;extra&quot;: {
+        &quot;display-name&quot;: &quot;phpBB 3.1 NV Newspage Extension&quot;,
+        &quot;soft-require&quot;: {
+            &quot;phpbb/phpbb&quot;: &quot;&gt;=3.1.0-RC2,&lt;3.2.*@dev&quot;
+        }
+    }
+ }
+</programlisting>
+      <para>
+        Le second nouveau fichier s'appelle <literal>ext.php</literal>.
+        Il peut être utilisé pour étendre les fonctionnalités lors de
+        l'installation/désinstallation de votre extension :
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/ext.php
+
+// this file is not really needed, when empty it can be ommitted
+// however you can override the default methods and add custom
+// installation logic
+
+namespace nickvergessen\newspage;
+
+class ext extends \phpbb\extension\base
+{
+}
+</programlisting>
+    </sect2>
+    <sect2 id="front-facing-files-routes-and-services">
+      <title>Fichiers orientés utilisateur, routes et services</title>
+      <para>
+        Alors qu'en 3.0 vous créiez simplement un nouveau fichier dans le
+        dossier racine de phpBB, vous devez utiliser le nouveau système
+        de contrôleurs en 3.1 pour les extensions. Vos liens passeront de
+        quelque chose comme <literal>phpBB/newspage.php</literal> à
+        <literal>phpBB/app.php/newspage</literal>. Si le forum a activé
+        la réécriture d'URL, vos liens auront une apparence un peu plus
+        soignée, comme <literal>phpBB/newspage</literal>.
+      </para>
+      <para>
+        Afin de lier une règle de routage spécifique à votre extension,
+        vous devez définir la route dans le
+        <literal>config/routing.yml</literal> de votre extension.
+      </para>
+      <para>
+        Pour un démarrage simple du Newspage, deux règles suffisent. La
+        première règle est pour la page de base, actuellement
+        <literal>newspage.php</literal>. La seconde est pour la
+        pagination, comme <literal>newspage.php?start=5</literal>. La
+        première règle définit une page par défaut (1), tandis que la
+        seconde règle exige qu'une seconde partie de l'URL soit un
+        entier.
+      </para>
+      <programlisting language="yaml">
+# ext/nickvergessen/newspage/config/routing.yml
+newspage_base_controller:
+    pattern: /newspage
+    defaults: { _controller: nickvergessen.newspage.controller:base, page: 1 }
+
+newspage_page_controller:
+    pattern: /newspage/{page}
+    defaults: { _controller: nickvergessen.newspage.controller:base }
+    requirements:
+        page:  \d+
+</programlisting>
+      <para>
+        La chaîne que nous définissons pour <literal>_controller</literal>
+        définit un service (<literal>nickvergessen.newspage.controller</literal>)
+        et une méthode (<literal>base</literal>) de la classe qui est
+        alors appelée. Les services sont définis dans le
+        <literal>config/services.yml</literal> de votre extension. Les
+        services sont des instances de classes. Les services sont
+        utilisés de sorte qu'il n'existe qu'une seule instance de la
+        classe qui est utilisée en permanence. Vous pouvez également
+        définir les arguments du constructeur de votre classe. L'exemple
+        de définition du service du contrôleur Newspage ressemblerait à
+        quelque chose comme :
+      </para>
+      <programlisting language="yaml">
+# ext/nickvergessen/newspage/config/services.yml
+services:
+    nickvergessen.newspage.controller:
+        class: nickvergessen\newspage\controller\main
+        arguments:
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@controller.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+</programlisting>
+      <para>
+        Tout service précédemment défini dans votre fichier, ou dans le
+        fichier du noyau de phpBB
+        <literal>phpBB/config/services.yml</literal>, peut également être
+        utilisé comme argument, ainsi que certaines chaînes prédéfinies
+        (comme <literal>core.root_path</literal> ici).
+      </para>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Les classes de <literal>phpBB/ext/</literal> sont chargées
+          automatiquement par leur espace de noms et leurs noms de
+          classe, où l'antislash (<literal>\</literal>) représente les
+          dossiers. Dans ce cas, la classe
+          <literal>nickvergessen\newspage\controller\main</literal>
+          serait située dans
+          <literal>phpBB/ext/nickvergessen/newspage/controller/main.php</literal>
+        </para>
+      </note>
+      <para>
+        Pour plus d'explications sur le
+        <ulink url="https://area51.phpbb.com/docs/dev/master/extensions/tutorial_controllers.html#routing">Routage</ulink>
+        et les
+        <ulink url="https://area51.phpbb.com/docs/dev/master/extensions/tutorial_controllers.html#dependencies">Services</ulink>,
+        consultez notre documentation.
+      </para>
+      <para>
+        Dans cet exemple, mon
+        <emphasis role="strong">controller/main.php</emphasis>
+        ressemblerait à ce qui suit :
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/controller/main.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+namespace nickvergessen\newspage\controller;
+
+class main
+{
+   /**
+    * Constructor
+    * NOTE: The parameters of this method must match in order and type with
+    * the dependencies defined in the services.yml file for this service.
+    *
+    * @param \phpbb\config            $config    Config object
+    * @param \phpbb\template          $template  Template object
+    * @param \phpbb\user              $user      User object
+    * @param \phpbb\controller\helper $helper    Controller helper object
+    * @param string                   $root_path phpBB root path
+    * @param string                   $php_ext   phpEx
+    */
+   public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user, \phpbb\controller\helper $helper, $root_path, $php_ext)
+   {
+       $this-&gt;config = $config;
+       $this-&gt;template = $template;
+       $this-&gt;user = $user;
+       $this-&gt;helper = $helper;
+       $this-&gt;root_path = $root_path;
+       $this-&gt;php_ext = $php_ext;
+   }
+
+   /**
+    * Base controller to be accessed with the URL /newspage/{page}
+    * (where {page} is the placeholder for a value)
+    *
+    * @param int    $page    Page number taken from the URL
+    * @return Symfony\Component\HttpFoundation\Response A Symfony Response object
+    */
+   public function base($page = 1)
+   {
+       /*
+       * Do some magic here,
+       * load your data and send it to the template.
+       */
+
+       /*
+       * The render method takes up to three other arguments
+       * @param    string        Name of the template file to display
+       *                        Template files are searched for two places:
+       *                        - phpBB/styles/&lt;style_name&gt;/template/
+       *                        - phpBB/ext/&lt;all_active_extensions&gt;/styles/&lt;style_name&gt;/template/
+       * @param    string        Page title
+       * @param    int            Status code of the page (200 - OK [ default ], 403 - Unauthorised, 404 - Page not found, etc.)
+       */
+       return $this-&gt;helper-&gt;render('newspage_body.html');
+   }
+}
+</programlisting>
+      <note>
+        <title>Remarque</title>
+        <para>
+          L'ordre des arguments dans services.yml doit correspondre à
+          l'ordre des arguments passés au constructeur de la classe
+          <literal>public function __construct()</literal>. Sinon, une
+          erreur sera levée et le forum sera cassé si vous essayez
+          d'activer l'extension.
+        </para>
+      </note>
+      <para>
+        Vous pouvez également avoir plusieurs méthodes différentes dans
+        un seul contrôleur, ainsi que plusieurs contrôleurs, afin de
+        mieux organiser votre code.
+      </para>
+    </sect2>
+    <sect2 id="acp-modules">
+      <title>Modules ACP</title>
+      <para>
+        Cette section s'applique également aux modules MCP et UCP.
+      </para>
+      <para>
+        Comme mentionné précédemment, ces fichiers sont également
+        déplacés dans le dossier de votre extension. Le fichier info,
+        actuellement situé dans
+        <literal>phpBB/includes/acp/info/acp_newspage.php</literal>, va
+        devenir
+        <literal>ext/nickvergessen/newspage/acp/main_info.php</literal>
+        et le module lui-même est déplacé de
+        <literal>phpBB/includes/acp/acp_newspage.php</literal> vers
+        <literal>ext/nickvergessen/newspage/acp/main_module.php</literal>.
+        Afin de pouvoir charger automatiquement les fichiers par leurs
+        noms de classe, nous devons apporter quelques ajustements aux
+        classes elles-mêmes.
+      </para>
+      <para>
+        Pour <literal>main_info.php</literal>, nous devons ajuster le
+        nom de la classe de <literal>acp_newspage_info</literal> à
+        <literal>main_info</literal> et également changer la valeur de
+        <literal>'filename'</literal> dans le tableau retourné.
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/acp/main_info.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+namespace nickvergessen\newspage\acp;
+
+class main_info
+{
+   function module()
+   {
+       return [
+           'filename' =&gt; '\nickvergessen\newspage\acp\main_module',
+           'title'    =&gt; 'ACP_NEWSPAGE_TITLE',
+           'modes'    =&gt; [
+               'config_newspage' =&gt; [
+                   'title' =&gt; 'ACP_NEWSPAGE_CONFIG',
+                   'auth'  =&gt; 'acl_a_board',
+                   'cat'   =&gt; ['ACP_NEWSPAGE_TITLE']
+               ],
+           ],
+       ];
+   }
+}
+</programlisting>
+      <para>
+        Dans le cas du module, ajustez simplement le nom de la classe :
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/acp/main_module.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+/**
+ * @ignore
+ */
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+namespace nickvergessen\newspage\acp;
+
+class main_module
+{
+   var $u_action;
+
+   function main($id, $mode)
+   {
+       // Your magic stuff here
+   }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="database-changes-umil-replaced-by-migrations">
+    <title>Modifications de la base de données, UMIL remplacé par les Migrations</title>
+    <para>
+      Pour plus de documentation sur les migrations, consultez l'API
+      <literal>../migrations/index</literal> et la documentation
+      <literal>tutorial_migrations</literal>
+    </para>
+    <para>
+      Fondamentalement, les migrations font la même chose que vos
+      fichiers UMIL en 3.0. Elles effectuent les modifications de base
+      de données de votre MOD/Extension. La plus grande différence
+      entre les migrations et UMIL est qu'alors que vous aviez un seul
+      fichier avec un seul tableau dans UMIL pour toutes vos
+      modifications, vous pouvez avoir plusieurs fichiers dans les
+      Migrations. Vous créez généralement un nouveau fichier de
+      migration chaque fois que vous devez introduire de nouvelles
+      modifications de base de données. Mais jetons de nouveau un coup
+      d'œil au Newspage.
+    </para>
+    <programlisting>
+$versions = [
+   '1.0.0'    =&gt; [
+       'config_add' =&gt; [
+           ['news_number', 5],
+           ['news_forums', '0'],
+           ['news_char_limit', 500],
+           ['news_user_info', 1],
+           ['news_post_buttons', 1],
+       ],
+       'module_add' =&gt; [
+           ['acp', 'ACP_CAT_DOT_MODS', 'NEWS'],
+
+           ['acp', 'NEWS', [
+                   'module_basename'    =&gt; 'newspage',
+                   'module_langname'    =&gt; 'NEWS_CONFIG',
+                   'module_mode'        =&gt; 'overview',
+                   'module_auth'        =&gt; 'acl_a_board',
+               ],
+           ],
+       ],
+   ],
+   '1.0.1'    =&gt; [
+       'config_add' =&gt; [
+           ['news_pages', 1],
+       ],
+   ],
+   '1.0.2'    =&gt; [],
+   '1.0.3' =&gt; [
+       'config_add' =&gt; [
+           ['news_attach_show', 1],
+           ['news_cat_show', 1],
+           ['news_archive_per_year', 1],
+       ],
+   ],
+];
+</programlisting>
+    <sect2 id="schema-changes">
+      <title>Modifications de schéma</title>
+      <para>
+        Le Newspage n'a aucune modification de schéma de base de
+        données, donc j'utiliserai l'exemple
+        <literal>../migrations/schema_changes</literal> de la
+        Documentation. Fondamentalement, vous devez avoir deux méthodes
+        dans votre fichier de classe de migration :
+      </para>
+      <programlisting>
+public function update_schema()
+</programlisting>
+      <para>
+        et
+      </para>
+      <programlisting>
+public function revert_schema()
+</programlisting>
+      <para>
+        où les deux méthodes retournent un tableau avec les
+        modifications :
+      </para>
+      <programlisting>
+public function update_schema()
+{
+   return [
+       'add_columns'        =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_teampage'    =&gt; ['UINT', 0, 'after' =&gt; 'group_legend'],
+           ],
+           $this-&gt;table_prefix . 'profile_fields'    =&gt; [
+               'field_show_on_pm'        =&gt; ['BOOL', 0],
+           ],
+       ],
+       'change_columns'    =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_legend'        =&gt; ['UINT', 0],
+           ],
+       ],
+   ];
+}
+
+public function revert_schema()
+{
+   return [
+       'drop_columns'        =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_teampage',
+           ],
+           $this-&gt;table_prefix . 'profile_fields'    =&gt; [
+               'field_show_on_pm',
+           ],
+       ],
+       'change_columns'    =&gt; [
+           $this-&gt;table_prefix . 'groups'        =&gt; [
+               'group_legend'        =&gt; ['BOOL', 0],
+           ],
+       ],
+   ];
+}
+</programlisting>
+      <para>
+        La méthode <literal>revert_schema()</literal> devrait ainsi
+        annuler toutes les modifications apportées par
+        <literal>update_schema()</literal>.
+      </para>
+    </sect2>
+    <sect2 id="data-changes">
+      <title>Modifications de données</title>
+      <para>
+        Les modifications de données, comme l'ajout de modules, de
+        permissions et de configurations, sont fournies avec la fonction
+        <literal>update_data()</literal>.
+      </para>
+      <para>
+        Cette fonction retourne également un tableau. L'exemple pour la
+        mise à jour de la version 1.0.0 du Newspage ressemblerait à ce
+        qui suit :
+      </para>
+      <programlisting>
+public function update_data()
+{
+   return [
+       ['config.add', ['news_number', 5]],
+       ['config.add', ['news_forums', '0']],
+       ['config.add', ['news_char_limit', 500]],
+       ['config.add', ['news_user_info', 1]],
+       ['config.add', ['news_post_buttons', 1]],
+
+       ['module.add', [
+           'acp',
+           'ACP_CAT_DOT_MODS',
+           'ACP_NEWSPAGE_TITLE'
+       ]],
+       ['module.add', [
+           'acp',
+           'ACP_NEWSPAGE_TITLE',
+           [
+               'module_basename'    =&gt; '\nickvergessen\newspage\acp\main_module',
+               'modes'                =&gt; ['config_newspage'],
+           ],
+       ]],
+
+       ['config.add', ['newspage_mod_version', '1.0.0']],
+   ];
+}
+</programlisting>
+      <para>
+        Plus d'informations sur ces outils de mise à jour de données
+        peuvent être trouvées dans
+        <literal>../migrations/tools/index</literal>.
+      </para>
+    </sect2>
+    <sect2 id="dependencies-and-finishing-up-migrations">
+      <title>Dépendances et finalisation des migrations</title>
+      <para>
+        Il ne reste maintenant que deux choses dont votre fichier de
+        migration a besoin. La première est une vérification, qui
+        permet à phpBB de voir si la migration est déjà installée, bien
+        qu'elle n'ait pas encore été exécutée (par exemple lors de la
+        mise à jour d'un MOD 3.0 vers une Extension 3.1).
+      </para>
+      <para>
+        Le moyen le plus simple pour cette vérification pourrait être la
+        version du MOD, mais lorsque vous ajoutez des colonnes aux
+        tables, vous pouvez également vérifier si elles existent :
+      </para>
+      <programlisting>
+public function effectively_installed()
+{
+   return isset($this-&gt;config['newspage_mod_version']) &amp;&amp; version_compare($this-&gt;config['newspage_mod_version'], '1.0.0', '&gt;=');
+}
+</programlisting>
+      <para>
+        Comme les fichiers de migration peuvent avoir presque n'importe
+        quel nom, phpBB pourrait être incapable de trier correctement
+        vos fichiers de migration. Pour éviter ce problème, vous pouvez
+        définir un ensemble de dépendances qui doivent être installées
+        avant que votre migration puisse être installée. phpBB essaiera
+        de les installer avant d'installer votre migration. Si elles ne
+        peuvent pas être trouvées ou installées, votre installation
+        échouera également. Pour la migration 1.0.0, je n'exigerai que
+        la migration <literal>3.1.0-a1</literal> de phpBB :
+      </para>
+      <programlisting>
+static public function depends_on()
+{
+   return ['\phpbb\db\migration\data\v310\alpha1'];
+}
+</programlisting>
+      <para>
+        Toutes les autres migrations de Newspage peuvent maintenant
+        exiger le premier fichier de migration de Newspage, et donc
+        toutes dépendront également de la migration 3.1.0-a1 de phpBB.
+      </para>
+      <para>
+        Un fichier complet pourrait ressembler à ceci :
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/migrations/v10x/release_1_0_0.php
+/**
+ *
+ * @package migration
+ * @copyright (c) 2013 phpBB Group
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License v2
+ *
+ */
+
+namespace nickvergessen\newspage\migrations\v10x;
+
+class release_1_0_0 extends \phpbb\db\migration\migration
+{
+   public function effectively_installed()
+   {
+       return isset($this-&gt;config['newspage_mod_version']) &amp;&amp; version_compare($this-&gt;config['newspage_mod_version'], '1.0.0', '&gt;=');
+   }
+
+   static public function depends_on()
+   {
+       return ['phpbb_db_migration_data_310_dev'];
+   }
+
+   public function update_data()
+   {
+       return [
+           ['config.add', ['news_number', 5]],
+           ['config.add', ['news_forums', '0']],
+           ['config.add', ['news_char_limit', 500]],
+           ['config.add', ['news_user_info', 1]],
+           ['config.add', ['news_post_buttons', 1]],
+
+           ['module.add', [
+               'acp',
+               'ACP_CAT_DOT_MODS',
+               'ACP_NEWSPAGE_TITLE'
+           ]],
+           ['module.add', [
+               'acp',
+               'ACP_NEWSPAGE_TITLE',
+               [
+                   'module_basename'    =&gt; '\nickvergessen\newspage\acp\main_module',
+                   'modes'                =&gt; ['config_newspage'],
+               ],
+           ]],
+
+           ['config.add', ['newspage_mod_version', '1.0.0']],
+       ];
+   }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="include-extensions-language-files">
+    <title>Inclure les fichiers de langue de l'extension</title>
+    <para>
+      Comme les fichiers de langue de votre extension ne sont plus
+      détectés par <literal>$user-&gt;add_lang()</literal>, vous devez
+      utiliser la méthode <literal>$user-&gt;add_lang_ext()</literal>.
+      Cette méthode prend deux arguments, le premier étant le nom
+      complet de l'extension (y compris le vendor) et le second le nom
+      du fichier ou un tableau de noms de fichiers. Ainsi, pour charger
+      le fichier de langue du Newspage, nous appelons :
+    </para>
+    <programlisting>
+$user-&gt;add_lang_ext('nickvergessen/newspage', 'newspage');
+</programlisting>
+    <para>
+      pour charger le fichier de langue
+      <literal>phpBB/ext/nickvergessen/newspage/language/en/newspage.php</literal>
+    </para>
+  </sect1>
+  <sect1 id="file-edits---dont-edit-use-events-and-listeners">
+    <title>Modifications de fichiers - Ne modifiez pas ! Utilisez les événements et les écouteurs !</title>
+    <para>
+      Concernant la Modification Newspage, la seule chose qui manque
+      maintenant pour la compléter est le lien dans la section d'en-tête,
+      afin que vous puissiez commencer à naviguer sur le Newspage.
+    </para>
+    <para>
+      Pour ce faire, la variable de template était auparavant définie
+      dans la fonction <literal>page_header()</literal> de phpBB avec
+      une modification dans le template
+      <literal>overall_header.html</literal>. Mais ce n'est pas phpBB
+      3.0, nous n'utilisons donc plus de modifications de fichiers et
+      utilisons à la place les <emphasis role="strong">événements</emphasis>.
+      Avec les événements, vous pouvez vous accrocher (hook) à plusieurs
+      endroits et exécuter votre code, sans les modifier.
+    </para>
+    <sect2 id="php-events">
+      <title>Événements php</title>
+      <para>
+        Ainsi, au lieu d'ajouter
+      </para>
+      <programlisting>
+$template-&gt;assign_vars([
+   'U_NEWSPAGE'    =&gt; append_sid($phpbb_root_path . 'app.' . $phpEx, 'controller=newspage/'),
+]);
+</programlisting>
+      <para>
+        à <literal>page_header()</literal>, nous plaçons cela dans un
+        écouteur d'événement, qui est ensuite appelé chaque fois que
+        <literal>page_header()</literal> elle-même est appelée.
+      </para>
+      <para>
+        Nous ajoutons donc le fichier
+        <emphasis role="strong">event/main_listener.php</emphasis> à
+        notre extension, qui implémente une classe Symfony :
+      </para>
+      <programlisting>
+&lt;?php
+// ext/nickvergessen/newspage/event/main_listener.php
+
+/**
+ *
+ * @package NV Newspage Extension
+ * @copyright (c) 2013 nickvergessen
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
+
+/**
+ * @ignore
+ */
+
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+namespace nickvergessen\newspage\event;
+
+/**
+ * Event listener
+ */
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+   /**
+    * Instead of using &quot;global $user;&quot; in the function, we use dependencies again.
+    */
+   public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+   {
+       $this-&gt;helper = $helper;
+       $this-&gt;template = $template;
+       $this-&gt;user = $user;
+   }
+}
+</programlisting>
+      <para>
+        Dans la méthode <literal>getSubscribedEvents()</literal>, nous
+        indiquons au système à quels événements nous voulons abonner nos
+        nouvelles fonctions personnalisées. Dans notre cas, nous voulons
+        nous abonner à deux événements : l'événement
+        <literal>core.page_header</literal> et l'événement
+        <literal>core.user_setup</literal> (une liste complète des
+        événements peut être trouvée
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html">ici</ulink>) :
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup'    =&gt; 'load_language_on_setup',
+        'core.page_header'   =&gt; 'add_page_header_link',
+    ];
+}
+</programlisting>
+      <para>
+        Ajoutons maintenant les deux fonctions qui sont appelées à
+        chaque événement :
+      </para>
+      <programlisting>
+public function load_language_on_setup($event)
+{
+    $lang_set_ext = $event['lang_set_ext'];
+    $lang_set_ext[] = [
+        'ext_name' =&gt; 'nickvergessen/newspage',
+        'lang_set' =&gt; 'newspage',
+    ];
+    $event['lang_set_ext'] = $lang_set_ext;
+}
+
+public function add_page_header_link($event)
+{
+    // I use a second language file here, so I only load the strings global which are required globally.
+    // This includes the name of the link, aswell as the ACP module names.
+    $this-&gt;user-&gt;add_lang_ext('nickvergessen/newspage', 'newspage_global');
+
+    $this-&gt;template-&gt;assign_vars([
+        'U_NEWSPAGE'    =&gt; $this-&gt;helper-&gt;route('newspage_base_controller'),
+    ]);
+}
+</programlisting>
+      <para>
+        Comme dernière étape, nous devons enregistrer l'écouteur
+        d'événement auprès du système. Ceci se fait en utilisant la
+        balise <literal>event.listener</literal> dans le
+        <literal>config/service.yml</literal> :
+      </para>
+      <programlisting language="yaml">
+# ext/nickvergessen/newspage/config/service.yml
+nickvergessen.newspage.listener:
+    class: nickvergessen\newspage\event\main_listener
+    arguments:
+        - '@controller.helper'
+        - '@template'
+        - '@user'
+    tags:
+        - { name: event.listener }
+</programlisting>
+      <para>
+        Une fois ceci ajouté, votre écouteur est appelé et nous en avons
+        terminé avec les modifications php.
+      </para>
+      <para>
+        De nouveau comme pour les contrôleurs, vous pouvez avoir
+        plusieurs écouteurs dans le dossier <literal>event/</literal>,
+        ainsi que vous abonner à plusieurs événements avec un seul
+        écouteur.
+      </para>
+    </sect2>
+    <sect2 id="template-event">
+      <title>Événement de template</title>
+      <para>
+        Maintenant, la seule chose qui reste est d'ajouter le code à la
+        sortie HTML. Pour les templates, vous avez besoin d'un fichier
+        par événement de template.
+      </para>
+      <para>
+        Le nom de fichier inclut le nom de l'événement. Afin d'ajouter le
+        lien Newspage à côté du lien FAQ, nous devons utiliser
+        l'événement <literal>'overall_header_navigation_prepend'</literal>
+        (une liste complète des événements peut être trouvée
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html">ici</ulink>).
+      </para>
+      <para>
+        Nous ajoutons donc le fichier
+        <literal>styles/prosilver/template/event/overall_header_navigation_prepend_listener.html</literal>
+        à notre dossier d'extension et y ajoutons notre code html.
+      </para>
+      <programlisting language="html">
+&lt;li class=&quot;icon-newspage&quot;&gt;&lt;a href=&quot;{{ U_NEWSPAGE }}&quot;&gt;{{ lang('NEWSPAGE') }}&lt;/a&gt;&lt;/li&gt;
+</programlisting>
+      <para>
+        Et voilà. Aucune modification de fichier n'est nécessaire pour
+        les fichiers de template non plus.
+      </para>
+    </sect2>
+    <sect2 id="adding-events">
+      <title>Ajouter des événements</title>
+      <para>
+        De nombreux événements sont déjà disponibles. Cependant, si
+        votre extension a besoin d'utiliser un événement qui n'est pas
+        encore présent dans le code de phpBB, vous pouvez demander que
+        l'événement soit ajouté au noyau en créant un ticket dans le
+        <ulink url="https://tracker.phpbb.com/projects/PHPBB3">phpBB Bug
+        Tracker</ulink>, et nous nous efforcerons de l'inclure dans la
+        prochaine version.
+      </para>
+    </sect2>
+    <sect2 id="basics-finished">
+      <title>Les bases sont terminées !</title>
+      <para>
+        Et voilà, la Modification 3.0 a été convertie avec succès en une
+        Extension 3.1.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="compatibility">
+    <title>Compatibilité</title>
+    <para>
+      Dans certains cas, la compatibilité des fonctions et des classes
+      n'a pas pu être conservée, tout en augmentant leur puissance pour
+      la 3.1.
+    </para>
+    <sect2 id="pagination">
+      <title>Pagination</title>
+      <para>
+        Lorsque vous utilisez votre ancien code 3.0, vous recevrez une
+        erreur telle que la suivante :
+      </para>
+      <programlisting>
+Fatal error: Call to undefined function generate_pagination() in .../phpBB3/ext/nickvergessen/newspage/controller/main.php on line 534
+</programlisting>
+      <para>
+        Le problème est que la pagination n'est plus retournée par la
+        fonction, mais est désormais automatiquement placée dans le
+        template. De plus, le nom de la fonction a été mis à jour avec
+        un préfixe phpbb.
+      </para>
+      <para>
+        L'ancien code de pagination ressemblait à :
+      </para>
+      <programlisting>
+$pagination = generate_pagination(append_sid(&quot;{$phpbb_root_path}app.$phpEx&quot;, 'controller=newspage/'), $total_paginated, $config['news_number'], $start);
+
+$this-&gt;template-&gt;assign_vars([
+    'PAGINATION'        =&gt; $pagination,
+    'PAGE_NUMBER'        =&gt; on_page($total_paginated, $config['news_number'], $start),
+    'TOTAL_NEWS'        =&gt; $this-&gt;user-&gt;lang('VIEW_TOPIC_POSTS', $total_paginated),
+]);
+</programlisting>
+      <para>
+        Le nouveau code devrait ressembler à :
+      </para>
+      <programlisting>
+$pagination = $phpbb_container-&gt;get('pagination');
+$pagination-&gt;generate_template_pagination(
+    [
+        'routes' =&gt; [
+            'newspage_base_controller',
+            'newspage_page_controller',
+        ],
+        'params' =&gt; [],
+    ], 'pagination', 'page', $total_paginated, $this-&gt;config['news_number'], $start);
+
+$this-&gt;template-&gt;assign_vars([
+    'PAGE_NUMBER'        =&gt; $pagination-&gt;on_page($total_paginated, $this-&gt;config['news_number'], $start),
+    'TOTAL_NEWS'        =&gt; $this-&gt;user-&gt;lang('VIEW_TOPIC_POSTS', $total_paginated),
+]);
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

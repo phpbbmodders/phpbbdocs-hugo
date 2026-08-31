@@ -1,0 +1,2025 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutoriel : Notifications</title>
+  </articleinfo>
+  <para>
+    Ce tutoriel explique :
+  </para>
+  <sect1 id="introduction">
+    <title>Introduction</title>
+    <para>
+      Le système de notifications a été introduit avec la sortie de phpBB
+      <literal>3.1</literal>. Depuis lors, il a connu de nouveaux
+      développements et améliorations pour les utilisateurs et les
+      développeurs d'extensions. Dans la <literal>3.2</literal>, le
+      système de notifications a été profondément remanié, le rendant
+      plus rapide et plus efficace.
+    </para>
+    <para>
+      Les utilisateurs de phpBB ont un contrôle complet sur leurs
+      interactions personnelles avec les notifications. Ils peuvent
+      définir leurs propres préférences pour les méthodes de notification
+      ou les désactiver entièrement. Ils peuvent marquer les
+      notifications comme lues lorsque nécessaire, bien que dans de
+      nombreux cas cela soit fait automatiquement.
+    </para>
+    <para>
+      Dans phpBB, il existe deux méthodes de notification par défaut :
+      les notifications par e-mail et les notifications sur le forum. La
+      méthode par e-mail n'est disponible que lorsque le paramètre
+      « e-mails pour tout le forum » a été activé par l'administrateur du
+      forum dans l'ACP. Les extensions peuvent cependant créer et ajouter
+      leurs propres méthodes de notification.
+    </para>
+    <para>
+      Ce tutoriel documentera comment une extension peut exploiter le
+      système de notifications en créant une notification basée sur une
+      sorte d'événement déclencheur (comme répondre à un message),
+      envoyer la notification via le forum, l'e-mail ou une autre méthode
+      personnalisée, et gérer ses notifications.
+    </para>
+    <sect2 id="file-structure">
+      <title>Structure des fichiers</title>
+      <para>
+        Voici un aperçu de la structure de fichiers nécessaire pour
+        qu'une notification fonctionne au sein d'une extension. Au total,
+        7 fichiers seront abordés dans ce tutoriel, pour créer et envoyer
+        des notifications. Ces fichiers seront référencés tout au long de
+        ce tutoriel.
+      </para>
+      <literallayout><i class="fa fa-user fa-fw" aria-hidden="true"></i>
+      vendor
+      └─ <i class="fa fa-puzzle-piece fa-fw" aria-hidden="true"></i>
+      extension
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      config
+       &#160; │ &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> services.yml
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      event
+       &#160; │ &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> listener.php
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      language
+       &#160; │ &#160; &#160; └─
+      <i class="fa fa-folder fa-fw" aria-hidden="true"></i> en
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; └─
+      <i class="fa fa-folder fa-fw" aria-hidden="true"></i> email
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; │ &#160;
+      &#160; └─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      short
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; │ &#160;
+      &#160; │ &#160; &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> sample.txt
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; │ &#160;
+      &#160; └─ <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>
+      sample.txt
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>
+      extension_common.php
+       &#160; ├─ <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
+      notification
+       &#160; │ &#160; &#160; └─
+      <i class="fa fa-folder fa-fw" aria-hidden="true"></i> type
+       &#160; │ &#160; &#160; &#160; &#160; &#160; &#160; └─
+      <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> sample.php
+       &#160; └─ <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>
+      ext.php</literallayout>
+    </sect2>
+  </sect1>
+  <sect1 id="creating-a-notification-type">
+    <title>Créer un type de notification</title>
+    <para>
+      La première chose à faire est de déterminer un nom pour le type de
+      notification que nous allons créer. Pour les besoins de ce
+      tutoriel, nous l'appellerons « sample ». Toutes les extensions
+      doivent toujours utiliser leur vendor et leur nom comme préfixes,
+      donc le nom du type de notification que nous utiliserons est :
+      <literal>vendor.extension.notification.type.sample</literal>.
+    </para>
+    <sect2 id="registering-as-a-symfony-service">
+      <title>Enregistrement en tant que service Symfony</title>
+      <para>
+        Notre type de notification doit maintenant être enregistré en
+        tant que service Symfony dans le fichier
+        <literal>services.yml</literal> de notre extension. Comme pour
+        toute déclaration de service, il aura besoin d'un identifiant de
+        service et de l'argument class (nous verrons un peu plus tard ce
+        qui doit figurer dans notre classe <literal>sample</literal>).
+        Cependant, les types de notification nécessitent également trois
+        paramètres supplémentaires : <literal>parent</literal>,
+        <literal>shared</literal> et <literal>tags</literal>.
+      </para>
+      <para>
+        Le paramètre <literal>parent</literal> déclarera le service
+        parent de notre notification. Autrement dit, notre notification
+        sera une classe enfant et héritera d'un service de notification
+        du cœur de phpBB, en l'occurrence la classe/service de
+        notification de base de phpBB.
+      </para>
+      <para>
+        Le paramètre <literal>shared</literal> doit être défini sur
+        <literal>flase</literal>, ce qui garantira qu'une nouvelle
+        instance est créée chaque fois que ce type de notification est
+        demandé. Cela évitera que les données d'une instance de
+        notification se retrouvent mélangées par inadvertance avec celles
+        d'une autre.
+      </para>
+      <para>
+        Enfin, <literal>tags</literal> est utilisé pour étiqueter notre
+        service en tant que type de notification. C'est ainsi que phpBB
+        saura que celui-ci fait partie de son système de notifications.
+      </para>
+      <programlisting language="yaml">
+services:
+    vendor.extension.notification.type.sample:
+        class: vendor\extension\notification\type\sample
+        parent: notification.type.base
+        shared: false
+        tags: [{ name: notification.type }]
+</programlisting>
+      <para>
+        Cependant, pour les besoins de ce tutoriel, nous allons avoir
+        besoin de deux services supplémentaires dans notre type de
+        notification. Nous utiliserons l'objet Helper du contrôleur
+        (<literal>\\phpbb\\controller\\helper</literal>) pour créer une
+        route (voir <link linkend="get_url">get_url</link>) et l'objet
+        User loader (<literal>\\phpbb\\user_loader</literal>) pour
+        afficher les détails d'un utilisateur (voir
+        <link linkend="get_title">get_title</link> et
+        <link linkend="get_avatar">get_avatar</link>). Mais comme nous
+        définissons un <literal>parent</literal>, nous ne pouvons pas
+        également utiliser le paramètre <literal>arguments</literal>.
+        Nous devons soit définir tous les <literal>arguments</literal>,
+        y compris ceux du parent, soit utiliser le paramètre
+        <literal>calls</literal> pour appeler des fonctions lors de
+        l'instanciation de notre notification, qui chargeront ces
+        fonctions d'objets supplémentaires, comme montré ci-dessous. Vous
+        pouvez en savoir plus à ce sujet dans
+        <link linkend="additional-services">Services
+        supplémentaires</link>.
+      </para>
+      <para>
+        Le premier argument de l'appel est le nom de la fonction
+        <literal>set_</literal> que nous allons appeler et créer dans
+        notre classe <literal>sample</literal>. Le second argument est un
+        tableau contenant les définitions de service que nos fonctions
+        <literal>set_</literal> ajouteront à notre classe
+        <literal>sample</literal>.
+      </para>
+      <programlisting language="yaml">
+services:
+    vendor.extension.notification.type.sample:
+        class: vendor\extension\notification\type\sample
+        parent: notification.type.base
+        shared: false
+        tags: [{ name: notification.type }]
+        calls:
+            - ['set_helper', ['@controller.helper']]
+            - ['set_user_loader', ['@user_loader']]
+</programlisting>
+    </sect2>
+    <sect2 id="altering-an-extensions-state">
+      <title>Modifier l'état d'une extension</title>
+      <para>
+        La chose suivante que nous devons faire est un peu de ménage
+        requis pour chaque extension créant ses propres notifications :
+        l'activation, la désactivation et la purge de notre type de
+        notification lorsque l'état de notre extension change. Autrement
+        dit, lorsqu'une extension est activée/désactivée, le type de
+        notification doit également être activé/désactivé. Ou lorsque les
+        données de l'extension sont supprimées, les données du type de
+        notification doivent également être purgées de la base de
+        données. Si cela n'est pas fait ou configuré correctement, cela
+        déclenchera des exceptions non interceptées, rendant le forum
+        inaccessible.
+      </para>
+      <para>
+        Pour y parvenir, trois fonctions doivent être ajoutées au fichier
+        <literal>ext.php</literal>. Chaque fonction récupérera le
+        gestionnaire de notifications depuis le conteneur de services et
+        effectuera son action respective.
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace vendor\extension;
+
+class ext extends \phpbb\extension\base
+{
+    /**
+     * Enable notifications for the extension.
+     *
+     * @param mixed  $old_state  State returned by previous call of this method
+     * @return mixed             Returns false after last step, otherwise temporary state
+     * @access public
+     */
+    public function enable_step($old_state)
+    {
+        if ($old_state === false)
+        {
+            /** @var \phpbb\notification\manager $notification_manager */
+            $notification_manager = $this-&gt;container-&gt;get('notification_manager');
+
+            $notification_manager-&gt;enable_notifications('vendor.extension.notification.type.sample');
+            return 'notification';
+        }
+
+        return parent::enable_step($old_state);
+    }
+
+    /**
+     * Disable notifications for the extension.
+     *
+     * @param mixed  $old_state  State returned by previous call of this method
+     * @return mixed             Returns false after last step, otherwise temporary state
+     * @access public
+     */
+    public function disable_step($old_state)
+    {
+        if ($old_state === false)
+        {
+            /** @var \phpbb\notification\manager $notification_manager */
+            $notification_manager = $this-&gt;container-&gt;get('notification_manager');
+
+            $notification_manager-&gt;disable_notifications('vendor.extension.notification.type.sample');
+
+            return 'notification';
+        }
+
+        return parent::disable_step($old_state);
+    }
+
+    /**
+     * Purge notifications for the extension.
+     *
+     * @param mixed  $old_state  State returned by previous call of this method
+     * @return mixed             Returns false after last step, otherwise temporary state
+     * @access public
+     */
+    public function purge_step($old_state)
+    {
+        if ($old_state === false)
+        {
+            /** @var \phpbb\notification\manager $notification_manager */
+            $notification_manager = $this-&gt;container-&gt;get('notification_manager');
+
+            $notification_manager-&gt;purge_notifications('vendor.extension.notification.type.sample');
+
+            return 'notification';
+        }
+
+        return parent::purge_step($old_state);
+    }
+}
+</programlisting>
+    </sect2>
+    <sect2 id="defining-language-strings">
+      <title>Définir les chaînes de langue</title>
+      <para>
+        Ensuite, nous pouvons commencer à définir quelques chaînes de
+        langue qui seront utilisées par la notification. Ce fichier de
+        langue spécifique contient toutes les chaînes de langue possibles
+        pouvant être utilisées dans une notification. Vous pouvez
+        supprimer toutes les chaînes dont vous n'aurez pas besoin.
+      </para>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          Ce fichier de langue sera inclus plus tard dans ce tutoriel,
+          lors de la configuration d'un utilisateur, ce qui signifie
+          qu'elles seront disponibles globalement. Cependant, il existe
+          quelques chaînes qui ne sont nécessaires que dans l'
+          <literal>UCP (User Control Panel)</literal>. Idéalement, ces
+          chaînes devraient être définies dans un fichier séparé, à
+          savoir <literal>info_ucp_extension.php</literal>. L'utilisation
+          de cette convention de nommage
+          (<literal>info_ucp_*.php</literal>) l'inclura automatiquement
+          uniquement dans l'UCP. Mais pour les besoins de ce tutoriel,
+          elles sont toutes définies dans ce même fichier de langue.
+        </para>
+      </tip>
+      <programlisting>
+&lt;?php
+
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
+if (empty($lang) || !is_array($lang))
+{
+    $lang = [];
+}
+
+// Some characters you may want to copy&amp;paste: ’ » “ ” …
+$lang = array_merge($lang, [
+    'VENDOR_EXTENSION_NOTIFICATION_REASON'       =&gt; 'This is a sample reason',
+    'VENDOR_EXTENSION_NOTIFICATION_TITLE'        =&gt; '&lt;strong&gt;Received a sample notification&lt;/strong&gt; from %s',
+
+    // These strings should ideally be defined in a info_ucp_*.php language file
+    'VENDOR_EXTENSION_NOTIFICATIONS'     =&gt; 'Sample notifications category',
+    'VENDOR_EXTENSION_NOTIFICATION_SAMPLE'       =&gt; 'Someone sends you a sample notification',
+]);
+</programlisting>
+      <para>
+        Créons maintenant le fichier de template d'e-mail sample, qui se
+        trouve également dans le répertoire de langue. Les variables
+        utilisées dans ce fichier sont définies dans
+        <link linkend="get_email_template_variables">get_email_template_variables</link>.
+        La première ligne du fichier doit commencer par
+        <literal>Subject:</literal>, suivi du sujet réel de l'e-mail et
+        d'une ligne vide. Il est possible d'utiliser des variables
+        également dans la ligne de sujet.
+      </para>
+      <programlisting>
+Subject: New sample private message has arrived
+
+Hello {USERNAME},
+
+You have received a new sample private message from &quot;{AUTHOR}&quot; to your account on &quot;{SITENAME}&quot; with the following subject:
+{SUBJECT}
+
+You can view your new message by clicking on the following link:
+{U_REGULAR}
+
+You have requested that you be notified on this event, remember that you can always choose not to be notified of new messages by changing the appropriate setting in your profile.
+{U_NOTIFICATION_SETTINGS}
+
+{EMAIL_SIG}
+</programlisting>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          C'est une bonne pratique d'utiliser toujours la mise en page
+          suivante :
+        </para>
+        <programlisting>
+Subject: The email subject
+
+Hello {USERNAME},
+
+The content for this email.
+
+{EMAIL_SIG}
+</programlisting>
+      </tip>
+    </sect2>
+    <sect2 id="the-notification-type-class">
+      <title>La classe du type de notification</title>
+      <para>
+        L'exemple suivant montre le strict minimum nécessaire pour une
+        classe de type de notification.
+        <link linkend="notification-type-class-functions">Toutes les
+        fonctions</link> seront abordées plus tard.
+      </para>
+      <para>
+        Nous avons défini la classe de type de notification
+        <literal>base</literal> comme <literal>parent</literal> lors de l'
+        <link linkend="registering-as-a-symfony-service">enregistrement
+        en tant que service Symfony</link>. Il est donc important que
+        notre classe de type de notification étende la classe
+        <literal>base</literal>.
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace vendor\extension\notification\type;
+
+class sample extends \phpbb\notification\type\base
+{
+    // All the functions
+}
+</programlisting>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          Il est également possible d'étendre d'autres types de
+          notification, plutôt que la classe <literal>base</literal>.
+          <br/> Par exemple, si vous souhaitez étendre le type de
+          notification <literal>post</literal> à la place : <br/> vous
+          devrez enregistrer celui-ci comme parent du service :
+          <literal>parent: notification.type.post</literal> <br/> et
+          étendre cette classe à la place :
+          <literal>class sample extends \phpbb\notification\type\post</literal>
+        </para>
+      </tip>
+    </sect2>
+  </sect1>
+  <sect1 id="notification-type-class-functions">
+    <title>Fonctions de la classe de type de notification</title>
+    <para>
+      Il est maintenant temps de plonger dans le monde merveilleux de
+      notre classe de type de notification. Nous allons essayer de
+      couvrir toutes les fonctions qu'il vous est possible d'utiliser.
+      Nous indiquerons également si chaque fonction est requise ou
+      optionnelle.
+    </para>
+    <sect2 id="base-services">
+      <title>Services de base</title>
+      <para>
+        La classe de base du type de notification
+        (<literal>\\phpbb\\notification\\type\\base</literal>) dispose
+        déjà de quelques services disponibles pouvant être utilisés dans
+        les fonctions de notre classe.
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Objet
+              </entry>
+              <entry>
+                Classe
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>$auth</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\auth\\auth</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$db</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\db\\driver\\driver_interface</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$language</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\language\\language</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$user</literal>
+              </entry>
+              <entry>
+                <literal>\\phpbb\\user</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$phpbb_root_path</literal>
+              </entry>
+              <entry>
+                <literal>string</literal> chemin racine de phpBB
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$php_ext</literal>
+              </entry>
+              <entry>
+                <literal>string</literal> extension de fichier php
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>$user_notifications_table</literal>
+              </entry>
+              <entry>
+                <literal>string</literal> table des notifications
+                utilisateur
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="additional-services">
+      <title>Services supplémentaires</title>
+      <para>
+        Comme mentionné plus tôt dans l'
+        <link linkend="registering-as-a-symfony-service">enregistrement
+        en tant que service Symfony</link>, nous voulons utiliser deux
+        services supplémentaires. Et comme nous utilisons la construction
+        <literal>calls</literal>, plutôt que de surcharger le
+        <literal>__construct()</literal> du parent, nous devons définir
+        les fonctions qui sont appelées. Vous pouvez utiliser cette
+        construction pour tout service Symfony enregistré que vous
+        pourriez avoir besoin d'injecter.
+      </para>
+      <programlisting>
+/** @var \phpbb\controller\helper */
+protected $helper;
+
+/** @var \phpbb\user_loader */
+protected $user_loader;
+
+/**
+ * Set controller helper.
+ *
+ * @param \phpbb\controller\helper  $helper  Controller helper object
+ * @return void
+ */
+public function set_helper(\phpbb\controller\helper $helper)
+{
+    $this-&gt;helper = $helper;
+}
+
+/**
+ * Set user loader.
+ *
+ * @param \phpbb\user_loader  $user_loader  User loader object
+ * @return void
+ */
+public function set_user_loader(\phpbb\user_loader $user_loader)
+{
+    $this-&gt;user_loader = $user_loader;
+}
+</programlisting>
+    </sect2>
+    <sect2 id="required-class-functions">
+      <title>Fonctions requises de la classe</title>
+      <para>
+        Les fonctions suivantes doivent être implémentées dans chaque
+        classe de type de notification.
+      </para>
+    </sect2>
+    <sect2 id="get_type">
+      <title>get_type</title>
+      <para>
+        Ceci doit retourner l'identifiant de service tel que défini dans
+        l'
+        <link linkend="registering-as-a-symfony-service">enregistrement
+        en tant que service Symfony</link>.
+      </para>
+      <programlisting>
+/**
+ * Get notification type name.
+ *
+ * @return string  The notification name as defined in services.yml
+ */
+public function get_type()
+{
+    return 'vendor.extension.notification.type.sample';
+}
+</programlisting>
+    </sect2>
+    <sect2 id="notification_option">
+      <title>notification_option</title>
+      <para>
+        Ce tableau de variables définit deux chaînes de langue de notre
+        notification qui apparaîtront dans l'
+        <literal>UCP (User Control Panel)</literal>. <br/> Le
+        <literal>group</literal> est destiné à la catégorie sous laquelle
+        le type de notification apparaîtra. <br/> Le
+        <literal>lang</literal> est destiné au type de notification
+        lui-même.
+      </para>
+      <para>
+        Il est également possible de définir un <literal>id</literal>
+        dans ces options. Ce n'est généralement pas nécessaire pour la
+        plupart des extensions. La variable <literal>id</literal> est
+        utilisée pour concaténer plusieurs types de notification en un
+        seul. Ainsi, si vous avez plusieurs types de notification qui
+        doivent apparaître comme un seul type dans les préférences de
+        l'utilisateur, vous pouvez définir le même <literal>id</literal>
+        sur tous ces types.
+      </para>
+      <para>
+        Si vous ne souhaitez pas afficher cette notification dans les
+        préférences de l'utilisateur, vous pouvez omettre cette variable
+        et veiller également à ce que la fonction
+        <link linkend="is_available">is_available</link> retourne
+        <literal>false</literal>.
+      </para>
+      <programlisting>
+/**
+ * Notification option data (for outputting to the user).
+ *
+ * @var bool|array  False if the service should use it's default data
+ *                  Array of data (including keys 'id', 'lang', and 'group')
+ * @static
+ */
+static public $notification_option = [
+    'lang'   =&gt; 'VENDOR_EXTENSION_NOTIFICATION_SAMPLE',
+    'group'  =&gt; 'VENDOR_EXTENSION_NOTIFICATIONS',
+];
+</programlisting>
+    </sect2>
+    <sect2 id="is_available">
+      <title>is_available</title>
+      <para>
+        Cette fonction détermine si ce type de notification doit
+        apparaître dans l'<literal>UCP (User Control Panel)</literal>.
+        Vous pouvez simplement la définir sur <literal>true</literal> ou
+        vérifier certains paramètres de configuration ou
+        d'authentification, ou tout autre critère, tant qu'elle retourne
+        toujours un booléen <literal>true</literal> ou
+        <literal>false</literal>. Dans l'exemple ci-dessous, nous ferons
+        dépendre l'affichage de la notification dans l'UCP du fait que
+        les messages privés soient activés et que l'utilisateur soit
+        autorisé à les lire.
+      </para>
+      <para>
+        Si cette fonction retourne <literal>false</literal>, le type de
+        notification n'apparaîtra pas dans l'UCP. Cela signifie
+        simplement qu'un utilisateur ne peut pas modifier ses préférences
+        concernant ce type de notification et ne peut donc pas
+        l'activer/désactiver. N'oubliez pas que si cette fonction peut
+        retourner <literal>false</literal>, veillez à ce que le tableau
+        <link linkend="notification_option">notification_option</link>
+        soit défini.
+      </para>
+      <programlisting>
+/**
+ * Is this type available to the current user.
+ *
+ * Defines whether or not it will be shown in the UCP &quot;Edit notification options&quot;.
+ *
+ * @return bool  Whether or not this is available to the user
+ */
+public function is_available()
+{
+    return $this-&gt;config['allow_privmsg'] &amp;&amp; $this-&gt;auth-&gt;acl_get('u_readpm');
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_item_id">
+      <title>get_item_id</title>
+      <para>
+        Cette fonction doit retourner l'identifiant de l'élément auquel
+        appartient cette notification. Généralement, cela fait référence
+        à une sorte d'entité, comme un forum, un sujet, un message,
+        etc... Si vous n'avez pas d'élément spécifique, vous pouvez
+        consulter l'
+        <link linkend="custom-item-identifier">identifiant d'élément
+        personnalisé</link>.
+      </para>
+      <para>
+        Pour être clair, cet identifiant n'est pas l'identifiant réel de
+        la notification (<literal>notification_id</literal>). Il est
+        cependant utilisé - conjointement avec l'
+        <link linkend="get_item_parent_id">identifiant parent</link> -
+        pour créer un index. Par exemple, lorsqu'une notification avec un
+        identifiant d'élément/parent est envoyée à un utilisateur, et que
+        cet utilisateur n'a toujours pas lu une notification antérieure
+        avec la même combinaison d'identifiants élément/parent, la
+        nouvelle notification ne sera pas envoyée. Ceci permet d'éviter
+        de spammer l'utilisateur avec des notifications concernant
+        toujours le même élément.
+      </para>
+      <programlisting>
+/**
+ * Get the id of the item.
+ *
+ * @param array  $data  The notification type specific data
+ * @return int          Identifier of the notification
+ * @static
+ */
+public static function get_item_id($data)
+{
+    return $data['message_id'];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_item_parent_id">
+      <title>get_item_parent_id</title>
+      <para>
+        Cette fonction doit retourner l'identifiant du parent de
+        l'élément auquel appartient cette notification. Généralement,
+        cela fait référence à une sorte d'entité parente pour l'
+        <link linkend="get_item_id">identifiant d'élément</link>, comme
+        un forum, un sujet, un message, etc... Par exemple, lorsque
+        l'élément est un sujet, le parent est le forum. Lorsque l'élément
+        est un message, le parent est le sujet. Et ainsi de suite. S'il
+        n'y a pas de parent pour l'élément, vous pouvez faire en sorte
+        que cette fonction retourne zéro : <literal>return 0;</literal>.
+      </para>
+      <programlisting>
+/**
+ * Get the id of the parent.
+ *
+ * @param array  $data  The type notification specific data
+ * @return int          Identifier of the parent
+ * @static
+ */
+public static function get_item_parent_id($data)
+{
+    return 0;
+}
+</programlisting>
+    </sect2>
+    <sect2 id="find_users_for_notification">
+      <title>find_users_for_notification</title>
+      <para>
+        Cette fonction est responsable de trouver les utilisateurs devant
+        être notifiés. Elle doit retourner un tableau avec les
+        identifiants d'utilisateur comme clés et les méthodes de
+        notification comme valeurs. Diverses fonctions utilitaires vous
+        aident à parvenir au résultat souhaité.
+      </para>
+      <sect3 id="check_user_notification_options">
+        <title>check_user_notification_options</title>
+        <para>
+          Vous pouvez envoyer un tableau d'identifiants d'utilisateur à
+          cette fonction. Elle vérifiera alors les méthodes de
+          notification disponibles pour chaque utilisateur. Si le type de
+          notification est disponible dans l'
+          <literal>UCP (User Control Panel)</literal>, elle vérifiera les
+          préférences de l'utilisateur. Sinon, elle utilisera les
+          méthodes de notification par défaut : la méthode forum et la
+          méthode e-mail (si <emphasis>e-mails pour tout le forum</emphasis>
+          est activé). Le tableau retourné par cette fonction peut être
+          utilisé comme valeur de retour pour
+          <link linkend="find_users_for_notification">find_users_for_notification</link>.
+        </para>
+      </sect3>
+      <sect3 id="get_authorised_recipients">
+        <title>get_authorised_recipients</title>
+        <para>
+          Si votre notification concerne un événement dans un forum
+          spécifique, vous voudrez peut-être vérifier l'authentification
+          des utilisateurs. Ceci peut être fait à l'aide de cette
+          fonction, qui vérifiera la permission <literal>f_read</literal>
+          de tous les utilisateurs pour le <literal>forum_id</literal>
+          fourni. Le tableau retourné par cette fonction est déjà passé
+          par
+          <link linkend="check_user_notification_options">check_user_notification_options</link>.
+        </para>
+        <programlisting>
+/**
+ * Find the users who want to receive notifications.
+ *
+ * @param array  $data     The type specific data
+ * @param array  $options  Options for finding users for notification
+ *                           ignore_users =&gt; array of users and user types that should not receive notifications from this type
+ *                           because they've already been notified
+ *                           e.g.: array(2 =&gt; array(''), 3 =&gt; array('', 'email'), ...)
+ * @return array           Array of user identifiers with their notification method(s)
+ */
+public function find_users_for_notification($data, $options = [])
+{
+    return $this-&gt;check_user_notification_options([$data['user_id']], $options);
+}
+</programlisting>
+        <note>
+          <title>Remarque</title>
+          <para>
+            La variable <literal>forum_id</literal> ci-dessous n'est pas
+            définie dans ce tutoriel, elle est simplement montrée à titre
+            d'exemple.
+          </para>
+        </note>
+        <programlisting>
+public function find_users_for_notification($data, $options = [])
+{
+    return $this-&gt;get_authorised_recipients([$data['user_id']], $data['forum_id'], $options);
+}
+</programlisting>
+      </sect3>
+    </sect2>
+    <sect2 id="users_to_query">
+      <title>users_to_query</title>
+      <para>
+        Cette fonction doit retourner un tableau d'identifiants
+        d'utilisateur pour les utilisateurs dont le nom d'utilisateur doit
+        être affiché, ou pour les utilisateurs dont l'avatar sera affiché
+        à côté du texte de la notification. En coulisses, l'objet
+        gestionnaire de notifications
+        (<literal>\\phpbb\\notification\\manager</literal>) récupérera
+        tous les identifiants de toutes les notifications qui doivent
+        être affichées. Il utilisera ensuite une seule requête SQL pour
+        récupérer toutes les données de ces utilisateurs, plutôt que de
+        faire interroger séparément les données d'un utilisateur par
+        chaque notification.
+      </para>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          En règle générale, tous les identifiants d'utilisateur qui
+          seront utilisés dans <literal>$user_loader</literal> devraient
+          être retournés ici.
+        </para>
+      </tip>
+      <programlisting>
+/**
+ * Users needed to query before this notification can be displayed.
+ *
+ * @return array  Array of user identifiers to query.
+ */
+public function users_to_query()
+{
+    return [$this-&gt;get_data('sender_id')];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_title">
+      <title>get_title</title>
+      <para>
+        Ceci doit retourner le texte principal de la notification.
+        Généralement, l'action qui a été effectuée et qui a donné lieu à
+        cette notification. Le plus souvent, l'action est mise en gras et
+        le reste est en texte normal, comme montré dans le
+        <ulink url="">fichier de langue</ulink>.
+      </para>
+      <para>
+        Notez que notre chaîne de langue possède un espace réservé de
+        chaîne <literal>%s</literal>, c'est pourquoi nous envoyons
+        également le nom d'utilisateur de l'expéditeur comme second
+        argument. Le nom d'utilisateur peut être facilement récupéré par
+        l'objet <literal>$user_loader</literal>. Toutes les données de
+        cet utilisateur ont déjà été interrogées, puisque nous avons
+        fourni l'identifiant de l'utilisateur dans la fonction
+        <link linkend="users_to_query">users_to_query</link>. Aucune
+        requête SQL supplémentaire ne sera donc exécutée.
+      </para>
+      <programlisting>
+/**
+ * Get the title of this notification.
+ *
+ * @return string  The notification's title
+ */
+public function get_title()
+{
+    return $this-&gt;language-&gt;lang(
+        'VENDOR_EXTENSION_NOTIFICATION_SAMPLE_TITLE',
+        $this-&gt;user_loader-&gt;get_username($this-&gt;get_data('sender_id'), 'no_profile')
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_url">
+      <title>get_url</title>
+      <para>
+        Ceci doit retourner l'URL vers laquelle l'utilisateur est envoyé
+        en cliquant sur la notification. Cette fonction est requise dans
+        votre type de notification, même s'il n'y a aucune URL vers
+        laquelle envoyer l'utilisateur, auquel cas elle doit retourner
+        une chaîne vide : <literal>return '';</literal>.
+      </para>
+      <para>
+        Il existe généralement deux façons de créer l'URL requise. Soit
+        via <literal>append_sid()</literal>, soit en utilisant l'
+        <emphasis>objet Helper du contrôleur</emphasis>. La première est
+        généralement utilisée lors de l'envoi d'un utilisateur vers une
+        page du cœur de phpBB, telle que viewforum, viewtopic ou l'ucp.
+        La seconde est généralement utilisée lors de l'envoi d'un
+        utilisateur vers une page d'une extension, qui utilise souvent
+        des routes.
+      </para>
+      <programlisting>
+/**
+ * Get the URL to this item.
+ *
+ * @return string  The notification's URL
+ */
+public function get_url()
+{
+    return append_sid(&quot;{$this-&gt;phpbb_root_path}ucp.{$this-&gt;php_ext}&quot;, [
+        'mode' =&gt; 'view',
+        'i'    =&gt; 'pm'
+        'p'    =&gt; $this-&gt;get_data('message_id'),
+    ]);
+}
+</programlisting>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Nous avons ajouté l'<emphasis>objet Helper du
+          contrôleur</emphasis> dans la section
+          <link linkend="additional-services">Services
+          supplémentaires</link>.
+        </para>
+      </note>
+      <programlisting>
+public function get_url()
+{
+    return $this-&gt;helper-&gt;route('vendor_extension_route', [
+        'subject'    =&gt; $this-&gt;get_data('message_subject'),
+    ]);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_email_template">
+      <title>get_email_template</title>
+      <para>
+        Si vous ne souhaitez pas utiliser la méthode de notification par
+        e-mail, ceci doit retourner <literal>false</literal>, et les
+        utilisateurs ne pourront pas sélectionner la méthode e-mail dans
+        leurs préférences de notification.
+      </para>
+      <para>
+        Cependant, si vous souhaitez utiliser la méthode de notification
+        par e-mail, vous devez retourner ici le fichier
+        <emphasis>template</emphasis> de l'e-mail. Il ne s'agit pas d'un
+        fichier template comme vous pourriez en avoir l'habitude, car il
+        ne se trouve pas dans le répertoire
+        <literal>styles/all/template</literal>. Il se trouve plutôt dans
+        le répertoire <literal>email</literal> de la langue, comme montré
+        dans la structure des fichiers.
+      </para>
+      <para>
+        Vous pouvez, ou plutôt devriez, utiliser le préfixe
+        <literal>@vendor_extension/</literal> pour indiquer le chemin de
+        votre extension. Le répertoire <emphasis>par défaut</emphasis>,
+        comme mentionné, est le répertoire <literal>email</literal>, et
+        dans notre cas, le nom de fichier est <literal>sample</literal>.
+        Le nom du fichier doit donc être ajouté au préfixe, ce qui donne
+        <literal>@vendor_extension/sample</literal>. Si votre template
+        d'e-mail se trouve dans un sous-répertoire du répertoire
+        <literal>email</literal>, vous devrez l'indiquer dans le chemin,
+        par exemple :
+        <literal>@vendor_extension/subdirectory/sample</literal>.
+      </para>
+      <programlisting>
+/**
+ * Get email template.
+ *
+ * @return string|false  This notification's template file or false if there is none
+ */
+public function get_email_template()
+{
+    return '@vendor_extension/sample';
+}
+</programlisting>
+      <para>
+        Il existe également une troisième méthode de notification,
+        Jabber, qui utilise le répertoire <literal>email/short</literal>
+        pour ses fichiers template. Cette méthode de notification est
+        étroitement liée à la méthode e-mail, il est donc important de
+        fournir également ce fichier template, même si le contenu peut
+        être identique au template de l'e-mail.
+      </para>
+      <warning>
+        <title>Avertissement</title>
+        <para>
+          Assurez-vous d'avoir à la fois
+          <literal>language/en/email/sample.txt</literal> et
+          <literal>language/en/email/short/sample.txt</literal> dans le
+          répertoire de langue de votre extension, pour éviter les
+          erreurs.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="get_email_template_variables">
+      <title>get_email_template_variables</title>
+      <para>
+        Si vous n'utilisez pas la méthode de notification par e-mail,
+        ceci doit retourner un <literal>array()</literal> vide. Mais si
+        vous utilisez la méthode e-mail, vous devez alors utiliser cette
+        fonction pour définir les variables utilisées dans votre
+        <ulink url="">template d'e-mail</ulink>. Cependant, notez que le
+        cœur de phpBB définit déjà certaines variables
+        <emphasis>par défaut</emphasis> pour vous :
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Variable
+              </entry>
+              <entry>
+                Description
+              </entry>
+              <entry>
+                Définie dans
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>USERNAME</literal>
+              </entry>
+              <entry>
+                Le nom d'utilisateur du destinataire
+              </entry>
+              <entry>
+                <literal>\\phpbb\\notification\\method\\messenger_base</literal>
+                <literal>notify_using_messenger()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>U_NOTIFICATION_SETTINGS</literal>
+              </entry>
+              <entry>
+                L'URL des préférences de notification du destinataire
+              </entry>
+              <entry>
+                <literal>\\phpbb\\notification\\method\\messenger_base</literal>
+                <literal>notify_using_messenger()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>EMAIL_SIG</literal>
+              </entry>
+              <entry>
+                La signature e-mail du forum
+              </entry>
+              <entry>
+                <literal>includes/functions_messenger.php</literal>
+                <literal>send()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>SITENAME</literal>
+              </entry>
+              <entry>
+                Le nom du site du forum
+              </entry>
+              <entry>
+                <literal>includes/functions_messenger.php</literal>
+                <literal>send()</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>U_BOARD</literal>
+              </entry>
+              <entry>
+                L'URL du forum
+              </entry>
+              <entry>
+                <literal>includes/functions_messenger.php</literal>
+                <literal>send()</literal>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        Lorsque vous spécifiez des variables de template supplémentaires
+        telles que des URL, vous devez vous assurer qu'il s'agit d'URL
+        absolues. Elles doivent inclure l'URL <emphasis>complète</emphasis> :
+        <literal>https://www.example.com/forum/ucp.php</literal> plutôt
+        que simplement <literal>./ucp.php</literal>. L'exemple ci-dessous
+        vous montrera comment y parvenir, à la fois pour les URL
+        classiques et pour les URL générées à partir de routes Symfony.
+      </para>
+      <programlisting>
+/**
+ * Get email template variables.
+ *
+ * @return array  Array of variables that can be used in the email template
+ */
+public function get_email_template_variables()
+{
+    return [
+        'AUTHOR' =&gt; htmlspecialchars_decode($this-&gt;user_loader-&gt;get_username($this-&gt;get_data('sender_id'), 'username')),
+        'SUBJECT'    =&gt; htmlspecialchars_decode(censor_text($this-&gt;get_data('message_subject')),
+
+        // Absolute URL: regular
+        'U_REGULAR'     =&gt; generate_board_url() . '/ucp.' . $this-&gt;php_ext . '?i=pm&amp;mode=view&amp;p=' . $this-&gt;get_data('message_id'),
+
+        // Absolute URL: route
+        'U_ROUTE'       =&gt; generate_board_url(false) . $this-&gt;helper-&gt;route('vendor_extension_route'),
+    ];
+}
+</programlisting>
+    </sect2>
+    <sect2 id="optional-class-functions">
+      <title>Fonctions optionnelles de la classe</title>
+      <para>
+        Les fonctions suivantes sont optionnelles et peuvent être omises
+        si votre notification n'a pas besoin de les utiliser.
+      </para>
+    </sect2>
+    <sect2 id="get_avatar">
+      <title>get_avatar</title>
+      <para>
+        Les identifiants d'utilisateur retournés par la fonction
+        <link linkend="users_to_query">users_to_query</link> sont ajoutés
+        à l'objet User loader. Malheureusement, cet objet n'est pas
+        disponible par défaut dans les
+        <link linkend="base-services">Services de base</link>. C'est
+        pourquoi nous l'avons ajouté dans la section
+        <link linkend="additional-services">Services
+        supplémentaires</link>.
+      </para>
+      <para>
+        Nous utilisons donc la fonction pratique, judicieusement nommée
+        <literal>get_avatar()</literal>, disponible depuis l'objet User
+        loader. Et nous fournissons trois paramètres. Le premier est
+        l'identifiant de l'utilisateur dont nous voulons afficher
+        l'avatar. Le second est un booléen, indiquant que l'utilisateur
+        n'a pas besoin d'être interrogé depuis la base de données, cela
+        étant déjà fait. Et le troisième est également un booléen,
+        indiquant que l'image d'avatar doit être chargée paresseusement
+        (lazy loading) dans le HTML. L'interface des notifications étant
+        un menu déroulant non visible immédiatement, le lazy loading est
+        plus avantageux pour le temps de chargement d'une page.
+      </para>
+      <para>
+        Si vous ne souhaitez pas afficher d'avatar à côté du texte de la
+        notification, vous pouvez omettre entièrement cette fonction.
+      </para>
+      <programlisting>
+/**
+ * Get the user's avatar.
+ *
+ * @return string  The HTML formatted avatar
+ */
+public function get_avatar()
+{
+    return $this-&gt;user_loader-&gt;get_avatar($this-&gt;get_data('sender_id'), false, true);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_forum">
+      <title>get_forum</title>
+      <para>
+        Si vous voulez fournir le nom du forum qui a déclenché cette
+        notification, cela est possible grâce à cette fonction. Par
+        exemple, lorsqu'un nouveau sujet est publié dans un forum. Cette
+        fonction peut être omise si aucun nom de forum n'est requis ou
+        disponible. Elle sera précédée de la chaîne
+        <emphasis>Forum:</emphasis> :
+      </para>
+      <blockquote>
+        <para>
+          <emphasis>Forum:</emphasis> le nom du forum
+        </para>
+      </blockquote>
+      <note>
+        <title>Remarque</title>
+        <para>
+          La variable <literal>forum_name</literal> ci-dessous n'est pas
+          définie dans ce tutoriel, elle est simplement montrée à titre
+          d'exemple.
+        </para>
+      </note>
+      <programlisting>
+/**
+ * Get the forum name for this notification.
+ *
+ * @return string  The notification's forum name
+ */
+public function get_forum()
+{
+    return $this-&gt;language-&gt;lang(
+        'NOTIFICATION_FORUM',
+        $this-&gt;get_data('forum_name')
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_reason">
+      <title>get_reason</title>
+      <para>
+        Si vous voulez fournir une raison littérale pour cette
+        notification, cela est possible grâce à cette fonction. Par
+        exemple, la raison fournie lors de la création ou de la clôture
+        d'un signalement, ou pour la modification ou la suppression d'un
+        message. Cette fonction peut être omise si aucune raison n'est
+        requise. Elle sera précédée de la chaîne
+        <emphasis>Reason:</emphasis> :
+      </para>
+      <blockquote>
+        <para>
+          <emphasis>Reason:</emphasis> This is a sample reason
+        </para>
+      </blockquote>
+      <programlisting>
+/**
+ * Get the reason for this notification.
+ *
+ * @return string  The notification's reason
+ */
+public function get_reason()
+{
+    return $this-&gt;language-&gt;lang(
+        'NOTIFICATION_REASON',
+        $this-&gt;language-&gt;lang('VENDOR_EXTENSION_NOTIFICATION_SAMPLE_REASON'))
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_reference">
+      <title>get_reference</title>
+      <para>
+        Si vous voulez fournir une référence supplémentaire pour cette
+        notification, cela est possible grâce à cette notification. Par
+        exemple, le sujet d'un message privé, d'un message ou d'un sujet.
+        Cette fonction peut être omise si aucune référence n'est requise.
+        Elle sera encadrée par des guillemets doubles :
+      </para>
+      <blockquote>
+        <para>
+          &quot;The message subject&quot;
+        </para>
+      </blockquote>
+      <programlisting>
+/**
+ * Get the reference for this notification.
+ *
+ * @return string  The notification's reference
+ */
+public function get_reference()
+{
+    return $this-&gt;language-&gt;lang(
+        'NOTIFICATION_REFERENCE',
+        censor_text($this-&gt;get_data('message_subject'))
+    );
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_style_class">
+      <title>get_style_class</title>
+      <para>
+        Il est également possible d'ajouter une classe CSS personnalisée
+        à la ligne de la notification. Ceci peut être utile si vous
+        souhaitez modifier le style par défaut du texte de la
+        notification. Par exemple, lorsque la notification concerne un
+        signalement ou une désapprobation. Fournir une chaîne de classes
+        ici les ajoutera à la notification. Cette fonction peut être
+        omise si aucune classe CSS supplémentaire n'est requise.
+      </para>
+      <programlisting>
+/**
+ * Get the CSS style class for this notification.
+ *
+ * @return string  The notification's CSS class
+ */
+public function get_style_class()
+{
+    return 'sample-notification-class and-another-class';
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_redirect_url">
+      <title>get_redirect_url</title>
+      <para>
+        Cette fonction peut retourner une URL différente de celle de
+        <link linkend="get_url">get_url</link>. L'URL retournée par cette
+        fonction sera utilisée pour <literal>redirect()</literal>
+        l'utilisateur après qu'il a marqué la notification comme lue. Par
+        défaut, cette URL est la même que celle retournée par
+        <link linkend="get_url">get_url</link>. Donc si vous n'avez pas
+        besoin de fournir une URL de <emphasis>« mark
+        read »</emphasis> différente, vous pouvez omettre cette fonction.
+      </para>
+      <para>
+        Par exemple, la notification <literal>post</literal> utilise
+        ceci pour envoyer l'utilisateur au premier message non lu d'un
+        sujet.
+      </para>
+      <programlisting>
+/**
+ * Get the URL to redirect to after the item has been marked as read.
+ *
+ * @return string  The notification's &quot;mark read&quot;-URL
+ */
+public function get_redirect_url()
+{
+    return append_sid(&quot;{$this-&gt;phpbb_root_path}viewtopic.{$this-&gt;php_ext}&quot;, &quot;t={$this-&gt;item_parent_id}&amp;amp;view=unread#unread&quot;);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="get_data">
+      <title>get_data</title>
+      <para>
+        Il s'agit d'une fonction utilitaire, couramment utilisée dans les
+        fonctions appelées lors de l'affichage de ce type de
+        notification. Ces <emphasis>fonctions d'affichage</emphasis> ont
+        souvent besoin d'accéder à des données spécifiques à une
+        notification donnée, telles qu'un <literal>message_id</literal>.
+        Pour récupérer ces variables de données, vous pouvez utiliser
+        cette fonction, avec le nom de la variable comme argument :
+        <literal>$this-&gt;get_data('key')</literal>.
+      </para>
+      <important>
+        <title>Important</title>
+        <para>
+          Toutes les données que vous devez récupérer doivent être
+          insérées lors de la création de la notification. <br/> Ceci se
+          fait via la fonction
+          <link linkend="create_insert_array">create_insert_array</link>.
+        </para>
+      </important>
+      <programlisting>
+$this-&gt;get_data('sender_id');
+$this-&gt;get_data('message_id');
+$this-&gt;get_data('message_subject');
+</programlisting>
+    </sect2>
+    <sect2 id="create_insert_array">
+      <title>create_insert_array</title>
+      <para>
+        Cette fonction est responsable de l'insertion des données
+        spécifiques à ce type de notification. Ces données seront
+        stockées dans la base de données et utilisées lors de
+        l'affichage de la notification.
+      </para>
+      <para>
+        Le paramètre <literal>$data</literal> contiendra le tableau
+        envoyé lors de l'
+        <link linkend="sending-a-notification">envoi d'une
+        notification</link>. Ainsi, toutes les données nécessaires à la
+        création et à l'affichage de la notification doivent être
+        incluses.
+      </para>
+      <para>
+        Cependant, seules les données nécessaires à l'affichage de la
+        notification doivent être insérées. Si vous avez fait attention,
+        vous aurez remarqué que nous utilisons quatre variables de
+        données. À savoir <literal>user_id</literal>,
+        <literal>sender_id</literal>, <literal>message_id</literal> et
+        <literal>message_subject</literal>. Mais
+        <literal>user_id</literal> n'est requis que lors de la création
+        de la notification, et n'est pas nécessaire lors de son
+        affichage. Cette variable n'a donc pas besoin d'être stockée dans
+        la base de données. Toutes les autres variables peuvent être
+        insérées à l'aide de la fonction utilitaire
+        <literal>set_data('key', 'value')</literal>.
+      </para>
+      <para>
+        Astuce
+      </para>
+      <para>
+        En règle générale, seules les données que vous récupérez via
+        <literal>get_data()</literal> doivent être définies via
+        <literal>set_data()</literal>.
+      </para>
+      <programlisting>
+/**
+ * Function for preparing the data for insertion in an SQL query.
+ * (The service handles insertion)
+ *
+ * @param array  $data             The type specific data
+ * @param array  $pre_create_data  Data from pre_create_insert_array()
+ * @return void
+ */
+public function create_insert_array($data, $pre_create_data = [])
+{
+    $this-&gt;set_data('sender_id', $data['sender_id']);
+    $this-&gt;set_data('message_id', $data['message_id']);
+    $this-&gt;set_data('message_subject', $data['message_subject']);
+
+    parent::create_insert_array($data, $pre_create_data);
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="sending-a-notification">
+    <title>Envoyer une notification</title>
+    <para>
+      Maintenant que nous avons configuré notre classe de type de
+      notification, il est temps de commencer à envoyer la notification.
+      Nous savons de quelles données nous avons besoin, nous pouvons donc
+      les collecter lorsque l'événement se déclenche.
+    </para>
+    <para>
+      L'envoi d'une notification se fait avec l'objet gestionnaire de
+      notifications (<literal>\\phpbb\\notification\\manager</literal>).
+      Ce service peut être injecté avec la déclaration de service
+      <literal>- '@notification_manager'</literal>.
+    </para>
+    <para>
+      Vous pouvez ensuite utiliser le gestionnaire de notifications pour
+      envoyer la notification. Ceci se fait avec la fonction
+      <literal>add_notifications</literal>. Le type de notification
+      (<literal>vendor.extension.notification.type.sample</literal>) doit
+      être fourni comme premier argument, et toutes les
+      <literal>$data</literal> dont nous avons besoin dans notre type de
+      notification comme second argument.
+    </para>
+    <para>
+      Vous trouverez ci-dessous un exemple simple de la façon d'envoyer
+      la notification. Il est possible d'envoyer une notification depuis
+      n'importe où. Cet exemple utilise un écouteur d'événement, mais il
+      est également possible de l'envoyer depuis un contrôleur.
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace vendor\extension\event;
+
+class listener implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
+{
+    static public function getSubscribedEvents()
+    {
+        return ['core.submit_pm_after' =&gt; 'send_sample_notification'];
+    }
+
+    /** @var \phpbb\notification\manager */
+    protected $notification_manager;
+
+    public function __construct(\phpbb\notification\manager $notication_manager)
+    {
+        $this-&gt;notification_manager   = $notification_manager;
+    }
+
+    public function send_sample_notification(\phpbb\event\data $event)
+    {
+        // For the sake of this tutorial, we assume that the PM is send to a single user
+        $this-&gt;notification_manager-&gt;add_notifications('vendor.extension.notification.type.sample', [
+            'user_id'         =&gt; array_key_first($event['pm_data']['recipients']),
+            'sender_id'       =&gt; $event['data']['from_user_id'],
+            'message_id'      =&gt; $event['data']['msg_id'],
+            'message_subject' =&gt; $event['subject'],
+        ]);
+    }
+}
+</programlisting>
+  </sect1>
+  <sect1 id="updating-a-notification">
+    <title>Mettre à jour une notification</title>
+    <para>
+      La mise à jour d'une notification se fait avec l'objet gestionnaire
+      de notifications (<literal>\\phpbb\\notification\\manager</literal>).
+      Ce service peut être injecté avec la déclaration de service
+      <literal>- '@notification_manager'</literal>.
+    </para>
+    <para>
+      Vous pouvez ensuite utiliser le gestionnaire de notifications pour
+      mettre à jour la notification. Ceci se fait avec la fonction
+      <literal>update_notifications</literal>. Le type de notification
+      (<literal>vendor.extension.notification.type.sample</literal>) doit
+      être fourni comme premier argument, et toutes les
+      <literal>$data</literal> dont nous avons besoin dans notre type de
+      notification comme second argument. Optionnellement, vous pouvez
+      envoyer un troisième argument, <literal>$options</literal>, pour
+      préciser quelle notification doit être mise à jour. Les options
+      pouvant être définies sont listées ci-dessous :
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Objet
+            </entry>
+            <entry>
+              Classe
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>item_id</literal>
+            </entry>
+            <entry>
+              L'identifiant de l'élément pour la notification. <br/> Par
+              défaut, <link linkend="get_item_id">get_item_id</link>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>item_parent_id</literal>
+            </entry>
+            <entry>
+              L'identifiant parent de l'élément pour la notification.
+              <br/> Optionnel
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>user_id</literal>
+            </entry>
+            <entry>
+              L'identifiant de l'utilisateur ayant reçu la notification.
+              <br/> Optionnel
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>read</literal>
+            </entry>
+            <entry>
+              Un booléen indiquant si la notification a été lue.
+              <br/> Optionnel
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <programlisting>
+// For the sake of this tutorial, we assume that the PM is send to a single user
+$user_id = array_key_first($event['pm_data']['recipients']);
+
+$data = [
+    'user_id'         =&gt; $user_id,
+    'sender_id'       =&gt; $event['data']['from_user_id'],
+    'message_id'      =&gt; $event['data']['msg_id'],
+    'message_subject' =&gt; $event['data']['subject'],
+];
+
+// Just the item identifier is sufficient to update this notification as it is unique
+// But lets include some options to demonstrate how that can be done as well.
+$options = [
+    'user_id'  =&gt; $user_id,
+    'item_id'  =&gt; $event['data']['msg_id'],
+    'read'     =&gt; false, // Only update when user has not read it yet
+];
+
+$this-&gt;notification_manager-&gt;update_notifications('vendor.extension.notification.type.sample', $data, $options);
+</programlisting>
+    <para>
+      Voyons maintenant comment fonctionne l'exemple ci-dessus. Le type
+      de notification sera créé comme s'il était en train d'être envoyé.
+      Ensuite, plutôt que d'insérer la notification, il récupérera les
+      données créées par la fonction
+      <link linkend="create_insert_array">create_insert_array</link>. Ces
+      données sont transformées en instruction SQL
+      <literal>UPDATE</literal> via
+      <literal>$db-&gt;sql_create_array('UPDATE', $data)</literal>. Et les
+      <literal>$options</literal> fournies sont transformées en clause
+      SQL <literal>WHERE</literal>.
+    </para>
+    <note>
+      <title>Remarque</title>
+      <para>
+        Les données récupérées depuis
+        <link linkend="create_insert_array">create_insert_array</link> ne
+        sont pas des colonnes de base de données. <br/> Les données
+        passent par <literal>serialize()</literal> et sont stockées dans
+        la colonne <literal>notification_data</literal>.
+      </para>
+    </note>
+    <para>
+      Les données sont récupérées par la fonction
+      <literal>create_update_array</literal> dans la classe
+      <literal>base</literal> du type de notification. Elle crée d'abord
+      le tableau d'insertion, puis désassigne quelques variables qui ne
+      doivent pas être mises à jour : <literal>user_id</literal>,
+      <literal>notification_id</literal>,
+      <literal>notification_time</literal> et
+      <literal>notification_read</literal> <emphasis>(qui est
+      l'indicateur permettant de savoir si la notification a déjà été
+      lue)</emphasis>. Si vous souhaitez également mettre à jour l'une de
+      ces variables, vous devrez surcharger la fonction
+      <literal>create_update_array</literal> de la classe
+      <literal>base</literal>.
+    </para>
+    <para>
+      Il est également possible de gérer entièrement vous-même le
+      processus de mise à jour pour votre type de notification. Ceci se
+      fait en créant une fonction <literal>update_notifications</literal>
+      dans votre classe de type de notification. Jetez un œil au type
+      <literal>quote</literal> pour un exemple.
+    </para>
+  </sect1>
+  <sect1 id="deleting-a-notification">
+    <title>Supprimer une notification</title>
+    <para>
+      Il est parfois nécessaire de supprimer une notification. Par
+      exemple, lorsqu'un message privé est supprimé avant d'être lu, ou
+      qu'un sujet avec des notifications de message non approuvé est
+      supprimé. Dans chacun de ces cas, la cause de la notification a été
+      supprimée, rendant la notification obsolète.
+    </para>
+    <para>
+      La suppression d'une notification est gérée à l'aide de la fonction
+      <literal>delete_notifications</literal> située dans l'objet
+      gestionnaire de notifications
+      (<literal>\\phpbb\\notification\\manager</literal>). Vous
+      utiliseriez généralement un écouteur d'événement approprié pour
+      appeler <literal>delete_notifications</literal>, par exemple
+      lorsqu'une action se produit qui rendrait votre notification
+      obsolète.
+    </para>
+    <para>
+      Cette fonction est très simple à utiliser, et ne nécessite que
+      quelques paramètres de base :
+    </para>
+    <sect2 id="delete_notifications">
+      <title>delete_notifications</title>
+      <sect3 id="parameters">
+        <title>Paramètres</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Paramètre
+                </entry>
+                <entry>
+                  Description
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_type</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant de service de la notification. <br/> Peut
+                  être une chaîne unique ou un tableau d'identifiants de
+                  service. <br/> Dans cet exemple :
+                  <literal>vendor.extension.notification.type.sample</literal>.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">item_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) d'élément. <br/> L'identifiant
+                  d'élément pour lequel vous voulez supprimer des
+                  notifications. <br/> Peut être un seul entier ou un
+                  tableau d'entiers. Seuls les identifiants d'élément
+                  pour le(s) type(s) de <br/> notification fourni(s)
+                  seront supprimés.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">parent_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) parent. <br/> L'identifiant parent
+                  pour lequel vous voulez supprimer des notifications.
+                  <br/> Peut être un seul entier ou un tableau d'entiers.
+                  Utilisez cet argument pour supprimer les <br/>
+                  notifications qui n'appartiennent qu'au(x)
+                  identifiant(s) parent donné(s). La valeur par défaut
+                  est <br/> false pour ignorer les identifiants parents.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">user_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) d'utilisateur. <br/> L'identifiant de
+                  l'utilisateur pour lequel vous voulez supprimer des
+                  notifications. <br/> Peut être un seul entier ou un
+                  tableau d'entiers. Utilisez cet argument pour supprimer
+                  les <br/> notifications pour un utilisateur donné ou un
+                  ensemble d'utilisateurs. La valeur par défaut est false
+                  pour ignorer <br/> des utilisateurs spécifiques.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <programlisting>
+// Let's take a look at a PM that was deleted.
+// Say the item ID(s) for our notification come from the deleted PM's message IDs.
+$item_ids = $event['data']['msg_ids'];
+
+// Just the item identifier is sufficient to delete this notification as it is unique
+// But you could include user_id or parent_id's if they were relevant as well.
+$this-&gt;notification_manager-&gt;delete_notifications('vendor.extension.notification.type.sample', $item_ids);
+</programlisting>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="marking-a-notification">
+    <title>Marquer une notification</title>
+    <para>
+      Les notifications sont automatiquement marquées comme lues
+      lorsqu'elles sont cliquées dans le menu déroulant des
+      notifications. Ou lors du marquage des forums ou des sujets comme
+      lus, leurs notifications respectives sont également marquées.
+      Cependant, il peut parfois être préférable de marquer manuellement
+      une notification comme lue ou non lue.
+    </para>
+    <para>
+      Il existe trois méthodes disponibles pour marquer une notification,
+      toutes situées dans l'objet gestionnaire de notifications
+      (<literal>\\phpbb\\notification\\manager</literal>). La différence
+      distincte entre ces méthodes réside dans la façon dont elles
+      déterminent quelles notifications doivent être marquées. Soit via
+      leur identifiant d'élément, leur identifiant parent, soit via
+      l'identifiant réel de la notification. Lors du marquage des
+      notifications par leur identifiant d'élément ou leur identifiant
+      parent, elles seront automatiquement marquées pour toutes les
+      méthodes de notification disponibles. Mais lors du marquage des
+      notifications par leur identifiant réel, vous devrez fournir
+      vous-même la méthode de notification spécifique.
+    </para>
+    <para>
+      Obsolète
+    </para>
+    <para>
+      Les fonctions suivantes sont dépréciées depuis phpBB
+      <literal>3.2.0</literal> : <br/>
+      <literal>mark_notifications_read</literal> <br/>
+      <literal>mark_notifications_read_by_parent</literal>
+    </para>
+    <para>
+      Voici un résumé rapide des trois méthodes disponibles pour marquer
+      les notifications et leurs arguments.
+    </para>
+    <sect2 id="mark_notifications">
+      <title>mark_notifications</title>
+      <sect3 id="parameters-1">
+        <title>Paramètres</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Paramètre
+                </entry>
+                <entry>
+                  Description
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_type</emphasis>
+                </entry>
+                <entry>
+                  Peut être une chaîne unique ou un tableau
+                  d'identifiants de service. <br/> Dans cet exemple :
+                  <literal>vendor.extension.notification.type.sample</literal>.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">item_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) d'élément. <br/> Le(s) identifiant(s)
+                  d'élément des notifications que vous voulez marquer
+                  comme lues. <br/> Peut être un seul entier ou un
+                  tableau d'entiers. Il est également possible de passer
+                  <br/> false pour marquer comme lus tous les
+                  identifiants d'élément.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">user_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) d'utilisateur. <br/> Le(s)
+                  identifiant(s) d'utilisateur pour lesquels vous voulez
+                  marquer des notifications comme lues. <br/> Peut être
+                  un seul entier ou un tableau d'entiers. Il est
+                  également possible de passer <br/> false pour marquer
+                  comme lus pour tous les identifiants d'utilisateur.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">time</emphasis>
+                </entry>
+                <entry>
+                  Horodatage UNIX à utiliser comme limite. <br/> Marque
+                  comme lues les notifications envoyées avant cette
+                  heure. Toutes les notifications créées après cette
+                  <br/> heure ne seront pas marquées comme lues. La
+                  valeur par défaut est false, ce qui marquera tout comme
+                  lu.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">mark_read</emphasis>
+                </entry>
+                <entry>
+                  Indique si la notification doit être marquée comme
+                  <emphasis>lue</emphasis> ou <emphasis>non
+                  lue</emphasis>. <br/> Par défaut,
+                  <emphasis>lue</emphasis>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="mark_notifications_by_parent">
+      <title>mark_notifications_by_parent</title>
+      <sect3 id="parameters-2">
+        <title>Paramètres</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Paramètre
+                </entry>
+                <entry>
+                  Description
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_type</emphasis>
+                </entry>
+                <entry>
+                  Peut être une chaîne unique ou un tableau
+                  d'identifiants de service. <br/> Dans cet exemple :
+                  <literal>vendor.extension.notification.type.sample</literal>.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">parent_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) parent. <br/> Le(s) identifiant(s)
+                  parent de l'élément pour les notifications que vous
+                  voulez marquer comme lues. <br/> Peut être un seul
+                  entier ou un tableau d'entiers. Il est également
+                  possible de passer <br/> false pour marquer comme lus
+                  tous les identifiants parents d'élément.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">user_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) d'utilisateur. <br/> Le(s)
+                  identifiant(s) d'utilisateur pour lesquels vous voulez
+                  marquer des notifications comme lues. <br/> Peut être
+                  un seul entier ou un tableau d'entiers. Il est
+                  également possible de passer <br/> false pour marquer
+                  comme lus pour tous les identifiants d'utilisateur.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">time</emphasis>
+                </entry>
+                <entry>
+                  Horodatage UNIX à utiliser comme limite. <br/> Marque
+                  comme lues les notifications envoyées avant cette
+                  heure. Toutes les notifications créées après cette
+                  <br/> heure ne seront pas marquées comme lues. La
+                  valeur par défaut est false, ce qui marquera tout comme
+                  lu.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">mark_read</emphasis>
+                </entry>
+                <entry>
+                  Indique si la notification doit être marquée comme
+                  <emphasis>lue</emphasis> ou <emphasis>non
+                  lue</emphasis>. <br/> Par défaut,
+                  <emphasis>lue</emphasis>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="mark_notifications_by_id">
+      <title>mark_notifications_by_id</title>
+      <para>
+        Jusqu'ici, nous n'avons pas eu à travailler avec l'identifiant
+        réel de la notification elle-même, en utilisant plutôt les
+        identifiants d'élément et de parent de la notification. C'est
+        généralement parce que, au sein du cœur de phpBB, nous ne
+        connaissons peut-être jamais, ou n'avons pas accès à,
+        l'identifiant réel de la notification, la majeure partie de la
+        gestion des notifications se faisant via les identifiants
+        distincts d'élément et/ou de parent. Cependant, il peut arriver
+        qu'il soit plus pratique ou précis de travailler directement avec
+        l'identifiant unique de la notification. Par exemple, lorsque les
+        notifications sont listées dans l'
+        <literal>UCP (User Control Panel)</literal> et qu'un utilisateur
+        peut sélectionner des notifications spécifiques à marquer comme
+        lues.
+      </para>
+      <sect3 id="parameters-3">
+        <title>Paramètres</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Paramètre
+                </entry>
+                <entry>
+                  Description
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">method_name</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant de service de la méthode de notification
+                  <br/> Par exemple :
+                  <literal>notification.method.board</literal>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">notification_id</emphasis>
+                </entry>
+                <entry>
+                  L'identifiant(s) de la notification <br/> Peut être un
+                  entier ou un tableau d'entiers.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">time</emphasis>
+                </entry>
+                <entry>
+                  Horodatage UNIX à utiliser comme limite. <br/> Marque
+                  comme lues les notifications envoyées avant cette
+                  heure. Toutes les notifications créées après cette
+                  <br/> heure ne seront pas marquées comme lues. La
+                  valeur par défaut est false, ce qui marquera tout comme
+                  lu.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">mark_read</emphasis>
+                </entry>
+                <entry>
+                  Indique si la notification doit être marquée comme
+                  <emphasis>lue</emphasis> ou <emphasis>non
+                  lue</emphasis>. <br/> Par défaut,
+                  <emphasis>lue</emphasis>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="advanced-lessons">
+    <title>Leçons avancées</title>
+    <sect2 id="custom-item-identifier">
+      <title>Identifiant d'élément personnalisé</title>
+      <para>
+        Parfois, vous ne pouvez pas utiliser un identifiant d'élément
+        « normal », tel qu'un <literal>topic_id</literal>, un
+        <literal>post_id</literal> ou un <literal>msg_id</literal>. Dans
+        ce cas, vous devrez créer un compteur de notifications
+        personnalisé dans votre extension. Vous l'ajoutez via une
+        migration, où il est ajouté à la table de configuration. Par
+        exemple avec le code suivant :
+        <literal>['config.add', ['vendor_extension_notification_id', 0]]</literal>.
+      </para>
+      <para>
+        Pour en savoir plus à ce sujet, consultez la section
+        <ulink url="../migrations/tools/config.html#add-config-setting">Add
+        config setting</ulink>.
+      </para>
+      <para>
+        Ensuite, lors de l'envoi d'une notification, vous devrez
+        incrémenter l'identifiant et l'utiliser comme identifiant
+        d'élément. Vous pouvez utiliser la fonction
+        <literal>increment()</literal> de l'objet Config
+        (<literal>\\phpbb\\config\\config</literal>) pour y parvenir.
+      </para>
+      <programlisting>
+// Increment the notification identifier by 1
+$this-&gt;config-&gt;increment('vendor_extension_notification_id', 1);
+
+$this-&gt;notification_manager-&gt;add_notification('vendor.extension.notification.type.sample', [
+    'item_id'   =&gt; $this-&gt;config['vendor_extension_notification_id'],
+]);
+</programlisting>
+      <para>
+        Vous pouvez utiliser cet identifiant de notification personnalisé
+        dans la fonction
+        <link linkend="get_item_id">get_item_id</link>.
+      </para>
+      <programlisting>
+public static function get_item_id($data)
+{
+    return $data['item_id'];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

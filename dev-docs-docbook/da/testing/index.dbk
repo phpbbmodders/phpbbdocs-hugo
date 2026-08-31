@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Testning</title>
+  </articleinfo>
+  <para>
+    For at sikre kodens integritet, når nye funktioner tilføjes, og
+    eksisterende funktioner ændres med rettelser, bruger phpBB
+    testframeworket PHPUnit. På den måde kan udviklingsteamet holde styr
+    på, om en ændring foretaget i kernen påvirker andre eksisterende
+    funktioner på uforudsete måder.
+  </para>
+  <para>
+    Der findes to primære typer af tests, der kan skrives og køres:
+    unit-tests og funktionelle tests.
+  </para>
+  <para>
+    unit_testing functional_testing ui_testing
+  </para>
+</article>

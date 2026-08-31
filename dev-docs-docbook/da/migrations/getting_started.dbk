@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Kom godt i gang</title>
+  </articleinfo>
+  <para>
+    For at komme i gang med Migrationer skal vi først oprette en
+    migrationsfil, der indeholder listen over databaseændringer.
+  </para>
+  <para>
+    Før vi går i gang, bør du huske, at der med Migrationer ikke er
+    nogen grænse for antallet af migrationsfiler. Det betyder, at du frit
+    kan oprette migrationsfiler efter behov, uanset om du vil oprette én
+    fil pr. version, pr. funktion, eller endda for hver ændring, du
+    foretager i databasen -- det er helt op til dig!
+  </para>
+  <sect1 id="where-do-i-create-the-migration-file">
+    <title>Hvor opretter jeg migrationsfilen?</title>
+    <sect2 id="extension-author">
+      <title>Extension-forfatter</title>
+      <para>
+        Opret en mappe i <literal>ext/vendor/extension/</literal> kaldet
+        migrations. Alle dine migrationsfiler bør ligge i denne mappe.
+      </para>
+    </sect2>
+    <sect2 id="developer">
+      <title>Udvikler</title>
+      <para>
+        phpBB's migrationsfiler findes i
+        <literal>phpbb/db/migration/data/</literal>. Du kan enten
+        oprette en fil i denne mappe eller oprette en undermappe, hvis du
+        planlægger at oprette flere migrationsfiler til én enkelt
+        funktion.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="what-must-go-in-the-migration-file">
+    <title>Hvad skal der stå i migrationsfilen?</title>
+    <para>
+      Det eneste absolutte krav er at oprette en ny klasse, der udvider
+      <literal>\phpbb\db\migration\migration</literal>:
+    </para>
+    <programlisting>
+&lt;?php
+class new_migration_class extends \phpbb\db\migration\migration
+{
+    // Data for database changes will go in here!
+}
+</programlisting>
+    <sect2 id="what-should-the-new-migration-class-name-be">
+      <title>Hvad skal den nye migrationsklasse hedde?</title>
+      <para>
+        Navngivningen af klassen skal følge de generelle
+        kodningsretningslinjer og kan ellers være, hvad du vil.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="what-else-goes-in-a-migration-file">
+    <title>Hvad ellers indgår i en migrationsfil?</title>
+    <para>
+      Nu er du klar til at begynde at tilføje instruktioner, så
+      Migratoren ved, hvad den skal gøre, når den støder på din
+      migrationsfil.
+    </para>
+    <sect2 id="migration-dependencies">
+      <title>Migrationsafhængigheder</title>
+      <para>
+        Før du begynder at oprette migrationsfiler, du vil bruge, bør du
+        forstå migrationsafhængigheder, og hvordan de fungerer.
+      </para>
+      <para>
+        <literal>dependencies</literal>
+      </para>
+    </sect2>
+    <sect2 id="schema-changes">
+      <title>Skemaændringer</title>
+      <para>
+        Hvis du skal foretage skemaændringer (oprette/ændre/fjerne
+        tabeller/kolonner/indekser), bør du læse følgende side.
+      </para>
+      <para>
+        <literal>schema_changes</literal>
+      </para>
+    </sect2>
+    <sect2 id="data-changes">
+      <title>Dataændringer</title>
+      <para>
+        Hvis du skal foretage dataændringer (konfigurationsindstillinger,
+        tilføje/fjerne moduler, tilføje/fjerne/sætte/fjerne tilladelser,
+        eller andre brugerdefinerede ændringer), bør du læse følgende
+        side.
+      </para>
+      <para>
+        <literal>data_changes</literal>
+      </para>
+    </sect2>
+    <sect2 id="check-if-effectively-installed">
+      <title>Kontrollér, om det reelt er installeret</title>
+      <para>
+        Funktionen <literal>effectively_installed()</literal> kaldes,
+        før en migration installeres. Dette giver dig mulighed for nemt
+        at gå fra en tidligere metode til databaseinstallation til
+        Migrationer.
+      </para>
+      <para>
+        <emphasis role="strong">Hvis den returnerer true, markeres
+        migrationen som installeret uden at anvende nogen
+        ændringer.</emphasis> <emphasis>Denne funktion er ikke
+        obligatorisk og bør normalt ikke være nødvendig. Den er kun
+        nødvendig, hvis du forsøger at tillade opdateringer fra et
+        system, der muligvis allerede er installeret, men hvor
+        migrationer endnu ikke er kørt (f.eks. ved opdatering af en mod
+        fra 3.0.x til 3.1.x).</emphasis>
+      </para>
+    </sect2>
+  </sect1>
+</article>

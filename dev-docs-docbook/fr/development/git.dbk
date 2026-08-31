@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Git</title>
+  </articleinfo>
+  <para>
+    phpBB utilise Git comme système de gestion de versions. Le
+    repository Git de phpBB est hébergé sur GitHub à l'adresse
+    <ulink url="https://github.com/phpbb/phpbb">https://github.com/phpbb/phpbb</ulink>.
+  </para>
+  <para>
+    Cette documentation explique comment contribuer au développement de
+    phpBB :
+  </para>
+  <itemizedlist spacing="compact">
+    <listitem>
+      <para>
+        <link linkend="basics">Notions de base</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="branch-names">Noms de branches</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="commit-messages">Messages de commit</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="developers">Développeurs</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="windows">Windows</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="further-reading">Pour aller plus loin</link>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <link linkend="external-links">Liens externes</link>
+      </para>
+    </listitem>
+  </itemizedlist>
+  <sect1 id="basics">
+    <title>Notions de base</title>
+    <sect2 id="phpbb-repository">
+      <title>Repository de phpBB</title>
+      <sect3 id="forking-and-cloning">
+        <title>Fork et clonage</title>
+        <para>
+          Pour contribuer au développement de phpBB, vous devriez créer
+          un compte utilisateur <ulink url="https://github.com">GitHub</ulink>
+          si vous n'en avez pas déjà un.
+        </para>
+        <para>
+          Commencez par forker le
+          <ulink url="https://github.com/phpbb/phpbb">repository de
+          phpBB</ulink> vers votre compte, en cliquant sur le bouton
+          « Fork » du repository de phpBB.
+        </para>
+        <para>
+          Clonez votre fork du repository de phpBB sur votre ordinateur :
+          <literal>git clone git://github.com/&lt;my_github_name&gt;/phpbb.git</literal>
+        </para>
+        <para>
+          Consultez
+          <ulink url="https://help.github.com/articles/set-up-git">Set
+          Up Git</ulink> pour de l'aide sur la configuration de Git.
+        </para>
+      </sect3>
+      <sect3 id="branches">
+        <title>Branches</title>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/master">master</ulink>
+              - La dernière version de développement instable, avec les
+              nouvelles fonctionnalités, etc.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.3.x">3.3.x</ulink>
+              - Branche de développement de la ligne 3.3. Les corrections
+              de bugs et les modifications mineures de fonctionnalités y
+              sont appliquées.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.2.x">3.2.x</ulink>
+              - Branche de développement de la ligne 3.2. Les corrections
+              de bugs et les modifications mineures de fonctionnalités y
+              sont appliquées.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.1.x">3.1.x</ulink>
+              - Branche de développement de la ligne stable 3.1. phpBB
+              3.1 a atteint sa fin de vie et n'est donc plus maintenue.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/3.0.x">3.0.x</ulink>
+              - Branche de développement de la ligne stable 3.0. phpBB
+              3.0 a atteint sa fin de vie et n'est donc plus maintenue.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://github.com/phpbb/phpbb/tree/2.0.x">2.0.x</ulink>
+              - Branche de développement de la ligne obsolète 2.0.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+      <sect3 id="tags">
+        <title>Tags</title>
+        <para>
+          Les tags sont des versions publiées. Les versions stables sont
+          mergées dans la branche master.
+        </para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              release-3.Y.Z-aX - Version alpha X de la ligne 3.Y.Z.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-3.Y.Z-bX - Version bêta X de la ligne 3.Y.Z.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-3.Y.Z-RCX - Version candidate X de la version
+              stable 3.Y.Z.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-3.Y.Z - Version stable 3.Y.Z.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              release-2.0.X - Version stable obsolète 2.0.X.
+            </para>
+          </listitem>
+        </itemizedlist>
+        <para>
+          Cela signifie que tout développement de corrections de bugs
+          doit avoir lieu sur la branche 3.2.x, et sera mergé dans les
+          branches supérieures, y compris master. Tout développement de
+          fonctionnalités doit avoir lieu dans master. Lisez-en davantage
+          sur le workflow dans la section suivante.
+        </para>
+      </sect3>
+      <sect3 id="how-to-contribute">
+        <title>Comment contribuer ?</title>
+        <para>
+          Lorsque vous corrigez un bug, veuillez poster dans le
+          <ulink url="https://tracker.phpbb.com">bug tracker</ulink>.
+          Lorsque vous ajoutez une fonctionnalité à la 3.x, postez votre
+          patch pour relecture dans un nouveau sujet sur le
+          <ulink url="https://area51.phpbb.com/phpBB/viewforum.php?f=81">forum
+          de discussion [3.x]</ulink> sur Area51. Veuillez fournir soit
+          un lien vers votre commit ou votre branche sur GitHub, soit
+          joindre un patch créé avec <literal>git format-patch</literal>.
+          Pour les fonctionnalités ou changements plus importants,
+          envisagez de l'ajouter d'abord comme idée sur
+          <ulink url="https://www.phpbb.com/community/ideas">phpBB
+          Ideas</ulink>, ou de poster une RFC sur Area51.
+        </para>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="branch-names">
+    <title>Noms de branches</title>
+    <para>
+      Les noms de branches doivent avoir un préfixe se terminant par une
+      barre oblique. Seuls 3 types de préfixes sont autorisés :
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>feature/</literal> suivi d'un nom de fonctionnalité
+          pour les branches ajoutant une fonctionnalité.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>task/</literal> suivi d'un nom de tâche pour les
+          branches qui n'ajoutent ni une fonctionnalité ni ne corrigent
+          des bugs.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>ticket/</literal> suivi d'un numéro de ticket pour les
+          branches corrigeant des bugs.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Exemples de nommage de branches :
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>feature/feature-name</literal> pour les
+          fonctionnalités.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>task/task-name</literal> pour les tâches.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>ticket/12345</literal> pour les corrections de bugs.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <literallayout>Lorsque des branches entrent dans le repository
+    principal de phpBB, elles sont renommées en
+    <emphasis role="strong">&lt;category&gt;/&lt;user&gt;/&lt;name-or-id&gt;</emphasis>
+    ou
+    <emphasis role="strong">user/&lt;category&gt;/&lt;name-or-id&gt;</emphasis>
+    afin d'indiquer clairement de quel repository de développeur la
+    branche a été mergée.</literallayout>
+  </sect1>
+  <sect1 id="commit-messages">
+    <title>Messages de commit</title>
+    <para>
+      Vous devriez toujours <ulink url="https://tracker.phpbb.com">créer
+      un ticket</ulink> avant de commencer à travailler. Il est important
+      que chaque commit référence un ticket. L'état de ce ticket importe
+      peu. Aucune ligne ne doit contenir plus de 79 caractères. La
+      première ligne doit être suivie d'une ligne vide. Cela signifie que
+      vous ne devez pas couper la première phrase de votre message ! Le
+      but est de conserver des logs --oneline utiles, qui n'affichent que
+      la première ligne de chaque message. Un bon message de commit
+      ressemble alors à ceci :
+    </para>
+    <programlisting>
+[branch you are working on] A short explanation of the change.
+
+A more detailed explanation of which things exactly were changed and for
+what reasons.
+
+This can span multiple paragraphs for a bigger change. And
+it should really make clear all the changes to anyone reading this commit
+message without further context.
+
+TICKET-ID
+</programlisting>
+    <para>
+      Un exemple :
+    </para>
+    <programlisting>
+[feature/request-class] Adding request class ported from ascraeus-experiment.
+
+The well known request_var function is now a wrapper that calls a method
+on a phpbb_request object. The class provides additional functionality.
+It can replace all super globals with special objects that throw errors
+when being accessed. They still allow isset operations to keep backward
+compatibility with isset($_POST['var']) checks. The phpbb_request class
+implements the phpbb_request_interface which is available for easy mocking
+of input in tests.
+
+PHPBB-1234
+</programlisting>
+    <para>
+      La structure d'un message de commit, telle que vérifiée par le
+      hook commit-msg, est la suivante :
+    </para>
+    <programlisting>
+[&lt;branch&gt;] &lt;summary&gt;
+
+&lt;description&gt;
+
+&lt;ticket1&gt;
+&lt;ticketn&gt;
+</programlisting>
+    <para>
+      Les composants obligatoires sont le résumé, la branche et la liste
+      des tickets ; la description est facultative. La description
+      comme la liste des tickets doivent être précédées d'une
+      <emphasis role="strong">unique</emphasis> ligne vide. L'élément de
+      description est de longueur illimitée et peut contenir un nombre
+      quelconque de lignes vides pour séparer les paragraphes ; chaque
+      ticket de la liste doit figurer sur sa propre ligne. Si la branche
+      est une branche [ticket/], la liste des tickets doit contenir un
+      ticket correspondant ; enfin, la liste des tickets ne doit
+      contenir aucun doublon.
+    </para>
+  </sect1>
+  <sect1 id="developers">
+    <title>Développeurs</title>
+    <para>
+      Consultez la section <link linkend="forking-and-cloning">Fork et
+      clonage</link>.
+    </para>
+    <sect2 id="configuration">
+      <title>Configuration</title>
+      <sect3 id="git-1">
+        <title>Git</title>
+        <para>
+          Ajoutez votre nom d'utilisateur à Git sur votre système :
+        </para>
+        <programlisting>
+git config --global user.name &quot;Your Name Here&quot;
+</programlisting>
+        <para>
+          Ajoutez votre adresse e-mail à Git sur votre système :
+        </para>
+        <programlisting>
+git config --add user.email username@phpbb.com
+</programlisting>
+        <para>
+          Ajoutez le remote upstream (vous pouvez remplacer 'upstream'
+          par ce que vous voulez) :
+        </para>
+        <programlisting>
+git remote add upstream git://github.com/phpbb/phpbb.git
+</programlisting>
+        <note>
+          <title>Remarque</title>
+          <para>
+            L'URL du remote <emphasis>upstream</emphasis>
+            <emphasis role="strong">est</emphasis> le repo GitHub de
+            phpBB. Votre fork clonée du repo GitHub de phpBB utilise, par
+            défaut, l'URL du remote <emphasis>origin</emphasis>.
+          </para>
+        </note>
+      </sect3>
+      <sect3 id="composer">
+        <title>Composer</title>
+        <para>
+          Pour pouvoir exécuter une installation depuis le repo (et non à
+          partir d'un paquet préconstruit), vous devez exécuter les
+          commandes shell suivantes pour installer les dépendances de
+          phpBB.
+        </para>
+        <programlisting>
+cd phpBB
+php ../composer.phar install
+</programlisting>
+        <para>
+          Ignorez les éventuels avertissements
+          <emphasis>abandoned package</emphasis>.
+        </para>
+        <para>
+          <ulink url="https://getcomposer.org/doc/00-intro.md">Introduction
+          - Composer</ulink> pour plus d'informations.
+        </para>
+      </sect3>
+      <sect3 id="hooks">
+        <title>Hooks</title>
+        <para>
+          Le repository de phpBB contient des hooks côté client qui
+          peuvent faciliter le développement. Ils se trouvent dans le
+          répertoire <literal>git-tools/hooks</literal>. Ces hooks font
+          des choses comme préparer et valider les messages de commit, ou
+          vérifier les erreurs de syntaxe PHP. Il existe un script pour
+          les mettre en place (qui les symlink dans
+          <literal>.git/hooks</literal>).
+        </para>
+        <programlisting>
+cd git-tools/hooks
+./install
+</programlisting>
+        <para>
+          Si vous obtenez une erreur indiquant que les hooks existent
+          déjà, supprimez simplement tous les fichiers de
+          <literal>.git/hooks</literal> et relancez la commande
+          d'installation.
+        </para>
+        <para>
+          Une fois ces hooks installés, il vous suffit d'exécuter
+          <literal>git commit</literal> pour valider de nouvelles
+          modifications. Selon votre environnement, il vous sera demandé
+          d'ajouter un message de commit à l'aide de
+          <ulink url="http://vimdoc.sourceforge.net/htmldoc/">Vim</ulink>
+          ou
+          <ulink url="https://www.gnu.org/software/emacs/manual/html_node/emacs/Help.html">Emacs</ulink>.
+          Les hooks se chargeront de formater l'intégralité de votre
+          message de commit dans le format requis (voir
+          <link linkend="commit-messages">Messages de commit</link>).
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="creating-local-branches">
+      <title>Création de branches locales</title>
+      <para>
+        Pour travailler sur phpBB, vous devez créer des branches locales
+        de la branche de développement dont vous avez besoin (par
+        exemple <emphasis>master</emphasis>). Exécutez la commande
+        suivante pour effectuer cette opération :
+      </para>
+      <programlisting>
+git checkout -b master origin/master
+</programlisting>
+    </sect2>
+    <sect2 id="workflow">
+      <title>Workflow</title>
+      <sect3 id="pulling-in-upstream-changes">
+        <title>Récupérer les modifications d'upstream</title>
+        <para>
+          Vous devrez merger les modifications apportées au repository
+          upstream pour qu'elles apparaissent dans votre fork ; voici les
+          étapes pour le faire. Nous supposons que vous effectuez ceci
+          sur la branche <emphasis role="strong">master</emphasis>, mais
+          il pourrait s'agir d'une branche de correction de bugs ou d'une
+          branche de développement, donc assurez-vous d'être sur la
+          bonne branche à l'aide de <literal>git branch</literal>, et
+          changez avec <literal>git checkout</literal> si nécessaire.
+        </para>
+        <blockquote>
+          <para>
+            1. Récupérez les modifications de la branche
+            <emphasis role="strong">master</emphasis> d'upstream : :
+          </para>
+          <programlisting>
+git pull upstream master
+</programlisting>
+          <para>
+            2. Poussez les modifications vers votre fork (remplacez
+            master par la branche actuelle) : :
+          </para>
+          <programlisting>
+git push origin master
+</programlisting>
+        </blockquote>
+        <para>
+          L'image suivante illustre le modèle de branches de phpBB. Elle
+          peut vous aider à comprendre les différentes branches dont
+          cette section parle plus loin.
+        </para>
+        <para>
+          <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/Phpbb-git-workflow.png" />
+            </imageobject>
+            <textobject>
+              <phrase>image</phrase>
+            </textobject>
+          </inlinemediaobject>
+        </para>
+      </sect3>
+      <sect3 id="bug-fixing">
+        <title>Correction de bugs</title>
+        <para>
+          Assurez-vous d'abord d'utiliser la bonne branche de
+          développement (par exemple <emphasis>3.2.x</emphasis>) et non
+          la branche <emphasis>master</emphasis>. Dans cet exemple, nous
+          utilisons 3.2.x.
+        </para>
+        <programlisting>
+git checkout 3.2.x # Checkout the base branch 3.2.x
+git branch ticket/12345 # Create a new branch for your bug fix
+git checkout ticket/12345 # Switch to the new branch
+# Make your changes
+git add &lt;files&gt; # Stage the files
+git commit # Commit staged files - please use a correct commit message
+# Make more changes &amp; commits if necessary
+git push origin ticket/12345 # Push the branch back to GitHub
+</programlisting>
+      </sect3>
+      <sect3 id="starting-a-new-feature">
+        <title>Démarrer une nouvelle fonctionnalité</title>
+        <para>
+          Assurez-vous d'abord d'utiliser la bonne branche de
+          développement (par exemple <emphasis>master</emphasis>). Dans
+          cet exemple, nous utilisons master.
+        </para>
+        <programlisting>
+git checkout master # Checkout the base branch
+git checkout -b feature/my-fancy-new-feature # Create a new branch for your feature &amp; switch to it
+# Make your changes
+git add &lt;files&gt; # Stage the files
+git commit # Commit staged files - please use a correct commit message
+# Make more changes &amp; commits
+git push origin feature/my-fancy-new-feature # Push the branch back to GitHub
+</programlisting>
+      </sect3>
+      <sect3 id="collaborating-with-other-developers-on-a-feature">
+        <title>Collaborer avec d'autres développeurs sur une
+        fonctionnalité</title>
+        <para>
+          Vous avez poussé une nouvelle fonctionnalité sur GitHub et un
+          autre développeur y a travaillé. Voici comment intégrer ses
+          modifications dans votre propre branche de fonctionnalité.
+        </para>
+        <programlisting>
+git remote add otherdeveloper git://github.com/otherdeveloper/phpbb.git # Add the other developer's repository as a remote
+git fetch otherdeveloper # Fetch otherdeveloper's changes
+git checkout feature/my-fancy-new-feature # Switch to the feature branch
+git merge otherdeveloper/feature/my-fancy-new-feature # Merge otherdeveloper's changes into your feature branch
+# If necessary resolve conflicts &amp; commit
+git push origin feature/my-fancy-new-feature # Push the branch back to GitHub
+</programlisting>
+      </sect3>
+      <sect3 id="merging-a-feature-or-bugfix-branch">
+        <title>Merger une branche de fonctionnalité ou de correction de
+        bug</title>
+        <para>
+          Une fois qu'une fonctionnalité ou une correction de bug est
+          terminée, elle peut être mergée dans la branche master. Pour
+          préserver l'historique, nous ne faisons jamais de fast-forward
+          pour ce type de merge. Dans cet exemple, nous allons merger la
+          correction de bug créée plus haut dans 3.2.x. Nous mergeons
+          ensuite les modifications dans 3.3.x, puis nous mergeons 3.3.x
+          dans master pour maintenir ces branches à jour.
+        </para>
+        <programlisting>
+git checkout 3.2.x # Branch we want to merge into, pull in upstream changes first.
+git merge --no-ff remote/ticket/12345 # Merge remote branch without fast forward
+git checkout 3.3.x # Branch we want to merge into, pull in upstream changes first.
+git merge --no-ff 3.2.x # Merge to keep the 3.3.x branch in sync
+git checkout master # Branch we want to merge into, pull in upstream changes first.
+git merge --no-ff 3.3.x # Merge to keep the master branch in sync
+git push origin 3.2.x 3.3.x master # Push the three changed branches back to GitHub
+</programlisting>
+        <para>
+          De plus, le paramètre de configuration merge.log de Git est
+          défini à true, ce qui produit un résumé des commits mergés.
+        </para>
+      </sect3>
+      <sect3 id="merging-into-phpbb-repository">
+        <title>Merger dans le repository de phpBB</title>
+        <para>
+          Ceci ne s'applique <emphasis>qu'</emphasis>aux membres de
+          l'équipe de développement. Les étapes suivantes doivent être
+          suivies lors du merge d'une branche de sujet dans le repository
+          de phpBB.
+        </para>
+        <note>
+          <title>Remarque</title>
+          <para>
+            Notez que les tests doivent être exécutés avant de merger
+            dans le repository officiel. Les tests sont exécutés à chaque
+            push vers une pull request par
+            <ulink url="https://github.com/phpbb/phpbb/actions">Github
+            Actions</ulink>, mais il est recommandé de les exécuter
+            également vous-même. Pour plus d'informations, lisez
+            <literal>../testing/index</literal>.
+          </para>
+        </note>
+      </sect3>
+      <sect3 id="merging-only-to-master">
+        <title>Merger uniquement vers master</title>
+        <note>
+          <title>Remarque</title>
+          <para>
+            Le remote <emphasis>upstream</emphasis> ci-dessous pointe
+            vers le repository officiel de phpBB, et
+            <emphasis>origin</emphasis> pointe vers votre fork.
+          </para>
+        </note>
+        <programlisting>
+git remote update upstream
+git checkout master
+git reset --hard upstream/master
+git merge --no-ff &lt;author&gt;/&lt;branch&gt; # example: git merge --no-ff naderman/ticket/000000
+git push origin master
+# Before continuing, look at your commit list in your fork to make sure it looks correct.
+# If unsure, ask.
+git push upstream master
+</programlisting>
+      </sect3>
+      <sect3 id="merging-to-3.3.x">
+        <title>Merger vers 3.3.x</title>
+        <warning>
+          <title>Avertissement</title>
+          <para>
+            <emphasis role="strong">TOUS</emphasis> les merges vers 3.3.x
+            <emphasis role="strong">doivent</emphasis> aussi être mergés
+            vers master !
+          </para>
+        </warning>
+        <programlisting>
+git remote update upstream
+git checkout 3.3.x
+git reset --hard upstream/3.3.x
+git merge --no-ff &lt;author&gt;/&lt;branch&gt; # example: git merge --no-ff naderman/ticket/000000
+git push origin 3.3.x
+git checkout master
+git reset --hard upstream/master
+git merge --no-ff 3.3.x
+git push origin master
+# Before continuing, look at your commit list in your fork to make sure it looks correct.
+# If unsure, ask.
+git push upstream 3.3.x
+git push upstream master
+</programlisting>
+      </sect3>
+      <sect3 id="merging-to-3.2.x">
+        <title>Merger vers 3.2.x</title>
+        <warning>
+          <title>Avertissement</title>
+          <para>
+            <emphasis role="strong">TOUS</emphasis> les merges vers 3.2.x
+            <emphasis role="strong">doivent</emphasis> aussi être mergés
+            vers 3.3.x et master !
+          </para>
+        </warning>
+        <programlisting>
+git remote update upstream
+git checkout 3.2.x
+git reset --hard upstream/3.2.x
+git merge --no-ff &lt;author&gt;/&lt;branch&gt; # example: git merge --no-ff naderman/ticket/000000
+git push origin 3.2.x
+git checkout 3.3.x
+git reset --hard upstream/3.3.x
+git merge --no-ff 3.2.x
+git push origin 3.3.x
+git checkout master
+git reset --hard upstream/master
+git merge --no-ff 3.3.x
+git push origin master
+# Before continuing, look at your commit list in your fork to make sure it looks correct.
+# If unsure, ask.
+git push upstream 3.2.x
+git push upstream 3.3.x
+git push upstream master
+</programlisting>
+      </sect3>
+      <sect3 id="merging-to-3.3.x-and-master-with-different-patches">
+        <title>Merger vers 3.3.x et master avec des patches
+        différents</title>
+        <warning>
+          <title>Avertissement</title>
+          <para>
+            <emphasis role="strong">TOUS</emphasis> les merges vers 3.3.x
+            <emphasis role="strong">doivent</emphasis> aussi être mergés
+            vers master !
+          </para>
+        </warning>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              L'auteur du patch crée fix-3.3
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch merge son fix-3.3 dans une branche
+              fix-master
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch modifie fix-master jusqu'à ce qu'elle
+              fonctionne comme prévu
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch envoie 2 pull requests
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge le fix-3.3 de l'auteur dans son 3.3.x
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge le fix-master de l'auteur dans son master
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge son 3.3.x dans master (devrait fonctionner
+              en fast-forward)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur vérifie les résultats
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur pousse 3.3.x et master vers phpbb
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+      <sect3 id="merging-to-3.2.x-3.3.x-and-master-with-different-patches">
+        <title>Merger vers 3.2.x, 3.3.x et master avec des patches
+        différents</title>
+        <warning>
+          <title>Avertissement</title>
+          <para>
+            <emphasis role="strong">TOUS</emphasis> les merges vers 3.2.x
+            <emphasis role="strong">doivent</emphasis> aussi être mergés
+            vers 3.3.x et master !
+          </para>
+        </warning>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              L'auteur du patch crée fix-3.2
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch merge son fix-3.2 dans une branche
+              fix-3.3
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch modifie fix-3.3 jusqu'à ce qu'elle
+              fonctionne comme prévu
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch merge son fix-3.3 dans une branche
+              fix-master
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch modifie fix-master jusqu'à ce qu'elle
+              fonctionne comme prévu
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              L'auteur du patch envoie 3 pull requests
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge le fix-3.2 de l'auteur dans son 3.2.x
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge le fix-3.3 de l'auteur dans son 3.3.x
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge le fix-master de l'auteur dans son master
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge son 3.2.x dans 3.3.x (devrait fonctionner
+              en fast-forward)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur merge son 3.3.x dans master (devrait fonctionner
+              en fast-forward)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur vérifie les résultats
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Le mergeur pousse 3.2.x, 3.3.x et master vers phpbb
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+      <sect3 id="fixing-merge-conflicts">
+        <title>Résoudre les conflits de merge</title>
+        <para>
+          Les conflits de merge <emphasis role="strong">doivent</emphasis>
+          toujours être résolus à l'aide de la fonctionnalité rebase de
+          git. <emphasis role="strong">Ne mergez pas</emphasis> la
+          branche de base, par exemple master, pour résoudre d'éventuels
+          conflits de merge ou pour mettre à jour votre branche.
+        </para>
+        <para>
+          Pour mettre à jour votre branche, vous pouvez souvent exécuter
+          un simple rebase :
+        </para>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              Faites un checkout de votre branche de fonctionnalité ou de
+              correction de bug
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Assurez-vous qu'il n'y a aucune modification non stagée et
+              que votre branche a déjà été poussée vers votre remote
+              (cela vous permettra ensuite d'annuler vos modifications de
+              rebase)
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Exécutez git rebase
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Poussez votre branche vers votre remote avec force
+            </para>
+          </listitem>
+        </orderedlist>
+        <para>
+          Les commandes pour cela sont les suivantes :
+        </para>
+        <programlisting>
+git checkout ticket/12345
+git fetch upstream                      # ensure upstream is up to date
+git rebase upstream/3.3.x               # rebase on top of upstream's 3.3.x branch
+git push origin ticket/12345 -f
+</programlisting>
+        <para>
+          Si vous pensez que quelque chose s'est mal passé ou qu'il y a
+          trop de conflits de merge, vous pouvez annuler le rebase en
+          exécutant :
+        </para>
+        <programlisting>
+git rebase --abort
+</programlisting>
+        <para>
+          Pour les rebases plus difficiles et lors du changement de
+          branche de base, il est judicieux d'utiliser le --onto à trois
+          éléments pour le rebase :
+        </para>
+        <programlisting>
+git rebase --onto new_base_branch old_base_branch ticket/12345
+</programlisting>
+        <para>
+          Où
+        </para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              new_base_branch est la nouvelle branche de base sur
+              laquelle votre branche de correction de bug doit être basée
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              old_base_branch est l'ancienne branche de base sur laquelle
+              votre branche de correction de bug était basée avant le
+              rebase
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              ticket/12345 est le nom de votre branche de correction de
+              bug ou de fonctionnalité
+            </para>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="windows">
+    <title>Windows</title>
+    <para>
+      <emphasis role="strong">Si vous utilisez git sur Windows</emphasis>,
+      vous devriez désactiver <literal>AutoCrlf</literal>, qui traduit
+      automatiquement <literal>\n</literal> en <literal>\r\n</literal>.
+    </para>
+    <para>
+      <emphasis role="strong">Si vous n'utilisez pas TortoiseGit :</emphasis>
+      Pour cela, vous devez utiliser la commande suivante :
+    </para>
+    <programlisting>
+git config core.autocrlf input
+</programlisting>
+    <para>
+      Si vous souhaitez appliquer cela à tous les repositories, vous
+      pouvez utiliser l'option <literal>--global</literal>. Comme ceci :
+    </para>
+    <programlisting>
+git config --global core.autocrlf input
+</programlisting>
+    <para>
+      La différence est que, si vous n'utilisez pas l'option globale,
+      tout nouveau repository que vous créez n'aura pas cette option
+      correctement définie pour le développement de phpBB, ce qui peut
+      provoquer des erreurs lors du commit ou de l'exécution d'un fichier
+      PHP.
+    </para>
+    <para>
+      <emphasis role="strong">Pour ceux qui utilisent</emphasis>
+      <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink>
+      <emphasis role="strong">(et qui avaient l'habitude de travailler
+      avec TortoiseSVN) :</emphasis>
+    </para>
+    <para>
+      Lorsque vous utilisez TortoiseGit pour la première fois, vous devez
+      désactiver <literal>AutoCrlf</literal> dans <emphasis>Settings</emphasis>
+      &gt; <emphasis>Git</emphasis> &gt; <emphasis>Config</emphasis>,
+      afin que vos fins de ligne ne soient pas changées de LF en CR-LF.
+      Vous devez également modifier le fichier local
+      <literal>.git/config</literal> et y ajouter le code suivant, afin
+      de pouvoir merger correctement les branches (<emphasis>vous devez
+      le faire sur chaque repository git que vous possédez</emphasis>) :
+    </para>
+    <programlisting>
+[merge]
+    log = True
+</programlisting>
+    <sect2 id="create-your-own-ssh-key">
+      <title>Créer votre propre clé SSH</title>
+      <para>
+        <ulink url="http://help.github.com/win-set-up-git/">http://help.github.com/win-set-up-git/</ulink>
+      </para>
+      <para>
+        TortoiseGit utilisera automatiquement la clé SSH
+      </para>
+      <note>
+        <title>Remarque</title>
+        <para>
+          J'ai utilisé l'option OpenSSH lors de l'installation, donc je
+          ne suis pas sûr que cela fonctionne pour l'autre option, ni si
+          vous êtes censé procéder d'une autre façon.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="clone">
+      <title>Clone</title>
+      <para>
+        Ensuite, clonez simplement le repository sur votre système local,
+        et le reste se fait à peu près comme avec TortoiseSVN.
+      </para>
+    </sect2>
+    <sect2 id="commands">
+      <title>Commandes</title>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <tbody>
+            <row>
+              <entry>
+                <emphasis role="strong">Pull</emphasis>
+              </entry>
+              <entry>
+                Récupère les mises à jour depuis upstream
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="strong">Commit</emphasis>
+              </entry>
+              <entry>
+                Valide les modifications
+                <emphasis role="strong">localement</emphasis> (vous devez
+                faire un Push ou un Sync pour valider les modifications
+                dans le repository)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="strong">Push</emphasis>
+              </entry>
+              <entry>
+                Pousse les modifications effectuées localement vers le
+                repository en ligne
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <emphasis role="strong">Sync</emphasis>
+              </entry>
+              <entry>
+                Pousse/récupère les modifications avec davantage
+                d'options
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          Faites toujours un <emphasis role="strong">Pull</emphasis>
+          d'abord, puis un <emphasis role="strong">Commit</emphasis>,
+          puis un <emphasis role="strong">Push</emphasis> ; cela vous
+          aidera à ne pas vous retrouver avec des conflits de merge.
+        </para>
+      </tip>
+    </sect2>
+  </sect1>
+  <sect1 id="further-reading">
+    <title>Pour aller plus loin</title>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="http://book.git-scm.com/">Git Community Book
+          (online)</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://progit.org/book/">Pro Git Book
+          (online)</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://gitcasts.com/">GitCasts</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://www.techscreencast.com/tool/versioncontrol/railsconf-git-talk/810">Getting
+          Git</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://en.oreilly.com/rails2008/public/content/home">RailsConf
+          2008</ulink> - Conférence sur Git par Scott Chacon
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://git-scm.com/documentation">Documentation
+          officielle de Git</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://git-scm.com/course/svn.html">Git Crash
+          Course for SVN users</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://github.com/guides/home">GitHub
+          Guides</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://learn.github.com/">Learn.GitHub</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://www.spheredev.org/wiki/Git_for_the_lazy">Git
+          for the lazy</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="external-links">
+    <title>Liens externes</title>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://git-scm.com/">Page d'accueil officielle de
+          Git</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/">GitHub</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/phpbb">Compte GitHub de
+          phpBB</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/phpbb-extensions">Compte GitHub
+          de phpBB Extensions</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://tortoisegit.org/">TortoiseGit</ulink> - Un
+          client Git pour Windows basé sur TortoiseSVN
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://github.com/TortoiseGit/TortoiseGit/">TortoiseGit
+          sur GitHub</ulink> - Repository GitHub
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="http://tirania.org/blog/archive/2010/Dec-31.html">Open
+          Source Contribution Etiquette</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+</article>

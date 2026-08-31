@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Tilladelser</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Tilladelsessystemet i phpBB bruges til at styre adgangen til
+      forskellige dele af softwaren. Det fungerer ved at give
+      administratorer mulighed for at tildele bestemte tilladelser til
+      brugergrupper eller individuelle brugere, hvilket bestemmer,
+      hvilke handlinger de kan udføre.
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="create-permissions">Opret tilladelser</link>
+            med en migration.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="define-permissions">Definér tilladelser</link>
+            med sprognøgler.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="wire-up-permissions">Kobl tilladelser
+            til</link> events.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="checking-permissions">Kontrollér
+            tilladelser</link> med PHP.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="understanding-permissions">Forstå
+            tilladelser</link> i phpBB.
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="create-permissions">
+    <title>Opret tilladelser</title>
+    <para>
+      Der findes fire tilladelsestyper:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>a_*</literal> Administrator
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>m_*</literal> Redaktør
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>u_*</literal> Bruger
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>f_*</literal> Forum
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Du kan oprette nye tilladelser for hver af disse typer og tildele
+      dem til brugergrupper eller tilladelsesroller. Du kan også
+      definere nye roller til at tildele dine tilladelser til, hvis det
+      ønskes.
+    </para>
+    <para>
+      Tilladelser skal først oprettes i en migration ved hjælp af
+      <literal>../migrations/tools/permission</literal>. Det hjælper med
+      at tilføje, fjerne, sætte og fjerne tilladelser samt tilføje eller
+      fjerne tilladelsesroller. For eksempel, for at oprette en ny
+      brugertilladelse <literal>u_foo_bar</literal> og sætte den til
+      <literal>YES</literal> for gruppen Registered Users og rollen
+      Standard User Role:
+    </para>
+    <programlisting>
+return [
+    ['permission.add', ['u_foo_bar']],
+    ['permission.permission_set', ['REGISTERED', 'u_foo_bar', 'group']],
+    ['permission.permission_set', ['ROLE_USER_STANDARD', 'u_foo_bar']],
+];
+</programlisting>
+  </sect1>
+  <sect1 id="define-permissions">
+    <title>Definér tilladelser</title>
+    <para>
+      Tilladelser skal have en tilhørende sprognøgledefinition. Alle
+      sprognøgler for tilladelser bør placeres i en sprogfil, der starter
+      med <literal>permissions_</literal>, og nøglerne indlæses
+      automatisk i ACP-sprogarrayet. Sprogfilen
+      <literal>permissions_foobar.php</literal> er f.eks.:
+    </para>
+    <programlisting>
+$lang = array_merge($lang, [
+    'ACL_U_FOOBAR' =&gt; 'Can post foobars',
+]);
+</programlisting>
+  </sect1>
+  <sect1 id="wire-up-permissions">
+    <title>Kobl tilladelser til</title>
+    <para>
+      At koble tilladelser til handler blot om at gøre phpBB opmærksom
+      på dine nye tilladelser ved at tilføje dem til
+      tilladelsesdataarrayet. Arrayet bruger tilladelsesnavnet som nøgle
+      og en array-værdi, der definerer tilladelsens sprognøgle og den
+      kategori, den skal tilhøre.
+    </para>
+    <para>
+      Dette gøres i en event-listener ved hjælp af eventet
+      <literal>core.permissions</literal> for at tilføje dine nye
+      tilladelser til phpBB's tilladelsesdataarray:
+    </para>
+    <programlisting>
+$event-&gt;update_subarray('permissions', 'u_foo_bar', ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post']);
+</programlisting>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        For at understøtte phpBB 3.2.1 eller tidligere versioner kan du
+        ikke bruge metoden <literal>update_subarray()</literal>, og du
+        skal i stedet bruge følgende ældre kodestil:
+      </para>
+      <programlisting>
+# Wiring permissions the correct way for phpBB 3.1.0 - 3.2.1
+$permissions = $event['permissions'];
+$permissions['u_foo_bar'] = ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post'];
+$event['permissions'] = $permissions;
+
+# Notice that the above permissions $event variable must first be copied by assigning it to a
+# local variable, then modified, and then copied back. This is because the event variables are
+# overloaded, which is a limitation in PHP. For example, this shortcut will not work:
+$event['permissions']['u_foo_bar'] = ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post'];
+</programlisting>
+    </warning>
+  </sect1>
+  <sect1 id="checking-permissions">
+    <title>Kontrollér tilladelser</title>
+    <para>
+      En brugers tilladelse kan kontrolleres ved at kalde
+      <literal>$auth-&gt;acl_get()</literal>:
+    </para>
+    <programlisting>
+// Check a user's permissions
+$auth-&gt;acl_get('u_foo_bar');
+</programlisting>
+    <para>
+      Hvis det er specifikt for et forum (dvs. lokalt), skal du sende
+      forum-ID'et som andet argument:
+    </para>
+    <programlisting>
+// Check a user's permission in the forum with ID 3
+$auth-&gt;acl_get('u_foo_bar', 3);
+</programlisting>
+    <para>
+      For fora kan man bruge det forumspecifikke kald
+      <literal>$auth-&gt;acl_getf()</literal>:
+    </para>
+    <programlisting>
+// Check a forum's permissions
+$auth-&gt;acl_getf('f_your_permission');
+</programlisting>
+    <para>
+      Det er også muligt at kontrollere mere end én valgmulighed med
+      <literal>acl_gets()</literal>:
+    </para>
+    <programlisting>
+$auth-&gt;acl_gets('permission1'[, 'permission2', ..., 'permissionNth'], $forumId);
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Når du kontrollerer tilladelser, er det også vigtigt at holde
+        sig for øje, om de globale eller lokale tilladelser skal
+        kontrolleres. Hvis <literal>acl_get</literal> kaldes uden et
+        forum-ID, bruges de globale tilladelser. Sender du derimod et
+        forum-ID, kontrolleres også de lokale tilladelser, som
+        potentielt kan overskrive et <literal>NO</literal> med et
+        <literal>YES</literal>. Efter kontrol af alle bruger-, gruppe-,
+        forum- og globale tilladelser er den returnerede tilladelse
+        altid enten <literal>YES</literal> eller <literal>NO</literal>;
+        <literal>NEVER</literal> bruges kun til at gennemtvinge et
+        <literal>NO</literal>.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="understanding-permissions">
+    <title>Forstå tilladelser</title>
+    <para>
+      Tilladelser i phpBB styrer, hvilke handlinger brugere har lov til
+      at udføre på forummet, såsom at oprette et nyt emne, besvare et
+      indlæg eller redigere en brugers profil. Hver tilladelse tildeles
+      en værdi af <literal>YES</literal>, <literal>NO</literal> eller
+      <literal>NEVER</literal>.
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>YES</literal> betyder, at brugeren eller gruppen har
+          lov til at udføre handlingen.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>NO</literal> betyder, at brugeren eller gruppen ikke
+          har lov til at udføre handlingen, men det kan tilsidesættes af
+          et <literal>YES</literal> fra en gruppe eller rolle, de er
+          tildelt.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>NEVER</literal> betyder, at brugeren eller gruppen
+          ikke har lov til at udføre handlingen, og dette kan ikke
+          tilsidesættes af et <literal>YES</literal> fra en gruppe eller
+          rolle, de er tildelt.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Når en bruger anmoder om at udføre en handling, kombinerer phpBB
+      alle de tilladelser, brugeren har fået tildelt gennem sine grupper,
+      roller og direkte tilladelsestildelinger. Hvis en tilladelse er
+      sat til <literal>NEVER</literal>, tilsidesætter den alle andre
+      tilladelser og nægter brugeren adgang til den pågældende handling.
+      Hvis en tilladelse er sat til <literal>NO</literal>, kan den
+      tilsidesættes af en <literal>YES</literal>-tilladelse fra en anden
+      gruppe eller rolle.
+    </para>
+    <sect2 id="permission-types">
+      <title>Tilladelsestyper</title>
+      <para>
+        Der findes fire typer af tilladelser i phpBB:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>a_*</literal> Administrator: Disse tilladelser
+            anvendes på brugere, der er tildelt administratorroller.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>f_*</literal> Forum: Disse tilladelser anvendes på
+            individuelle fora og kan sættes for hver brugergruppe eller
+            individuel bruger.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>m_*</literal> Redaktør: Disse tilladelser anvendes
+            på brugere, der er tildelt redaktørroller for specifikke
+            fora.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>u_*</literal> Bruger: Disse tilladelser anvendes på
+            individuelle brugere og tilsidesætter de tilladelser, der er
+            sat for deres brugergruppe.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="local-and-global-permissions">
+      <title>Lokale og globale tilladelser</title>
+      <para>
+        Tilladelser kan sættes til at gælde lokalt eller globalt. Lokale
+        tilladelser er specifikke for et enkelt forum, mens globale
+        tilladelser gælder for hele boardet. Som standard er
+        forumtilladelser sat til lokale. Administrator- og
+        brugertilladelser er typisk sat til globale.
+      </para>
+      <para>
+        Tilladelsesindstillinger kan også sættes til at gælde både
+        lokalt og globalt, hvilket er typisk for redaktørtilladelser.
+        Dette gør det muligt for nogle brugere at få tildelt tilladelsen
+        på et enkelt forum, mens andre kan få tildelt tilladelsen for
+        hele boardet.
+      </para>
+    </sect2>
+    <sect2 id="roles">
+      <title>Roller</title>
+      <para>
+        Roller er et foruddefineret sæt af tilladelsesindstillinger, der
+        kan anvendes på brugere eller grupper. Når
+        tilladelsesindstillingerne for en rolle ændres, opdateres de
+        brugere eller grupper, der er tildelt den pågældende rolle,
+        automatisk.
+      </para>
+      <para>
+        Den effektive tilladelse for en given valgmulighed bestemmes af
+        en kombination af brugerens gruppemedlemskab, tildelte roller og
+        direkte tilladelsestildelinger. I nogle tilfælde kan
+        modstridende tilladelser forekomme, hvilket kan føre til
+        uventede resultater. Det er vigtigt omhyggeligt at overveje
+        tilladelsesindstillingerne for at sikre, at brugerne får det
+        passende adgangsniveau på forummet.
+      </para>
+    </sect2>
+  </sect1>
+</article>

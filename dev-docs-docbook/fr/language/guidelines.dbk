@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Politique de soumission des packs de langue</title>
+  </articleinfo>
+  <para>
+    Voici les procédures et recommandations que doit suivre tout
+    traducteur qui soumet un pack de langue à notre
+    <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisations
+    Database</ulink>. Tous les packs de langue approuvés se trouvent
+    dans notre <ulink url="https://www.phpbb.com/languages/">Language
+    Packs Database</ulink>. Si vous soumettez votre pack de langue à
+    notre <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisations
+    Database</ulink>, il sera d'abord automatiquement envoyé au
+    Translations Manager pour validation. Le Translations Manager est
+    chargé de vérifier que votre soumission respecte les recommandations
+    ci-dessous. Le non-respect des instructions suivantes peut entraîner
+    le refus immédiat de votre soumission. Veuillez noter que le
+    Translations Manager dispose d'une entière liberté d'appréciation
+    quant à ce qu'il approuve ou refuse. Ce processus peut parfois
+    prendre un temps considérable ; il est donc dans votre intérêt de
+    suivre toutes les recommandations dès le départ. Si votre pack de
+    langue est refusé puis resoumis, il est replacé en fin de file
+    d'attente.
+  </para>
+  <orderedlist numeration="arabic" spacing="compact">
+    <listitem>
+      <para>
+        Les soumissions doivent être compatibles avec la dernière
+        version de phpBB. Toute clé manquante sera détectée lors du
+        processus de téléversement, et votre soumission sera
+        automatiquement refusée.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Les soumissions doivent être complètes. Les traductions
+        partielles ne sont pas autorisées et seront automatiquement
+        refusées. Les e-mails, fichiers texte et images de thème doivent
+        également être entièrement traduits.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Les packs de langue peuvent contenir cinq fichiers
+        supplémentaires (un obligatoire et quatre facultatifs) qui ne
+        sont pas présents dans le pack de langue anglais britannique :
+        <literal>LICENSE</literal> (obligatoire),
+        <literal>README.md</literal> (facultatif),
+        <literal>AUTHORS.md</literal> (facultatif),
+        <literal>VERSION.md</literal> (facultatif) et
+        <literal>CHANGELOG.md</literal> (facultatif). Vous êtes libre
+        d'écrire ce que vous voulez dans le fichier
+        <literal>README.md</literal>, vous pouvez lister tous les auteurs
+        et contributeurs de votre pack de langue dans le fichier
+        <literal>AUTHORS.md</literal>, vous pouvez indiquer la version de
+        votre pack de langue dans le fichier
+        <literal>VERSION.md</literal>, et vous pouvez lister l'historique
+        complet des versions dans le fichier
+        <literal>CHANGELOG.md</literal>. Le fichier
+        <literal>LICENSE</literal> est ajouté automatiquement pendant le
+        processus de téléversement, vous n'avez donc pas besoin de
+        l'ajouter manuellement. Son but est d'informer l'utilisateur de
+        la licence utilisée. Les packs de langue héritent de la licence
+        de phpBB, la
+        <ulink url="http://www.opensource.org/licenses/gpl-2.0.php">GNU
+        General Public License 2.0</ulink>, et aucune licence
+        supplémentaire ou alternative n'est autorisée. Tous ces fichiers
+        supplémentaires doivent être placés dans le répertoire
+        <literal>language/{iso}/</literal>, à côté du fichier
+        <literal>iso.txt</literal>. Tout autre fichier supplémentaire
+        sera détecté et votre soumission sera refusée.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Les soumissions doivent avoir les fichiers et la structure
+        suivants :
+      </para>
+    </listitem>
+  </orderedlist>
+  <programlisting>
+languagename_versionnumber.zip
+   languagename_versionnumber/
+      ext/
+         phpbb/
+            viglink/
+               language/
+                  {iso}/
+                     info_acp_viglink.php
+                     viglink_module_acp.php
+      language/
+         {iso}/
+            acp/
+               attachments.php
+               ban.php
+               board.php
+               bots.php
+               common.php
+               database.php
+               email.php
+               extensions.php
+               forums.php
+               groups.php
+               index.htm
+               language.php
+               modules.php
+               permissions.php
+               permissions_phpbb.php
+               posting.php
+               profile.php
+               prune.php
+               search.php
+               styles.php
+               users.php
+            email/
+               short/
+                  bookmark.txt
+                  newtopic_notify.txt
+                  post_approved.txt
+                  post_disapproved.txt
+                  post_in_queue.txt
+                  privmsg_notify.txt
+                  quote.txt
+                  report_pm.txt
+                  report_post.txt
+                  topic_approved.txt
+                  topic_disapproved.txt
+                  topic_in_queue.txt
+                  topic_notify.txt
+
+               admin_activate.txt
+               admin_send_email.txt
+               admin_welcome_activated.txt
+               admin_welcome_inactive.txt
+               bookmark.txt
+               contact_admin.txt
+               coppa_resend_inactive.txt
+               coppa_welcome_inactive.txt
+               email_notify.txt
+               forum_notify.txt
+               group_added.txt
+               group_request.txt
+               index.htm
+               installed.txt
+               newtopic_notify.txt
+               pm_report_closed.txt
+               pm_report_deleted.txt
+               post_approved.txt
+               post_disapproved.txt
+               post_in_queue.txt
+               privmsg_notify.txt
+               profile_send_email.txt
+               profile_send_im.txt
+               quote.txt
+               report_closed.txt
+               report_deleted.txt
+               report_pm.txt
+               report_post.txt
+               topic_approved.txt
+               topic_disapproved.txt
+               topic_in_queue.txt
+               topic_notify.txt
+               user_activate.txt
+               user_activate_inactive.txt
+               user_activate_passwd.txt
+               user_reactivate_account.txt
+               user_remind_inactive.txt
+               user_resend_inactive.txt
+               user_welcome.txt
+               user_welcome_inactive.txt
+            help/
+               bbcode.php
+               faq.php
+            app.php
+            AUTHORS.md (optional)
+            captcha_qa.php
+            captcha_recaptcha.php
+            cli.php
+            CHANGELOG.md (optional)
+            common.php
+            groups.php
+            index.htm
+            install.php
+            iso.txt (
+            LICENSE
+            mcp.php
+            memberlist.php
+            migrator.php
+            plupload.php
+            posting.php
+            README.md (optional)
+            search.php
+            ucp.php
+            VERSION.md (optional)
+            viewforum.php
+            viewtopic.php
+      styles/
+         prosilver/
+            theme/
+               {iso}/
+                  icon_user_online.gif
+                  index.htm (optional)
+                  stylesheet.css
+</programlisting>
+  <orderedlist numeration="arabic" spacing="compact" startingnumber="5">
+    <listitem>
+      <para>
+        Les soumissions doivent suivre le plus fidèlement possible les
+        recommandations des
+        <ulink url="https://area51.phpbb.com/docs/33x/coding-guidelines.html#translation">3.3
+        Translation (i18n/L10n) Guidelines</ulink>, en particulier le
+        <ulink url="https://area51.phpbb.com/docs/33x/coding-guidelines.html#writingstyle">3.3
+        Writing style</ulink>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Tous les fichiers PHP et texte doivent être encodés en UTF-8 sans
+        BOM, avec une nouvelle ligne en fin de fichier. De nombreux
+        éditeurs de texte modernes utilisent ceci par défaut, mais nous
+        recommandons de le vérifier dans les paramètres de votre
+        éditeur. Nous vous recommandons d'utiliser
+        <ulink url="https://notepad-plus-plus.org/">Notepad++</ulink> ou
+        <ulink url="http://www.pspad.com/en/">PSPad</ulink>, tous deux
+        légers et gratuits.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        La traduction est essentiellement votre propre travail, et vous
+        avez le droit de détenir un droit d'auteur sur la traduction et
+        d'indiquer votre nom ou les noms des membres de votre équipe dans
+        le fichier <literal>AUTHORS.md</literal>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Un maximum de 3 liens peut être inclus en tant que crédit
+        d'auteur dans le pied de page, personnalisable via la clé
+        <literal>'TRANSLATION_INFO'</literal> dans
+        <literal>common.php</literal>. Veuillez noter que le Translations
+        Manager dispose d'une entière liberté d'appréciation quant à ce
+        qui est acceptable comme lien de crédit d'auteur.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Les soumissions doivent être envoyées sous la forme d'un seul
+        fichier zip. La Customisations Database nommera automatiquement
+        votre pack de langue téléversé selon le format
+        <literal>languagename_versionnumber.zip</literal>. Par exemple,
+        si l'auteur d'un pack de langue portugais brésilien téléverse une
+        archive nommée <literal>Brasileiro_1.0.5.zip</literal>, elle sera
+        automatiquement renommée en
+        <literal>brazilian_portuguese_1_0_5.zip</literal>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        La description de la contribution pour votre pack de langue dans
+        la Customisations Database doit être traduite en anglais en plus
+        de votre langue locale. Cela facilitera le téléchargement de
+        votre traduction par les administrateurs qui ne parlent pas
+        cette langue.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        La capture d'écran de la contribution dans la Customisations
+        Database doit uniquement être le drapeau du pays où la langue
+        principalement parlée est celle du pack de langue. Par exemple,
+        le drapeau de la France pour la langue française.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Le nom de révision dans la Customisations Database doit être
+        laissé vide, contenir la version du paquet phpBB, et/ou le nom de
+        la version du paquet (par exemple « **3.3.10 / Bertie's New
+        Translation** » pour la 3.3.10).
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        L'URL de démo dans la Customisations Database doit être vide,
+        sauf si vous souhaitez y mettre un lien vers une communauté
+        internationale (<ulink url="https://www.phpbb.com/support/intl/">officiellement</ulink>
+        répertoriée ou non) liée à la langue de la contribution. Par
+        exemple,
+        <ulink url="https://www.phpbb.nl/">https://www.phpbb.nl/</ulink>
+        comme URL de démo concernant la
+        <ulink url="https://www.phpbb.com/customise/db/translation/dutch_casual_honorifics/">langue
+        néerlandaise</ulink> est autorisé.
+      </para>
+    </listitem>
+  </orderedlist>
+</article>

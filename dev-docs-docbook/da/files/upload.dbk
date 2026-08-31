@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Klassen upload</title>
+  </articleinfo>
+  <para>
+    Den nyligt introducerede <literal>upload</literal>-fil-klasse
+    erstatter den tidligere eksisterende klasse
+    <literal>fileupload</literal>.
+  </para>
+  <sect1 id="passing-settings-to-upload-class">
+    <title>Videregivelse af indstillinger til klassen upload</title>
+    <para>
+      I phpBB-versioner før 3.2 kunne indstillinger som maksimale
+      billeddimensioner sendes direkte til klassen
+      <literal>fileupload</literal> via konstruktøren. Da disse nu hentes
+      via containerinfrastrukturen, er dette ikke længere muligt. I
+      stedet indeholder den nye klasse <literal>upload</literal> flere
+      metoder til nemt at sætte de nødvendige uploadkrav:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>set_allowed_extensions($allowed_extensions)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_allowed_dimensions($min_width, $min_height, $max_width, $max_height)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_max_filesize($max_filesize)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_disallowed_content($disallowed_content)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_error_prefix($error_prefix)</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Hver af disse metoder returnerer den aktuelle instans af klassen
+      <literal>upload</literal>, hvilket giver mulighed for kædede kald:
+    </para>
+    <programlisting>
+$upload-&gt;set_allowed_extensions(['png', 'jpg'])
+    -&gt;set_allowed_dimensions(20, 20, 90, 90)
+    -&gt;set_max_filesize(65536)
+    -&gt;set_error_prefix('AVATAR_');
+</programlisting>
+  </sect1>
+  <sect1 id="uploading-files">
+    <title>Upload af filer</title>
+    <para>
+      De tidligere eksisterende metoder
+      <literal>form_upload()</literal>, <literal>remote_upload()</literal>
+      og <literal>local_upload()</literal> findes ikke længere. I stedet
+      indeholder klassen <literal>upload</literal> nu metoden
+      <literal>handle_upload()</literal>.
+    </para>
+    <programlisting>
+$files_upload-&gt;handle_upload('files.type.local', $source_file, $filedata);
+</programlisting>
+    <para>
+      Metoden forventer uploadtypen som det første argument. Typer, der
+      er tilgængelige som standard, er
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>files.types.form</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>files.types.local</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>files.types.remote</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Extensions kan naturligvis tilføje nye uploadtyper og bruge dem,
+      forudsat at de implementerer
+      <literal>phpbb\files\types\type_interface</literal>. Alle
+      argumenter efter typen videresendes til uploadtype-klassen. Disse
+      skal implementere upload-metoden og hente de videresendte
+      argumenter med <literal>func_get_args()</literal>.
+    </para>
+  </sect1>
+  <sect1 id="converting-uses-of-fileupload-class">
+    <title>Konvertering af brug af klassen
+    <literal>fileupload</literal></title>
+    <para>
+      Det anbefales at bruge <literal>files</literal>-factory-klassen til
+      at hente <literal>files</literal>-klasserne. I dette eksempel
+      bruger vi dog phpBB-containeren.
+    </para>
+    <sect2 id="empty-constructor">
+      <title>Tom konstruktør</title>
+      <para>
+        I phpBB 3.1 så den grundlæggende brug af klassen
+        <literal>fileupload</literal> sådan ud:
+      </para>
+      <programlisting>
+include_once($phpbb_root_path . 'includes/functions_upload.' . $phpEx);
+$upload = new fileupload();
+$upload-&gt;set_disallowed_content([]);
+$extensions = $cache-&gt;obtain_attach_extensions((($is_message) ? false : (int) $forum_id));
+$upload-&gt;set_allowed_extensions(array_keys($extensions['_allowed_']));
+$file = ($local) ? $upload-&gt;local_upload($local_storage, $local_filedata, $mimetype_guesser) : $upload-&gt;form_upload($form_name, $mimetype_guesser, $plupload);
+</programlisting>
+      <para>
+        Fra og med phpBB 3.2 er dette ændret til:
+      </para>
+      <programlisting>
+$upload = $phpbb_container-&gt;get('files.upload');
+$upload-&gt;set_disallowed_content([]);
+$extensions = $cache-&gt;obtain_attach_extensions((($is_message) ? false : (int) $forum_id));
+$upload-&gt;set_allowed_extensions(array_keys($extensions['_allowed_']));
+$file = ($local) ? $upload-&gt;handle_upload('files.types.local', $local_storage, $local_filedata) : $upload-&gt;handle_upload('files.types.form', $form_name);
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Services som <literal>phpbb\mimetype\guesser</literal> og
+          <literal>phpbb\plupload\plupload</literal> sendes ikke længere
+          til upload-metoderne.
+        </para>
+      </note>
+      <para>
+        Kaldene kan naturligvis også kædes sammen:
+      </para>
+      <programlisting>
+$extensions = $cache-&gt;obtain_attach_extensions((($is_message) ? false : (int) $forum_id));
+$file = $phpbb_container-&gt;get('files.upload')
+    -&gt;set_disallowed_content([])
+    -&gt;set_allowed_extensions(array_keys($extensions['_allowed_']))
+    -&gt;handle_upload('files.types.local', $local_storage, $local_filedata);
+</programlisting>
+    </sect2>
+    <sect2 id="settings-passed-to-constructor">
+      <title>Indstillinger sendt til konstruktøren</title>
+      <para>
+        phpBB 3.1 gjorde det også muligt at sende indstillingerne direkte
+        til konstruktøren for klassen <literal>fileupload</literal>:
+      </para>
+      <programlisting>
+$upload = new fileupload(
+    $error_prefix,
+    $allowed_extensions,
+    $max_filesize,
+    $min_width,
+    $min_height,
+    $max_width,
+    $max_height,
+    $disallowed_content
+);
+</programlisting>
+      <para>
+        Da klassen <literal>upload</literal> hentes med containeren eller
+        factory-klassen, er det ikke længere muligt at sende disse
+        indstillinger til konstruktøren. I stedet bør de sendes med de
+        tilhørende <literal>set_</literal>-metoder:
+      </para>
+      <programlisting>
+$upload = $files_factory-&gt;get('files.upload')
+    -&gt;set_error_prefix($error_prefix)
+    -&gt;set_allowed_extensions($allowed_extensions)
+    -&gt;set_max_filesize($max_filesize)
+    -&gt;set_allowed_dimensions($min_width, $min_height, $max_width, $max_height)
+    -&gt;set_disallowed_content($disallowed_content);
+</programlisting>
+      <para>
+        Dette kan også kædes sammen for direkte at kalde metoden
+        <literal>handle_upload()</literal>:
+      </para>
+      <programlisting>
+$upload = $files_factory-&gt;get('files.upload')
+    -&gt;set_error_prefix($error_prefix)
+    -&gt;set_allowed_extensions($allowed_extensions)
+    -&gt;set_max_filesize($max_filesize)
+    -&gt;set_allowed_dimensions($min_width, $min_height, $max_width, $max_height)
+    -&gt;set_disallowed_content($disallowed_content)
+    -&gt;handle_upload('files.types.local', $local_storage, $local_filedata);
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="reset-settings">
+    <title>Nulstil indstillinger</title>
+    <para>
+      Indstillinger som maksimal filstørrelse, tilladte dimensioner og
+      fejlpræfiks kan nemt nulstilles ved hjælp af metoden
+      <literal>reset_vars()</literal>.
+    </para>
+  </sect1>
+  <sect1 id="perform-common-checks-on-upload">
+    <title>Udfør generelle kontroller på upload</title>
+    <para>
+      Metoden <literal>common_checks()</literal> kan bruges til at udføre
+      generelle kontroller på <literal>filespec</literal>-objektet, der
+      returneres af metoden <literal>handle_upload()</literal>. Disse
+      omfatter kontrol af den uploadede fils størrelse, filens navn og
+      filendelse samt ikke-tilladt filindhold. Dette kan gøres ved blot
+      at sende <literal>filespec</literal>-objektet:
+    </para>
+    <programlisting>
+$upload-&gt;common_checks($filespec);
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        <literal>common_checks()</literal> har ikke nogen returværdi. Se
+        i stedet egenskaben
+        <literal>$filespec-&gt;error</literal> efter at have kørt
+        <literal>common_checks()</literal>
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="check-form-for-validity">
+    <title>Kontrollér, om en formular er gyldig</title>
+    <para>
+      Man kan kontrollere, om en formular er gyldig til filupload, ved
+      blot at sende formularnavnet til metoden
+      <literal>is_valid()</literal>. Den returnerer true for gyldige
+      formularer og false, hvis filen ikke blev uploadet til den angivne
+      formular, eller hvis uploadfilen ikke var korrekt sat.
+    </para>
+    <programlisting>
+$valid_form = $upload-&gt;is_valid('acme_form');
+</programlisting>
+  </sect1>
+</article>

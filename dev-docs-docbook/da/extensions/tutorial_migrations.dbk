@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Migrations</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Denne tutorial forklarer:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Migrations: Databaseændringer
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="migrations">
+    <title>Migrations</title>
+    <para>
+      Migrations er en måde at lette databaseændringer på, meget på
+      samme måde som UMIL blev brugt i phpBB 3.0. Gennem Migrations kan
+      extension-udviklere nemt ændre og tilføje nyt skema og nye data til
+      databasen, som det kræves af en extension.
+    </para>
+    <para>
+      Læs Migrations:
+      <literal>../migrations/getting_started</literal>
+      udviklerdokumentation for uddybende migrationsdokumentation. Vi
+      vil kort opsummere de vigtigste begreber inden for migrations her.
+    </para>
+    <para>
+      phpBB Customisation Database's
+      <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#migrations">valideringspolitik
+      for Migrations</ulink>.
+    </para>
+    <sect2 id="database-changes">
+      <title>Databaseændringer</title>
+      <sect3 id="schema-changes">
+        <title>Skemaændringer</title>
+        <para>
+          Metoden <literal>update_schema()</literal> bruges til at
+          lette skemaændringer, såsom tilføjelse af nye tabeller,
+          kolonner, nøgler og indekser.
+        </para>
+        <para>
+          Metoden <literal>revert_schema()</literal> bør altid
+          inkluderes for at fortryde eventuelle ændringer, der er
+          indført af metoden <literal>update_schema()</literal>.
+        </para>
+        <para>
+          Vi anbefaler at placere skemaændringer i deres egen migration.
+        </para>
+        <para>
+          Læs mere: <literal>../migrations/schema_changes</literal>.
+        </para>
+      </sect3>
+      <sect3 id="data-changes">
+        <title>Dataændringer</title>
+        <para>
+          Metoden <literal>update_data()</literal> bruges til at
+          indsætte, opdatere og fjerne feltdata.
+        </para>
+        <para>
+          Metoden <literal>revert_data()</literal> er valgfri og kan
+          bruges til at fortryde dataændringer. Normalt fortrydes
+          metoden <literal>update_data()</literal> automatisk under et
+          purge-trin, hvor eventuelle ændringer indført af
+          migrationsværktøjerne omgøres. Brug af metoden
+          <literal>revert_data()</literal> er kun nødvendig for at
+          foretage yderligere ændringer under afinstallation af en
+          extension, såsom udførelse af brugerdefinerede funktioner.
+        </para>
+        <para>
+          Vi anbefaler at placere dataændringer i deres egen migration.
+        </para>
+        <para>
+          Læs mere: <literal>../migrations/data_changes</literal>.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="migration-tools">
+      <title>Migrationsværktøjer</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/config</literal>
+          </term>
+          <listitem>
+            <para>
+              Config-værktøjet hjælper med at tilføje, opdatere og
+              fjerne config-elementer.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/config_text</literal>
+          </term>
+          <listitem>
+            <para>
+              config_text-værktøjet hjælper med at tilføje, opdatere og
+              fjerne config_text-elementer. Tabellen config_text bruges
+              til at gemme indstillinger med en værdi af vilkårlig
+              længde i en TEXT-kolonne. I modsætning til config-værdier
+              bliver config_text ikke mellemlagret eller forudhentet.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/module</literal>
+          </term>
+          <listitem>
+            <para>
+              Module-værktøjet hjælper med at tilføje og fjerne
+              ACP-, MCP- og UCP-moduler.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/permission</literal>
+          </term>
+          <listitem>
+            <para>
+              Permission-værktøjet hjælper med at tilføje, fjerne, sætte
+              og fjerne tilladelser samt tilføje eller fjerne
+              tilladelsesroller.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2 id="migration-dependencies">
+      <title>Migrationsafhængigheder</title>
+      <sect3 id="depends_on">
+        <title>depends_on()</title>
+        <para>
+          Metoden <literal>depends_on()</literal> bruges til at
+          definere en migrations afhængigheder. Afhængigheder fortæller
+          Migratoren, i hvilken rækkefølge migrations skal installeres.
+        </para>
+        <para>
+          Læs mere: <literal>../migrations/dependencies</literal>.
+        </para>
+      </sect3>
+      <sect3 id="effectively_installed">
+        <title>effectively_installed()</title>
+        <para>
+          Metoden <literal>effectively_installed()</literal> bruges
+          primært til at hjælpe med overgangen fra en tidligere metode
+          til databaseinstallation (såsom en MOD, der brugte UMIL) til
+          migrations. Vi anbefaler dog at bruge den hele tiden for at
+          sikre sikrere migrations.
+        </para>
+        <para>
+          Når effectively_installed returnerer true, anses migrationen
+          for allerede at være installeret, hvilket betyder, at
+          migrationen springes over. Dette hjælper med at forhindre, at
+          eksisterende ændringer i databasen, der allerede kan være
+          foretaget af en tidligere migration eller MOD-installation,
+          bliver omskrevet (eller overskrevet).
+        </para>
+        <para>
+          I følgende kode ville migrationen f.eks. ikke blive anvendt,
+          hvis den angivne config-værdi allerede findes i databasen:
+        </para>
+        <programlisting>
+public function effectively_installed()
+{
+   return isset($this-&gt;config['acme_demo_goodbye']);
+}
+</programlisting>
+        <warning>
+          <title>Advarsel</title>
+          <para>
+            Som en generel regel bør migrations aldrig ændres, når de
+            først er installeret. Ændring af en migration i en
+            extension, der allerede er installeret, kan forhindre den i
+            at kunne fortryde databaseændringer eller afinstalleres
+            korrekt. For at foretage efterfølgende ændringer i databasen
+            bør der oprettes nye migrations, som implementerer de
+            yderligere ændringer eller opdateringer. De eneste
+            undtagelser fra denne regel er rettelser af SQL- og
+            logikfejl eller bugs, så længe de ikke ændrer de
+            databaseændringer, der allerede er foretaget, eller de
+            afhængigheder, der er angivet i migrationens metode
+            <literal>depends_on()</literal>.
+          </para>
+        </warning>
+        <para>
+          Når du er fortrolig med, hvordan Migrations fungerer, kan du
+          fortsætte til næste afsnit for at lære, hvordan du opretter og
+          installerer et ACP-modul, som giver os mulighed for at
+          konfigurere nogle indstillinger for Acme Demo-extensionen.
+        </para>
+      </sect3>
+    </sect2>
+  </sect1>
+</article>

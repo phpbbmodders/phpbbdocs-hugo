@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Request</title>
+  </articleinfo>
+  <para>
+    Indholdsfortegnelse
+  </para>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Request-klassen indeholder alle forespørgselsdata og stiller en
+      klar grænseflade til rådighed for at arbejde med disse data. Den
+      forhindrer direkte adgang til <literal>$_GET</literal>,
+      <literal>$_POST</literal>, <literal>$_REQUEST</literal> med mere.
+      Request-klassen bør være fuldt bagudkompatibel og gøre det muligt
+      helt at fjerne enhver adgang til superglobale variabler.
+    </para>
+    <sect2 id="information">
+      <title>Information</title>
+      <variablelist spacing="compact">
+        <varlistentry>
+          <term>
+            Klasse
+          </term>
+          <listitem>
+            <para>
+              <literal>\\phpbb\\request\\request</literal>
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Interface
+          </term>
+          <listitem>
+            <para>
+              <literal>\\phpbb\\request\\request_interface</literal>
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Deklaration
+          </term>
+          <listitem>
+            <para>
+              <literal>- '@request'</literal>
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2 id="super-globals">
+      <title>Superglobale variabler</title>
+      <para>
+        Med denne request-klasse på plads bør brugen af
+        <ulink url="https://www.php.net/manual/en/language.variables.superglobals.php">superglobale
+        variabler</ulink> ikke længere være nødvendig og bør undgås, når
+        det er muligt. Det betyder, at der ikke bør være behov for at
+        bruge nogen af variablerne <literal>$_GET</literal>,
+        <literal>$_POST</literal>, <literal>$_REQUEST</literal>,
+        <literal>$_COOKIE</literal>, <literal>$_FILES</literal> og
+        <literal>$_SERVER</literal>.
+      </para>
+      <para>
+        Request-klassen giver et ekstra sikkerhedslag til håndtering af
+        forespørgselsdata og brugerinput. Den sørger for korrekt
+        sanering af inputtet og konverterer variablerne til de forventede
+        typer, såsom strenge, heltal og (flerdimensionelle) arrays.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="functions">
+    <title>Funktioner</title>
+    <para>
+      Nedenfor finder du nogle af de mest anvendte funktioner fra
+      request-klassen. Hver funktion har tilhørende kodeeksempler og en
+      tabel, der forklarer funktionens parametre.
+    </para>
+    <sect2 id="is_ajax">
+      <title>is_ajax</title>
+      <para>
+        Kontrollerer, om den aktuelle forespørgsel er en AJAX-forespørgsel.
+        Det vil sige, at forespørgslen er foretaget som en
+        XMLHttpRequest. Dette kan være nyttigt, når der skal returneres
+        forskellige svar.
+      </para>
+      <programlisting>
+if ($request-&gt;is_set_post('submit'))
+{
+    $message = $language-&gt;lang('CONFIG_UPDATED');
+
+    if ($request-&gt;is_ajax())
+    {
+        // Send a JSON response for an AJAX request
+        $json_response = new \phpbb\json_response();
+
+        return $json_response-&gt;send([
+            'MESSAGE_TITLE'  =&gt; $language-&gt;lang('INFORMATION');
+            'MESSAGE_TEXT'   =&gt; $message,
+        ]);
+    }
+
+    // Include a back link for a non-AJAX request
+    $u_back = $helper-&gt;route('my_route');
+    $message .= '&lt;br&gt;&lt;br&gt;' . $language-&gt;lang('RETURN_PAGE', '&lt;a href=&quot;' . $u_back . '&quot;&gt;', '&lt;/a&gt;');
+
+    return $helper-&gt;message($message);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="is_secure">
+      <title>is_secure</title>
+      <para>
+        Kontrollerer, om den aktuelle forespørgsel foregår over en sikker
+        protokol: HTTPS. Nyttig, når der skal oprettes et protokolprefiks
+        til en URL, eller når der foretages API-kald.
+      </para>
+      <programlisting>
+$url = ($request-&gt;is_secure() ? 'https://' : 'http://') . $server_name;
+
+$recaptcha_server = $request-&gt;is_secure() ? $recaptcha_server_secure : $recaptcha_server;
+</programlisting>
+    </sect2>
+    <sect2 id="is_set">
+      <title>is_set</title>
+      <para>
+        Kontrollerer, om en bestemt variabel er sat i et af de
+        superglobale arrays. Du kan eventuelt angive et bestemt
+        superglobalt array, hvori variablen skal være sat. Hvis intet
+        superglobalt array angives, bruges som standard det superglobale
+        array <literal>REQUEST</literal>, som indeholder
+        <literal>GET</literal>, <literal>POST</literal> og
+        <literal>COOKIE</literal>.
+      </para>
+      <programlisting>
+$print = $request-&gt;variable('print');
+$start = $request-&gt;variable('start', \phpbb\request\request_interface::GET);
+$submit = $request-&gt;variable('submit', \phpbb\request\request_interface::POST);
+$session = $request-&gt;variable('user_sid', \phpbb\request\request_interface::COOKIE);
+</programlisting>
+      <sect3 id="parameters">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på den variabel, der skal kontrolleres
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  Det superglobale array, der skal gennemsøges for
+                  variablen.
+                  <br/> Kan være en af
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Standardværdien er <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="is_set_post">
+      <title>is_set_post</title>
+      <para>
+        Kontrollerer, om en bestemt variabel blev sendt via en
+        <literal>POST</literal>-forespørgsel. For at sikre, at en
+        forespørgsel blev sendt med <literal>POST</literal>, bør du kalde
+        denne funktion på mindst én variabel. Dette er en genvej for
+        <literal>$request-&gt;variable('variable', \phpbb\request\request_interface::POST);</literal>.
+      </para>
+      <programlisting>
+$submit = $request-&gt;is_set_post('submit');
+$preview = $request-&gt;is_set_post('preview');
+
+if ($submit || $preview)
+{
+   // The form was submitted with a POST request
+}
+</programlisting>
+      <sect3 id="parameters-1">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på den variabel, der skal kontrolleres
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="variable">
+      <title>variable</title>
+      <para>
+        Dette er den centrale funktion til håndtering af alt input. Alle
+        variabler i <literal>GET</literal>- eller
+        <literal>POST</literal>-forespørgsler bør hentes gennem denne
+        funktion for at maksimere sikkerheden.
+      </para>
+      <para>
+        Variabelnavnet bør være værdien af HTML-inputtets
+        name-attribut, der skal hentes. Så for
+        <literal>&lt;input name=&quot;subject&quot; type=&quot;text&quot;&gt;</literal>
+        er variabelnavnet <literal>subject</literal>.
+      </para>
+      <para>
+        Standardværdien bør have præcis samme type som det forventede
+        input. Dette er nødvendigt, da de hentede variabler
+        typekonverteres til præcis samme type. Hvis ingen variabel var
+        tilgængelig i forespørgslen, returneres den angivne
+        standardværdi.
+      </para>
+      <para>
+        Når værdien, der forespørges på, er en streng eller et array,
+        der indeholder strenge, bør parameteren
+        <literal>multibyte</literal> sættes til <literal>true</literal>.
+        Eller sagt på en anden måde: når som helst den forespurgte værdi
+        kan indeholde UTF-8-tegn. Det betyder, at du ikke behøver at
+        køre den returnerede værdi gennem
+        <literal>utf8_normalize_nfc</literal>. Hvis den sættes til
+        <literal>false</literal>, vil alle bytes uden for ASCII-området
+        <emphasis>(0-127)</emphasis> blive erstattet med spørgsmålstegn.
+      </para>
+      <programlisting>
+$int = $request-&gt;variable('integer', 0);
+$array1 = $request-&gt;variable('array1', [0]);
+$array2 = $request-&gt;variable('array2', [0 =&gt; ''], true);
+$string = $request-&gt;variable('string', '', true);
+
+// Make sure to type cast the defaults when necessary
+$limit = $request-&gt;variable('topics_per_page', (int) $config['topics_per_page']);
+$subject = $request-&gt;variable('subject', $row['post_subject'], true);
+</programlisting>
+      <para>
+        Det er også muligt at angive, fra hvilket superglobalt array
+        variablen skal hentes. Dette kan hjælpe med at sikre, at den
+        korrekte variabel returneres, eller at formularen sendes på den
+        forventede måde.
+      </para>
+      <programlisting>
+$start = $request-&gt;variable('start', 0, false, \phpbb\request\request_interface::GET);
+$confirm = $request-&gt;variable('confirm', '', true, \phpbb\request\request_interface::POST);
+$cookie_data['u'] = $request-&gt;variable($config['cookie_name'] . '_u', 0, false, \phpbb\request\request_interface::COOKIE);
+</programlisting>
+      <para>
+        Hvis standardværdien er et array, er det muligt at indlejre det
+        så dybt, som det er nødvendigt. Der er ingen begrænsninger for
+        indlejringsdybden.
+      </para>
+      <programlisting>
+$forum_ids = $request-&gt;variable('forum_ids', [0]);
+$user_notes = $request-&gt;variable('user_notes', [0 =&gt; ['']], true);
+
+// [forum_id =&gt; [user_id =&gt; [notes]]]
+$user_notes_per_forum = $request-&gt;variable('user_notes_per_forum', [0 =&gt; [0 =&gt; ['']]], true);
+</programlisting>
+      <para>
+        En yderligere funktionalitet er sti-syntaksen. Den giver dig
+        mulighed for at tilgå en enkelt værdi på en dybt indlejret
+        placering (indlejret input), samtidig med at typerne forbliver
+        korrekte. Dette kan opnås ved at sende et array som
+        variabelnavnet. Hver værdi i dette array repræsenterer en nøgle
+        i forespørgselsarrayet. Indlejringen øges med hver angivet
+        værdi.
+      </para>
+      <programlisting>
+/**
+ * HTML:
+ * &lt;textarea name=&quot;user_notes_per_forum[10][2][]&quot;&gt;An initial note&lt;/textarea&gt;
+ * &lt;textarea name=&quot;user_notes_per_forum[10][2][]&quot;&gt;A secondary note&lt;/textarea&gt;
+ *
+ * REQUEST:
+ * 'user_notes_per_forum' = [10 =&gt; [2 =&gt; ['An initial note', 'A secondary note']]]
+ */
+
+$note = $request-&gt;variable(['user_notes_per_forum', 10, 2, 1], '', true);
+
+/**
+ * This will return the secondary note,
+ * for the forum identifier of 10
+ * and the user identifier of 2.
+ * Please note that the last array is 0-based.
+ */
+</programlisting>
+      <sect3 id="parameters-2">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på den variabel, der skal hentes
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">default</emphasis>
+                </entry>
+                <entry>
+                  Standardværdien med den korrekte variabeltype
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">multibyte</emphasis>
+                </entry>
+                <entry>
+                  Om variablen kan indeholde UTF-8-tegn eller ej
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  Det superglobale array, der skal gennemsøges for
+                  variablen.
+                  <br/> Kan være en af
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Standardværdien er <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="file">
+      <title>file</title>
+      <para>
+        Denne funktion er en genvej til at hente
+        <literal>FILES</literal>-variabler. Den returnerer information
+        om den uploadede fil, eller et tomt array, hvis variablen ikke
+        findes i <literal>$_FILES</literal>. Dette er en genvej for
+        <literal>$request-&gt;variable('variable', ['name' =&gt; 'none'], true, \phpbb\request\request_interface::FILES)</literal>
+      </para>
+      <para>
+        Variabelnavnet bør være værdien af HTML-inputtets
+        name-attribut, der skal hentes. Så for
+        <literal>&lt;input name=&quot;attachment&quot; type=&quot;file&quot;&gt;</literal>
+        er variabelnavnet <literal>attachment</literal>.
+      </para>
+      <programlisting>
+$upload_file = $request-&gt;file('avatar_upload_file');
+
+if (!empty($upload_file['name']))
+{
+    $file = $upload-&gt;handle_upload('files.types.form', 'avatar_upload_file');
+}
+</programlisting>
+      <sect3 id="parameters-3">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på HTML-filinputtets name-attribut
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="header">
+      <title>header</title>
+      <para>
+        Denne funktion er en genvej til at hente værdien af klientens
+        HTTP-headere.
+      </para>
+      <programlisting>
+// Basic client information
+$browser     = $request-&gt;header('User-Agent');
+$referer     = $request-&gt;header('Referer');
+$forwarded_for   = $request-&gt;header('X-Forwarded-For');
+
+// Client's accepted language
+if ($request-&gt;header('Accept-Language'))
+{
+    $accept_languages = explode(',', $request-&gt;header('Accept-Language'));
+
+    // ...
+}
+</programlisting>
+      <sect3 id="parameters-4">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på den header, der skal hentes
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">default</emphasis>
+                </entry>
+                <entry>
+                  Standardværdien med den korrekte variabeltype <br/>
+                  Standardværdien er en tom streng: <literal>''</literal>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="server">
+      <title>server</title>
+      <para>
+        Denne funktion er en genvej til at hente
+        <literal>SERVER</literal>-variabler. Den giver også en fallback
+        til <literal>getenv()</literal>, da nogle CGI-opsætninger kan
+        have brug for det.
+      </para>
+      <programlisting>
+$script_name = htmlspecialchars_decode($request-&gt;server('REQUEST_URI'));
+$script_name = ($pos = strpos($script_name, '?')) !== false ? substr($script_name, 0, $pos) : $script_name;
+
+$server_name = htmlspecialchars_decode($request-&gt;header('Host', $request-&gt;server('SERVER_NAME')));
+$server_name = (string) strtolower($server_name);
+
+$server_port = $request-&gt;server('SERVER_PORT', 0);
+</programlisting>
+      <sect3 id="parameters-5">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på den variabel, der skal hentes
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">default</emphasis>
+                </entry>
+                <entry>
+                  Standardværdien med den korrekte variabeltype <br/>
+                  Standardværdien er en tom streng: <literal>''</literal>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="overwrite">
+      <title>overwrite</title>
+      <para>
+        Denne funktion gør det muligt at overskrive eller sætte en værdi
+        i et af de superglobale arrays. Ændringer, der foretages direkte
+        på de superglobale variabler, vil
+        <emphasis role="strong">ikke</emphasis> have nogen effekt på
+        resultaterne af de andre metoder, som request-klassen stiller
+        til rådighed. <br/> Det betyder, at ændring af en superglobal
+        variabel som
+        <literal>$_POST['variable'] = 'changed';</literal>, <br/> ikke
+        vil ændre den returnerede værdi for
+        <literal>$request-&gt;variable('variable', '', true);</literal>.
+      </para>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Brug af denne funktion bør undgås, hvis muligt! <br/> Den vil
+          forbruge dobbelt så meget hukommelse som værdien.
+        </para>
+      </warning>
+      <programlisting>
+// Reset start parameter if we jumped from the quickmod dropdown
+if ($request-&gt;variable('start', 0))
+{
+    $request-&gt;overwrite('start', 0);
+}
+</programlisting>
+      <programlisting>
+if ($error)
+{
+    $request-&gt;overwrite('confirm', null, \phpbb\request\request_interface::POST);
+    $request-&gt;overwrite('confirm_key', null, \phpbb\request\request_interface::POST);
+}
+</programlisting>
+      <sect3 id="parameters-6">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Navnet på den variabel, der skal overskrives
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">value</emphasis>
+                </entry>
+                <entry>
+                  Værdien, variablen skal sættes til. <br/> Hvis den
+                  sættes til <literal>null</literal>, fjernes variablen.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  Det superglobale array, hvori variablen skal ændres.
+                  <br/> Kan være en af
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Standardværdien er <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="variable_names">
+      <title>variable_names</title>
+      <para>
+        Denne funktion returnerer alle variabelnavne for et bestemt
+        superglobalt array. Du kan eventuelt angive et bestemt
+        superglobalt array, hvori variablen skal være sat. Hvis intet
+        superglobalt array angives, bruges som standard det superglobale
+        array <literal>REQUEST</literal>, som indeholder
+        <literal>GET</literal>, <literal>POST</literal> og
+        <literal>COOKIE</literal>. Den returnerer derefter alle navne
+        <emphasis>(nøgler)</emphasis>, der findes for det pågældende
+        superglobale array.
+      </para>
+      <programlisting>
+// Converts query string (GET) parameters in request into hidden fields.
+$hidden = '';
+$names = $request-&gt;variable_names(\phpbb\request\request_interface::GET);
+
+foreach ($names as $name)
+{
+    // Sessions are dealt with elsewhere, omit sid always
+    if ($name == 'sid')
+    {
+        continue;
+    }
+
+    $value = $request-&gt;variable($name, '', true);
+    $get_value = $request-&gt;variable($name, '', true, \phpbb\request\request_interface::GET);
+
+    if ($value === $get_value)
+    {
+        $escaped_name = phpbb_quoteattr($name);
+        $escaped_value = phpbb_quoteattr($value);
+
+        $hidden .= &quot;&lt;input type='hidden' name=$escaped_name value=$escaped_value /&gt;&quot;;
+    }
+}
+
+return $hidden;
+</programlisting>
+      <sect3 id="parameters-7">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  Det superglobale array, som variabelnavnene skal
+                  hentes fra. <br/>
+                  Kan være en af
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Standardværdien er <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="get_super_global">
+      <title>get_super_global</title>
+      <para>
+        Denne funktion returnerer det oprindelige array for det
+        forespurgte superglobale array. Du kan eventuelt angive et
+        bestemt superglobalt array, hvori variablen skal være sat. Hvis
+        intet superglobalt array angives, bruges som standard det
+        superglobale array <literal>REQUEST</literal>, som indeholder
+        <literal>GET</literal>, <literal>POST</literal> og
+        <literal>COOKIE</literal>. Den returnerer derefter det
+        oprindelige array med alle variablerne for det pågældende
+        superglobale array.
+      </para>
+      <programlisting>
+// Any post data could be necessary for auth (un)linking
+$link_data = $request-&gt;get_super_global(\phpbb\request\request_interface::POST);
+
+// The current user_id is also necessary
+$link_data['user_id'] = $user-&gt;data['user_id'];
+
+// Tell the provider that the method is auth_link not login_link
+$link_data['link_method'] = 'auth_link';
+
+if (!empty($link_data['link']))
+{
+    $auth_provider-&gt;link_account($link_data);
+}
+else
+{
+    $auth_provider-&gt;unlink_account($link_data);
+}
+</programlisting>
+      <sect3 id="parameters-8">
+        <title>Parametre</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parameter
+                </entry>
+                <entry>
+                  Beskrivelse
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  Det superglobale array, som det oprindelige array skal
+                  hentes fra. <br/>
+                  Kan være en af
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Standardværdien er <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="request_var">
+    <title>request_var</title>
+    <para>
+      Forældet
+    </para>
+    <para>
+      Denne funktion er forældet siden phpBB <literal>3.1.0</literal>
+    </para>
+    <para>
+      Funktionen <literal>request_var</literal> blev brugt tilbage i
+      phpBB <literal>2.x</literal> og <literal>3.0</literal>, men har
+      siden været <emphasis role="strong">forældet</emphasis>. Det
+      betyder, at denne funktion ikke længere bør bruges. Brug i stedet
+      phpBB's request-klasses funktion
+      <link linkend="variable">variable</link>, som har flere
+      valgmuligheder og funktioner.
+    </para>
+  </sect1>
+</article>

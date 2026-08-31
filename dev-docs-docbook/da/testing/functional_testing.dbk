@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Funktionel testning</title>
+  </articleinfo>
+  <para>
+    Funktionelle tests tester softwaren på samme måde, som en bruger
+    ville gøre. De simulerer en bruger, der bevæger sig rundt på
+    webstedet, men de udfører disse trin automatisk. phpBB giver dig
+    mulighed for at skrive den slags tests. Dette dokument fortæller dig
+    hvordan.
+  </para>
+  <sect1 id="running-functional-tests">
+    <title>Kørsel af funktionelle tests</title>
+    <para>
+      Information om, hvordan tests køres, findes i GitHub-repositoryet
+      på
+      <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md">https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md</ulink>.
+      Du kan skifte branch for at se instruktioner for en bestemt version
+      af phpBB.
+    </para>
+  </sect1>
+  <sect1 id="writing-functional-tests">
+    <title>Skrivning af funktionelle tests</title>
+    <para>
+      Din testcase skal nedarve fra klassen
+      <literal>phpbb_functional_test_case</literal>. Du vil da kunne
+      foretage forespørgsler til en ny phpBB-installation. Sørg desuden
+      for at placere filen i mappen
+      <literal>tests/functional/</literal> og at tilføje
+      dokumentationsblokken <literal>@group functional</literal> over
+      klassen, så tests udføres korrekt.
+    </para>
+    <programlisting>
+&lt;?php
+// tests/functional/my_test.php
+
+/**
+ * @group functional
+ */
+class phpbb_functional_my_test extends phpbb_functional_test_case
+{
+    public function bootstrap()
+    {
+        // setup code
+    }
+
+    public function test_index()
+    {
+        // test code
+    }
+}
+</programlisting>
+    <para>
+      Der findes en metode <literal>bootstrap()</literal>, hvor du kan
+      placere kode, der køres, før testen udføres. Her kan du sætte nogle
+      objekter op efter installationen, som er nødvendige for din test.
+      Herefter kan du definere dine tests, ligesom du normalt ville, ved
+      at give metoderne præfikset <literal>test_</literal>. I dette
+      tilfælde tester vi indekssiden.
+    </para>
+    <sect2 id="goutte-and-assertions">
+      <title>Goutte og assertions</title>
+      <para>
+        Frameworket til funktionel testning er bygget med
+        <ulink url="https://github.com/fabpot/Goutte">Goutte</ulink>, som
+        foretager HTTP-forespørgsler og giver os mulighed for at
+        interagere med siden. Goutte-&quot;klienten&quot; er tilgængelig
+        i dine tests via
+        <literal>$this-&gt;request($method, $path)</literal>. Alternativt
+        kan du også tilgå den direkte via
+        <literal>$this-&gt;client</literal>.
+      </para>
+      <para>
+        Når du kalder <literal>request()</literal>, får du en crawler,
+        som giver dig mulighed for at hente dele af siden ved hjælp af
+        CSS-selektorer. Her er et eksempel:
+      </para>
+      <programlisting>
+&lt;?php
+// tests/functional/my_test.php
+
+/**
+ * @group functional
+ */
+class phpbb_functional_my_test extends phpbb_functional_test_case
+{
+    public function test_index()
+    {
+        $crawler = $this-&gt;request('GET', 'index.php');
+        $this-&gt;assertGreaterThan(0, $crawler-&gt;filter('.topiclist')-&gt;count());
+    }
+}
+</programlisting>
+      <para>
+        Vi udfører en GET-forespørgsel til <literal>index.php</literal>,
+        anvender derefter et CSS-filter, der forespørger på klassen
+        .topiclist. Derefter sikrer vi os, at vores forespørgsel matchede
+        noget.
+      </para>
+      <para>
+        Hvis boardets indeksside var i stykker, ville vores test opdage
+        det, hvilket giver os mulighed for at opdage problemet og rette
+        det. Jo flere ting du tester, jo flere fejl opdager du tidligt.
+      </para>
+      <para>
+        For mere information om, hvad du kan gøre med Goutte, se
+        <ulink url="https://github.com/fabpot/Goutte">GitHub-projektet</ulink>,
+        <ulink url="http://www.phparch.com/2010/04/four-new-php-5-3-components-and-goutte-a-simple-web-scraper/">Ryan
+        Weavers Goutte-tutorial</ulink> og
+        <ulink url="http://symfony.com/doc/2.0/book/testing.html#the-test-client">Symfonys
+        testdokumentation</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="authentication">
+      <title>Godkendelse</title>
+      <para>
+        Mange funktionelle tests kræver, at brugeren er logget ind. For
+        at gøre dette kan du bruge metoden <literal>login()</literal>,
+        der nedarves fra klassen
+        <literal>phpbb_functional_test_case</literal>. Denne metode
+        tildeler brugerens SID til den nedarvede klasseegenskab
+        <literal>$this-&gt;sid</literal>. Du skal tilføje denne til de
+        URL'er, som den indloggede bruger navigerer til, for at bevare
+        sessionen. For brugseksempler, se logout-testen i
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/functional/auth_test.php">tests/functional/auth_test.php</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="localisation">
+      <title>Oversættelse</title>
+      <para>
+        I tests, ligesom i phpBB selv, bør du ikke bruge hardkodet sprog,
+        medmindre det er absolut nødvendigt. Brug i stedet metoderne
+        <literal>$this-&gt;add_lang()</literal> og
+        <literal>$this-&gt;lang()</literal>. Begge opfører sig meget
+        ligesom deres modstykker i klassen
+        <literal>\phpbb\user</literal>. Bemærk, at
+        <literal>language/en/common.php</literal> automatisk indlæses af
+        testframeworket.
+      </para>
+      <programlisting>
+public function test_example()
+{
+    // include the file at ./phpBB/language/en/ucp.php
+    $this-&gt;add_lang('ucp');
+
+    // we can also include multiple ones:
+    $this-&gt;add_lang(['memberlist', 'mcp']);
+
+    // Let's use a language key
+    $this-&gt;assertEquals('Login', $this-&gt;lang('LOGIN'));
+
+    // And let's use a language key formatted for use with sprintf
+    $this-&gt;assertEquals('Logout [ user ]', $this-&gt;lang('LOGOUT_USER', 'user'));
+}
+</programlisting>
+      <para>
+        For flere brugseksempler, se venligst
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/functional/lang_test.php">tests/functional/lang_test.php</ulink>.
+      </para>
+    </sect2>
+  </sect1>
+</article>

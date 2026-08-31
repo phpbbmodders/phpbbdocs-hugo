@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Moduler</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      I phpBB kan du oprette dine egne moduler til bruger-, redaktør- og
+      administrationskontrolpanelerne. Denne modulære tilgang har mange
+      fordele frem for at oprette indstillingssider fra bunden:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Du kan håndtere moduler i ACP'en.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Du behøver ikke selv håndtere autorisation direkte.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Du får et indbygget navigationstræ i systemet.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Modulskabelonerne indeholder allerede funktioner som
+            paginering, brødkrummer og bekræftelsesmeddelelser.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Denne tutorial forklarer:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="creating-control-panel-modules">Oprettelse af
+            kontrolpanelmoduler</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="installing-control-panel-modules">Installation
+            af kontrolpanelmoduler</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Denne tutorial beskriver, hvordan du opretter et ACP-modul. For
+        at oprette MCP- eller UCP-moduler skal du som regel blot erstatte
+        alle forekomster af &quot;acp&quot; med &quot;mcp&quot; eller
+        &quot;ucp&quot;.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="creating-control-panel-modules">
+    <title>Oprettelse af kontrolpanelmoduler</title>
+    <para>
+      Et modul kræver tre filer:
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="module-info">Modulinformation</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="module-class">Modulklasse</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="module-template">Modulskabelon</link>
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+    <sect2 id="module-info">
+      <title>Modulinformation</title>
+      <para>
+        Modulinformationsklassen indeholder blot en metode, der
+        returnerer et array med information, der beskriver modulet.
+        Information som modulets navn, tilgængelige tilstande og
+        nødvendige tilladelser.
+      </para>
+      <para>
+        Denne fil skal altid ende på <literal>*_info.php</literal> og bør
+        gemmes i extensionens mappe <literal>acp/</literal>. Til denne
+        tutorial bruger vi
+        <literal>ext/acme/demo/acp/main_info.php</literal>:
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\acp;
+
+class main_info
+{
+    public function module()
+    {
+        return [
+            'filename'  =&gt; '\acme\demo\acp\main_module',
+            'title'     =&gt; 'ACP_DEMO_TITLE',
+            'modes'    =&gt; [
+                'settings'  =&gt; [
+                    'title' =&gt; 'ACP_DEMO',
+                    'auth'  =&gt; 'ext_acme/demo &amp;&amp; acl_a_board',
+                    'cat'   =&gt; ['ACP_DEMO_TITLE'],
+                ],
+            ],
+        ];
+    }
+}
+</programlisting>
+      <para>
+        Klassen <literal>main_info</literal> har kun én metode,
+        <literal>module()</literal>, som returnerer et array med følgende
+        information:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Nøgle
+              </entry>
+              <entry>
+                Indhold
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>filename</literal>
+              </entry>
+              <entry>
+                Fuldt namespaced sti til
+                <link linkend="module-class">modulklassen</link>, der
+                begynder med en indledende skråstreg.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>title</literal>
+              </entry>
+              <entry>
+                Sprognøgle for modultitlen, der vises i ACP'ens sektion
+                for modulhåndtering.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>modes</literal>
+              </entry>
+              <entry>
+                Indeholder et array af tilstande for modulet. Se den
+                næste tabel for flere detaljer.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        Bemærk, at vi har defineret én tilstand ved navn
+        <literal>settings</literal> med følgende information:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Nøgle
+              </entry>
+              <entry>
+                Indhold
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>title</literal>
+              </entry>
+              <entry>
+                Sprognøgle for tilstandens titel, der vises i ACP'ens
+                sektion for modulhåndtering.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>auth</literal>
+              </entry>
+              <entry>
+                En autorisationsnøgle, der bruges til at styre adgangen
+                til tilstanden. Extensionens vendor/navn
+                <literal>acme/demo</literal> er nødvendigt for at sikre,
+                at extensionen er aktiveret. Vi angiver også valgfrit, at
+                brugeren i dette tilfælde skal have tilladelsen
+                <literal>a_board</literal>.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>cat</literal>
+              </entry>
+              <entry>
+                Refererer til den overordnede kategori, tilstanden hører
+                til. Bør typisk indeholde sprognøglen for den overordnede
+                kategori.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="module-class">
+      <title>Modulklasse</title>
+      <para>
+        Modulklassen indeholder selve koden til modulet. Denne fil gemmes
+        også i extensionens mappe <literal>acp/</literal>. Til denne
+        tutorial bruger vi
+        <literal>ext/acme/demo/acp/main_module.php</literal>:
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\acp;
+
+class main_module
+{
+    public $u_action;
+    public $tpl_name;
+    public $page_title;
+
+    public function main($id, $mode)
+    {
+        global $language, $template, $request, $config;
+
+        $this-&gt;tpl_name = 'acp_demo_body';
+        $this-&gt;page_title = $language-&gt;lang('ACP_DEMO_TITLE');
+
+        add_form_key('acme_demo_settings');
+
+        if ($request-&gt;is_set_post('submit'))
+        {
+            if (!check_form_key('acme_demo_settings'))
+            {
+                 trigger_error('FORM_INVALID');
+            }
+
+            $config-&gt;set('acme_demo_goodbye', $request-&gt;variable('acme_demo_goodbye', 0));
+            trigger_error($language-&gt;lang('ACP_DEMO_SETTING_SAVED') . adm_back_link($this-&gt;u_action));
+        }
+
+        $template-&gt;assign_vars([
+            'ACME_DEMO_GOODBYE' =&gt; $config['acme_demo_goodbye'],
+            'U_ACTION'          =&gt; $this-&gt;u_action,
+        ]);
+    }
+}
+</programlisting>
+      <para>
+        Selve modulet skal indeholde en metode
+        <literal>main($id, $mode)</literal>, som tager modulets
+        <literal>id</literal> i databasen og den
+        <literal>mode</literal>, der kaldes, som argumenter.
+      </para>
+      <para>
+        I koden for metoden <literal>main</literal> sætter vi først
+        navnet på den <link linkend="module-template">modulskabelon</link>-fil,
+        der bruges til at gengive modulet, og sidetitlen tildeles en
+        sprognøgle.
+      </para>
+      <para id="form key">
+        For at styrke formularen mod sikkerhedssårbarheder bruger vi en
+        kontrol af en formularnøgle for at verificere, at den formular,
+        der indsendes, er gyldig. Dette gøres ved at kalde
+        <literal>add_form_key('acme_demo_settings')</literal>, når
+        formularen vises, og derefter kontrollere formularnøglen, når den
+        indsendes:
+      </para>
+      <programlisting>
+if (!check_form_key('acme_demo_settings'))
+{
+    trigger_error('FORM_INVALID');
+}
+</programlisting>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          Formularnøglen bør være unik for hver formular. Nøglen kan
+          være en vilkårlig strengværdi, men extensions bør inkludere
+          deres vendor- og extension-navn.
+        </para>
+      </warning>
+      <para>
+        Hvis formularnøglen godkendes, sætter vi
+        konfigurationsværdien til den indsendte værdi og viser brugeren
+        en succesmeddelelse:
+      </para>
+      <programlisting>
+$config-&gt;set('acme_demo_goodbye', $request-&gt;variable('acme_demo_goodbye', 0));
+trigger_error($language-&gt;lang('ACP_DEMO_SETTING_SAVED') . adm_back_link($this-&gt;u_action));
+</programlisting>
+      <para>
+        I slutningen af metoden tildeler vi to skabelonvariabler. Den
+        første indeholder den aktuelle værdi af konfigurationsværdien.
+        Den anden indeholder klasseegenskaben
+        <literal>u_action</literal>, som indeholder URL'en for den
+        aktuelle formularhandling.
+      </para>
+    </sect2>
+    <sect2 id="module-template">
+      <title>Modulskabelon</title>
+      <para>
+        Vores ACP-modul skal nu bruge den skabelonfil, vi tildelte det i
+        <link linkend="module-class">modulklassen</link>. Vi bruger
+        <literal>ext/acme/demo/adm/style/acp_demo_body.html</literal>.
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          ACP'en adskiller sig fra MCP'en og UCP'en ved, at den har sin
+          egen typografi. MCP'en og UCP'en bruger boardets
+          hovedtypografi, dvs. prosilver. ACP-skabelonfiler skal derfor
+          gemmes i <literal>./adm/style/</literal>, mens MCP- og
+          UCP-skabelonfiler gemmes i
+          <literal>./styles/prosilver/template/</literal>.
+        </para>
+      </note>
+      <programlisting>
+{% INCLUDE 'overall_header.html' %}
+
+&lt;h1&gt;{{ lang('SETTINGS') }}&lt;/h1&gt;
+
+&lt;form id=&quot;acp_board&quot; method=&quot;post&quot; action=&quot;{{ U_ACTION }}&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label for=&quot;acme_demo_goodbye&quot;&gt;{{ lang('ACP_DEMO_GOODBYE') }}&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input type=&quot;radio&quot; class=&quot;radio&quot; name=&quot;acme_demo_goodbye&quot; value=&quot;1&quot; {% if ACME_DEMO_GOODBYE %}checked=&quot;checked&quot; {% endif %}/&gt; {{ lang('YES') }} &amp;nbsp;
+                &lt;input type=&quot;radio&quot; class=&quot;radio&quot; name=&quot;acme_demo_goodbye&quot; value=&quot;0&quot; {% if not ACME_DEMO_GOODBYE %}checked=&quot;checked&quot; {% endif %}/&gt; {{ lang('NO') }}&lt;/dd&gt;
+        &lt;/dl&gt;
+
+        &lt;p class=&quot;submit-buttons&quot;&gt;
+            &lt;input class=&quot;button1&quot; type=&quot;submit&quot; id=&quot;submit&quot; name=&quot;submit&quot; value=&quot;{{ lang('SUBMIT') }}&quot; /&gt;&amp;nbsp;
+            &lt;input class=&quot;button2&quot; type=&quot;reset&quot; id=&quot;reset&quot; name=&quot;reset&quot; value=&quot;{{ lang('RESET') }}&quot; /&gt;
+        &lt;/p&gt;
+
+        {{ S_FORM_TOKEN }}
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+
+{% INCLUDE 'overall_footer.html' %}
+</programlisting>
+      <para>
+        Denne skabelon gengiver en formular med én valgmulighed til at
+        skifte indstillingen <emphasis>acme_demo_goodbye</emphasis> via
+        to radioknapper, samt to inputknapper til at indsende eller
+        nulstille formularen. Bemærk, at skabelonvariablen
+        <literal>{{ S_FORM_TOKEN }}</literal> er nødvendig som en del af
+        <link linkend="form key">sikkerhedskontrollen af
+        formularnøglen</link>.
+      </para>
+      <sect3 id="module-language-keys">
+        <title>Sprognøgler for modulet</title>
+        <para>
+          Mellem vores modulklasse- og skabelonfiler har vi tilføjet
+          nogle nye sprognøgler. Vi kan tilføje dem til vores
+          sprogarray i <literal>acme/demo/language/en/demo.php</literal>:
+        </para>
+        <programlisting>
+'ACP_DEMO_TITLE'         =&gt; 'Demo Module',
+'ACP_DEMO'               =&gt; 'Settings',
+'ACP_DEMO_GOODBYE'       =&gt; 'Should say goodbye?',
+'ACP_DEMO_SETTING_SAVED' =&gt; 'Settings have been saved successfully!',
+</programlisting>
+        <note>
+          <title>Bemærk</title>
+          <para>
+            Husk, at vi indlæser vores sprogfil globalt i hele phpBB via
+            eventet <literal>core.user_setup</literal> i vores
+            event-listener. Da vi ikke anbefaler at gøre dette hele
+            tiden, er en alternativ metode til automatisk at indlæse en
+            sprogfil i ACP'en at give filnavnet præfikset
+            <literal>info_acp_*.php</literal> for modulets sprognøgler
+            eller <literal>permissions_*.php</literal> for
+            tilladelsessprognøgler.
+          </para>
+        </note>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="installing-control-panel-modules">
+    <title>Installation af kontrolpanelmoduler</title>
+    <para>
+      Modulet er nu færdigt, men det vises endnu ikke i ACP'en. For at
+      installere modulet i databasen, når extensionen aktiveres, har vi
+      brug for en migration.
+    </para>
+    <para>
+      Migrationsfiler skal gemmes i extensionens mappe
+      <literal>migrations/</literal>. Til Acme Demo har vi brug for en
+      migration, der installerer følgende data:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            En konfigurationsværdi ved navn
+            <literal>acme_demo_goodbye</literal>, som kan sættes af
+            administratoren.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            ACP-moduldataene.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\migrations;
+
+class add_module extends \phpbb\db\migration\migration
+{
+    /**
+     * If our config variable already exists in the db
+     * skip this migration.
+     */
+    public function effectively_installed()
+    {
+        return isset($this-&gt;config['acme_demo_goodbye']);
+    }
+
+    /**
+     * This migration depends on phpBB's v314 migration
+     * already being installed.
+     */
+    static public function depends_on()
+    {
+        return ['\phpbb\db\migration\data\v31x\v314'];
+    }
+
+    public function update_data()
+    {
+        return [
+
+            // Add the config variable we want to be able to set
+            ['config.add', ['acme_demo_goodbye', 0]],
+
+            // Add a parent module (ACP_DEMO_TITLE) to the Extensions tab (ACP_CAT_DOT_MODS)
+            ['module.add', [
+                'acp',
+                'ACP_CAT_DOT_MODS',
+                'ACP_DEMO_TITLE'
+            ]],
+
+            // Add our main_module to the parent module (ACP_DEMO_TITLE)
+            ['module.add', [
+                'acp',
+                'ACP_DEMO_TITLE',
+                [
+                    'module_basename'   =&gt; '\acme\demo\acp\main_module',
+                    'modes'             =&gt; ['settings'],
+                ],
+            ]],
+        ];
+    }
+}
+</programlisting>
+    <para>
+      For at lære mere om migrations, se venligst dokumentationen i
+      <literal>../migrations/index</literal>.
+    </para>
+    <para>
+      På dette tidspunkt har vi færdiggjort Acme Demo-extensionen! Der
+      er dog mere, extensions kan gøre, end det, vi har lært fra Acme
+      Demo. Fortsæt til de næste afsnit for at lære, hvordan du kan gøre
+      mere med extensions.
+    </para>
+  </sect1>
+</article>

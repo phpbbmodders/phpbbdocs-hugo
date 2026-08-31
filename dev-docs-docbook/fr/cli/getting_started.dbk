@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Premiers pas</title>
+  </articleinfo>
+  <para>
+    L'interface en ligne de commande (Command Line Interface, CLI) est
+    un outil utile pour les administrateurs phpBB qui ont accès à un
+    shell (ou SSH) sur le serveur où ils exécutent phpBB, ainsi que
+    pour les développeurs d'extensions. Elle fournit des commandes CLI
+    pour gérer les valeurs de configuration, les extensions, exécuter
+    les migrations de base de données, purger le cache, et plus
+    encore.
+  </para>
+  <para>
+    La plupart des systèmes d'exploitation sont livrés avec une
+    application de ligne de commande intégrée. Sur Mac OS et Ubuntu,
+    elle s'appelle &quot;Terminal&quot; et sur Windows, elle s'appelle
+    &quot;Invite de commandes&quot;. Des logiciels tiers comme
+    <ulink url="http://www.putty.org">PuTTY</ulink> et
+    <ulink url="https://www.iterm2.com">iTerm</ulink> peuvent également
+    être utilisés.
+  </para>
+  <para>
+    Pour utiliser la CLI de phpBB sur un serveur web, vous aurez besoin
+    d'un accès SSH à votre serveur web. Vous pouvez vous renseigner
+    auprès de votre hébergeur pour savoir s'il propose un accès SSH et
+    comment vous connecter à votre serveur web depuis la CLI.
+  </para>
+  <para>
+    Une fois que vous avez accédé à votre serveur web via SSH, ou si
+    vous êtes dans un environnement de développement localhost, il
+    vous suffit de naviguer jusqu'au répertoire de votre forum phpBB
+    avec la commande <literal>cd</literal> :
+  </para>
+  <programlisting>
+$ cd path/to/phpBB
+</programlisting>
+  <para>
+    À partir de là, exécuter des commandes revient simplement à
+    appeler l'application CLI de phpBB.
+  </para>
+  <programlisting>
+$ php bin/phpbbcli.php
+</programlisting>
+  <para>
+    <emphasis>Si tout fonctionne correctement, la commande ci-dessus
+    doit afficher des informations sur la console CLI de phpBB
+    actuellement installée. Si vous recevez un message d'erreur,
+    assurez-vous d'avoir navigué dans le répertoire racine de votre
+    forum.</emphasis>
+  </para>
+  <sect1 id="general-commands">
+    <title>Commandes générales</title>
+    <para>
+      La commande <literal>list</literal> affiche une liste de toutes
+      les commandes disponibles pour la CLI de phpBB.
+    </para>
+    <programlisting>
+$ php bin/phpbbcli.php list
+</programlisting>
+    <para>
+      La commande <literal>help</literal> affiche l'aide générale pour
+      l'utilisation de la CLI de phpBB.
+    </para>
+    <programlisting>
+$ php bin/phpbbcli.php help
+</programlisting>
+  </sect1>
+  <sect1 id="using-commands">
+    <title>Utilisation des commandes</title>
+    <para>
+      Toutes les commandes phpBB (telles que décrites lors de
+      l'exécution de la commande <literal>list</literal>) disposent
+      d'une documentation d'aide intégrée dans la CLI. Utilisez
+      l'option <literal>--help</literal> ou <literal>-h</literal> avec
+      n'importe quelle commande CLI de phpBB pour afficher l'aide
+      détaillée de cette commande.
+    </para>
+    <programlisting>
+$ php bin/phpbbcli.php config:set --help
+</programlisting>
+    <para>
+      La commande ci-dessus affichera des informations sur les
+      arguments et options qui peuvent être utilisés avec la commande
+      spécifiée, dans cet exemple <literal>config:set</literal>. Par
+      exemple, la commande ci-dessus affichera :
+    </para>
+    <programlisting>
+Usage:
+ config:set [-d|--dynamic] key value
+</programlisting>
+    <para>
+      Les arguments ou options affichés entre crochets indiquent
+      qu'ils sont facultatifs. Cela nous montre que les arguments
+      <literal>key</literal> et <literal>value</literal> sont
+      obligatoires. En revanche, les options <literal>-d</literal> ou
+      <literal>--dynamic</literal> disponibles pour cette commande
+      sont facultatives. Notez également que <literal>-d</literal> est
+      l'abréviation de <literal>--dynamic</literal>. La plupart des
+      options disposent d'un équivalent abrégé.
+    </para>
+  </sect1>
+  <sect1 id="general-options">
+    <title>Options générales</title>
+    <para>
+      Options courantes pouvant être utilisées avec n'importe quelle
+      commande CLI de phpBB.
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Option
+            </entry>
+            <entry>
+              Utilisation
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>--help, -h</literal>
+            </entry>
+            <entry>
+              Afficher un message d'aide
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--quiet, -q</literal>
+            </entry>
+            <entry>
+              N'afficher aucun message
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--verbose, -v, -vv, -vvv</literal>
+            </entry>
+            <entry>
+              Augmenter le niveau de détail des messages : 1 pour une
+              sortie normale, 2 pour une sortie plus détaillée et 3
+              pour le débogage
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--version, -V</literal>
+            </entry>
+            <entry>
+              Afficher la version de cette application
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--ansi</literal>
+            </entry>
+            <entry>
+              Forcer la sortie ANSI (couleurs)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--no-ansi</literal>
+            </entry>
+            <entry>
+              Désactiver la sortie ANSI (couleurs)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--no-interaction, -n</literal>
+            </entry>
+            <entry>
+              Ne poser aucune question interactive
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--safe-mode</literal>
+            </entry>
+            <entry>
+              Exécuter en mode sans échec (sans extensions)
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="install-phpbb-using-the-cli">
+    <title>Installer phpBB à l'aide de la CLI</title>
+    <para>
+      Le programme d'installation CLI de phpBB utilise un fichier YAML
+      rempli avec les données nécessaires pour configurer une base de
+      données pour une nouvelle installation de phpBB. Vous pouvez
+      trouver un exemple de fichier de configuration dans
+      <literal>docs/install-config.sample.yml</literal>. Copiez ce
+      fichier vers <literal>install/install-config.yml</literal>.
+      Ajustez les paramètres de l'exemple selon vos besoins. Par
+      exemple, une base de données MySQL utilisant l'interface
+      <literal>mysqli</literal>, hébergée sur un serveur
+      <literal>localhost</literal> avec l'utilisateur root
+      <literal>bertie</literal>, le mot de passe
+      <literal>bertiepasswd</literal> et nommée
+      <literal>bertiedb</literal> ressemblerait à ceci :
+    </para>
+    <programlisting>
+installer:
+    admin:
+        name: admin
+        password: mypassword
+        email: admin@example.org
+
+    board:
+        lang: en
+        name: My Board
+        description: My amazing new phpBB board
+
+    database:
+        dbms: mysqli
+        dbhost: ~
+        dbport: ~
+        dbuser: bertie
+        dbpasswd: bertiepasswd
+        dbname: bertiedb
+        table_prefix: phpbb_
+
+    email:
+        enabled: false
+        smtp_delivery : ~
+        smtp_host: ~
+        smtp_port: ~
+        smtp_auth: ~
+        smtp_user: ~
+        smtp_pass: ~
+
+    server:
+        cookie_secure: false
+        server_protocol: http://
+        force_server_vars: false
+        server_name: localhost
+        server_port: 80
+        script_path: /
+
+    extensions: ['phpbb/viglink']
+</programlisting>
+    <para>
+      Vous pouvez ajuster des paramètres supplémentaires comme le nom
+      d'utilisateur de l'administrateur, l'adresse e-mail et les
+      informations du forum. Assurez-vous que le fichier est lisible
+      par la CLI.
+    </para>
+    <para>
+      Pour installer le forum, exécutez la commande suivante :
+    </para>
+    <programlisting>
+$ php install/phpbbcli.php install install-config.yml
+</programlisting>
+    <para>
+      Le programme d'installation démarre alors et affiche sa
+      progression pendant l'installation.
+    </para>
+  </sect1>
+  <sect1 id="update-phpbb-using-the-cli">
+    <title>Mettre à jour phpBB à l'aide de la CLI</title>
+    <para>
+      Tout comme l'installation depuis la CLI, phpBB peut également
+      être mis à jour depuis la CLI à l'aide d'un fichier YAML
+      contenant des instructions de mise à jour. Vous pouvez trouver
+      un exemple de fichier de configuration de mise à jour dans
+      <literal>docs/update-config.sample.yml</literal>. Copiez ce
+      fichier vers <literal>install/update-config.yml</literal>.
+    </para>
+    <programlisting>
+updater:
+    type: all
+    extensions: ['phpbb/viglink']
+</programlisting>
+    <para>
+      Dans cet état, le programme de mise à jour mettra à jour votre
+      base de données phpBB et remplacera également tous les fichiers
+      phpBB par les fichiers mis à jour, vous offrant une mise à
+      niveau complète.
+    </para>
+    <para>
+      Cependant, si vous avez déjà remplacé les fichiers via le
+      système de fichiers ou FTP, vous pouvez choisir de ne mettre à
+      jour que la base de données en changeant <literal>type</literal>
+      de <literal>all` à</literal>db_only`` :
+    </para>
+    <programlisting>
+updater:
+   type: db_only
+</programlisting>
+    <para>
+      Pour mettre à jour le forum, exécutez la commande suivante :
+    </para>
+    <programlisting>
+$ php install/phpbbcli.php update update-config.yml
+</programlisting>
+    <para>
+      Le programme de mise à jour démarre et affiche sa progression.
+    </para>
+  </sect1>
+</article>

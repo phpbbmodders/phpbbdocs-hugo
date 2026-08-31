@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Politik for indsendelse af sprogpakker</title>
+  </articleinfo>
+  <para>
+    Nedenfor følger de procedurer og retningslinjer, som enhver
+    oversætter, der indsender en sprogpakke til vores
+    <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisations
+    Database</ulink>, skal følge. Alle godkendte sprogpakker kan findes i
+    vores <ulink url="https://www.phpbb.com/languages/">Language Packs
+    Database</ulink>. Hvis du indsender din sprogpakke til vores
+    <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisations
+    Database</ulink>, sendes den først automatisk til
+    Translations Manager til validering. Translations Manager er
+    ansvarlig for at sikre, at din indsendelse følger nedenstående
+    retningslinjer. Manglende overholdelse af følgende instruktioner kan
+    føre til øjeblikkelig afvisning af din indsendelse. Bemærk venligst,
+    at Translations Manager har fuld skønsmæssig ret til at afgøre, hvad
+    der godkendes eller afvises. Denne proces kan nogle gange tage
+    betydelig tid, så det er i din interesse at følge alle retningslinjer
+    fra starten. Hvis din sprogpakke afvises og derefter indsendes igen,
+    placeres den bagerst i køen.
+  </para>
+  <orderedlist numeration="arabic" spacing="compact">
+    <listitem>
+      <para>
+        Indsendelser skal være kompatible med den nyeste version af
+        phpBB. Enhver manglende nøgle registreres under
+        uploadprocessen, og din indsendelse afvises automatisk.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Indsendelser skal være komplette. Delvise oversættelser er ikke
+        tilladt og afvises automatisk. E-mails, tekstfiler og
+        temabilleder skal også være fuldt oversat.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Sprogpakker kan indeholde fem ekstra filer (én obligatorisk og
+        fire valgfrie), som ikke findes i den britisk-engelske sprogpakke:
+        <literal>LICENSE</literal> (obligatorisk),
+        <literal>README.md</literal> (valgfri),
+        <literal>AUTHORS.md</literal> (valgfri),
+        <literal>VERSION.md</literal> (valgfri) og
+        <literal>CHANGELOG.md</literal> (valgfri). Du kan frit skrive,
+        hvad du vil, i filen <literal>README.md</literal>, du kan
+        opliste alle forfattere og bidragydere til din sprogpakke i
+        filen <literal>AUTHORS.md</literal>, du kan angive din
+        sprogpakkes version i filen <literal>VERSION.md</literal>, og du
+        kan opliste hele versionshistorikken i filen
+        <literal>CHANGELOG.md</literal>. Filen
+        <literal>LICENSE</literal> tilføjes automatisk under
+        uploadprocessen, så du behøver ikke selv tilføje den. Dens formål
+        er at informere brugeren om, hvilken licens der bruges.
+        Sprogpakker arver phpBB's licens
+        <ulink url="http://www.opensource.org/licenses/gpl-2.0.php">GNU
+        General Public License 2.0</ulink>, og ingen yderligere eller
+        alternative licenser er tilladt. Alle disse ekstra filer skal
+        placeres i mappen <literal>language/{iso}/</literal>, ved siden
+        af filen <literal>iso.txt</literal>. Eventuelle andre ekstra
+        fil(er) vil blive registreret, og din indsendelse vil blive
+        afvist.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Indsendelser skal have følgende filer og struktur:
+      </para>
+    </listitem>
+  </orderedlist>
+  <programlisting>
+languagename_versionnumber.zip
+   languagename_versionnumber/
+      ext/
+         phpbb/
+            viglink/
+               language/
+                  {iso}/
+                     info_acp_viglink.php
+                     viglink_module_acp.php
+      language/
+         {iso}/
+            acp/
+               attachments.php
+               ban.php
+               board.php
+               bots.php
+               common.php
+               database.php
+               email.php
+               extensions.php
+               forums.php
+               groups.php
+               index.htm
+               language.php
+               modules.php
+               permissions.php
+               permissions_phpbb.php
+               posting.php
+               profile.php
+               prune.php
+               search.php
+               styles.php
+               users.php
+            email/
+               short/
+                  bookmark.txt
+                  newtopic_notify.txt
+                  post_approved.txt
+                  post_disapproved.txt
+                  post_in_queue.txt
+                  privmsg_notify.txt
+                  quote.txt
+                  report_pm.txt
+                  report_post.txt
+                  topic_approved.txt
+                  topic_disapproved.txt
+                  topic_in_queue.txt
+                  topic_notify.txt
+
+               admin_activate.txt
+               admin_send_email.txt
+               admin_welcome_activated.txt
+               admin_welcome_inactive.txt
+               bookmark.txt
+               contact_admin.txt
+               coppa_resend_inactive.txt
+               coppa_welcome_inactive.txt
+               email_notify.txt
+               forum_notify.txt
+               group_added.txt
+               group_request.txt
+               index.htm
+               installed.txt
+               newtopic_notify.txt
+               pm_report_closed.txt
+               pm_report_deleted.txt
+               post_approved.txt
+               post_disapproved.txt
+               post_in_queue.txt
+               privmsg_notify.txt
+               profile_send_email.txt
+               profile_send_im.txt
+               quote.txt
+               report_closed.txt
+               report_deleted.txt
+               report_pm.txt
+               report_post.txt
+               topic_approved.txt
+               topic_disapproved.txt
+               topic_in_queue.txt
+               topic_notify.txt
+               user_activate.txt
+               user_activate_inactive.txt
+               user_activate_passwd.txt
+               user_reactivate_account.txt
+               user_remind_inactive.txt
+               user_resend_inactive.txt
+               user_welcome.txt
+               user_welcome_inactive.txt
+            help/
+               bbcode.php
+               faq.php
+            app.php
+            AUTHORS.md (optional)
+            captcha_qa.php
+            captcha_recaptcha.php
+            cli.php
+            CHANGELOG.md (optional)
+            common.php
+            groups.php
+            index.htm
+            install.php
+            iso.txt (
+            LICENSE
+            mcp.php
+            memberlist.php
+            migrator.php
+            plupload.php
+            posting.php
+            README.md (optional)
+            search.php
+            ucp.php
+            VERSION.md (optional)
+            viewforum.php
+            viewtopic.php
+      styles/
+         prosilver/
+            theme/
+               {iso}/
+                  icon_user_online.gif
+                  index.htm (optional)
+                  stylesheet.css
+</programlisting>
+  <orderedlist numeration="arabic" spacing="compact" startingnumber="5">
+    <listitem>
+      <para>
+        Indsendelser bør følge anbefalingerne i
+        <ulink url="https://area51.phpbb.com/docs/33x/coding-guidelines.html#translation">3.3
+        Translation (i18n/L10n) Guidelines</ulink> så tæt som muligt,
+        især
+        <ulink url="https://area51.phpbb.com/docs/33x/coding-guidelines.html#writingstyle">3.3
+        Writing style</ulink>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Alle PHP- og tekstfiler skal være kodet i UTF-8 uden BOM og med
+        en ny linje for enden af filen. Mange moderne tekstredigeringsprogrammer
+        bruger dette som standardindstilling, men vi anbefaler at
+        kontrollere det i dit redigeringsprograms indstillinger. Vi
+        anbefaler, at du bruger
+        <ulink url="https://notepad-plus-plus.org/">Notepad++</ulink>
+        eller <ulink url="http://www.pspad.com/en/">PSPad</ulink>, som
+        begge er lette og gratis.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Oversættelsen er hovedsageligt dit eget arbejde, og du har ret
+        til at have ophavsret på oversættelsen og til at angive dit navn
+        eller navnene på dit teams medlemmer i filen
+        <literal>AUTHORS.md</literal>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Der kan medtages op til 3 links som forfatterkreditering i
+        bunden, som kan tilpasses via nøglen
+        <literal>'TRANSLATION_INFO'</literal> i
+        <literal>common.php</literal>. Bemærk venligst, at Translations
+        Manager har fuld skønsmæssig ret til at afgøre, hvad der er
+        acceptabelt som et forfatterkrediteringslink.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Indsendelser skal indsendes som én samlet zip-fil.
+        Customisations Database navngiver automatisk din uploadede
+        sprogpakke ved hjælp af formatet
+        <literal>languagename_versionnumber.zip</literal>. Hvis en
+        forfatter til en brasiliansk-portugisisk sprogpakke f.eks.
+        uploader et arkiv ved navn
+        <literal>Brasileiro_1.0.5.zip</literal>, ændres det automatisk
+        til <literal>brazilian_portuguese_1_0_5.zip</literal>.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Bidragsbeskrivelsen for din sprogpakke i Customisations Database
+        bør oversættes til engelsk ud over dit lokale sprog. Dette gør
+        det lettere for administratorer, der ikke taler sproget, at
+        downloade din oversættelse.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Bidragsscreenshottet i Customisations Database bør kun være
+        flaget for det land, hvor hovedsproget er det, sprogpakken
+        vedrører. For eksempel Frankrigs flag for det franske sprog.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Revisionsnavnet i Customisations Database bør stå tomt,
+        indeholde phpBB-pakkens version og/eller pakkens udgivelsesnavn
+        (f.eks. &quot;**3.3.10 / Bertie's New Translation**&quot; for
+        3.3.10).
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Demo-URL'en i Customisations Database skal være tom, medmindre
+        du vil sætte et link til et internationalt fællesskab
+        (<ulink url="https://www.phpbb.com/support/intl/">officielt</ulink>
+        listet eller ej) relateret til bidragets sprog. For eksempel er
+        <ulink url="https://www.phpbb.nl/">https://www.phpbb.nl/</ulink>
+        som Demo-URL vedrørende det
+        <ulink url="https://www.phpbb.com/customise/db/translation/dutch_casual_honorifics/">hollandske
+        sprog</ulink> tilladt.
+      </para>
+    </listitem>
+  </orderedlist>
+</article>

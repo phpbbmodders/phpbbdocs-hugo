@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- To build in other languages, change "en" in the <book> tag and the href attributes to the language code you want to build. -->
+
+<book lang="en">
+	<bookinfo>
+		<title>phpBB 3.3 <emphasis>Proteus</emphasis> Documentation</title>
+		<orgname>phpBB Group</orgname>
+	</bookinfo>
+
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/quick_start_guide.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/upgrade_guide.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/admin_guide.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/moderator_guide.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/user_guide.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/server_guide.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content/en/chapters/glossary.xml" />
+</book>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Auth API</title>
+  </articleinfo>
+  <para>
+    Dette er en forklaring på, hvordan phpBB's auth/acl-API bruges.
+  </para>
+  <sect1 id="introduction">
+    <title>1. Introduktion</title>
+    <sect2 id="what-is-it">
+      <title>Hvad er det?</title>
+      <para>
+        Klassen <literal>auth</literal> indeholder metoder relateret til
+        autorisation af brugere til at tilgå forskellige boardfunktioner,
+        f.eks. oprettelse af indlæg, visning, besvarelse, login (og
+        logout) osv. Hvis du skal kontrollere, om en bruger kan udføre en
+        handling, eller håndtere brugerlogin/logout, er denne klasse
+        nødvendig.
+      </para>
+    </sect2>
+    <sect2 id="initialisation">
+      <title>Initialisering</title>
+      <para>
+        For at bruge nogen af metoderne i klassen <literal>auth</literal>
+        skal den først instantieres. Dette gøres bedst tidligt i
+        scriptets afvikling på følgende måde:
+      </para>
+      <programlisting>
+$auth = new phpbb\auth\auth();
+</programlisting>
+      <para>
+        Når en instans af klassen er oprettet, kan du frit kalde de
+        forskellige metoder, den indeholder. Bemærk: hvis du ønsker at
+        bruge metoderne i <literal>auth_admin</literal>, skal denne
+        instantieres separat på samme måde.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="methods">
+    <title>2. Metoder</title>
+    <para>
+      Herunder følger de metoder, du kan bruge.
+    </para>
+    <sect2 id="i.-acl">
+      <title>2.i. acl</title>
+      <para>
+        Metoden <literal>acl</literal> er initialiseringsrutinen for
+        alle ACL-funktionerne. Den skal kaldes, før nogen ACL-metode
+        bruges. Den tager én parameter: et associativt array, der
+        indeholder brugerinformation.
+      </para>
+      <programlisting>
+$auth-&gt;acl($userdata);
+</programlisting>
+      <para>
+        Hvor <literal>$userdata</literal> som minimum indeholder:
+        <literal>user_id</literal>, <literal>user_permissions</literal>
+        og <literal>user_type</literal>.
+      </para>
+    </sect2>
+    <sect2 id="ii.-acl_get">
+      <title>2.ii. acl_get</title>
+      <para>
+        Denne metode afgør, om en bruger kan udføre en handling, enten
+        globalt eller i et bestemt forum.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_get('option'[, forum]);
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>option</literal>: f.eks. 'f_list', 'm_edit',
+            'a_adduser' osv. Brug <literal>!option</literal> til at
+            negere.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>forum</literal> (valgfri): heltal
+            <literal>forum_id</literal>.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Returnerer et positivt heltal, hvis tilladt, nul, hvis afvist.
+      </para>
+    </sect2>
+    <sect2 id="iii.-acl_gets">
+      <title>2.iii. acl_gets</title>
+      <para>
+        Denne metode kontrollerer flere tilladelser på én gang.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_gets('option1'[, 'option2', ..., forum]);
+</programlisting>
+      <para>
+        Returnerer et positivt heltal, hvis <emphasis>en af</emphasis>
+        tilladelserne er givet.
+      </para>
+    </sect2>
+    <sect2 id="iv.-acl_getf">
+      <title>2.iv. acl_getf</title>
+      <para>
+        Denne metode kontrollerer, i hvilke fora en bruger har en bestemt
+        tilladelse.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_getf('option'[, clean]);
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>option</literal>: tilladelsesstreng (negation med
+            <literal>!</literal> er tilladt)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>clean</literal>: boolesk. Hvis sand, returneres kun
+            de fora, hvor tilladelsen er givet.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Returnerer et associativt array:
+      </para>
+      <programlisting>
+array(forum_id1 =&gt; array(option =&gt; integer), forum_id2 =&gt; ...)
+</programlisting>
+    </sect2>
+    <sect2 id="v.-acl_getf_global">
+      <title>2.v. acl_getf_global</title>
+      <para>
+        Kontrollerer, om en bruger har en tilladelse globalt eller i
+        mindst ét forum.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_getf_global('option');
+</programlisting>
+      <para>
+        Returnerer et positivt heltal eller nul.
+      </para>
+    </sect2>
+    <sect2 id="vi.-acl_cache">
+      <title>2.vi. acl_cache</title>
+      <para>
+        <emphasis role="strong">Privat metode.</emphasis> Kaldes
+        automatisk, når det er nødvendigt. Genererer
+        user_permissions-data.
+      </para>
+    </sect2>
+    <sect2 id="vii.-acl_clear_prefetch">
+      <title>2.vii. acl_clear_prefetch</title>
+      <para>
+        Rydder kolonnen <literal>user_permissions</literal> i
+        brugertabellen.
+      </para>
+      <programlisting>
+$user_id = 2;
+$auth-&gt;acl_clear_prefetch($user_id);
+</programlisting>
+      <para>
+        Brug <literal>$user_id = 0</literal> for at rydde mellemlageret
+        for alle brugere. Returnerer null.
+      </para>
+    </sect2>
+    <sect2 id="viii.-acl_get_list">
+      <title>2.viii. acl_get_list</title>
+      <para>
+        Returnerer et array, der beskriver, hvilke brugere der har hvilke
+        tilladelser i hvilke fora.
+      </para>
+      <programlisting>
+$user_id = array(2, 53);
+$permissions = array('f_list', 'f_read');
+$forum_id = array(1, 2, 3);
+$result = $auth-&gt;acl_get_list($user_id, $permissions, $forum_id);
+</programlisting>
+      <para>
+        Parametertyper: - <literal>$user_id</literal>:
+        <literal>false</literal>, int, eller array af int -
+        <literal>$permissions</literal>: <literal>false</literal>,
+        streng, eller array af streng - <literal>$forum_id</literal>:
+        <literal>false</literal>, int, eller array af int
+      </para>
+    </sect2>
+    <sect2 id="ix.-miscellaneous">
+      <title>2.ix. Diverse</title>
+      <para>
+        Yderligere metoder til at hente rå tilladelsesdata:
+      </para>
+      <programlisting>
+function acl_group_raw_data($group_id = false, $opts = false, $forum_id = false)
+function acl_user_raw_data($user_id = false, $opts = false, $forum_id = false)
+function acl_raw_data_single_user($user_id)
+function acl_raw_data($user_id = false, $opts = false, $forum_id = false)
+function acl_role_data($user_type, $role_type, $ug_id = false, $forum_id = false)
+</programlisting>
+      <para>
+        Brug <literal>acl_raw_data</literal> til generelle forespørgsler;
+        de øvrige er optimeret til specifikke data.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="admin-related-functions">
+    <title>3. Administratorrelaterede funktioner</title>
+    <para>
+      Yderligere metoder er tilgængelige i klassen
+      <literal>auth_admin</literal> til håndtering af tilladelser,
+      indstillinger og brugermellemlager. Den findes i:
+    </para>
+    <programlisting>
+includes/acp/auth.php
+</programlisting>
+    <para>
+      Instantiér separat:
+    </para>
+    <programlisting>
+$auth_admin = new auth_admin();
+</programlisting>
+    <para>
+      Dette giver adgang til metoderne i både
+      <literal>auth_admin</literal> og <literal>auth</literal>.
+    </para>
+  </sect1>
+</article>

@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Valideringspolitik for sprogpakker</title>
+  </articleinfo>
+  <sect1 id="submission-guidelines">
+    <title>Retningslinjer for indsendelse</title>
+    <sect2 id="description">
+      <title>Beskrivelse</title>
+      <para>
+        Bidragsbeskrivelsen i
+        <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
+        Database</ulink> bør oversættes til engelsk ud over dit lokale
+        sprog, da nogle administratorer måske ønsker at downloade din
+        oversættelse uden at tale dit sprog.
+      </para>
+    </sect2>
+    <sect2 id="screenshot">
+      <title>Screenshot</title>
+      <para>
+        Bidragsscreenshottet i
+        <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
+        Database</ulink> bør kun være flaget for det land, hvor sproget
+        tales. For eksempel Frankrigs flag for det franske sprog.
+      </para>
+    </sect2>
+    <sect2 id="demo-link">
+      <title>Demo-link</title>
+      <para>
+        Demo-URL'en i Customisation Database skal være tom, medmindre du
+        vil sætte et link til et internationalt fællesskab
+        (<ulink url="https://www.phpbb.com/support/intl/">officielt</ulink>
+        listet eller ej) relateret til bidragets sprog. For eksempel er
+        <ulink url="https://www.phpbb.nl/">https://www.phpbb.nl/</ulink>
+        som Demo-URL vedrørende det
+        <ulink url="https://www.phpbb.com/customise/db/translation/dutch_casual_honorifics/">hollandske
+        sprog</ulink> tilladt.
+      </para>
+    </sect2>
+    <sect2 id="package">
+      <title>Pakke</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Den indsendte
+            <literal>&lt;languagename&gt;_&lt;version&gt;.zip</literal>
+            skal indeholde en mappe
+            <literal>&lt;languagename&gt;_&lt;version&gt;</literal>.
+            Filerne ovenfor bør placeres i denne mappe.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Revisionsnavnet i
+            <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
+            Database</ulink> bør stå tomt, indeholde phpBB-pakkens
+            version og/eller pakkens udgivelsesnavn (f.eks.
+            <literal>3.3.10</literal> / `Bertie's translation for
+            3.3.10) for bedre forståelse.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="package-validation">
+    <title>Pakkevalidering</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Sprogpakker skal indeholde alle filer, der findes i mapperne
+          for det engelske sprog. Dette omfatter følgende mapper:
+        </para>
+        <blockquote>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>
+                <literal>ext/phpbb/viglink/language/en/</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/en/</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>styles/prosilver/theme/en/</literal>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Sprogpakker skal indeholde 1 ekstra fil:
+        </para>
+        <blockquote>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>
+                <literal>language/{iso}/LICENSE</literal>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Sprogpakker kan indeholde 4 yderligere ekstra filer:
+        </para>
+        <blockquote>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>
+                <literal>language/{iso}/AUTHORS.md</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/{iso}/CHANGELOG.md</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/{iso}/README.md</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/{iso}/VERSION.md</literal>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Ingen andre ekstra filer er tilladt!
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Alle mapper inden for sprogmapperne skal indeholde en fil
+          <literal>index.htm</literal> (f.eks.
+          <literal>language/en/acp/index.htm</literal>,
+          <literal>language/en/index.htm</literal>,
+          <literal>styles/prosilver/theme/de/index.htm</literal>, se
+          <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/language/guidelines.html#language-pack-submission-policy">Language
+          Pack Submission Policy</ulink> for en komplet liste.).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          En undtagelse fra denne regel er mapperne til
+          viglink-oversættelsen og de mapper, der hører til
+          phpBB-pakken (f.eks. <literal>language/</literal>,
+          <literal>styles/</literal>).
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="file-validation">
+    <title>Filvalidering</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Alle filer skal gemmes med <literal>LF</literal>
+          (LineFeed/UNIX) linjeafslutninger.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Alle <literal>.php</literal>-filer skal have en kontrol af
+          konstanten <literal>IN_PHPBB</literal>:
+        </para>
+        <blockquote>
+          <programlisting>
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+</programlisting>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Alle filer, der indeholder andet sprog end engelsk
+          (<literal>.php</literal>, <literal>.txt</literal>, samt alle
+          ekstra filer fra
+          <link linkend="package-validation">Pakkevalidering</link>),
+          skal gemmes som <emphasis>UTF8 uden BOM</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>.php</literal>-filer må
+          <emphasis role="strong">ikke</emphasis> generere noget output.
+          Der må ikke være tegn før <literal>&lt;?php</literal>.
+          <literal>.php</literal>-filer må
+          <emphasis role="strong">ikke</emphasis> indeholde
+          slut-tagget <literal>?&gt;</literal>, men skal blot slutte med
+          en ny linje
+        </para>
+      </listitem>
+    </itemizedlist>
+    <sect2 id="languageisoiso.txt">
+      <title>language/{iso}/iso.txt</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Filen skal indeholde præcis 3 linjer:
+          </para>
+          <blockquote>
+            <orderedlist spacing="compact">
+              <listitem>
+                <para>
+                  Sprogets engelske navn
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  Sprogets navn på det talte sprog
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  Information om forfatter(gruppe) (kun almindelig tekst,
+                  ingen links tilladt)
+                </para>
+              </listitem>
+            </orderedlist>
+          </blockquote>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="index.htm">
+      <title>*/index.htm</title>
+      <para>
+        Filerne <literal>index.htm</literal> i alle mapper skal enten
+        være helt tomme eller indeholde standard-HTML-body'en:
+      </para>
+      <programlisting language="html">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+&lt;/head&gt;
+
+&lt;body bgcolor=&quot;#FFFFFF&quot; text=&quot;#000000&quot;&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</programlisting>
+    </sect2>
+    <sect2 id="languageisohelp.php">
+      <title>language/{iso}/help/*.php</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Filen må kun indeholde 1 array ved navn $lang. Ingen andre
+            variabler er tilladt.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Arrayet må kun indeholde arrays med følgende struktur:
+          </para>
+          <blockquote>
+            <programlisting>
+[
+    0 =&gt; 'TextA',
+    1 =&gt; 'TextB',
+],
+</programlisting>
+            <itemizedlist spacing="compact">
+              <listitem>
+                <para>
+                  Hvis TextA er <literal>--</literal>, er indgangen en
+                  overskrift.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  Hvis både TextA og TextB er <literal>--</literal>,
+                  udløser indgangen et kolonneskift i sidens
+                  to-kolonne-layout. En fil
+                  <literal>help/*.php</literal> skal indeholde præcis én
+                  af disse indgange.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </blockquote>
+        </listitem>
+        <listitem>
+          <para>
+            For TextA og TextB gælder den almindelige
+            <link linkend="key-validation">nøglevalidering</link>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="languageisoemail.txt-and-languageisoemailshort.txt">
+      <title>language/{iso}/email/*.txt og
+      language/{iso}/email/short/*.txt</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            E-mails må kun indeholde emnelinjen, når den engelske
+            e-mailskabelon også indeholder den:
+          </para>
+          <programlisting>
+Subject: {Translated subject here}
+</programlisting>
+        </listitem>
+        <listitem>
+          <para>
+            E-mails må kun indeholde <literal>{EMAIL_SIG}</literal>, når
+            den engelske e-mailskabelon også indeholder den. Derudover
+            skal <literal>{EMAIL_SIG}</literal> altid stå på sin egen
+            linje, skal være den sidste linje tekst og skal efterfølges
+            af en tom, ny linje.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            E-mails bør bruge alle de variabler, der findes i den
+            engelske e-mailskabelon, for at give brugeren den samme
+            information.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            E-mails må kun indeholde <literal>{U_BOARD}</literal>,
+            <literal>{EMAIL_SIG}</literal> og
+            <literal>{SITENAME}</literal> som ekstra variabler. Ingen
+            andre variabler er tilgængelige.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            E-mails må ikke bruge HTML-indhold.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Der skal være en tom, ny linje for enden af filen.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="languageiso.php-and-languageisoacp.php">
+      <title>language/{iso}/*.php og language/{iso}/acp/*.php</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Filen må kun indeholde 1 array ved navn
+            <literal>$lang</literal>. Ingen andre variabler er tilladt.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Sprogfiler skal indeholde alle nøgler, der findes i den
+            engelske sprogfil.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Sprogfiler må kun indeholde nøgler, der også findes i den
+            engelske sprogfil.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            For alle indgange gælder
+            <link linkend="key-validation">nøglevalidering</link>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="key-validation">
+    <title>Nøglevalidering</title>
+    <sect2 id="type">
+      <title>Type</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Indgange skal være af samme type som i den engelske sprogfil.
+            Hvis indgangen er af typen <literal>string</literal>, skal
+            din oversættelse også være af typen
+            <literal>string</literal>. Hvis den engelske indgang er af
+            typen <literal>array</literal> (f.eks. ved brug af
+            flertalsformer), skal din oversættelse også være af typen
+            <literal>array</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Hvis indgangen er et array, skal din oversættelse indeholde
+            de samme nøgler som det engelske array. Undtagelser er
+            flertalsformer.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="string-and-integer-replacements">
+      <title>Streng- og heltalserstatninger</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Hvis den engelske streng indeholder erstatninger, såsom
+            <literal>%s</literal>, <literal>%1$s</literal>,
+            <literal>%d</literal> og <literal>%1$d</literal>, bør din
+            streng indeholde det samme antal erstatninger. Undtagelser
+            er heltalserstatninger i flertalsformer. Dette giver dig
+            mulighed for at bruge:
+          </para>
+          <programlisting>
+No posts
+</programlisting>
+          <para>
+            frem for:
+          </para>
+          <programlisting>
+0 posts
+</programlisting>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="html">
+      <title>HTML</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Strenge bør kun indeholde HTML, der også findes i de
+            engelske strenge.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Ekstra <literal>&lt;a href=&quot;&quot;&gt;</literal>,
+            <literal>&lt;strong&gt;</literal>,
+            <literal>&lt;em&gt;</literal>, <literal>&lt;u&gt;</literal>
+            og <literal>&lt;br /&gt;</literal> er tilladt.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;b&gt;</literal> bør ikke bruges, brug i stedet
+            <literal>&lt;strong&gt;</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;i&gt;</literal> bør ikke bruges, brug i stedet
+            <literal>&lt;em&gt;</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Strenge bør kun lukke HTML, som de selv har åbnet, og bør
+            lukke al HTML, de har åbnet. Undtagelser her er:
+          </para>
+          <blockquote>
+            <itemizedlist>
+              <listitem>
+                <variablelist spacing="compact">
+                  <varlistentry>
+                    <term>
+                      <literal>language/{iso}/install.php</literal>
+                    </term>
+                    <listitem>
+                      <itemizedlist spacing="compact">
+                        <listitem>
+                          <para>
+                            <literal>INSTALL_INTRO_BODY</literal>
+                          </para>
+                        </listitem>
+                        <listitem>
+                          <para>
+                            <literal>SUPPORT_BODY</literal>
+                          </para>
+                        </listitem>
+                        <listitem>
+                          <para>
+                            <literal>UPDATE_INSTALLATION_EXPLAIN</literal>
+                          </para>
+                        </listitem>
+                      </itemizedlist>
+                    </listitem>
+                  </varlistentry>
+                </variablelist>
+              </listitem>
+              <listitem>
+                <variablelist spacing="compact">
+                  <varlistentry>
+                    <term>
+                      <literal>language/{iso}/ucp.php</literal>
+                    </term>
+                    <listitem>
+                      <itemizedlist spacing="compact">
+                        <listitem>
+                          <para>
+                            <literal>TERMS_OF_USE_CONTENT</literal>
+                          </para>
+                        </listitem>
+                        <listitem>
+                          <para>
+                            <literal>PRIVACY_POLICY</literal>
+                          </para>
+                        </listitem>
+                      </itemizedlist>
+                    </listitem>
+                  </varlistentry>
+                </variablelist>
+              </listitem>
+            </itemizedlist>
+          </blockquote>
+          <para>
+            som altid befinder sig inden i et
+            <literal>&lt;p&gt;</literal>-tag og har lov til at lukke det,
+            hvis de genåbner det senere.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="arrays">
+      <title>Arrays</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Arrays skal have samme struktur og elementer som den
+            engelske version. Undtagelser er flertalsformer, som kan
+            have flere eller færre nøgler afhængigt af flertalsreglen.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="copyright-license">
+    <title>Ophavsret og licens</title>
+    <sect2 id="copyright">
+      <title>Ophavsret</title>
+      <para>
+        Oversættelsen er hovedsageligt dit eget arbejde, og du har ret
+        til at have ophavsret og navne på den. Derfor kan der medtages op
+        til 3 links som forfatterkreditering i bunden, som kan tilpasses
+        via nøglen <literal>TRANSLATION_INFO</literal> i
+        <literal>common.php</literal>.
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Translations Manager har fuld skønsmæssig ret til at afgøre,
+          hvad der er acceptabelt som et forfatterkrediteringslink.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="license">
+      <title>Licens</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Alle oversættelser skal udgives under
+            <ulink url="http://www.opensource.org/licenses/gpl-2.0.php">GNU
+            General Public License 2.0</ulink>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+</article>

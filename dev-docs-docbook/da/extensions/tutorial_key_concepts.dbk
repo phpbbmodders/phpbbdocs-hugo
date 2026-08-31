@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Nøglebegreber</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Før vi kan kaste os ud i at få vores extension til at gøre store
+      ting, skal vi gennemgå nogle nøglebegreber og fremgangsmåder, der
+      bruges i phpBB.
+    </para>
+    <para>
+      Denne tutorial forklarer:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="dependency-injection">Dependency
+            injection</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="php-files">PHP-filer</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="template-files">Skabelonfiler</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="language-files">Sprogfiler</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="javascript-and-css-files">JavaScript- og
+            CSS-filer</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="dependency-injection">
+    <title>Dependency injection</title>
+    <para>
+      En stor del af phpBB's kodebase siden 3.1 er baseret på en
+      grundlæggende mekanisme, nemlig dependency injection. Målet er, at
+      du ikke skal bekymre dig om at håndtere de forskellige
+      afhængigheder for de komponenter, du vil bruge (f.eks.
+      databaselaget, mellemlagersystemet eller det aktuelle
+      brugerobjekt). Det er også en måde at holde op med at bruge
+      globalt scopede variabler på.
+    </para>
+    <para>
+      Siden phpBB 3.1 er dette implementeret ved hjælp af Symfony
+      DependencyInjection Component. Alle services, som phpBB stiller
+      til rådighed, er defineret i en YAML-formateret fil i
+      <literal>/config/services.yml</literal>. Extensions kan bruge de
+      services, phpBB definerer, samt definere deres egne services til
+      deres PHP-klasser i deres egen
+      <literal>config/services.yml</literal>.
+    </para>
+    <para>
+      For at give et enkelt eksempel på dependency injection i praksis,
+      lad os se på konstruktørmetoden for Acme Demos
+      controller-klasse <literal>main.php</literal>:
+    </para>
+    <programlisting>
+public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+{
+    $this-&gt;config = $config;
+    $this-&gt;helper = $helper;
+    $this-&gt;template = $template;
+    $this-&gt;user = $user;
+}
+</programlisting>
+    <para>
+      Som du kan se, kræver den objekterne (også kaldet services)
+      <literal>$config</literal>, <literal>$helper</literal>,
+      <literal>$template</literal> og <literal>$user</literal>. For at
+      få disse services til automatisk at blive fundet af dependency
+      injection skal Acme Demo-extensionen definere sin
+      controller-klasse som en service i sin
+      <literal>config/services.yml</literal>:
+    </para>
+    <programlisting language="yaml">
+services:
+    acme.demo.controller:
+        class: acme\demo\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+</programlisting>
+    <para>
+      Bemærk, at <literal>acme.demo.controller</literal> er det unikke
+      servicenavn for klassen. Extensions skal give dem præfikset med
+      vendor- og extension-navnet (i dette tilfælde
+      <literal>acme.demo</literal>) for at undgå potentielle konflikter
+      med andre extensions eller kerneservices.
+    </para>
+    <para>
+      <literal>class</literal> er blot den namespacede sti til klassen.
+    </para>
+    <para>
+      <literal>arguments</literal> er de serviceafhængigheder, klassen
+      kræver. Det er vigtigt, at rækkefølgen af argumenter matcher
+      rækkefølgen af parametre i metodedefinitionen for
+      <literal>__construct()</literal>. Alle argumenter, der starter med
+      symbolerne <literal>@</literal> eller <literal>%</literal>, bør
+      omsluttes af enkelte anførselstegn (dette bliver påkrævet fra og
+      med phpBB 3.2).
+    </para>
+    <para>
+      De fleste PHP-filer i en extension bør bruge
+      dependency-injection-modellen med servicedefinitioner, især
+      controllere og event-listeners. Undtagelserne herfra er
+      ACP/MCP/UCP-filer, sprogfiler og migrationsfiler (som i øjeblikket
+      ikke bruger service-containeren).
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://symfony.com/doc/2.8/components/dependency_injection.html">Symfony:
+          The DependencyInjection Component</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="php-files">
+    <title>PHP-filer</title>
+    <para>
+      Som en del af phpBB's bevægelse mod udbredt brug af
+      objektorientering anbefales det, at udviklere bruger klasser til at
+      organisere data, hvor det er relevant. Extensions opfordres til at
+      gemme relaterede funktioner i klasser og klasser i deres egne
+      filer.
+    </para>
+    <para>
+      Navngivningen af klasser er vigtig for konsistensen. Alle klasser
+      bør være namespacede og have en direkte afbildning mellem klasse
+      og stinavn; med andre ord skal namespacet og klassenavnet afspejle
+      mappestrukturen. For eksempel:
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\controller;
+
+class main
+{
+    // do something
+}
+</programlisting>
+    <para>
+      Koden med ovenstående namespace ville høre til en klassefil og
+      stistruktur som
+      <literal>acme/demo/controller/main.php</literal>.
+    </para>
+    <para>
+      Korrekt namespacede klasser autoindlæses af phpBB, hvilket betyder,
+      at der ikke behøver oprettes accessor-funktioner, for at de kan
+      tilgås af andre klasser.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        phpBB 3.1's
+        <ulink url="https://area51.phpbb.com/docs/31x/coding-guidelines.html">kodningsretningslinjer</ulink>
+        angiver, at det afsluttende <literal>?&gt;</literal> ikke er
+        nødvendigt i PHP-filer, og at alle filer bør indeholde en ekstra
+        tom linje til sidst.
+      </para>
+    </note>
+    <sect2 id="in_phpbb-security">
+      <title>IN_PHPBB-sikkerhed</title>
+      <para>
+        PHP-filer, der kun indeholder klasser, behøver ikke bruge
+        sikkerhedstesten <literal>IN_PHPBB</literal>. Men hvis dine
+        PHP-filer indeholder eksekverbar kode, der ikke er indkapslet i
+        en klassestruktur, såsom eksponerede funktioner,
+        <literal>define()</literal>-, <literal>include()</literal>- eller
+        <literal>require()</literal>-sætninger eller andre artefakter,
+        kræves testen <literal>IN_PHPBB</literal> forud for al
+        eksekverbar kode:
+      </para>
+      <programlisting>
+&lt;?php
+
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+include('somefile.php');
+
+function do_something ()
+{
+   // do something
+}
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            phpBB 3.1's
+            <ulink url="https://area51.phpbb.com/docs/31x/coding-guidelines.html">kodningsretningslinjer</ulink>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            phpBB Customisation Database's
+            <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#php">valideringspolitik
+            for PHP</ulink>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="template-files">
+    <title>Skabelonfiler</title>
+    <para>
+      Skabelonanvendelse for extensions adskiller sig ikke fra
+      skabelonanvendelse i phpBB3 generelt. phpBB 3.1 er skiftet til
+      Twig-skabelonmotoren, men bevarer phpBB's oprindelige
+      skabelonsyntaks. Derfor er både phpBB's og Twigs skabelonsyntaks
+      tilladt i en extension. Hvis du ikke er fortrolig med Twig, kan du
+      bruge phpBB's syntaks.
+    </para>
+    <para>
+      En extension kan indeholde to typer skabelonfiler:
+      brugerdefinerede skabeloner og
+      <literal>template-events-label</literal>. En extensions
+      brugerdefinerede skabelonfiler bør have unikke navne, helst med
+      vendor- og extension-navnet som præfiks, for at undgå konflikter
+      med andre extensions eller phpBB's skabelonfiler. Ud over
+      skabelonfiler kan en extension indeholde temafiler (CSS-scripts og
+      billeder), JavaScript-filer og andre assets.
+    </para>
+    <para>
+      Skabelonfiler i en extension bør organiseres på en måde, der ligner
+      phpBB's skabelonfilstruktur. Mappen <literal>styles/</literal> bør
+      indeholde mapper for hver typografi, du har skrevet skabelonfiler
+      til. For eksempel prosilver og subsilver2. Enhver typografi, der
+      nedarver fra prosilver, vil også nedarve fra din extensions
+      prosilver-mappe.
+    </para>
+    <para>
+      En speciel mappe <literal>all/</literal> kan bruges til at
+      indeholde skabelonfiler, der kan bruges med alle og enhver
+      typografi (f.eks. en fælles JS-fil).
+    </para>
+    <para>
+      Skabelonfiler til ACP'en bør gemmes i
+      <literal>adm/style/</literal>-placeringen, ligesom i phpBB's
+      struktur.
+    </para>
+    <para>
+      Et eksempel på en mappestruktur for en extension med universelle
+      (all) filer og typografispecifikke filer:
+    </para>
+    <programlisting>
+styles
+├── all
+│   ├── template
+│   │   └── event
+│   │       └── overall_header_head_append.html
+│   └── theme
+│       ├── css
+│       │   └── acme_demo_main.css
+│       └── images
+│           └── acme_demo_image.png
+├── prosilver
+│   └── template
+│       ├── acme_demo_body.html
+│       └── event
+│           └── overall_header_navigation_append.html
+└── subsilver2
+    └── template
+        ├── acme_demo_body.html
+        └── event
+            └── overall_header_navigation_append.html
+</programlisting>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Hvis et standard phpBB-skabelonfilnavn bruges til en
+        extension-skabelon, tilsidesætter den skabelonfilen fra phpBB.
+        Det er derfor vigtigt at være opmærksom på dette, når
+        skabelonfiler navngives. Det frarådes at tilsidesætte skabelonfiler
+        for offentligt udgivne extensions, da det kan give konflikter med
+        andre extensions.
+      </para>
+    </warning>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://twig.symfony.com/">Twig Template
+          Syntax</ulink> hos Symfony.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>Tutorial: Template Syntax &lt;tutorial-template-syntax&gt;</literal>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          phpBB Customisation Database's
+          <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#templates">valideringspolitik
+          for skabeloner</ulink>.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="language-files">
+    <title>Sprogfiler</title>
+    <para>
+      Sprogfiler i en extension bør organiseres på en måde, der ligner
+      phpBB's sprogfilstruktur. Mappen <literal>language/</literal> bør
+      indeholde mapper for hvert sprog, du har en oversættelse til.
+      Bemærk, at det engelske sprog <literal>en</literal> er påkrævet
+      for alle extensions, da det er standardsproget i phpBB.
+    </para>
+    <para>
+      Acme Demo-extensionens sprogfil ser sådan ud:
+    </para>
+    <programlisting>
+&lt;?php
+
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
+if (empty($lang) || !is_array($lang))
+{
+    $lang = [];
+}
+
+$lang = array_merge($lang, [
+    'DEMO_PAGE'              =&gt; 'Demo',
+    'DEMO_HELLO'             =&gt; 'Hello %s!',
+    'DEMO_GOODBYE'           =&gt; 'Goodbye %s!',
+    'ACP_DEMO_TITLE'         =&gt; 'Demo Module',
+    'ACP_DEMO'               =&gt; 'Settings',
+    'ACP_DEMO_GOODBYE'       =&gt; 'Should say goodbye?',
+    'ACP_DEMO_SETTING_SAVED' =&gt; 'Settings have been saved successfully!',
+]);
+</programlisting>
+    <para>
+      Indlæsning af sprogfiler i en extension er nemt nok ved hjælp af
+      metoden <literal>add_lang()</literal> på objektet
+      <literal>$language</literal>. Den tager to argumenter, det første
+      er navnet på sprogfilen (eller et array af sprogfilnavne), og det
+      andet er extensionens vendor/pakke.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Language-objektet blev introduceret i 3.2 for at give en dedikeret
+        klasse af sprogmetoder, udtrukket fra User-objektet. Den
+        tidligere metode med at bruge <literal>add_lang_ext()</literal>
+        fra User-objektet er forældet i 3.2 og vil på et tidspunkt blive
+        fjernet fremover.
+      </para>
+    </note>
+    <programlisting>
+// Load a single language file from acme/demo/language/en/common.php
+$language-&gt;add_lang(‘common’, ‘acme/demo’);
+
+// Load multiple language files from
+// acme/demo/language/en/common.php
+// acme/demo/language/en/controller.php
+$language-&gt;add_lang([‘common’, ‘controller’], ‘acme/demo’);
+</programlisting>
+    <para>
+      Af ydelsesmæssige årsager foretrækkes det at bruge ovenstående
+      metode til at indlæse sprogfiler på ethvert tidspunkt i din
+      extensions kodeafvikling, hvor sprognøglerne er nødvendige. Hvis
+      det dog er absolut nødvendigt at indlæse en extensions sprognøgler
+      globalt, så de er tilgængelige hele tiden, bør PHP-eventet
+      <literal>core.user_setup</literal> bruges.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Sprogfiler kan gives et hvilket som helst navn. Sprogfiler, der
+        starter med <literal>permissions_</literal> eller
+        <literal>info_acp_</literal>, indlæses dog automatisk i ACP'en
+        til henholdsvis tilladelses- og ACP-modul-sprognøgler, og de
+        behøver ikke at blive indlæst ved hjælp af de tidligere omtalte
+        funktioner eller events.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="javascript-and-css-files">
+    <title>JavaScript- og CSS-filer</title>
+    <para>
+      JavaScript- og CSS-filer kan gemmes hvor som helst inde i din
+      extension. De mest almindelige placeringer er dog inden for dine
+      typografimapper. Tilføjelse af disse scripts til din extensions
+      skabeloner kan nemt håndteres ved hjælp af phpBB's skabelonsyntaks
+      <literal>{% INCLUDECSS %}</literal> og
+      <literal>{% INCLUDEJS %}</literal>.
+    </para>
+    <para>
+      Formatet for disse INCLUDE-tags har følgende form:
+    </para>
+    <programlisting>
+{% INCLUDECSS '@vendor_extname/scriptname.css' %}
+
+{% INCLUDEJS '@vendor_extname/scriptname.js' %}
+</programlisting>
+    <para>
+      INCLUDECSS-tagget kigger i extensionens
+      <emphasis role="strong">theme</emphasis>-mappe for typografien
+      efter den navngivne fil, baseret på brugerens aktuelle typografi,
+      eller i all-typografimappen, hvis en sådan findes. INCLUDECSS-tagget
+      genererer automatisk et <literal>&lt;link&gt;</literal>-tag for
+      den angivne CSS-fil i sektionen
+      <literal>&lt;head&gt;</literal> i HTML-dokumentet.
+    </para>
+    <para>
+      INCLUDEJS-tagget kigger i extensionens
+      <emphasis role="strong">template</emphasis>-mappe for typografien
+      efter den navngivne fil, baseret på brugerens aktuelle typografi,
+      eller i all-typografimappen, hvis en sådan findes. INCLUDEJS-tagget
+      genererer automatisk et
+      <literal>&lt;script&gt;</literal>-tag for den angivne JS-fil i
+      bunden af HTML-dokumentet.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        INCLUDECSS- og INCLUDEJS-tagsene kan bruges i ethvert
+        skabelonevent eller enhver brugerdefineret skabelonfil.
+      </para>
+    </note>
+    <para>
+      Når du inkluderer JavaScript-/CSS-biblioteker og frameworks som
+      jQuery-UI eller Font Awesome, kan potentiel overlapning af
+      ressourcer mellem extensions afhjælpes ved hjælp af en simpel
+      løsning, som anbefales af phpBB's Extensions Team. Ved hjælp af
+      tagget <literal>{% DEFINE %}</literal> bør du teste, om det
+      script, din extension vil inkludere, allerede er defineret, og
+      hvis ikke, inkludere dit script og definere det. For eksempel:
+    </para>
+    <programlisting>
+{% if not definition.INCLUDED_JQUERYUIJS %}
+    {% INCLUDEJS '@vendor_extname/jquery-ui.js' %}
+    {% DEFINE INCLUDED_JQUERYUIJS = true %}
+{% endif %}
+</programlisting>
+    <para>
+      Nogle eksempler på skabelonvariabeldefinitioner til brug med
+      almindelige biblioteker (almindelig praksis bør være at navngive
+      variabeldefinitionen efter bibliotekets filnavn, f.eks. bliver
+      highslide.js til HIGHSLIDEJS):
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          HighSlide JS: <literal>INCLUDED_HIGHSLIDEJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Font Awesome CSS: <literal>INCLUDED_FONTAWESOMECSS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          ColorBox JS: <literal>INCLUDED_COLORBOXJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          ColPick JS: <literal>INCLUDED_COLPICKJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          MoTools JS: <literal>INCLUDED_MOTOOLSJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Dojo JS: <literal>INCLUDED_DOJOJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Angular JS: <literal>INCLUDED_ANGULARJS</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      phpBB Customisation Database's
+      <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#scripts">valideringspolitik
+      for JavaScript og CSS</ulink>.
+    </para>
+    <para>
+      Nu hvor vi har gennemgået, hvordan PHP-, skabelon-, sprog- og
+      asset-filer fungerer i phpBB, er vi klar til at fortsætte til de
+      næste afsnit for at lære, hvordan vi bygger vores extension videre
+      ud til noget funktionelt.
+    </para>
+  </sect1>
+</article>

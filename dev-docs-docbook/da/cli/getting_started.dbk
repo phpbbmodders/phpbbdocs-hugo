@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Kom godt i gang</title>
+  </articleinfo>
+  <para>
+    Kommandolinjegrænsefladen (Command Line Interface, CLI) er et
+    nyttigt værktøj for phpBB-administratorer, der har adgang til en
+    shell (eller SSH) på den server, de kører phpBB på, samt for
+    extension-udviklere. Den stiller CLI-kommandoer til rådighed til at
+    håndtere konfigurationsværdier, extensions, køre databasemigrationer,
+    rydde mellemlageret med mere.
+  </para>
+  <para>
+    De fleste styresystemer leveres med et indbygget
+    kommandolinjeprogram. For Mac OS og Ubuntu hedder det &quot;Terminal&quot;,
+    og for Windows hedder det &quot;Command Prompt&quot;. Tredjepartsprogrammer
+    som <ulink url="http://www.putty.org">PuTTY</ulink> og
+    <ulink url="https://www.iterm2.com">iTerm</ulink> kan også bruges.
+  </para>
+  <para>
+    For at bruge phpBB's CLI på en webserver skal du have SSH-adgang til
+    din webserver. Du kan finde ud af hos din webhostingudbyder, om de
+    tilbyder SSH-adgang, og hvordan du logger ind på din webserver via
+    CLI'en.
+  </para>
+  <para>
+    Når du har fået adgang til din webserver via SSH, eller hvis du
+    befinder dig i et localhost-udviklingsmiljø, skal du blot navigere
+    til din phpBB-forummappe med kommandoen <literal>cd</literal>:
+  </para>
+  <programlisting>
+$ cd path/to/phpBB
+</programlisting>
+  <para>
+    Derfra er det blot et spørgsmål om at kalde phpBB's
+    CLI-program for at afgive kommandoer.
+  </para>
+  <programlisting>
+$ php bin/phpbbcli.php
+</programlisting>
+  <para>
+    <emphasis>Hvis alt fungerer korrekt, bør kommandoen ovenfor vise
+    information om den aktuelt installerede phpBB CLI-konsol. Hvis du
+    modtager en fejlmeddelelse, skal du sikre dig, at du har navigeret
+    ind i rodmappen for dit forum.</emphasis>
+  </para>
+  <sect1 id="general-commands">
+    <title>Generelle kommandoer</title>
+    <para>
+      Kommandoen <literal>list</literal> viser en liste over alle
+      tilgængelige kommandoer for phpBB's CLI.
+    </para>
+    <programlisting>
+$ php bin/phpbbcli.php list
+</programlisting>
+    <para>
+      Kommandoen <literal>help</literal> viser generel hjælp til brug af
+      phpBB's CLI.
+    </para>
+    <programlisting>
+$ php bin/phpbbcli.php help
+</programlisting>
+  </sect1>
+  <sect1 id="using-commands">
+    <title>Brug af kommandoer</title>
+    <para>
+      Alle phpBB-kommandoer (som beskrevet, når kommandoen
+      <literal>list</literal> køres) har integreret hjælpedokumentation
+      tilgængelig i CLI'en. Brug tilvalget <literal>--help</literal>
+      eller <literal>-h</literal> sammen med enhver af phpBB's
+      CLI-kommandoer for at se detaljeret hjælp til den pågældende
+      kommando.
+    </para>
+    <programlisting>
+$ php bin/phpbbcli.php config:set --help
+</programlisting>
+    <para>
+      Kommandoen ovenfor viser information om de argumenter og
+      tilvalg, der kan bruges med den angivne kommando, i dette
+      eksempel <literal>config:set</literal>. Kommandoen ovenfor vil for
+      eksempel vise:
+    </para>
+    <programlisting>
+Usage:
+ config:set [-d|--dynamic] key value
+</programlisting>
+    <para>
+      Argumenter eller tilvalg vist inden i klammer angiver, at de er
+      valgfrie at bruge. Dette viser os, at argumenterne
+      <literal>key</literal> og <literal>value</literal> er
+      obligatoriske. Tilvalgene <literal>-d</literal> eller
+      <literal>--dynamic</literal>, der er tilgængelige for denne
+      kommando, er derimod valgfrie. Bemærk også, at
+      <literal>-d</literal> er en forkortelse for
+      <literal>--dynamic</literal>. De fleste tilvalg har en tilsvarende
+      forkortelse.
+    </para>
+  </sect1>
+  <sect1 id="general-options">
+    <title>Generelle tilvalg</title>
+    <para>
+      Almindelige tilvalg, der kan bruges med enhver af phpBB's
+      CLI-kommandoer.
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Tilvalg
+            </entry>
+            <entry>
+              Anvendelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>--help, -h</literal>
+            </entry>
+            <entry>
+              Vis en hjælpemeddelelse
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--quiet, -q</literal>
+            </entry>
+            <entry>
+              Vis ingen meddelelser
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--verbose, -v, -vv, -vvv</literal>
+            </entry>
+            <entry>
+              Øg detaljeringsgraden af meddelelserne: 1 for normalt
+              output, 2 for mere detaljeret output og 3 for
+              fejlretningsoutput
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--version, -V</literal>
+            </entry>
+            <entry>
+              Vis denne applikations version
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--ansi</literal>
+            </entry>
+            <entry>
+              Gennemtving ANSI-output (farver)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--no-ansi</literal>
+            </entry>
+            <entry>
+              Deaktiver ANSI-output (farver)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--no-interaction, -n</literal>
+            </entry>
+            <entry>
+              Stil ingen interaktive spørgsmål
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>--safe-mode</literal>
+            </entry>
+            <entry>
+              Kør i sikker tilstand (uden extensions)
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="install-phpbb-using-the-cli">
+    <title>Installer phpBB ved hjælp af CLI'en</title>
+    <para>
+      phpBB's CLI-installationsprogram bruger en YAML-fil udfyldt med de
+      data, der er nødvendige for at konfigurere en database til en ny
+      phpBB-installation. Du kan finde en eksempelkonfigurationsfil i
+      <literal>docs/install-config.sample.yml</literal>. Kopiér denne
+      fil til <literal>install/install-config.yml</literal>. Tilpas
+      eksempelparametrene til dine behov. En MySQL-database, der f.eks.
+      bruger interfacet <literal>mysqli</literal>, hostet på en
+      <literal>localhost</literal>-server med root-brugeren
+      <literal>bertie</literal> og adgangskoden
+      <literal>bertiepasswd</literal> og navngivet
+      <literal>bertiedb</literal>, ville se sådan ud:
+    </para>
+    <programlisting>
+installer:
+    admin:
+        name: admin
+        password: mypassword
+        email: admin@example.org
+
+    board:
+        lang: en
+        name: My Board
+        description: My amazing new phpBB board
+
+    database:
+        dbms: mysqli
+        dbhost: ~
+        dbport: ~
+        dbuser: bertie
+        dbpasswd: bertiepasswd
+        dbname: bertiedb
+        table_prefix: phpbb_
+
+    email:
+        enabled: false
+        smtp_delivery : ~
+        smtp_host: ~
+        smtp_port: ~
+        smtp_auth: ~
+        smtp_user: ~
+        smtp_pass: ~
+
+    server:
+        cookie_secure: false
+        server_protocol: http://
+        force_server_vars: false
+        server_name: localhost
+        server_port: 80
+        script_path: /
+
+    extensions: ['phpbb/viglink']
+</programlisting>
+    <para>
+      Du kan tilpasse yderligere indstillinger som administratorens
+      brugernavn, e-mailadresse og boardinformation. Sørg for, at filen
+      kan læses af CLI'en.
+    </para>
+    <para>
+      For at installere boardet skal du køre følgende kommando:
+    </para>
+    <programlisting>
+$ php install/phpbbcli.php install install-config.yml
+</programlisting>
+    <para>
+      Installationsprogrammet starter nu og viser sin fremgang under
+      installationen.
+    </para>
+  </sect1>
+  <sect1 id="update-phpbb-using-the-cli">
+    <title>Opdater phpBB ved hjælp af CLI'en</title>
+    <para>
+      Ligesom ved installation fra CLI'en kan phpBB også opdateres fra
+      CLI'en ved hjælp af en YAML-fil med opdateringsinstruktioner. Du
+      kan finde en eksempelopdateringskonfigurationsfil i
+      <literal>docs/update-config.sample.yml</literal>. Kopiér denne fil
+      til <literal>install/update-config.yml</literal>.
+    </para>
+    <programlisting>
+updater:
+    type: all
+    extensions: ['phpbb/viglink']
+</programlisting>
+    <para>
+      I denne tilstand opdaterer opdateringsprogrammet din
+      phpBB-database, og det erstatter også alle phpBB-filer med de
+      opdaterede filer, hvilket giver dig en fuldstændig opgradering.
+    </para>
+    <para>
+      Hvis du derimod allerede har erstattet filerne via filsystemet
+      eller FTP, kan du vælge kun at opdatere databasen ved at ændre
+      <literal>type</literal> fra <literal>all` til</literal>db_only``:
+    </para>
+    <programlisting>
+updater:
+   type: db_only
+</programlisting>
+    <para>
+      For at opdatere boardet skal du køre følgende kommando:
+    </para>
+    <programlisting>
+$ php install/phpbbcli.php update update-config.yml
+</programlisting>
+    <para>
+      Opdateringsprogrammet starter og viser sin fremgang.
+    </para>
+  </sect1>
+</article>

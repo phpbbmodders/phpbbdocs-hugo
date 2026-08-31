@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Det booleske strukturssystem</title>
+  </articleinfo>
+  <sect1 id="intro">
+    <title>Intro</title>
+    <para>
+      Denne funktion hjælper extension-forfattere med at redigere
+      SQL-forespørgsler på en nem og hurtig måde uden at skulle
+      parse SQL-forespørgslerne - typisk ved hjælp af regex og
+      kompliceret tekstredigering. I stedet for en enkelt streng giver
+      dette mulighed for at redigere WHERE-klausulen i en
+      SQL-forespørgsel ved at tilføje, fjerne og redigere PHP-arrays. Ved
+      at bruge denne metode bliver det langt mere ligetil at finde den
+      del af forespørgslen, der skal redigeres.
+    </para>
+    <para>
+      Hvis det gøres korrekt, kan uforenelighed mellem extensions, der
+      bruger den samme SQL-forespørgsel, undgås - hvor et regex-match
+      let kunne tvinge forfatteren til at lave meget komplekse matches.
+      Med dette bliver det at finde og erstatte indholdet blot en
+      trælignende gennemløbning, da det kun er arrays. Kompatibilitet
+      mellem extensions bliver dermed meget nemmere.
+    </para>
+    <para>
+      Selvom dette helt sikkert vil reducere sandsynligheden for
+      indbyrdes uforenelighed mellem extensions, er det ikke tryllekunst.
+      Det er blot et værktøj, der hjælper med at løse det samme problem.
+    </para>
+  </sect1>
+  <sect1 id="main-use-case-ideals">
+    <title>Vigtigste ideelle anvendelsesscenarier</title>
+    <orderedlist numeration="arabic" spacing="compact">
+      <listitem>
+        <para>
+          At gøre opbygningen af WHERE-klausulen i SQL-forespørgsler
+          fleksibel
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          At lette, forenkle og forhindre fejl, når phpBB's extensions
+          redigerer SQL-forespørgsler
+        </para>
+      </listitem>
+    </orderedlist>
+  </sect1>
+  <sect1 id="why-not...">
+    <title>Hvorfor ikke...</title>
+    <orderedlist numeration="arabic" spacing="compact">
+      <listitem>
+        <para>
+          Doctrine dbal -&gt; Problemet med Doctrine dbal er, at dets
+          query builder ikke er klar til det andet primære
+          anvendelsesscenarie nævnt ovenfor. Der er ingen måde at ændre
+          en SQL-forespørgsel på. Hvis du vil ændre noget, skal du
+          genopbygge hele SQL-forespørgslen.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Linq -&gt; Jeg kendte ikke til Linq før i dag. Ud fra det, jeg
+          har undersøgt, har det ikke blot det samme problem som
+          Doctrine, men dets interface er også unødvendigt komplekst for
+          almindelige mennesker, der bare vil ændre en lille smule
+          information.
+        </para>
+      </listitem>
+    </orderedlist>
+  </sect1>
+  <sect1 id="the-data-structure">
+    <title>Datastrukturen</title>
+    <para>
+      Denne builder bruger en trælignende organisering af informationen
+      til de booleske sammenligninger i SQL-forespørgsler. Hver knude i
+      et sådant træ er et PHP-array. Hver knude kan have et af 3
+      formater:
+    </para>
+    <sect2 id="type1">
+      <title>type1</title>
+      <para>
+        Den 1. type indeholder 3 elementer:
+      </para>
+      <para>
+        Venstre side, operator, højre side. F.eks.
+      </para>
+      <programlisting>
+['f.forum_id', '=', 1]
+['f.forum_id', '&lt;&gt;', 1]
+['f.forum_id', 'IN', []]
+['f.forum_id', 'IN', [1,2,5,6,7]]
+['f.forum_id', 'NOT_IN', [1,2,5,6,7]]
+['f.forum_id', 'IS', NULL]
+</programlisting>
+      <para>
+        For operatoren findes der 6 specielle værdier (alt andet tages
+        bogstaveligt):
+      </para>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            IN
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            NOT_IN
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            LIKE
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            NOT_LIKE
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            IS
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            IS_NOT
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        Alle disse er specielle, fordi de kalder dbal'ens metoder til at
+        behandle dataene. Hvis du f.eks. bruger operatoren
+        <emphasis role="strong">IN</emphasis>, kaldes
+        $db-&gt;sql_in_set() med dataene fra højre side.
+      </para>
+    </sect2>
+    <sect2 id="type2">
+      <title>type2</title>
+      <para>
+        Den 2. type har variabel længde. Den identificeres ved, at
+        strengen 'AND', 'OR' eller 'NOT' står på arrayets første plads.
+      </para>
+      <para>
+        Det første element indeholder den boolske operator, der bruges
+        til at forbinde alle de øvrige elementer.
+      </para>
+      <para>
+        F.eks.
+      </para>
+      <programlisting>
+['OR',
+    ['t.forum_id', '=', 3],
+    ['t.topic_type', '=', 0],
+    ['t.topic_id', 'IN', [2,3,4]],
+)
+</programlisting>
+      <para>
+        hvilket giver følgende output (efter genindrykning)
+      </para>
+      <programlisting language="SQL">
+t.forum_id = 3 OR
+t.topic_type = 0 OR
+t.topic_id IN (2, 3, 4)
+</programlisting>
+    </sect2>
+    <sect2 id="type3">
+      <title>type3</title>
+      <para>
+        Den 3. type har 5 elementer: venstre side, operator,
+        underforespørgselsoperator, underforespørgslens SELECT-type,
+        selve underforespørgslen.
+      </para>
+      <para>
+        Denne bruges, når du har brug for en underforespørgsel i din
+        DB-forespørgsel. I bund og grund gør dette, at
+        sql_build_query() kaldes rekursivt med det 4. og 5. element.
+      </para>
+      <programlisting>
+['f.forum_id', '=', 'ANY', 'SELECT', [
+    'SELECT' =&gt; [/*...*/],
+    'FROM' =&gt; [/*...*/],
+]]
+
+['f.forum_id', '', 'IN', 'SELECT', [
+    'SELECT' =&gt; [/*...*/],
+    'FROM' =&gt; [/*...*/],
+]]
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="why-arrays">
+    <title>Hvorfor arrays?</title>
+    <para>
+      Motivationen for at bruge arrays kommer fra følgende behov:
+    </para>
+    <orderedlist numeration="arabic">
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              Dette er information, der kommer til at blive brugt ganske
+              ofte.
+            </term>
+            <listitem>
+              <para>
+                1.1. I det ideelle tilfælde vil hver SQL-forespørgsel med
+                enten en ON- eller en WHERE-klausul (stort set alle)
+                bruge dette.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <para>
+          Den implementering, som dette bygger oven på, bruger allerede
+          arrays.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Redigering af arrays er en ganske triviel opgave for enhver
+          kode.
+        </para>
+      </listitem>
+    </orderedlist>
+    <sect2 id="why-not-objects">
+      <title>Hvorfor ikke objekter?</title>
+      <orderedlist numeration="arabic">
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                At gennemløbe objekter, der danner et træ, er
+                <emphasis role="strong">alvorligt langsomt</emphasis> i
+                PHP.
+              </term>
+              <listitem>
+                <para>
+                  1.1. Dette ville ikke rigtig blive bemærket på en
+                  ren/uændret phpBB-installation, men efterhånden som du
+                  tilføjer extensions, ville det hurtigt blive
+                  ekstremt langsomt.
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                At gøre dette med immutable (uforanderlige) objekter er
+                fuldstændig ubrugeligt.
+              </term>
+              <listitem>
+                <para>
+                  2.1. Det ville kræve, at koden, der manipulerer det,
+                  ved, hvordan alt relateret skal genopbygges ved næsten
+                  enhver ændring.
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+        <listitem>
+          <variablelist>
+            <varlistentry>
+              <term>
+                Mutable (foranderlige) objekter med et tilstrækkeligt
+                letanvendeligt API er rent helvede at designe.
+              </term>
+              <listitem>
+                <para>
+                  3.1. Hvordan skulle et script vide, hvordan det skal
+                  angive de nødvendige ændringer uden at bruge et
+                  komplekst API? 3.2. Hvordan skulle et brugerscript
+                  hurtigt kunne teste, om en forespørgsel har det
+                  korrekte format?
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </orderedlist>
+      <para>
+        Det var hovedsageligt af de ovennævnte grunde, at arrays blev
+        valgt som medium.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="how-to-use">
+    <title>Sådan bruges det</title>
+    <para>
+      Dette system bruges, når der opbygges forespørgsler ved hjælp af
+      db'ens metode sql_build_query().
+    </para>
+    <para>
+      Når du opbygger det array, der skal sendes til den som 2. parameter,
+      kan du - når du skriver WHERE-klausulen - bruge dette system i
+      stedet for blot at skrive en streng eller lave din egen
+      akkumulator af betingelser.
+    </para>
+    <para>
+      For eksemplernes skyld nedenfor vil jeg simulere en eksekvering,
+      der findes i phpBB, og antage, at forespørgslen skal igennem et
+      event, der foretager en lille ændring af den.
+    </para>
+  </sect1>
+  <sect1 id="how-to-use-in-phpbb">
+    <title>Sådan bruges det i phpBB</title>
+    <para>
+      I den ideelle situation bør alle DB-forespørgsler, der kan
+      gennemgå flere trin, hvor SQL-data manipuleres eller ændres, bruge
+      dette - især hvis de også går igennem et event.
+    </para>
+    <sect2 id="translate-sql-to-the-structured-conditional">
+      <title>Oversæt SQL til den strukturerede betingelse</title>
+      <para>
+        Her er en trin-for-trin-vejledning til at omdanne en
+        forespørgsel lavet med en streng til det format, som denne
+        funktion bruger.
+      </para>
+      <para>
+        Forestil dig nu, at du ønsker noget i stil med dette (kilde:
+        viewforum.php:277):
+      </para>
+      <programlisting>
+$sql = 'SELECT COUNT(topic_id) AS num_topics
+FROM ' . TOPICS_TABLE . &quot;
+WHERE forum_id = $forum_id
+    AND (topic_last_post_time &gt;= $min_post_time
+        OR topic_type = &quot; . POST_ANNOUNCE . '
+        OR topic_type = ' . POST_GLOBAL . ')
+    AND ' . $phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id);
+</programlisting>
+      <para>
+        Ser ret ligetil ud, ikke? OK,
+        <emphasis role="strong">trin 1</emphasis>, forbered den til
+        sql_build_query();
+      </para>
+      <para>
+        Ifølge manualen for denne omdannelse bør den se sådan ud:
+      </para>
+      <programlisting>
+$sql_ary = [
+    'SELECT'    =&gt; 'COUNT(topic_id) AS num_topics',
+    'FROM'      =&gt; [
+        TOPICS_TABLE        =&gt; '',
+    ],
+    'WHERE'     =&gt; &quot;forum_id = $forum_id
+        AND (topic_last_post_time &gt;= $min_post_time
+            OR topic_type = &quot; . POST_ANNOUNCE . '
+            OR topic_type = ' . POST_GLOBAL . ')
+        AND ' . $phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id),
+];
+
+$db-&gt;sql_build_query('SELECT', $sql_ary);
+</programlisting>
+      <para>
+        Det er fint nok, men det bruger endnu ikke denne processor.
+        <emphasis role="strong">Trin 2</emphasis> Fokusér nu kun på
+        WHERE-klausulen
+      </para>
+      <para>
+        Hmm... Lad os se... Der er et sæt af AND'er, der skal forbindes.
+        Lad os starte der.
+      </para>
+      <programlisting>
+// ...
+'WHERE'     =&gt; ['AND,
+    &quot;forum_id = $forum_id&quot;,
+    &quot;(topic_last_post_time &gt;= $min_post_time
+        OR topic_type = &quot; . POST_ANNOUNCE . '
+        OR topic_type = ' . POST_GLOBAL . ')',
+    $phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)
+],
+// ...
+</programlisting>
+      <para>
+        Inde i sættet af AND'er er en af dem et sæt af OR'er.
+      </para>
+      <programlisting>
+// ...
+'WHERE'     =&gt; ['AND,
+    &quot;forum_id = $forum_id&quot;,
+    ['OR',
+        &quot;topic_last_post_time &gt;= $min_post_time&quot;,
+        'topic_type = ' . POST_ANNOUNCE,
+        'topic_type = ' . POST_GLOBAL,
+    ),
+    $phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)
+),
+// ...
+</programlisting>
+      <para>
+        Sådan! Bedre! Men det er stadig ikke særlig nemt at arbejde med.
+        Der er en streng for hver sammenligning. MEN! Hvis jeg bruger
+        type1-arrayet nævnt ovenfor, kan jeg adskille hver enkelt af dem
+        i en enkelt ting! I dette tilfælde...
+      </para>
+      <programlisting>
+// ...
+'WHERE'     =&gt; ['AND,
+    ['forum_id', '=', $forum_id],
+    ['OR',
+        ['topic_last_post_time', '&gt;=', $min_post_time],
+        ['topic_type', '=', POST_ANNOUNCE],
+        ['topic_type', '=', POST_GLOBAL],
+    ),
+    [$phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)],
+// ...
+</programlisting>
+      <para>
+        Sådan! Ingen variabelinterpolering, ingen eksplicit
+        strengsammensætning, og hvis det senere skal opbygges eller
+        ændres, bliver det en meget ligetil opgave (se næste afsnit), og
+        alle data escapes korrekt.
+      </para>
+      <para>
+        Som det sidste stykke kode i dette afsnit, her er, hvordan hele
+        SQL-forespørgslen bør skrives, når dette system bruges:
+      </para>
+      <programlisting>
+$sql_ary = [
+    'SELECT'    =&gt; 'COUNT(topic_id) AS num_topics',
+    'FROM'      =&gt; [
+        TOPICS_TABLE        =&gt; '',
+    ],
+    'WHERE'     =&gt; ['AND,
+        ['forum_id', '=', $forum_id],
+        ['OR',
+            ['topic_last_post_time', '&gt;=', $min_post_time],
+            ['topic_type', '=', POST_ANNOUNCE],
+            ['topic_type', '=', POST_GLOBAL],
+        ],
+        [$phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)],
+    ],
+];
+
+$db-&gt;sql_build_query('SELECT', $sql_ary);
+</programlisting>
+    </sect2>
+    <sect2 id="modify-the-structured-conditional-in-an-extension">
+      <title>Rediger den strukturerede betingelse i en extension</title>
+      <para>
+        En af de vigtigste grunde til, at denne funktion er designet
+        netop på denne måde, er hovedsageligt det, der illustreres i
+        dette afsnit. Ligesom i underafsnittet ovenfor vil jeg vise dig
+        praktiske eksempler på, hvordan denne funktion bruges. Tag koden
+        ovenfor som eksempel:
+      </para>
+      <programlisting>
+$sql = [
+    'SELECT'    =&gt; 'COUNT(topic_id) AS num_topics',
+    'FROM'      =&gt; [
+        TOPICS_TABLE        =&gt; '',
+    ],
+    'WHERE'     =&gt; ['AND,
+        ['forum_id', '=', $forum_id],
+        ['OR',
+            ['topic_last_post_time', '&gt;=', $min_post_time],
+            ['topic_type', '=', POST_ANNOUNCE],
+            ['topic_type', '=', POST_GLOBAL],
+        ),
+        [$phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)]
+    ],
+];
+</programlisting>
+      <para>
+        Forestil dig, at du er ved at bygge en extension, der kræver, at
+        forespørgslen ovenfor ændres. Du vil f.eks. gøre
+        topic_last_post_time til et obligatorisk krav for denne
+        forespørgsel. Med andre ord ønsker du, at forespørgslen skal se
+        sådan ud:
+      </para>
+      <programlisting>
+$sql = [
+    'SELECT'    =&gt; 'COUNT(topic_id) AS num_topics',
+    'FROM'      =&gt; [
+        TOPICS_TABLE        =&gt; '',
+    ],
+    'WHERE'     =&gt; ['AND,
+        ['forum_id', '=', $forum_id],
+        ['topic_last_post_time', '&gt;=', $min_post_time],
+        [$phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)],
+    ],
+];
+</programlisting>
+      <para>
+        Bare som god praksis, og for at hjælpe andre
+        extension-forfattere med at ændre denne forespørgsel på en
+        nemmere måde, lad os i stedet lave den sådan her:
+      </para>
+      <programlisting>
+$sql = [
+    'SELECT'    =&gt; 'COUNT(topic_id) AS num_topics',
+    'FROM'      =&gt; [
+        TOPICS_TABLE        =&gt; '',
+    ],
+    'WHERE'     =&gt; ['AND,
+        ['forum_id', '=', $forum_id],
+        ['OR',
+            ['topic_last_post_time', '&gt;=', $min_post_time],
+        ],
+        [$phpbb_content_visibility-&gt;get_visibility_sql('topic', $forum_id)],
+    ],
+];
+</programlisting>
+      <para>
+        Bemærk, at jeg beholdt OR-klausulen. Dette er blot for, at disse
+        ændringer skal have så lille en chance som muligt for at ødelægge
+        andre extensions. Men lad os gå videre.
+      </para>
+      <para>
+        I din funktion:
+      </para>
+      <programlisting>
+function eventGrabber($event)
+{
+</programlisting>
+      <para>
+        Du vil have et $event['sql'], som indeholder forespørgslen.
+        Nedenfor bruger jeg indlejring af &quot;if&quot;; hvis du
+        foretrækker det, kan du bruge exceptions i stedet. For at tilgå
+        det, vi ønsker, kan vi gøre det sådan her:
+      </para>
+      <programlisting>
+// May be required by PHP
+$sql = $event['sql'];
+// Is the element I expect there?
+if(isset($sql['WHERE'][2][0]))
+{
+    if(is_array($sql['WHERE'][2]))
+    {
+        if($sql['WHERE'][2][0] === 'OR')
+        {
+            // This should be the array with the OR I wanted
+            if(isset($sql['WHERE'][2][0][1]) &amp;&amp; $sql['WHERE'][2][0][1][0] === 'topic_last_post_time')
+            {
+                // Confirmed to be what I want it to be!
+                // this array_slice() will remove the elements after the above-mentioned topic_last_post_time
+                $sql['WHERE'][2][0][1] = array_slice($sql['WHERE'][2][0][1], 1);
+
+                $event['sql'] = $sql;
+                return;
+            }
+        }
+        else
+        {
+            // For example, write code to log this happened so that an admin can help you making your
+            // extension compatible with other extensions or even for you to be warned about phpBB changes.
+        }
+    }
+    else
+    {
+        // For example, write code to log this happened so that an admin can help you making your
+        // extension compatible with other extensions or even for you to be warned about phpBB changes.
+    }
+}
+else
+{
+    // For example, write code to log this happened so that an admin can help you making your
+    // extension compatible with other extensions or even for you to be warned about phpBB changes.
+}
+</programlisting>
+      <para>
+        Hvis du tænker: Hva?!??!? Det er alt for kompliceret... Hvordan
+        er dette bedre end før?!?!
+      </para>
+      <para>
+        Jamen, jeg sikrer mig bare ovenfor. Jeg gør det bare på en måde,
+        der sikrer, at det med sikkerhed vil virke. Hvis du ikke er til
+        det, er dette dog nok:
+      </para>
+      <programlisting>
+function myEventListener($event)
+{
+    $sql = $event['sql'];
+    $sql['WHERE'][2][0][1] = array_slice($sql['WHERE'][2][0][1], 1);
+    $event['sql'] = $sql;
+}
+</programlisting>
+      <para>
+        Eller for at beskytte dig selv en smule:
+      </para>
+      <programlisting>
+function myEventListener($event)
+{
+    $sql = $event['sql'];
+    if(!empty($sql['WHERE'][2][0][1]) &amp;&amp; is_array($sql['WHERE'][2][0][1]))
+    {
+        $sql['WHERE'][2][0][1] = array_slice($sql['WHERE'][2][0][1], 1);
+    }
+    else
+    {
+        // For example, write code to log this happened so that an admin can help you making your
+        // extension compatible with other extensions or even for you to be warned about phpBB changes.
+    }
+    $event['sql'] = $sql;
+}
+</programlisting>
+      <para>
+        Jeg har vist dig ovenstående først, fordi jeg ønskede, at du
+        skulle opleve viljen til at gøre alles arbejde på den nemmeste og
+        mest fleksible måde.
+      </para>
+      <para>
+        <emphasis role="strong">Eksempel 2:</emphasis>
+      </para>
+      <para>
+        Forestil dig nu, at du vil tilføje en betingelse til
+        OR-udsagnslisten. Du vil f.eks. have, at fastgjorte indlæg ikke
+        skal tælles med.
+      </para>
+      <para>
+        Den lange/selvbeskyttende metode bruger stort set samme formel
+        som de 3 eksempler ovenfor. Den korte metode er omtrent lige så
+        meget som dette:
+      </para>
+      <programlisting>
+function myEventListener($event)
+{
+    $sql = $event['sql'];
+    if(!empty($sql['WHERE'][2][0][1]) &amp;&amp; is_array($sql['WHERE'][2][0][1]))
+    {
+        $sql['WHERE'][2][0][1][] = ['topic_type', '=', POST_STICKY];
+    }
+    else
+    {
+        // For example, write code to log this happened so that an admin can help you making your
+        // extension compatible with other extensions or even for you to be warned about phpBB changes.
+    }
+    $event['sql'] = $sql;
+}
+</programlisting>
+      <para>
+        ... Og så er du færdig. Ingen regex, intet behov for at skrive
+        din egen 'OR' eller lignende. Som en bonus er det garanteret, at
+        outputtet bliver gyldig SQL, hvis det, du skriver, følger de
+        grundlæggende regler for, hvordan SQL skrives.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="usage-examples">
+    <title>Brugseksempler</title>
+    <para>
+      Her præsenterer jeg kodeeksempler, der illustrerer, hvordan dette
+      system bruges.
+    </para>
+    <sect2 id="in-phpbbs-code">
+      <title>I phpBB's kode</title>
+      <programlisting>
+$db-&gt;sql_build_query('SELECT', [
+    'SELECT' =&gt; ['f.forum_id', 'f.forum_title'],
+    'FROM' =&gt; [
+        FORUMS_TABLE  =&gt; 'f',
+        TOPICS_TABLE =&gt; 't',
+    ],
+    'WHERE' =&gt; [
+        'AND',
+        ['t.topic_poster', '=', 1],
+        ['f.forum_id', '&gt;=', 'ALL', 'SELECT', [
+            'SELECT' =&gt; ['t.forum_id'],
+            'FROM' =&gt; [TOPICS_TABLE  =&gt; 't'],
+            'WHERE' =&gt; ['t.topic_poster', '=', 1],
+        ],
+    ],
+);
+</programlisting>
+      <programlisting>
+['OR',
+    ['t.forum_id', '=', 3],
+    ['t.topic_type', '=', 0],
+)
+</programlisting>
+      <programlisting>
+['AND,
+    ['t.forum_id', '=', 3],
+    ['t.topic_type', '=', 0],
+    ['t.topic_id', '&gt;', 5],
+    ['t.topic_poster', '&lt;&gt;', 5],
+),
+</programlisting>
+      <programlisting>
+['AND,
+    ['t.forum_id', '=', 3],
+    ['NOT',
+        ['t.topic_type', '=', 0],
+    ],
+    ['t.topic_id', '&gt;', 5],
+    ['t.topic_poster', '&lt;&gt;', 5],
+],
+</programlisting>
+      <programlisting>
+t.forum_id = 3
+AND NOT ( t.topic_type = 0 )
+AND t.topic_id &gt; 5
+AND t.topic_poster &lt;&gt; 5
+</programlisting>
+    </sect2>
+    <sect2 id="in-phpbbs-extensions-code">
+      <title>I koden for phpBB's extensions</title>
+      <programlisting>
+function myEventListener($event)
+{
+    $sql = $event['sql'];
+    $sql['WHERE'][2][0][1] = array_slice($sql['WHERE'][2][0][1], 1);
+    $event['sql'] = $sql;
+}
+</programlisting>
+      <para>
+        Der kommer flere, efterhånden som folk indsender flere nyttige
+        eksempler
+      </para>
+    </sect2>
+  </sect1>
+</article>

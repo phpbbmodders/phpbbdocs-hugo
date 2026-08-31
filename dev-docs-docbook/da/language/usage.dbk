@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Brug af sprogsystemet</title>
+  </articleinfo>
+  <para>
+    phpBB bruger et sprogsystem for at garantere nem lokalisering. Alle
+    strenge, der vises for brugeren, slås først op i en intern ordbog.
+    Det er derfor også et krav, at extensions bruger dette system til alt
+    output, der vises for brugeren. Dette kapitel viser dig, hvordan
+    sprogsystemet bruges, og hvordan du tilføjer dine egne
+    brugerdefinerede indgange.
+  </para>
+  <para>
+    Vi refererer generelt til ordets navn i ordbogen som
+    <emphasis role="strong">sprognøgle</emphasis> eller
+    <emphasis role="strong">sprogvariabel</emphasis>, og til den
+    returnerede værdi som <emphasis role="strong">sprogværdi</emphasis>
+    eller <emphasis role="strong">sprogstreng</emphasis>. Sammen udgør de
+    en <emphasis role="strong">sprogindgang</emphasis>. Sprogindgange
+    samles i sprogfiler.
+  </para>
+  <note>
+    <title>Bemærk</title>
+    <para>
+      Ifølge konvention bør sprognøglen altid være med store bogstaver
+      udelukkende, med understregninger til at adskille ord.
+    </para>
+  </note>
+  <sect1 id="using-the-language-system-in-php">
+    <title>Brug af sprogsystemet i PHP</title>
+    <para>
+      Objektet, der indeholder sprogordbogen for den aktuelle bruger, er
+      objektet <literal>$language</literal> (klassen
+      <literal>phpbb\language\language</literal>). For at hente
+      oversættelsen af en sprogindgang inde i PHP-kode skal du kalde
+      metoden <literal>phpbb\language\language::lang()</literal>:
+    </para>
+    <programlisting>
+$language-&gt;lang('LANG_KEY');
+</programlisting>
+    <para>
+      Du kan også indsætte værdier i den oversatte streng. Brug
+      <literal>%s</literal> som pladsholder for strenge i sprogstrengen
+      og <literal>%d</literal> for heltal:
+    </para>
+    <programlisting>
+// Language string: &quot;My translation has a %s&quot;
+echo $language-&gt;lang('LANG_KEY', 'parameter');
+// Output: &quot;My translation has a parameter&quot;
+
+// Language string: &quot;My translation has %d parameter&quot;
+echo $language-&gt;lang('LANG_KEY', 1);
+// Output: &quot;My translation has 1 parameter&quot;
+</programlisting>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Når du bruger <literal>%d</literal> til flertalsformer, skal du
+        sørge for at give oversættere mulighed for at bruge
+        flertalsformer i overensstemmelse med deres eget sprog. For mere
+        information, se: <literal>plurals</literal>
+      </para>
+    </warning>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Mange funktioner i phpBB oversætter automatisk deres argumenter;
+        det er normalt tilstrækkeligt at sende sprognøglen som argument.
+      </para>
+    </note>
+    <para>
+      Ordbogen indlæses ikke i hukommelsen på én gang, men er opdelt i
+      flere filer, som manuelt skal indlæses efter behov. Filerne
+      gemmes i sprogmappen, navngivet efter dens
+      <ulink url="https://area51.phpbb.com/docs/master/coding-guidelines.html#translation">sprogtag</ulink>,
+      hvor der bruges én undermappe for hvert installeret sprog.
+      Standardsprogfilerne ligger i roden af denne undermappe, mens
+      ACP-sprogfiler placeres i undermappen
+      <literal>/acp</literal>; e-mailskabeloner placeres i undermappen
+      <literal>/email</literal>.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Filer til extensions bør placeres i extensionens
+        <literal>/language</literal>-mappe.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="loading-language-files">
+    <title>Indlæsning af sprogfiler</title>
+    <sect2 id="loading-from-phpbb-core">
+      <title>Indlæsning fra phpBB's kerne</title>
+      <para>
+        Yderligere sprogfiler kan indlæses under brugeropsætningen via
+        kaldet til metoden <literal>phpbb\user::setup()</literal> øverst
+        i hver tilgængelig fil. For at gøre dette skal du sende navnet
+        med undermappen, men uden filendelse, som argument til setup.
+      </para>
+      <programlisting>
+$user-&gt;setup('search');
+// or
+$user-&gt;setup(['ucp', 'search']);
+</programlisting>
+      <para>
+        Da <literal>phpbb\user::setup()</literal> kun må kaldes én gang,
+        skal <literal>phpbb\language\language::add_lang()</literal>
+        bruges til at indlæse yderligere sprogfiler, efter
+        <literal>phpbb\user::setup()</literal> allerede er blevet kaldt.
+      </para>
+      <programlisting>
+$language-&gt;add_lang('search');
+// or
+$language-&gt;add_lang(['ucp', 'search']);
+</programlisting>
+    </sect2>
+    <sect2 id="loading-from-an-extension">
+      <title>Indlæsning fra en extension</title>
+      <para>
+        For at indlæse en fil fra en extension skal du bruge
+        <literal>phpbb\language\language::add_lang()</literal>, som
+        tager arrayet af sprogfiler som første argument og
+        vendor-navnet + extension-navnet som andet argument.
+      </para>
+      <programlisting>
+$language-&gt;add_lang('demo', 'acme/demo');
+// or
+$language-&gt;add_lang(['demo', 'demo2'], 'acme/demo');
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-language-system-in-template-files">
+    <title>Brug af sprogsystemet i skabelonfiler</title>
+    <para>
+      Sprogindgange i
+      <literal>Template Syntax &lt;tutorial-template-syntax&gt;</literal>
+      er en stor forbedring siden phpBB 3.0. Der er ikke længere behov
+      for manuelt at tildele disse i PHP-filen; sprogindgange fra
+      indlæste sprogfiler kan bruges automatisk.
+    </para>
+    <para>
+      For at bruge sprogindgangen med nøglen <literal>MY_KEY</literal> i
+      en skabelonfil skal du blot skrive <literal>{L_MY_KEY}</literal> i
+      skabelonen (phpBB-syntaks) eller
+      <literal>{{ lang('MY_KEY') }}</literal> (den nye twig-syntaks).
+    </para>
+    <sect2 id="javascript">
+      <title>JavaScript</title>
+      <para>
+        Hvis sprogindgangen skal bruges inde i JavaScript, skal den
+        escapes korrekt. Dette opnås nemt ved at bruge
+        <literal>{LA_MY_KEY}</literal> i skabelonen (phpBB-syntaks) eller
+        <literal>{{ lang('MY_KEY')|e('js') }}</literal> (den nye
+        twig-syntaks).
+      </para>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Når du bruger sprogindgange i JavaScript-kontekst med den nye
+          twig-syntaks, er følgende metoder mulige:
+        </para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|escape('js') }}</literal>
+              Twigs indbyggede escape-filter til JavaScript-kontekst.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|e('js') }}</literal>
+              Kortformsversion for at kalde
+              <literal>escape</literal> ved hjælp af
+              <literal>e</literal>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|escape('addslashes') }}</literal>
+              phpBB's forældede addslashes-escape-filter.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|e('addslashes') }}</literal>
+              Kortformsversion for at kalde <literal>escape</literal> ved
+              hjælp af <literal>e</literal>.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </note>
+    </sect2>
+  </sect1>
+  <sect1 id="add-new-entries">
+    <title>Tilføj nye indgange</title>
+    <para>
+      Nye sprogfiler bør altid placeres i deres egne filer i
+      extensions-mappen.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Når du definerer logindgange og modulnavne, skal du sørge for at
+        indlæse sprogfilen, når indgangene bruges.
+      </para>
+    </note>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Når du skriver eller redigerer en sprogfil, skal du sørge for at
+        gemme den med UTF-8-kodning <emphasis role="strong">uden
+        BOM</emphasis>
+        (<ulink url="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte
+        Order Mark</ulink>). Ellers vil forummet ikke fungere korrekt.
+        Nogle redigeringsprogrammer kalder denne tilstand
+        &quot;utf8 cookie&quot;.
+      </para>
+    </note>
+    <programlisting>
+&lt;?php
+// language/en/sample.php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+/**
+ * DO NOT CHANGE
+ */
+if (empty($lang) || !is_array($lang))
+{
+    $lang = [];
+}
+
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+
+$lang = array_merge($lang, [
+    'MY_LANGUAGE_KEY'         =&gt; 'A language entry',
+    'MY_OTHER_LANGUAGE_KEY'   =&gt; 'Another language entry',
+    'MY_TRICKY_LANGUAGE_KEY'  =&gt; 'This is a %slink%s',
+]);
+</programlisting>
+  </sect1>
+</article>

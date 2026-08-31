@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Kom godt i gang</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Velkommen til phpBB's udviklingsvejledning og dokumentation for
+      extensions.
+    </para>
+    <para>
+      Disse tutorial-sider er baseret på phpBB's extension
+      <ulink url="https://github.com/phpbb/phpbb-ext-acme-demo">Acme
+      Demo</ulink>. Denne enkle extension demonstrerer mange af de
+      almindelige funktioner i en extension, herunder brug af en
+      front-controller-side, ændring af phpBB gennem kerneevents og
+      skabelon-events, ændring af databasen ved hjælp af migrations, samt
+      opsætning af et ACP-modul til konfigurationsindstillinger.
+    </para>
+    <para>
+      Denne tutorial dækker den grundlæggende oprettelse af extensions:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="extension-folder">Extension-mappe</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="composer-json">Composer JSON</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      <literal>skeleton_extension</literal> er et værktøj, der hjælper
+      udviklere med hurtigt at generere de indledende filer og
+      komponenter, der er nødvendige for at begynde at udvikle nye
+      extensions til phpBB.
+    </para>
+  </sect1>
+  <sect1 id="extension-folder">
+    <title>Extension-mappe</title>
+    <para>
+      Alle extensions skal placeres inden for mappen
+      <literal>ext/</literal>, som findes i phpBB's rodmappe.
+    </para>
+    <para>
+      Extensions pakkes ved hjælp af følgende mappestruktur:
+      <literal>vendor/extname</literal>.
+    </para>
+    <para>
+      En extension bør derfor placeres i phpBB-mappen som følger:
+      <literal>phpBB/ext/vendor/extname</literal>.
+    </para>
+    <para>
+      Vendor-navnet kan være forfatterens brugernavn eller et hvilket som
+      helst andet navn, du vælger at gruppere dine extensions efter.
+      Extension-navnet er navnet på extensionen. I denne tutorial bruger
+      vi <literal>acme</literal> som vendor-navn og
+      <literal>demo</literal> som extension-navn.
+    </para>
+    <important>
+      <title>Vigtigt</title>
+      <para>
+        Både vendor- og extension-navnet skal starte med et lille
+        bogstav, efterfulgt af kun små bogstaver og tal.
+        <emphasis role="strong">Store bogstaver, understregninger,
+        bindestreger og andre tegn er ikke tilladt.</emphasis> Følgende
+        er et eksempel på et tilladt vendor- og extension-navn:
+        <literal>iamuser1/iamanextension</literal>.
+      </para>
+    </important>
+  </sect1>
+  <sect1 id="composer-json">
+    <title>Composer JSON</title>
+    <para>
+      Hver extension kræver en metadatafil ved navn
+      <literal>composer.json</literal>, for at phpBB kan identificere
+      din extension. Denne fil indeholder grundlæggende information om
+      en extension samt dens afhængigheder. Den skrives i JSON-format og
+      skal gemmes i extensionens rodmappe, f.eks.
+      <literal>phpBB/ext/acme/demo/composer.json</literal>.
+    </para>
+    <para>
+      Informationen i <literal>composer.json</literal> bruges af
+      Extensions Manager i ACP'en. Detaljerne om metadataene forklares
+      nedenfor eksemplet, men lad os for nu se på hele filen:
+    </para>
+    <programlisting language="json">
+{
+    &quot;name&quot;: &quot;acme/demo&quot;,
+    &quot;type&quot;: &quot;phpbb-extension&quot;,
+    &quot;description&quot;: &quot;Acme Demo Extension for phpBB 3.2&quot;,
+    &quot;homepage&quot;: &quot;https://github.com/phpbb/phpbb-ext-acme-demo&quot;,
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;time&quot;: &quot;2013-11-05&quot;,
+    &quot;keywords&quot;: [&quot;phpbb&quot;, &quot;extension&quot;, &quot;acme&quot;, &quot;demo&quot;],
+    &quot;license&quot;: &quot;GPL-2.0-only&quot;,
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;Nickv&quot;,
+            &quot;email&quot;: &quot;nickvergessen@localhost&quot;,
+            &quot;homepage&quot;: &quot;https://github.com/nickvergessen/&quot;,
+            &quot;role&quot;: &quot;Lead Developer&quot;
+        }
+    ],
+    &quot;require&quot;: {
+        &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
+        &quot;composer/installers&quot;: &quot;~1.0&quot;
+    },
+    &quot;require-dev&quot;: {
+        &quot;phpbb/epv&quot;: &quot;dev-master&quot;
+    },
+    &quot;extra&quot;: {
+        &quot;display-name&quot;: &quot;Acme Demo Extension&quot;,
+        &quot;soft-require&quot;: {
+            &quot;phpbb/phpbb&quot;: &quot;~3.2&quot;
+        }
+    }
+}
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Det er vigtigt at huske, at det sidste element eller objekt i et
+        JSON-array ikke må have et afsluttende komma.
+      </para>
+    </note>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec align="left" />
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Felt
+            </entry>
+            <entry>
+              Obligatorisk
+            </entry>
+            <entry>
+              Indhold
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>name</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Vendor-navnet og extension-navnet, adskilt af
+              <literal>/</literal>, der matcher mappestrukturen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>type</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Pakketypen. Denne bør altid være
+              <literal>phpbb-extension</literal>.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>description</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              En kort beskrivelse af din extension; må være tom (men skal
+              angives).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>homepage</literal>
+            </entry>
+            <entry>
+              Nej
+            </entry>
+            <entry>
+              En gyldig URL. Det anbefales at bruge linket til bidraget i
+              Customisation Database, eller til din extensions
+              repository (hvis du bruger et offentligt et af slagsen som
+              GitHub).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>version</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Din extensions version. Denne bør følge formatet X.Y.Z med
+              et valgfrit suffiks -dev, -patch, -alpha, -beta eller -RC.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>time</literal>
+            </entry>
+            <entry>
+              Nej
+            </entry>
+            <entry>
+              Udgivelsesdatoen for din extension. Skal være i formatet
+              YYYY-MM-DD eller YYYY-MM-DD HH:MM:SS.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>keywords</literal>
+            </entry>
+            <entry>
+              Nej
+            </entry>
+            <entry>
+              Et array af nøgleord relateret til extensionen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>license</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Pakkens licens. Dette kan enten være en streng eller et
+              array af strenge. Extensions bør typisk licenseres under
+              den samme GPL-2.0-licens som phpBB.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>authors</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Et array af forfattere til extensionen. Se
+              <link linkend="authors">authors</link> for flere detaljer.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>require</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Et array af krav til extensionen. Se
+              <link linkend="require">require</link> for flere detaljer.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>require-dev</literal>
+            </entry>
+            <entry>
+              Nej
+            </entry>
+            <entry>
+              Et array af udviklingskrav til extensionen. Se
+              <link linkend="require-dev">require-dev</link> for flere
+              detaljer.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>extra</literal>
+            </entry>
+            <entry>
+              Ja
+            </entry>
+            <entry>
+              Et array af vilkårlige ekstra data. Se
+              <link linkend="extra">extra</link> for flere detaljer.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <sect2 id="authors">
+      <title>authors</title>
+      <para>
+        Du kan have et ubegrænset antal forfattere. Mindst én forfatter
+        anbefales stærkt.
+      </para>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Felt
+              </entry>
+              <entry>
+                Obligatorisk
+              </entry>
+              <entry>
+                Indhold
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>name</literal>
+              </entry>
+              <entry>
+                Ja
+              </entry>
+              <entry>
+                Navnet på en forfatter.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>email</literal>
+              </entry>
+              <entry>
+                Nej
+              </entry>
+              <entry>
+                En e-mailadresse for forfatteren.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>homepage</literal>
+              </entry>
+              <entry>
+                Nej
+              </entry>
+              <entry>
+                En URL, der peger på forfatterens hjemmeside.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>role</literal>
+              </entry>
+              <entry>
+                Nej
+              </entry>
+              <entry>
+                Role kan bruges til at angive, hvad forfatteren har
+                bidraget med til extensionen (f.eks. Developer,
+                Translator, Supporter osv.)
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="require">
+      <title>require</title>
+      <para>
+        Angiv de afhængigheder, extensionen kræver, dvs. PHP-versionen og
+        <ulink url="https://packagist.org/">tredjepartsbiblioteker</ulink>.
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Felt
+              </entry>
+              <entry>
+                Indhold
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>php</literal>
+              </entry>
+              <entry>
+                Den mindste stabile PHP-version, der kræves af
+                extensionen. phpBB 3.2 kræver PHP 5.4.0 eller nyere, så
+                versionssammenligningen er
+                <literal>&gt;= 5.4.0</literal>.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>composer/installers</literal>
+              </entry>
+              <entry>
+                Anbefales af phpBB. Dette installerer extensions på den
+                korrekte placering i phpBB, når de installeres via
+                Composer.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="require-dev">
+      <title>require-dev</title>
+      <para>
+        I den valgfrie sektion <literal>require-dev</literal> kan du
+        angive de afhængigheder for extensionen, som kun er nødvendige
+        under udvikling. Acme Demo bruger
+        <ulink url="https://packagist.org/packages/phpbb/epv">Extension
+        Pre Validator Tool</ulink> fra phpBB's Extensions Team til at
+        udføre nogle grundlæggende valideringer, når der køres tests på
+        Travis CI (se <literal>tutorial_testing</literal>). Da vi altid
+        ønsker at have den nyeste version, kræver vi
+        <literal>dev-master</literal>.
+      </para>
+    </sect2>
+    <sect2 id="extra">
+      <title>extra</title>
+      <para>
+        Denne sektion kan indeholde stort set alle former for vilkårlige
+        data i henhold til composer-specifikationen. phpBB kræver dog to
+        specielle indgange i dette array for extensions:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Felt
+              </entry>
+              <entry>
+                Indhold
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>display-name</literal>
+              </entry>
+              <entry>
+                Navnet på din extension, f.eks. Acme Demo Extension.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>soft-require</literal>
+              </entry>
+              <entry>
+                Den mindste stabile phpBB-version, der kræves af
+                extensionen. I dette tilfælde kræver vi enhver
+                3.1-version, hvilket gøres ved at give den præfikset
+                <literal>~</literal>:
+                <literal>&quot;phpbb/phpbb&quot;: &quot;~3.2&quot;</literal>.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        En fuldstændig forklaring af alle tilgængelige JSON-skemafelter i
+        en composer.json-fil kan findes her:
+        <ulink url="https://getcomposer.org/doc/04-schema.md">https://getcomposer.org/doc/04-schema.md</ulink>
+      </para>
+      <para>
+        Mere information om angivelse af begrænsninger for pakkeversioner
+        kan findes her:
+        <ulink url="https://getcomposer.org/doc/articles/versions.md#basic-constraints">https://getcomposer.org/doc/articles/versions.md#basic-constraints</ulink>
+      </para>
+      <para>
+        Indtil videre har vores extension endnu ikke nogen
+        funktionalitet. Fortsæt til de næste afsnit for at lære mere om,
+        hvordan man skriver en extension, der gør noget nyttigt.
+      </para>
+    </sect2>
+  </sect1>
+</article>

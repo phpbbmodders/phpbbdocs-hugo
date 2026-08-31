@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Hvad er nyt i phpBB 3.3</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      phpBB 3.3 (Proteus) er kun en mindre versionsopdatering af 3.2. Der
+      er dog nogle få ændringer, som extension-udviklere skal være
+      opmærksomme på. De største ændringer i 3.3 er opdateringer af
+      mange af phpBB's underliggende afhængigheder, som bringer Symfony,
+      Twig, jQuery og PHP up to date.
+    </para>
+    <para>
+      Denne dokumentation forklarer:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="php-7">PHP 7</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="symfony-3.4">Symfony 3.4</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="twig-2">Twig 2</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="jquery-3">jQuery 3</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="extension-installation-error-messages">Fejlmeddelelser
+            ved installation af extensions</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="php-7">
+    <title>PHP 7</title>
+    <para>
+      PHP 7.2.0 er den mindste version, der kræves af phpBB 3.3. Det er
+      usandsynligt, at dette skulle give problemer for extensions. Hvis
+      din PHP-kode virkede i phpBB 3.1 eller 3.2, bør den også virke i
+      phpBB 3.3.
+    </para>
+    <para>
+      Hvis du har til hensigt at begynde at bruge nogle af de nye
+      sprogkonstruktioner, der er introduceret i PHP 7, skal du gøre din
+      extensions minimumskrav til PHP kendt for dine brugere. Dette kan
+      omfatte at angive den mindste PHP-version i din extensions fil
+      <literal>composer.json</literal> samt at angive phpBB 3.3 som et
+      minimumskrav. Du kan også bruge filen
+      <literal>ext.php</literal> til at kontrollere, at
+      minimumskravene til PHP- og phpBB-version er opfyldt, i metoden
+      <literal>is_enableable()</literal>, hvilket forhindrer brugere,
+      der ikke opfylder kravene, i ved et uheld at installere din
+      extension. Eksempler på dette kan findes
+      <ulink url="tutorial_advanced.html#using-installation-commands-in-ext-php">her</ulink>.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Den mindst krævede version af PHP blev hævet til 7.2.0 med
+        udgivelsen af phpBB 3.3.11. Tidligere versioner af phpBB 3.3
+        understøttede også en minimums-PHP-version på 7.1.3.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="symfony-3.4">
+    <title>Symfony 3.4</title>
+    <para>
+      Symfony er blevet opdateret til 3.4 (fra 2.8). Følgende ændringer
+      skyldes forældelser introduceret i Symfony 2, som er blevet
+      fjernet i Symfony 3. Følgende ændringer er
+      <emphasis role="strong">påkrævede</emphasis> for phpBB 3.3 og
+      nyere.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Selvom følgende ændringer er påkrævede for phpBB 3.3, er de
+        bagudkompatible og vil derfor stadig fungere med phpBB 3.2 og
+        3.1.
+      </para>
+    </note>
+    <sect2 id="deprecated-special-characters-at-the-beginning-of-unquoted-strings">
+      <title>Forældede specialtegn i begyndelsen af strenge uden
+      anførselstegn</title>
+      <para>
+        Ifølge Yaml-specifikationen må strenge uden anførselstegn ikke
+        starte med <literal>@</literal>, <literal>%</literal>,
+        <literal></literal>, | eller &gt;`. Du skal omslutte disse
+        strenge med enkelte eller dobbelte anførselstegn:
+      </para>
+      <programlisting language="yaml">
+vendor.package.class:
+   class: vendor\package\classname
+   arguments:
+      - '@dbal.conn'
+      - '%custom.tables%'
+   calls:
+      - [set_controller_helper, ['@controller.helper']]
+</programlisting>
+    </sect2>
+    <sect2 id="deprecated-route-pattern">
+      <title>Forældet Route Pattern</title>
+      <para>
+        Ældre versioner af Symfony og phpBB tillod, at routes blev
+        defineret ved hjælp af nøgleordet <literal>pattern</literal>:
+      </para>
+      <programlisting language="yaml">
+vendor.package.route:
+   pattern: /{value}
+</programlisting>
+      <para>
+        For phpBB 3.3 skal route-stier i stedet defineres ved hjælp af
+        nøgleordet <literal>path</literal>:
+      </para>
+      <programlisting language="yaml">
+vendor.package.route:
+   path: /{value}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="twig-2">
+    <title>Twig 2</title>
+    <para>
+      Twig er blevet opdateret fra version 1 til version 2. Denne
+      ændring bør ikke påvirke den Twig-skabelonsyntaks, du eventuelt
+      bruger i dine extensions.
+    </para>
+  </sect1>
+  <sect1 id="jquery-3">
+    <title>jQuery 3</title>
+    <para>
+      phpBB 3.3 leveres med jQuery 3.4.1, opdateret fra den langt ældre
+      version 1.12.4, der blev leveret med phpBB 3.2.
+    </para>
+    <para>
+      Udviklerne af jQuery er meget gode til at bevare bagudkompatibilitet,
+      hvilket betyder, at det meste af din jQuery-kode bør fortsætte med
+      at virke. De største ændringer, der introduceres med jQuery version
+      2 og 3, er, at understøttelsen af ældre browsere droppes, især
+      Internet Explorer.
+    </para>
+    <para>
+      Selvom det ikke altid er nemt at kontrollere, om en extensions
+      jQuery-kode fungerer korrekt, tilbyder jQuery et Migration PlugIn
+      på deres hjemmeside. Du kan tilføje den ukomprimerede version af
+      dette plugin til dit phpBB-udviklingsboard, som vil udskrive
+      eventuelle problemer, det finder i din jQuery-kode, til din
+      browsers fejlkonsol.
+    </para>
+    <para>
+      De fleste af de problemer, du måtte se rapporteret af Migration
+      PlugIn'et, vil være advarsler relateret til brug af forældede
+      jQuery-funktioner (som regel genveje eller alias som
+      <literal>click()</literal> eller <literal>focus()</literal>, som i
+      stedet bør ændres til delegeringshændelseshåndteringen
+      <literal>on()</literal>). Selv hvis du bruger forældede funktioner,
+      vil de sandsynligvis stadig fungere fint, men det er dog bedst at
+      foretage de anbefalede opdateringer, i tilfælde af at jQuery på et
+      tidspunkt fjerner de forældede funktioner.
+    </para>
+  </sect1>
+  <sect1 id="extension-installation-error-messages">
+    <title>Fejlmeddelelser ved installation af extensions</title>
+    <para>
+      En ofte efterspurgt funktion blandt extension-forfattere gør
+      endelig sin debut i phpBB 3.3: Visning af fejlmeddelelser til
+      brugere, når en extension ikke kan aktiveres!
+    </para>
+    <para>
+      Typisk bruger extension-forfattere deres extensions fil
+      <literal>ext.php</literal> til at opsætte betingede tests, der
+      kontrollerer, om et phpBB-board opfylder de grundlæggende krav for
+      deres extension. Hvis det fejler, aktiveres extensionen ikke. Dog
+      mødes brugerne kun med en fejlmeddelelse om, at deres board ikke
+      opfyldte extensionens krav.
+    </para>
+    <para>
+      Nu kan extension-forfattere forklare, hvilke specifikke krav der
+      forårsagede, at extensionen ikke kunne installeres.
+    </para>
+    <para>
+      Dette kan gøres i den samme fil <literal>ext.php</literal> og den
+      samme metode <literal>is_enableable()</literal> som før. Bortset
+      fra at metoden nu, i stedet for kun at kunne returnere enten en
+      sand eller falsk boolesk værdi, giver dig mulighed for at returnere
+      et array af fejlmeddelelser for hver årsag til, at en extension
+      ikke kan aktiveres/installeres.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        For at være bagudkompatibel med phpBB 3.2 og 3.1 skal du
+        kontrollere for phpBB 3.3 eller nyere, før du bruger det nye
+        meddelelsessystem. Ellers skal du for ældre phpBB-boards bruge
+        den oprindelige metode med at returnere en simpel sand/falsk
+        boolesk værdi.
+      </para>
+    </note>
+    <programlisting>
+/**
+ * Check if extension can be enabled
+ *
+ * @return bool|array True if enableable, false (or an array of error messages) if not.
+ */
+public function is_enableable()
+{
+    // Only install extension if PHP ZipArchive is present
+    $enableable = class_exists('ZipArchive');
+
+    // If the test failed and phpBB 3.3 is detected, return error message explaining why
+    if (!$enableable &amp;&amp; phpbb_version_compare(PHPBB_VERSION, '3.3.0', '&gt;='))
+    {
+        // Import my extension's language file
+        $language = $this-&gt;container-&gt;get('language');
+        $language-&gt;add_lang('my_install_lang_file', 'myvendor/myextension');
+
+        // Return message 'PHP ZipArchive is required to enable and use this extension.'
+        return [$language-&gt;lang('INSTALL_FAILED_MESSAGE')];
+    }
+
+    // Return the boolean result of the test, either true (or false for phpBB 3.2 and 3.1)
+    return $enableable;
+}
+</programlisting>
+  </sect1>
+</article>

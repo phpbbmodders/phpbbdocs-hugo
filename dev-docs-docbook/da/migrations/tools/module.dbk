@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Module Tool</title>
+  </articleinfo>
+  <para>
+    Module-værktøjet giver dig mulighed for at tilføje eller fjerne
+    moduler i UCP, MCP eller ACP.
+  </para>
+  <sect1 id="add-module">
+    <title>Tilføj modul</title>
+    <para>
+      Tilføj et nyt modul
+    </para>
+    <programlisting>
+['module.add', [ mixed $class [, mixed $parent [, array $data [, mixed $include_path ]]] ]]
+</programlisting>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec align="left" />
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Parameter
+            </entry>
+            <entry>
+              Obligatorisk/standard
+            </entry>
+            <entry>
+              Anvendelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              class
+            </entry>
+            <entry>
+              Obligatorisk
+            </entry>
+            <entry>
+              Modulklassen: acp, mcp eller ucp
+            </entry>
+          </row>
+          <row>
+            <entry>
+              parent
+            </entry>
+            <entry>
+              standard 0
+            </entry>
+            <entry>
+              Modulets overordnede module_id eller module_langname (0
+              for ingen overordnet)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              data
+            </entry>
+            <entry>
+              standard []
+            </entry>
+            <entry>
+              Et array med data om det nye modul. Dette kan sættes op på
+              to forskellige måder. (se nedenfor)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              include_path
+            </entry>
+            <entry>
+              standard false
+            </entry>
+            <entry>
+              Angiv eventuelt en brugerdefineret include-sti (fungerer
+              kun ved brug af den automatiske metode til at tilføje
+              moduler)
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <sect2 id="manually-specifying-module-info">
+      <title>Manuel angivelse af modulinformation</title>
+      <para>
+        Den &quot;manuelle&quot; måde til at indsætte en kategori eller
+        ét modul ad gangen. Det merges med det basisarray, der vises
+        lidt nedenfor, men kræver som minimum, at
+        <literal>module_langname</literal> sendes, og hvis du vil
+        oprette et modul (i stedet for blot en kategori), skal du sende
+        <literal>module_basename</literal> og
+        <literal>module_mode</literal>.
+      </para>
+      <programlisting>
+$data = [
+    'module_enabled'    =&gt; 1,
+    'module_display'    =&gt; 1,
+    'module_basename'   =&gt; '',
+    'module_class'      =&gt; $class,
+    'parent_id'         =&gt; (int) $parent,
+    'module_langname'   =&gt; '',
+    'module_mode'       =&gt; '',
+    'module_auth'       =&gt; '',
+];
+</programlisting>
+    </sect2>
+    <sect2 id="automatically-determining-module-info">
+      <title>Automatisk bestemmelse af modulinformation</title>
+      <para>
+        Den &quot;automatiske&quot; måde. Til at indsætte flere moduler
+        ad gangen baseret på specifikationerne i
+        <literal>_info</literal>-filen for modulet/modulerne. For at
+        dette skal fungere, skal modulerne være korrekt opsat i
+        <literal>_info</literal>-filen. Her er et eksempel (dette ville
+        indsætte tilstandene settings, log og flag fra filen
+        <literal>includes/acp/info/acp_asacp.php</literal>):
+      </para>
+      <programlisting>
+$data = [
+    'module_basename'   =&gt; 'acp_asacp',
+    'modes'             =&gt; ['settings', 'log', 'flag'],
+];
+</programlisting>
+      <para>
+        Du kan eventuelt udelade 'modes', og så indsættes alle
+        modulerne i den pågældende info-fil.
+      </para>
+    </sect2>
+    <sect2 id="example">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        // Add a new category named ACP_CAT_TEST_MOD to ACP_CAT_DOT_MODS
+        ['module.add', [
+            'acp',
+            'ACP_CAT_DOT_MODS',
+            'ACP_CAT_TEST_MOD'
+       ]],
+
+        // Add the settings and features modes from the acp_board module to the ACP_CAT_TEST_MOD category using the &quot;automatic&quot; method.
+        ['module.add', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'       =&gt; 'acp_board',
+                'modes'                 =&gt; ['settings', 'features'],
+            ],
+        ]],
+
+        // Add the avatar mode from acp_board to the ACP_CAT_TEST_MOD category using the &quot;manual&quot; method.
+        ['module.add', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'   =&gt; 'acp_board',
+                'module_langname'   =&gt; 'ACP_AVATAR_SETTINGS',
+                'module_mode'       =&gt; 'avatar',
+                'module_auth'       =&gt; 'acl_a_board &amp;&amp; ext_vendor/name',
+            ],
+        ]],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="remove-module">
+    <title>Fjern modul</title>
+    <programlisting>
+['module.remove', [ mixed $class [, mixed $parent [, array $data [, mixed $include_path ]]] ]]
+</programlisting>
+    <sect2 id="parameters">
+      <title>Parametre</title>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Parameter
+              </entry>
+              <entry>
+                Obligatorisk/standard
+              </entry>
+              <entry>
+                Anvendelse
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                class
+              </entry>
+              <entry>
+                Obligatorisk
+              </entry>
+              <entry>
+                Modulklassen: acp, mcp eller ucp
+              </entry>
+            </row>
+            <row>
+              <entry>
+                parent
+              </entry>
+              <entry>
+                standard 0
+              </entry>
+              <entry>
+                Modulets overordnede module_id eller module_langname (0
+                for ingen overordnet)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                module
+              </entry>
+              <entry>
+                standard ''
+              </entry>
+              <entry>
+                module_id eller module_langname for det modul, der skal
+                fjernes (mere information nedenfor)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                include_path
+              </entry>
+              <entry>
+                standard false
+              </entry>
+              <entry>
+                Angiv eventuelt en brugerdefineret include-sti (fungerer
+                kun ved brug af den automatiske metode til at tilføje
+                moduler)
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="manually-specifying-module-info-1">
+      <title>Manuel angivelse af modulinformation</title>
+      <para>
+        Den &quot;manuelle&quot; måde. Når et modul fjernes med den
+        manuelle metode, kan du angive en streng (module_langname) eller
+        et heltal (module_id)
+      </para>
+    </sect2>
+    <sect2 id="automatically-determining-module-info-1">
+      <title>Automatisk bestemmelse af modulinformation</title>
+      <para>
+        Den &quot;automatiske&quot; måde. Når et modul fjernes med den
+        automatiske metode, kan du bruge den samme information, der
+        sendes via arrayet $data, som ved brug af den automatiske metode
+        i funktionen module_add. Ligesom med den automatiske
+        tilføjelsesmetode finder dette automatisk de moduler, der er
+        angivet i henhold til det angivne module_basename og modes fra
+        <anchor id="info" />info-filen.
+      </para>
+    </sect2>
+    <sect2 id="example-1">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        // Remove the avatar mode from acp_board to the ACP_CAT_TEST_MOD category using the &quot;manual&quot; method.
+        ['module.remove', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'   =&gt; 'acp_board',
+                'module_langname'   =&gt; 'ACP_AVATAR_SETTINGS',
+                'module_mode'       =&gt; 'avatar',
+                'module_auth'       =&gt; 'acl_a_board &amp;&amp; ext_vendor/name',
+            ],
+        ]],
+
+        // Remove the settings and features modes from the acp_board module to the ACP_CAT_TEST_MOD category using the &quot;automatic&quot; method.
+        ['module.remove', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'       =&gt; 'acp_board',
+                'modes'                 =&gt; ['settings', 'features'],
+            ],
+        ]],
+
+        // Remove a new category named ACP_CAT_TEST_MOD to ACP_CAT_DOT_MODS
+        ['module.remove', [
+            'acp',
+            'ACP_CAT_DOT_MODS',
+            'ACP_CAT_TEST_MOD'
+        ]],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

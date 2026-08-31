@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Migrations</title>
+  </articleinfo>
+  <para>
+    Depuis phpBB 3.1, la mise à jour de la base de données s'effectue
+    à l'aide des Migrations.
+  </para>
+  <para>
+    Les Migrations ont été créées en raison des difficultés liées au
+    développement distribué et au maintien d'une configuration de
+    base de données à jour parmi tous les développeurs.
+  </para>
+  <para>
+    Sujet RFC si vous êtes intéressé par les raisons :
+    <ulink url="http://area51.phpbb.com/phpBB/viewtopic.php?t=41337">http://area51.phpbb.com/phpBB/viewtopic.php?t=41337</ulink>
+  </para>
+  <para>
+    getting_started dependencies schema_changes data_changes tools/index
+  </para>
+  <sect1 id="what-do-migrations-mean-for-me">
+    <title>Que signifient les Migrations pour moi ?</title>
+    <sect2 id="as-a-user">
+      <title>En tant qu'utilisateur</title>
+      <para>
+        Les Migrations n'affectent pas l'utilisation de phpBB, mais
+        uniquement l'écriture de code pour celui-ci, donc les
+        administrateurs n'ont rien à faire différemment.
+      </para>
+      <para>
+        Les mises à jour de base de données entre les versions de
+        phpBB et les mises à jour d'extensions seront plus sûres et,
+        dans le cas peu probable où quelque chose se produirait
+        pendant les modifications de base de données, beaucoup plus
+        faciles à déboguer et à corriger.
+      </para>
+    </sect2>
+    <sect2 id="as-an-extension-author">
+      <title>En tant qu'auteur d'extension</title>
+      <para>
+        Fonctionnalité (similaire à UMIL pour phpBB 3.0) intégrée à
+        phpBB pour faciliter la gestion des modifications de base de
+        données entre les versions, ainsi que des outils utiles pour
+        aider à effectuer des modifications de base de données.
+      </para>
+    </sect2>
+    <sect2 id="as-a-developer">
+      <title>En tant que développeur</title>
+      <para>
+        Collaboration facilitée avec les autres, moins de temps passé
+        à gérer les modifications de base de données entre les
+        différentes branches et pull requests.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="how-do-i-use-migrations">
+    <title>Comment utiliser les Migrations ?</title>
+    <sect2 id="getting-started-with-migrations">
+      <title>Premiers pas avec les Migrations</title>
+      <para>
+        Comment créer un fichier de Migration de base
+        <literal>getting_started</literal>
+      </para>
+    </sect2>
+    <sect2 id="migration-helpers">
+      <title>Assistants de Migration</title>
+      <para>
+        Comment utiliser les assistants de Migration pour effectuer
+        des modifications de base de données de base
+        <literal>tools/index</literal>
+      </para>
+    </sect2>
+  </sect1>
+</article>

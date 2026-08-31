@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>La classe upload</title>
+  </articleinfo>
+  <para>
+    La classe files <literal>upload</literal> nouvellement introduite
+    remplace la classe <literal>fileupload</literal> précédemment
+    existante.
+  </para>
+  <sect1 id="passing-settings-to-upload-class">
+    <title>Transmettre des paramètres à la classe upload</title>
+    <para>
+      Dans les versions de phpBB antérieures à 3.2, des paramètres
+      comme les dimensions d'image maximales pouvaient être transmis
+      directement à la classe <literal>fileupload</literal> via le
+      constructeur. Comme ceux-ci sont désormais récupérés via
+      l'infrastructure de conteneur, cela n'est plus possible. À la
+      place, la nouvelle classe <literal>upload</literal> intègre
+      plusieurs méthodes pour définir facilement les exigences de
+      téléchargement nécessaires :
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>set_allowed_extensions($allowed_extensions)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_allowed_dimensions($min_width, $min_height, $max_width, $max_height)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_max_filesize($max_filesize)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_disallowed_content($disallowed_content)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_error_prefix($error_prefix)</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Chacune de ces méthodes retourne l'instance actuelle de la
+      classe <literal>upload</literal>, ce qui permet d'enchaîner les
+      appels :
+    </para>
+    <programlisting>
+$upload-&gt;set_allowed_extensions(['png', 'jpg'])
+    -&gt;set_allowed_dimensions(20, 20, 90, 90)
+    -&gt;set_max_filesize(65536)
+    -&gt;set_error_prefix('AVATAR_');
+</programlisting>
+  </sect1>
+  <sect1 id="uploading-files">
+    <title>Télécharger des fichiers</title>
+    <para>
+      Les méthodes précédemment existantes
+      <literal>form_upload()</literal>, <literal>remote_upload()</literal>
+      et <literal>local_upload()</literal> n'existent plus. À la
+      place, la classe <literal>upload</literal> contient désormais
+      la méthode <literal>handle_upload()</literal>.
+    </para>
+    <programlisting>
+$files_upload-&gt;handle_upload('files.type.local', $source_file, $filedata);
+</programlisting>
+    <para>
+      La méthode attend le type de téléchargement comme premier
+      argument. Les types disponibles par défaut sont
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>files.types.form</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>files.types.local</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>files.types.remote</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Les extensions peuvent bien entendu ajouter de nouveaux types de
+      téléchargement et les utiliser, à condition qu'elles
+      implémentent <literal>phpbb\files\types\type_interface</literal>.
+      Tout argument suivant le type sera transmis à la classe du type
+      de téléchargement. Celles-ci doivent implémenter la méthode
+      upload et récupérer les arguments transmis avec
+      <literal>func_get_args()</literal>.
+    </para>
+  </sect1>
+  <sect1 id="converting-uses-of-fileupload-class">
+    <title>Convertir les usages de la classe
+    <literal>fileupload</literal></title>
+    <para>
+      Il est recommandé d'utiliser la factory <literal>files</literal>
+      pour récupérer les classes <literal>files</literal>. Dans cet
+      exemple, nous utiliserons cependant le conteneur phpBB.
+    </para>
+    <sect2 id="empty-constructor">
+      <title>Constructeur vide</title>
+      <para>
+        Dans phpBB 3.1, l'utilisation de base de la classe
+        <literal>fileupload</literal> ressemblait à ceci :
+      </para>
+      <programlisting>
+include_once($phpbb_root_path . 'includes/functions_upload.' . $phpEx);
+$upload = new fileupload();
+$upload-&gt;set_disallowed_content([]);
+$extensions = $cache-&gt;obtain_attach_extensions((($is_message) ? false : (int) $forum_id));
+$upload-&gt;set_allowed_extensions(array_keys($extensions['_allowed_']));
+$file = ($local) ? $upload-&gt;local_upload($local_storage, $local_filedata, $mimetype_guesser) : $upload-&gt;form_upload($form_name, $mimetype_guesser, $plupload);
+</programlisting>
+      <para>
+        Depuis phpBB 3.2, ceci devient :
+      </para>
+      <programlisting>
+$upload = $phpbb_container-&gt;get('files.upload');
+$upload-&gt;set_disallowed_content([]);
+$extensions = $cache-&gt;obtain_attach_extensions((($is_message) ? false : (int) $forum_id));
+$upload-&gt;set_allowed_extensions(array_keys($extensions['_allowed_']));
+$file = ($local) ? $upload-&gt;handle_upload('files.types.local', $local_storage, $local_filedata) : $upload-&gt;handle_upload('files.types.form', $form_name);
+</programlisting>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Les services tels que <literal>phpbb\mimetype\guesser</literal>
+          et <literal>phpbb\plupload\plupload</literal> ne sont plus
+          transmis aux méthodes de téléchargement.
+        </para>
+      </note>
+      <para>
+        Les appels peuvent bien sûr également être enchaînés :
+      </para>
+      <programlisting>
+$extensions = $cache-&gt;obtain_attach_extensions((($is_message) ? false : (int) $forum_id));
+$file = $phpbb_container-&gt;get('files.upload')
+    -&gt;set_disallowed_content([])
+    -&gt;set_allowed_extensions(array_keys($extensions['_allowed_']))
+    -&gt;handle_upload('files.types.local', $local_storage, $local_filedata);
+</programlisting>
+    </sect2>
+    <sect2 id="settings-passed-to-constructor">
+      <title>Paramètres transmis au constructeur</title>
+      <para>
+        phpBB 3.1 permettait également de transmettre les paramètres
+        directement au constructeur de la classe
+        <literal>fileupload</literal> :
+      </para>
+      <programlisting>
+$upload = new fileupload(
+    $error_prefix,
+    $allowed_extensions,
+    $max_filesize,
+    $min_width,
+    $min_height,
+    $max_width,
+    $max_height,
+    $disallowed_content
+);
+</programlisting>
+      <para>
+        Comme la classe <literal>upload</literal> est récupérée via
+        le conteneur ou la factory, il n'est plus possible de
+        transmettre ces paramètres au constructeur. Ils doivent à la
+        place être transmis avec les méthodes
+        <literal>set_</literal> correspondantes :
+      </para>
+      <programlisting>
+$upload = $files_factory-&gt;get('files.upload')
+    -&gt;set_error_prefix($error_prefix)
+    -&gt;set_allowed_extensions($allowed_extensions)
+    -&gt;set_max_filesize($max_filesize)
+    -&gt;set_allowed_dimensions($min_width, $min_height, $max_width, $max_height)
+    -&gt;set_disallowed_content($disallowed_content);
+</programlisting>
+      <para>
+        Ceci peut également être enchaîné pour appeler directement la
+        méthode <literal>handle_upload()</literal> :
+      </para>
+      <programlisting>
+$upload = $files_factory-&gt;get('files.upload')
+    -&gt;set_error_prefix($error_prefix)
+    -&gt;set_allowed_extensions($allowed_extensions)
+    -&gt;set_max_filesize($max_filesize)
+    -&gt;set_allowed_dimensions($min_width, $min_height, $max_width, $max_height)
+    -&gt;set_disallowed_content($disallowed_content)
+    -&gt;handle_upload('files.types.local', $local_storage, $local_filedata);
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="reset-settings">
+    <title>Réinitialiser les paramètres</title>
+    <para>
+      Les paramètres comme la taille de fichier maximale, les
+      dimensions autorisées et le préfixe d'erreur peuvent facilement
+      être réinitialisés à l'aide de la méthode
+      <literal>reset_vars()</literal>.
+    </para>
+  </sect1>
+  <sect1 id="perform-common-checks-on-upload">
+    <title>Effectuer les vérifications courantes sur le
+    téléchargement</title>
+    <para>
+      La méthode <literal>common_checks()</literal> peut être utilisée
+      pour effectuer des vérifications courantes sur l'objet
+      <literal>filespec</literal> retourné par la méthode
+      <literal>handle_upload()</literal>. Celles-ci incluent des
+      vérifications de la taille du fichier téléchargé, du nom et de
+      l'extension du fichier, ainsi que du contenu de fichier non
+      autorisé. Cela peut être effectué en transmettant simplement
+      l'objet <literal>filespec</literal> :
+    </para>
+    <programlisting>
+$upload-&gt;common_checks($filespec);
+</programlisting>
+    <note>
+      <title>Remarque</title>
+      <para>
+        <literal>common_checks()</literal> n'a pas de valeur de
+        retour. Veuillez plutôt vérifier la propriété
+        <literal>$filespec-&gt;error</literal> après avoir exécuté
+        <literal>common_checks()</literal>
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="check-form-for-validity">
+    <title>Vérifier la validité d'un formulaire</title>
+    <para>
+      Il est possible de vérifier si un formulaire est valide pour les
+      téléchargements de fichiers en transmettant simplement le nom du
+      formulaire à la méthode <literal>is_valid()</literal>. Elle
+      retournera true pour les formulaires valides et false si le
+      fichier n'a pas été téléchargé pour le formulaire spécifié ou si
+      le fichier de téléchargement n'était pas correctement défini.
+    </para>
+    <programlisting>
+$valid_form = $upload-&gt;is_valid('acme_form');
+</programlisting>
+  </sect1>
+</article>

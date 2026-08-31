@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Permission Tool</title>
+  </articleinfo>
+  <para>
+    L'outil permission aide à ajouter et supprimer des permissions, à
+    activer et désactiver des permissions, et à ajouter et supprimer
+    des rôles de permission.
+  </para>
+  <sect1 id="add-permission">
+    <title>Ajouter une permission</title>
+    <para>
+      Ajouter une nouvelle permission
+    </para>
+    <programlisting>
+['permission.add', [permission name, global (default: true) , copy from (default: false) ]],
+</programlisting>
+    <sect2 id="example">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.add', ['a_new']], // New global admin permission a_new
+         ['permission.add', ['m_new']], // New global moderator permission m_new
+         ['permission.add', ['m_new', false]], // New local moderator permission m_new
+         ['permission.add', ['u_new']], // New global user permission u_new
+         ['permission.add', ['u_new', false]], // New local user permission u_new
+
+         ['permission.add', ['a_copy', true, 'a_existing']], // New global admin permission a_copy, copies permission settings from a_existing
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="delete-permission">
+    <title>Supprimer une permission</title>
+    <para>
+      Supprimer une permission
+    </para>
+    <programlisting>
+['permission.remove', [permission name, global (default: true) ]],
+</programlisting>
+    <sect2 id="example-1">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.remove', ['a_new']], // Remove global admin permission a_new
+         ['permission.remove', ['m_new']], // Remove global moderator permission m_new
+         ['permission.remove', ['m_new', false]], // Remove local moderator permission m_new
+         ['permission.remove', ['u_new']], // Remove global user permission u_new
+         ['permission.remove', ['u_new', false]], // Remove local user permission u_new
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="add-role">
+    <title>Ajouter un rôle</title>
+    <para>
+      Ajouter un nouveau rôle de permission
+    </para>
+    <programlisting>
+['permission.role_add', [role name, role type (u_, m_, a_), role description]],
+</programlisting>
+    <sect2 id="example-2">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.role_add', ['new admin role', 'a_', 'a new role for admins']], // New role &quot;new admin role&quot;
+         ['permission.role_add', ['new moderator role', 'm_', 'a new role for moderators']], // New role &quot;new moderator role&quot;
+         ['permission.role_add', ['new user role', 'u_', 'a new role for users']], // New role &quot;new user role&quot;
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="update-permission-role">
+    <title>Mettre à jour un rôle de permission</title>
+    <para>
+      Mettre à jour un rôle de permission
+    </para>
+    <programlisting>
+['permission.role_update', [old role name, new role name]],
+</programlisting>
+    <sect2 id="example-3">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.role_update', ['new admin role', 'new name for admin role']], // Rename &quot;new admin role&quot; to &quot;new name for admin role&quot;
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="remove-role">
+    <title>Supprimer un rôle</title>
+    <para>
+      Supprimer un rôle de permission
+    </para>
+    <programlisting>
+['permission.role_remove', [role name]],
+</programlisting>
+    <sect2 id="example-4">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.role_remove', ['new admin role']], // Remove role &quot;new admin role&quot;
+         ['permission.role_remove', ['new moderator role']], // Remove role &quot;new moderator role&quot;
+         ['permission.role_remove', ['new user role']], // Remove role &quot;new user role&quot;
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="permission-set">
+    <title>Activer une permission</title>
+    <para>
+      Définir une permission (à Oui ou Jamais)
+    </para>
+    <programlisting>
+['permission.permission_set', [role/group name, permission name(s), type ('role', 'group', default: role), has permission (default: true) ]],
+</programlisting>
+    <sect2 id="example-5">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_new']], // Give ROLE_ADMIN_FULL a_new permission
+         ['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_new2', 'role', false]], // Set a_new2 to never for ROLE_ADMIN_FULL
+         ['permission.permission_set', ['REGISTERED', 'u_new', 'group']], // Give REGISTERED users u_new permission
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="permission-unset">
+    <title>Désactiver une permission</title>
+    <para>
+      Supprimer une permission (définie sur Non)
+    </para>
+    <programlisting>
+['permission.permission_unset', [role/group name, permission name(s), type ('role', 'group', default: role) ]],
+</programlisting>
+    <sect2 id="example-6">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['permission.permission_unset', ['ROLE_ADMIN_FULL', 'a_new']], // Remove a_new permission from role ROLE_ADMIN_FULL
+         ['permission.permission_unset', ['REGISTERED', 'u_new', 'group']], // Remove u_new permission from group REGISTERED
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="role-exists">
+    <title>Le rôle existe</title>
+    <para>
+      Vérifier si un rôle de permission existe avant de tenter
+      d'activer/désactiver des permissions sur celui-ci (introduit
+      dans phpBB 3.3.2)
+    </para>
+    <programlisting>
+['permission.role_exists', [role name]],
+</programlisting>
+    <sect2 id="example-7">
+      <title>Exemple</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        ['if', [
+            ['permission.role_exists', ['ROLE_ADMIN_FULL']], // Check if ROLE_ADMIN_FULL exists before updating it
+            ['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_new']], // Give ROLE_ADMIN_FULL a_new permission
+        ]],
+
+        ['if', [
+            ['permission.role_exists', ['ROLE_MOD_FULL']], // Check if ROLE_MOD_FULL exists before updating it
+            ['permission.permission_unset', ['ROLE_MOD_FULL', 'm_new']], // Remove m_new permission from role ROLE_MOD_FULL
+        ]],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

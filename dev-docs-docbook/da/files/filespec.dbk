@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Klassen filespec</title>
+  </articleinfo>
+  <para>
+    Den nyligt introducerede <literal>filespec</literal>-fil-klasse
+    erstatter den tidligere eksisterende klasse
+    <literal>filespec</literal>.
+  </para>
+  <sect1 id="passing-settings-to-filespec-class">
+    <title>Videregivelse af indstillinger til klassen filespec</title>
+    <para>
+      I phpBB-versioner før 3.2 blev <literal>$upload_ary</literal> og
+      <literal>$upload_namespace</literal> sendt til klassen
+      <literal>filespec</literal> via konstruktøren. Da disse nu hentes
+      via containerinfrastrukturen, er dette ikke længere muligt. I
+      stedet indeholder den nye klasse <literal>filespec</literal> 2
+      metoder til nemt at sætte de nødvendige data:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>set_upload_ary($upload_ary)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_upload_namespace($namespace)</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Hver af disse metoder returnerer den aktuelle instans af klassen
+      <literal>filespec</literal>, hvilket giver mulighed for kædede
+      kald:
+    </para>
+    <programlisting>
+$filespec-&gt;set_upload_ary($upload_ary)
+    -&gt;set_upload_namespace($namespace);
+</programlisting>
+  </sect1>
+  <sect1 id="retrieving-property-values">
+    <title>Hentning af egenskabsværdier</title>
+    <para>
+      Værdier for <literal>filespec</literal>-egenskaber kan nemt hentes
+      med metoden <literal>get()</literal>. Angiv blot navnet på den
+      egenskab, der skal hentes, så returneres dens værdi.
+    </para>
+    <programlisting>
+$filename = $filespec-&gt;get('filename');
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        <literal>get()</literal> returnerer false, hvis den angivne
+        egenskab ikke findes, eller hvis klassen ikke blev korrekt
+        initialiseret.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="clean-file-name">
+    <title>Rens filnavn</title>
+    <para>
+      <literal>filespec</literal> understøtter flere måder at rense
+      filnavnet på, afhængigt af den angivne tilstand med metoden
+      <literal>clean_filename()</literal>. Mulige tilstande er:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              avatar
+            </term>
+            <listitem>
+              <para>
+                Bygger navnet baseret på det angivne præfiks og ID
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              real
+            </term>
+            <listitem>
+              <para>
+                Opretter et navn med små bogstaver og fjerner nogle
+                potentielt problematiske tegn
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              unique
+            </term>
+            <listitem>
+              <para>
+                Opretter et unikt filnavn uden filendelse
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              unique_ext
+            </term>
+            <listitem>
+              <para>
+                Opretter et unikt filnavn med filendelse
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="move-file-to-location">
+    <title>Flyt fil til placering</title>
+    <para>
+      Det er muligt at flytte den uploadede fil til en angivet placering
+      med metoden <literal>move_file()</literal>.
+    </para>
+    <programlisting>
+move_file($destination, $overwrite = false, $skip_image_check = false, $chmod = false)
+</programlisting>
+    <para>
+      <literal>$destination</literal>: Sti, filen skal flyttes til
+    </para>
+    <para>
+      <literal>$overwrite</literal>: Om eksisterende filer skal
+      overskrives
+    </para>
+    <para>
+      <literal>$skip_image_check</literal>: Om det skal springes over at
+      kontrollere, om billedet er gyldigt
+    </para>
+    <para>
+      <literal>$chmod</literal>: Tilladelsesmaske, filen skal sættes til
+      med <literal>chmod()</literal>
+    </para>
+  </sect1>
+</article>

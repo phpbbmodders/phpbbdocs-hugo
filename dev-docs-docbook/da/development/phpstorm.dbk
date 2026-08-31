@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Brug af PhpStorm med phpBB</title>
+  </articleinfo>
+  <para>
+    PhpStorm er en IDE (Integrated Development Environment) og er den
+    foretrukne udviklingsplatform for phpBB's udviklingsteam.
+  </para>
+  <para>
+    Denne vejledning forklarer, hvordan du sætter PhpStorm op til
+    udvikling med phpBB.
+  </para>
+  <sect1 id="create-a-new-project">
+    <title>Opret et nyt projekt</title>
+    <para>
+      Først skal du have en kopi af phpBB's udviklingsrepository fra
+      GitHub.
+    </para>
+    <orderedlist numeration="arabic" spacing="compact">
+      <listitem>
+        <para>
+          Besøg <ulink url="https://github.com/phpbb/phpbb">phpBB's
+          repository</ulink> og fork det til din GitHub-konto.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Klon din nye phpBB-fork til din computer.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Åbn PhpStorm
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Vælg &quot;Create New Project from Existing Files&quot;, og
+          følg trinnene i guiden.
+        </para>
+      </listitem>
+    </orderedlist>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Afhængigt af dit lokale miljø er det typisk bedste valg
+        &quot;Source files are in a local directory, no web server is
+        yet configured&quot;. Du kan altid sætte webserveren op senere.
+      </para>
+    </note>
+    <orderedlist numeration="arabic" spacing="compact" startingnumber="5">
+      <listitem>
+        <para>
+          Vælg den phpBB-projektmappe, du klonede fra GitHub, og klik på
+          &quot;Project Root&quot;. Klik derefter på
+          &quot;Finish&quot;.
+        </para>
+      </listitem>
+    </orderedlist>
+  </sect1>
+  <sect1 id="code-style">
+    <title>Kodestil</title>
+    <para>
+      Ved at sætte PhpStorm op til at overholde phpBB's guide for
+      kodestil sikrer du, at du altid skriver kode, der lever op til
+      phpBB's krav. Disse indstillinger konfigureres i PhpStorms
+      Settings/Preferences, under
+      <emphasis role="strong">Editor &gt; Code Style</emphasis>.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Før du ændrer indstillinger, er det en god idé at oprette et
+        phpBB-&quot;Scheme&quot; i ruden med indstillinger for kodestil.
+        Dette phpBB-scheme kan anvendes på ethvert phpBB-projekt, du
+        opretter i PhpStorm.
+      </para>
+    </note>
+    <para>
+      For nemheds skyld har vi leveret en XML-eksport af følgende
+      kodestilsindstillinger til phpBB (se
+      <link linkend="phpbb-code-style-scheme">phpBB Code Style
+      Scheme</link>). Du kan importere disse indstillinger til dit
+      projekt, og alle de følgende stilindstillinger konfigureres
+      automatisk for dig.
+    </para>
+    <sect2 id="php">
+      <title>PHP</title>
+      <sect3 id="tabs-indents">
+        <title>Tabulatorer og indrykning</title>
+        <para>
+          Der bør bruges tabulatorer (ikke mellemrum). Alle
+          tabulator- og indrykningsstørrelser bør sættes til 4
+          mellemrum. Sørg også for, at &quot;Keep indents on empty
+          lines&quot; IKKE er markeret.
+        </para>
+      </sect3>
+      <sect3 id="spaces">
+        <title>Mellemrum</title>
+        <para>
+          Der findes mange indstillinger for håndtering af mellemrum, og
+          standardindstillingerne fungerer for det meste fint. Den
+          generelle regel er, at der skal være enkelte mellemrum omkring
+          alle operatorer og parenteser (undtagen ved
+          funktionsdeklarationer/-kald).
+        </para>
+      </sect3>
+      <sect3 id="wrapping-and-braces">
+        <title>Ombrydning og krøllede parenteser</title>
+        <para>
+          Den generelle regel her er, at krøllede parenteser altid sættes
+          på nye linjer.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="css-javascript-html-twig">
+      <title>CSS, JavaScript, HTML, Twig</title>
+      <para>
+        Der bør bruges tabulatorer (ikke mellemrum). Alle tabulator- og
+        indrykningsstørrelser bør sættes til 4 mellemrum. Sørg også for,
+        at &quot;Keep indents on empty lines&quot; IKKE er markeret.
+      </para>
+    </sect2>
+    <sect2 id="json-yaml">
+      <title>JSON og YAML</title>
+      <para>
+        Json- og Yaml-filer bruger 4 mellemrum frem for tabulatorer, så
+        tabulatortegnet bør deaktiveres, og indrykningsstørrelsen bør
+        være 4 mellemrum.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="inspections">
+    <title>Inspektioner</title>
+    <para>
+      En af de mest effektive funktioner i en IDE som PhpStorm er dens
+      evne til at inspicere din kode og i realtid give dig fejl og
+      advarsler. En IDE er fuldt opmærksom på, hvordan phpBB's kodebase
+      er designet til at fungere, og hvordan alle dens klasser og
+      funktioner interagerer med hinanden. Inspektioner kan øjeblikkeligt
+      vise dig, f.eks. hvis du bruger en funktion forkert, kalder
+      metoder, der ikke findes, mangler argumenter osv.
+    </para>
+    <para>
+      Standardindstillingerne for inspektioner bør fungere fint. Der er
+      dog et par justeringer, der kan være ønskelige:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          Hvis PhpStorm ikke er forbundet til din databaseserver, vil du
+          måske slå advarslerne
+          <emphasis role="strong">SQL &gt; SQL Dialect Detection</emphasis>
+          og <emphasis role="strong">SQL &gt; No data sources
+          configured</emphasis> fra.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          phpBB bruger fuldt kvalificerede namespaces, så du kan slå
+          denne inspektionsadvarsel
+          <emphasis role="strong">PHP &gt; Code Style &gt; Unnecessary
+          fully qualified name</emphasis> fra.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Du kan aktivere yderligere JavaScript-inspektioner. Under
+          <emphasis role="strong">JavaScript &gt; Code quality
+          tools</emphasis> kan du aktivere JSCS, JSHint, JSlint og/eller
+          ESLint. phpBB leveres med konfigurationsfiler til JSHint og
+          JSCS. Med disse inspektioner aktiveret kan du bruge de
+          konfigurationsfiler, som phpBB leverer, i stedet for PhpStorms
+          standardindstillinger. Det gør du ved at pege PhpStorm på de
+          brugerdefinerede konfigurationsfiler under
+          <emphasis role="strong">Language &amp; Frameworks &gt;
+          JavaScript &gt; Code Quality Tools</emphasis>. Peg JSHint på
+          .jshintrc og JSCS på .jscsrc.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        JSCS følger ikke med PhpStorm. JSCS-værktøjet køres via NodeJS.
+        For at bruge JSCS skal du sikre dig, at NodeJS-frameworket er
+        downloadet og installeret på din computer. Derefter kan du
+        installere JSCS via npm-pakkehåndteringen og konfigurere
+        JSCS-indstillingerne i PhpStorm til at bruge JSCS-pakken. For
+        mere information, se
+        <ulink url="https://www.jetbrains.com/help/phpstorm/10.0/using-javascript-code-quality-tools.html#JSCS">PhpStorms
+        dokumentation</ulink>.
+      </para>
+    </warning>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        phpBB bruger jQuery. JavaScript-inspektionerne skal gøres
+        opmærksomme på jQuery for at undgå falske advarsler/fejl. For at
+        gøre dette skal du blot gå til
+        <emphasis role="strong">Languages &amp; Frameworks &gt;
+        JavaScript &gt; Libraries</emphasis> og aktivere jQuery. Hvis
+        jQuery ikke findes på listen, kan du bruge
+        &quot;Download&quot;-knappen til at downloade en kopi af jQuery
+        til PhpStorm.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="plugins">
+    <title>Plugins</title>
+    <para>
+      Ved at tilføje plugins til PhpStorm kan du få endnu flere
+      funktioner, værktøjer, inspektører og kodekvalitetsanalyser til din
+      IDE.
+    </para>
+    <sect2 id="editorconfig">
+      <title>EditorConfig</title>
+      <para>
+        phpBB bruger en EditorConfig-profil. Installér
+        EditorConfig-pluginet for at drage fordel af den. Dette smarte
+        plugin sørger automatisk for, at dine PHP-, CSS-, JS-, HTML-,
+        YML- og MD-filer altid bruger tabulatorer eller mellemrum
+        korrekt, som krævet af filtypen, fjerner efterstillede
+        mellemrum og sikrer, at alle filer har en ny tom linje til
+        sidst.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="languages-frameworks">
+    <title>Sprog og frameworks</title>
+    <para>
+      PHP-inspektioner afhænger af PHP-sprogniveauet (f.eks. PHP 5.3,
+      5.4, 7.0 osv.). Du bør sætte
+      <emphasis role="strong">PHP language level</emphasis> til den
+      mindste version, phpBB understøtter. Dette er for at sikre, at du
+      ikke ved et uheld skriver kode, der måske er gyldig i PHP 5.6, men
+      inkompatibel med PHP 5.4 (som phpBB understøtter).
+      <emphasis role="strong">PHP interpreter</emphasis> bør sættes til
+      den PHP-binærfil, der er tilgængelig i rullemenuen. Hvis der ikke
+      findes nogen interpreter, skal du pege den på din PHP-eksekverbare
+      fil på dit system (f.eks.: /usr/bin/php).
+    </para>
+  </sect1>
+  <sect1 id="phpunit-testing">
+    <title>PHPUnit-testning</title>
+    <para>
+      Selvom det er muligt at køre PHPUnit-tests i PhpStorm direkte fra
+      terminalvinduet, er PHPUnit-testning også indbygget i PhpStorm som
+      en Run/Debug-handling. Fordelen ved dette er, at testning nemmere
+      kan sættes på pause eller afbrydes. Fejlede tests kan køres igen
+      uden at skulle køre hele testsuiten. Bedst af alt har rapporteringen
+      af fejlede tests hyperlinks til de fejlende kodesteder, hvilket gør
+      det meget nemmere at springe til de problematiske tests og
+      phpBB-koden og fejlsøge dem.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Dette forudsætter, at du allerede har PHPUnit-testning
+        konfigureret og fungerende fra kommandolinjegrænsefladen. Læs
+        dokumentationen i <literal>../testing/index</literal> for mere
+        information.
+      </para>
+    </note>
+    <para>
+      For at sætte PHPUnit op i PhpStorm skal du gå til:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <emphasis role="strong">Run &gt; Edit
+          Configurations</emphasis>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Tryk på <emphasis role="strong">+</emphasis> for at oprette en
+          ny PHPUnit-konfiguration, og giv den et navn, f.eks. 'phpBB
+          tests'.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Sæt <emphasis role="strong">Test Runner</emphasis> til
+          <emphasis role="strong">Defined in configuration
+          file</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Markér <emphasis role="strong">Use alternative configuration
+          file</emphasis>, og peg den på filen
+          <emphasis role="strong">phpunit.xml.dist</emphasis> i
+          phpBB-projektets rod.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Sæt <emphasis role="strong">Command Line &gt; Custom working
+          directory</emphasis> til phpBB-projektets rod.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Nu kan du vælge <emphasis role="strong">Run &gt; phpBB
+          tests</emphasis>, og unit-tests bør køre inde i PhpStorm.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Hvis du skriver extensions til phpBB, kan du også sætte
+        PHPUnit-testkonfigurationer op for hver extension. Skift blot
+        hver konfiguration til at bruge extensionens konfigurationsfil i
+        stedet for phpBB's.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="phpstorm-setting-exports-for-phpbb">
+    <title>PhpStorm-indstillingseksport til phpBB</title>
+    <para>
+      Det følgende er den kodestil, vi anbefaler til dit phpBB-projekt i
+      PhpStorm. Kopiér og gem denne kodeblok som
+      <literal>phpbb.xml</literal>. Gå derefter i PhpStorm til
+      <emphasis role="strong">Settings &gt; Editor &gt; Code
+      Style</emphasis>. Klik på tandhjulsikonet ved siden af
+      <emphasis role="strong">Scheme</emphasis>, og vælg
+      <emphasis role="strong">Import Scheme...</emphasis>, og importér
+      filen <literal>phpbb.xml</literal>.
+    </para>
+    <sect2 id="phpbb-code-style-scheme">
+      <title>phpBB Code Style Scheme</title>
+      <programlisting language="xml">
+&lt;code_scheme name=&quot;phpBB&quot; version=&quot;173&quot;&gt;
+  &lt;option name=&quot;OTHER_INDENT_OPTIONS&quot;&gt;
+    &lt;value&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/value&gt;
+  &lt;/option&gt;
+  &lt;CssCodeStyleSettings&gt;
+    &lt;option name=&quot;HEX_COLOR_LOWER_CASE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;HEX_COLOR_LONG_FORMAT&quot; value=&quot;true&quot; /&gt;
+  &lt;/CssCodeStyleSettings&gt;
+  &lt;JSCodeStyleSettings version=&quot;0&quot;&gt;
+    &lt;option name=&quot;SPACE_BEFORE_FUNCTION_LEFT_PARENTH&quot; value=&quot;false&quot; /&gt;
+  &lt;/JSCodeStyleSettings&gt;
+  &lt;PHPCodeStyleSettings&gt;
+    &lt;option name=&quot;ALIGN_KEY_VALUE_PAIRS&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;ALIGN_PHPDOC_PARAM_NAMES&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;ALIGN_PHPDOC_COMMENTS&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;COMMA_AFTER_LAST_ARRAY_ELEMENT&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;PHPDOC_BLANK_LINE_BEFORE_TAGS&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;PHPDOC_WRAP_LONG_LINES&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;LOWER_CASE_BOOLEAN_CONST&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;LOWER_CASE_NULL_CONST&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;PHPDOC_USE_FQCN&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;MULTILINE_CHAINED_CALLS_SEMICOLON_ON_NEW_LINE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;NAMESPACE_BRACE_STYLE&quot; value=&quot;2&quot; /&gt;
+  &lt;/PHPCodeStyleSettings&gt;
+  &lt;XML&gt;
+    &lt;option name=&quot;XML_LEGACY_SETTINGS_IMPORTED&quot; value=&quot;true&quot; /&gt;
+  &lt;/XML&gt;
+  &lt;codeStyleSettings language=&quot;CSS&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;HTML&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;JavaScript&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;PHP&quot;&gt;
+    &lt;option name=&quot;BLANK_LINES_AFTER_PACKAGE&quot; value=&quot;1&quot; /&gt;
+    &lt;option name=&quot;BRACE_STYLE&quot; value=&quot;2&quot; /&gt;
+    &lt;option name=&quot;ELSE_ON_NEW_LINE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;CATCH_ON_NEW_LINE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;INDENT_BREAK_FROM_CASE&quot; value=&quot;false&quot; /&gt;
+    &lt;option name=&quot;ALIGN_MULTILINE_PARAMETERS&quot; value=&quot;false&quot; /&gt;
+    &lt;option name=&quot;ALIGN_MULTILINE_FOR&quot; value=&quot;false&quot; /&gt;
+    &lt;option name=&quot;ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;SPACE_AFTER_TYPE_CAST&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;METHOD_CALL_CHAIN_WRAP&quot; value=&quot;5&quot; /&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;Twig&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;yaml&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;INDENT_SIZE&quot; value=&quot;4&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+&lt;/code_scheme&gt;
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

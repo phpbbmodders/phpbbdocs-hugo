@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Controllere og Routes</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      phpBB 3.1 introducerede Symfonys
+      <ulink url="https://symfony.com/doc/current/components/http_kernel.html">HttpKernel</ulink>-,
+      <ulink url="https://symfony.com/doc/current/controller.html">Controller</ulink>-
+      og
+      <ulink url="https://symfony.com/doc/current/routing.html">Routing</ulink>-systemer,
+      som giver extensions mulighed for at håndtere brugerdefinerede
+      "front-facing"-sider, som brugere kan se og interagere med.
+    </para>
+    <para>
+      Denne tutorial forklarer, hvordan du opretter brugervendte sider:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="controllers">Controllere</link>: Brugervendte
+            filer
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="routing">Routing</link>: URL'er til
+            brugervendte filer
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="controllers">
+    <title>Controllere</title>
+    <para>
+      En controller er en klasse med en samling af funktioner, der
+      leverer indhold og håndterer interaktioner fra brugeren, baseret
+      på hvad der forespørges i URL'en. For eksempel en blog-extension,
+      der viser ét eller flere blogindlæg.
+    </para>
+    <para>
+      I øjeblikket har vores Acme Demo-extension et link i
+      navigationslinjen uden noget mål. Vi bruger en controller til at
+      oprette en side, brugeren vil se, og bruger routing til at
+      håndtere URL'en til vores controller.
+    </para>
+    <para>
+      Controllerfiler kan placeres hvor som helst i en extensions
+      mappestruktur, men for at holde tingene organiserede er det bedst
+      at placere dem i en separat mappe ved navn
+      <literal>controller/</literal>. Controllerfiler kan også gives et
+      hvilket som helst navn. Til Acme Demo-extensionen bruger vi
+      <literal>ext\acme\demo\controller\main.php</literal>.
+    </para>
+    <para>
+      Hver controller bør indeholde mindst to metoder:
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            En offentlig metode <literal>__construct()</literal>. Denne
+            er valgfri, hvis din controller ikke har nogen
+            afhængigheder.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            En offentlig metode <literal>handle()</literal>. Denne
+            metode kan hedde hvad som helst, men "handle" er almindeligt.
+            Denne metode skal returnere et Symfony Response-objekt.
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\controller;
+
+use \Symfony\Component\HttpFoundation\Response;
+
+class main
+{
+    /* @var \phpbb\config\config */
+    protected $config;
+
+    /* @var \phpbb\controller\helper */
+    protected $helper;
+
+    /* @var \phpbb\language\language */
+    protected $language;
+
+    /* @var \phpbb\template\template */
+    protected $template;
+
+    /**
+     * Constructor
+     *
+     * @param \phpbb\config\config      $config
+     * @param \phpbb\controller\helper  $helper
+     * @param \phpbb\language\language  $language
+     * @param \phpbb\template\template  $template
+     */
+    public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\template\template $template)
+    {
+        $this-&gt;config   = $config;
+        $this-&gt;helper   = $helper;
+        $this-&gt;language = $language;
+        $this-&gt;template = $template;
+    }
+
+    /**
+     * Demo controller for route /demo/{name}
+     *
+     * @param string $name
+     * @throws \phpbb\exception\http_exception
+     * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+     */
+    public function handle($name)
+    {
+        if ($name === 'bertie')
+        {
+            throw new \phpbb\exception\http_exception(403, 'NO_AUTH_SPEAKING', [$name]);
+        }
+
+        $l_message = !$this-&gt;config['acme_demo_goodbye'] ? 'DEMO_HELLO' : 'DEMO_GOODBYE';
+        $this-&gt;template-&gt;assign_var('DEMO_MESSAGE', $this-&gt;language-&gt;lang($l_message, $name));
+
+        return $this-&gt;helper-&gt;render('@acme_demo/demo_body.html', $name);
+    }
+}
+</programlisting>
+    <sect2 id="dependencies">
+      <title>Afhængigheder</title>
+      <para>
+        Lad os nu se på controllerens konstruktør, før vi kigger på selve
+        controller-koden i metoden <literal>handle()</literal>.
+      </para>
+      <para>
+        Vores controller har flere afhængigheder af phpBB-objekter. Vi
+        skal fortælle phpBB om vores controller og dens afhængigheder ved
+        at definere den som en service i vores fil
+        <literal>config/services.yml</literal>, som blev introduceret i
+        <literal>tutorial_events</literal>. Den samlede
+        <literal>services.yml</literal>-fil bør se sådan ud:
+      </para>
+      <programlisting language="yaml">
+services:
+    acme.demo.controller:
+        class: acme\demo\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@template'
+    acme.demo.listener:
+        class: acme\demo\event\main_listener
+        tags:
+            - { name: event.listener }
+</programlisting>
+      <caution>
+        <title>Forsigtig</title>
+        <para>
+          Husk, at rækkefølgen af argumenter skal matche rækkefølgen af
+          parametre i konstruktørens metodedefinition.
+        </para>
+      </caution>
+    </sect2>
+    <sect2 id="request-handling">
+      <title>Håndtering af forespørgsler</title>
+      <para>
+        Metoden <literal>handle()</literal> er ansvarlig for at håndtere
+        forespørgslen om at vise sider. Bemærk, at den tager argumentet
+        <literal>$name</literal>. Dette er en variabel, der sendes ind
+        fra en URL-parameter, som defineret i konfigurationsfilen for
+        <link linkend="routing">routing</link>.
+      </para>
+      <para>
+        Handle-metoden har en speciel betingelse, der kontrollerer, om
+        brugeren forsøger at bruge <emphasis>bertie</emphasis>. Vi vil
+        ikke godkende dette, fordi folk ikke bør interagere med
+        <ulink url="https://www.phpbb.com/shop/">Bertie</ulink>. Så vi
+        kaster en <literal>http_exception</literal> med en 403-fejlkode,
+        hvilket viser en pæn "ikke godkendt"-fejlmeddelelse til brugeren.
+      </para>
+      <para>
+        Med et gyldigt navn opretter handle-metoden en simpel besked, der
+        vises til brugeren, og tildeler den til controllerens array af
+        skabelonvariabler.
+      </para>
+      <para>
+        Derefter bruger vi Helper-objektet
+        <literal>phpbb\controller\helper</literal> til at gengive vores
+        side med metoden <literal>render()</literal>. Den tager
+        skabelonfilnavnet, sidetitlen og statuskoden som argumenter.
+        Sidetitlen har som standard en tom streng, og statuskoden har som
+        standard 200. Vi bruger
+        <link linkend="controller-template">controller-skabelonen</link>
+        <literal>demo_body.html</literal>.
+      </para>
+      <tip>
+        <title>Tip</title>
+        <para>
+          Når du kalder en skabelonfil fra PHP ved hjælp af
+          <literal>phpbb\controller\helper:render()</literal>, søges der
+          efter skabelonfiler to steder (i denne rækkefølge):
+        </para>
+        <blockquote>
+          <orderedlist numeration="arabic" spacing="compact">
+            <listitem>
+              <para>
+                phpBB/styles/*style_name*/template/
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                phpBB/ext/*all_active_extensions*/styles/*style_name*/template/
+              </para>
+            </listitem>
+          </orderedlist>
+        </blockquote>
+        <para>
+          Følgende kode indlæser en skabelon, der kan befinde sig på
+          begge de ovenstående placeringer, dvs. i enhver phpBB-typografi
+          eller aktiv extension:
+        </para>
+        <programlisting>
+$this-&gt;helper-&gt;render('demo_body.html', $name);
+</programlisting>
+        <para>
+          Hvis du kun har brug for at indlæse en skabelonfil inden for
+          din egen extension, anbefaler vi at bruge præfikset
+          <literal>@vendor_extension/</literal>:
+        </para>
+        <programlisting>
+$this-&gt;helper-&gt;render('@acme_demo/demo_body.html', $name);
+</programlisting>
+        <para>
+          Det anbefales også altid at bruge unikke navne til dine
+          skabeloner for at undgå mulige konflikter med phpBB's
+          skabeloner eller andre extensions.
+        </para>
+      </tip>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Metoden <literal>phpbb\controller\helper:render()</literal>
+          returnerer et Symfony Response-objekt for os. Hvis du vælger
+          ikke at bruge Helper-objektet, skal du manuelt returnere et
+          Symfony Response-objekt. Response-objektet tager to
+          argumenter:
+        </para>
+        <blockquote>
+          <orderedlist numeration="arabic" spacing="compact">
+            <listitem>
+              <para>
+                Response-besked - Dette bør være hele den gengivne
+                sidekildekode, der udskrives på skærmen.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Statuskode - Denne er som standard 200, hvilket er
+                statuskoden "OK". Hvis du sender et svar om, at nogle
+                oplysninger ikke kunne findes, bør du bruge statussen 404
+                ("Not Found"). 403 bruges, hvis brugeren mangler de
+                nødvendige tilladelser, og 500 bruges til en ukendt fejl.
+              </para>
+            </listitem>
+          </orderedlist>
+        </blockquote>
+        <programlisting>
+return new \Symfony\Component\HttpFoundation\Response($template_file, 200);
+</programlisting>
+      </note>
+      <warning>
+        <title>Advarsel</title>
+        <para>
+          En controller bør aldrig kalde
+          <literal>trigger_error()</literal> for at generere output. I
+          stedet bør den altid returnere Symfony Response- eller
+          JsonResponse-objekter, eller kaste en phpBB http_exception.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="controller-template">
+      <title>Controller-skabelon</title>
+      <para>
+        Hver controller kræver en HTML-skabelonfil. Acme
+        Demo-extensionen bruger <literal>demo_body.html</literal>, som
+        findes i mappen
+        <literal>styles/prosilver/template/</literal>, med følgende
+        indhold, inklusive phpBB's header og footer:
+      </para>
+      <programlisting language="html">
+{% include 'overall_header.html' %}
+
+&lt;h2&gt;{{ DEMO_MESSAGE }}&lt;/h2&gt;
+
+{% include 'overall_footer.html' %}
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          En så enkel skabelonfil kunne gemmes i typografimappen
+          <literal>all/</literal>, da den tydeligvis ikke har nogen
+          HTML-markup, der er specifik for prosilver-typografien.
+        </para>
+      </note>
+    </sect2>
+  </sect1>
+  <sect1 id="routing">
+    <title>Routing</title>
+    <para>
+      På dette tidspunkt har vi nu en controller, der kan oprette og
+      levere en brugervendt side, men vi har endnu ikke en URL, hvorigennem
+      siden kan tilgås.
+    </para>
+    <para>
+      For at løse dette skal hver controller definere en
+      <emphasis>route</emphasis> i extensionens fil
+      <literal>config/routing.yml</literal>. Denne fil er ansvarlig for
+      at forbinde controllerens tilgangsnavn (dvs. det, der skrives i
+      URL'en) med dens service (dvs. det, vi gennemgik i
+      <link linkend="dependencies">Afhængigheder</link>).
+    </para>
+    <para>
+      Husk, at vores controller forventer, at der sendes en
+      URL-parameter til den som variablen <literal>$name</literal>. Vi
+      ønsker derfor, at vores URL skal se sådan ud:
+      <literal>/app.php/demo/&lt;name&gt;</literal>.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Alle extension-controllerfiler tilgås via
+        <literal>app.php</literal>. Boards kan dog aktivere funktionen
+        Enable URL rewriting i ACP'en for at skjule komponenten
+        <literal>app.php/</literal> i URL'en.
+      </para>
+    </note>
+    <para>
+      Vores fil <literal>routing.yml</literal> bør se sådan ud:
+    </para>
+    <programlisting language="yaml">
+acme_demo_route:
+    path: /demo/{name}
+    defaults: { _controller: acme.demo.controller:handle, name: &quot;world&quot; }
+</programlisting>
+    <para>
+      Routing-definitionen ovenfor betyder, at når brugeren går til
+      URL'en <literal>/app.php/demo/&lt;name&gt;</literal>, indlæses
+      servicen <literal>acme.demo.controller</literal>, og metoden
+      <literal>handle</literal> kaldes, hvor værdien af
+      <literal>{name}</literal>-"slugen" sendes til argumentet
+      <literal>$name</literal> (navnene på slugen og argumentet skal
+      matche). Hvis der ikke angives nogen værdi for
+      <literal>{name}</literal> (dvs. hvis URL'en er
+      <literal>/app.php/demo</literal>), sendes standardværdien "world"
+      til metoden <literal>handle</literal>.
+    </para>
+    <para>
+      Som du kan se, giver slugs en effektiv måde at interagere med din
+      controller på via URL-parametre. Du skal angive en slug for hver
+      obligatorisk parameter i din metode. Valgfrie parametre behøver
+      ikke angives i routing-definitionen, i hvilket tilfælde de får den
+      standardværdi, der er angivet i metodedefinitionen.
+    </para>
+    <para>
+      Du kan også angive regulære udtryk for slugs for mere præcist at
+      styre den type data, der sendes til metoden. Hvis vi f.eks. vil
+      sikre, at <literal>name</literal> er et heltal, tilføjer vi
+      følgende kode til vores routedefinition:
+    </para>
+    <programlisting language="yaml">
+requirements:
+    name: \d+
+</programlisting>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Element
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              route
+            </entry>
+            <entry>
+              Routenavnet er et unikt navn og skal have vendor- og
+              extension-navnet som præfiks. Brug kun små bogstaver og
+              understregninger.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              path
+            </entry>
+            <entry>
+              Stien for URL-komponenten, inklusive slugs omsluttet af
+              krøllede parenteser. Hvis en sti ikke matcher nogen route,
+              returneres en 404-fejl.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              defaults
+            </entry>
+            <entry>
+              Servicenavnet for controlleren og navnet på den metode,
+              der skal kaldes, adskilt af et kolon. Standardværdier for
+              slugs kan eventuelt defineres.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              requirements
+            </entry>
+            <entry>
+              Bruges til at få en bestemt route til kun at matche under
+              specifikke betingelser.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      <literal>routing.yml</literal> kan indeholde flere
+      routedefinitioner til flere URL'er, alt efter hvad extensionens
+      behov kræver. Routes sammenlignes i den rækkefølge, de er angivet
+      i filen <literal>routing.yml</literal>, hvilket er vigtigt at
+      tage højde for, når routes defineres. For eksempel:
+    </para>
+    <programlisting language="yaml">
+acme_blog_home:
+    path: /blog
+    defaults: { _controller: acme.blog.controller:handle }
+
+acme_blog_entry:
+    path: /blog/{id}
+    defaults: { _controller: acme.blog.controller:handle }
+    requirements:
+        id: \d+
+
+acme_blog_edit:
+    path: /blog/{id}/edit
+    defaults: { _controller: acme.blog.controller:handle }
+    requirements:
+        id: \d+
+</programlisting>
+    <sect2 id="generating-links-to-routes">
+      <title>Generering af links til routes</title>
+      <para>
+        Nu hvor vi kan tilgå vores brugervendte side fra en URL, skal vi
+        tilføje denne URL til det link i navigationslinjen, vi oprettede
+        tidligere med skabelonlisteneren.
+      </para>
+      <para>
+        Husk, at vores skabelonlistener har en variabel
+        <literal>U_DEMO_PAGE</literal>. Vi vil nu vende tilbage til
+        vores PHP-event-listener og opdatere den, så den genererer en
+        URL for vores route og tildeler den til
+        <literal>U_DEMO_PAGE</literal>.
+      </para>
+      <para>
+        Først bruger vi eventet <literal>core.page_header</literal>.
+        Dette er et ideelt event at bruge, når du vil manipulere kode,
+        når headeren for en phpBB-side genereres. Vi skal opdatere
+        metoden <literal>getSubscribedEvents()</literal> i
+        <literal>event/main_listener.php</literal> som følger:
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup'  =&gt; 'load_language_on_setup',
+        'core.page_header' =&gt; 'add_page_header_link',
+    ];
+}
+</programlisting>
+      <para>
+        Dernæst tilføjer vi en ny metode til event-listeneren, som
+        opretter vores link og tildeler det til vores skabelonvariabel:
+      </para>
+      <programlisting>
+/**
+ * Add a page header nav bar link
+ *
+ * @param \phpbb\event\data $event The event object
+ */
+public function add_page_header_link($event)
+{
+    $this-&gt;template-&gt;assign_vars([
+        'U_DEMO_PAGE' =&gt; $this-&gt;helper-&gt;route('acme_demo_route', ['name' =&gt; 'world']),
+    ]);
+}
+</programlisting>
+      <para>
+        I denne nye metode bruger vi Controller Helper-objektets metode
+        <literal>route()</literal> til at oprette linket til vores
+        controller. Bemærk, at den tager to argumenter:
+      </para>
+      <blockquote>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              Navnet på routen, som defineret i
+              <literal>routing.yml</literal>. I dette tilfælde
+              <literal>acme_demo_route</literal>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Et valgfrit array af parametre. I dette tilfælde sender vi
+              værdien <literal>world</literal> til parameteren
+              <literal>name</literal> som standardværdi.
+            </para>
+          </listitem>
+        </orderedlist>
+      </blockquote>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Den genererede URL ser sådan ud:
+          <literal>./app.php/demo/world</literal>, hvilket svarer til
+          <literal>./app.php/demo?name=world</literal>.
+        </para>
+      </note>
+      <para>
+        Bemærk, at vores nye metode
+        <literal>add_page_header_link()</literal> kræver objekterne
+        Controller Helper og Template fra phpBB. Vi skal derfor også
+        tilføje en ny konstruktør til vores event-listener for at
+        indsprøjte disse afhængigheder. Sætter vi det hele sammen, bør
+        den samlede event-listener se sådan ud:
+      </para>
+      <programlisting>
+namespace acme\demo\event;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+    /* @var \phpbb\controller\helper */
+    protected $helper;
+
+    /* @var \phpbb\template\template */
+    protected $template;
+
+    /**
+     * Constructor
+     *
+     * @param \phpbb\controller\helper $helper
+     * @param \phpbb\template\template $template
+     */
+    public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
+    {
+        $this-&gt;helper   = $helper;
+        $this-&gt;template = $template;
+    }
+
+    /**
+     * Assign functions defined in this class to event listeners in the core
+     *
+     * @return array
+     */
+    static public function getSubscribedEvents()
+    {
+        return [
+            'core.user_setup'  =&gt; 'load_language_on_setup',
+            'core.page_header' =&gt; 'add_page_header_link',
+        ];
+    }
+
+    /**
+     * Load the Acme Demo language file
+     *     acme/demo/language/en/demo.php
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_language_on_setup($event)
+    {
+        $lang_set_ext = $event['lang_set_ext'];
+        $lang_set_ext[] = [
+            'ext_name' =&gt; 'acme/demo',
+            'lang_set' =&gt; 'demo',
+        ];
+        $event['lang_set_ext'] = $lang_set_ext;
+    }
+
+    /**
+     * Add a page header nav bar link
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function add_page_header_link($event)
+    {
+        $this-&gt;template-&gt;assign_vars([
+            'U_DEMO_PAGE' =&gt; $this-&gt;helper-&gt;route('acme_demo_route', ['name' =&gt; 'world']),
+        ]);
+    }
+}
+</programlisting>
+      <para>
+        Husk også at opdatere event-listenerens servicedefinition i
+        <literal>config/services.yml</literal> med de nye afhængigheder:
+      </para>
+      <programlisting language="yaml">
+acme.demo.listener:
+    class: acme\demo\event\main_listener
+    arguments:
+        - '@controller.helper'
+        - '@template'
+    tags:
+        - { name: event.listener }
+</programlisting>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Husk at rydde mellemlageret, hver gang du ændrer noget i
+          <literal>*.yml</literal>-filerne.
+        </para>
+      </note>
+      <para>
+        Nu bør vores link i navigationslinjen åbne en ny brugervendt
+        side, der siger "Hello world!" Hvis vi midlertidigt erstatter
+        "world" med en anden streng, f.eks. "foo", bør siden sige "Hello
+        foo!". Og hvis vi bruger "bertie", bør vi blive vist en
+        403-fejlside.
+      </para>
+      <para>
+        Vi har nu færdiggjort vores brugervendte controller-side. Fortsæt
+        til næste afsnit for at lære, hvordan du tilføjer et ACP-modul
+        til din extension, så vi kan give den nogle
+        konfigurationsindstillinger.
+      </para>
+    </sect2>
+  </sect1>
+</article>

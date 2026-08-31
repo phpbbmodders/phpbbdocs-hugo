@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Auth API</title>
+  </articleinfo>
+  <para>
+    Ceci est une explication de la manière d'utiliser l'API auth/acl de phpBB.
+  </para>
+  <sect1 id="introduction">
+    <title>1. Introduction</title>
+    <sect2 id="what-is-it">
+      <title>Qu'est-ce que c'est ?</title>
+      <para>
+        La classe <literal>auth</literal> contient des méthodes liées à
+        l'autorisation des utilisateurs à accéder aux différentes
+        fonctions du forum, par exemple la publication, la visualisation,
+        la réponse, la connexion (et la déconnexion), etc. Si vous devez
+        vérifier si un utilisateur peut effectuer une tâche ou gérer les
+        connexions/déconnexions des utilisateurs, cette classe est
+        nécessaire.
+      </para>
+    </sect2>
+    <sect2 id="initialisation">
+      <title>Initialisation</title>
+      <para>
+        Pour utiliser l'une des méthodes contenues dans la classe
+        <literal>auth</literal>, elle doit d'abord être instanciée. La
+        meilleure façon de procéder est de le faire tôt dans l'exécution
+        du script, de la manière suivante :
+      </para>
+      <programlisting>
+$auth = new phpbb\auth\auth();
+</programlisting>
+      <para>
+        Une fois qu'une instance de la classe a été créée, vous êtes
+        libre d'appeler les différentes méthodes qu'elle contient.
+        Remarque : si vous souhaitez utiliser les méthodes de
+        <literal>auth_admin</literal>, vous devrez l'instancier
+        séparément de la même manière.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="methods">
+    <title>2. Méthodes</title>
+    <para>
+      Voici les méthodes que vous pouvez utiliser.
+    </para>
+    <sect2 id="i.-acl">
+      <title>2.i. acl</title>
+      <para>
+        La méthode <literal>acl</literal> est la routine d'initialisation
+        pour toutes les fonctions ACL. Elle doit être appelée avant toute
+        méthode ACL. Elle prend un paramètre : un tableau associatif
+        contenant les informations de l'utilisateur.
+      </para>
+      <programlisting>
+$auth-&gt;acl($userdata);
+</programlisting>
+      <para>
+        Où <literal>$userdata</literal> inclut au minimum :
+        <literal>user_id</literal>, <literal>user_permissions</literal>,
+        et <literal>user_type</literal>.
+      </para>
+    </sect2>
+    <sect2 id="ii.-acl_get">
+      <title>2.ii. acl_get</title>
+      <para>
+        Cette méthode détermine si un utilisateur peut effectuer une
+        action, soit globalement, soit dans un forum spécifique.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_get('option'[, forum]);
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>option</literal> : par exemple 'f_list', 'm_edit',
+            'a_adduser', etc. Utilisez <literal>!option</literal> pour
+            nier.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>forum</literal> (optionnel) : entier
+            <literal>forum_id</literal>.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Retourne un entier positif si autorisé, zéro si refusé.
+      </para>
+    </sect2>
+    <sect2 id="iii.-acl_gets">
+      <title>2.iii. acl_gets</title>
+      <para>
+        Cette méthode vérifie plusieurs permissions à la fois.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_gets('option1'[, 'option2', ..., forum]);
+</programlisting>
+      <para>
+        Retourne un entier positif si <emphasis>l'une</emphasis> des
+        permissions est accordée.
+      </para>
+    </sect2>
+    <sect2 id="iv.-acl_getf">
+      <title>2.iv. acl_getf</title>
+      <para>
+        Cette méthode vérifie dans quels forums un utilisateur dispose
+        d'une certaine permission.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_getf('option'[, clean]);
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>option</literal> : chaîne de permission (négation
+            avec <literal>!</literal> autorisée)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>clean</literal> : booléen. Si vrai, seuls les
+            forums où la permission est accordée sont retournés.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Retourne un tableau associatif :
+      </para>
+      <programlisting>
+array(forum_id1 =&gt; array(option =&gt; integer), forum_id2 =&gt; ...)
+</programlisting>
+    </sect2>
+    <sect2 id="v.-acl_getf_global">
+      <title>2.v. acl_getf_global</title>
+      <para>
+        Vérifie si un utilisateur dispose d'une permission globalement
+        ou dans au moins un forum.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_getf_global('option');
+</programlisting>
+      <para>
+        Retourne un entier positif ou zéro.
+      </para>
+    </sect2>
+    <sect2 id="vi.-acl_cache">
+      <title>2.vi. acl_cache</title>
+      <para>
+        <emphasis role="strong">Méthode privée.</emphasis> Appelée
+        automatiquement en cas de besoin. Génère les données
+        user_permissions.
+      </para>
+    </sect2>
+    <sect2 id="vii.-acl_clear_prefetch">
+      <title>2.vii. acl_clear_prefetch</title>
+      <para>
+        Efface la colonne <literal>user_permissions</literal> dans la
+        table des utilisateurs.
+      </para>
+      <programlisting>
+$user_id = 2;
+$auth-&gt;acl_clear_prefetch($user_id);
+</programlisting>
+      <para>
+        Utilisez <literal>$user_id = 0</literal> pour effacer le cache
+        de tous les utilisateurs. Retourne null.
+      </para>
+    </sect2>
+    <sect2 id="viii.-acl_get_list">
+      <title>2.viii. acl_get_list</title>
+      <para>
+        Retourne un tableau décrivant quels utilisateurs disposent de
+        quelles permissions dans quels forums.
+      </para>
+      <programlisting>
+$user_id = array(2, 53);
+$permissions = array('f_list', 'f_read');
+$forum_id = array(1, 2, 3);
+$result = $auth-&gt;acl_get_list($user_id, $permissions, $forum_id);
+</programlisting>
+      <para>
+        Types de paramètres : - <literal>$user_id</literal> :
+        <literal>false</literal>, int, ou tableau d'int -
+        <literal>$permissions</literal> : <literal>false</literal>,
+        chaîne, ou tableau de chaînes - <literal>$forum_id</literal> :
+        <literal>false</literal>, int, ou tableau d'int
+      </para>
+    </sect2>
+    <sect2 id="ix.-miscellaneous">
+      <title>2.ix. Divers</title>
+      <para>
+        Méthodes supplémentaires pour extraire les données brutes de
+        permissions :
+      </para>
+      <programlisting>
+function acl_group_raw_data($group_id = false, $opts = false, $forum_id = false)
+function acl_user_raw_data($user_id = false, $opts = false, $forum_id = false)
+function acl_raw_data_single_user($user_id)
+function acl_raw_data($user_id = false, $opts = false, $forum_id = false)
+function acl_role_data($user_type, $role_type, $ug_id = false, $forum_id = false)
+</programlisting>
+      <para>
+        Utilisez <literal>acl_raw_data</literal> pour les requêtes
+        générales ; les autres sont optimisées pour des données
+        spécifiques.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="admin-related-functions">
+    <title>3. Fonctions liées à l'administration</title>
+    <para>
+      Des méthodes supplémentaires sont disponibles dans la classe
+      <literal>auth_admin</literal> pour la gestion des permissions,
+      des options et du cache utilisateur. Elle se trouve dans :
+    </para>
+    <programlisting>
+includes/acp/auth.php
+</programlisting>
+    <para>
+      Instanciez-la séparément :
+    </para>
+    <programlisting>
+$auth_admin = new auth_admin();
+</programlisting>
+    <para>
+      Cela donne accès aux méthodes de <literal>auth_admin</literal>
+      et de <literal>auth</literal>.
+    </para>
+  </sect1>
+</article>

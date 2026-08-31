@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title></title>
+  </articleinfo>
+  <sect1 id="phpbb-development-documentation">
+    <title>Documentation de développement phpBB</title>
+    <para>
+      Contenu :
+    </para>
+    <para>
+      development/processes development/git
+      development/coding_guidelines cli/index auth/authentication
+      db/dbal extensions/index files/index language/index
+      migrations/index request/request testing/index
+      development/phpstorm
+    </para>
+  </sect1>
+  <sect1 id="indices-and-tables">
+    <title>Index et tables</title>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>genindex</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>search</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+</article>

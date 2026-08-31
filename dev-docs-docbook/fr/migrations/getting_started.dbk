@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Premiers pas</title>
+  </articleinfo>
+  <para>
+    Pour commencer avec les Migrations, nous devons d'abord créer un
+    fichier de Migration qui contiendra la liste des modifications de
+    base de données.
+  </para>
+  <para>
+    Avant de commencer, vous devez d'abord vous rappeler qu'avec les
+    Migrations, il n'y a pas de limite au nombre de fichiers de
+    Migration. Cela signifie que vous êtes libre de créer des fichiers
+    de migration selon vos besoins, que vous souhaitiez créer un seul
+    fichier par version, par fonctionnalité, ou même pour chaque
+    modification que vous apportez à la base de données -- cela vous
+    appartient entièrement !
+  </para>
+  <sect1 id="where-do-i-create-the-migration-file">
+    <title>Où créer le fichier de Migration ?</title>
+    <sect2 id="extension-author">
+      <title>Auteur d'extension</title>
+      <para>
+        Créez un répertoire dans
+        <literal>ext/vendor/extension/</literal> appelé migrations.
+        Tous vos fichiers de Migration doivent se trouver dans ce
+        répertoire.
+      </para>
+    </sect2>
+    <sect2 id="developer">
+      <title>Développeur</title>
+      <para>
+        Les fichiers de Migration de phpBB se trouvent dans
+        <literal>phpbb/db/migration/data/</literal>. Vous pouvez créer
+        un fichier dans ce répertoire OU créer un sous-répertoire si
+        vous prévoyez de créer plusieurs fichiers de Migration pour
+        une seule fonctionnalité.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="what-must-go-in-the-migration-file">
+    <title>Que doit contenir le fichier de Migration ?</title>
+    <para>
+      La seule exigence absolue est de créer une nouvelle classe qui
+      étend <literal>\phpbb\db\migration\migration</literal> :
+    </para>
+    <programlisting>
+&lt;?php
+class new_migration_class extends \phpbb\db\migration\migration
+{
+    // Data for database changes will go in here!
+}
+</programlisting>
+    <sect2 id="what-should-the-new-migration-class-name-be">
+      <title>Quel doit être le nom de la nouvelle classe de migration ?</title>
+      <para>
+        Le schéma de nommage des classes doit suivre les directives
+        générales de codage et peut par ailleurs être ce que vous
+        voulez.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="what-else-goes-in-a-migration-file">
+    <title>Que contient également un fichier de Migration ?</title>
+    <para>
+      Vous êtes maintenant prêt à commencer à ajouter des instructions
+      afin que le Migrator sache quoi faire lorsqu'il rencontre votre
+      fichier de Migration.
+    </para>
+    <sect2 id="migration-dependencies">
+      <title>Dépendances de Migration</title>
+      <para>
+        Avant de commencer à créer des fichiers de Migration que vous
+        souhaitez utiliser, vous devez comprendre les dépendances de
+        Migration et leur fonctionnement.
+      </para>
+      <para>
+        <literal>dependencies</literal>
+      </para>
+    </sect2>
+    <sect2 id="schema-changes">
+      <title>Modifications de schéma</title>
+      <para>
+        Si vous devez effectuer des modifications de schéma
+        (créer/modifier/supprimer des tables/colonnes/index), vous
+        devriez lire la page suivante.
+      </para>
+      <para>
+        <literal>schema_changes</literal>
+      </para>
+    </sect2>
+    <sect2 id="data-changes">
+      <title>Modifications de données</title>
+      <para>
+        Si vous devez effectuer des modifications de données
+        (paramètres de configuration, ajout/suppression de modules,
+        ajout/suppression/définition/annulation de permissions, ou
+        autres modifications personnalisées), vous devriez lire la
+        page suivante.
+      </para>
+      <para>
+        <literal>data_changes</literal>
+      </para>
+    </sect2>
+    <sect2 id="check-if-effectively-installed">
+      <title>Vérifier si effectivement installé</title>
+      <para>
+        La fonction <literal>effectively_installed()</literal> est
+        appelée avant l'installation d'une Migration. Cela vous permet
+        de passer facilement d'une méthode d'installation de base de
+        données précédente aux Migrations.
+      </para>
+      <para>
+        <emphasis role="strong">Si elle retourne true, la Migration
+        est marquée comme installée sans appliquer aucune
+        modification.</emphasis> <emphasis>Cette fonction n'est pas
+        obligatoire et ne devrait généralement pas être nécessaire.
+        Elle n'est nécessaire que si vous essayez de permettre des
+        mises à jour à partir d'un système qui pourrait déjà être
+        installé, mais où les migrations n'ont pas encore été
+        exécutées (par exemple, la mise à jour d'un mod de 3.0.x vers
+        3.1.x).</emphasis>
+      </para>
+    </sect2>
+  </sect1>
+</article>

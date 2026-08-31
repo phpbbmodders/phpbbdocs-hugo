@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutoriel : Événements et écouteurs</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduction</title>
+    <para>
+      phpBB 3.1 a introduit un système d'événements dans l'ensemble du
+      code source et des fichiers template, qui permet aux extensions
+      d'utiliser des écouteurs pour ajouter des fonctionnalités, injecter
+      du code et modifier le comportement et les fonctionnalités
+      existants.
+    </para>
+    <para>
+      Ce tutoriel explique comment utiliser les événements et les
+      écouteurs :
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="template-events-listeners">Événements et
+            écouteurs de template</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="php-core-events-listeners">Événements et
+            écouteurs PHP du cœur</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="template-events-label">
+    <title>Événements et écouteurs de template</title>
+    <para>
+      Les événements de template permettent aux extensions d'injecter du
+      code dans les fichiers template. Des événements sont disséminés
+      dans toute la structure de template des styles de phpBB, offrant de
+      nombreux points d'injection utiles. Un événement de template
+      typique se présente comme suit :
+    </para>
+    <programlisting>
+{% EVENT event_name_and_position %}
+</programlisting>
+    <para>
+      Consultez la liste complète des
+      <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html#template-events">Template
+      events</ulink>.
+    </para>
+    <sect2 id="listening-for-an-event">
+      <title>Écouter un événement</title>
+      <para>
+        Pour <emphasis>s'abonner</emphasis> à un événement de template,
+        nous devons créer un <emphasis>écouteur</emphasis>, un fichier
+        template portant exactement le même nom que l'identifiant de
+        l'événement de template que nous voulons utiliser, et le placer
+        dans le sous-répertoire <literal>event/</literal> du dossier
+        template d'un style.
+      </para>
+      <para>
+        Par exemple, nous utiliserons l'événement
+        <literal>overall_header_navigation_prepend</literal> pour ajouter
+        un nouveau lien avant les liens existants dans la barre de
+        navigation du forum. L'écouteur pour cet événement sera :
+      </para>
+      <programlisting>
+acme/demo/styles/prosilver/template/event/overall_header_navigation_prepend.html
+</programlisting>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          Si vous souhaitez qu'un écouteur de template soit utilisé par
+          tous les styles, il doit être placé dans le répertoire de style
+          <literal>all/</literal>, par exemple
+          <literal>vendor/extname/styles/all/template/event/</literal>.
+          Cela permet d'éviter la duplication de code et facilite la
+          gestion des fichiers de style.
+        </para>
+        <para>
+          Les répertoires prosilver et subsilver2 doivent être utilisés
+          pour les fichiers template qui doivent être personnalisés pour
+          chaque style. De même, si un style tiers nécessite une
+          personnalisation supplémentaire pour maintenir la
+          compatibilité, un dossier pour ce style doit être inclus avec
+          ces fichiers template.
+        </para>
+        <para>
+          Pour ajouter des écouteurs de template ACP, placez ces fichiers
+          dans <literal>vendor/extname/adm/style/event/</literal>.
+        </para>
+      </tip>
+      <para>
+        Dans l'écouteur de template, nous allons créer un lien pour la
+        barre de navigation. Celui-ci se compose d'un simple élément de
+        liste, avec un lien et une description :
+      </para>
+      <programlisting language="html">
+&lt;li class=&quot;small-icon icon-faq no-bulletin&quot;&gt;
+    &lt;a href=&quot;{{ U_DEMO_PAGE }}&quot;&gt;
+        {{ lang('DEMO_PAGE') }}
+    &lt;/a&gt;
+&lt;/li&gt;
+</programlisting>
+      <para>
+        Une fois l'écouteur de template créé, vous devriez pouvoir voir
+        le nouveau lien dans la barre de navigation du forum, avec
+        l'icône du lien FAQ et le texte <literal>DEMO_PAGE</literal>.
+        Nous corrigerons le texte du lien dans la section suivante.
+      </para>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          Si le lien n'apparaît pas, vous devrez peut-être purger le
+          cache du forum depuis la page principale de l'ACP. Vous pouvez
+          également activer <literal>DEBUG_MODE</literal> dans votre
+          fichier <literal>config.php</literal>, ce qui obligera le
+          moteur de template à toujours rechercher les écouteurs de
+          template lors du rendu d'une page.
+        </para>
+      </tip>
+      <para>
+        Il est important de comprendre que lorsque phpBB compile les
+        templates, il n'existe actuellement aucun système permettant de
+        déterminer la priorité selon laquelle les écouteurs de template
+        de différentes extensions abonnés au même événement sont
+        compilés. Dans de rares cas, certaines extensions peuvent
+        provoquer un conflit ; dans ce cas, il est recommandé aux auteurs
+        des extensions de collaborer pour trouver une solution à leurs
+        écouteurs de template en conflit.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="php-core-events-listeners">
+    <title>Événements et écouteurs PHP du cœur</title>
+    <para>
+      Les événements permettent aux extensions d'exécuter du code à de
+      nombreux endroits du code du cœur de phpBB, sans en modifier le
+      code. Ainsi, les extensions peuvent facilement ajouter des
+      fonctionnalités, en supprimer ou modifier le comportement, tout en
+      conservant la compatibilité et des procédures de mise à jour
+      simples.
+    </para>
+    <sect2 id="terminology">
+      <title>Terminologie</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            Événements
+          </term>
+          <listitem>
+            <para>
+              Les événements sont déclenchés à divers endroits du code du
+              cœur de phpBB. Les écouteurs des extensions s'abonnent à
+              ces événements. Ils sont en mesure d'exécuter du code
+              chaque fois que l'événement correspondant s'est produit. Un
+              autre nom pour les événements est « points d'ancrage »
+              (hook locations).
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Écouteurs
+          </term>
+          <listitem>
+            <para>
+              Les écouteurs sont déclenchés par les événements. Ce sont
+              des méthodes qui peuvent traiter les données entrantes et
+              manipuler les variables dans la portée de l'événement. Ils
+              peuvent ainsi modifier le comportement de phpBB, ajouter de
+              nouvelles fonctionnalités ou, s'ils sont utilisés dans le
+              contexte des templates, modifier la sortie. De nombreux
+              écouteurs font partie d'un abonné (subscriber). Un autre
+              nom pour les écouteurs est « points d'accroche » (hooks).
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      <para>
+        Consultez la liste complète des
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html#php-events">PHP
+        events</ulink> pris en charge.
+      </para>
+    </sect2>
+    <sect2 id="the-event-listener">
+      <title>L'écouteur d'événement</title>
+      <para>
+        Dans la section précédente, nous avons créé un écouteur de
+        template qui ajoute un lien pour l'extension Acme Demo à la barre
+        de navigation de phpBB. Nous allons maintenant utiliser des
+        événements PHP pour charger un fichier de langue contenant la clé
+        de langue <literal>DEMO_PAGE</literal>, afin que notre lien dans
+        la barre de navigation s'affiche avec le texte correct.
+      </para>
+      <para>
+        Pour ce faire, nous devons créer une classe d'écouteur
+        d'événement PHP (également appelée classe d'abonné). Cette classe
+        comprend un ensemble de méthodes d'écoute, dont chacune peut
+        <emphasis>s'abonner</emphasis> à des événements PHP dans le code
+        source de phpBB. La classe d'écouteur doit être créée dans le
+        sous-répertoire <literal>event/</literal> du répertoire de
+        l'extension, sinon elle ne fonctionnera pas. Elle doit également
+        respecter les exigences suivantes :
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Respecter les conventions d'espace de noms des classes
+            d'extension : <literal>vendor\extname\event\subscribername.php</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Implémenter l'interface Symfony
+            <literal>Symfony\Component\EventDispatcher\EventSubscriberInterface</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Utiliser la méthode statique
+            <literal>getSubscribedEvents()</literal> pour abonner les
+            méthodes de l'écouteur à des événements spécifiques, dont les
+            clés contiennent les noms des événements et les valeurs les
+            noms des fonctions d'écoute.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Dans l'extension Acme Demo, nous voulons charger notre fichier de
+        langue partout. Nous allons donc abonner une fonction d'écoute à
+        l'événement <literal>core.user_setup</literal> de phpBB :
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\event;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+    /**
+     * Assign functions defined in this class to event listeners in the core
+     *
+     * @return array
+     */
+    static public function getSubscribedEvents()
+    {
+        return [
+            'core.user_setup' =&gt; 'load_language_on_setup',
+        ];
+    }
+
+    /**
+     * Load the Acme Demo language file
+     *     acme/demo/language/en/demo.php
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_language_on_setup($event)
+    {
+        $lang_set_ext = $event['lang_set_ext'];
+        $lang_set_ext[] = [
+            'ext_name' =&gt; 'acme/demo',
+            'lang_set' =&gt; 'demo',
+        ];
+        $event['lang_set_ext'] = $lang_set_ext;
+    }
+}
+</programlisting>
+      <para>
+        Alors, que fait exactement la classe
+        <literal>main_listener.php</literal> ci-dessus ?
+      </para>
+      <para>
+        La méthode <literal>getSubscribedEvents()</literal> abonne notre
+        fonction d'écoute <literal>load_language_on_setup()</literal> à
+        l'événement nommé <literal>core.user_setup</literal>. Cela
+        signifie que lorsque cet événement se produit, notre fonction
+        s'exécute.
+      </para>
+      <tip>
+        <title>Astuce</title>
+        <para>
+          Vous pouvez assigner plusieurs fonctions d'écoute à un seul
+          événement à l'aide d'un tableau :
+        </para>
+        <programlisting>
+'core.user_setup' =&gt; [['foo_method'], ['bar_method']]
+</programlisting>
+      </tip>
+      <para>
+        La méthode d'écoute <literal>load_language_on_setup()</literal>
+        ajoute simplement notre fichier de langue au tableau de données
+        de langue de phpBB. D'une manière générale, un écouteur n'est
+        qu'une fonction publique de la classe d'abonné, référencée dans
+        le tableau retourné par <literal>getSubscribedEvents()</literal>.
+        Elle prend un argument, <literal>$event</literal>. Ce paramètre
+        vous permet d'accéder aux variables transmises à l'événement par
+        le code du cœur et de les modifier. Dans ce cas, nous modifions
+        la variable <literal>lang_set_ext</literal> en y ajoutant le
+        fichier de langue d'Acme Demo.
+      </para>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Remarquez comment la variable d'événement
+          <literal>lang_set_ext</literal> est d'abord copiée en
+          l'assignant à une variable locale, puis modifiée, puis
+          recopiée. Ce raccourci ne fonctionne pas :
+          <literal>$event['foo']['bar'] = $baz;</literal> Ceci est dû au
+          fait que les variables d'événement sont surchargées
+          (overloaded), ce qui constitue une limitation de PHP.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="registering-the-listener">
+      <title>Enregistrer l'écouteur</title>
+      <para>
+        Pour que phpBB charge et exécute automatiquement notre classe
+        d'écouteur d'événement, nous devons créer une définition de
+        service pour celle-ci. Cela se fait en créant un fichier
+        <literal>config/services.yml</literal> dans l'extension :
+      </para>
+      <programlisting language="yaml">
+services:
+    acme.demo.listener:
+        class: acme\demo\event\main_listener
+        tags:
+            - { name: event.listener }
+</programlisting>
+      <warning>
+        <title>Avertissement</title>
+        <para>
+          Les fichiers YAML sont sensibles à l'indentation. Ils
+          nécessitent une indentation de 4 espaces par niveau,
+          <emphasis role="strong">n'utilisez pas de
+          tabulations</emphasis>.
+        </para>
+      </warning>
+      <para>
+        La première ligne indique à phpBB qu'une liste de services est en
+        cours d'enregistrement. À la ligne suivante, nous spécifions le
+        nom du service, qui correspond ici à notre écouteur d'événement.
+      </para>
+      <important>
+        <title>Important</title>
+        <para>
+          Les noms de service doivent être préfixés par votre vendor et
+          le nom de votre extension.
+        </para>
+      </important>
+      <para>
+        L'attribut <literal>class</literal> doit contenir l'espace de
+        noms et le nom de la classe du service enregistré. L'espace de
+        noms dépend de l'emplacement du fichier, au sein du répertoire
+        <literal>ext/</literal>. Ainsi, le fichier
+        <literal>ext/acme/demo/event/main_listener.php</literal> a pour
+        espace de noms <literal>acme\demo\event</literal> et pour nom de
+        classe <literal>main_listener</literal>. Le nom complet de la
+        classe est donc <literal>acme\demo\event\main_listener</literal>,
+        ce qu'il faut spécifier ici.
+      </para>
+      <para>
+        L'attribut <literal>tags</literal> indique à phpBB que le service
+        est un écouteur d'événement.
+      </para>
+      <para>
+        Une fois le fichier YAML des services créé (ou modifié), le cache
+        de phpBB doit être purgé. Après avoir purgé le cache dans l'ACP,
+        la description du lien dans la barre de navigation devrait
+        maintenant afficher <literal>Demo</literal> au lieu de
+        <literal>DEMO_PAGE</literal>.
+      </para>
+      <note>
+        <title>Remarque</title>
+        <para>
+          Les fichiers PHP et de template du cœur de phpBB ont été
+          préparés avec des dizaines d'emplacements d'événements.
+          Cependant, si aucun événement n'existe là où votre extension
+          pourrait en avoir besoin, l'équipe de développement de phpBB
+          accueille volontiers les demandes d'événements sur le forum
+          <ulink url="https://area51.phpbb.com/phpBB/viewforum.php?f=111">area51.com
+          Event Requests</ulink>.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="prioritising-event-listeners-optional">
+      <title>Prioriser les écouteurs d'événements (facultatif)</title>
+      <para>
+        Il arrive que différentes extensions rencontrent des problèmes
+        lorsqu'elles se disputent l'utilisation des mêmes événements du
+        cœur PHP. Pour tenter de résoudre ces problèmes, le développeur
+        de l'extension peut vouloir prioriser son extension par rapport
+        aux autres, afin qu'elle soit déclenchée avant les autres
+        extensions.
+      </para>
+      <para>
+        Dans de tels cas, la méthode <literal>getSubscribedEvents()</literal>
+        fournit un argument permettant de définir une priorité pour les
+        méthodes d'écoute d'événements. Par exemple :
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup' =&gt; ['foo_method', $priority]
+    ];
+}
+</programlisting>
+      <para>
+        Dans cet exemple, <literal>$priority</literal> est un entier dont
+        la valeur par défaut est 0. Plus la valeur de cet entier est
+        élevée, plus l'importance est grande, et donc cet écouteur sera
+        déclenché avant les autres abonnés à cet événement.
+      </para>
+      <para>
+        Nous avons maintenant utilisé les événements et les écouteurs
+        pour modifier phpBB et insérer un joli lien dans la barre de
+        navigation. Cependant, ce lien ne fonctionne pas encore. Passez à
+        la section suivante pour apprendre à utiliser les contrôleurs et
+        le routage afin que notre lien dans la barre de navigation ouvre
+        une page personnalisée destinée à l'utilisateur.
+      </para>
+    </sect2>
+  </sect1>
+</article>

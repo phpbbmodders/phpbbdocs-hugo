@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Config Tool</title>
+  </articleinfo>
+  <para>
+    Config-værktøjet hjælper med at tilføje, opdatere og fjerne
+    konfigurationsindstillinger.
+  </para>
+  <sect1 id="add-config-setting">
+    <title>Tilføj konfigurationsindstilling</title>
+    <para>
+      Tilføj en ny konfigurationsindstilling
+    </para>
+    <programlisting>
+['config.add', [config name, config value, is dynamic (default: false) ]],
+</programlisting>
+    <sect2 id="example">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.add', ['foo', 'bar']], // $config['foo'] = 'bar';
+         ['config.add', ['foo2', 1, true]], // $config['foo2'] = '1'; Dynamic, do not cache
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="update-config-setting">
+    <title>Opdater konfigurationsindstilling</title>
+    <para>
+      Opdater en konfigurationsindstilling
+    </para>
+    <programlisting>
+['config.update', [config name, new config value]],
+</programlisting>
+    <sect2 id="example-1">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.update', ['foo', 'bar']], // $config['foo'] = 'bar';
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="update-if-current-value-equals-specific-value">
+    <title>Opdater, hvis den aktuelle værdi er lig med en bestemt
+    værdi</title>
+    <para>
+      Opdater en konfigurationsindstilling, hvis den aktuelle
+      konfigurationsværdi er lig med en angivet værdi
+    </para>
+    <programlisting>
+['config.update_if_equals', [compare to, config name, new config value]],
+</programlisting>
+    <sect2 id="example-2">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.update_if_equals', ['bar', 'foo', 'bar2']], // if ($config['foo'] == 'bar') { $config['foo'] = 'bar2'; }
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="delete-config-setting">
+    <title>Slet konfigurationsindstilling</title>
+    <para>
+      Slet en konfigurationsindstilling
+    </para>
+    <programlisting>
+['config.remove', [config name]],
+</programlisting>
+    <sect2 id="example-3">
+      <title>Eksempel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+         ['config.remove', ['foo']], // unset($config['foo']);
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

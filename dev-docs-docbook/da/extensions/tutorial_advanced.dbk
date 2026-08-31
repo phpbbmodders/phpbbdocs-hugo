@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Avancerede lektioner</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduktion</title>
+    <para>
+      Denne tutorial forklarer:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <link linkend="adding-a-php-event-to-your-extension">Tilføjelse
+          af et PHP-event til din extension</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="adding-a-template-event-to-your-extension">Tilføjelse
+          af et skabelonevent til din extension</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-installation-commands-in-ext.php">Brug af
+          installationskommandoer i ext.php</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-service-collections">Brug af
+          service-samlinger</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-the-phpbb-finder-tool">Brug af phpBB's
+          finder-værktøj</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-service-replacement">Brug af udskiftning
+          af services</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-service-decoration">Brug af
+          service-dekorering</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="replacing-the-phpbb-datetime-class">Udskiftning
+          af phpBB's Datetime-klasse</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="extension-version-checking">Versionskontrol for
+          extensions</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="implementing-filesystem-changes-to-phpbb">Implementering
+          af filsystemændringer i phpBB</link>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="adding-a-php-event-to-your-extension">
+    <title>Tilføjelse af et PHP-event til din extension</title>
+    <para>
+      Du kan tilføje PHP-events til din egen extension, hvilket giver
+      andre extensions mulighed for at hooke ind i dele af din extension
+      for at tilføje funktionalitet eller ændre dens opførsel. I bund og
+      grund handler det om, at du som extension-forfatter opretter dine
+      egne events på nøglepunkter i din extensions kode, som andre
+      extensions derefter kan lytte efter. Hvis din extension ikke er
+      aktiveret, ignoreres den relevante kode i andre extensions. Når
+      din extension er aktiveret, og det pågældende event kaldes,
+      afvikles listeners i de andre aktiverede extensions.
+    </para>
+    <para>
+      Sådan ser et event ud:
+    </para>
+    <programlisting>
+&lt;?php
+/**
+* Short description of the event
+*
+* @event acme.demo.identifier
+* @var  string  var1  A variable to make available to the event
+* @var  string  var2  A second variable to make available to the event
+* @since 3.1-A1
+*/
+$vars = ['var1', 'var2'];
+extract($phpbb_dispatcher-&gt;trigger_event('acme.demo.identifier', compact($vars)));
+</programlisting>
+    <para>
+      Du skal erstatte <literal>identifier</literal> med navnet på dit
+      event. Dette skal have dit vendor- og extension-navn som præfiks
+      og kun bruge understregninger og små bogstaver for præfikset og
+      navnet, som skal adskilles med et punktum.
+    </para>
+    <para>
+      Derudover refererer <literal>var1</literal> og
+      <literal>var2</literal> til de implicitte variabler
+      <literal>$var1</literal> og <literal>$var2</literal> fra det
+      aktuelle scope. Disse sendes ind i eventet og er tilgængelige via
+      $event-arrayet. De kan bruges og ændres efter behov og derefter
+      sendes tilbage fra eventet. Når du opretter et brugerdefineret
+      event, skal du sørge for at stille så mange variabler fra eventets
+      scope til rådighed for listeners som muligt.
+    </para>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Det er vigtigt, at når du først har oprettet et event, der er
+        indeholdt i en fuld udgivelse, at du ikke ændrer eventets
+        identifikator eller på anden vis ændrer eventet på en måde, der
+        bryder bagudkompatibiliteten, medmindre det er absolut
+        nødvendigt. Ellers kan andre extensions bryde sammen uden
+        advarsel! Det er sandsynligvis bedst at offentliggøre en liste
+        over events, din extension leverer, og gøre offentligt
+        opmærksom på eventuelle eventændringer, før en ny version
+        udgives.
+      </para>
+    </warning>
+    <para>
+      Hvis et event ikke kræver nogen argumenter, kan du bruge denne
+      korte version:
+    </para>
+    <programlisting>
+$phpbb_dispatcher-&gt;dispatch('acme.demo.identifier');
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Objektet <literal>$phpbb_dispatcher</literal> er tilgængeligt
+        fra phpBB's dependency-injection-container eller som en global
+        variabel, så hvis du ikke sender det som en parameter til din
+        metode, skal du bruge global <literal>$phpbb_dispatcher</literal>
+        for at gøre det tilgængeligt.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="adding-a-template-event-to-your-extension">
+    <title>Tilføjelse af et skabelonevent til din extension</title>
+    <para>
+      Ud over PHP-events findes der også skabelon-events. Skabelon-events
+      kan bruges til at udvide skabelonen for en extension, så andre
+      extensions kan manipulere outputtet fra din extension. For at
+      oprette et skabelonevent skal du blot tilføje EVENT-tagget til din
+      skabelon:
+    </para>
+    <programlisting>
+{% EVENT acme_demo_identifier %}
+</programlisting>
+    <para>
+      Eventet kan bruges på samme måde som skabelon-events i phpBB's
+      kerne. Se <literal>tutorial_events</literal> for, hvordan disse
+      events bruges.
+    </para>
+    <para>
+      Du skal altid give dine eventnavne præfikset med dit vendor- og
+      extension-navn. Sørg for kun at bruge understregninger, tal og
+      små bogstaver.
+    </para>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Ligesom med PHP-events bør du ikke ændre eventets identifikator
+        efter en udgivelse af din extension. Andre extensions bruger
+        muligvis allerede dit event og risikerer at gå i stykker.
+      </para>
+    </warning>
+    <caution>
+      <title>Forsigtig</title>
+      <para>
+        Det anbefales ikke at genbruge eksisterende eventnavne forskellige
+        steder. Dette bør kun gøres, hvis koden (indlejrede
+        HTML-elementer) omkring eventet er den samme begge steder.
+        Overvej også andre extensions: vil de altid lytte på begge
+        steder, eller kun på ét? Er du i tvivl, bør du bruge et nyt og
+        unikt event.
+      </para>
+    </caution>
+  </sect1>
+  <sect1 id="using-installation-commands-in-ext.php">
+    <title>Brug af installationskommandoer i ext.php</title>
+    <para>
+      Der er tidspunkter, hvor en extension kan have brug for at afvikle
+      kode, mens den aktiveres, deaktiveres eller renses. Nogle eksempler
+      kan være at kontrollere, om boardet opfylder extensionens krav,
+      eller at køre en form for opsætnings- eller oprydningsprocesser.
+    </para>
+    <para>
+      Dette gøres ved at tilføje en klasse ved navn
+      <literal>ext.php</literal> til rodmappen for en extension. Den
+      skal udvide <literal>\phpbb\extension\base</literal>. Ved at
+      udvide basisklassen kan brugerdefineret kode afvikles under
+      aktivering, deaktivering eller rensning af en extension med
+      følgende nedarvede metoder:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>is_enableable()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>enable_step()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>disable_step()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>purge_step()</literal>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Antag, at en extension strengt kræver phpBB 3.1.5 eller nyere. Vi
+      kan overskrive metoden <literal>is_enableable()</literal> og bruge
+      den til at kontrollere phpBB's version og returnere et boolesk
+      resultat.
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo;
+
+class ext extends \phpbb\extension\base
+{
+    public function is_enableable()
+    {
+        $config = $this-&gt;container-&gt;get('config');
+        return phpbb_version_compare($config['version'], '3.1.5', '&gt;=');
+    }
+}
+</programlisting>
+    <para>
+      Returneres false, installeres extensionen ikke, og brugeren
+      informeres om, at boardet ikke opfylder extensionens krav.
+      Returneres true, fortsætter installationen.
+    </para>
+    <para>
+      Klassen <literal>ext.php</literal> kan indeholde eventuelle
+      specielle installationskommandoer i metoderne
+      <literal>enable_step()</literal>, <literal>disable_step()</literal>
+      og <literal>purge_step()</literal>. Disse metoder er defineret i
+      <literal>\phpbb\extension\base</literal>, som denne klasse
+      udvider, men du kan overskrive dem for at give særlige
+      instruktioner til hvert trin. For eksempel:
+    </para>
+    <programlisting>
+public function enable_step($old_state)
+{
+    if ($old_state === false)
+    {
+        // do something...
+
+        return 'did_something';
+    }
+
+    return parent::enable_step($old_state);
+}
+</programlisting>
+    <para>
+      Bemærk, at vi kun afvikler vores kode, hvis det indkommende
+      <literal>$old_state</literal> er false. Når vi er færdige, skal vi
+      returnere en vilkårlig værdi. Ellers returnerer vi blot tilstanden
+      for den overordnede klasse.
+    </para>
+    <para>
+      phpBB's extension
+      <ulink url="https://github.com/phpbb-extensions/boardrules/blob/master/ext.php">Board
+      Rules</ulink> viser endnu et eksempel på dette for at forberede
+      notifikationssystemet for extensionen, når extensionen aktiveres,
+      deaktiveres og slettes.
+    </para>
+    <para>
+      Metoderne for enable-/disable-/purge-trinnene gør det muligt at
+      sætte store processer på pause og genoptage dem. Hvis den
+      returnerede værdi fra trin-metoden ikke er false, serialiseres den
+      returnerede værdi og gemmes i databasen. Når trin-metoden kaldes
+      igen, deserialiseres den senest kendte tilstand, og den fortsætter
+      med at blive afviklet, indtil false returneres.
+    </para>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        De serialiserede data gemmes i tabellen
+        <emphasis>phpbb_ext</emphasis> under feltet
+        <emphasis>ext_state</emphasis>. Udviklere bør aldrig manipulere
+        dette felt direkte, da serialiseringen håndteres internt af
+        phpBB.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-service-collections">
+    <title>Brug af service-samlinger</title>
+    <para>
+      I 3.1 er "services" et nyt begreb. Du kan læse om, præcis hvad en
+      service er,
+      <ulink url="https://symfony.com/doc/current/book/service_container.html">her</ulink>.
+      Resten af denne vejledning antager, at du har grundlæggende
+      kendskab til services, og hvordan de bruges. En service-samling er
+      i bund og grund netop det, det lyder som: en samling af services.
+      Når du definerer din service, giver du den et specielt "tag", som
+      forbinder den med en samling af services. Dette kan senere bruges
+      til nemt at hente en liste over services til brug i din extension.
+    </para>
+    <para>
+      For at bruge dette skal du først oprette en service til din
+      service-samling. Denne peger faktisk på et phpBB-kerneobjekt kaldet
+      <literal>phpbb\di\service_collection</literal>.
+    </para>
+    <programlisting language="yaml">
+acme.demo.foobar_collection:
+    class: phpbb\di\service_collection
+    arguments:
+        - '@service_container'
+    tags:
+        - { name: service_collection, tag: acme.demo.foobar_service }
+</programlisting>
+    <para>
+      Servicenavnet og tag-navnet kan naturligvis være, hvad du vil.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        For at forhindre dubletter i dit tag bør du bruge et unikt
+        tag-navn, helst i formen vendor.extname.tag_name.
+      </para>
+    </note>
+    <para>
+      Når du nu vil tilføje en service til din samling, skal du blot
+      tagge den:
+    </para>
+    <programlisting language="yaml">
+acme.demo.thing_one:
+    class: acme\demo\thingy\thing_one
+    tags:
+        - { name: acme.demo.foobar_service }
+</programlisting>
+    <para>
+      Bemærk, at "name"-værdien i tagget her svarer til
+      "tag"-værdien i den tidligere definition af service-samlingen.
+      Husk også, at hvis klassen (i dette tilfælde
+      <literal>thing_one</literal>) udvider en anden klasse, skal du
+      angive de korrekte services og værdier for eventuelle parametre
+      defineret i den overordnede klasses konstruktør, hvis nødvendigt.
+    </para>
+    <para>
+      Til sidst, for at bruge samlingen af services, skal du blot sende
+      den første service som et argument til en anden service-klasse.
+      Lad os f.eks. sige, at jeg har et manager-objekt for min
+      foobar-extension, og jeg vil have, at manageren kender til alle
+      services i servicen "foobar_collection". Når du definerer
+      manager-klassen, skal du blot give den service-samlingen som et
+      argument.
+    </para>
+    <programlisting language="yaml">
+acme.demo.foobar_manager:
+    arguments:
+        - '@acme.demo.foobar_collection'
+</programlisting>
+    <para>
+      Dette argument returnerer en instans af
+      <literal>phpbb\di\service_collection</literal>, som udvider
+      <literal>ArrayObject</literal>, så den kan bruges som et array,
+      der indeholder servicenavnet for hvert element i samlingen som
+      nøgle og en instans af hvert serviceelement som den tilhørende
+      værdi.
+    </para>
+    <para>
+      Dette system bruges i kernen til flere funktioner, herunder
+      notifikationer og authentication providers.
+    </para>
+    <sect2 id="ordered-service-collection">
+      <title>Ordnet service-samling</title>
+      <note>
+        <title>Bemærk</title>
+        <para>
+          Ordnede service-samlinger blev introduceret i phpBB 3.2.
+        </para>
+      </note>
+      <para>
+        Ordnede service-samlinger giver dig mulighed for at definere den
+        rækkefølge, services indlæses i, hvilket er særligt nyttigt i
+        tilfælde, hvor prioritet og/eller afhængighed mellem services
+        kræver, at de indlæses i en bestemt rækkefølge.
+      </para>
+      <para>
+        Ordnede service-samlinger er baseret på en normal
+        service-samling, men samlingen sorteres med
+        <ulink url="https://php.net/ksort">ksort</ulink>. Brugen af den
+        sorterede service-samling er næsten den samme som en normal
+        service-samling, bortset fra at du bør bruge
+        <literal>ordered_service_collection</literal> i stedet for
+        <literal>service_collection</literal>:
+      </para>
+      <programlisting language="yaml">
+acme.demo.foobar_collection:
+    class: phpbb\di\ordered_service_collection
+    arguments:
+        - '@service_container'
+    tags:
+        - { name: service_collection, tag: acme.demo.foobar_service }
+</programlisting>
+      <para>
+        Og tilføjelse af en service til den ordnede service-samling:
+      </para>
+      <programlisting language="yaml">
+acme.demo.foobar_foo:
+     class: acme\demo\foobar_foo
+     tags:
+         - { name: acme.demo.foobar_service, order: 1 }
+
+ acme.demo.foobar_bar:
+     class: acme\demo\foobar_bar
+     tags:
+         - { name: acme.demo.foobar_service, order: 2 }
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-phpbb-finder-tool">
+    <title>Brug af phpBB's finder-værktøj</title>
+    <para>
+      Dette er nok den mindst anvendte metode, fordi den kræver en streng
+      fil- og mappenavngivningsstruktur, men ved at gøre dette giver den
+      den mest pålidelige organisering af filer, så du altid kan være
+      sikker på, hvor du skal kigge, hvis du vil finde en bestemt
+      funktion. Extension finder-objektet bruges til at gennemløbe
+      mappetræet for at lede efter filer, der er placeret i specifikke
+      mapper og overholder et sæt krav. Det bruges f.eks. til at lokalisere
+      migrationsfiler, både i kernen og i extensions, uden at disse filer
+      skal registreres som services.
+    </para>
+    <para>
+      <literal>\phpbb\extension\finder</literal> er tilgængelig fra
+      service-containeren som <literal>ext.finder</literal> og kan
+      bruges som følger. Følgende eksempel er en del af det, der bruges
+      til at finde alle routing-filer, både for extensions og
+      kerneroutes.
+    </para>
+    <programlisting>
+$finder
+    -&gt;directory('config')
+    -&gt;suffix('routing.yml')
+    -&gt;find();
+</programlisting>
+    <para>
+      Som du kan se, kan du kæde metodekald sammen (afsluttet med
+      <literal>find()</literal>). Se klassedefinitionen for mere
+      information om de forskellige metoder, der er tilgængelige (såsom
+      at angive en anden mappe for extensions end for kernefiler, og at
+      hente klassenavne baseret på de filer, den finder). Returværdien
+      fra metoden <literal>find()</literal> er et array af filstier, der
+      matcher de angivne kriterier.
+    </para>
+    <para>
+      Antag f.eks., at du har en extension, og du skal hente en samling
+      af alle PNG-billedfiler fra en af dens mapper. Du kunne bruge
+      extension manager til at indlæse finderen og gennemløbe
+      extensionens billedmappe som følger:
+    </para>
+    <programlisting>
+$finder = $extension_manager-&gt;get_finder();
+
+$images = $finder
+    -&gt;extension_suffix('.png')
+    -&gt;extension_directory('/images')
+    -&gt;find_from_extension('demo', $phpbb_root_path . 'ext/acme/demo/');
+</programlisting>
+    <para>
+      Arrayet <literal>$images</literal> ville se sådan ud (som du kan
+      se, indeholder array-nøglerne billedstierne):
+    </para>
+    <programlisting>
+[
+    'ext/acme/demo/images/image1.png' =&gt; 'demo',
+    'ext/acme/demo/images/image2.png' =&gt; 'demo',
+];
+</programlisting>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Metoden <literal>find_from_extension</literal>, der bruges
+        ovenfor, søger kun i den angivne extension. Vil du søge efter
+        PNG-filer i hele extension-mappen, kan du bruge:
+      </para>
+      <programlisting>
+$finder = $extension_manager-&gt;get_finder();
+
+$images = $finder
+    -&gt;find('.png')
+    -&gt;core_path('ext/')
+    -&gt;find();
+</programlisting>
+    </note>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Afhængigt af hvordan Finder-klassen er konfigureret, søger
+        find-metoden både i phpBB's kernefiler og i extension-mapperne.
+        Du kan bruge <literal>extension_*</literal>-metoderne i
+        Finder-klassen til at konfigurere extension-specifikke søgninger,
+        og du kan bruge <literal>core_*</literal>-metoderne til at
+        konfigurere kernespecifikke søgninger.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="using-service-replacement">
+    <title>Brug af udskiftning af services</title>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Brug kun udskiftning af services, hvis din extension skal være
+        kompatibel med phpBB 3.1. For 3.2 og nyere, se
+        <link linkend="using-service-decoration">Brug af
+        service-dekorering</link>.
+      </para>
+    </warning>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Du kan ikke antage, i hvilken rækkefølge en service defineres i
+        phpBB, hvis andre extensions er installeret. Vær rigtig
+        forsigtig ved brug af udskiftning af services.
+      </para>
+    </warning>
+    <para>
+      Med udskiftning af services kan du erstatte en eksisterende
+      service i phpBB (eller i en extension) med din egen service. Din
+      erstatning bør typematche den originale service (så hvis den
+      originale service implementerer et interface, bør du som minimum
+      implementere det samme interface. Hvis det er en konkret klasse,
+      skal du udvide den klasse). Den bedste måde at opnå dette på er
+      ved at udvide den originale klasse og kun erstatte de funktioner,
+      du vil ændre.
+    </para>
+    <para>
+      For at erstatte en phpBB-kerneservice skal du blot navngive din
+      extensions servicenavn med det samme navn som servicen i phpBB's
+      kerne.
+    </para>
+    <para>
+      For eksempel, for at erstatte config-klassen, skal du erstatte
+      servicen <literal>config</literal> i phpBB med din egen
+      implementering:
+    </para>
+    <programlisting language="yaml">
+config:
+    class: acme\demo\config\db
+    arguments:
+        - '@auth'
+        - '@passwords.manager'
+        - '@acme.demo.db_reader'
+</programlisting>
+    <para>
+      Den originale config-klasse i <literal>\phpbb\config\db</literal>
+      implementerer ikke et interface. Det betyder, at du skal udvide
+      den originale <literal>\phpbb\config\db</literal>, ellers matcher
+      typen ikke type hinting'en i de konstruktører, der bruger
+      config-servicen. Hvis den originale service direkte implementerer
+      et interface, og alle type hints refererer til interfacet, er du
+      ikke nødt til at udvide den originale klasse og bør i stedet
+      implementere interfacet.
+    </para>
+    <warning>
+      <title>Advarsel</title>
+      <para>
+        Bruger du EPV i et GitHub-repository, eller under indsendelse
+        til extensions-databasen på phpBB.com, modtager du en advarsel
+        om, at din servicekonfiguration ikke følger politikkerne for
+        extensions-databasen. Da du overskriver en kerneservice, kan du
+        blot ignorere denne meddelelse. Du bør dog altid informere phpBB
+        Extensions Team om, hvorfor du modtog advarslen.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-service-decoration">
+    <title>Brug af service-dekorering</title>
+    <para>
+      Læs om Service Decoration hos
+      <ulink url="https://symfony.com/doc/current/components/dependency_injection/advanced.html#decorating-services">Symfony</ulink>
+      for fuld dokumentation.
+    </para>
+    <para>
+      Fra phpBB 3.2 kan du bruge service-dekorering som den foretrukne
+      metode til at erstatte eksisterende services, i kernen eller fra
+      andre extensions. Dekorering opdaterer en eksisterende service med
+      et nyt navn, mens den efterlades intakt, så den kan refereres til i
+      den nye service.
+    </para>
+    <para>
+      For at erstatte <literal>config</literal> med
+      <literal>acme.demo.decorated.config</literal> skal du f.eks. blot
+      tilføje tilvalget <literal>decorates</literal> til dens
+      servicedefinition:
+    </para>
+    <programlisting language="yaml">
+acme.demo.decorated.config:
+  class: '\acme\demo\decorated\config'
+  decorates: 'config'
+</programlisting>
+    <para>
+      I Symfony vil den gamle config-service være blevet omdøbt til
+      <literal>acme.demo.decorated.config.inner</literal>, så du kan
+      indsprøjte den i din nye service ved at tilføje den til din
+      services argumenter:
+    </para>
+    <programlisting language="yaml">
+acme.demo.decorated.config:
+  class: '\acme\demo\decorated\config'
+  decorates: 'config'
+  arguments:
+    - '@acme.demo.decorated.config.inner'
+</programlisting>
+    <para>
+      Husk igen, at din nye klassetype matcher den originale klasse.
+    </para>
+  </sect1>
+  <sect1 id="replacing-the-phpbb-datetime-class">
+    <title>Udskiftning af phpBB's Datetime-klasse</title>
+    <para>
+      Hvis du vil erstatte phpBB's Datetime-klasse, f.eks. for at bruge
+      en anden type kalender, kan du sætte parameteren
+      <literal>datetime.class</literal> i din `services.yml`:
+    </para>
+    <programlisting language="yaml">
+parameters:
+    datetime.class: '\acme\demo\datetime'
+</programlisting>
+    <para>
+      Din klasse bør udvide phpBB's datetime-klasse
+      <literal>\phpbb\datetime</literal>.
+    </para>
+  </sect1>
+  <sect1 id="extension-version-checking">
+    <title>Versionskontrol for extensions</title>
+    <para>
+      Extension manager kan kontrollere for den nyeste version af din
+      extension og informere brugere, når deres installation af din
+      extension er forældet.
+    </para>
+    <note>
+      <title>Bemærk</title>
+      <para>
+        Extensions, der udgives gennem phpBB's Customisation Database,
+        får denne funktion gratis og kan se bort fra dette afsnit.
+      </para>
+    </note>
+    <para>
+      Dette kræver metadataene <literal>version-check</literal> i din
+      extensions fil <literal>composer.json</literal>:
+    </para>
+    <programlisting language="yaml">
+&quot;extra&quot;: {
+    &quot;version-check&quot;: {
+        &quot;host&quot;: &quot;my.site.com&quot;,
+        &quot;directory&quot;: &quot;/versions&quot;,
+        &quot;filename&quot;: &quot;acme_version_file.json&quot;,
+    &quot;ssl&quot;: false
+    }
+}
+</programlisting>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Parameter
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>host</literal>
+            </entry>
+            <entry>
+              Fuld URL til domæneserveren.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>directory</literal>
+            </entry>
+            <entry>
+              Sti fra domænets rod til den mappe, der indeholder filen,
+              startende med en indledende skråstreg.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>filename</literal>
+            </entry>
+            <entry>
+              En JSON-fil, der indeholder information om den nyeste
+              version.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>ssl</literal>
+            </entry>
+            <entry>
+              true eller false, afhængigt af om domæneserveren kører
+              ssl
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Bemærk, at der kræves en JSON-fil, hostet fra din egen server. I
+      eksemplet ovenfor ville den være:
+      <literal>http://my.site.com/versions/acme_version_file.json</literal>
+    </para>
+    <para>
+      Indholdet af JSON-filen bør se sådan ud:
+    </para>
+    <programlisting language="json">
+{
+    &quot;stable&quot;: {
+        &quot;1.0&quot;: {
+            &quot;current&quot;: &quot;1.0.0&quot;,
+            &quot;announcement&quot;: &quot;http://my.site.com/version_1.0.0&quot;,
+            &quot;download&quot;: &quot;http://my.site.com/version_1.0.0.zip&quot;,
+            &quot;eol&quot;: null,
+            &quot;security&quot;: false
+        }
+    },
+    &quot;unstable&quot;: {
+        &quot;1.0&quot;: {
+            &quot;current&quot;: &quot;1.0.1&quot;,
+            &quot;announcement&quot;: &quot;http://my.site.com/version_1.0.1&quot;,
+            &quot;eol&quot;: null,
+            &quot;security&quot;: false
+        },
+        &quot;1.1&quot;: {
+            &quot;current&quot;: &quot;1.1.0-b4&quot;,
+            &quot;announcement&quot;: &quot;http://my.site.com/version_1.1.0&quot;,
+            &quot;eol&quot;: null,
+            &quot;security&quot;: false
+        }
+    }
+}
+</programlisting>
+    <para>
+      Grenene "stable" og "unstable" er valgfrie, men mindst én af dem
+      skal være defineret. Extension Manager har en indstilling, der
+      giver administratorer mulighed for at kontrollere for ustabile
+      versioner. Af denne grund bør stabile grene kun bruges til stabile
+      udgivelsesversioner, der er egnet til et live-forum. Den ustabile
+      gren kan bruges til at give links til versioner under udvikling.
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Parameter
+            </entry>
+            <entry>
+              Beskrivelse
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>current</literal>
+            </entry>
+            <entry>
+              Den aktuelle version af extensionen i en given gren.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>announcement</literal>
+            </entry>
+            <entry>
+              En URL til en side om denne version af extensionen (f.eks.
+              et emne i phpBB's forum Extensions in Development).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>download</literal>
+            </entry>
+            <entry>
+              (Valgfri) En URL til at downloade denne version af
+              extensionen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>eol</literal>
+            </entry>
+            <entry>
+              Dette bruges i øjeblikket endnu ikke. Brug
+              <literal>null</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>security</literal>
+            </entry>
+            <entry>
+              Dette bruges i øjeblikket endnu ikke. Brug
+              <literal>false</literal>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="implementing-filesystem-changes-to-phpbb">
+    <title>Implementering af filsystemændringer i phpBB</title>
+    <para>
+      I visse scenarier kan en extension have brug for at implementere
+      filsystemændringer i phpBB ud over extensionens selvstændige
+      struktur. Selvom denne fremgangsmåde generelt frarådes, er der
+      specifikke tilfælde, hvor det kan være hensigtsmæssigt. Extensions
+      kan trygt tilføje eller fjerne filer og mapper inden for phpBB's
+      mapper <literal>files</literal>, <literal>images</literal> og
+      <literal>store</literal>, da disse er designet til at indeholde
+      brugergenereret indhold og typisk ikke erstattes under
+      opdateringer af phpBB eller extensions.
+    </para>
+    <para>
+      Der findes to primære metoder til at implementere
+      filsystemændringer i phpBB gennem en extension:
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            Ved brug af Migrations
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Ved brug af aktiveringsprocessen for extensions (ext.php)
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+    <para>
+      Nedenfor er eksempler på, hvordan du opretter en mappe ved navn
+      <literal>acme_demo_dir</literal> i mappen
+      <literal>store</literal> til lagring af yderligere
+      extension-relaterede filer.
+    </para>
+    <sect2 id="using-migrations">
+      <title>Ved brug af Migrations</title>
+      <para>
+        Selvom migrations generelt er designet til databaseændringer,
+        tilbyder de specifikke fordele, når filsystemændringer skal
+        håndteres:
+      </para>
+      <blockquote>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              Eksistenskontrol: Brug metoden
+              <literal>effectively_installed</literal> til at
+              kontrollere, om filerne eller mapperne allerede findes.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Installationsrækkefølge: Brug metoden
+              <literal>depends_on</literal> til at sikre, at mappen
+              oprettes på det korrekte tidspunkt under extensionens
+              installationsproces.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Kør separate (valgfrie) filsystemprocesser under
+              installation og afinstallation.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </blockquote>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\migrations;
+
+class add_acme_demo_dir extends \phpbb\db\migration\container_aware_migration
+{
+    /** @var \phpbb\filesystem\filesystem */
+    protected $filesystem;
+
+    /** @var string */
+    protected $acme_demo_dir;
+
+    /**
+     * Initialize class properties
+     */
+    protected function init()
+    {
+        if (!isset($this-&gt;filesystem))
+        {
+            $this-&gt;filesystem = $this-&gt;container-&gt;get('filesystem');
+            $this-&gt;acme_demo_dir = $this-&gt;container-&gt;getParameter('core.root_path') . 'store/acme_demo_dir';
+        }
+    }
+
+    public function effectively_installed()
+    {
+        $this-&gt;init();
+        return $this-&gt;filesystem-&gt;exists($this-&gt;acme_demo_dir);
+    }
+
+    public static function depends_on()
+    {
+        return ['\acme\demo\migrations\first_migration'];
+    }
+
+    public function update_data(): array
+    {
+        return [
+            ['custom', [[$this, 'add_dir']]],
+        ];
+    }
+
+    public function revert_data(): array
+    {
+        return [
+            ['custom', [[$this, 'remove_dir']]],
+        ];
+    }
+
+    public function add_dir()
+    {
+        $this-&gt;init();
+
+        try
+        {
+            $this-&gt;filesystem-&gt;mkdir($this-&gt;acme_demo_dir, 0755);
+            $this-&gt;filesystem-&gt;touch($this-&gt;acme_demo_dir . '/index.htm');
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+    }
+
+    public function remove_dir()
+    {
+        $this-&gt;init();
+
+        try
+        {
+            $this-&gt;filesystem-&gt;remove($this-&gt;acme_demo_dir);
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+    }
+}
+</programlisting>
+    </sect2>
+    <sect2 id="using-ext.php">
+      <title>Ved brug af ext.php</title>
+      <para>
+        Filsystemændringer kan også implementeres i extensionens fil
+        <literal>ext.php</literal>. Denne metode er at foretrække, hvis:
+      </para>
+      <blockquote>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              Ændringerne ikke har nogen specifikke krav eller
+              afhængigheder, der skal overvåges via et migrationstrin.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Ændringerne bør ske på et bestemt tidspunkt, såsom ved
+              aktivering, deaktivering eller sletning af extensionen.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </blockquote>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo;
+
+class ext extends \phpbb\extension\base
+{
+    /**
+     * Create acme_demo_dir when extension is enabled
+     */
+    public function enable_step($old_state)
+    {
+        if ($old_state !== false)
+        {
+            return parent::enable_step($old_state);
+        }
+
+        $filesystem = $this-&gt;container-&gt;get('filesystem');
+        $my_dir_path = $this-&gt;container-&gt;getParameter('core.root_path') . 'store/acme_demo_dir';
+
+        try
+        {
+            $filesystem-&gt;mkdir($my_dir_path, 0755);
+            $filesystem-&gt;touch($my_dir_path . '/index.htm');
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+
+        return 'added acme_demo_dir';
+    }
+
+    /**
+     * Delete acme_demo_dir when deleting extension data
+     */
+    public function purge_step($old_state)
+    {
+        if ($old_state !== false)
+        {
+            return parent::purge_step($old_state);
+        }
+
+        $filesystem = $this-&gt;container-&gt;get('filesystem');
+        $my_dir_path = $this-&gt;container-&gt;getParameter('core.root_path') . 'store/acme_demo_dir';
+
+        try
+        {
+            $filesystem-&gt;remove($my_dir_path);
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+
+        return 'removed acme_demo_dir';
+    }
+}
+</programlisting>
+      <para>
+        Ved at benytte en af disse metoder kan du implementere de
+        nødvendige filsystemændringer, samtidig med at kompatibiliteten
+        med phpBB's struktur og bedste praksis bevares.
+      </para>
+    </sect2>
+  </sect1>
+</article>
