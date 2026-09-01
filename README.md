@@ -6,15 +6,15 @@ Nothing in this folder touches the project root — the two pipelines are fully 
 
 ## Scripts, in the order you'd actually run them
 
-### 1. `pull_upstream_docs.sh` — refresh the end-user docs reference copy
+### 1. `pull_upstream_docs.sh` — sync the end-user docs source from upstream
 
 ```bash
-./pull_upstream_docs.sh [target_dir]
+./pull_upstream_docs.sh
 ```
 
-Sparse-clones the `documentation/` subtree (the end-user DocBook source: `proteus_doc.xml`, `content/`, `xsl/`) from the official [phpbb/documentation](https://github.com/phpbb/documentation) repo into `upstream-phpbb-documentation/` (default). Read-only against this project — it never touches this folder's own `content/`, `xsl/`, or `proteus_doc_*.xml`, it only creates/updates a pristine reference copy to diff against.
+Upstream is the source of truth for the English end-user docs, not a locally-maintained copy: this syncs `content/en/chapters/` and `content/en/images/` straight from the `documentation/` subtree of the official [phpbb/documentation](https://github.com/phpbb/documentation) repo (via a cached sparse checkout at `upstream-phpbb-documentation/`), overwriting local changes and removing anything upstream no longer has. `content/da/`, `content/fr/`, and `proteus_doc_<lang>.xml` (this project's own multi-language book wrapper — not present upstream in this form) are untouched.
 
-**Optional.** Only needed if you want to check the current upstream content against this project's own (which is missing some `<chapterinfo><copyright>` metadata upstream still carries — see the script's own header for the licensing context that came out of). Doesn't feed into either build script below.
+**Run this before step 2** to make sure the build reflects current upstream content. `proteus_doc_<lang>.xml`'s `<bookinfo>` (title/abstract/authorgroup/copyright) is hand-maintained, not synced by this script — check it against `upstream-phpbb-documentation/documentation/proteus_doc.xml` by hand if upstream's book metadata changes.
 
 ### 2. `phpbbdocs_hugo.sh` — build the end-user docs
 
@@ -24,7 +24,7 @@ Sparse-clones the `documentation/` subtree (the end-user DocBook source: `proteu
 
 Transforms `proteus_doc_<lang>.xml` (via `xsl/proteus_hugo.xsl`) into Hugo Markdown under `site/content/<lang>/`, copies that language's images, then runs `hugo`. `language` defaults to `all` (every `proteus_doc_*.xml` found — currently `en`, `da`, and `fr`); `destination_dir` defaults to `site/public`.
 
-**No prerequisite script** — `content/<lang>/chapters/`, `content/<lang>/images/`, and `proteus_doc_<lang>.xml` already exist as static source in this folder.
+**No prerequisite script for `da`/`fr`** — those are hand-translated static source. For `en`, run step 1 first so it reflects current upstream rather than whatever was last synced.
 
 ### 3. `convert_dev_docs_to_docbook.sh` — pull and convert the developer docs
 
@@ -34,7 +34,7 @@ Transforms `proteus_doc_<lang>.xml` (via `xsl/proteus_hugo.xsl`) into Hugo Markd
 
 Pulls the `development/` subtree (Sphinx/reStructuredText developer docs — coding guidelines, extension tutorials, DBAL reference, etc.) from the same upstream repo, and converts every `.rst` file to DocBook 4 XML via a pinned pandoc 3.11 (downloaded once into a local cache) with two fix-ups pandoc's own DocBook writer needs (see the script's header comment for the specifics — an unclosed `<br>` tag and an invalid `&nbsp;` entity). Output defaults to `dev-docs-docbook/en/`.
 
-**Only produces English.** There's no automated translation step — see "Adding another language" below for how the Danish and French versions (`dev-docs-docbook/da/`, `dev-docs-docbook/fr/`) actually came about.
+**Only produces English**, and is now **run automatically by step 4 whenever `language` is `en`** — there's no automated translation step, so `da`/`fr` still work as before (see "Adding another language" below for how those versions actually came about). Run this script directly only if you want the raw DocBook output on its own, e.g. as a starting point for a new translation.
 
 ### 4. `phpbbdocs_hugo_devdocs.sh` — build the developer docs
 
@@ -44,7 +44,7 @@ Pulls the `development/` subtree (Sphinx/reStructuredText developer docs — cod
 
 Renders `dev-docs-docbook/<language>/` (`language` defaults to `en`) into Hugo pages under `content/<language>/development/`, treating each top-level subdirectory (`auth/`, `cli/`, `db/`, `extensions/`, etc.) as a chapter and each `.rst`-derived article as a page within it, then runs `hugo` — building into the **same site** `phpbbdocs_hugo.sh` does, so run both if you want the full site.
 
-**Requires step 3 first** (for whichever language's DocBook source it's reading). Uses a different rendering stylesheet than `phpbbdocs_hugo.sh` (`xsl/proteus_hugo_devdocs.xsl`) because the developer docs are 55 independent articles nested in subdirectories, not one XIncluded book — see that stylesheet's own header comment for the full reasoning, including why it targets DocBook 4 specifically (avoids an XML-namespace mismatch that silently renders every page empty under DocBook 5).
+**For `en`, this always re-runs step 3 first** (pulling fresh from upstream and re-converting) so an English build never renders a stale prior conversion — there's no separate prerequisite step to remember. **For any other language, `dev-docs-docbook/<language>/` must already exist**, since there's no automated upstream source for a translation. Uses a different rendering stylesheet than `phpbbdocs_hugo.sh` (`xsl/proteus_hugo_devdocs.xsl`) because the developer docs are 55 independent articles nested in subdirectories, not one XIncluded book — see that stylesheet's own header comment for the full reasoning, including why it targets DocBook 4 specifically (avoids an XML-namespace mismatch that silently renders every page empty under DocBook 5).
 
 ### 5. `fill_translation_fallbacks.sh` — fill translation gaps with the source-language content
 
@@ -62,19 +62,18 @@ For every page that exists in `source_lang`'s content but has no counterpart at 
 
 **Full site, all languages, from scratch:**
 ```bash
-./pull_upstream_docs.sh                  # optional, just a reference pull
-./convert_dev_docs_to_docbook.sh
+./pull_upstream_docs.sh                  # syncs content/en/ from upstream
 ./phpbbdocs_hugo.sh all
-./phpbbdocs_hugo_devdocs.sh en
+./phpbbdocs_hugo_devdocs.sh en             # re-pulls + re-converts dev docs from upstream itself
 ./phpbbdocs_hugo_devdocs.sh da
 ./phpbbdocs_hugo_devdocs.sh fr
 ./fill_translation_fallbacks.sh en da fr
 ./phpbbdocs_hugo.sh all                    # rebuild once more so the fallback pages are in the built site
 ```
 
-**Just rebuilt the end-user docs content?** `./phpbbdocs_hugo.sh all` — nothing else needed, unless the rebuild introduced new pages that might now be missing from another language, in which case follow with `./fill_translation_fallbacks.sh en da fr && ./phpbbdocs_hugo.sh all`.
+**Just want the latest end-user docs content?** `./pull_upstream_docs.sh && ./phpbbdocs_hugo.sh all` — the sync pulls current upstream chapters/images into `content/en/`, then the build picks them up. Follow with `./fill_translation_fallbacks.sh en da fr && ./phpbbdocs_hugo.sh all` if the sync introduced pages a translation doesn't have yet.
 
-**Just re-pulled/re-converted the developer docs?** `./convert_dev_docs_to_docbook.sh && ./phpbbdocs_hugo_devdocs.sh en` (and `./phpbbdocs_hugo_devdocs.sh da` / `./phpbbdocs_hugo_devdocs.sh fr` too, if those translated DocBook sources are still current — translating is a separate, manual step, so a fresh English pull doesn't automatically update the translated pages). Follow with `./fill_translation_fallbacks.sh en da fr` if the pull added anything a translation doesn't have yet.
+**Just want the latest developer docs?** `./phpbbdocs_hugo_devdocs.sh en` — pulls upstream, converts to DocBook, and builds in one step (and `./phpbbdocs_hugo_devdocs.sh da` / `./phpbbdocs_hugo_devdocs.sh fr` too, if those translated DocBook sources are still current — translating is a separate, manual step, so a fresh English pull doesn't automatically update the translated pages). Follow with `./fill_translation_fallbacks.sh en da fr` if it added anything a translation doesn't have yet.
 
 ## Adding another language to the developer docs
 

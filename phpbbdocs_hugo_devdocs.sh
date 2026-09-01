@@ -9,15 +9,16 @@
 # requested (content/<lang>/development/), then runs the Hugo build
 # itself.
 #
-# Requires dev-docs-docbook/<lang>/ to already exist for the requested
-# language. dev-docs-docbook/en/ comes from convert_dev_docs_to_docbook.sh,
-# which pulls the developer docs from upstream and converts each .rst
-# file to a standalone DocBook <article> (see its own header comment for
-# why the conversion needs the fixes it applies). A translated
-# dev-docs-docbook/<lang>/ has to be produced separately — this script
-# only renders whichever DocBook source already exists for the
-# requested language into Hugo pages, it doesn't translate anything
-# itself.
+# For "en", this script always regenerates dev-docs-docbook/en/ itself
+# first by running convert_dev_docs_to_docbook.sh, which pulls the
+# developer docs fresh from upstream and converts each .rst file to a
+# standalone DocBook <article> (see its own header comment for why the
+# conversion needs the fixes it applies) — so an "en" build never
+# silently renders a stale prior conversion. For any other language,
+# dev-docs-docbook/<lang>/ has to already exist, produced separately —
+# there's no automated upstream source for a translation, so this
+# script only renders whichever DocBook source is already on disk for
+# that language into Hugo pages, it doesn't translate anything itself.
 #
 # Every page gets a translationKey derived from its chapter and slug
 # (development-<chapter>-<slug>, stable across languages since neither
@@ -45,7 +46,9 @@
 # table/code-block/line-break support the end-user docs never needed
 # but this content does).
 #
-# Requires xsltproc and hugo on PATH.
+# Requires xsltproc and hugo on PATH. Building "en" also transitively
+# requires whatever convert_dev_docs_to_docbook.sh needs (git, curl,
+# tar, xmllint) — see that script's own header.
 #
 # Usage: ./phpbbdocs_hugo_devdocs.sh [language] [destination_dir]
 #   language        Defaults to "en". Reads from dev-docs-docbook/<language>/
@@ -75,10 +78,17 @@ destination_dir=${2:-$site_dir/public}
 command -v xsltproc >/dev/null 2>&1 || { echo "xsltproc is required" >&2; exit 1; }
 command -v hugo >/dev/null 2>&1 || { echo "Hugo is required" >&2; exit 1; }
 
-[ -d "$source_dir" ] || {
-	echo "No $source_dir found — run convert_dev_docs_to_docbook.sh first (for 'en'), or produce a translated $source_dir some other way (for '$lang')." >&2
-	exit 1
-}
+if [ "$lang" = "en" ]; then
+	# English has a real upstream source — always regenerate it fresh
+	# rather than trusting whatever's already on disk, so this build can
+	# never silently render a stale prior conversion.
+	"$script_dir/convert_dev_docs_to_docbook.sh" "$source_dir"
+else
+	[ -d "$source_dir" ] || {
+		echo "No $source_dir found — produce a translated $source_dir first (there's no automated upstream source for '$lang')." >&2
+		exit 1
+	}
+fi
 
 # A handful of the top-level directory names are abbreviations that
 # look better with a specific human title than a bare capitalized first

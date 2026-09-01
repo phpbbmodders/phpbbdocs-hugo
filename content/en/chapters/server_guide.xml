@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="server_guide">
     <?dbhtml dir="serverguide" filename="index.html" ?>
+    <chapterinfo>
+        <releaseinfo>$Id$</releaseinfo>
+        <copyright>
+            <year>2022</year>
+            <holder>phpBB Group</holder>
+        </copyright>
+    </chapterinfo>
     <title>Server Guide</title>
+    <abstract>
+        <para>This chapter describes the server configuration related to phpBB.</para>
+    </abstract>
+
     <section id="server_sphinx">
         <title>Sphinx search configuration</title>
         <para>
