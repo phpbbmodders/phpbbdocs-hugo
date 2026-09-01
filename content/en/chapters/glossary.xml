@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="glossary">
 	<?dbhtml dir="glossary" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2006</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
 	<title>Glossary</title>
+	<abstract>
+		<para>A guide to the terms used in the phpBB Documentation and on the forums.</para>
+	</abstract>
+	
 	<section id="terms">
 		<sectioninfo>
 			<authorgroup>
@@ -22,6 +33,7 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
+		
 		<title>Terms</title>
 		<para>There are quite a few terms that are commonly used throughout phpBB and the support forums. Here is some information on these terms.</para>
 		

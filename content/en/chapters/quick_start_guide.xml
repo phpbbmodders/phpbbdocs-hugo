@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="quick_start_guide">
 	<?dbhtml  dir="quickstart" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2006</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
 	<title>Quick Start Guide</title>
+	<abstract>
+		<para>A quick guide through the first steps of installing and configuring up your very own phpBB 3.3 forum.</para>
+	</abstract>
 	<section id="quick_requirements">
 		<sectioninfo>
 			<authorgroup>
@@ -466,7 +476,7 @@
 	</section>
 	<section id="quick_support">
 		<title>Obtaining support</title>
-		<para>The <ulink url="https://www.phpbb.com/about/">phpBB Team</ulink> provides many options for users to find support for their phpBB install. In addition to this very documentation, the <ulink url="https://www.phpbb.com/community/viewforum.php?f=661">support forum on www.phpbb.com</ulink> has many answers that users like you are searching for. Therefore, we highly recommend the use of the search feature before asking a new question. If you are unable to find an answer, feel free to post a new topic asking for help. Be sure to be descriptive when explaining your problem! The more we know about what is happening, the faster we can provide you with the answer you are looking for. Be sure to fill out the <ulink url="https://www.phpbb.com/support/srt/">Support Request Template</ulink> with the information it asks for and provide it in your post.</para>
+		<para>The <ulink url="https://www.phpbb.com/about/">phpBB Team</ulink> provides many options for users to find support for their phpBB install. In addition to this very documentation, the <ulink url="https://www.phpbb.com/community/viewforum.php?f=556">support forum on www.phpbb.com</ulink> has many answers that users like you are searching for. Therefore, we highly recommend the use of the search feature before asking a new question. If you are unable to find an answer, feel free to post a new topic asking for help. Be sure to be descriptive when explaining your problem! The more we know about what is happening, the faster we can provide you with the answer you are looking for. Be sure to fill out the <ulink url="https://www.phpbb.com/support/srt/">Support Request Template</ulink> with the information it asks for and provide it in your post.</para>
 
 		<para>In addition to the support forum on www.phpbb.com, we provide a <ulink url="https://www.phpbb.com/kb/">Knowledge Base</ulink> for users to read and submit articles on common answers to questions. Our community has taken a lot of time in writing these articles, so be sure to check them out.</para>
 

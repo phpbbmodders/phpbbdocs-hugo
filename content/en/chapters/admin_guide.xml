@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="admin_guide">
 	<?dbhtml dir="adminguide" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2009</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
 	<title>Administration Guide</title>
+	<abstract>
+		<para>This chapter describes the phpBB 3.3 admin controls.</para>
+	</abstract>
 	<section id="admin_control_panel">
 		<sectioninfo>
 			<authorgroup>
@@ -1210,7 +1220,7 @@
 						<term>Warnings</term>
 						<listitem>
 							<para>This is the number of warnings the user currently has.</para>
-							<para>For more information about warnings, see <xref linkend="moderator_mcp"/>.</para>
+							<para>For more information about warnings, see <xref linkend="mcp_warnings"/>.</para>
 						</listitem>
 					</varlistentry>
 
