@@ -1,0 +1,6 @@
+{{ if or .PrevInSection .NextInSection }}
+<nav class="page-nav" aria-label="{{ i18n "pageNavigation" }}">
+  {{ with .PrevInSection }}<a class="previous" href="{{ .RelPermalink }}"><span>{{ i18n "previous" }}</span>{{ .Title }}</a>{{ end }}
+  {{ with .NextInSection }}<a class="next" href="{{ .RelPermalink }}"><span>{{ i18n "next" }}</span>{{ .Title }}</a>{{ end }}
+</nav>
+{{ end }}

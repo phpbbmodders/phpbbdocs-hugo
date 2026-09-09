@@ -1,0 +1,10 @@
+{{ define "main" }}
+  {{/* Set by fill_translation_fallbacks.sh on a page it copied in from
+       another language to fill a translation gap — the content below
+       is real, just not actually written in this page's own language. */}}
+  {{ if .Params.fallback }}
+    <div class="fallback-notice">{{ i18n "fallbackNotice" }}</div>
+  {{ end }}
+  {{ .Content }}
+  {{ partial "page-nav.html" . }}
+{{ end }}

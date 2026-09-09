@@ -1,0 +1,6 @@
+<div class="language-switcher">
+  <span class="sr-only">{{ i18n "language" }}:</span>
+  {{ range .AllTranslations }}
+    <a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}"{{ if eq .Language.Lang $.Site.Language.Lang }} class="current" aria-current="page"{{ end }}>{{ .Language.Label }}</a>
+  {{ end }}
+</div>

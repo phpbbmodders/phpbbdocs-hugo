@@ -1,0 +1,30 @@
+[home]
+other = "Accueil"
+[documentation]
+other = "Documentation"
+[community]
+other = "Communauté"
+[contact]
+other = "Contact"
+[moddingCommunities]
+other = "Modding Communities"
+[primaryNavigation]
+other = "Navigation principale"
+[language]
+other = "Langue"
+[browseDocs]
+other = "Parcourir la documentation"
+[filter]
+other = "Filtrer"
+[filterPlaceholder]
+other = "Rechercher une page…"
+[overview]
+other = "Aperçu de la documentation"
+[pageNavigation]
+other = "Navigation de page"
+[previous]
+other = "Précédent"
+[next]
+other = "Suivant"
+[fallbackNotice]
+other = "Cette page n'a pas encore été traduite — affichage de la version anglaise."

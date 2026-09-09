@@ -1,0 +1,32 @@
+<div class="docs-nav-panel">
+  <label for="docs-filter-{{ .Site.Language.Lang }}">{{ i18n "filter" }}</label>
+  <input id="docs-filter-{{ .Site.Language.Lang }}" class="docs-filter" type="search" placeholder="{{ i18n "filterPlaceholder" }}" autocomplete="off">
+  <nav class="docs-tree">
+    <a class="docs-home{{ if .IsHome }} active{{ end }}" href="{{ .Site.Home.RelPermalink }}">{{ i18n "overview" }}</a>
+    {{ range .Site.Home.Sections.ByWeight }}
+      <section class="docs-tree-section">
+        <a href="{{ .RelPermalink }}"{{ if eq $.CurrentSection . }} class="active"{{ end }}>{{ .Title }}</a>
+        <ul>
+          {{ range .RegularPages.ByWeight }}
+            <li><a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active" aria-current="page"{{ end }}>{{ .Title }}</a></li>
+          {{ end }}
+          {{/* A top-level section can itself contain sub-sections instead
+               of regular pages directly (e.g. Development's chapters:
+               Auth, CLI, Extensions...) — one level deeper than the
+               plain section > page shape the rest of the site uses.
+               List each sub-section's own pages nested under it. */}}
+          {{ range .Sections.ByWeight }}
+            <li class="docs-tree-subsection">
+              <span class="docs-tree-subsection-title">{{ .Title }}</span>
+              <ul>
+                {{ range .RegularPages.ByWeight }}
+                  <li><a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active" aria-current="page"{{ end }}>{{ .Title }}</a></li>
+                {{ end }}
+              </ul>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  </nav>
+</div>

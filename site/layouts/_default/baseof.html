@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.tagline }}{{ end }}">
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+</head>
+<body>
+  <div class="site-shell">
+    {{ partial "header.html" . }}
+    {{ partial "topnav.html" . }}
+
+    <div class="utility-bar">
+      <a href="{{ .Site.Home.RelPermalink }}">⌂ {{ .Site.Title }}</a>
+      {{ if .IsHome }}
+        <span aria-hidden="true">‹</span>
+        <span>{{ i18n "documentation" }}</span>
+      {{ else }}
+        {{/* .Ancestors walks nearest-parent-first up to (and including)
+             Home — reversed for a natural left-to-right trail, and Home
+             skipped since it's already the ⌂ link above. Was previously
+             just "Home ‹ current page title" with no ancestors at all,
+             which only looked correct by coincidence for this site's
+             original section > page (2-level) content; it silently
+             dropped the middle crumb once development/'s
+             section > chapter > page (3-level) structure existed. */}}
+        {{ range .Ancestors.Reverse }}
+          {{ if not .IsHome }}
+            <span aria-hidden="true">‹</span>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{ end }}
+        {{ end }}
+        <span aria-hidden="true">‹</span>
+        <span>{{ .Title }}</span>
+      {{ end }}
+      {{ partial "language-switcher.html" . }}
+    </div>
+
+    <details class="mobile-docs-nav">
+      <summary>{{ i18n "browseDocs" }}</summary>
+      {{ partial "docs-nav.html" . }}
+    </details>
+
+    <div class="docs-grid">
+      <aside class="docs-sidebar" aria-label="{{ i18n "browseDocs" }}">
+        {{ partial "docs-nav.html" . }}
+      </aside>
+      <main class="docs-main" id="main-content">
+        <article class="docs-article">
+          {{ block "main" . }}{{ end }}
+        </article>
+      </main>
+    </div>
+
+    {{ partial "footer.html" . }}
+  </div>
+  <script src="{{ "js/docs.js" | relURL }}" defer></script>
+</body>
+</html>

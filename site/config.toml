@@ -1,0 +1,52 @@
+baseURL = "/"
+title = "phpBB 3.3 Documentation"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  forumURL = "https://www.phpbbmodders.com/community/"
+  projectURL = "https://www.phpbbmodders.com/"
+
+[languages]
+  [languages.en]
+    label = "English"
+    locale = "en-GB"
+    contentDir = "content/en"
+    title = "phpBB 3.3 Documentation"
+    weight = 1
+    [languages.en.params]
+      tagline = "Documentation for phpBB administrators and users"
+
+  [languages.da]
+    label = "Dansk"
+    locale = "da-DK"
+    contentDir = "content/da"
+    title = "phpBB 3.3 Dokumentation"
+    weight = 2
+    [languages.da.params]
+      tagline = "Dokumentation til phpBB-administratorer og brugere"
+
+  [languages.fr]
+    label = "Français"
+    locale = "fr-FR"
+    contentDir = "content/fr"
+    title = "Documentation phpBB 3.3"
+    weight = 3
+    [languages.fr.params]
+      tagline = "Documentation pour les administrateurs et utilisateurs de phpBB"
+
+  [languages.de_x_sie]
+    label = "Deutsch (Sie)"
+    locale = "de-DE"
+    contentDir = "content/de_x_sie"
+    title = "phpBB 3.3 Dokumentation"
+    weight = 4
+    [languages.de_x_sie.params]
+      tagline = "Dokumentation für phpBB-Administratoren und -Benutzer"

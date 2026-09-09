@@ -1,0 +1,30 @@
+[home]
+other = "Forside"
+[documentation]
+other = "Dokumentation"
+[community]
+other = "Fællesskab"
+[contact]
+other = "Kontakt"
+[moddingCommunities]
+other = "Modding Communities"
+[primaryNavigation]
+other = "Primær navigation"
+[language]
+other = "Sprog"
+[browseDocs]
+other = "Gennemse dokumentation"
+[filter]
+other = "Filtrer"
+[filterPlaceholder]
+other = "Find en side…"
+[overview]
+other = "Dokumentationsoversigt"
+[pageNavigation]
+other = "Sidenavigation"
+[previous]
+other = "Forrige"
+[next]
+other = "Næste"
+[fallbackNotice]
+other = "Denne side er endnu ikke oversat — viser den engelske version."
