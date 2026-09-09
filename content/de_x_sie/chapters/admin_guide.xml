@@ -102,7 +102,7 @@
 
 				<itemizedlist>
 					<title>Verwarnungen</title>
-					<listitem><para>Moderatoren können Benutzern, die gegen die Forenregeln verstoßen, Verwarnungen erteilen. Der Wert <guilabel>Dauer der Verwarnung</guilabel> legt fest, wie viele Tage eine Verwarnung gültig ist, bevor sie abläuft. Alle positiven ganzen Zahlen sind gültige Werte. Weitere Informationen zu Verwarnungen finden Sie unter <xref linkend="moderator_mcp" />.</para></listitem>
+					<listitem><para>Moderatoren können Benutzern, die gegen die Forenregeln verstoßen, Verwarnungen erteilen. Der Wert <guilabel>Gültigkeit von Verwarnungen</guilabel> legt fest, wie viele Tage eine Verwarnung gültig ist, bevor sie abläuft. Alle positiven ganzen Zahlen sind gültige Werte. Weitere Informationen zu Verwarnungen finden Sie unter <xref linkend="moderator_mcp" />.</para></listitem>
 				</itemizedlist>
 			</section>
 
@@ -312,7 +312,7 @@
 					<listitem><para><guilabel>Aktiviere E-Mail-Funktionalität</guilabel>: Wenn dies deaktiviert ist, werden vom Board überhaupt keine E-Mails versendet.</para></listitem>
 					<listitem><para><guilabel>Benutzer versenden E-Mails über das Board:</guilabel>: Wenn dies aktiviert ist, wird anstelle einer E-Mail-Adresse ein Formular angezeigt, über das Benutzer sich gegenseitig über das Board E-Mails senden können.</para></listitem>
 					<listitem><para><guilabel>Name der E-Mail-Funktion</guilabel>: Wenn Sie den nativen, PHP-basierten E-Mail-Dienst verwenden, sollte dies der Name der E-Mail-Funktion sein. Höchstwahrscheinlich lautet dieser „mail“.</para></listitem>
-					<listitem><para><guilabel>Paketgröße für E-Mails</guilabel>: Dies ist die Anzahl der E-Mails, die in einem Paket versendet werden können. Dies ist nützlich, wenn Sie Massen-E-Mails versenden möchten und eine große Anzahl von Benutzern haben.</para></listitem>
+					<listitem><para><guilabel>Größe von E-Mail-Paketen</guilabel>: Dies ist die Anzahl der E-Mails, die in einem Paket versendet werden können. Dies ist nützlich, wenn Sie Massen-E-Mails versenden möchten und eine große Anzahl von Benutzern haben.</para></listitem>
 					<listitem><para><guilabel>Kontakt-E-Mail-Adresse</guilabel>: Dies ist die Adresse, an die E-Mail-Rückmeldungen zu Ihrem Board gesendet werden. Dies ist außerdem die Adresse, die die Felder „Von“ und „Antwort an“ in allen von Ihrem Board versendeten E-Mails ausfüllt.</para></listitem>
 					<listitem><para><guilabel>Rückantwort-E-Mail-Adresse</guilabel>: Dies ist die Rückantwortadresse, die als technische Kontakt-E-Mail-Adresse in allen E-Mails eingetragen wird. Sie füllt immer die Felder „Return-Path“ und „Sender“ in allen von Ihrem Board versendeten E-Mails aus.</para></listitem>
 					<listitem><para><guilabel>E-Mail-Signatur</guilabel>: Dieser Text wird an das Ende aller von Ihrem Board versendeten E-Mails angehängt.</para></listitem>
@@ -353,7 +353,7 @@
 					<listitem><para><guilabel>Jabber-Port</guilabel>: Der Port, auf dem sich der oben angegebene Jabber-Server befindet. Port 5222 ist der gängigste Port; wenn Sie sich diesbezüglich unsicher sind, lassen Sie diesen Wert unverändert.</para></listitem>
 					<listitem><para><guilabel>Jabber-Benutzername oder JID</guilabel>: Der Jabber-Benutzername oder eine vollständige Jabber-ID (sieht wie eine E-Mail-Adresse aus), die Ihr Board beim Verbinden mit dem angegebenen Jabber-Server verwendet. Sie müssen ein bereits registriertes Konto angeben.</para></listitem>
 					<listitem><para><guilabel>Jabber-Passwort</guilabel>: Das Passwort für den oben angegebenen Jabber-Benutzernamen. Ist der Jabber-Benutzername nicht registriert, versucht phpBB3, den oben angegebenen Jabber-Benutzernamen mit diesem Wert als Passwort zu registrieren.</para><important><para>Dieses Passwort wird als Klartext in der Datenbank gespeichert und ist für jeden sichtbar, der Zugriff auf Ihre Datenbank hat oder diese Konfigurationsseite einsehen kann.</para></important></listitem>
-					<listitem><para><guilabel>Paketgröße für Jabber</guilabel>: Dies ist die Anzahl der Nachrichten, die in einem Paket versendet werden können. Ist dies auf „0“ gesetzt, werden Nachrichten sofort versendet und nicht für einen späteren Versand in eine Warteschlange gestellt.</para></listitem>
+					<listitem><para><guilabel>Jabber-Paketgröße</guilabel>: Dies ist die Anzahl der Nachrichten, die in einem Paket versendet werden können. Ist dies auf „0“ gesetzt, werden Nachrichten sofort versendet und nicht für einen späteren Versand in eine Warteschlange gestellt.</para></listitem>
 				</itemizedlist>
 			</section>
 		</section>
@@ -370,7 +370,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Serverkonfiguration</title>
-			<para>Als Administrator eines Boards ist es unerlässlich, die Servereinstellungen Ihres phpBB-Boards fein abstimmen zu können. Die Konfiguration der Servereinstellungen Ihres Boards ist sehr einfach. Es gibt fünf Hauptkategorien von Servereinstellungen: <guimenuitem>Cookies</guimenuitem>, <guimenuitem>Servereinstellungen</guimenuitem>, <guimenuitem>Sicherheitseinstellungen</guimenuitem>, <guimenuitem>Lasteinstellungen</guimenuitem> und <guimenuitem>Sucheinstellungen</guimenuitem>. Die korrekte Konfiguration dieser Einstellungen trägt dazu bei, dass Ihr Board nicht nur funktioniert, sondern auch effizient und wie beabsichtigt arbeitet. Die folgenden Unterabschnitte beschreiben jede Kategorie der Serverkonfiguration. Denken Sie daran, nach dem Aktualisieren der Einstellungen jeweils auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen zu übernehmen.</para>
+			<para>Als Administrator eines Boards ist es unerlässlich, die Servereinstellungen Ihres phpBB-Boards fein abstimmen zu können. Die Konfiguration der Servereinstellungen Ihres Boards ist sehr einfach. Es gibt fünf Hauptkategorien von Servereinstellungen: <guimenuitem>Cookies</guimenuitem>, <guimenuitem>Servereinstellungen</guimenuitem>, <guimenuitem>Sicherheitseinstellungen</guimenuitem>, <guimenuitem>Lasteinstellungen</guimenuitem> und <guimenuitem>Suchfunktion</guimenuitem>. Die korrekte Konfiguration dieser Einstellungen trägt dazu bei, dass Ihr Board nicht nur funktioniert, sondern auch effizient und wie beabsichtigt arbeitet. Die folgenden Unterabschnitte beschreiben jede Kategorie der Serverkonfiguration. Denken Sie daran, nach dem Aktualisieren der Einstellungen jeweils auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen zu übernehmen.</para>
 
 			<section id="acp_server_cookies">
 				<sectioninfo>
@@ -619,13 +619,13 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Sucheinstellungen</title>
+				<title>Suchfunktion</title>
 
-				<para>Ihr Board kann ein wahrer Wissensschatz sein. Diese Informationen effektiv durchsuchen zu können ist sehr wichtig, insbesondere wenn Sie die Anzahl redundanter Themen auf Ihrem Board verringern möchten. Hier, auf der Seite <guimenuitem>Sucheinstellungen</guimenuitem>, können Sie festlegen, welche Suchmethode die Suchfunktion Ihres Boards zur Indizierung von Beiträgen und zur Suche verwendet, sowie verschiedene damit verbundene Optionen festlegen. Es gibt vier Hauptkategorien von Sucheinstellungen: <guilabel>Allgemeine Sucheinstellungen</guilabel>, <guilabel>Verwendetes Backend</guilabel>, <guilabel>Fulltext mysql</guilabel> und <guilabel>Fulltext native</guilabel>. Im Folgenden werden die einzelnen Gruppen von Sucheinstellungen im Detail beschrieben.</para>
+				<para>Ihr Board kann ein wahrer Wissensschatz sein. Diese Informationen effektiv durchsuchen zu können ist sehr wichtig, insbesondere wenn Sie die Anzahl redundanter Themen auf Ihrem Board verringern möchten. Hier, auf der Seite <guimenuitem>Suchfunktion</guimenuitem>, können Sie festlegen, welche Suchmethode die Suchfunktion Ihres Boards zur Indizierung von Beiträgen und zur Suche verwendet, sowie verschiedene damit verbundene Optionen festlegen. Es gibt vier Hauptkategorien von Sucheinstellungen: <guilabel>Allgemeine Such-Einstellungen</guilabel>, <guilabel>Verwendetes Backend</guilabel>, <guilabel>Fulltext mysql</guilabel> und <guilabel>Fulltext native</guilabel>. Im Folgenden werden die einzelnen Gruppen von Sucheinstellungen im Detail beschrieben.</para>
 
 				<para>Die erste Gruppe von Sucheinstellungen ist allgemeiner Natur und richtet sich an die Benutzer, die die Suchfunktion direkt nutzen.
 					<itemizedlist>
-						<title>Allgemeine Sucheinstellungen</title>
+						<title>Allgemeine Such-Einstellungen</title>
 						<listitem><para><guilabel>Suchfunktion aktivieren</guilabel>: Setzen Sie diese Option auf <guilabel>Ja</guilabel>, um die Suchfunktion für Ihre Benutzer zu aktivieren; auch die Mitgliedersuche wird dadurch aktiviert.</para></listitem>
 						<listitem><para><guilabel>Wartezeit zwischen zwei Suchvorgängen von Benutzern</guilabel>: Dieser Wert gibt die Anzahl an Sekunden an, die Ihre Benutzer zwischen aufeinanderfolgenden Suchen warten müssen. Dieser Wert wird für jeden Benutzer unabhängig geprüft. Alle positiven ganzen Zahlen sind gültige Werte. Wenn Sie die Prüfung der Suchintervalle für Benutzer deaktivieren möchten, setzen Sie diesen Wert auf „0“.</para></listitem>
 						<listitem><para><guilabel>Wartezeit zwischen zwei Suchvorgängen von Gästen</guilabel>: Dies ist die Anzahl an Sekunden zwischen Suchen, die Gastbenutzer warten müssen. Dieser Wert gilt gemeinsam für alle Gastbenutzer; sucht ein Gast, müssen die anderen warten, bis dieses Intervall verstrichen ist. Alle positiven ganzen Zahlen sind gültige Werte. Wenn Sie die Prüfung der Suchintervalle für Gäste deaktivieren möchten, setzen Sie diesen Wert auf „0“.</para></listitem>
@@ -798,7 +798,7 @@
 		<title>Beitragseinstellungen</title>
 
 		<para>Foren sind ohne Inhalt nutzlos. Inhalte werden von Ihren Benutzern erstellt und veröffentlicht; daher ist es sehr wichtig, die richtigen Beitragseinstellungen zu haben, die steuern, wie Inhalte veröffentlicht werden. Diesen Bereich erreichen Sie über den Navigationsreiter <guimenuitem>Beiträge</guimenuitem>.</para>
-		<para>Die erste Seite, die Sie im Bereich <guimenuitem>Beitragseinstellungen</guimenuitem> sehen, ist <guilabel>BBCodes</guilabel>. Die übrigen verfügbaren Unterabschnitte sind in zwei Hauptgruppen unterteilt: <guilabel>Nachrichten</guilabel> und <guilabel>Anhänge</guilabel>. <guimenuitem>Einstellungen für private Nachrichten</guimenuitem>, <guimenuitem>Beitrags-Symbole</guimenuitem>, <guimenuitem>Smileys</guimenuitem> und <guimenuitem>Wortzensur</guimenuitem> sind nachrichtenbezogene Einstellungen. <guimenuitem>Dateianhänge</guimenuitem>, <guimenuitem>Erweiterungen verwalten</guimenuitem>, <guimenuitem>Erweiterungsgruppen verwalten</guimenuitem> und <guimenuitem>Verwaiste Dateianhänge</guimenuitem> sind anhangbezogene Einstellungen.</para>
+		<para>Die erste Seite, die Sie im Bereich <guimenuitem>Beitragseinstellungen</guimenuitem> sehen, ist <guilabel>BBCodes</guilabel>. Die übrigen verfügbaren Unterabschnitte sind in zwei Hauptgruppen unterteilt: <guilabel>Nachrichten</guilabel> und <guilabel>Anhänge</guilabel>. <guimenuitem>Einstellungen für private Nachrichten</guimenuitem>, <guimenuitem>Beitrags-Symbole</guimenuitem>, <guimenuitem>Smileys</guimenuitem> und <guimenuitem>Wortzensur</guimenuitem> sind nachrichtenbezogene Einstellungen. <guimenuitem>Dateianhänge</guimenuitem>, <guimenuitem>Dateitypen verwalten</guimenuitem>, <guimenuitem>Dateityp-Gruppen verwalten</guimenuitem> und <guimenuitem>Verwaiste Dateianhänge</guimenuitem> sind anhangbezogene Einstellungen.</para>
 
 		<section id="acp_posting_bbcodes">
 			<sectioninfo>
@@ -815,7 +815,7 @@
 			<title>BBCodes</title>
 
 			<para><glossterm>BBCodes</glossterm> sind eine spezielle Methode zur Formatierung von Beiträgen, ähnlich wie HTML. phpBB 3.3 erlaubt es Ihnen, sehr einfach eigene BBCodes zu erstellen. Auf dieser Seite sehen Sie die aktuell vorhandenen benutzerdefinierten BBCodes.</para>
-			<para>Das Hinzufügen eines BBCodes ist sehr einfach. Richtig umgesetzt, kann es sicherer sein, Benutzern die Verwendung Ihres neuen BBCodes zu erlauben, als ihnen die Verwendung von HTML-Code zu gestatten. Um einen BBCode hinzuzufügen, klicken Sie auf <guilabel>Neuen BBCode hinzufügen</guilabel>. Beim Hinzufügen eines BBCodes gibt es vier wesentliche Punkte zu beachten: wie Ihre Benutzer den BBCode verwenden sollen, welchen HTML-Code der BBCode tatsächlich verwendet (dies sehen die Benutzer nicht), welche Kurzinfo-Meldung Sie für den BBCode wünschen und ob für den neuen BBCode eine Schaltfläche auf dem Beitragsbildschirm angezeigt werden soll. Wenn Sie mit der Konfiguration aller Einstellungen des benutzerdefinierten BBCodes fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihren neuen BBCode hinzuzufügen.</para>
+			<para>Das Hinzufügen eines BBCodes ist sehr einfach. Richtig umgesetzt, kann es sicherer sein, Benutzern die Verwendung Ihres neuen BBCodes zu erlauben, als ihnen die Verwendung von HTML-Code zu gestatten. Um einen BBCode hinzuzufügen, klicken Sie auf <guilabel>BBCode hinzufügen</guilabel>. Beim Hinzufügen eines BBCodes gibt es vier wesentliche Punkte zu beachten: wie Ihre Benutzer den BBCode verwenden sollen, welchen HTML-Code der BBCode tatsächlich verwendet (dies sehen die Benutzer nicht), welche Kurzinfo-Meldung Sie für den BBCode wünschen und ob für den neuen BBCode eine Schaltfläche auf dem Beitragsbildschirm angezeigt werden soll. Wenn Sie mit der Konfiguration aller Einstellungen des benutzerdefinierten BBCodes fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihren neuen BBCode hinzuzufügen.</para>
 
 			<figure id="img_acp_creating_bbcodes">
 				<title>BBCodes erstellen</title>
@@ -829,7 +829,7 @@
 				</mediaobject>
 			</figure>
 
-			<para>Im Formular <guilabel>BBCode-Verwendung</guilabel> können Sie festlegen, wie Ihre Benutzer den BBCode verwenden sollen. Angenommen, Sie möchten einen neuen font-BBCode erstellen, mit dem Ihre Benutzer eine Schriftart für ihren Text auswählen können. Ein Beispiel für den Eintrag unter <guilabel>BBCode-Verwendung</guilabel> wäre
+			<para>Im Formular <guilabel>BBCode-Benutzung</guilabel> können Sie festlegen, wie Ihre Benutzer den BBCode verwenden sollen. Angenommen, Sie möchten einen neuen font-BBCode erstellen, mit dem Ihre Benutzer eine Schriftart für ihren Text auswählen können. Ein Beispiel für den Eintrag unter <guilabel>BBCode-Benutzung</guilabel> wäre
 				<code>[font={SIMPLETEXT}]{TEXT}[/font]</code>
 				Dies würde einen neuen [font]-BBCode erzeugen und dem Benutzer erlauben, die gewünschte Schriftart für den Text auszuwählen. Der Text des Benutzers wird durch <guilabel>TEXT</guilabel> dargestellt, während <guilabel>SIMPLETEXT</guilabel> den vom Benutzer eingegebenen Schriftartnamen darstellt.
 			</para>
@@ -839,9 +839,9 @@
 			</para>
 			<para>Der dritte Punkt, den Sie beim Hinzufügen eines benutzerdefinierten BBCodes berücksichtigen sollten, ist, welche Art von Hilfetext Ihren Benutzern angezeigt werden soll, wenn sie den neuen BBCode verwenden möchten. Idealerweise ist die Hilfetext-Meldung ein kurzer Hinweis oder Tipp für den Benutzer, der den BBCode verwendet. Diese Meldung wird unterhalb der BBCode-Zeile auf den Beitragsbildschirmen angezeigt.</para>
 			<note>
-				<para>Ist die als Nächstes beschriebene Option <guilabel>Beim Posten anzeigen</guilabel> nicht aktiviert, wird die Hilfetext-Meldung nicht angezeigt.</para>
+				<para>Ist die als Nächstes beschriebene Option <guilabel>Beim Verfassen eines Beitrags anzeigen</guilabel> nicht aktiviert, wird die Hilfetext-Meldung nicht angezeigt.</para>
 			</note>
-			<para>Zuletzt können Sie beim Hinzufügen eines neuen BBCodes entscheiden, ob für Ihren neuen BBCode auf den Beitragsbildschirmen eine eigentliche BBCode-Schaltfläche angezeigt werden soll. Falls gewünscht, aktivieren Sie das Kontrollkästchen <guilabel>Beim Posten anzeigen</guilabel>.</para>
+			<para>Zuletzt können Sie beim Hinzufügen eines neuen BBCodes entscheiden, ob für Ihren neuen BBCode auf den Beitragsbildschirmen eine eigentliche BBCode-Schaltfläche angezeigt werden soll. Falls gewünscht, aktivieren Sie das Kontrollkästchen <guilabel>Beim Verfassen eines Beitrags anzeigen</guilabel>.</para>
 			<para>Es ist wichtig, beim Erstellen Ihrer benutzerdefinierten BBCodes geeignete Platzhalter (Tokens) zu wählen. Die Tokens begrenzen die Art der akzeptierten Eingabe. Wenn Sie nur URLs zulassen möchten, verwenden Sie den Platzhalter <guilabel>URL</guilabel>. Wenn Sie nur Zahlen zulassen möchten, verwenden Sie den Platzhalter <guilabel>NUMBER</guilabel>.</para>
 
 			<variablelist>
@@ -939,8 +939,8 @@
 				<listitem><para><guilabel>Signatur in Privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, damit Ihre Benutzer ihre <glossterm>Signatur</glossterm> in ihren privaten Nachrichten einfügen können.</para></listitem>
 				<listitem><para><guilabel>Druckansicht in Privaten Nachrichten erlauben</guilabel>: Eine weitere neue Funktion in phpBB 3.3 ist eine druckerfreundliche Ansicht. Wählen Sie <guilabel>Ja</guilabel>, damit Ihre Benutzer ihre privaten Nachrichten in der Druckansicht betrachten können.</para></listitem>
 				<listitem><para><guilabel>Weiterleiten von Privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, damit Ihre Benutzer private Nachrichten weiterleiten können.</para></listitem>
-				<listitem><para><guilabel>Verwendung des [img]-BBCode-Tags erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihre Benutzer in ihren privaten Nachrichten eingebettete Bilder posten können sollen.</para></listitem>
-				<listitem><para><guilabel>Verwendung des [flash]-BBCode-Tags erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihre Benutzer in ihren privaten Nachrichten eingebettete Macromedia-Flash-Objekte posten können sollen.</para></listitem>
+				<listitem><para><guilabel>BBCode-Tag [IMG] in Privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihre Benutzer in ihren privaten Nachrichten eingebettete Bilder posten können sollen.</para></listitem>
+				<listitem><para><guilabel>BBCode-Tag [FLASH] in Privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihre Benutzer in ihren privaten Nachrichten eingebettete Macromedia-Flash-Objekte posten können sollen.</para></listitem>
 				<listitem><para><guilabel>Die Nutzung von Themen-Symbolen in Privaten Nachrichten aktivieren</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Sie Ihren Benutzern erlauben möchten, Themensymbole zu ihren privaten Nachrichten hinzuzufügen. (Themensymbole werden neben den Titeln der privaten Nachrichten angezeigt.)</para></listitem>
 			</itemizedlist>
 
@@ -970,7 +970,7 @@
 				<listitem><para><guilabel>Symbolpfad</guilabel>: Diese Spalte zeigt den Pfad an, in dem sich das Symbol befindet, relativ zum Verzeichnis <filename>/images/icons/</filename>.</para></listitem>
 				<listitem><para><guilabel>Symbolbreite</guilabel>: Dies ist die Breite (in Pixeln), auf die das Symbol gestreckt werden soll.</para></listitem>
 				<listitem><para><guilabel>Symbolhöhe</guilabel>: Dies ist die Höhe (in Pixeln), auf die das Symbol gestreckt werden soll.</para></listitem>
-				<listitem><para><guilabel>Beim Posten anzeigen</guilabel>: Ist dieses Kontrollkästchen aktiviert, wird das Beitragssymbol tatsächlich auf dem Beitragsbildschirm angezeigt.</para></listitem>
+				<listitem><para><guilabel>Beim Verfassen eines Beitrags anzeigen</guilabel>: Ist dieses Kontrollkästchen aktiviert, wird das Beitragssymbol tatsächlich auf dem Beitragsbildschirm angezeigt.</para></listitem>
 				<listitem><para><guilabel>Symbolreihenfolge</guilabel>: Sie können außerdem festlegen, in welcher Reihenfolge das Beitragssymbol angezeigt wird. Sie können das Beitragssymbol entweder an die erste Stelle setzen oder nach einem beliebigen anderen bereits installierten Beitragssymbol.</para></listitem>
 				<listitem><para><guilabel>Hinzufügen</guilabel>: Sind Sie mit den Einstellungen zum Hinzufügen Ihres neuen Beitragssymbols zufrieden, aktivieren Sie dieses Kontrollkästchen.</para></listitem>
 			</itemizedlist>
@@ -1003,7 +1003,7 @@
 				<listitem><para><guilabel>Bezeichnung</guilabel>: Dies ist der Titel des Smileys.</para></listitem>
 				<listitem><para><guilabel>Smiley-Breite</guilabel>: Dies ist die Breite in Pixeln, auf die das Smiley gestreckt wird.</para></listitem>
 				<listitem><para><guilabel>Smiley-Höhe</guilabel>: Dies ist die Höhe in Pixeln, auf die das Smiley gestreckt wird.</para></listitem>
-				<listitem><para><guilabel>Beim Posten anzeigen</guilabel>: Ist dieses Kontrollkästchen aktiviert, wird dieses Smiley tatsächlich auf dem Beitragsbildschirm angezeigt.</para></listitem>
+				<listitem><para><guilabel>Beim Verfassen eines Beitrags anzeigen</guilabel>: Ist dieses Kontrollkästchen aktiviert, wird dieses Smiley tatsächlich auf dem Beitragsbildschirm angezeigt.</para></listitem>
 				<listitem><para><guilabel>Smiley-Reihenfolge</guilabel>: Sie können außerdem festlegen, in welcher Reihenfolge das Smiley angezeigt wird. Sie können das Smiley entweder an die erste Stelle setzen oder nach einem beliebigen anderen bereits installierten Smiley.</para></listitem>
 				<listitem><para><guilabel>Hinzufügen</guilabel>: Sind Sie mit den Einstellungen zum Hinzufügen Ihres neuen Smileys zufrieden, aktivieren Sie dieses Kontrollkästchen.</para></listitem>
 			</itemizedlist>
@@ -1025,7 +1025,7 @@
 
 			<para>In manchen Foren wird ein gewisses Maß an angemessener, unanstößiger Sprache verlangt. Wie phpBB2 bietet auch phpBB3 weiterhin eine Wortzensur an. Wörter, die den im Bereich <guilabel>Wortzensur</guilabel> festgelegten Mustern entsprechen, werden automatisch mit einem von Ihnen, dem Administrator, festgelegten Text zensiert. Um die Wortzensur Ihres Boards zu verwalten, klicken Sie auf <guimenuitem>Wortzensur</guimenuitem>.</para>
 
-			<para>Um eine neue Wortzensur hinzuzufügen, klicken Sie auf <guilabel>Neues Wort hinzufügen</guilabel>. Es gibt zwei Felder: <guilabel>Wort</guilabel> und <guilabel>Ersetzung</guilabel>. Geben Sie das Wort, das automatisch zensiert werden soll, in das Textfeld <guilabel>Wort</guilabel> ein. (Beachten Sie, dass Sie Platzhalter (*) verwenden können.) Geben Sie dann den Text, durch den das zensierte Wort ersetzt werden soll, in das Textfeld <guilabel>Ersetzung</guilabel> ein. Wenn Sie fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um das neue zensierte Wort zu Ihrem Board hinzuzufügen.</para>
+			<para>Um eine neue Wortzensur hinzuzufügen, klicken Sie auf <guilabel>Neuen Begriff hinzufügen</guilabel>. Es gibt zwei Felder: <guilabel>Begriff</guilabel> und <guilabel>Ersetzung</guilabel>. Geben Sie das Wort, das automatisch zensiert werden soll, in das Textfeld <guilabel>Begriff</guilabel> ein. (Beachten Sie, dass Sie Platzhalter (*) verwenden können.) Geben Sie dann den Text, durch den das zensierte Wort ersetzt werden soll, in das Textfeld <guilabel>Ersetzung</guilabel> ein. Wenn Sie fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um das neue zensierte Wort zu Ihrem Board hinzuzufügen.</para>
 
 			<para>Um eine bestehende Wortzensur zu bearbeiten, suchen Sie die Zeile des zensierten Wortes. Klicken Sie auf das „Bearbeiten“-Symbol in dieser Zeile und fahren Sie mit der Änderung der Einstellungen des zensierten Wortes fort.</para>
 		</section>
@@ -1050,7 +1050,7 @@
 				<listitem><para><guilabel>Anzeigereihenfolge der Anhänge</guilabel>: Die Reihenfolge, in der Anhänge angezeigt werden, basierend auf dem Zeitpunkt, zu dem der Anhang gepostet wurde.</para></listitem>
 				<listitem><para><guilabel>Maximales Kontingent für Dateianhänge</guilabel>: Der maximale Speicherplatz, der für alle Anhänge Ihres Boards zur Verfügung steht. Soll dieses Kontingent unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
 				<listitem><para><guilabel>Maximale Dateigröße</guilabel>: Die maximal zulässige Dateigröße eines Anhangs. Soll dieser Wert unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
-				<listitem><para><guilabel>Maximale Dateigröße bei Nachrichten</guilabel>: Der maximale Speicherplatz, der pro Benutzer für Anhänge in privaten Nachrichten zur Verfügung steht. Soll dieses Kontingent unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
+				<listitem><para><guilabel>Maximale Dateigröße in Privaten Nachrichten</guilabel>: Der maximale Speicherplatz, der pro Benutzer für Anhänge in privaten Nachrichten zur Verfügung steht. Soll dieses Kontingent unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
 				<listitem><para><guilabel>Maximale Anzahl von Dateianhängen pro Beitrag</guilabel>: Die maximale Anzahl an Anhängen, die in einem Beitrag gepostet werden können. Soll dieser Wert unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
 				<listitem><para><guilabel>Maximale Anzahl von Dateianhängen pro Privater Nachricht</guilabel>: Die maximale Anzahl an Anhängen, die in einer privaten Nachricht gepostet werden können. Soll dieser Wert unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
 				<listitem><para><guilabel>Sichere Downloads aktivieren</guilabel>: Wenn Sie Anhänge nur für bestimmte <glossterm>IP-Adresse</glossterm>n oder Hostnamen verfügbar machen möchten, sollte diese Option aktiviert werden. Sie können sichere Downloads nach der Aktivierung hier weiter konfigurieren; die spezifischen Einstellungen für sichere Downloads befinden sich in den Formularen <guilabel>Erlaubte IPs/Hostnamen festlegen</guilabel> und <guilabel>Erlaubte IPs/Hostnamen entfernen oder deren Ausschluss aufheben</guilabel> am unteren Ende der Seite.</para></listitem>
@@ -1084,11 +1084,11 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Erweiterungen verwalten</title>
+			<title>Dateitypen verwalten</title>
 
-			<para>Sie können die Anhang-Einstellungen Ihres Boards weiter konfigurieren, indem Sie festlegen, welche Dateiendungen angehängte Dateien beim Hochladen haben dürfen. Es wird empfohlen, aus Sicherheitsgründen keine Skript-Dateiendungen (wie php, php3, php4, phtml, pl, cgi, py, rb, asp, aspx usw.) zuzulassen. Diese Seite finden Sie, indem Sie im <glossterm>ACP</glossterm> auf <guimenuitem>Erweiterungen verwalten</guimenuitem> klicken.</para>
+			<para>Sie können die Anhang-Einstellungen Ihres Boards weiter konfigurieren, indem Sie festlegen, welche Dateiendungen angehängte Dateien beim Hochladen haben dürfen. Es wird empfohlen, aus Sicherheitsgründen keine Skript-Dateiendungen (wie php, php3, php4, phtml, pl, cgi, py, rb, asp, aspx usw.) zuzulassen. Diese Seite finden Sie, indem Sie im <glossterm>ACP</glossterm> auf <guimenuitem>Dateitypen verwalten</guimenuitem> klicken.</para>
 
-			<para>Um eine erlaubte Dateiendung hinzuzufügen, suchen Sie auf der Seite das Formular <guilabel>Erweiterung hinzufügen</guilabel>. Geben Sie in das Feld <guilabel>Erweiterung</guilabel> die Dateiendung ein. Geben Sie den Punkt vor der Dateiendung nicht mit an. Wählen Sie dann über das Auswahlmenü <guilabel>Erweiterungsgruppe</guilabel> die Erweiterungsgruppe aus, der diese neue Dateiendung zugeordnet werden soll. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+			<para>Um eine erlaubte Dateiendung hinzuzufügen, suchen Sie auf der Seite das Formular <guilabel>Dateierweiterung hinzufügen</guilabel>. Geben Sie in das Feld <guilabel>Dateierweiterung</guilabel> die Dateiendung ein. Geben Sie den Punkt vor der Dateiendung nicht mit an. Wählen Sie dann über das Auswahlmenü <guilabel>Dateityp-Gruppe</guilabel> die Erweiterungsgruppe aus, der diese neue Dateiendung zugeordnet werden soll. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
 
 			<para>Sie können außerdem die derzeit erlaubten Dateiendungen Ihres Boards einsehen. Auf der Seite sollten Sie eine Tabelle mit allen erlaubten Dateiendungen sehen. Um die Gruppe zu ändern, der eine Erweiterung angehört, wählen Sie im Auswahlmenü in der Zeile der Erweiterung eine neue Erweiterungsgruppe aus. Um eine Erweiterung zu löschen, aktivieren Sie das Kontrollkästchen in der Spalte <guilabel>Löschen</guilabel>. Sind Sie mit der Verwaltung der aktuellen Dateiendungen Ihres Boards fertig, klicken Sie am unteren Ende der Seite auf <guilabel>Absenden</guilabel>.</para>
 		</section>
@@ -1101,22 +1101,22 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Erweiterungsgruppen verwalten</title>
+			<title>Dateityp-Gruppen verwalten</title>
 
-			<para>Erlaubte Dateiendungen können zur einfacheren Verwaltung und Übersicht in Gruppen zusammengefasst werden. Um die Erweiterungsgruppen zu verwalten, klicken Sie im Bereich <guilabel>Beiträge</guilabel> des <glossterm>ACP</glossterm> auf <guimenuitem>Erweiterungsgruppen verwalten</guimenuitem>. Sie können spezifische Einstellungen für jede Erweiterungsgruppe konfigurieren.</para>
+			<para>Erlaubte Dateiendungen können zur einfacheren Verwaltung und Übersicht in Gruppen zusammengefasst werden. Um die Erweiterungsgruppen zu verwalten, klicken Sie im Bereich <guilabel>Beiträge</guilabel> des <glossterm>ACP</glossterm> auf <guimenuitem>Dateityp-Gruppen verwalten</guimenuitem>. Sie können spezifische Einstellungen für jede Erweiterungsgruppe konfigurieren.</para>
 
 			<para>Um eine neue Dateiendungsgruppe hinzuzufügen, suchen Sie das Textfeld neben der Schaltfläche <guilabel>Neue Gruppe erstellen</guilabel>. Geben Sie den Namen der Erweiterungsgruppe ein und klicken Sie dann auf <guilabel>Absenden</guilabel>. Sie gelangen dann zum Formular für die Erweiterungsgruppen-Einstellungen. Im Folgenden werden alle verfügbaren Optionen beschrieben; sie gelten sowohl für bereits bestehende als auch für neu angelegte Erweiterungsgruppen.</para>
 
 			<itemizedlist>
-				<title>Erweiterungsgruppe hinzufügen</title>
+				<title>Dateityp-Gruppe hinzufügen</title>
 				<listitem><para><guilabel>Gruppenname</guilabel>: Der Name der Erweiterungsgruppe.</para></listitem>
 				<listitem><para><guilabel>Spezialkategorie</guilabel>: Dateien in dieser Erweiterungsgruppe können unterschiedlich angezeigt werden. Wählen Sie in diesem Auswahlmenü eine Spezialkategorie, um festzulegen, wie die Anhänge dieser Erweiterungsgruppe innerhalb eines Beitrags dargestellt werden.</para></listitem>
 				<listitem><para><guilabel>Erlaubt</guilabel>: Aktivieren Sie dies, wenn Anhänge dieser Erweiterungsgruppe erlaubt sein sollen.</para></listitem>
-				<listitem><para><guilabel>In privaten Nachrichten erlaubt</guilabel>: Aktivieren Sie dies, wenn Anhänge dieser Erweiterungsgruppe in privaten Nachrichten erlaubt sein sollen.</para></listitem>
+				<listitem><para><guilabel>Erlaubt in Privaten Nachrichten</guilabel>: Aktivieren Sie dies, wenn Anhänge dieser Erweiterungsgruppe in privaten Nachrichten erlaubt sein sollen.</para></listitem>
 				<listitem><para><guilabel>Upload-Symbol</guilabel>: Das kleine Symbol, das neben allen Anhängen dieser Erweiterungsgruppe angezeigt wird.</para></listitem>
 				<listitem><para><guilabel>Maximale Dateigröße</guilabel>: Die maximale Dateigröße für Anhänge in dieser Erweiterungsgruppe.</para></listitem>
-				<listitem><para><guilabel>Zugewiesene Erweiterungen</guilabel>: Dies ist eine Liste aller Dateiendungen, die dieser Erweiterungsgruppe angehören. Klicken Sie auf <guilabel>Zur Erweiterungsverwaltung wechseln</guilabel>, um zu verwalten, welche Erweiterungen dieser Gruppe angehören.</para></listitem>
-				<listitem><para><guilabel>Erlaubte Foren</guilabel>: Hiermit können Sie festlegen, in welchen Foren Ihre Benutzer Anhänge dieser Erweiterungsgruppe posten dürfen. Um diese Erweiterungsgruppe in allen Foren zu aktivieren, wählen Sie das Optionsfeld <guilabel>Alle Foren erlauben</guilabel>. Um festzulegen, in welchen bestimmten Foren diese Erweiterungsgruppe erlaubt ist, wählen Sie das Optionsfeld <guilabel>Nur unten ausgewählte Foren</guilabel> und wählen Sie dann die Foren im Auswahlmenü aus.</para></listitem>
+				<listitem><para><guilabel>Zugeordnete Dateierweiterungen</guilabel>: Dies ist eine Liste aller Dateiendungen, die dieser Erweiterungsgruppe angehören. Klicken Sie auf <guilabel>Dateierweiterungen bearbeiten</guilabel>, um zu verwalten, welche Erweiterungen dieser Gruppe angehören.</para></listitem>
+				<listitem><para><guilabel>Erlaubte Foren</guilabel>: Hiermit können Sie festlegen, in welchen Foren Ihre Benutzer Anhänge dieser Erweiterungsgruppe posten dürfen. Um diese Erweiterungsgruppe in allen Foren zu aktivieren, wählen Sie das Optionsfeld <guilabel>Alle Foren erlauben</guilabel>. Um festzulegen, in welchen bestimmten Foren diese Erweiterungsgruppe erlaubt ist, wählen Sie das Optionsfeld <guilabel>Nur in folgenden ausgewählten Foren</guilabel> und wählen Sie dann die Foren im Auswahlmenü aus.</para></listitem>
 			</itemizedlist>
 
 			<para>Um die Einstellungen einer aktuellen Dateiendungsgruppe zu bearbeiten, klicken Sie auf das Symbol „Einstellungen“ in der Zeile der Erweiterungsgruppe. Bearbeiten Sie dann die Einstellungen der Erweiterungsgruppe. Weitere Informationen zu jeder Einstellung finden Sie oben.</para>
@@ -1138,7 +1138,7 @@
 
 			<para>Um verwaiste Anhänge zu verwalten, klicken Sie im linken Menü im Bereich <guimenuitem>Beiträge</guimenuitem> des <glossterm>ACP</glossterm> auf <guimenuitem>Verwaiste Dateianhänge</guimenuitem>. Sie sollten eine Tabelle mit allen verwaisten Anhängen sowie allen wichtigen Informationen zu jedem verwaisten Anhang sehen.</para>
 
-			<para>Sie können einen verwaisten Anhang einem bestimmten Beitrag zuweisen. Ermitteln Sie dazu zunächst die Beitrags-ID des Beitrags. Geben Sie diesen Wert in die Spalte <guilabel>Beitrags-ID</guilabel> für den jeweiligen verwaisten Anhang ein. Aktivieren Sie <guilabel>Datei an Beitrag anhängen</guilabel> und klicken Sie dann auf <guilabel>Absenden</guilabel>.</para>
+			<para>Sie können einen verwaisten Anhang einem bestimmten Beitrag zuweisen. Ermitteln Sie dazu zunächst die Beitrags-ID des Beitrags. Geben Sie diesen Wert in die Spalte <guilabel>Beitrags-ID</guilabel> für den jeweiligen verwaisten Anhang ein. Aktivieren Sie <guilabel>Datei an den Beitrag anhängen</guilabel> und klicken Sie dann auf <guilabel>Absenden</guilabel>.</para>
 
 			<para>Um einen verwaisten Anhang zu löschen, aktivieren Sie das Kontrollkästchen <guilabel>Löschen</guilabel> des verwaisten Anhangs und klicken Sie dann auf <guilabel>Absenden</guilabel>. Beachten Sie, dass dies nicht rückgängig gemacht werden kann.</para>
 		</section>
@@ -1336,7 +1336,7 @@
 				<title>Benutzer-Avatar</title>
 
 				<para>Hier können Sie den <glossterm>Avatar</glossterm> des Benutzers verwalten. Hat der Benutzer bereits einen Avatar für sich festgelegt, können Sie das Avatarbild sehen.</para>
-				<para>Abhängig von Ihren Avatar-Einstellungen (weitere Informationen zu den Avatar-Einstellungen finden Sie unter <link linkend="acp_board_avatars">Avatar-Einstellungen</link>) können Sie jede verfügbare Option zum Ändern des Avatars des Benutzers wählen: <guilabel>Von Ihrem Computer hochladen</guilabel>, <guilabel>Von einer URL hochladen</guilabel> oder <guilabel>Extern verlinken</guilabel>. Sie können auch einen Avatar aus der Avatar-Galerie Ihres Boards auswählen, indem Sie auf die Schaltfläche <guilabel>Galerie anzeigen</guilabel> neben <guilabel>Lokale Galerie:</guilabel> klicken.</para>
+				<para>Abhängig von Ihren Avatar-Einstellungen (weitere Informationen zu den Avatar-Einstellungen finden Sie unter <link linkend="acp_board_avatars">Avatar-Einstellungen</link>) können Sie jede verfügbare Option zum Ändern des Avatars des Benutzers wählen: <guilabel>Von Ihrem Rechner hochladen</guilabel>, <guilabel>Von URL hochladen</guilabel> oder <guilabel>Von extern verlinken</guilabel>. Sie können auch einen Avatar aus der Avatar-Galerie Ihres Boards auswählen, indem Sie auf die Schaltfläche <guilabel>Galerie anzeigen</guilabel> neben <guilabel>Lokale Galerie:</guilabel> klicken.</para>
 				<note>
 					<para>Die von Ihnen am Avatar des Benutzers vorgenommenen Änderungen müssen weiterhin den in den Avatar-Einstellungen festgelegten Beschränkungen entsprechen.</para>
 				</note>
@@ -1414,7 +1414,7 @@
 				<title>Anhänge</title>
 
 				<para>Je nach den aktuellen Anhang-Einstellungen haben Ihre Benutzer möglicherweise bereits <glossterm>Anhänge</glossterm> gepostet. Hat der Benutzer bereits mindestens einen Anhang hochgeladen, sehen Sie die Auflistung der Anhänge in der Tabelle. Die verfügbaren Daten zu jedem Anhang umfassen: <guilabel>Dateiname</guilabel>, <guilabel>Themen-Titel</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Dateigröße</guilabel> und <guilabel>Downloads</guilabel>.</para>
-				<para>Um Sie bei der Verwaltung der Anhänge des Benutzers zu unterstützen, können Sie die Sortierreihenfolge der Anhangsliste wählen. Suchen Sie das Auswahlmenü <guilabel>Sortieren nach:</guilabel> und wählen Sie die Kategorie, nach der die Liste sortiert werden soll (mögliche Optionen sind <guimenuitem>Dateiname</guimenuitem>, <guimenuitem>Erweiterung</guimenuitem>, <guimenuitem>Dateigröße</guimenuitem>, <guimenuitem>Downloads</guimenuitem>, <guimenuitem>Beitragszeit</guimenuitem> und <guimenuitem>Themen-Titel</guimenuitem>. Um die Sortierreihenfolge festzulegen, wählen Sie im Auswahlmenü neben der Sortierkategorie entweder <guimenuitem>Absteigend</guimenuitem> oder <guimenuitem>Aufsteigend</guimenuitem>. Wenn Sie fertig sind, klicken Sie auf <guilabel>Los</guilabel>.</para>
+				<para>Um Sie bei der Verwaltung der Anhänge des Benutzers zu unterstützen, können Sie die Sortierreihenfolge der Anhangsliste wählen. Suchen Sie das Auswahlmenü <guilabel>Sortieren nach:</guilabel> und wählen Sie die Kategorie, nach der die Liste sortiert werden soll (mögliche Optionen sind <guimenuitem>Dateiname</guimenuitem>, <guimenuitem>Dateityp</guimenuitem>, <guimenuitem>Dateigröße</guimenuitem>, <guimenuitem>Downloads</guimenuitem>, <guimenuitem>Beitragszeit</guimenuitem> und <guimenuitem>Themen-Titel</guimenuitem>. Um die Sortierreihenfolge festzulegen, wählen Sie im Auswahlmenü neben der Sortierkategorie entweder <guimenuitem>Absteigend</guimenuitem> oder <guimenuitem>Aufsteigend</guimenuitem>. Wenn Sie fertig sind, klicken Sie auf <guilabel>Los</guilabel>.</para>
 				<para>Um den Anhang anzuzeigen, klicken Sie auf den Dateinamen des Anhangs. Der Anhang öffnet sich im selben Browserfenster. Sie können auch das Thema anzeigen, in dem der Anhang gepostet wurde, indem Sie auf den Link neben der Beschriftung <guilabel>Thema:</guilabel> unterhalb des Dateinamens klicken. Das Löschen der Anhänge des Benutzers ist sehr einfach. Aktivieren Sie in der Anhangsliste die Kontrollkästchen neben den Anhängen, die Sie löschen möchten. Haben Sie alles Gewünschte ausgewählt, klicken Sie auf <guilabel>Markierte löschen</guilabel> unterhalb der Anhangsliste.</para>
 				<tip>
 					<para>Um alle auf der Seite angezeigten Anhänge auszuwählen, klicken Sie auf den Link <guilabel>Alle markieren</guilabel> unterhalb der Anhangsliste. Dies ist besonders hilfreich, wenn Sie alle auf der Seite angezeigten Anhänge auf einmal löschen möchten.</para>
@@ -1534,17 +1534,17 @@
 
 			<para>Eine der vielen neuen Funktionen in phpBB3, die das Benutzererlebnis verbessern, sind <guilabel>Benutzerdefinierte Profilfelder</guilabel>. Früher konnten Benutzer nur Informationen in den angezeigten gemeinsamen Profilfeldern eintragen; Administratoren mussten ihrem Board Modifikationen hinzufügen, um ihren individuellen Bedürfnissen gerecht zu werden. In phpBB3 können Administratoren jedoch bequem über das <acronym>ACP</acronym> benutzerdefinierte Profilfelder erstellen.</para>
 
-			<para>Um Ihr benutzerdefiniertes Profilfeld zu erstellen, melden Sie sich in Ihrem ACP an. Klicken Sie auf den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und suchen Sie dann im linken Menü den Link <guimenuitem>Benutzerdefinierte Profilfelder</guimenuitem>, um darauf zu klicken. Sie sollten sich nun auf der richtigen Seite befinden. Suchen Sie das leere Textfeld unterhalb der Überschriften für benutzerdefinierte Profilfelder, das sich neben einem Auswahlmenü und der Schaltfläche <guilabel>Neues Feld erstellen</guilabel> befindet. Geben Sie in das leere Textfeld zunächst den Namen des neuen Profilfelds ein, das Sie erstellen möchten. Wählen Sie dann im Auswahlmenü den Feldtyp aus. Verfügbare Optionen sind <guimenuitem>Zahlen</guimenuitem>, <guimenuitem>Einzeiliges Textfeld</guimenuitem>, <guimenuitem>Textbereich</guimenuitem>, <guimenuitem>Boolesch (Ja/Nein)</guimenuitem>, <guimenuitem>Dropdown-Feld</guimenuitem> und <guimenuitem>Datum</guimenuitem>. Klicken Sie auf die Schaltfläche <guilabel>Neues Feld erstellen</guilabel>, um fortzufahren. Im Folgenden werden die drei Gruppen von Einstellungen beschrieben, die das neue benutzerdefinierte Profilfeld hat.
+			<para>Um Ihr benutzerdefiniertes Profilfeld zu erstellen, melden Sie sich in Ihrem ACP an. Klicken Sie auf den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und suchen Sie dann im linken Menü den Link <guimenuitem>Benutzerdefinierte Profilfelder</guimenuitem>, um darauf zu klicken. Sie sollten sich nun auf der richtigen Seite befinden. Suchen Sie das leere Textfeld unterhalb der Überschriften für benutzerdefinierte Profilfelder, das sich neben einem Auswahlmenü und der Schaltfläche <guilabel>Neues Feld anlegen</guilabel> befindet. Geben Sie in das leere Textfeld zunächst den Namen des neuen Profilfelds ein, das Sie erstellen möchten. Wählen Sie dann im Auswahlmenü den Feldtyp aus. Verfügbare Optionen sind <guimenuitem>Zahlen</guimenuitem>, <guimenuitem>Einzeiliges Textfeld</guimenuitem>, <guimenuitem>Mehrzeiliges Textfeld</guimenuitem>, <guimenuitem>Boolescher Wert (Ja/Nein)</guimenuitem>, <guimenuitem>Auswahlfeld</guimenuitem> und <guimenuitem>Datum</guimenuitem>. Klicken Sie auf die Schaltfläche <guilabel>Neues Feld anlegen</guilabel>, um fortzufahren. Im Folgenden werden die drei Gruppen von Einstellungen beschrieben, die das neue benutzerdefinierte Profilfeld hat.
 				<itemizedlist>
 					<title>Profilfeld hinzufügen</title>
 					<listitem><para><guilabel>Art des Feldes:</guilabel> Dies ist die Art des Feldes, um das es sich bei Ihrem neuen benutzerdefinierten Profilfeld handelt. Das bedeutet, es kann aus Zahlen, Daten usw. bestehen. Dies sollte bereits festgelegt sein.</para></listitem>
 					<listitem><para><guilabel>Feld-Kennung:</guilabel> Dies ist der Name des Profilfelds. Dieser Name identifiziert das Profilfeld innerhalb der Datenbank und der Vorlagen von phpBB3.</para></listitem>
-					<listitem><para><guilabel>Profilfeld anzeigen:</guilabel> Diese Einstellung legt fest, ob das neue Profilfeld überhaupt angezeigt wird. Das Profilfeld wird auf Themenseiten, in Profilen und in der Mitgliederliste angezeigt, sofern dies in den Lasteinstellungen aktiviert ist. Standardmäßig ist nur die Anzeige im Benutzerprofil aktiviert.</para></listitem>
+					<listitem><para><guilabel>Profilfeld öffentlich anzeigen:</guilabel> Diese Einstellung legt fest, ob das neue Profilfeld überhaupt angezeigt wird. Das Profilfeld wird auf Themenseiten, in Profilen und in der Mitgliederliste angezeigt, sofern dies in den Lasteinstellungen aktiviert ist. Standardmäßig ist nur die Anzeige im Benutzerprofil aktiviert.</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Sichtbarkeitsoption</title>
-					<listitem><para><guilabel>Im Benutzer-Kontrollzentrum anzeigen:</guilabel> Diese Einstellung legt fest, ob Ihre Benutzer das Profilfeld im <acronym>UCP</acronym> ändern können.</para></listitem>
+					<listitem><para><guilabel>Im persönlichen Bereich des Benutzers anzeigen:</guilabel> Diese Einstellung legt fest, ob Ihre Benutzer das Profilfeld im <acronym>UCP</acronym> ändern können.</para></listitem>
 					<listitem><para><guilabel>Bei der Registrierung anzeigen:</guilabel> Ist diese Option aktiviert, wird das Profilfeld auf der Registrierungsseite angezeigt. Benutzer können dieses Feld im <acronym>UCP</acronym> ändern.</para></listitem>
 					<listitem><para><guilabel>Erforderliches Feld:</guilabel> Diese Einstellung legt fest, ob Sie Ihre Benutzer zum Ausfüllen dieses Profilfelds zwingen möchten. Dadurch wird das Profilfeld bei der Registrierung sowie im Benutzer-Kontrollzentrum angezeigt.</para></listitem>
 					<listitem><para><guilabel>Profilfeld verstecken:</guilabel> Ist diese Option aktiviert, erscheint dieses Profilfeld nur in den Profilen der Benutzer. In diesem Fall können nur Administratoren und Moderatoren dieses Feld sehen oder ausfüllen.</para></listitem>
