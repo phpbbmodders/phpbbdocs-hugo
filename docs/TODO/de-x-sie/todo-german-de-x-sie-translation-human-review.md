@@ -17,15 +17,18 @@ boards), covering every chapter — `admin_guide.xml`, `user_guide.xml`,
 traced to its English source line and checked against the real
 language pack, not sampled.
 
-Around 75 real mismatches were found and fixed in `admin_guide.xml`
-alone, from small things ("Smilies" became "Smileys", since the real
-board never uses "Smilies" as a German word) to larger ones (an entire
-section calling something "Themensymbole"/topic icons now correctly
-says "Beitrags-Symbole"/post icons; the dotted-topics, read-marking,
-and password-complexity toggles; several ACP page titles and dropdown
-labels that didn't match the real navigation). Full details and the
-"why" behind what's left unmatched (grammatical case forms, hyphenation,
-and untranslated technical strings, mostly) are in
+Around 90 real mismatches were found and fixed across `admin_guide.xml`
+and `user_guide.xml`, from small things ("Smilies" became "Smileys",
+since the real board never uses "Smilies" as a German word) to larger
+ones (an entire section calling something "Themensymbole"/topic icons
+now correctly says "Beitrags-Symbole"/post icons; the dotted-topics,
+read-marking, and password-complexity toggles; several ACP page titles,
+dropdown labels, and search/sort options that didn't match the real
+navigation or strings). `moderator_guide.xml`, `quick_start_guide.xml`,
+`upgrade_guide.xml`, `server_guide.xml`, and `glossary.xml` needed no
+fixes. Full details and the "why" behind what's left unmatched
+(grammatical case forms, hyphenation, and untranslated technical
+strings, mostly) are in
 [`todo-german-de-x-sie-terminology-audit.md`](todo-german-de-x-sie-terminology-audit.md).
 
 ## Content that's never had a native read
@@ -55,29 +58,32 @@ oddly phrased, or like it was translated rather than written.
   board uses; just the little bit of embedded formatting got dropped.
   Take a look and confirm they still read naturally without it.
 
-## Genuinely unconfirmed items in admin_guide.xml
+## Genuinely unconfirmed items
 
 For these, no matching key could be found at all in the fetched
 language-pack files, so there's nothing to check the wording against.
 That doesn't mean anything is known to be wrong, just unverified. Full
-detail — English source, exact location, and why each one couldn't be
-confirmed — is in
-[`todo-german-de-x-sie-supplementary-glossary.md`](todo-german-de-x-sie-supplementary-glossary.md),
-which is meant to make it easy to turn these into entries in a
-project-specific supplementary glossary:
+detail — English source, exact location, why each one couldn't be
+confirmed, and blank columns to record the team's decision — is the
+fillable
+[`german-de-x-sie-supplementary-glossary.md`](german-de-x-sie-supplementary-glossary.md):
 
-- "Name der E-Mail-Funktion" (mail function name) — the ACP setting
-  this describes may no longer exist under that name in current phpBB.
-- "Abmessungen für Bildlinks" (image link dimensions), "Neues Passwort
+- In `admin_guide.xml`: "Name der E-Mail-Funktion" (mail function
+  name, may no longer exist under that name in current phpBB),
+  "Abmessungen für Bildlinks" (image link dimensions), "Neues Passwort
   bestätigen" (confirm new password, in the admin's edit-user form),
   "Rückantwort-E-Mail-Adresse" (return email address), "übergeordnetes
   Modul" (module parent), "Berechtigungen kopieren" (copy permissions),
   "Benutzernamen entsperren oder Ausnahmen entfernen" (un-ban or
-  un-exclude usernames), and "IP von erlaubten/nicht erlaubten
-  IPs/Hostnamen ausschließen" (the exclude-IP checkbox) — all
-  plausible, existing German, just not independently verified.
-- The two system-requirement checks for non-Latin UTF-8 character
-  support (`mbstring`/`PCRE`) — no matching key found either.
+  un-exclude usernames), "IP von erlaubten/nicht erlaubten
+  IPs/Hostnamen ausschließen" (the exclude-IP checkbox), and the two
+  system-requirement checks for non-Latin UTF-8 character support
+  (`mbstring`/`PCRE`).
+- In `moderator_guide.xml`: "Themenart ändern" (change topic type).
+- In `quick_start_guide.xml`: "Installation starten" (Start Install
+  button), "herunterzuladen" (the config.php download step), and two
+  VigLink-extension strings ("Konto umwandeln", "VigLink-Einstellungen")
+  whose language files live outside phpBB core entirely.
 
 ## Pre-existing issues shared with the English source
 

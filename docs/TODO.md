@@ -16,9 +16,8 @@ plans live under `docs/TODO/`; this file stays a concise summary.
   key found) remains listed for a native speaker to double-check.
 - [German (de-x-sie) supplementary glossary](TODO/de-x-sie/german-de-x-sie-supplementary-glossary.md) —
   a fillable glossary of terms from the audit above with no matching
-  phpBB language-pack string at all; background and reasoning for each
-  row is in
-  [the accompanying reference doc](TODO/de-x-sie/todo-german-de-x-sie-supplementary-glossary.md).
+  phpBB language-pack string at all, with the reasoning behind each row
+  and blank columns to record the team's agreed wording.
 - [Next translation priority](TODO/todo-language-priority.md) — ranks the
   remaining phpBB language packs (English, Danish, French, and German are
   done) from highest to lowest priority for the next translation, with the

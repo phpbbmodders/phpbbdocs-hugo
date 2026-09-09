@@ -8,23 +8,27 @@ chapters (`admin_guide.xml`, `user_guide.xml`, `moderator_guide.xml`,
 Honorifics) language pack (`phpbb-de/phpbb-translation`,
 `language/de_x_sie/`).
 
-All seven chapters have had a full line-by-line pass: every
-`<guilabel>`/`<guimenuitem>`/`<title>` string in every chapter has been
-individually checked against the real language pack. Six of them
-(`user_guide.xml`, `moderator_guide.xml`, `quick_start_guide.xml`,
-`upgrade_guide.xml`, `server_guide.xml`, `glossary.xml`) turned out
-clean after that pass, once the real mismatches found along the way
-were fixed — not just close paraphrases but different literal button
-and field labels, and in several cases an entire feature described
-with the wrong term: the "Manage extensions" pages being confused with
-phpBB's unrelated Extensions/mods feature, predefined permission-role
-names like "Vollmoderator" not matching the real "Umfassender
-Moderator", and "Moderatorkontrollzentrum"/
-"Administrationskontrollzentrum" not matching the real
-"Moderations-Bereich"/"Administrations-Bereich" (see the commit log
-for the full list). `admin_guide.xml` is the seventh chapter, covered
-below — it had far more ground to cover, but it went through the exact
-same full pass as the other six.
+All seven chapters — `admin_guide.xml`, `user_guide.xml`,
+`moderator_guide.xml`, `quick_start_guide.xml`, `upgrade_guide.xml`,
+`server_guide.xml`, `glossary.xml` — have had the exact same
+exhaustive treatment: every `<guilabel>`/`<guimenuitem>`/`<title>`
+string in every chapter has been individually traced to its English
+source line and resolved, not sampled. Real mismatches were found and
+fixed in `admin_guide.xml` and `user_guide.xml`, not just close
+paraphrases but different literal button and field labels, and in
+several cases an entire feature described with the wrong term: the
+"Manage extensions" pages being confused with phpBB's unrelated
+Extensions/mods feature, predefined permission-role names like
+"Vollmoderator" not matching the real "Umfassender Moderator",
+"Moderatorkontrollzentrum"/"Administrationskontrollzentrum" not
+matching the real "Moderations-Bereich"/"Administrations-Bereich", and
+several search/sort dropdown labels and a private-message button whose
+wording didn't match the real strings (see the commit log for the full
+list). `moderator_guide.xml`, `quick_start_guide.xml`,
+`upgrade_guide.xml`, `server_guide.xml`, and `glossary.xml` came back
+clean under the same exhaustive check — no fixes needed, though each
+turned up a small number of strings genuinely unconfirmable against
+the fetched language pack (see the supplementary glossary below).
 
 All 50 dev-docs files have had a full read-through against their
 English originals. Dev-docs reference far fewer phpBB UI strings than
@@ -79,10 +83,12 @@ has a specific, checked reason it isn't a translation bug:
   older/renamed feature; these are flagged for awareness, not silently
   patched in German only, since fixing only the translation would fork
   it from the (equally wrong) English original.
-- **Genuinely unconfirmed** — a small residual set where no matching
-  key could be found in the fetched reference files at all. These are
-  listed in `docs/TODO/de-x-sie/todo-german-de-x-sie-translation-human-review.md` rather
-  than repeated here.
+- **Genuinely unconfirmed** — a small residual set, across every
+  chapter (not just `admin_guide.xml`), where no matching key could be
+  found in the fetched reference files at all. These are listed, with
+  the reasoning behind each one, in the fillable
+  [`german-de-x-sie-supplementary-glossary.md`](german-de-x-sie-supplementary-glossary.md)
+  rather than repeated here.
 
 ## How to do this
 
