@@ -96,7 +96,4 @@ Ideas not yet built, practical and speculative alike: [`docs/TODO.md`](docs/TODO
 
 ## License
 
-This project carries two licenses, covering two different things:
-
-- **Build tooling** (shell scripts, XSLT stylesheets, Hugo site templates/CSS) — **GNU General Public License, version 2 (GPL-2.0)**. See [LICENSE](LICENSE).
-- **Documentation content** (the English source pulled from [phpbb/documentation](https://github.com/phpbb/documentation), and its Danish and French translations) &copy; phpBB Limited, licensed under the [CC Attribution-NonCommercial-ShareAlike 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license, matching upstream. See [LICENSE-DOCS](LICENSE-DOCS).
+This entire repository — build tooling (shell scripts, XSLT stylesheets, Hugo site templates/CSS) and documentation content alike (the English source pulled from [phpbb/documentation](https://github.com/phpbb/documentation), and its Danish, French, and German translations) &copy; phpBB Limited — is licensed under the [CC Attribution-NonCommercial-ShareAlike 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license, matching the single-license convention of phpBB's own upstream documentation repository. See [LICENSE](LICENSE).
