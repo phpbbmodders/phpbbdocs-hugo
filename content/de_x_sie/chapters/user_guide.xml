@@ -156,7 +156,7 @@
 					<listitem><para><guilabel>Skype</guilabel>: Ihr Benutzername, der dem Dienst <ulink url="http://www.skype.com/">Skype</ulink> zugeordnet ist.</para></listitem>
 					<listitem><para><guilabel>Website</guilabel>: Die Adresse Ihrer Website. Muss mit dem entsprechenden Protokollverweis versehen werden (d. h. http://)</para></listitem>
 					<listitem><para><guilabel>Wohnort</guilabel>: Ihr physischer Standort. Beachten Sie, dass dieser in der Regel zusammen mit Ihren Benutzerinformationen bei jedem Beitrag angezeigt wird, sodass die übliche Vorsicht bezüglich der Veröffentlichung persönlicher Informationen im Internet gelten sollte.</para></listitem>
-					<listitem><para><guilabel>Beruf</guilabel>: Ihr Beruf. Die eingegebene Information erscheint nur auf der Profilansichtsseite.</para></listitem>
+					<listitem><para><guilabel>Tätigkeit</guilabel>: Ihr Beruf. Die eingegebene Information erscheint nur auf der Profilansichtsseite.</para></listitem>
 					<listitem><para><guilabel>Interessen</guilabel>: Ihre persönlichen Interessen. Die hier eingegebene Information erscheint nur auf der Profilansichtsseite.</para></listitem>
 					<listitem><para><guilabel>Geburtstag</guilabel>: Ihr Geburtstag. Diese Information wird verwendet, um Ihren Benutzernamen im Geburtstagsbereich der Forenübersicht anzuzeigen. Wenn das Jahr angegeben ist, wird Ihr Alter in Ihrem Profil angezeigt.</para></listitem>
 				</itemizedlist>
@@ -167,12 +167,12 @@
 			</section>
 			<section id="ucp_avatar">
 				<title>Avatar</title>
-				<para>Ihr Avatar ist ein Bild, das bei jedem von Ihnen verfassten Beitrag angezeigt wird. Je nach Foreneinstellungen können Avatare vollständig deaktiviert sein oder in einer (oder mehreren) von drei Formen erscheinen: „<guilabel>Vom eigenen Computer hochladen</guilabel>“, „<guilabel>Von einer URL hochladen</guilabel>“ und „<guilabel>Extern verlinken</guilabel>“.</para>
+				<para>Ihr Avatar ist ein Bild, das bei jedem von Ihnen verfassten Beitrag angezeigt wird. Je nach Foreneinstellungen können Avatare vollständig deaktiviert sein oder in einer (oder mehreren) von drei Formen erscheinen: „<guilabel>Von Ihrem Rechner hochladen</guilabel>“, „<guilabel>Von URL hochladen</guilabel>“ und „<guilabel>Extern verlinken</guilabel>“.</para>
 				<para>
 					<itemizedlist>
 						<listitem><para><guilabel>Gravatar</guilabel>: Wenn Sie den Avatar-Dienst Gravatar.com nutzen, können Sie hier Ihre Gravatar-E-Mail-Adresse angeben, um Ihr Gravatar-Bild als Avatar zu verwenden.</para></listitem>
-						<listitem><para><guilabel>Vom eigenen Computer hochladen</guilabel>: Sie können einen Avatar von Ihrem Computer hochladen, der auf dem Server des Forums gespeichert wird.</para></listitem>
-						<listitem><para><guilabel>Von einer URL hochladen</guilabel>: Sie können die URL eines vorhandenen Bildes angeben. Dies führt dazu, dass das Bild auf den Server des Forums kopiert und dort gespeichert wird.</para></listitem>
+						<listitem><para><guilabel>Von Ihrem Rechner hochladen</guilabel>: Sie können einen Avatar von Ihrem Computer hochladen, der auf dem Server des Forums gespeichert wird.</para></listitem>
+						<listitem><para><guilabel>Von URL hochladen</guilabel>: Sie können die URL eines vorhandenen Bildes angeben. Dies führt dazu, dass das Bild auf den Server des Forums kopiert und dort gespeichert wird.</para></listitem>
 						<listitem><para><guilabel>Extern verlinken</guilabel>: Sie können die URL eines vorhandenen Bildes angeben. Dies führt nicht dazu, dass das Bild auf dem Server des Forums gespeichert wird, sondern es wird direkt von seinem aktuellen Speicherort eingebunden.</para></listitem>
 					</itemizedlist>
 				</para>
@@ -200,11 +200,11 @@
 				<para>Allgemeine Einstellungen steuern verschiedene übergreifende Interaktionen mit der phpBB-Software.</para>
 				<para>
 					<itemizedlist>
-						<listitem><para><guilabel>Benutzer können mich per E-Mail kontaktieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über die Schaltfläche „E-Mail“ in Ihrem Profil eine E-Mail senden.</para></listitem>
+						<listitem><para><guilabel>Mitglieder dürfen mich per E-Mail kontaktieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über die Schaltfläche „E-Mail“ in Ihrem Profil eine E-Mail senden.</para></listitem>
 						<listitem><para><guilabel>Administratoren dürfen mir Informationen per E-Mail schicken</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, erhalten Sie vom Forenadministrator versendete Massen-E-Mails.</para></listitem>
 						<listitem><para><guilabel>Andere Mitglieder dürfen mir Private Nachrichten schicken</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über das Forum private Nachrichten senden.</para></listitem>
 						<listitem><para><guilabel>Verberge meinen Online-Status</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihr Online-Status vor anderen Benutzern verborgen. Beachten Sie, dass Administratoren und Moderatoren Ihren Online-Status weiterhin sehen können.</para></listitem>
-						<listitem><para><guilabel>Mein Forenstil</guilabel>: Erlaubt Ihnen festzulegen, welchen Stil das Forum verwendet. Diese Einstellung ist möglicherweise nicht verfügbar, wenn der Forenadministrator festgelegt hat, die Stile der Benutzer zu überschreiben.</para></listitem>
+						<listitem><para><guilabel>Mein Board-Style</guilabel>: Erlaubt Ihnen festzulegen, welchen Stil das Forum verwendet. Diese Einstellung ist möglicherweise nicht verfügbar, wenn der Forenadministrator festgelegt hat, die Stile der Benutzer zu überschreiben.</para></listitem>
 						<listitem><para><guilabel>Meine Sprache</guilabel>: Erlaubt Ihnen festzulegen, welches Sprachpaket das Forum verwendet. Beachten Sie, dass diese Einstellung sich nur auf die Sprachtexte des Forums bezieht; Beiträge werden in der Sprache dargestellt, in der sie verfasst wurden.</para></listitem>
 						<listitem><para><guilabel>Meine Zeitzone</guilabel>: Erlaubt Ihnen festzulegen, in welcher Zeitzone die Forenzeiten angezeigt werden sollen.</para></listitem>
 						<listitem><para><guilabel>Mein Datums-Format</guilabel>: Steuert, in welchem Format Zeiten dargestellt werden. Sie können eine der Optionen im Auswahlfeld wählen – fortgeschrittene Benutzer können „<guilabel>Benutzerdefiniert</guilabel>“ wählen und ein eigenes Format eingeben (im Format der <ulink url="http://www.php.net/date">date-Funktion von php.net</ulink>).</para></listitem>
@@ -219,7 +219,7 @@
 						<listitem><para><guilabel>BBCode standardmäßig aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, ist BBCode im Beitrags-Editor aktiviert.</para></listitem>
 						<listitem><para><guilabel>Smileys standardmäßig aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Smileys in Ihren Beiträgen dargestellt.</para></listitem>
 						<listitem><para><guilabel>Meine Signatur standardmäßig anhängen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihre Signatur an Ihre Beiträge angehängt.</para></listitem>
-						<listitem><para><guilabel>Bei Antworten standardmäßig benachrichtigen</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Sie per E-Mail benachrichtigt, wenn eine Antwort auf Ihren Beitrag erfolgt.</para></listitem>
+						<listitem><para><guilabel>Mich standardmäßig über Antworten informieren</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Sie per E-Mail benachrichtigt, wenn eine Antwort auf Ihren Beitrag erfolgt.</para></listitem>
 					</itemizedlist>
 
 				</para>
@@ -286,12 +286,12 @@
 			<para>Benutzer können als <guilabel>Freund</guilabel> oder <guilabel>Feind</guilabel> markiert werden, um deren Nachrichten filtern zu können. Wenn ein Stil dies unterstützt, werden Beiträge von Benutzern auf Ihrer Feindesliste ausgeblendet und Beiträge von Benutzern auf Ihrer Freundesliste hervorgehoben. Regeln für private Nachrichten können die Freundes- und Feindesliste zum Filtern eingehender privater Nachrichten verwenden.</para>
 		</section>
 		<section id="ucp_attachments">
-			<title>Anhänge</title>
+			<title>Dateianhänge</title>
 			<para>Der Anhangsbereich des UCP zeigt eine Liste aller Anhänge, die Sie zum Forum hochgeladen haben. Jeder Eintrag enthält einen Link zu der Nachricht, in der sich der Anhang befindet, die Größe des Anhangs, die Anzahl der Downloads sowie den Zeitpunkt des Hochladens. Über diese Seite können Sie Anhänge aus dem Forum löschen. Inline-Verweise auf einen gelöschten Anhang verbleiben im ursprünglichen Beitrag, der Anhang wird jedoch in keiner anderen Weise als durch den Dateinamen dargestellt.</para>
 		</section>
 		<section id="ucp_usergroups">
 			<title>Benutzergruppen</title>
-			<para>Die Mitgliedschaft in Benutzergruppen kann über den Bereich Benutzergruppen des UCP verwaltet werden. Die Seite listet Gruppen auf, in denen der Benutzer Mitglied oder Leiter ist, sowie alle anderen Benutzergruppen. Gruppen, die für den Beitritt offen sind, verfügen über ein Optionsfeld, mit dem der Benutzer die Mitgliedschaft beantragen kann. Benutzer können sich außerdem selbst aus Gruppen entfernen, in denen sie Mitglied sind. Wenn ein Benutzer über das Recht <guilabel>Standard-Benutzergruppe ändern</guilabel> verfügt, kann er hier auswählen, welche Gruppe seine Standardgruppe sein soll. Die Standard-Benutzergruppe bestimmt die Farbe des Benutzernamens, die im gesamten Forum angezeigt wird.</para>
+			<para>Die Mitgliedschaft in Benutzergruppen kann über den Bereich Benutzergruppen des UCP verwaltet werden. Die Seite listet Gruppen auf, in denen der Benutzer Mitglied oder Leiter ist, sowie alle anderen Benutzergruppen. Gruppen, die für den Beitritt offen sind, verfügen über ein Optionsfeld, mit dem der Benutzer die Mitgliedschaft beantragen kann. Benutzer können sich außerdem selbst aus Gruppen entfernen, in denen sie Mitglied sind. Wenn ein Benutzer über das Recht <guilabel>Kann Hauptgruppe ändern</guilabel> verfügt, kann er hier auswählen, welche Gruppe seine Standardgruppe sein soll. Die Standard-Benutzergruppe bestimmt die Farbe des Benutzernamens, die im gesamten Forum angezeigt wird.</para>
 			<para>Benutzer, die als Gruppenleiter bestimmt sind, können die Mitgliedschaft der Gruppe verwalten. Benutzer können hier hinzugefügt, entfernt, ausstehende Beitrittsanträge genehmigt oder abgelehnt sowie deren Standard-Benutzergruppe geändert werden.</para>
 		</section>
 	</section>
@@ -326,8 +326,8 @@
 				<listitem><para><guilabel>Themen-/Beitragssymbol</guilabel>: Das Themen-/Beitragssymbol ist ein kleines Symbol, das links neben Ihrem Beitragsbetreff angezeigt wird. Dies hilft, Ihren Beitrag zu kennzeichnen und hervorzuheben, ist jedoch vollkommen optional.</para></listitem>
 				<listitem><para><guilabel>Betreff</guilabel>: Wenn Sie mit Ihrem Beitrag ein neues Thema erstellen, ist der Betreff erforderlich und wird zum Titel des Themas. Wenn Sie auf ein bestehendes Thema antworten, ist dies optional, kann aber geändert werden.</para></listitem>
 				<listitem><para>Beitragsinhalt – Obwohl nicht beschriftet, ist das große Textfeld der Ort, an dem der eigentliche Inhalt Ihres Beitrags eingegeben wird. Hier können Sie neben Ihrem Text auch Dinge wie <link linkend="posting_smilies">Smileys</link> oder <link linkend="posting_bbcodes">BBCode</link> verwenden, sofern der Forenadministrator diese aktiviert hat. Als HTML eingegebener Inhalt wird als Text dargestellt, HTML-Eingaben werden nicht unterstützt.</para></listitem>
-				<listitem><para>Smileys – Smileys, oder Emoticons, sind kleine Bilder, die in Ihren Beitrag eingefügt werden können, um Ausdruck zu betonen. Wenn Smileys aktiviert sind, sehen Sie den Text „<guilabel>Smileys sind AN</guilabel>“ rechts neben dem Feld für den Beitragsinhalt. Andernfalls sehen Sie den Text „<guilabel>Smileys sind AUS</guilabel>“. Weitere Einzelheiten finden Sie unter <link linkend="posting_smilies">Smileys verwenden</link>.</para></listitem>
-				<listitem><para>BBCode – BBCode ist eine Art der Formatierung, die auf Ihren Beitragsinhalt angewendet werden kann, sofern BBCode vom Forenadministrator aktiviert wurde. Wenn BBCode aktiviert ist, sehen Sie den Text „<guilabel>BBCode ist AN</guilabel>“ rechts neben dem Feld für den Beitragsinhalt. Andernfalls sehen Sie den Text „<guilabel>BBCode ist AUS</guilabel>“. Weitere Einzelheiten finden Sie unter <link linkend="posting_bbcodes">BBCode verwenden</link>.</para></listitem>
+				<listitem><para>Smileys – Smileys, oder Emoticons, sind kleine Bilder, die in Ihren Beitrag eingefügt werden können, um Ausdruck zu betonen. Wenn Smileys aktiviert sind, sehen Sie den Text „<guilabel>Smileys sind eingeschaltet</guilabel>“ rechts neben dem Feld für den Beitragsinhalt. Andernfalls sehen Sie den Text „<guilabel>Smileys sind ausgeschaltet</guilabel>“. Weitere Einzelheiten finden Sie unter <link linkend="posting_smilies">Smileys verwenden</link>.</para></listitem>
+				<listitem><para>BBCode – BBCode ist eine Art der Formatierung, die auf Ihren Beitragsinhalt angewendet werden kann, sofern BBCode vom Forenadministrator aktiviert wurde. Wenn BBCode aktiviert ist, sehen Sie den Text „<guilabel>BBCode ist eingeschaltet</guilabel>“ rechts neben dem Feld für den Beitragsinhalt. Andernfalls sehen Sie den Text „<guilabel>BBCode ist ausgeschaltet</guilabel>“. Weitere Einzelheiten finden Sie unter <link linkend="posting_bbcodes">BBCode verwenden</link>.</para></listitem>
 			</itemizedlist>
 		</section>
 
@@ -370,33 +370,33 @@
 			</figure>
 			<para>Der Standardstatus dieser Optionen richtet sich nach Ihren <link linkend="ucp_posting">Beitragsstandardeinstellungen</link> auf der Seite <guilabel>Foreneinstellungen</guilabel> des Benutzerkontrollzentrums.</para>
 			<itemizedlist>
-				<listitem><para><guilabel>BBCode deaktivieren</guilabel>: Wenn BBCode im Forum aktiviert ist und Sie es verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens wird BBCode in Ihrem Beitragsinhalt nicht in die entsprechende Ausgabe umgewandelt. Zum Beispiel wird [b]Fettgedruckter Text[/b] in Ihrem Beitrag genau als [b]Fettgedruckter Text[/b] angezeigt.</para></listitem>
-				<listitem><para><guilabel>Smileys deaktivieren</guilabel>: Wenn Smileys im Forum aktiviert sind und Sie diese verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens werden die Zeichen der Smileys nicht in das entsprechende Bild umgewandelt. Zum Beispiel wird ;) in Ihrem Beitrag genau als ;) angezeigt.</para></listitem>
-				<listitem><para><guilabel>URLs nicht automatisch erkennen</guilabel>: Wenn Sie eine URL direkt in Ihren Beitragsinhalt eingeben (im Format http://....com oder www.etc.com), wird diese standardmäßig in einen anklickbaren Textstring umgewandelt. Wenn dieses Kästchen beim Verfassen des Beitrags jedoch aktiviert ist, bleiben diese URLs als normaler Textstring erhalten.</para></listitem>
+				<listitem><para><guilabel>BBCode ausschalten</guilabel>: Wenn BBCode im Forum aktiviert ist und Sie es verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens wird BBCode in Ihrem Beitragsinhalt nicht in die entsprechende Ausgabe umgewandelt. Zum Beispiel wird [b]Fettgedruckter Text[/b] in Ihrem Beitrag genau als [b]Fettgedruckter Text[/b] angezeigt.</para></listitem>
+				<listitem><para><guilabel>Smileys ausschalten</guilabel>: Wenn Smileys im Forum aktiviert sind und Sie diese verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens werden die Zeichen der Smileys nicht in das entsprechende Bild umgewandelt. Zum Beispiel wird ;) in Ihrem Beitrag genau als ;) angezeigt.</para></listitem>
+				<listitem><para><guilabel>URLs nicht automatisch verlinken</guilabel>: Wenn Sie eine URL direkt in Ihren Beitragsinhalt eingeben (im Format http://....com oder www.etc.com), wird diese standardmäßig in einen anklickbaren Textstring umgewandelt. Wenn dieses Kästchen beim Verfassen des Beitrags jedoch aktiviert ist, bleiben diese URLs als normaler Textstring erhalten.</para></listitem>
 				<listitem><para><guilabel>Signatur anhängen (die Signatur kann im persönlichen Bereich geändert werden)</guilabel>: Wenn dieses Kästchen aktiviert ist, wird die in Ihrem Profil festgelegte Signatur an den Beitrag angehängt, sofern Signaturen vom Administrator aktiviert wurden und Sie über die entsprechenden Berechtigungen verfügen. Weitere Informationen zu Signaturen finden Sie unter <link linkend="ucp_signature">UCP-Signatur</link>.</para></listitem>
-				<listitem><para><guilabel>Mich per E-Mail benachrichtigen, wenn eine Antwort gepostet wird</guilabel>: Wenn dieses Kästchen aktiviert ist, erhalten Sie jedes Mal eine Benachrichtigung (per E-Mail, Jabber usw.), wenn ein anderer Benutzer auf das Thema antwortet. Dies wird als Abonnieren des Themas bezeichnet. Weitere Informationen finden Sie unter <link linkend="ucp_subscriptions">UCP-Abonnements</link>.</para></listitem>
+				<listitem><para><guilabel>Mich benachrichtigen, sobald eine Antwort geschrieben wurde</guilabel>: Wenn dieses Kästchen aktiviert ist, erhalten Sie jedes Mal eine Benachrichtigung (per E-Mail, Jabber usw.), wenn ein anderer Benutzer auf das Thema antwortet. Dies wird als Abonnieren des Themas bezeichnet. Weitere Informationen finden Sie unter <link linkend="ucp_subscriptions">UCP-Abonnements</link>.</para></listitem>
 				<listitem><para><guilabel>Thema sperren</guilabel>: Sofern Sie über Moderationsberechtigungen in diesem Forum verfügen, wird das Thema durch Aktivieren dieses Kästchens gesperrt, nachdem Ihre Antwort veröffentlicht wurde. Ab diesem Zeitpunkt darf niemand außer Moderatoren oder Administratoren auf das Thema antworten. Weitere Informationen finden Sie unter <link linkend="modtools_lock">Sperren eines Themas oder Beitrags</link>.</para></listitem>
 			</itemizedlist>
 
 			<section id="posting_special">
 				<title>Themenarten</title>
-				<para>Sofern Sie über die entsprechenden Berechtigungen verfügen, haben Sie beim Erstellen eines neuen Themas mit <guilabel>Thema veröffentlichen als</guilabel> die Möglichkeit, verschiedene Themenarten auszuwählen. Die vier möglichen Arten sind: <guilabel>Normal</guilabel>, <guilabel>Wichtig</guilabel>, <guilabel>Ankündigung</guilabel> und <guilabel>Global</guilabel>. Standardmäßig sind alle neuen Beiträge <guilabel>Normal</guilabel>.</para>
+				<para>Sofern Sie über die entsprechenden Berechtigungen verfügen, haben Sie beim Erstellen eines neuen Themas mit <guilabel>Thema veröffentlichen als</guilabel> die Möglichkeit, verschiedene Themenarten auszuwählen. Die vier möglichen Arten sind: <guilabel>Normal</guilabel>, <guilabel>Wichtig</guilabel>, <guilabel>Bekanntmachung</guilabel> und <guilabel>Global</guilabel>. Standardmäßig sind alle neuen Beiträge <guilabel>Normal</guilabel>.</para>
 				<itemizedlist>
 					<listitem><para><guilabel>Normal</guilabel>: Durch Auswahl von Normal wird Ihr neues Thema ein Standardthema im Forum.</para></listitem>
 					<listitem><para><guilabel>Wichtig</guilabel>: Wichtige Themen sind besondere Themen im Forum. Sie werden oberhalb aller normalen Themen oben auf der ersten Seite des Forums, in dem sie veröffentlicht wurden, „festgepinnt“.</para></listitem>
-					<listitem><para><guilabel>Ankündigung</guilabel>: Ankündigungen ähneln wichtigen Themen darin, dass sie oben im Forum „festgepinnt“ werden. Sie unterscheiden sich jedoch in zwei Punkten von wichtigen Themen: 1) Sie stehen oberhalb der wichtigen Themen, und 2) sie erscheinen oben auf <emphasis>jeder</emphasis> Seite des Forums statt nur auf der ersten Seite der Themen.</para></listitem>
-					<listitem><para><guilabel>Global</guilabel>: Globale bzw. globale Ankündigungen sind besondere Arten von Ankündigungen, die oben auf jeder Seite jedes Forums im gesamten Forum erscheinen. Sie erscheinen oberhalb jeder anderen Art von besonderem Thema.</para></listitem>
+					<listitem><para><guilabel>Bekanntmachung</guilabel>: Bekanntmachungen ähneln wichtigen Themen darin, dass sie oben im Forum „festgepinnt“ werden. Sie unterscheiden sich jedoch in zwei Punkten von wichtigen Themen: 1) Sie stehen oberhalb der wichtigen Themen, und 2) sie erscheinen oben auf <emphasis>jeder</emphasis> Seite des Forums statt nur auf der ersten Seite der Themen.</para></listitem>
+					<listitem><para><guilabel>Global</guilabel>: Globale bzw. globale Bekanntmachungen sind besondere Arten von Bekanntmachungen, die oben auf jeder Seite jedes Forums im gesamten Forum erscheinen. Sie erscheinen oberhalb jeder anderen Art von besonderem Thema.</para></listitem>
 				</itemizedlist>
-				<para>Sie haben außerdem die Möglichkeit festzulegen, wie lange die besonderen Themen (wichtige Themen, Ankündigungen und globale Ankündigungen) ihre Art behalten. Zum Beispiel wird eine Ankündigung erstellt und so festgelegt, dass sie 4 Tage lang „festgepinnt“ bleibt. Nach Ablauf der 4 Tage wird die Ankündigung automatisch in ein normales Thema umgewandelt.</para>
+				<para>Sie haben außerdem die Möglichkeit festzulegen, wie lange die besonderen Themen (wichtige Themen, Bekanntmachungen und globale Bekanntmachungen) ihre Art behalten. Zum Beispiel wird eine Bekanntmachung erstellt und so festgelegt, dass sie 4 Tage lang „festgepinnt“ bleibt. Nach Ablauf der 4 Tage wird die Bekanntmachung automatisch in ein normales Thema umgewandelt.</para>
 			</section>
 		</section>
 
 		<section id="posting_attachments">
-			<title>Anhänge</title>
+			<title>Dateianhänge</title>
 			<para>Anhänge erlauben es Benutzern, Dateien hochzuladen und an ihren Beitrag anzuhängen. Die Möglichkeit, Anhänge anzuhängen und herunterzuladen, wird durch die Berechtigungen „Kann Dateien anhängen“ bzw. „Kann Dateien herunterladen“ bestimmt.</para>
-			<para>Um einen Anhang hinzuzufügen, suchen Sie den Bereich <guilabel>Anhänge</guilabel> der Beitragsseite und klicken Sie auf die Schaltfläche <guilabel>Dateien hinzufügen</guilabel>. Ein Kommentar kann in das Textfeld <guilabel>Dateikommentar</guilabel> eingegeben werden. Ein Klick auf <guilabel>Datei hinzufügen</guilabel> lädt die Datei hoch und hängt sie an den Beitrag an. Um mehrere Dateien hochzuladen, wiederholen Sie den Vorgang. Anhänge können auch hochgeladen werden, indem eine Datei per Drag &amp; Drop auf den Nachrichtenbereich der Beitragsseite gezogen wird.</para>
-			<para>Um einen Anhang zu löschen, suchen Sie die Anhangsliste am unteren Ende des Bereichs <guilabel>Anhänge</guilabel> der Beitragsseite und klicken Sie auf die Schaltfläche <guilabel>Datei löschen</guilabel> für den gewünschten Anhang.</para>
-			<para>Anhänge können im Beitragstext angezeigt werden, indem Sie für den gewünschten Anhang auf die Schaltfläche <guilabel>Inline einfügen</guilabel> klicken. Wenn ein Anhang inline platziert wird, wird ein BBCode-ähnlicher Text in den Beitragstext eingefügt, sodass er verschoben werden kann. Wird ein Anhang nicht inline platziert, wird er am Ende des Beitrags angezeigt.</para>
+			<para>Um einen Anhang hinzuzufügen, suchen Sie den Bereich <guilabel>Dateianhänge</guilabel> der Beitragsseite und klicken Sie auf die Schaltfläche <guilabel>Dateien hinzufügen</guilabel>. Ein Kommentar kann in das Textfeld <guilabel>Dateikommentar</guilabel> eingegeben werden. Ein Klick auf <guilabel>Datei hinzufügen</guilabel> lädt die Datei hoch und hängt sie an den Beitrag an. Um mehrere Dateien hochzuladen, wiederholen Sie den Vorgang. Anhänge können auch hochgeladen werden, indem eine Datei per Drag &amp; Drop auf den Nachrichtenbereich der Beitragsseite gezogen wird.</para>
+			<para>Um einen Anhang zu löschen, suchen Sie die Anhangsliste am unteren Ende des Bereichs <guilabel>Dateianhänge</guilabel> der Beitragsseite und klicken Sie auf die Schaltfläche <guilabel>Datei löschen</guilabel> für den gewünschten Anhang.</para>
+			<para>Anhänge können im Beitragstext angezeigt werden, indem Sie für den gewünschten Anhang auf die Schaltfläche <guilabel>Im Beitrag anzeigen</guilabel> klicken. Wenn ein Anhang inline platziert wird, wird ein BBCode-ähnlicher Text in den Beitragstext eingefügt, sodass er verschoben werden kann. Wird ein Anhang nicht inline platziert, wird er am Ende des Beitrags angezeigt.</para>
 			<para>Anhänge unterliegen einer Reihe von Einschränkungen, nämlich der Dateigröße und dem Dateityp.</para>
 			<itemizedlist>
 				<listitem><para>Dateigröße: Die maximale Dateigröße für hochgeladene Dateien wird vom Administrator festgelegt. Der Standardwert beträgt 256 KiB.</para></listitem>
@@ -408,11 +408,11 @@
 			<title>Umfragen</title>
 			<para>Umfragen erlauben es Benutzern, in einem Thema über eine Idee oder ein Thema abzustimmen. Umfragen können nur im ersten Beitrag eines Themas erstellt werden. Die Möglichkeit, Umfragen zu erstellen und daran teilzunehmen, wird durch die vom Administrator festgelegte Berechtigung „Umfragen“ bestimmt.</para>
 			<itemizedlist>
-				<listitem><para><guilabel>Umfragefrage</guilabel> – Dies ist die Idee oder das Thema, über das in der Umfrage abgestimmt wird. Dies ist erforderlich, um eine Umfrage zu starten.</para></listitem>
-				<listitem><para><guilabel>Umfrageoptionen</guilabel> – Dies sind die zulässigen Antworten auf die Umfragefrage. Bei der Eingabe einer Umfrageoption sollte jede in einer separaten Zeile des Textfelds stehen. Mindestens zwei Umfrageoptionen sind erforderlich.</para></listitem>
-				<listitem><para><guilabel>Optionen pro Benutzer</guilabel> – Dies ist die Anzahl der Optionen, die jeder Benutzer bei der Abstimmung auswählen darf. Wenn einem Benutzer mehr als eine Option erlaubt ist, ersetzt eine Reihe von Kontrollkästchen die Optionsfelder der Standardumfrage.</para></listitem>
-				<listitem><para><guilabel>Umfrage läuft für</guilabel> – Dies ist die Anzahl der Tage, in denen Benutzer an der Umfrage teilnehmen können. Sobald die Zeit abgelaufen ist, können keine weiteren Stimmen mehr abgegeben werden und die Ergebnisse werden angezeigt.</para></listitem>
-				<listitem><para><guilabel>Erneute Abstimmung erlauben</guilabel> – Wenn dies ausgewählt ist, können Benutzer ihre Stimme erneut abgeben.</para></listitem>
+				<listitem><para><guilabel>Frage</guilabel> – Dies ist die Idee oder das Thema, über das in der Umfrage abgestimmt wird. Dies ist erforderlich, um eine Umfrage zu starten.</para></listitem>
+				<listitem><para><guilabel>Antworten der Umfrage</guilabel> – Dies sind die zulässigen Antworten auf die Umfragefrage. Bei der Eingabe einer Umfrageoption sollte jede in einer separaten Zeile des Textfelds stehen. Mindestens zwei Umfrageoptionen sind erforderlich.</para></listitem>
+				<listitem><para><guilabel>Auswahlmöglichkeiten pro Benutzer</guilabel> – Dies ist die Anzahl der Optionen, die jeder Benutzer bei der Abstimmung auswählen darf. Wenn einem Benutzer mehr als eine Option erlaubt ist, ersetzt eine Reihe von Kontrollkästchen die Optionsfelder der Standardumfrage.</para></listitem>
+				<listitem><para><guilabel>Umfrage durchführen für</guilabel> – Dies ist die Anzahl der Tage, in denen Benutzer an der Umfrage teilnehmen können. Sobald die Zeit abgelaufen ist, können keine weiteren Stimmen mehr abgegeben werden und die Ergebnisse werden angezeigt.</para></listitem>
+				<listitem><para><guilabel>Ändern der Abstimmung erlauben</guilabel> – Wenn dies ausgewählt ist, können Benutzer ihre Stimme erneut abgeben.</para></listitem>
 			</itemizedlist>
 		</section>
 		<section id="posting_drafts">
@@ -466,7 +466,7 @@
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>Benutzernamen sollten in das Textfeld eingegeben werden, wonach entweder <guilabel>Hinzufügen</guilabel> oder <guilabel>Hinzufügen [BCC]</guilabel> verwendet wird, um den Benutzer zur entsprechenden Empfängerliste hinzuzufügen. Wenn Sie sich über den Namen eines Benutzers nicht sicher sind, können Sie den Link <guilabel>Mitglied suchen</guilabel> verwenden, um die Mitgliederliste nach dem Benutzer zu durchsuchen. Setzen Sie ein Häkchen neben den gewünschten Benutzer(n) in der Mitgliederliste und drücken Sie <guilabel>Markierte auswählen</guilabel>, um den Benutzer zum Empfängerfeld hinzuzufügen.</para>
+			<para>Benutzernamen sollten in das Textfeld eingegeben werden, wonach entweder <guilabel>Hinzufügen</guilabel> oder <guilabel>[ BCC ]</guilabel> verwendet wird, um den Benutzer zur entsprechenden Empfängerliste hinzuzufügen. Wenn Sie sich über den Namen eines Benutzers nicht sicher sind, können Sie den Link <guilabel>Nach einem Mitglied suchen</guilabel> verwenden, um die Mitgliederliste nach dem Benutzer zu durchsuchen. Setzen Sie ein Häkchen neben den gewünschten Benutzer(n) in der Mitgliederliste und drücken Sie <guilabel>Markierte auswählen</guilabel>, um den Benutzer zum Empfängerfeld hinzuzufügen.</para>
 		</section>
 		<section id="pm_folders">
 			<sectioninfo>
@@ -495,7 +495,7 @@
 				<title>Benutzerdefinierte Ordner</title>
 
 				<para>Wenn der Administrator dies erlaubt, können Sie in phpBB 3.3 Ihre eigenen benutzerdefinierten Ordner für <glossterm>private Nachrichten</glossterm> erstellen. Um zu prüfen, ob Sie Ordner hinzufügen können, besuchen Sie den Bereich <guimenuitem>Optionen bearbeiten</guimenuitem> im Bereich <guilabel>Private Nachrichten</guilabel>. </para>
-				<para>Um einen neuen Ordner hinzuzufügen, geben Sie den Namen des Ordners in das Eingabefeld <guilabel>Ordner hinzufügen</guilabel> ein. Wenn die Erstellung erfolgreich war, erscheint Ihr neuer Ordner am Ende der Ordnerliste. Sie können ihn dann wie einen normalen Nachrichtenordner verwenden und Nachrichten hineinverschieben oder einen Filter einrichten (weitere Informationen zu Filtern finden Sie im Abschnitt <link linkend="pm_rules">Regeln für private Nachrichten</link>), der dies automatisch für Sie erledigt.</para>
+				<para>Um einen neuen Ordner hinzuzufügen, geben Sie den Namen des Ordners in das Eingabefeld <guilabel>Ordner erstellen</guilabel> ein. Wenn die Erstellung erfolgreich war, erscheint Ihr neuer Ordner am Ende der Ordnerliste. Sie können ihn dann wie einen normalen Nachrichtenordner verwenden und Nachrichten hineinverschieben oder einen Filter einrichten (weitere Informationen zu Filtern finden Sie im Abschnitt <link linkend="pm_rules">Regeln für private Nachrichten</link>), der dies automatisch für Sie erledigt.</para>
 			</section>
 
 			<section id="pm_folders_moving">
@@ -508,7 +508,7 @@
 				</sectioninfo>
 				<title>Nachrichten verschieben</title>
 
-				<para>Es würde keinen Sinn ergeben, benutzerdefinierte Ordner zu haben, wenn Sie nicht in der Lage wären, Nachrichten zwischen ihnen zu verschieben. Um genau das zu tun, besuchen Sie den Ordner, aus dem Sie die Nachrichten verschieben möchten. Wählen Sie die Nachrichten aus, die Sie verschieben möchten, und verwenden Sie das Auswahlmenü <guilabel>Markierte verschieben</guilabel>, um den Zielordner auszuwählen.</para>
+				<para>Es würde keinen Sinn ergeben, benutzerdefinierte Ordner zu haben, wenn Sie nicht in der Lage wären, Nachrichten zwischen ihnen zu verschieben. Um genau das zu tun, besuchen Sie den Ordner, aus dem Sie die Nachrichten verschieben möchten. Wählen Sie die Nachrichten aus, die Sie verschieben möchten, und verwenden Sie das Auswahlmenü <guilabel>Markierte verschieben nach</guilabel>, um den Zielordner auszuwählen.</para>
 				<note>
 					<para>Bitte beachten Sie, dass Sie eine Fehlermeldung erhalten und die Verschiebung verworfen wird, wenn der Zielordner nach der Verschiebung mehr Nachrichten enthalten würde, als das Nachrichtenlimit erlaubt.</para>
 				</note>
@@ -524,12 +524,12 @@
 				</sectioninfo>
 				<title>Nachrichtenmarkierungen</title>
 
-				<para>Nachrichten innerhalb von Ordnern können farbliche Markierungen haben. Bitte beachten Sie die Legende <guilabel>Nachrichtenfarben</guilabel>, um zu sehen, was jede Farbe bedeutet. Die genaue Art der Farbgebung hängt vom verwendeten Theme ab. Farbige Nachrichten können vier verschiedene Bedeutungen haben:</para>
+				<para>Nachrichten innerhalb von Ordnern können farbliche Markierungen haben. Bitte beachten Sie die Legende <guilabel>Nachrichten-Farben</guilabel>, um zu sehen, was jede Farbe bedeutet. Die genaue Art der Farbgebung hängt vom verwendeten Theme ab. Farbige Nachrichten können vier verschiedene Bedeutungen haben:</para>
 				<variablelist>
 					<varlistentry>
 						<term>Markierte Nachricht</term>
 						<listitem>
-							<para>Sie können eine Nachricht mit der Option <guilabel>Als wichtig markieren</guilabel> aus dem Auswahlmenü als markiert festlegen.</para>
+							<para>Sie können eine Nachricht mit der Option <guilabel>Als wichtig markieren/demarkieren</guilabel> aus dem Auswahlmenü als markiert festlegen.</para>
 						</listitem>
 					</varlistentry>
 
@@ -584,17 +584,17 @@
 				<itemizedlist>
 					<listitem><para><guilabel>Ist wie</guilabel> – Das Feld enthält die angegebene Zeichenfolge.</para></listitem>
 					<listitem><para><guilabel>Ist nicht wie</guilabel> – Das Feld enthält die angegebene Zeichenfolge <emphasis role="strong">nicht</emphasis>.</para></listitem>
-					<listitem><para><guilabel>Ist</guilabel> – Das Feld stimmt exakt mit der angegebenen Zeichenfolge überein.</para></listitem>
-					<listitem><para><guilabel>Ist nicht</guilabel> – Der Inhalt des Feldes ist <emphasis role="strong">nicht</emphasis> mit der angegebenen Zeichenfolge identisch.</para></listitem>
+					<listitem><para><guilabel>Entspricht</guilabel> – Das Feld stimmt exakt mit der angegebenen Zeichenfolge überein.</para></listitem>
+					<listitem><para><guilabel>Entspricht nicht</guilabel> – Der Inhalt des Feldes ist <emphasis role="strong">nicht</emphasis> mit der angegebenen Zeichenfolge identisch.</para></listitem>
 					<listitem><para><guilabel>Beginnt mit</guilabel> – Das Feld beginnt mit der angegebenen Zeichenfolge.</para></listitem>
 					<listitem><para><guilabel>Endet mit</guilabel> – Das Feld endet mit der angegebenen Zeichenfolge.</para></listitem>
-					<listitem><para><guilabel>Ist Freund</guilabel> – Ob sich der Absender auf Ihrer Freundesliste befindet.</para></listitem>
-					<listitem><para><guilabel>Ist Feind</guilabel> – Ob sich der Absender auf Ihrer Feindesliste befindet.</para></listitem>
-					<listitem><para><guilabel>Ist Benutzer</guilabel> – Der Name des Absenders stimmt mit der angegebenen Zeichenfolge überein.</para></listitem>
-					<listitem><para><guilabel>Ist in Benutzergruppe</guilabel> – Der Absender gehört der angegebenen Benutzergruppe an.</para></listitem>
+					<listitem><para><guilabel>Ein Freund ist</guilabel> – Ob sich der Absender auf Ihrer Freundesliste befindet.</para></listitem>
+					<listitem><para><guilabel>Ein ignoriertes Mitglied ist</guilabel> – Ob sich der Absender auf Ihrer Feindesliste befindet.</para></listitem>
+					<listitem><para><guilabel>Ist Mitglied</guilabel> – Der Name des Absenders stimmt mit der angegebenen Zeichenfolge überein.</para></listitem>
+					<listitem><para><guilabel>Ist Mitglied der Gruppe</guilabel> – Der Absender gehört der angegebenen Benutzergruppe an.</para></listitem>
 					<listitem><para><guilabel>Beantwortet</guilabel> – Ob die Nachricht beantwortet wurde.</para></listitem>
 					<listitem><para><guilabel>Weitergeleitet</guilabel> – Ob die Nachricht weitergeleitet wurde.</para></listitem>
-					<listitem><para><guilabel>An meine Standard-Benutzergruppe</guilabel> – Ob die Nachricht an Ihre Benutzergruppe gesendet wurde.</para></listitem>
+					<listitem><para><guilabel>An meine Hauptgruppe</guilabel> – Ob die Nachricht an Ihre Benutzergruppe gesendet wurde.</para></listitem>
 					<listitem><para><guilabel>An mich</guilabel> – Ob eine Nachricht direkt an Sie gesendet wurde.</para></listitem>
 				</itemizedlist>
 				<para>Die folgende Liste zeigt, welche Bedingungen für jedes Feld verfügbar sind:</para>
@@ -602,21 +602,21 @@
 					<varlistentry>
 						<term>Betreff</term>
 						<listitem>
-							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Ist</guilabel>, <guilabel>Ist nicht</guilabel>, <guilabel>Beginnt mit</guilabel>, <guilabel>Endet mit</guilabel></para>
+							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Entspricht</guilabel>, <guilabel>Entspricht nicht</guilabel>, <guilabel>Beginnt mit</guilabel>, <guilabel>Endet mit</guilabel></para>
 						</listitem>
 					</varlistentry>
 
 					<varlistentry>
 						<term>Absender</term>
 						<listitem>
-							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Ist</guilabel>, <guilabel>Ist nicht</guilabel>, <guilabel>Beginnt mit</guilabel>, <guilabel>Endet mit</guilabel>, <guilabel>Ist Freund</guilabel>, <guilabel>Ist Feind</guilabel>, <guilabel>Ist Benutzer</guilabel>, <guilabel>Ist in Benutzergruppe</guilabel></para>
+							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Entspricht</guilabel>, <guilabel>Entspricht nicht</guilabel>, <guilabel>Beginnt mit</guilabel>, <guilabel>Endet mit</guilabel>, <guilabel>Ein Freund ist</guilabel>, <guilabel>Ein ignoriertes Mitglied ist</guilabel>, <guilabel>Ist Mitglied</guilabel>, <guilabel>Ist Mitglied der Gruppe</guilabel></para>
 						</listitem>
 					</varlistentry>
 
 					<varlistentry>
 						<term>Nachricht</term>
 						<listitem>
-							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Ist</guilabel>, <guilabel>Ist nicht</guilabel></para>
+							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Entspricht</guilabel>, <guilabel>Entspricht nicht</guilabel></para>
 						</listitem>
 					</varlistentry>
 
@@ -630,7 +630,7 @@
 					<varlistentry>
 						<term>Gesendet an</term>
 						<listitem>
-							<para><guilabel>An meine Standard-Benutzergruppe</guilabel>, <guilabel>An mich</guilabel></para>
+							<para><guilabel>An meine Hauptgruppe</guilabel>, <guilabel>An mich</guilabel></para>
 						</listitem>
 					</varlistentry>
 				</variablelist>
@@ -656,11 +656,11 @@
 			<title>Vordefinierte Suchen</title>
 			<para>phpBB verfügt über mehrere vordefinierte Suchen, um bestimmte Arten von Abfragen einfach durchzuführen.</para>
 			<itemizedlist>
-				<listitem><para><guilabel>Eigene Beiträge anzeigen</guilabel> – Liefert eine Liste der Themen, in denen Sie gepostet haben, sortiert nach dem Zeitpunkt des letzten Beitrags im Thema.</para></listitem>
-				<listitem><para><guilabel>Unbeantwortete Themen anzeigen</guilabel> – Liefert alle Themen, die keine Antworten enthalten.</para></listitem>
-				<listitem><para><guilabel>Ungelesene Beiträge anzeigen</guilabel> – Liefert eine Liste der Themen mit Beiträgen, die Sie noch nicht gelesen haben.</para></listitem>
-				<listitem><para><guilabel>Neue Beiträge anzeigen</guilabel> – Liefert eine Liste der Themen mit Beiträgen, die seit Ihrer letzten Anmeldung erstellt wurden.</para></listitem>
-				<listitem><para><guilabel>Aktive Themen anzeigen</guilabel> – Liefert eine Liste der Themen, in denen in den letzten Tagen gepostet wurde. Die Anzahl der Tage kann nach dem Laden der Suchseite geändert werden.</para></listitem>
+				<listitem><para><guilabel>Eigene Beiträge</guilabel> – Liefert eine Liste der Themen, in denen Sie gepostet haben, sortiert nach dem Zeitpunkt des letzten Beitrags im Thema.</para></listitem>
+				<listitem><para><guilabel>Unbeantwortete Themen</guilabel> – Liefert alle Themen, die keine Antworten enthalten.</para></listitem>
+				<listitem><para><guilabel>Ungelesene Beiträge</guilabel> – Liefert eine Liste der Themen mit Beiträgen, die Sie noch nicht gelesen haben.</para></listitem>
+				<listitem><para><guilabel>Neue Beiträge</guilabel> – Liefert eine Liste der Themen mit Beiträgen, die seit Ihrer letzten Anmeldung erstellt wurden.</para></listitem>
+				<listitem><para><guilabel>Aktive Themen</guilabel> – Liefert eine Liste der Themen, in denen in den letzten Tagen gepostet wurde. Die Anzahl der Tage kann nach dem Laden der Suchseite geändert werden.</para></listitem>
 			</itemizedlist>
 		</section>
 
@@ -850,9 +850,9 @@
 			</varlistentry>
 
 			<varlistentry>
-				<term>Suchwerkzeug „Mitglied suchen“</term>
+				<term>Suchwerkzeug „Nach einem Mitglied suchen“</term>
 				<listitem>
-					<para>Sie können Ihre Suchergebnisse mit der Suchfunktion <guilabel>Mitglied suchen</guilabel> eingrenzen. Diese Funktion erlaubt es Ihnen, Mitglieder anhand ihres Benutzernamens, ihrer ICQ-Nummer, AIM, YIM, MSN Messenger-/Windows Live Messenger-Adresse, ihres Beitrittsdatums, letzten Aktivitätsdatums, ihrer Beitragsanzahl, IP-Adresse und Benutzergruppenmitgliedschaft(en) zu finden. Alle Daten sollten im Format JJJJ-MM-TT eingegeben werden (zum Beispiel 2004-02-28, um den 28. Februar 2004 darzustellen). Der Asterisk (*) kann als Platzhalter für partielle Übereinstimmungen verwendet werden, etwa durch Eingabe von „Ar*“ in das Benutzernamenfeld, um alle mit Ar beginnenden Benutzernamen zu finden. Drücken Sie die Schaltfläche <guilabel>Absenden</guilabel>, um die Suche zu starten, oder die Schaltfläche <guilabel>Zurücksetzen</guilabel>, wenn Sie alle Felder leeren und die Suche erneut starten möchten.</para>
+					<para>Sie können Ihre Suchergebnisse mit der Suchfunktion <guilabel>Nach einem Mitglied suchen</guilabel> eingrenzen. Diese Funktion erlaubt es Ihnen, Mitglieder anhand ihres Benutzernamens, ihrer ICQ-Nummer, AIM, YIM, MSN Messenger-/Windows Live Messenger-Adresse, ihres Beitrittsdatums, letzten Aktivitätsdatums, ihrer Beitragsanzahl, IP-Adresse und Benutzergruppenmitgliedschaft(en) zu finden. Alle Daten sollten im Format JJJJ-MM-TT eingegeben werden (zum Beispiel 2004-02-28, um den 28. Februar 2004 darzustellen). Der Asterisk (*) kann als Platzhalter für partielle Übereinstimmungen verwendet werden, etwa durch Eingabe von „Ar*“ in das Benutzernamenfeld, um alle mit Ar beginnenden Benutzernamen zu finden. Drücken Sie die Schaltfläche <guilabel>Absenden</guilabel>, um die Suche zu starten, oder die Schaltfläche <guilabel>Zurücksetzen</guilabel>, wenn Sie alle Felder leeren und die Suche erneut starten möchten.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
