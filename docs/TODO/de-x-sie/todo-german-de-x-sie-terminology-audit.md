@@ -115,15 +115,7 @@ merging — if there's no matching key, add a row to
 [`german-de-x-sie-supplementary-glossary.md`](german-de-x-sie-supplementary-glossary.md)
 instead of leaving it unverified.
 
-That check covers literal UI quotes only. Everything else in
-dev-docs — the surrounding technical prose, explanations, and general
-terminology — is written for developers, not end users, and should be
-judged by whether it reads the way a native-German-speaking developer
-would naturally write it (technical register, developer vocabulary),
-not by whether it matches how an end-user chapter would phrase the
-same concept. This applies whether the developer reading it is new to
-the project or experienced — dev-docs are for both. This is the
-distinction the dev-docs pass already worked under (translation
-fidelity and technical accuracy, not `<guilabel>` matching, see above)
-— stated explicitly here so it isn't lost alongside the newer
-UI-string rule.
+That check covers literal UI quotes only. For everything else in
+dev-docs, reference proper German wording in place of awkward or
+not-well-placed phrasing when you see it — same as any translation
+review.
