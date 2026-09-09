@@ -7,9 +7,12 @@ could not find a matching string anywhere in phpBB's real language
 pack (`phpbb-de/phpbb-translation`). That's not the same as "wrong" —
 it just means there's no official phpBB string to check the wording
 against, so a native speaker has to judge it on its own merits rather
-than by comparison. (`dev-docs-docbook/de_x_sie/` doesn't use
-`<guilabel>`/`<guimenuitem>` tags at all, so it has nothing to add
-here.)
+than by comparison. `dev-docs-docbook/de_x_sie/` doesn't use
+`<guilabel>`/`<guimenuitem>` tags at all as of this audit, so it has no
+entries here yet — but if a future edit to the dev-docs introduces a
+real UI term with no phpBB language-pack match (the same situation
+that produces every other row in this table), add it here too rather
+than starting a separate dev-docs glossary.
 
 **How to use this file:** for each row, fill in "Agreed German term"
 with the wording the team settles on (it can just be the current
