@@ -114,8 +114,8 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Board-Funktionen</title>
-				<para>Über den Bereich <guimenuitem>Board-Funktionen</guimenuitem> können Sie mehrere Funktionen boardweit aktivieren oder deaktivieren. Beachten Sie, dass jede hier deaktivierte Funktion auf Ihrem Forum nicht verfügbar ist, selbst wenn Sie Ihren Benutzern die entsprechenden Berechtigungen erteilen.</para>
+				<title>Board-Funktionalitäten</title>
+				<para>Über den Bereich <guimenuitem>Board-Funktionalitäten</guimenuitem> können Sie mehrere Funktionen boardweit aktivieren oder deaktivieren. Beachten Sie, dass jede hier deaktivierte Funktion auf Ihrem Forum nicht verfügbar ist, selbst wenn Sie Ihren Benutzern die entsprechenden Berechtigungen erteilen.</para>
 				<para>Der Bereich <guimenuitem>Lasteinstellungen</guimenuitem> ermöglicht es Ihnen, einige rechenintensive Funktionen zu deaktivieren, falls Sie ein Shared- oder eingeschränktes Hosting nutzen.</para>
 			</section>
 
@@ -153,7 +153,7 @@
 				<para>Die <guilabel>Allgemeinen Optionen</guilabel> erlauben es Ihnen, die Funktionsweise privater Nachrichten auf Ihrem Board weiter zu definieren.
 					<itemizedlist>
 						<listitem>
-							<para><guilabel>Massen-PNs erlauben:</guilabel> ermöglicht das Versenden privater Nachrichten an mehrere Empfänger. Diese Funktion ist standardmäßig aktiviert. Wird sie deaktiviert, ist auch das Versenden privater Nachrichten an Gruppen nicht mehr möglich. </para>
+							<para><guilabel>Versand von Privaten Nachrichten an mehrere Mitglieder oder Gruppen erlauben:</guilabel> ermöglicht das Versenden privater Nachrichten an mehrere Empfänger. Diese Funktion ist standardmäßig aktiviert. Wird sie deaktiviert, ist auch das Versenden privater Nachrichten an Gruppen nicht mehr möglich. </para>
 							<tip>
 								<para>Im <link linkend="acp_groups">Abschnitt Gruppen</link> finden Sie Informationen dazu, wie Sie die Möglichkeit aktivieren, eine Nachricht an eine ganze Gruppe zu senden.</para>
 							</tip>
@@ -310,13 +310,13 @@
 				<itemizedlist>
 					<title>Allgemeine Einstellungen</title>
 					<listitem><para><guilabel>Aktiviere E-Mail-Funktionalität</guilabel>: Wenn dies deaktiviert ist, werden vom Board überhaupt keine E-Mails versendet.</para></listitem>
-					<listitem><para><guilabel>Benutzer versenden E-Mails über das Board:</guilabel>: Wenn dies aktiviert ist, wird anstelle einer E-Mail-Adresse ein Formular angezeigt, über das Benutzer sich gegenseitig über das Board E-Mails senden können.</para></listitem>
+					<listitem><para><guilabel>E-Mails über das Board versenden:</guilabel>: Wenn dies aktiviert ist, wird anstelle einer E-Mail-Adresse ein Formular angezeigt, über das Benutzer sich gegenseitig über das Board E-Mails senden können.</para></listitem>
 					<listitem><para><guilabel>Name der E-Mail-Funktion</guilabel>: Wenn Sie den nativen, PHP-basierten E-Mail-Dienst verwenden, sollte dies der Name der E-Mail-Funktion sein. Höchstwahrscheinlich lautet dieser „mail“.</para></listitem>
 					<listitem><para><guilabel>Größe von E-Mail-Paketen</guilabel>: Dies ist die Anzahl der E-Mails, die in einem Paket versendet werden können. Dies ist nützlich, wenn Sie Massen-E-Mails versenden möchten und eine große Anzahl von Benutzern haben.</para></listitem>
 					<listitem><para><guilabel>Kontakt-E-Mail-Adresse</guilabel>: Dies ist die Adresse, an die E-Mail-Rückmeldungen zu Ihrem Board gesendet werden. Dies ist außerdem die Adresse, die die Felder „Von“ und „Antwort an“ in allen von Ihrem Board versendeten E-Mails ausfüllt.</para></listitem>
 					<listitem><para><guilabel>Rückantwort-E-Mail-Adresse</guilabel>: Dies ist die Rückantwortadresse, die als technische Kontakt-E-Mail-Adresse in allen E-Mails eingetragen wird. Sie füllt immer die Felder „Return-Path“ und „Sender“ in allen von Ihrem Board versendeten E-Mails aus.</para></listitem>
 					<listitem><para><guilabel>E-Mail-Signatur</guilabel>: Dieser Text wird an das Ende aller von Ihrem Board versendeten E-Mails angehängt.</para></listitem>
-					<listitem><para><guilabel>E-Mail-Adressen verbergen</guilabel>: Wenn Sie E-Mail-Adressen vollständig privat halten möchten, setzen Sie diesen Wert auf <guilabel>Ja</guilabel>.</para></listitem>
+					<listitem><para><guilabel>E-Mail-Adressen verstecken</guilabel>: Wenn Sie E-Mail-Adressen vollständig privat halten möchten, setzen Sie diesen Wert auf <guilabel>Ja</guilabel>.</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
@@ -1061,7 +1061,7 @@
 
 			<itemizedlist>
 				<title>Einstellungen der Bildkategorie</title>
-				<listitem><para><guilabel>Bilder inline anzeigen</guilabel>: Legt fest, wie Bildanhänge angezeigt werden. Ist dies auf <guilabel>Nein</guilabel> gesetzt, wird stattdessen ein Link zum Anhang angezeigt, anstatt das Bild selbst (oder ein Vorschaubild) inline darzustellen.</para></listitem>
+				<listitem><para><guilabel>Bilder im Beitrag anzeigen</guilabel>: Legt fest, wie Bildanhänge angezeigt werden. Ist dies auf <guilabel>Nein</guilabel> gesetzt, wird stattdessen ein Link zum Anhang angezeigt, anstatt das Bild selbst (oder ein Vorschaubild) inline darzustellen.</para></listitem>
 				<listitem><para><guilabel>Vorschaubild erstellen</guilabel>: Diese Einstellung legt fest, ob Ihr Board für jedes angehängte Bild ein Vorschaubild erstellt oder nicht.</para></listitem>
 				<listitem><para><guilabel>Maximale Vorschaubildbreite in Pixeln</guilabel>: Dies ist die maximale Breite in Pixeln für die erzeugten Vorschaubilder.</para></listitem>
 				<listitem><para><guilabel>Maximale Vorschaubild-Dateigröße</guilabel>: Für Bilder werden keine Vorschaubilder erstellt, wenn die Dateigröße des erzeugten Vorschaubilds diesen Wert (in Byte) übersteigt. Dies ist nützlich bei besonders großen geposteten Bildern.</para></listitem>
