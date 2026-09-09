@@ -529,9 +529,9 @@
 						<term>Passwortkomplexität</term>
 						<listitem>
 							<para>Üblicherweise sind komplexere Passwörter besser als einfache Passwörter. Um Ihren Benutzern zu helfen, ihr Konto so sicher wie möglich zu gestalten, haben Sie auch die Möglichkeit, ein Passwort mit der von Ihnen festgelegten Komplexität zu verlangen. Diese Anforderung gilt für alle Benutzer, die ein neues Konto registrieren, oder wenn bestehende Benutzer ihr aktuelles Passwort ändern.</para>
-							<para>Im Auswahlmenü stehen vier Optionen zur Verfügung. <guimenuitem>Keine Erfordernisse</guimenuitem> deaktiviert die Prüfung der Passwortkomplexität vollständig. Die Einstellung <guimenuitem>Muss Groß- und Kleinbuchstaben enthalten</guimenuitem> verlangt, dass die Passwörter Ihrer Benutzer sowohl Klein- als auch Großbuchstaben enthalten. Die Einstellung <guimenuitem>Muss alphanumerische Zeichen enthalten</guimenuitem> verlangt, dass die Passwörter Ihrer Benutzer sowohl Buchstaben als auch Zahlen enthalten. Die Einstellung <guimenuitem>Muss Sonderzeichen enthalten</guimenuitem> schließlich verlangt, dass die Passwörter Ihrer Benutzer Symbole enthalten.</para>
+							<para>Im Auswahlmenü stehen vier Optionen zur Verfügung. <guimenuitem>Keine Erfordernisse</guimenuitem> deaktiviert die Prüfung der Passwortkomplexität vollständig. Die Einstellung <guimenuitem>Muss Groß- und Kleinbuchstaben enthalten</guimenuitem> verlangt, dass die Passwörter Ihrer Benutzer sowohl Klein- als auch Großbuchstaben enthalten. Die Einstellung <guimenuitem>Muss Buchstaben und Ziffern enthalten</guimenuitem> verlangt, dass die Passwörter Ihrer Benutzer sowohl Buchstaben als auch Zahlen enthalten. Die Einstellung <guimenuitem>Muss Sonderzeichen enthalten</guimenuitem> schließlich verlangt, dass die Passwörter Ihrer Benutzer Symbole enthalten.</para>
 							<note>
-								<para>Für jede Anforderung an die Passwortkomplexität gelten auch die im Auswahlmenü darüber liegenden Einstellungen. Wählen Sie beispielsweise <guimenuitem>Muss alphanumerische Zeichen enthalten</guimenuitem>, müssen die Passwörter Ihrer Benutzer nicht nur alphanumerische Zeichen enthalten, sondern auch sowohl Klein- als auch Großbuchstaben aufweisen.</para>
+								<para>Für jede Anforderung an die Passwortkomplexität gelten auch die im Auswahlmenü darüber liegenden Einstellungen. Wählen Sie beispielsweise <guimenuitem>Muss Buchstaben und Ziffern enthalten</guimenuitem>, müssen die Passwörter Ihrer Benutzer nicht nur alphanumerische Zeichen enthalten, sondern auch sowohl Klein- als auch Großbuchstaben aufweisen.</para>
 							</note>
 						</listitem>
 					</varlistentry>
@@ -1322,7 +1322,7 @@
 				</sectioninfo>
 				<title>Benutzereinstellungen</title>
 
-				<para>Benutzer haben viele Einstellungen, die sie für ihr Konto nutzen können. Als Administrator können Sie jede dieser Einstellungen ändern. Die Benutzereinstellungen (auch als Präferenzen bezeichnet) sind in drei Hauptkategorien unterteilt: <guilabel>Allgemeine Einstellungen</guilabel>, <guilabel>Standardeinstellungen für Beiträge</guilabel> und <guilabel>Anzeigeoptionen</guilabel>.</para>
+				<para>Benutzer haben viele Einstellungen, die sie für ihr Konto nutzen können. Als Administrator können Sie jede dieser Einstellungen ändern. Die Benutzereinstellungen (auch als Präferenzen bezeichnet) sind in drei Hauptkategorien unterteilt: <guilabel>Allgemeine Einstellungen</guilabel>, <guilabel>Beitragsoptionen</guilabel> und <guilabel>Anzeigeoptionen</guilabel>.</para>
 			</section>
 
 			<section id="acp_users_manage_avatar">
