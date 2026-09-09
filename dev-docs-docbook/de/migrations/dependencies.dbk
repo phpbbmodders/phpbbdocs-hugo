@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Abhängigkeiten</title>
+  </articleinfo>
+  <para>
+    Abhängigkeiten teilen dem Migrator mit, in welcher Reihenfolge
+    Migrations installiert werden müssen.
+  </para>
+  <sect1 id="declaring-dependencies">
+    <title>Abhängigkeiten deklarieren</title>
+    <para>
+      Fügen Sie in Ihrer Migration-Datei eine statische öffentliche
+      Funktion namens depends_on() hinzu, die ein Array zurückgibt.
+    </para>
+    <programlisting>
+static public function depends_on()
+{
+    return [];
+}
+</programlisting>
+    <para>
+      Es müssen lediglich die Klassennamen der Migration(en)
+      hinzugefügt werden, von denen die aktuelle Migration abhängt.
+    </para>
+    <para>
+      Zum Beispiel hängt die Migration
+      <literal>phpbb\db\migration\data\v310\dev</literal> davon ab,
+      dass die Migrations für Erweiterungen, Style-Aktualisierung,
+      Anzeige gemeldeter Beiträge und Zeitzone bereits installiert
+      sind.
+    </para>
+    <programlisting>
+static public function depends_on()
+{
+    return [
+        '\phpbb\db\migration\data\v310\extensions',
+        '\phpbb\db\migration\data\v310\style_update_p2',
+        '\phpbb\db\migration\data\v310\timezone_p2',
+        '\phpbb\db\migration\data\v310\reported_posts_display',
+        '\phpbb\db\migration\data\v310\migrations_table',
+    ];
+}
+</programlisting>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Es wird dringend empfohlen, für alle Migrations eine
+        Abhängigkeit anzugeben. Wenn es sich um die erste Migration
+        Ihrer Erweiterung handelt, hängen Sie einfach von der
+        Release-Migration der minimal erforderlichen phpBB-Version
+        Ihrer Erweiterung ab, z. B. 3.1.4:
+      </para>
+    </note>
+    <programlisting>
+static public function depends_on()
+{
+    return [
+        '\phpbb\db\migration\data\v31x\v314',
+    ];
+}
+</programlisting>
+  </sect1>
+  <sect1 id="depends_on-creates-a-tree">
+    <title>depends_on erzeugt einen Baum</title>
+    <para>
+      Stellen Sie sich die folgende Situation vor:
+    </para>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec align="left" />
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Migration
+            </entry>
+            <entry>
+              Abhängigkeiten
+            </entry>
+            <entry>
+              Anmerkung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              <literal>phpbb\db\migration\data\\v310\\dev</literal>
+            </entry>
+            <entry>
+              Erstveröffentlichung, 1.0.0, erfordert phpBB 3.1.0
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_2</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              Neues Feature für 1.0.1 (während der Entwicklung)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_3</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              Ein weiteres neues Feature für 1.0.1 (während der
+              Entwicklung)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_4</literal>
+            </entry>
+            <entry>
+              <literal>migration_2</literal>
+            </entry>
+            <entry>
+              Ändert das Feature aus <literal>migration_2</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_5</literal>
+            </entry>
+            <entry>
+              <literal>migration_3</literal>,
+              <literal>migration_4</literal>
+            </entry>
+            <entry>
+              Release 1.0.1
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Dieses Abhängigkeitsschema würde dazu führen, dass die folgenden
+      Migrations zusätzlich installiert werden, wenn eine einzelne
+      Migration manuell installiert wurde. <emphasis>Es wird
+      vorausgesetzt, dass</emphasis>
+      <literal>phpbb\db\migration\data\v310\dev</literal>
+      <emphasis>bereits installiert ist.</emphasis>
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Installation
+            </entry>
+            <entry>
+              Installierte Migrations
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_2</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_2</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_3</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_3</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_4</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_2</literal>,
+              <literal>migration_4</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>migration_5</literal>
+            </entry>
+            <entry>
+              <literal>migration_1</literal>,
+              <literal>migration_2</literal>,
+              <literal>migration_4</literal>,
+              <literal>migration_3</literal>,
+              <literal>migration_5</literal>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="what-does-this-mean-for-me">
+    <title>Was bedeutet das für mich?</title>
+    <para>
+      Sie müssen alle Abhängigkeiten angeben, die die aktuelle
+      Migration hat, jedoch keine, die die Abhängigkeiten selbst als
+      Abhängigkeiten für ihre eigene Installation auflisten.
+    </para>
+    <para>
+      Das bedeutet, dass <literal>migration_5</literal> nicht
+      <literal>migration_1</literal> bis
+      <literal>migration_4</literal> als Abhängigkeit auflisten muss,
+      sondern nur <literal>migration_3</literal> und
+      <literal>migration_4</literal>, da diese Migrations bereits
+      <literal>migration_1</literal> und <literal>migration_2</literal>
+      voraussetzen.
+    </para>
+    <para>
+      Das bedeutet außerdem, dass die gewünschte
+      Ausführungsreihenfolge erhalten bleibt. Im obigen Beispiel
+      ändert <literal>migration_4</literal> das Feature aus
+      <literal>migration_2</literal> und muss angewendet werden,
+      nachdem <literal>migration_2</literal> installiert wurde.
+      Ebenso ist <literal>migration_5</literal> im obigen Beispiel die
+      Veröffentlichung von 1.0.1, wofür beide neuen Features
+      installiert sein müssen, bevor es 1.0.1 ist.
+    </para>
+  </sect1>
+</article>

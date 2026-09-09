@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Datenänderungen</title>
+  </articleinfo>
+  <para>
+    Datenänderungen werden in Migrations vorgenommen, indem ein Array
+    erstellt wird, das von
+    <literal>\phpbb\db\migrator::run_step()</literal> verarbeitet wird
+  </para>
+  <sect1 id="basics">
+    <title>Grundlagen</title>
+    <para>
+      Bei Datenänderungen sollte Ihre Migrations-Klasse mindestens
+      eine Funktion enthalten, update_data(). Optional können Sie eine
+      Funktion revert_data() bereitstellen, die ausgeführt wird, wenn
+      die Migration entfernt wird.
+    </para>
+  </sect1>
+  <sect1 id="update_data">
+    <title>update_data</title>
+    <para>
+      <literal>update_data()</literal> wird als
+      <emphasis role="strong">zweiter</emphasis> Schritt aufgerufen,
+      nach <literal>update_schema()</literal>, bei der Installation
+      einer Migration. Dies führt alle Datenbankdatenänderungen durch,
+      die Sie bei der Installation der Migration benötigen.
+    </para>
+    <programlisting>
+public function update_data()
+{
+    return [];
+}
+</programlisting>
+  </sect1>
+  <sect1 id="revert_data">
+    <title>revert_data</title>
+    <para>
+      <literal>revert_data()</literal> wird aufgerufen, wenn eine
+      Migration deinstalliert werden muss (dies kann geschehen, wenn
+      der Benutzer die Änderungen der Migration rückgängig machen
+      möchte/muss, eine Abhängigkeit zurückgesetzt wird oder die
+      Installation fehlschlägt und die gesamte Migration entfernt
+      wird).
+    </para>
+    <para>
+      Diese Funktion ist vollständig optional,
+      <emphasis role="strong">die meisten Daten werden automatisch
+      zurückgesetzt.</emphasis> Alle Aufrufe der Migration Tools
+      werden automatisch zurückgesetzt. Das Einzige, was diese
+      Funktion tun sollte, ist das Zurücksetzen eventuell
+      ausgeführter benutzerdefinierter Funktionen, falls dies
+      unbedingt erforderlich ist.
+    </para>
+    <programlisting>
+public function revert_data()
+{
+    return [];
+}
+</programlisting>
+  </sect1>
+  <sect1 id="what-to-return">
+    <title>Was zurückgegeben werden soll</title>
+    <para>
+      Ein Array von Arrays mit Anweisungen.
+    </para>
+    <para>
+      Diese Anweisungen können Aufrufe von Tools enthalten. Für alle
+      Konfigurationseinstellungen, berechtigungsbezogenen Befehle und
+      Module lesen Sie bitte die zugehörige Dokumentation unter
+      <literal>tools/index</literal>.
+    </para>
+  </sect1>
+  <sect1 id="if-conditional">
+    <title>If (Bedingung)</title>
+    <para>
+      Der if-Aufruf erlaubt es Ihnen, eine grundlegende if-Anweisung
+      zu erstellen, die geprüft wird und, falls wahr, die zugehörige
+      Anweisung verarbeitet wird.
+    </para>
+    <sect2 id="how-it-works">
+      <title>Wie es funktioniert</title>
+      <programlisting>
+['if', [
+    true, // Some statement that is either true or false
+    [/* Call to make if the statement is true */],
+]],
+</programlisting>
+    </sect2>
+    <sect2 id="examples">
+      <title>Beispiele</title>
+      <para>
+        wenn die Konfiguration &quot;captcha_gd&quot; wahr ist,
+        aktualisiere &quot;captcha_plugin&quot; mit
+        &quot;phpbb_captcha_gd&quot;
+      </para>
+      <programlisting>
+['if', [
+    ($this-&gt;config['captcha_gd']),
+    ['config.update', ['captcha_plugin', 'phpbb_captcha_gd']],
+]],
+</programlisting>
+      <para>
+        wenn die Konfiguration &quot;allow_avatar_upload&quot; oder
+        &quot;allow_avatar_local&quot; wahr ist, aktualisiere
+        &quot;allow_avatar&quot; mit dem Wert &quot;1&quot;
+      </para>
+      <programlisting>
+['if', [
+    ($this-&gt;config['allow_avatar_upload'] || $this-&gt;config['allow_avatar_local']),
+    ['config.update', ['allow_avatar', 1]],
+]],
+</programlisting>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Aufrufe der Migration Tools, die in die if-Bedingung
+          eingebettet sind, werden
+          <emphasis role="strong">nicht</emphasis> automatisch
+          zurückgesetzt, da if-Anweisungen von der Methode
+          <literal>revert_data()</literal> ignoriert werden. Sie
+          müssen selbst eine eigene
+          <literal>revert_data()</literal>-Methode definieren, um
+          diese Datenänderungen bei Bedarf rückgängig zu machen.
+        </para>
+      </note>
+    </sect2>
+  </sect1>
+  <sect1 id="custom">
+    <title>Custom</title>
+    <para>
+      Custom-Aufrufe ermöglichen es Ihnen, das Callable für Ihre
+      eigene Funktion anzugeben, die aufgerufen werden soll.
+    </para>
+    <sect2 id="how-it-works-1">
+      <title>Wie es funktioniert</title>
+      <programlisting>
+['custom', [
+    [/* Callable function */]
+]],
+</programlisting>
+    </sect2>
+    <sect2 id="example">
+      <title>Beispiel</title>
+      <para>
+        Ruft eine Funktion namens some_function innerhalb der
+        Migrations-Datei auf
+      </para>
+      <programlisting>
+['custom', [
+    [$this, 'some_function']
+]],
+</programlisting>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Die aufgerufene Funktion muss öffentlich zugänglich sein
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="multi-step-processes">
+      <title>Mehrstufige Prozesse</title>
+      <para>
+        Wenn Sie eine Funktion haben, die mehrmals aufgerufen werden
+        muss, um abgeschlossen zu werden, führt die Rückgabe von
+        irgendetwas außer null oder true dazu, dass die Funktion
+        erneut aufgerufen wird, bis null oder true zurückgegeben wird.
+      </para>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Dies sollte verwendet werden, wenn etwas ausgeführt werden
+          muss, das länger als das Zeitlimit dauern kann (zum
+          Beispiel das erneute Synchronisieren von Themen).
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="example-1">
+      <title>Beispiel</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        ['custom', [
+            [$this, 'some_function']
+        ]],
+    ];
+}
+
+// $value is equal to the value returned on the previous call (false if this is the first time it is run)
+public function some_function($value)
+{
+    $limit = 500;
+    $i = 0;
+
+    // Select all topics, starting at $value, limit $limit
+    while ($topic = fetchrow)
+    {
+        $i++;
+
+        // Do something
+    }
+
+    if ($i &lt; $limit)
+    {
+        // There are no more topics, we are done
+        return;
+    }
+
+    // There are still more topics to query, return the next start value
+    return $value + $limit;
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="examples-1">
+    <title>Beispiele</title>
+    <para>
+      Aus <literal>\phpbb\db\migration\data\v310\dev</literal>
+    </para>
+    <programlisting>
+public function update_data()
+{
+    return [
+        ['config.update', ['search_type', 'phpbb_search_' . $this-&gt;config['search_type']]],
+
+        ['config.add', ['fulltext_postgres_ts_name', 'simple']],
+        ['config.add', ['fulltext_postgres_min_word_len', 4]],
+        ...
+
+        ['permission.add', ['u_chgprofileinfo', true, 'u_sig']],
+
+        ['module.add', [
+            'acp',
+            'ACP_GROUPS',
+            [
+                'module_basename'    =&gt; 'acp_groups',
+                'modes'                =&gt; ['position'],
+            ],
+        ]],
+        ...
+
+        // Module will be renamed later
+        ['module.add', [
+            'acp',
+            'ACP_CAT_STYLES',
+            'ACP_LANGUAGE'
+        ]],
+
+        ['module.remove', [
+            'acp',
+            false,
+            'ACP_TEMPLATES',
+        ]],
+
+        ['custom', [[$this, 'rename_module_basenames']]],
+        ['custom', [[$this, 'rename_styles_module']]],
+        ...
+
+        ['config.update', ['version', '3.1.0-dev']],
+    ];
+}
+
+public function rename_styles_module()
+{
+    // Rename styles module to Customise
+    $sql = 'UPDATE ' . MODULES_TABLE . &quot;
+        SET module_langname = 'ACP_CAT_CUSTOMISE'
+        WHERE module_langname = 'ACP_CAT_STYLES'&quot;;
+    $this-&gt;sql_query($sql);
+}
+
+public function rename_module_basenames()
+{
+    // rename all module basenames to full classname
+    $sql = 'SELECT module_id, module_basename, module_class
+        FROM ' . MODULES_TABLE;
+    $result = $this-&gt;db-&gt;sql_query($sql);
+
+    while ($row = $this-&gt;db-&gt;sql_fetchrow($result))
+    {
+        $module_id = (int) $row['module_id'];
+        unset($row['module_id']);
+
+        if (!empty($row['module_basename']) &amp;&amp; !empty($row['module_class']))
+        {
+            // all the class names start with class name or with phpbb_ for auto loading
+            if (strpos($row['module_basename'], $row['module_class'] . '_') !== 0 &amp;&amp;
+                strpos($row['module_basename'], 'phpbb_') !== 0)
+            {
+                $row['module_basename'] = $row['module_class'] . '_' . $row['module_basename'];
+
+                $sql_update = $this-&gt;db-&gt;sql_build_array('UPDATE', $row);
+
+                $sql = 'UPDATE ' . MODULES_TABLE . '
+                    SET ' . $sql_update . '
+                    WHERE module_id = ' . $module_id;
+                $this-&gt;sql_query($sql);
+            }
+        }
+    }
+
+    $this-&gt;db-&gt;sql_freeresult($result);
+}
+</programlisting>
+  </sect1>
+</article>

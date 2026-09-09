@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="user_guide">
+	<?dbhtml dir="userguide" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2006</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
+	<title>Benutzerhandbuch</title>
+	<abstract>
+		<para>Dieses Kapitel richtet sich an die Forenbenutzer. Es erklärt alle benutzerseitigen Funktionen, die zur Nutzung von phpBB 3.3 benötigt werden.</para>
+	</abstract>
+	<section id="user_permissions">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>AdamR</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Wie Benutzerrechte die Forenerfahrung beeinflussen</title>
+		<para>phpBB3 verwendet Berechtigungen auf Basis einzelner Benutzer oder Benutzergruppen, um Benutzern den Zugriff auf bestimmte Funktionen oder Merkmale der Software zu erlauben oder zu verwehren. Dazu kann die Möglichkeit gehören, in bestimmten Foren zu posten, einen Avatar zu besitzen oder über private Nachrichten zu kommunizieren. Alle Berechtigungen können über das Administrationskontrollzentrum eingestellt werden.</para>
+		<para>Berechtigungen können auch so gesetzt werden, dass ausgewählte Mitglieder besondere Aufgaben übernehmen oder besondere Fähigkeiten im Forum erhalten. Berechtigungen erlauben es dem Administrator festzulegen, welche Moderationsfunktionen und in welchen Foren bestimmte Benutzer oder Benutzergruppen verwenden dürfen. Dies ermöglicht es ausgewählten Benutzern, Moderatoren des Forums zu werden. Der Administrator kann Benutzern außerdem Zugriff auf bestimmte Bereiche des Administrationskontrollzentrums gewähren, sodass wichtige Einstellungen oder Funktionen eingeschränkt und vor missbräuchlichen Handlungen geschützt bleiben. Beispielsweise könnte einer ausgewählten Gruppe von Moderatoren gestattet werden, den Avatar oder die Signatur eines Benutzers zu ändern, wenn dieser Avatar oder diese Signatur gegen die Regeln eines bestimmten Forums verstößt. Ohne diese Fähigkeiten müsste der Moderator einen Administrator benachrichtigen, damit das Profil des Benutzers geändert wird.</para>
+	</section>
+	<section id="user_registering">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>zeroK</othername>
+				</author>
+				<author>
+					<othername>battye</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Registrierung auf einem phpBB3-Forum</title>
+		<para>Die Registrierung eines Kontos auf einem phpBB3-Forum ist in der Regel ein einfacher und unkomplizierter Vorgang.</para>
+		<figure id="user_registering_typical_page">
+			<title>Die typische Registrierungsseite</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/user_guide/typical_registration_page.png"/>
+				</imageobject>
+				<caption>
+					<para>Dies ist, was Sie auf einer typischen Registrierungsseite erwarten können.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+		<para>Nachdem Sie auf den Link <guilabel>Registrieren</guilabel> geklickt haben, werden die Nutzungsbedingungen der Registrierung angezeigt, denen Sie zustimmen müssen, um fortzufahren. Manche Websites fragen Sie, ob Sie unter dreizehn Jahre alt sind, um dem <acronym>COPPA</acronym> zu entsprechen (dem US-amerikanischen Children's Online Privacy Protection Act von 1998; weitere Einzelheiten finden Sie unter <ulink url="http://www.coppa.org">http://www.coppa.org</ulink>). Wenn Sie jünger als dreizehn Jahre sind, bleibt Ihr Konto inaktiv, bis es von einem Elternteil oder Erziehungsberechtigten genehmigt wird. Sie erhalten eine E-Mail, in der die nächsten Schritte zur Aktivierung Ihres Kontos beschrieben werden.</para>
+		<para>Neben der Annahme der Nutzungsbedingungen müssen Sie einige wichtige Angaben machen, wie die Auswahl eines Benutzernamens, die Eingabe Ihrer E-Mail-Adresse und des gewünschten Passworts. Sie können außerdem Ihre Zeitzone und Sprache auswählen.</para>
+		<para>Wenn Sie im Formular, in dem Sie Ihren Benutzernamen, Ihr Passwort usw. angeben, eine Grafik mit einigen merkwürdig aussehenden Zeichen sehen, handelt es sich um die sogenannte <emphasis>visuelle Bestätigung</emphasis>. Viele Foren verwenden diese, auch bekannt als <acronym>CAPTCHA</acronym>, ein Bild mit verzerrten Buchstaben und Zahlen, die Sie dann in ein danebenliegendes Feld eingeben müssen. Der Grund dafür ist sicherzustellen, dass Sie sich als echter Benutzer registrieren (im Gegensatz zu einem Spam-Roboter, der eine automatisierte Registrierung durchführt). Geben Sie einfach die von Ihnen gesehenen Zeichen in das Feld <guilabel>Bestätigungscode</guilabel> ein und fahren Sie mit der Registrierung fort. Wenn Sie den Code nicht entziffern können, laden Sie die Seite neu, um einen neuen Code zu erhalten.</para>
+		<figure id="user_registering_captcha">
+			<title>Das Objekt der visuellen Bestätigung</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/user_guide/visual_confirmation.png"/>
+				</imageobject>
+				<caption>
+					<para>Dies ist ein Beispiel für einen visuellen Bestätigungscode, den Sie sehen könnten.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+		<para>Eine weitere verfügbare Option ist die Kontoaktivierung. Hier kann der Administrator zur Bedingung machen, dass Sie nach der Registrierung einem Ihnen zugesandten Link folgen müssen, bevor Ihr Konto aktiviert wird. In diesem Fall sehen Sie eine ähnliche Nachricht wie diese: <blockquote><guilabel> Ihr Konto wurde erstellt. Dieses Forum erfordert jedoch eine Kontoaktivierung. An die von Ihnen angegebene E-Mail-Adresse wurde ein Aktivierungsschlüssel gesendet. Bitte prüfen Sie Ihre E-Mails auf weitere Informationen </guilabel></blockquote> Es ist auch möglich, dass der Administrator selbst das Konto aktivieren muss.</para>
+		<para>Manche Foren verfügen über benutzerdefinierte Profilfelder. Wenn der Administrator sich dafür entschieden hat, benutzerdefinierte Profilfelder auf dem Registrierungsbildschirm anzuzeigen, erscheinen diese ebenfalls. In manchen Fällen sind diese benutzerdefinierten Profilfelder auch Pflichtfelder, das heißt, sie dürfen nicht leer bleiben.</para>
+		<para>Sobald Sie alle Felder der Registrierungsseite ausgefüllt haben, schließt ein Klick auf die Schaltfläche <guilabel>Absenden</guilabel> den Vorgang ab. Wenn Sie alle Felder leeren möchten, tut ein Klick auf die Schaltfläche <guilabel>Zurücksetzen</guilabel> dies für Sie. Nach dem Klick auf <guilabel>Absenden</guilabel> werden Sie über den nächsten Schritt informiert. In den meisten Fällen wird Ihnen eine E-Mail an die angegebene Adresse mit einem Link zum Abschluss der Registrierung gesendet. Andere Möglichkeiten sind, sich sofort anmelden zu können (d. h., es sind keine weiteren Schritte für den Registrierungsvorgang nötig), oder abzuwarten, bis ein Administrator Ihre Registrierung überprüft und annimmt, wobei Sie in diesem Fall per E-Mail benachrichtigt werden.</para>
+	</section>
+	<section id="user_control_panel">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Heimidal</othername>
+				</author>
+				<author>
+					<othername>iWisdom</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Orientierung im Benutzerkontrollzentrum</title>
+		<para>Das Benutzerkontrollzentrum (<glossterm>UCP</glossterm>) erlaubt es Ihnen, persönliche Einstellungen zu ändern, beobachtete Beiträge zu verwalten, private Nachrichten zu senden und zu empfangen, und die Art zu ändern, wie Informationen über Sie anderen Benutzern angezeigt werden. Um das UCP anzuzeigen, klicken Sie nach dem Anmelden auf den Link „Benutzerkontrollzentrum“.</para>
+		<para>Das UCP ist in sechs Reiter unterteilt: Übersicht, Private Nachrichten, Profil, Einstellungen, Freunde und Feinde sowie Gruppen. Innerhalb jedes Reiters befinden sich mehrere Unterseiten, die durch Klicken auf den gewünschten Link auf der linken Seite der UCP-Oberfläche aufgerufen werden. Einige dieser Bereiche sind je nach den vom Administrator für Sie festgelegten Berechtigungen möglicherweise nicht verfügbar.</para>
+		<para>Auf jeder Seite des UCP wird auf der linken Seite Ihre Freundesliste angezeigt. Um einem Freund eine private Nachricht zu senden, klicken Sie auf dessen Benutzernamen.</para>
+		<para>Private Nachrichten werden ausführlicher in <xref linkend="user_pm" /> behandelt.</para>
+		<section id="ucp_overview">
+			<title>Übersicht</title>
+			<para>Die Übersicht zeigt eine Momentaufnahme von Informationen zu Ihren Beitragsgewohnheiten, wie das Datum Ihres Forenbeitritts, Ihr aktivstes Thema und wie viele Beiträge Sie insgesamt verfasst haben. Zu den Unterseiten der Übersicht gehören Abonnements, Lesezeichen und Entwürfe.</para>
+
+			<figure id="ucp_overview_index">
+				<title>Übersicht des Benutzerkontrollzentrums (Index)</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/ucp_overview.png" />
+					</imageobject>
+					<caption>
+						<para>Der Übersichtsbereich des <glossterm>UCP</glossterm></para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<section id="ucp_subscriptions">
+				<title>Abonnements</title>
+				<para>Abonnements sind Foren oder einzelne Themen, die Sie ausgewählt haben, um sie auf neue Beiträge hin zu beobachten. Sobald ein neuer Beitrag in einem von Ihnen abonnierten Bereich erstellt wird, wird Ihnen eine E-Mail gesendet, um Sie über die Neuerung zu informieren. Um ein Abonnement zu erstellen, besuchen Sie das Forum oder Thema, das Sie abonnieren möchten, und klicken Sie auf den Link „Abonnieren“ am unteren Ende der Seite.</para>
+				<para>Um ein Abonnement zu entfernen, aktivieren Sie das Kästchen neben dem zu entfernenden Abonnement und klicken Sie auf die Schaltfläche „Abbestellen“.</para>
+			</section>
+			<section id="ucp_bookmarks">
+				<title>Lesezeichen</title>
+				<para>Lesezeichen sind, ähnlich wie Abonnements, Themen, die Sie sich ausgesucht haben, um sie zu beobachten. Es gibt jedoch zwei wesentliche Unterschiede: 1) Es können nur einzelne Themen mit einem Lesezeichen versehen werden, und 2) es wird keine E-Mail gesendet, um Sie über neue Beiträge zu informieren.</para>
+				<para>Um ein Lesezeichen zu erstellen, besuchen Sie das Thema, das Sie beobachten möchten, und klicken Sie auf den Link „Thema als Lesezeichen setzen“ am unteren Ende der Seite.</para>
+				<para>Um ein Lesezeichen zu entfernen, aktivieren Sie das Kästchen neben dem zu entfernenden Lesezeichen und klicken Sie auf die Schaltfläche „Markierte Lesezeichen entfernen“.</para>
+			</section>
+			<section id="ucp_drafts">
+				<title>Entwürfe</title>
+				<para>Entwürfe werden erstellt, wenn Sie auf der Seite „Neues Thema“ oder „Antworten“ auf die Schaltfläche „Speichern“ klicken. Angezeigt werden der Titel Ihres Beitrags, das Forum oder Thema, in dem der Entwurf erstellt wurde, sowie das Datum, an dem Sie ihn gespeichert haben.</para>
+				<para>Um einen Entwurf zur späteren Übermittlung weiter zu bearbeiten, klicken Sie auf den Link „Ansehen/Bearbeiten“. Wenn Sie die Nachricht fertigstellen und veröffentlichen möchten, klicken Sie auf „Entwurf laden“. Um einen Entwurf zu löschen, aktivieren Sie das Kästchen neben dem zu entfernenden Entwurf und klicken Sie auf „Markierte löschen“.</para>
+			</section>
+			<section id="ucp_notifications_overview">
+				<title>Benachrichtigungen</title>
+				<para>Benachrichtigungen weisen Sie auf Ereignisse hin, die im Forum stattgefunden haben. Sie erscheinen im Benachrichtigungsmenü am oberen Rand Ihres Bildschirms. Zu den Ereignissen gehören:</para>
+				<itemizedlist>
+					<listitem><para>Eine neue private Nachricht ist eingetroffen</para></listitem>
+					<listitem><para>Ein neues Thema wurde in einem abonnierten Forum erstellt</para></listitem>
+					<listitem><para>Ein neuer Beitrag wurde in einem abonnierten Thema erstellt</para></listitem>
+					<listitem><para>Ein neuer Beitrag wartet auf Moderation</para></listitem>
+					<listitem><para>Ein Beitrag wurde gemeldet</para></listitem>
+					<listitem><para>Ihr Thema/Beitrag wurde genehmigt/abgelehnt</para></listitem>
+					<listitem><para>Sie wurden in einem Beitrag zitiert</para></listitem>
+				</itemizedlist>
+				<figure id="notifications_menu">
+					<title>Benachrichtigungsmenü</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/notifications_menu.png" />
+						</imageobject>
+						<caption>
+							<para>Das <glossterm>Benachrichtigungs</glossterm>menü</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
+		</section>
+		<section id="ucp_profile">
+			<title>Profil</title>
+			<para>Dieser Bereich erlaubt es Ihnen, Ihre Profilinformationen festzulegen. Ihre Profilinformationen enthalten allgemeine Informationen, die andere Benutzer des Forums sehen können. Betrachten Sie Ihr Profil als ein Zeichen Ihrer öffentlichen Präsenz. Dieser Bereich ist von Ihren Einstellungen getrennt. (Einstellungen sind die individuellen Optionen, die Sie selbst festlegen und verwalten und die Ihre Forenerfahrung steuern. Daher ist dies von Ihren Profileinstellungen getrennt.)</para>
+			<section id="ucp_profile_info">
+				<title>Persönliche Einstellungen</title>
+				<para>Persönliche Einstellungen steuern die Informationen, die angezeigt werden, wenn ein Benutzer Ihr Profil ansieht. </para>
+				<itemizedlist>
+					<listitem><para><guilabel>ICQ-Nummer</guilabel>: Ihre Kontonummer, die dem <ulink url="http://www.icq.com/">ICQ</ulink>-System zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>AOL Instant Messenger</guilabel>: Ihr Bildschirmname, der dem System <ulink url="http://aim.com">AOL Instant Messenger</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Windows Live Messenger</guilabel>: Ihre E-Mail-Adresse, die dem Dienst <ulink url="http://home.live.com/">Windows Live</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Yahoo Messenger</guilabel>: Ihr Benutzername, der dem Dienst <ulink url="http://messenger.yahoo.com/">Yahoo Messenger</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Jabber-Adresse</guilabel>: Ihr Benutzername, der dem Dienst <ulink url="http://www.jabber.org/">Jabber</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Facebook</guilabel>: Ihr eindeutiger Benutzer-/Seitenname, der dem Dienst <ulink url="https://www.facebook.com/">Facebook</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Twitter</guilabel>: Ihr Benutzername, der dem Dienst <ulink url="https://twitter.com/">Twitter</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Skype</guilabel>: Ihr Benutzername, der dem Dienst <ulink url="http://www.skype.com/">Skype</ulink> zugeordnet ist.</para></listitem>
+					<listitem><para><guilabel>Website</guilabel>: Die Adresse Ihrer Website. Muss mit dem entsprechenden Protokollverweis versehen werden (d. h. http://)</para></listitem>
+					<listitem><para><guilabel>Wohnort</guilabel>: Ihr physischer Standort. Beachten Sie, dass dieser in der Regel zusammen mit Ihren Benutzerinformationen bei jedem Beitrag angezeigt wird, sodass die übliche Vorsicht bezüglich der Veröffentlichung persönlicher Informationen im Internet gelten sollte.</para></listitem>
+					<listitem><para><guilabel>Beruf</guilabel>: Ihr Beruf. Die eingegebene Information erscheint nur auf der Profilansichtsseite.</para></listitem>
+					<listitem><para><guilabel>Interessen</guilabel>: Ihre persönlichen Interessen. Die hier eingegebene Information erscheint nur auf der Profilansichtsseite.</para></listitem>
+					<listitem><para><guilabel>Geburtstag</guilabel>: Ihr Geburtstag. Diese Information wird verwendet, um Ihren Benutzernamen im Geburtstagsbereich der Forenübersicht anzuzeigen. Wenn das Jahr angegeben ist, wird Ihr Alter in Ihrem Profil angezeigt.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="ucp_signature">
+				<title>Signatur</title>
+				<para>Ihre Signatur erscheint nach Ihrer Wahl unter jedem von Ihnen verfassten Beitrag. Signaturen können mithilfe von <link linkend="posting_bbcodes">BBCode</link> formatiert werden. Der Forenadministrator kann eine maximale Länge für Signaturen festlegen. Sie können dieses Limit anhand der Zeile <guilabel>Es gilt ein Zeichenlimit von x Zeichen.</guilabel> oberhalb des Textfelds zum Bearbeiten der Signatur überprüfen, wobei x das aktuell festgelegte Limit ist.</para>
+			</section>
+			<section id="ucp_avatar">
+				<title>Avatar</title>
+				<para>Ihr Avatar ist ein Bild, das bei jedem von Ihnen verfassten Beitrag angezeigt wird. Je nach Foreneinstellungen können Avatare vollständig deaktiviert sein oder in einer (oder mehreren) von drei Formen erscheinen: „<guilabel>Vom eigenen Computer hochladen</guilabel>“, „<guilabel>Von einer URL hochladen</guilabel>“ und „<guilabel>Extern verlinken</guilabel>“.</para>
+				<para>
+					<itemizedlist>
+						<listitem><para><guilabel>Gravatar</guilabel>: Wenn Sie den Avatar-Dienst Gravatar.com nutzen, können Sie hier Ihre Gravatar-E-Mail-Adresse angeben, um Ihr Gravatar-Bild als Avatar zu verwenden.</para></listitem>
+						<listitem><para><guilabel>Vom eigenen Computer hochladen</guilabel>: Sie können einen Avatar von Ihrem Computer hochladen, der auf dem Server des Forums gespeichert wird.</para></listitem>
+						<listitem><para><guilabel>Von einer URL hochladen</guilabel>: Sie können die URL eines vorhandenen Bildes angeben. Dies führt dazu, dass das Bild auf den Server des Forums kopiert und dort gespeichert wird.</para></listitem>
+						<listitem><para><guilabel>Extern verlinken</guilabel>: Sie können die URL eines vorhandenen Bildes angeben. Dies führt nicht dazu, dass das Bild auf dem Server des Forums gespeichert wird, sondern es wird direkt von seinem aktuellen Speicherort eingebunden.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Zusätzlich kann ein Forenadministrator eine Avatar-Galerie zur Verwendung durch Benutzer bereitstellen. Diese Bilder werden vom Administrator vorausgewählt und können von jedem Mitglied des Forums verwendet werden.</para>
+			</section>
+			<section id="ucp_login_keys">
+				<title>Anmeldeschlüssel</title>
+				<para>Wenn Sie sich dafür entscheiden, sich beim Forum automatisch anmelden zu lassen, wenn Sie es besuchen (das Kästchen „Angemeldet bleiben“), erhält Ihr Browser einen Anmeldeschlüssel, den er bei Ihrem Besuch verwendet. Solange Ihr Browser diesen Schlüssel besitzt, werden Sie automatisch angemeldet. Wenn Sie sich abmelden, wird der Schlüssel nur aus Ihrem Browser und nicht aus dem Forum gelöscht.</para>
+				<para>Dieser Bereich erlaubt es Ihnen, alle Ihrem Konto zugeordneten Anmeldeschlüssel anzuzeigen, wann sie erstellt wurden und von welcher IP-Adresse aus. Sie können Anmeldeschlüssel auf dieser Seite ebenfalls löschen.</para>
+				<note><para>Das Löschen eines Anmeldeschlüssels, den Sie gerade verwenden, meldet Sie vom Forum ab.</para></note>
+			</section>
+			<section id="ucp_external_auth">
+				<title>Externe Konten</title>
+				<para>Wenn der Forenadministrator die <link linkend="acp_client_auth">OAuth-Authentifizierung</link> aktiviert hat, können Sie sich mit Ihrem Konto bei OAuth-Anbietern wie Bitly, Facebook und Google anmelden.</para>
+				<para>Klicken Sie für jeden Dienst auf die Schaltfläche <guilabel>Verknüpfen</guilabel>, um Ihre Konten mit dem Forum zu verknüpfen. Sie werden aufgefordert, sich erneut anzumelden. Verwenden Sie dabei Ihre Anmeldedaten für das Forum. <emphasis role="strong">Verwenden Sie NICHT</emphasis> Ihr externes Konto zu diesem Zeitpunkt. Wenn Sie sich anmelden, werden Sie zu Ihrer Kontoseite weitergeleitet, auf der angezeigt wird, dass für Ihr externes Konto eine ID erzeugt wurde.</para>
+				<para>Sobald ein Konto verknüpft wurde, können Sie es auf derselben Seite wieder trennen.</para>
+				<para>Nach der Verknüpfung des Kontos können Sie es nun verwenden, um sich beim Forum anzumelden. Klicken Sie einfach auf die entsprechende Dienst-Schaltfläche auf der Anmeldeseite.</para>
+			</section>
+		</section>
+		<section id="ucp_preferences">
+			<title>Einstellungen</title>
+			<para>Einstellungen erlauben es Ihnen, verschiedene Verhaltensweisen der phpBB-Software in Bezug auf Ihre Interaktion mit ihr festzulegen.</para>
+			<section id="ucp_global">
+				<title>Allgemein</title>
+				<para>Allgemeine Einstellungen steuern verschiedene übergreifende Interaktionen mit der phpBB-Software.</para>
+				<para>
+					<itemizedlist>
+						<listitem><para><guilabel>Benutzer können mich per E-Mail kontaktieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über die Schaltfläche „E-Mail“ in Ihrem Profil eine E-Mail senden.</para></listitem>
+						<listitem><para><guilabel>Administratoren dürfen mir Informationen per E-Mail zusenden</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, erhalten Sie vom Forenadministrator versendete Massen-E-Mails.</para></listitem>
+						<listitem><para><guilabel>Benutzern erlauben, mir private Nachrichten zu senden</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über das Forum private Nachrichten senden.</para></listitem>
+						<listitem><para><guilabel>Meinen Online-Status verbergen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihr Online-Status vor anderen Benutzern verborgen. Beachten Sie, dass Administratoren und Moderatoren Ihren Online-Status weiterhin sehen können.</para></listitem>
+						<listitem><para><guilabel>Mein Forenstil</guilabel>: Erlaubt Ihnen festzulegen, welchen Stil das Forum verwendet. Diese Einstellung ist möglicherweise nicht verfügbar, wenn der Forenadministrator festgelegt hat, die Stile der Benutzer zu überschreiben.</para></listitem>
+						<listitem><para><guilabel>Meine Sprache</guilabel>: Erlaubt Ihnen festzulegen, welches Sprachpaket das Forum verwendet. Beachten Sie, dass diese Einstellung sich nur auf die Sprachtexte des Forums bezieht; Beiträge werden in der Sprache dargestellt, in der sie verfasst wurden.</para></listitem>
+						<listitem><para><guilabel>Meine Zeitzone</guilabel>: Erlaubt Ihnen festzulegen, in welcher Zeitzone die Forenzeiten angezeigt werden sollen.</para></listitem>
+						<listitem><para><guilabel>Mein Datumsformat</guilabel>: Steuert, in welchem Format Zeiten dargestellt werden. Sie können eine der Optionen im Auswahlfeld wählen – fortgeschrittene Benutzer können „<guilabel>Benutzerdefiniert</guilabel>“ wählen und ein eigenes Format eingeben (im Format der <ulink url="http://www.php.net/date">date-Funktion von php.net</ulink>).</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="ucp_posting">
+				<title>Beitragseinstellungen</title>
+				<para>Beitragseinstellungen steuern die Standardeinstellungen der Beitrags-Editoren beim Erstellen eines Beitrags. Beachten Sie, dass diese Optionen beim Verfassen eines Beitrags jeweils einzeln steuerbar sind.</para>
+				<para>
+					<itemizedlist>
+						<listitem><para><guilabel>BBCode standardmäßig aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, ist BBCode im Beitrags-Editor aktiviert.</para></listitem>
+						<listitem><para><guilabel>Smilies standardmäßig aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Smilies in Ihren Beiträgen dargestellt.</para></listitem>
+						<listitem><para><guilabel>Meine Signatur standardmäßig anhängen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihre Signatur an Ihre Beiträge angehängt.</para></listitem>
+						<listitem><para><guilabel>Bei Antworten standardmäßig benachrichtigen</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Sie per E-Mail benachrichtigt, wenn eine Antwort auf Ihren Beitrag erfolgt.</para></listitem>
+					</itemizedlist>
+
+				</para>
+			</section>
+			<section id="ucp_display">
+				<title>Anzeige</title>
+				<para>Anzeigeeinstellungen steuern, wie Beiträge und Themen in den verschiedenen Forenansichten dargestellt werden.</para>
+				<para>
+					Die folgenden Einstellungen steuern, wie der Inhalt von Beiträgen und privaten Nachrichten dargestellt wird.
+					<itemizedlist>
+						<listitem><para><guilabel>Bilder in Beiträgen anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Bilder angezeigt.</para></listitem>
+						<listitem><para><guilabel>Flash-Animationen anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Flash-Animationen dargestellt.</para></listitem>
+						<listitem><para><guilabel>Smilies als Bilder anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Smilies als Bilder anstelle ihrer Textentsprechung dargestellt.</para></listitem>
+						<listitem><para><guilabel>Signaturen anzeigen</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Benutzersignaturen angezeigt.</para></listitem>
+						<listitem><para><guilabel>Avatare anzeigen</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Benutzeravatare angezeigt.</para></listitem>
+						<listitem><para><guilabel>Wortzensur aktivieren</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, wird der Text von Beiträgen und privaten Nachrichten gemäß der vom Administrator festgelegten <link linkend="acp_posting_censors">Zensurliste</link> zensiert.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Die folgenden Einstellungen steuern, wie Themen in der Forenansicht angezeigt werden.
+					<itemizedlist>
+						<listitem><para><guilabel>Themen der letzten Tage anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Themen, die angezeigt werden sollen. Standardmäßig werden alle Themen angezeigt.</para></listitem>
+						<listitem><para><guilabel>Themen sortieren nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Themen angezeigt werden. Themen können nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
+						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Themen können entweder <guilabel>aufsteigend</guilabel> oder <guilabel>absteigend</guilabel> angezeigt werden.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Die folgenden Einstellungen steuern, wie Beiträge in der Themenansicht angezeigt werden.
+					<itemizedlist>
+						<listitem><para><guilabel>Beiträge der letzten Tage anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Beiträge, die angezeigt werden sollen. Standardmäßig werden alle Beiträge angezeigt.</para></listitem>
+						<listitem><para><guilabel>Beiträge sortieren nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Beiträge angezeigt werden. Beiträge können nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
+						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Beiträge können entweder <guilabel>aufsteigend</guilabel> oder <guilabel>absteigend</guilabel> angezeigt werden.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="ucp_notifications">
+				<title>Benachrichtigungen</title>
+				<para>Benachrichtigungseinstellungen steuern, welche Ereignisse eine Benachrichtigung auslösen und wie Sie diese erhalten.</para>
+				<para>
+					Die folgenden Einstellungen steuern Ereignisse rund um das Verfassen von Beiträgen.
+					<itemizedlist>
+						<listitem><para><guilabel>Jemand antwortet auf ein von Ihnen mit einem Lesezeichen versehenes Thema</guilabel>: Ein Benutzer hat auf ein Thema geantwortet, das Sie mit einem Lesezeichen versehen haben.</para></listitem>
+						<listitem><para><guilabel>Jemand antwortet auf ein von Ihnen abonniertes Thema</guilabel>: Ein Benutzer hat auf ein Thema geantwortet, das Sie abonniert haben.</para></listitem>
+						<listitem><para><guilabel>Jemand zitiert Sie in einem Beitrag</guilabel>: Ein von Ihnen verfasster Beitrag wurde von einem anderen Benutzer zitiert.</para></listitem>
+						<listitem><para><guilabel>Jemand erstellt ein Thema in einem von Ihnen abonnierten Forum</guilabel>: Ein Benutzer hat ein neues Thema in einem von Ihnen abonnierten Forum erstellt.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Die folgenden Einstellungen steuern Ereignisse rund um die Moderation.
+					<itemizedlist>
+						<listitem><para><guilabel>Ein Beitrag oder Thema muss freigegeben werden</guilabel>: Ein Benutzer hat einen neuen Beitrag oder ein neues Thema erstellt, der/das eine Freigabe erfordert.</para></listitem>
+						<listitem><para><guilabel>Jemand meldet einen Beitrag</guilabel>: Ein Benutzer hat einen Beitrag gemeldet.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Die folgenden Einstellungen steuern verschiedene andere Ereignisse.
+					<itemizedlist>
+						<listitem><para><guilabel>Jemand beantragt die Mitgliedschaft in einer von Ihnen geleiteten Gruppe</guilabel>: Ein Benutzer hat beantragt, einer Benutzergruppe beizutreten, deren Leiter Sie sind.</para></listitem>
+						<listitem><para><guilabel>Jemand sendet Ihnen eine private Nachricht</guilabel>: Sie haben eine private Nachricht erhalten.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+		</section>
+		<section id="ucp_friends_foes">
+			<title>Freunde und Feinde</title>
+			<para>Benutzer können als <guilabel>Freund</guilabel> oder <guilabel>Feind</guilabel> markiert werden, um deren Nachrichten filtern zu können. Wenn ein Stil dies unterstützt, werden Beiträge von Benutzern auf Ihrer Feindesliste ausgeblendet und Beiträge von Benutzern auf Ihrer Freundesliste hervorgehoben. Regeln für private Nachrichten können die Freundes- und Feindesliste zum Filtern eingehender privater Nachrichten verwenden.</para>
+		</section>
+		<section id="ucp_attachments">
+			<title>Anhänge</title>
+			<para>Der Anhangsbereich des UCP zeigt eine Liste aller Anhänge, die Sie zum Forum hochgeladen haben. Jeder Eintrag enthält einen Link zu der Nachricht, in der sich der Anhang befindet, die Größe des Anhangs, die Anzahl der Downloads sowie den Zeitpunkt des Hochladens. Über diese Seite können Sie Anhänge aus dem Forum löschen. Inline-Verweise auf einen gelöschten Anhang verbleiben im ursprünglichen Beitrag, der Anhang wird jedoch in keiner anderen Weise als durch den Dateinamen dargestellt.</para>
+		</section>
+		<section id="ucp_usergroups">
+			<title>Benutzergruppen</title>
+			<para>Die Mitgliedschaft in Benutzergruppen kann über den Bereich Benutzergruppen des UCP verwaltet werden. Die Seite listet Gruppen auf, in denen der Benutzer Mitglied oder Leiter ist, sowie alle anderen Benutzergruppen. Gruppen, die für den Beitritt offen sind, verfügen über ein Optionsfeld, mit dem der Benutzer die Mitgliedschaft beantragen kann. Benutzer können sich außerdem selbst aus Gruppen entfernen, in denen sie Mitglied sind. Wenn ein Benutzer über das Recht <guilabel>Standard-Benutzergruppe ändern</guilabel> verfügt, kann er hier auswählen, welche Gruppe seine Standardgruppe sein soll. Die Standard-Benutzergruppe bestimmt die Farbe des Benutzernamens, die im gesamten Forum angezeigt wird.</para>
+			<para>Benutzer, die als Gruppenleiter bestimmt sind, können die Mitgliedschaft der Gruppe verwalten. Benutzer können hier hinzugefügt, entfernt, ausstehende Beitrittsanträge genehmigt oder abgelehnt sowie deren Standard-Benutzergruppe geändert werden.</para>
+		</section>
+	</section>
+	<section id="user_posting">
+	<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>AdamR</othername>
+				</author>
+				<author>
+					<othername>Noxwizard</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Die Beitragsseite meistern</title>
+		<para>Das Verfassen von Beiträgen ist der Hauptzweck von Diskussionsforen. Es gibt zwei Haupttypen von Beiträgen, die Sie erstellen können: ein Thema oder eine Antwort. Wenn Sie in einem Forum auf die Schaltfläche <guilabel>Neues Thema</guilabel> klicken, gelangen Sie zur Beitragsseite. Nach dem Absenden Ihres Beitrags erscheint ein neues Thema in diesem Forum, wobei Ihr Beitrag als erster angezeigt wird. Andere Benutzer (und auch Sie selbst) können nun mit der Schaltfläche <guilabel>Antworten</guilabel> auf Ihr Thema antworten. Dies bringt Sie erneut zur Beitragsseite, wo Sie Ihren Beitrag eingeben können.</para>
+		<section id="posting_form">
+			<title>Beitragsformular</title>
+			<para>Sie gelangen zum Beitragsformular, wenn Sie sich entscheiden, entweder ein neues Thema oder eine Antwort zu erstellen, wo Sie Ihren Beitragsinhalt eingeben können.</para>
+			<figure id="user_posting_form">
+			<title>Beitragsformular</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/posting_screen.png" />
+					</imageobject>
+					<caption>
+						<para>Der Bildschirm, der beim Erstellen eines neuen Themas angezeigt wird.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<itemizedlist>
+				<listitem><para><guilabel>Themen-/Beitragssymbol</guilabel>: Das Themen-/Beitragssymbol ist ein kleines Symbol, das links neben Ihrem Beitragsbetreff angezeigt wird. Dies hilft, Ihren Beitrag zu kennzeichnen und hervorzuheben, ist jedoch vollkommen optional.</para></listitem>
+				<listitem><para><guilabel>Betreff</guilabel>: Wenn Sie mit Ihrem Beitrag ein neues Thema erstellen, ist der Betreff erforderlich und wird zum Titel des Themas. Wenn Sie auf ein bestehendes Thema antworten, ist dies optional, kann aber geändert werden.</para></listitem>
+				<listitem><para>Beitragsinhalt – Obwohl nicht beschriftet, ist das große Textfeld der Ort, an dem der eigentliche Inhalt Ihres Beitrags eingegeben wird. Hier können Sie neben Ihrem Text auch Dinge wie <link linkend="posting_smilies">Smilies</link> oder <link linkend="posting_bbcodes">BBCode</link> verwenden, sofern der Forenadministrator diese aktiviert hat. Als HTML eingegebener Inhalt wird als Text dargestellt, HTML-Eingaben werden nicht unterstützt.</para></listitem>
+				<listitem><para>Smilies – Smilies, oder Emoticons, sind kleine Bilder, die in Ihren Beitrag eingefügt werden können, um Ausdruck zu betonen. Wenn Smilies aktiviert sind, sehen Sie den Text „<guilabel>Smilies sind AN</guilabel>“ rechts neben dem Feld für den Beitragsinhalt. Andernfalls sehen Sie den Text „<guilabel>Smilies sind AUS</guilabel>“. Weitere Einzelheiten finden Sie unter <link linkend="posting_smilies">Smilies verwenden</link>.</para></listitem>
+				<listitem><para>BBCode – BBCode ist eine Art der Formatierung, die auf Ihren Beitragsinhalt angewendet werden kann, sofern BBCode vom Forenadministrator aktiviert wurde. Wenn BBCode aktiviert ist, sehen Sie den Text „<guilabel>BBCode ist AN</guilabel>“ rechts neben dem Feld für den Beitragsinhalt. Andernfalls sehen Sie den Text „<guilabel>BBCode ist AUS</guilabel>“. Weitere Einzelheiten finden Sie unter <link linkend="posting_bbcodes">BBCode verwenden</link>.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="posting_smilies">
+			<title>Smilies</title>
+			<para>Smilies, oder Emoticons, sind kleine Bilder, die in Ihren Beitrag eingefügt werden können, um Ausdruck zu betonen. Um Smilies zu verwenden, werden bestimmte Zeichen zusammengefügt, um die gewünschte Ausgabe zu erhalten. Zum Beispiel fügt die Eingabe von :) <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/smile.gif"/></imageobject></inlinemediaobject> ein, ;) fügt <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/wink.gif"/></imageobject></inlinemediaobject> ein, usw. Andere Smilies erfordern das Format :texthier:, um angezeigt zu werden. Zum Beispiel fügt :roll: einen Smiley mit rollenden Augen ein: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/rolleyes.gif"/></imageobject></inlinemediaobject>, und :cry: fügt einen weinenden Smiley ein: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/cry.gif"/></imageobject></inlinemediaobject>.</para>
+			<para>In vielen Fällen können Sie auch auswählen, welchen Smiley Sie einfügen möchten, indem Sie auf sein Bild auf der rechten Seite des Textfelds für den Beitragsinhalt klicken. Beim Klicken erscheinen die Zeichen des Smileys an der aktuellen Position des Cursors im Textfeld.</para>
+			<para>Wenn Sie diese Zeichen in Ihrem Beitrag verwenden möchten, ohne dass sie als Smilies erscheinen, lesen Sie bitte <link linkend="posting_options">Beitragsoptionen</link>.</para>
+		</section>
+
+		<section id="posting_bbcodes">
+			<title>BBCodes</title>
+			<para>BBCode ist eine Art der Formatierung, die auf Ihren Beitragsinhalt angewendet werden kann, ähnlich wie HTML. Anders als HTML verwendet BBCode jedoch eckige Klammern [ und ] anstelle spitzer Klammern &lt; und &gt;. Je nach den vom Forenadministrator festgelegten Berechtigungen können Sie möglicherweise nur bestimmte BBCodes oder überhaupt keine verwenden.</para>
+			<para>Ausführliche Anweisungen zur Verwendung von BBCode finden Sie, indem Sie auf den Link <guilabel>BBCode</guilabel> rechts neben dem Textfeld für den Beitragsinhalt klicken. Bitte beachten Sie, dass der Administrator neue und benutzerdefinierte BBCodes hinzufügen kann, sodass Ihnen möglicherweise weitere zur Verfügung stehen, die nicht in dieser Liste enthalten sind.</para>
+			<para>Grundlegende BBCodes und ihre Ausgaben sind wie folgt:</para>
+			<para>[b]Fettgedruckter Text[/b]: <emphasis role="strong">Fettgedruckter Text</emphasis></para>
+			<para>[i]Kursiver Text[/i]: <emphasis>Kursiver Text</emphasis></para>
+			<para>[u]Unterstrichener Text[/u]: <emphasis role="underline">Unterstrichener Text</emphasis></para>
+			<para>[quote]Zitierter Text[/quote]: </para> <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/quoted_text.png"/></imageobject></inlinemediaobject>
+			<para>[quote="Zu zitierender Name"]Zitierter Text[/quote]: </para> <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/quoted_text_author.png"/></imageobject></inlinemediaobject>
+			<para>[url]https://www.phpbb.com[/url]: <ulink url="https://www.phpbb.com">https://www.phpbb.com</ulink></para>
+			<para>[url=https://www.phpbb.com]Verlinkter Text[/url]: <ulink url="https://www.phpbb.com">Verlinkter Text</ulink></para>
+			<para>[flash=Breite,Höhe]Pfad zur Flash-Datei[/flash] spielt die Flash-Animation mit den angegebenen Abmessungen ab.</para>
+			<para>Weitere ausführliche Anweisungen zur Verwendung von BBCode und den vielen weiteren verfügbaren BBCodes finden Sie, indem Sie auf den Link <guilabel>BBCode</guilabel> rechts neben dem Textfeld für den Beitragsinhalt klicken.</para>
+		</section>
+
+		<section id="posting_options">
+			<title>Beitragsoptionen</title>
+			<para>Beim Verfassen eines neuen Themas oder einer Antwort stehen Ihnen mehrere Beitragsoptionen zur Verfügung. Sie können diese Optionen anzeigen, indem Sie den Reiter <guilabel>Optionen</guilabel> im Bereich unterhalb des Beitragsformulars auswählen. Je nach den Berechtigungen, die Ihnen der Forenadministrator zugewiesen hat, oder je nachdem, ob Sie ein Thema oder eine Antwort verfassen, unterscheiden sich diese Optionen.</para>
+			<figure id="user_posting_options">
+			<title>Beitragsoptionen</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/posting_options.png" />
+					</imageobject>
+					<caption>
+						<para>Die Optionen, die beim Erstellen einer Antwort angezeigt werden.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>Der Standardstatus dieser Optionen richtet sich nach Ihren <link linkend="ucp_posting">Beitragsstandardeinstellungen</link> auf der Seite <guilabel>Foreneinstellungen</guilabel> des Benutzerkontrollzentrums.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>BBCode deaktivieren</guilabel>: Wenn BBCode im Forum aktiviert ist und Sie es verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens wird BBCode in Ihrem Beitragsinhalt nicht in die entsprechende Ausgabe umgewandelt. Zum Beispiel wird [b]Fettgedruckter Text[/b] in Ihrem Beitrag genau als [b]Fettgedruckter Text[/b] angezeigt.</para></listitem>
+				<listitem><para><guilabel>Smilies deaktivieren</guilabel>: Wenn Smilies im Forum aktiviert sind und Sie diese verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens werden die Zeichen der Smilies nicht in das entsprechende Bild umgewandelt. Zum Beispiel wird ;) in Ihrem Beitrag genau als ;) angezeigt.</para></listitem>
+				<listitem><para><guilabel>URLs nicht automatisch erkennen</guilabel>: Wenn Sie eine URL direkt in Ihren Beitragsinhalt eingeben (im Format http://....com oder www.etc.com), wird diese standardmäßig in einen anklickbaren Textstring umgewandelt. Wenn dieses Kästchen beim Verfassen des Beitrags jedoch aktiviert ist, bleiben diese URLs als normaler Textstring erhalten.</para></listitem>
+				<listitem><para><guilabel>Signatur anhängen (Signaturen können über das UCP geändert werden)</guilabel>: Wenn dieses Kästchen aktiviert ist, wird die in Ihrem Profil festgelegte Signatur an den Beitrag angehängt, sofern Signaturen vom Administrator aktiviert wurden und Sie über die entsprechenden Berechtigungen verfügen. Weitere Informationen zu Signaturen finden Sie unter <link linkend="ucp_signature">UCP-Signatur</link>.</para></listitem>
+				<listitem><para><guilabel>Mich per E-Mail benachrichtigen, wenn eine Antwort gepostet wird</guilabel>: Wenn dieses Kästchen aktiviert ist, erhalten Sie jedes Mal eine Benachrichtigung (per E-Mail, Jabber usw.), wenn ein anderer Benutzer auf das Thema antwortet. Dies wird als Abonnieren des Themas bezeichnet. Weitere Informationen finden Sie unter <link linkend="ucp_subscriptions">UCP-Abonnements</link>.</para></listitem>
+				<listitem><para><guilabel>Thema sperren</guilabel>: Sofern Sie über Moderationsberechtigungen in diesem Forum verfügen, wird das Thema durch Aktivieren dieses Kästchens gesperrt, nachdem Ihre Antwort veröffentlicht wurde. Ab diesem Zeitpunkt darf niemand außer Moderatoren oder Administratoren auf das Thema antworten. Weitere Informationen finden Sie unter <link linkend="modtools_lock">Sperren eines Themas oder Beitrags</link>.</para></listitem>
+			</itemizedlist>
+
+			<section id="posting_special">
+				<title>Themenarten</title>
+				<para>Sofern Sie über die entsprechenden Berechtigungen verfügen, haben Sie beim Erstellen eines neuen Themas mit <guilabel>Thema veröffentlichen als</guilabel> die Möglichkeit, verschiedene Themenarten auszuwählen. Die vier möglichen Arten sind: <guilabel>Normal</guilabel>, <guilabel>Wichtig</guilabel>, <guilabel>Ankündigung</guilabel> und <guilabel>Global</guilabel>. Standardmäßig sind alle neuen Beiträge <guilabel>Normal</guilabel>.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Normal</guilabel>: Durch Auswahl von Normal wird Ihr neues Thema ein Standardthema im Forum.</para></listitem>
+					<listitem><para><guilabel>Wichtig</guilabel>: Wichtige Themen sind besondere Themen im Forum. Sie werden oberhalb aller normalen Themen oben auf der ersten Seite des Forums, in dem sie veröffentlicht wurden, „festgepinnt“.</para></listitem>
+					<listitem><para><guilabel>Ankündigung</guilabel>: Ankündigungen ähneln wichtigen Themen darin, dass sie oben im Forum „festgepinnt“ werden. Sie unterscheiden sich jedoch in zwei Punkten von wichtigen Themen: 1) Sie stehen oberhalb der wichtigen Themen, und 2) sie erscheinen oben auf <emphasis>jeder</emphasis> Seite des Forums statt nur auf der ersten Seite der Themen.</para></listitem>
+					<listitem><para><guilabel>Global</guilabel>: Globale bzw. globale Ankündigungen sind besondere Arten von Ankündigungen, die oben auf jeder Seite jedes Forums im gesamten Forum erscheinen. Sie erscheinen oberhalb jeder anderen Art von besonderem Thema.</para></listitem>
+				</itemizedlist>
+				<para>Sie haben außerdem die Möglichkeit festzulegen, wie lange die besonderen Themen (wichtige Themen, Ankündigungen und globale Ankündigungen) ihre Art behalten. Zum Beispiel wird eine Ankündigung erstellt und so festgelegt, dass sie 4 Tage lang „festgepinnt“ bleibt. Nach Ablauf der 4 Tage wird die Ankündigung automatisch in ein normales Thema umgewandelt.</para>
+			</section>
+		</section>
+
+		<section id="posting_attachments">
+			<title>Anhänge</title>
+			<para>Anhänge erlauben es Benutzern, Dateien hochzuladen und an ihren Beitrag anzuhängen. Die Möglichkeit, Anhänge anzuhängen und herunterzuladen, wird durch die Berechtigungen „Kann Dateien anhängen“ bzw. „Kann Dateien herunterladen“ bestimmt.</para>
+			<para>Um einen Anhang hinzuzufügen, suchen Sie den Bereich <guilabel>Anhänge</guilabel> der Beitragsseite und klicken Sie auf die Schaltfläche <guilabel>Dateien hinzufügen</guilabel>. Ein Kommentar kann in das Textfeld <guilabel>Dateikommentar</guilabel> eingegeben werden. Ein Klick auf <guilabel>Datei hinzufügen</guilabel> lädt die Datei hoch und hängt sie an den Beitrag an. Um mehrere Dateien hochzuladen, wiederholen Sie den Vorgang. Anhänge können auch hochgeladen werden, indem eine Datei per Drag & Drop auf den Nachrichtenbereich der Beitragsseite gezogen wird.</para>
+			<para>Um einen Anhang zu löschen, suchen Sie die Anhangsliste am unteren Ende des Bereichs <guilabel>Anhänge</guilabel> der Beitragsseite und klicken Sie auf die Schaltfläche <guilabel>Datei löschen</guilabel> für den gewünschten Anhang.</para>
+			<para>Anhänge können im Beitragstext angezeigt werden, indem Sie für den gewünschten Anhang auf die Schaltfläche <guilabel>Inline einfügen</guilabel> klicken. Wenn ein Anhang inline platziert wird, wird ein BBCode-ähnlicher Text in den Beitragstext eingefügt, sodass er verschoben werden kann. Wird ein Anhang nicht inline platziert, wird er am Ende des Beitrags angezeigt.</para>
+			<para>Anhänge unterliegen einer Reihe von Einschränkungen, nämlich der Dateigröße und dem Dateityp.</para>
+			<itemizedlist>
+				<listitem><para>Dateigröße: Die maximale Dateigröße für hochgeladene Dateien wird vom Administrator festgelegt. Der Standardwert beträgt 256 KiB.</para></listitem>
+				<listitem><para>Dateityp: Die zum Hochladen zulässigen Dateitypen werden anhand ihrer Dateiendung eingeschränkt. Die zulässigen Endungen werden vom Administrator festgelegt.</para></listitem>
+			</itemizedlist>
+			<para>Weitere Informationen zum Ändern der Anhangseinstellungen finden Sie unter <link linkend="acp_attach_settings">ACP-Anhangseinstellungen</link>.</para>
+		</section>
+		<section id="posting_polls">
+			<title>Umfragen</title>
+			<para>Umfragen erlauben es Benutzern, in einem Thema über eine Idee oder ein Thema abzustimmen. Umfragen können nur im ersten Beitrag eines Themas erstellt werden. Die Möglichkeit, Umfragen zu erstellen und daran teilzunehmen, wird durch die vom Administrator festgelegte Berechtigung „Umfragen“ bestimmt.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Umfragefrage</guilabel> – Dies ist die Idee oder das Thema, über das in der Umfrage abgestimmt wird. Dies ist erforderlich, um eine Umfrage zu starten.</para></listitem>
+				<listitem><para><guilabel>Umfrageoptionen</guilabel> – Dies sind die zulässigen Antworten auf die Umfragefrage. Bei der Eingabe einer Umfrageoption sollte jede in einer separaten Zeile des Textfelds stehen. Mindestens zwei Umfrageoptionen sind erforderlich.</para></listitem>
+				<listitem><para><guilabel>Optionen pro Benutzer</guilabel> – Dies ist die Anzahl der Optionen, die jeder Benutzer bei der Abstimmung auswählen darf. Wenn einem Benutzer mehr als eine Option erlaubt ist, ersetzt eine Reihe von Kontrollkästchen die Optionsfelder der Standardumfrage.</para></listitem>
+				<listitem><para><guilabel>Umfrage läuft für</guilabel> – Dies ist die Anzahl der Tage, in denen Benutzer an der Umfrage teilnehmen können. Sobald die Zeit abgelaufen ist, können keine weiteren Stimmen mehr abgegeben werden und die Ergebnisse werden angezeigt.</para></listitem>
+				<listitem><para><guilabel>Erneute Abstimmung erlauben</guilabel> – Wenn dies ausgewählt ist, können Benutzer ihre Stimme erneut abgeben.</para></listitem>
+			</itemizedlist>
+		</section>
+		<section id="posting_drafts">
+			<title>Entwürfe</title>
+			<para>Beim Erstellen eines Beitrags kann dieser mithilfe der Entwurfsfunktion gespeichert oder geladen werden. Wenn die Forenberechtigungen das Speichern von Entwürfen erlauben, erscheinen die Schaltflächen <guilabel>Speichern</guilabel> und <guilabel>Laden</guilabel> auf der Beitragsseite.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Speichern</guilabel> – Speichert einen Beitrag als Entwurf. Beim Speichern eines Entwurfs werden nur der Betreff und die Nachricht des Beitrags gespeichert. Themensymbole, Anhänge usw. gehen verloren.</para></listitem>
+				<listitem><para><guilabel>Laden</guilabel> – Lädt einen gespeicherten Entwurf. Beim Klicken erscheint eine Liste der verfügbaren Entwürfe. Klicken Sie auf den Titel des gewünschten Beitrags, um den Entwurf zu laden. Alle Informationen im aktuellen Beitrag gehen verloren und werden durch die des Entwurfs ersetzt.</para></listitem>
+			</itemizedlist>
+			<para>Sobald ein Entwurf verwendet wurde, wird er entfernt. Weitere Informationen zur Verwaltung von Entwürfen finden Sie unter <link linkend="ucp_drafts">UCP-Entwürfe</link>.</para>
+			<note>
+				<para>Wenn keine Entwürfe verfügbar sind, erscheint die Schaltfläche <guilabel>Laden</guilabel> nicht.</para>
+			</note>
+		</section>
+	</section>
+	<section id="user_pm">
+		<title>Mit privaten Nachrichten kommunizieren</title>
+		<para>phpBB 3.3 erlaubt es seinen Benutzern, privat über private Nachrichten zu kommunizieren. Um den Bereich für private Nachrichten zu besuchen, können Sie entweder auf den Link [X neue Nachrichten] auf der linken Seite unterhalb der Forenkopfzeile klicken, oder Sie können direkt über das <link linkend="user_control_panel">Benutzerkontrollzentrum</link> darauf zugreifen.</para>
+		<para>Je nach den vom Forenadministrator erlaubten Kommunikationsmethoden gibt es 3 Möglichkeiten, über den Eingang einer neuen privaten Nachricht benachrichtigt zu werden:</para>
+		<orderedlist>
+			<listitem>
+				<para>Durch den Empfang einer E-Mail oder Jabber-Nachricht</para>
+			</listitem>
+			<listitem>
+				<para>Ein Eintrag erscheint im Benachrichtigungsmenü</para>
+			</listitem>
+			<listitem>
+				<para>Der Link <guilabel>Private Nachrichten [X]</guilabel> zeigt die Anzahl der derzeit ungelesenen Nachrichten an</para>
+			</listitem>
+		</orderedlist>
+		<para>Sie können die Optionen nach Ihren Wünschen im Bereich <link linkend="ucp_preferences">Einstellungen</link> festlegen.</para>
+		<para>Sie können sich in Ihren <link linkend="ucp_preferences">Einstellungen</link> dafür entscheiden, keine privaten Nachrichten von anderen Benutzern zu erhalten. Beachten Sie, dass Moderatoren und Administratoren Ihnen weiterhin private Nachrichten senden können, selbst wenn Sie diese deaktiviert haben.</para>
+		<note>
+			<para>Diese Funktionen stehen nur registrierten Benutzern mit den entsprechenden Berechtigungen zur Verfügung.</para>
+		</note>
+		<section id="pm_display">
+			<title>Nachrichtenanzeige</title>
+			<para>Der Posteingang ist der standardmäßige Eingangsordner, der eine Liste Ihrer zuletzt empfangenen privaten Nachrichten enthält. </para>
+		</section>
+		<section id="pm_new">
+			<title>Eine neue Nachricht verfassen</title>
+			<para>Der Bildschirm, der beim Verfassen einer privaten Nachricht angezeigt wird, ist nahezu identisch mit dem Bildschirm zum Erstellen eines neuen Beitrags. Der Hauptunterschied ist das zusätzliche Adressfeld zum Hinzufügen von Empfängern.</para>
+			<figure id="user_private_message_fields">
+			<title>Felder für private Nachrichten</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/private_messsage_fields.png" />
+					</imageobject>
+					<caption>
+						<para>Felder zum Hinzufügen von Empfängern zu einer privaten Nachricht.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>Benutzernamen sollten in das Textfeld eingegeben werden, wonach entweder <guilabel>Hinzufügen</guilabel> oder <guilabel>Hinzufügen [BCC]</guilabel> verwendet wird, um den Benutzer zur entsprechenden Empfängerliste hinzuzufügen. Wenn Sie sich über den Namen eines Benutzers nicht sicher sind, können Sie den Link <guilabel>Mitglied suchen</guilabel> verwenden, um die Mitgliederliste nach dem Benutzer zu durchsuchen. Setzen Sie ein Häkchen neben den gewünschten Benutzer(n) in der Mitgliederliste und drücken Sie <guilabel>Markierte auswählen</guilabel>, um den Benutzer zum Empfängerfeld hinzuzufügen.</para>
+		</section>
+		<section id="pm_folders">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Nachrichtenordner</title>
+			<para>Genau wie in Ihrem E-Mail-Programm werden alle <glossterm>privaten Nachrichten</glossterm> in Ordnern gespeichert. Der Umgang mit Ordnern ähnelt dem Umgang mit Foren in phpBB 3.3. Der <guilabel>Posteingang</guilabel> ist Ihr standardmäßiger Ordner für eingehende Nachrichten. Alle Nachrichten, die Sie erhalten, erscheinen hier.</para>
+			<para><guilabel>Gesendete Nachrichten</guilabel> erscheinen entweder im Ordner <guilabel>Postausgang</guilabel> oder im Ordner <guilabel>Gesendete Nachrichten</guilabel>. Solange der/die Empfänger die Nachricht noch nicht gelesen hat/haben, verbleibt sie im <guilabel>Postausgang</guilabel>. Sobald jemand die Nachricht liest, wird sie in den Ordner <guilabel>Gesendete Nachrichten</guilabel> archiviert. Wenn der Administrator dies erlaubt, können Sie Nachrichten nach dem Senden bearbeiten, solange sie sich im <guilabel>Postausgang</guilabel> befinden und die Empfänger sie noch nicht gelesen haben.</para>
+			<para>Jeder Ordner, einschließlich <guilabel>Gesendete Nachrichten</guilabel> und <guilabel>Postausgang</guilabel>, kann eine vom Forum festgelegte Anzahl von Nachrichten aufnehmen. Dies ist eine globale Einstellung, die nur ein Forenadministrator ändern kann. Ein Infotext zeigt am oberen Rand jedes Ordners die aktuelle Anzahl der erlaubten Nachrichten und den aktuellen Prozentsatz des von Ihren Nachrichten belegten Speicherplatzes an. Wird keine Einschränkung angezeigt, sind Ihnen unbegrenzt viele Nachrichten in jedem Ordner erlaubt.</para>
+			<note>
+				<para>Bitte beachten Sie, dass die insgesamt erlaubte Nachrichtenanzahl eine Einstellung pro Ordner ist. Sie können beispielsweise mehrere Ordner haben, die jeweils 50 Nachrichten erlauben. Wenn Sie 3 Ordner haben, liegt Ihr tatsächliches globales Limit bei 150 Nachrichten, aber jeder Ordner kann für sich genommen nur bis zu 50 Nachrichten enthalten. Es ist nicht möglich, Ordner zusammenzuführen und einen mit mehr Nachrichten als dem Limit zu erhalten.</para>
+			</note>
+
+			<section id="pm_folders_custom">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzerdefinierte Ordner</title>
+
+				<para>Wenn der Administrator dies erlaubt, können Sie in phpBB 3.3 Ihre eigenen benutzerdefinierten Ordner für <glossterm>private Nachrichten</glossterm> erstellen. Um zu prüfen, ob Sie Ordner hinzufügen können, besuchen Sie den Bereich <guimenuitem>Optionen bearbeiten</guimenuitem> im Bereich <guilabel>Private Nachrichten</guilabel>. </para>
+				<para>Um einen neuen Ordner hinzuzufügen, geben Sie den Namen des Ordners in das Eingabefeld <guilabel>Ordner hinzufügen</guilabel> ein. Wenn die Erstellung erfolgreich war, erscheint Ihr neuer Ordner am Ende der Ordnerliste. Sie können ihn dann wie einen normalen Nachrichtenordner verwenden und Nachrichten hineinverschieben oder einen Filter einrichten (weitere Informationen zu Filtern finden Sie im Abschnitt <link linkend="pm_rules">Regeln für private Nachrichten</link>), der dies automatisch für Sie erledigt.</para>
+			</section>
+
+			<section id="pm_folders_moving">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Nachrichten verschieben</title>
+
+				<para>Es würde keinen Sinn ergeben, benutzerdefinierte Ordner zu haben, wenn Sie nicht in der Lage wären, Nachrichten zwischen ihnen zu verschieben. Um genau das zu tun, besuchen Sie den Ordner, aus dem Sie die Nachrichten verschieben möchten. Wählen Sie die Nachrichten aus, die Sie verschieben möchten, und verwenden Sie das Auswahlmenü <guilabel>Markierte verschieben</guilabel>, um den Zielordner auszuwählen.</para>
+				<note>
+					<para>Bitte beachten Sie, dass Sie eine Fehlermeldung erhalten und die Verschiebung verworfen wird, wenn der Zielordner nach der Verschiebung mehr Nachrichten enthalten würde, als das Nachrichtenlimit erlaubt.</para>
+				</note>
+			</section>
+
+			<section id="pm_folders_marking">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Nachrichtenmarkierungen</title>
+
+				<para>Nachrichten innerhalb von Ordnern können farbliche Markierungen haben. Bitte beachten Sie die Legende <guilabel>Nachrichtenfarben</guilabel>, um zu sehen, was jede Farbe bedeutet. Die genaue Art der Farbgebung hängt vom verwendeten Theme ab. Farbige Nachrichten können vier verschiedene Bedeutungen haben:</para>
+				<variablelist>
+					<varlistentry>
+						<term>Markierte Nachricht</term>
+						<listitem>
+							<para>Sie können eine Nachricht mit der Option <guilabel>Als wichtig markieren</guilabel> aus dem Auswahlmenü als markiert festlegen.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Beantwortete Nachricht</term>
+						<listitem>
+							<para>Wenn Sie auf eine Nachricht antworten, wird die Nachricht entsprechend markiert. Auf diese Weise können Sie im Blick behalten, welche Nachrichten noch Ihre Aufmerksamkeit benötigen und welche Sie bereits beantwortet haben.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Nachricht von einem Freund</term>
+						<listitem>
+							<para>Wenn sich der Absender einer Nachricht auf Ihrer Freundesliste befindet (weitere Informationen finden Sie im Abschnitt <link linkend="ucp_friends_foes">Freunde &amp; Feinde</link>), wird die Nachricht mit dieser Farbe hervorgehoben.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Nachricht von einem Feind</term>
+						<listitem>
+							<para>Wenn sich der Absender einer Nachricht unter Ihren Feinden befindet, wird dies mit dieser Farbe hervorgehoben.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+
+				<note>
+					<para>Bitte beachten Sie, dass eine Nachricht immer nur eine Markierung haben kann, und zwar stets die zuletzt von Ihnen ausgeführte Aktion. Wenn Sie eine Nachricht beispielsweise als <guilabel>wichtig</guilabel> markieren und anschließend darauf antworten, überschreibt die Markierung <guilabel>beantwortet</guilabel> die Markierung <guilabel>wichtig</guilabel>.</para>
+				</note>
+			</section>
+		</section>
+		<section id="pm_rules">
+			<title>Nachrichtenregeln</title>
+			<para>Private Nachrichten können gefiltert werden, indem Regeln erstellt werden, die anhand der Metadaten der Nachricht Aktionen auf ihr ausführen. Wenn eine private Nachricht eintrifft, kann sie automatisch in bestimmte Ordner einsortiert, gelöscht oder hervorgehoben werden.</para>
+			<note>
+				<para>Regeln für private Nachrichten können nicht bearbeitet werden. Wenn eine Regel geändert werden muss, müssen Sie die aktuelle Regel löschen und sie erneut erstellen.</para>
+			</note>
+			<section id="pm_rule_fields">
+				<title>Vergleichbare Felder</title>
+				<para>Nachrichten können anhand der folgenden Felder gefiltert werden:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Betreff</guilabel> – Der Betreff der Nachricht.</para></listitem>
+					<listitem><para><guilabel>Absender</guilabel> – Der Benutzername des Nachrichtenabsenders.</para></listitem>
+					<listitem><para><guilabel>Nachricht</guilabel> – Der Inhalt der Nachricht.</para></listitem>
+					<listitem><para><guilabel>Nachrichtenstatus</guilabel> – Ob eine Nachricht beantwortet oder weitergeleitet wurde.</para></listitem>
+					<listitem><para><guilabel>Gesendet an</guilabel> – Ob die Nachricht direkt an Sie oder an eine Benutzergruppe gesendet wurde, deren Mitglied Sie sind.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="pm_rule_conditions">
+				<title>Übereinstimmungsbedingungen</title>
+				<para>Zum Filtern der Felder stehen mehrere Bedingungen zur Verfügung. Nicht alle der unten aufgeführten Bedingungen sind für jedes Feld verfügbar. Es folgt die vollständige Liste der verfügbaren Bedingungen:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Ist wie</guilabel> – Das Feld enthält die angegebene Zeichenfolge.</para></listitem>
+					<listitem><para><guilabel>Ist nicht wie</guilabel> – Das Feld enthält die angegebene Zeichenfolge <emphasis role="strong">nicht</emphasis>.</para></listitem>
+					<listitem><para><guilabel>Ist</guilabel> – Das Feld stimmt exakt mit der angegebenen Zeichenfolge überein.</para></listitem>
+					<listitem><para><guilabel>Ist nicht</guilabel> – Der Inhalt des Feldes ist <emphasis role="strong">nicht</emphasis> mit der angegebenen Zeichenfolge identisch.</para></listitem>
+					<listitem><para><guilabel>Beginnt mit</guilabel> – Das Feld beginnt mit der angegebenen Zeichenfolge.</para></listitem>
+					<listitem><para><guilabel>Endet mit</guilabel> – Das Feld endet mit der angegebenen Zeichenfolge.</para></listitem>
+					<listitem><para><guilabel>Ist Freund</guilabel> – Ob sich der Absender auf Ihrer Freundesliste befindet.</para></listitem>
+					<listitem><para><guilabel>Ist Feind</guilabel> – Ob sich der Absender auf Ihrer Feindesliste befindet.</para></listitem>
+					<listitem><para><guilabel>Ist Benutzer</guilabel> – Der Name des Absenders stimmt mit der angegebenen Zeichenfolge überein.</para></listitem>
+					<listitem><para><guilabel>Ist in Benutzergruppe</guilabel> – Der Absender gehört der angegebenen Benutzergruppe an.</para></listitem>
+					<listitem><para><guilabel>Beantwortet</guilabel> – Ob die Nachricht beantwortet wurde.</para></listitem>
+					<listitem><para><guilabel>Weitergeleitet</guilabel> – Ob die Nachricht weitergeleitet wurde.</para></listitem>
+					<listitem><para><guilabel>An meine Standard-Benutzergruppe</guilabel> – Ob die Nachricht an Ihre Benutzergruppe gesendet wurde.</para></listitem>
+					<listitem><para><guilabel>An mich</guilabel> – Ob eine Nachricht direkt an Sie gesendet wurde.</para></listitem>
+				</itemizedlist>
+				<para>Die folgende Liste zeigt, welche Bedingungen für jedes Feld verfügbar sind:</para>
+				<variablelist>
+					<varlistentry>
+						<term>Betreff</term>
+						<listitem>
+							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Ist</guilabel>, <guilabel>Ist nicht</guilabel>, <guilabel>Beginnt mit</guilabel>, <guilabel>Endet mit</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Absender</term>
+						<listitem>
+							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Ist</guilabel>, <guilabel>Ist nicht</guilabel>, <guilabel>Beginnt mit</guilabel>, <guilabel>Endet mit</guilabel>, <guilabel>Ist Freund</guilabel>, <guilabel>Ist Feind</guilabel>, <guilabel>Ist Benutzer</guilabel>, <guilabel>Ist in Benutzergruppe</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Nachricht</term>
+						<listitem>
+							<para><guilabel>Ist wie</guilabel>, <guilabel>Ist nicht wie</guilabel>, <guilabel>Ist</guilabel>, <guilabel>Ist nicht</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Nachrichtenstatus</term>
+						<listitem>
+							<para><guilabel>Beantwortet</guilabel>, <guilabel>Weitergeleitet</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Gesendet an</term>
+						<listitem>
+							<para><guilabel>An meine Standard-Benutzergruppe</guilabel>, <guilabel>An mich</guilabel></para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</section>
+
+			<section id="pm_rule_actions">
+				<title>Regelaktion</title>
+				<para>Sobald eine Nachricht zugeordnet wurde, kann eine Aktion auf sie angewendet werden. Die verfügbaren Aktionen sind:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>In Ordner verschieben -&gt; X</guilabel> – Verschiebt die Nachricht in den angegebenen Ordner.</para></listitem>
+					<listitem><para><guilabel>Als gelesen markieren</guilabel> – Die Nachricht wird sofort als gelesen markiert. Benachrichtigungen informieren Sie weiterhin über eine neue Nachricht, aber die Nachricht wird bereits als gelesen markiert sein, wenn Sie Ihre Liste privater Nachrichten ansehen.</para></listitem>
+					<listitem><para><guilabel>Nachricht markieren</guilabel> – Die Nachricht wird als wichtig markiert und in Ihrer Liste privater Nachrichten hervorgehoben.</para></listitem>
+					<listitem><para><guilabel>Nachricht löschen</guilabel> – Die Nachricht wird gelöscht, anstatt angezeigt zu werden. Es wird eine Nachricht angezeigt, die Sie darüber informiert, dass gemäß Ihren Nachrichtenregeln Nachrichten empfangen und gelöscht wurden. Nachrichten von Forenadministratoren und Moderatoren werden <emphasis role="strong">nicht</emphasis> gelöscht.</para></listitem>
+				</itemizedlist>
+			</section>
+		</section>
+	</section>
+	<section id="user_search">
+		<title>Suche – Wie Sie finden, wonach Sie suchen</title>
+		<para>Mit wachsendem Forum und zunehmender Anzahl an Beiträgen wird es schwieriger, bestimmte Inhalte schnell zu finden. Um das Auffinden von Beiträgen zu erleichtern, enthält phpBB ein Suchwerkzeug. Häufige Suchen werden in Form von Links auf der Übersichtsseite angeboten (neue Beiträge, unbeantwortete Beiträge usw.), Stichwortsuchen können von der Kopfzeile, der Forenansicht und der Themenansicht aus durchgeführt werden (in unterstützten Stilen), und benutzerdefinierte Suchanfragen können mit der Funktion Erweiterte Suche erstellt werden.</para>
+
+		<section id="user_search_predefined">
+			<title>Vordefinierte Suchen</title>
+			<para>phpBB verfügt über mehrere vordefinierte Suchen, um bestimmte Arten von Abfragen einfach durchzuführen.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Eigene Beiträge anzeigen</guilabel> – Liefert eine Liste der Themen, in denen Sie gepostet haben, sortiert nach dem Zeitpunkt des letzten Beitrags im Thema.</para></listitem>
+				<listitem><para><guilabel>Unbeantwortete Themen anzeigen</guilabel> – Liefert alle Themen, die keine Antworten enthalten.</para></listitem>
+				<listitem><para><guilabel>Ungelesene Beiträge anzeigen</guilabel> – Liefert eine Liste der Themen mit Beiträgen, die Sie noch nicht gelesen haben.</para></listitem>
+				<listitem><para><guilabel>Neue Beiträge anzeigen</guilabel> – Liefert eine Liste der Themen mit Beiträgen, die seit Ihrer letzten Anmeldung erstellt wurden.</para></listitem>
+				<listitem><para><guilabel>Aktive Themen anzeigen</guilabel> – Liefert eine Liste der Themen, in denen in den letzten Tagen gepostet wurde. Die Anzahl der Tage kann nach dem Laden der Suchseite geändert werden.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="user_search_forums_topics">
+			<title>Foren- und Themensuche</title>
+			<para>Manche Stile bieten Suchfelder in der Forenansicht und der Themenansicht an. Diese Felder erlauben es Ihnen, eine Stichwortsuche innerhalb des Forums oder innerhalb des aktuellen Themas durchzuführen.</para>
+
+			<figure id="user_search_topic">
+				<title>Suche innerhalb von Themen</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/search_topic.png" />
+					</imageobject>
+					<caption>
+						<para>Suchfeld innerhalb eines Themas.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+		</section>
+
+		<section id="user_search_advanced">
+			<title>Erweiterte Suche</title>
+			<para>Zusätzlich zu den von phpBB bereitgestellten vordefinierten Suchen ist es möglich, eigene Suchanfragen zu erstellen. Suchen können auf Stichwörtern, dem Autor und der Forenauswahl basieren.</para>
+			<section id="user_search_query">
+				<title>Die Suchanfrage</title>
+				<para>Um eine Suche im Forum durchzuführen, müssen Sie angeben, wonach Sie suchen möchten. Sie können Stichwörter angeben, nach denen gesucht werden soll, sowie einen Beitragsautor. Für die Durchführung der Suche stehen zwei Abfrageoptionen zur Verfügung:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Nach allen Begriffen suchen oder Suchanfrage wie eingegeben verwenden</guilabel> – Wenn mehrere Stichwörter angegeben werden, müssen <emphasis role="strong">alle</emphasis> Stichwörter im Ergebnis gefunden werden. Alternativ können Sie eine Abfrage mit speziellen Kennzeichnern angeben.</para></listitem>
+					<listitem><para><guilabel>Nach beliebigen Begriffen suchen</guilabel> – Wenn mehrere Stichwörter angegeben werden, werden Ergebnisse zurückgegeben, die <emphasis role="strong">eines</emphasis> der angegebenen Stichwörter enthalten.</para></listitem>
+				</itemizedlist>
+				<section id="user_search_query_keywords">
+					<title>Stichwörter</title>
+					<para>Zusätzlich zur Angabe von Stichwörtern können spezielle Kennzeichner verwendet werden, um die Bedeutung bestimmter Wörter zu erhöhen oder zu verringern.</para>
+					<variablelist>
+						<title>Kennzeichner</title>
+						<varlistentry>
+							<term>+</term>
+							<listitem>
+								<para>Vor einem Stichwort platziert, muss dieses Stichwort im Ergebnistext enthalten sein.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>-</term>
+							<listitem>
+								<para>Vor einem Stichwort platziert, darf dieses Stichwort im Ergebnistext nicht vorhanden sein.</para>
+								<variablelist>
+									<title>Beispiele</title>
+									<varlistentry>
+										<term>+hund -katze</term>
+										<listitem>
+											<para>Liefert Ergebnisse, die das Wort „hund“, aber nicht „katze“ enthalten.</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>|</term>
+							<listitem>
+								<para>Dieses Zeichen kann verwendet werden, um eine Liste von Stichwörtern zu trennen, von denen mindestens eines im Text gefunden werden soll. Wörter können in Klammern gesetzt und mit einem + oder - kombiniert werden, um anzuzeigen, dass mindestens eines der Wörter in jedem Ergebnis vorkommen muss oder nicht vorkommen darf.</para>
+								<variablelist>
+									<title>Beispiele</title>
+									<varlistentry>
+										<term>hund|katze</term>
+										<listitem>
+											<para>Liefert Ergebnisse, die entweder das Wort „hund“ oder das Wort „katze“ enthalten.</para>
+										</listitem>
+									</varlistentry>
+									<varlistentry>
+										<term>-(hund|katze)</term>
+										<listitem>
+											<para>Liefert Ergebnisse, die weder das Wort „hund“ noch das Wort „katze“ enthalten.</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>*</term>
+							<listitem>
+								<para>Ein Sternchen in einem Stichwort erlaubt partielle Stichwortübereinstimmungen.</para>
+								<variablelist>
+									<title>Beispiele</title>
+									<varlistentry>
+										<term>katze*</term>
+										<listitem>
+											<para>Liefert Ergebnisse, die mit dem Wort „katze“ beginnen, wie „katzen“ und „katzenartig“.</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</section>
+
+				<section id="user_search_query_author">
+					<title>Autor</title>
+					<para>Die Suchanfrage kann weiter verfeinert werden, indem der Autor des Beitrags angegeben wird. Wird ein Autor angegeben, werden nur Beiträge dieses Autors zurückgegeben, die den Anforderungen der Abfrage entsprechen. Das Autorenfeld erlaubt die Verwendung von Platzhaltern (*) für partielle Übereinstimmungen im Autorennamen.</para>
+				</section>
+			</section>
+
+			<section id="user_search_options">
+				<title>Die Suchoptionen</title>
+				<para>Suchen können weiter auf bestimmte Foren oder bestimmte Teile der Themen eingeschränkt werden.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>In Foren suchen</guilabel> – Hier können Sie bestimmte Foren auswählen, in denen die Suche durchgeführt werden soll. Mehrere Foren können durch Gedrückthalten der Taste „Strg“ oder „Befehl“ ausgewählt werden.</para></listitem>
+					<listitem><para><guilabel>In Unterforen suchen</guilabel> – Wenn diese Option ausgewählt ist, werden auch alle Unterforen der ausgewählten Foren durchsucht.</para></listitem>
+					<listitem>
+						<para><guilabel>Suchen in</guilabel> – Damit können Sie festlegen, welcher Teil der Beiträge durchsucht werden soll.</para>
+						<itemizedlist>
+							<listitem><para><guilabel>Beitragsbetreff und Nachrichtentext</guilabel> – Sowohl der Beitragsbetreff als auch der Beitragstext werden durchsucht.</para></listitem>
+							<listitem><para><guilabel>Nur Nachrichtentext</guilabel> – Nur der Text der Beiträge wird durchsucht, nicht der Titel.</para></listitem>
+							<listitem><para><guilabel>Nur Themen­titel</guilabel> – Nur die Themen­titel werden durchsucht.</para></listitem>
+							<listitem><para><guilabel>Nur erster Beitrag der Themen</guilabel> – Nur der erste Beitrag jedes Themas wird durchsucht, keine anderen Beiträge im Thema.</para></listitem>
+						</itemizedlist>
+					</listitem>
+					<listitem><para><guilabel>Ergebnisse anzeigen als</guilabel> – Diese Option formatiert die Suchergebnisse so, dass entweder nur der Beitragsinhalt oder nur die Themen­titel angezeigt werden.</para></listitem>
+					<listitem><para><guilabel>Ergebnisse sortieren nach</guilabel> – Ordnet die Ergebnisse nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Forum</guilabel>, <guilabel>Themen­titel</guilabel> oder <guilabel>Beitragsbetreff</guilabel>. Die Ergebnisse können in <guilabel>aufsteigender</guilabel> oder <guilabel>absteigender</guilabel> Reihenfolge angezeigt werden.</para></listitem>
+					<listitem><para><guilabel>Ergebnisse begrenzen auf die letzten</guilabel> – Begrenzt die Ergebnisse auf Beiträge, die in einem bestimmten Zeitraum erstellt wurden.</para></listitem>
+					<listitem><para><guilabel>Erste zurückgeben</guilabel> – Formatiert die Ergebnisse so, dass sie nur eine bestimmte Anzahl von Zeichen der übereinstimmenden Beiträge enthalten.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="user_search_refinement">
+				<title>Weitere Verfeinerung</title>
+				<para>Auf der Ergebnisseite ist es möglich, Ihre Suche durch Angabe weiterer Suchbegriffe weiter zu verfeinern.</para>
+				<figure id="user_search_refinement_image">
+					<title>Suchverfeinerung</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/search_refinement.png" />
+						</imageobject>
+						<caption>
+							<para>Verfeinerung der Suchergebnisse um das Wort „katze“.</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
+		</section>
+	</section>
+
+	<section id="user_memberlist">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>pentapenguin</othername>
+				</author>
+				<author>
+					<othername>battye</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Die Mitgliederliste – mehr, als man auf den ersten Blick sieht</title>
+		<para>phpBB3 führt mehrere neue Möglichkeiten ein, um nach Benutzern zu suchen.</para>
+
+		<figure id="user_memberlist_sorting">
+			<title>Sortieren der Mitgliederliste</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/user_guide/memberlist_sorting.png" />
+				</imageobject>
+				<caption>
+					<para>Auswahl einer Option zum Sortieren der Mitgliederliste.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+
+		<variablelist>
+			<varlistentry>
+				<term>Sortierung nach Benutzername</term>
+				<listitem>
+					<para>Wenn Sie alle Mitglieder finden möchten, deren Benutzernamen mit einem bestimmten Buchstaben beginnen, können Sie den Buchstaben aus der oben in der Mitgliederliste angezeigten Buchstabenliste auswählen. Ein Klick auf „A“ zeigt beispielsweise alle Benutzernamen an, die mit dem Buchstaben A beginnen, während ein Klick auf „B“ alle mit B beginnenden Benutzernamen auflistet. Ein Klick auf die Raute (#) zeigt eine Liste von Benutzernamen an, die nicht mit einem der sechsundzwanzig Buchstaben beginnen: mit anderen Worten Zahlen und andere Zeichen.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Sortierung nach Spaltenüberschriften</term>
+				<listitem>
+					<para>Jede der Spaltenüberschriften ist ebenfalls ein Sortierlink. Das bedeutet, Sie können auf <guilabel>Benutzername</guilabel>, <guilabel>Rang</guilabel>, <guilabel>Beiträge</guilabel>, <guilabel>Website</guilabel>, <guilabel>Wohnort</guilabel>, <guilabel>>Beigetreten</guilabel> oder <guilabel>Zuletzt aktiv</guilabel> klicken, um nach dieser Gruppe zu sortieren. Beim ersten Klicken werden die Listen in aufsteigender Reihenfolge sortiert (das heißt, Benutzernamen würden von A bis Z aufgelistet, und das Beitrittsdatum würde vom frühesten zum jüngsten aufgelistet). Wenn Sie die Liste in absteigender Reihenfolge anordnen möchten, warten Sie, bis die Seite in aufsteigender Reihenfolge geladen wurde, und klicken Sie ein zweites Mal auf die gewünschte Spaltenüberschrift.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Sortierung nach anderen Optionen</term>
+				<listitem>
+					<para>Sie können die Mitgliederliste auch über die Auswahlfelder am unteren Ende der Seite sortieren.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Suchwerkzeug „Mitglied suchen“</term>
+				<listitem>
+					<para>Sie können Ihre Suchergebnisse mit der Suchfunktion <guilabel>Mitglied suchen</guilabel> eingrenzen. Diese Funktion erlaubt es Ihnen, Mitglieder anhand ihres Benutzernamens, ihrer ICQ-Nummer, AIM, YIM, MSN Messenger-/Windows Live Messenger-Adresse, ihres Beitrittsdatums, letzten Aktivitätsdatums, ihrer Beitragsanzahl, IP-Adresse und Benutzergruppenmitgliedschaft(en) zu finden. Alle Daten sollten im Format JJJJ-MM-TT eingegeben werden (zum Beispiel 2004-02-28, um den 28. Februar 2004 darzustellen). Der Asterisk (*) kann als Platzhalter für partielle Übereinstimmungen verwendet werden, etwa durch Eingabe von „Ar*“ in das Benutzernamenfeld, um alle mit Ar beginnenden Benutzernamen zu finden. Drücken Sie die Schaltfläche <guilabel>Absenden</guilabel>, um die Suche zu starten, oder die Schaltfläche <guilabel>Zurücksetzen</guilabel>, wenn Sie alle Felder leeren und die Suche erneut starten möchten.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+
+		<note>
+			<para>Die Verfügbarkeit der Auswahlfelder für die Sortiermethode variiert je nach Stil.</para>
+		</note>
+	</section>
+</chapter>

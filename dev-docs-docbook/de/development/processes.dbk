@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Entwicklungsprozesse</title>
+  </articleinfo>
+  <sect1 id="new-features">
+    <title>Neue Funktionen</title>
+    <para>
+      Dieses Dokument beschreibt den Prozess, der zum Vorschlagen neuer
+      Funktionen für phpBB eingerichtet ist. phpBB verwendet dieses
+      System, um sicherzustellen, dass eine bestimmte Funktion so
+      hinzugefügt wird, wie sie vorgeschlagen wurde, und um sicher zu
+      stellen, dass Funktionswünsche transparent behandelt werden,
+      indem auf die Beiträge der Community zurückgegriffen wird.
+    </para>
+    <para>
+      Wenn Sie Funktionen oder Anpassungen für phpBB vorschlagen, gibt
+      es zwei mögliche Wege:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">Ideas</emphasis>
+            </term>
+            <listitem>
+              <para>
+                Im Allgemeinen eher informelle Ideen aus Sicht eines
+                Benutzers. Meist kurze Beschreibungen ohne allzu viele
+                technische Details.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">Feature Requests</emphasis>
+            </term>
+            <listitem>
+              <para>
+                Technischerer Vorschlag für neue Funktionen. Sollte
+                einen genaueren Blick auf den technischen Hintergrund
+                und mögliche Umsetzungswege dieser neuen Funktion
+                werfen. Grundlage für weitere Diskussionen mit dem
+                Entwicklungsteam.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Am Ende folgen beide demselben allgemeinen Prozess:
+    </para>
+    <para>
+      <inlinemediaobject>
+        <imageobject>
+          <imagedata fileref="images/new_feature_process.svg" />
+        </imageobject>
+        <textobject>
+          <phrase>image</phrase>
+        </textobject>
+      </inlinemediaobject>
+    </para>
+    <sect2 id="ideas">
+      <title>Ideas</title>
+      <para>
+        Ideas sind im Allgemeinen eher informelle Ideen, die den Wunsch
+        nach einer neuen Funktion aus Sicht des Benutzers beschreiben.
+        Sie zielen darauf ab, neue Ideen aus der täglichen Nutzung von
+        phpBB rasch zu sammeln.
+      </para>
+      <para>
+        Informelle Ideen sollten bei
+        <ulink url="https://www.phpbb.com/community/ideas">phpBB
+        Ideas</ulink> eingereicht werden. Dort ist es möglich, sowohl
+        Feedback als auch Unterstützung von anderen Benutzern zu
+        sammeln.
+      </para>
+      <para>
+        Detailliertere technische Diskussionen sollten jedoch in einem
+        <emphasis>Feature request</emphasis> stattfinden.
+      </para>
+    </sect2>
+    <sect2 id="feature-requests">
+      <title>Feature Requests</title>
+      <para>
+        Im Gegensatz zu den oben erwähnten <emphasis>Ideas</emphasis>
+        sollte sich ein <emphasis>Feature Request</emphasis> stärker
+        auf die technische Lösung für die vorgeschlagene Funktion
+        konzentrieren. Er kann auf einer <emphasis>Idea</emphasis>
+        basieren, dies ist aber nicht zwingend erforderlich.
+      </para>
+      <para>
+        Neue Feature Requests können entweder durch das Erstellen eines
+        Tickets im <ulink url="https://tracker.phpbb.com/">phpBB
+        Tracker</ulink> oder durch das Erstellen eines neuen
+        Diskussionsthemas in den
+        <ulink url="https://area51.phpbb.com/phpBB/">Area51
+        Forums</ulink> begonnen werden.
+      </para>
+      <para>
+        Versuchen Sie, die technischen Details der vorgeschlagenen
+        Funktion zu beschreiben, wie sie verwendet werden wird, und
+        Empfehlungen für eine mögliche Umsetzung zu geben. Geben Sie
+        Ihre Erwartungen zum Umfang der notwendigen Änderungen an und
+        versuchen Sie, die Komplexität des Vorschlags zu diskutieren.
+      </para>
+      <para>
+        Mitglieder der Community können an der Diskussion teilnehmen,
+        ihr Feedback geben und dabei helfen, einen Plan zu erarbeiten,
+        wie die Funktion am besten in kleinen und leicht
+        nachvollziehbaren Schritten umgesetzt werden kann.
+      </para>
+    </sect2>
+    <sect2 id="feature-acceptance">
+      <title>Annahme einer Funktion</title>
+      <para>
+        Nachdem eine Funktion vom <emphasis>phpBB Development
+        Team</emphasis> angenommen wurde, sollte es mindestens ein
+        Ticket im <ulink url="https://tracker.phpbb.com/">phpBB
+        Tracker</ulink> geben. Eine neue Funktion sollte in kleinere,
+        zwischengeschaltete Schritte unterteilt werden, um die
+        Umsetzung und Überprüfung der vorgeschlagenen Änderungen zu
+        erleichtern. Es ist außerdem möglich,
+        <emphasis>Epics</emphasis> im Tracker zu verwenden, um einen
+        besseren Überblick über die notwendigen Schritte zu erhalten.
+      </para>
+      <para>
+        Jeder Schritt einer Funktion kann dann separat überprüft und
+        integriert werden. Dadurch werden Code-Reviews einfacher,
+        schneller und sollten insgesamt auch zu besserem Code und
+        besseren Funktionen führen.
+      </para>
+    </sect2>
+    <sect2 id="implementation-review">
+      <title>Umsetzung &amp; Überprüfung</title>
+      <para>
+        Die Umsetzung einer Funktion oder ihrer zwischengeschalteten
+        Schritte erfolgt in der Regel nach der Annahme durch das
+        <emphasis>phpBB Development Team</emphasis>. Der gesamte Code
+        muss unseren
+        <ulink url="coding_guidelines.html">Programmierrichtlinien</ulink>
+        entsprechen. Die eigentliche Umsetzung kann vom Antragsteller,
+        einem Mitglied des <emphasis>phpBB Development Team</emphasis>
+        oder einem anderen Entwickler durchgeführt werden. Die Annahme
+        einer Funktion durch das <emphasis>phpBB Development
+        Team</emphasis> bedeutet nicht, dass ihre Umsetzung verpflichtend
+        ist oder dass sie vom <emphasis>phpBB Development Team</emphasis>
+        selbst umgesetzt werden muss.
+      </para>
+      <para>
+        Bei der Verwendung externer Bibliotheken stellen Sie bitte
+        sicher, dass diese mit unserer Lizenz kompatibel sind. Wenn Sie
+        sich nicht sicher sind, ob eine bestimmte Lizenzart akzeptabel
+        ist, fragen Sie bitte das <emphasis>phpBB Development
+        Team</emphasis>. PHP-Bibliotheken
+        <emphasis role="strong">MÜSSEN</emphasis> mit Composer
+        installiert werden und sollten im Allgemeinen als gut gepflegt
+        gelten.
+      </para>
+      <para>
+        Sobald der Code bereit zur Überprüfung ist, sollte ein Pull
+        Request in unserem
+        <ulink url="https://github.com/phpbb/phpbb/pulls">GitHub-Repository</ulink>
+        erstellt werden. Zielversionen sollten gemäß
+        <link linkend="target-versions">Zielversionen</link> gewählt
+        werden.
+      </para>
+    </sect2>
+    <sect2 id="finalisation-feature-merge">
+      <title>Abschluss / Feature-Merge</title>
+      <para>
+        Nachdem der Code vom <emphasis>phpBB Development Team</emphasis>
+        überprüft wurde, wird er in der Regel genehmigt und gemergt.
+        Falls es Probleme mit dem Code gibt, sollten diese im Rahmen des
+        Code-Reviews gelöst werden. Es kann jedoch auch sinnvoll sein,
+        Folgetickets zu erstellen, um zusätzliche Arbeiten oder
+        Anpassungen an der vorgeschlagenen Funktion zu übernehmen.
+      </para>
+      <para>
+        Sobald ein Pull Request gemergt wurde, besteht die typische
+        Folgearbeit darin, Dokumentation für die neue Funktion
+        hinzuzufügen, Blogbeiträge als eine Art Vorankündigung zu
+        erstellen oder mit der Arbeit am nächsten zwischengeschalteten
+        Schritt zu beginnen.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="target-versions">
+    <title>Zielversionen</title>
+    <para>
+      Die geeignete Zielversion für eine bestimmte Änderung oder
+      Funktion hängt in der Regel von den folgenden Merkmalen ab:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          Typ: Fehlerbehebung, Verhaltensänderung oder neue Funktion
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Umfang &amp; Komplexität
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Abwärtskompatibilität (BC)
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Basierend darauf und auf dem semantischen Versionierungsschema
+      sollten die folgenden allgemeinen Regeln gelten:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist spacing="compact">
+          <varlistentry>
+            <term>
+              <emphasis role="strong">PATCH</emphasis>-Versionsveröffentlichungen:
+            </term>
+            <listitem>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Fehlerbehebungen ohne BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Sicherheitskorrekturen einschl. BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Kleinere Verhaltensänderungen ohne BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Kleinere neue Funktionen ohne BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Aktualisierungen von Drittanbietern ohne BC-Brüche
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">MINOR</emphasis>-Versionsveröffentlichungen:
+            </term>
+            <listitem>
+              <para>
+                Dasselbe wie bei <emphasis role="strong">PATCH</emphasis>-Versionsveröffentlichungen,
+                zusätzlich mit:
+              </para>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Fehlerbehebungen einschl. BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Größere Verhaltensänderungen ohne BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Größere neue Funktionen ohne BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Aktualisierungen von Drittanbietern ohne
+                    <emphasis>signifikante</emphasis> BC-Brüche
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">MAJOR</emphasis>-Versionsveröffentlichungen:
+            </term>
+            <listitem>
+              <para>
+                Dasselbe wie bei <emphasis role="strong">PATCH</emphasis>-
+                und <emphasis role="strong">MINOR</emphasis>-Versionsveröffentlichungen,
+                zusätzlich mit:
+              </para>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Größere Verhaltensänderungen einschl. BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Größere neue Funktionen einschl. BC-Brüche
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Aktualisierungen von Drittanbietern einschl.
+                    <emphasis>signifikanter</emphasis> BC-Brüche,
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+</article>

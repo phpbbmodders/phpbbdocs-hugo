@@ -22,7 +22,7 @@ Upstream is the source of truth for the English end-user docs, not a locally-mai
 ./phpbbdocs_hugo.sh [language|all] [destination_dir]
 ```
 
-Transforms `proteus_doc_<lang>.xml` (via `xsl/proteus_hugo.xsl`) into Hugo Markdown under `site/content/<lang>/`, copies that language's images, then runs `hugo`. `language` defaults to `all` (every `proteus_doc_*.xml` found — currently `en`, `da`, and `fr`); `destination_dir` defaults to `site/public`.
+Transforms `proteus_doc_<lang>.xml` (via `xsl/proteus_hugo.xsl`) into Hugo Markdown under `site/content/<lang>/`, copies that language's images, then runs `hugo`. `language` defaults to `all` (every `proteus_doc_*.xml` found — currently `en`, `da`, `fr`, and `de`); `destination_dir` defaults to `site/public`.
 
 **No prerequisite script for `da`/`fr`** — those are hand-translated static source. For `en`, run step 1 first so it reflects current upstream rather than whatever was last synced.
 

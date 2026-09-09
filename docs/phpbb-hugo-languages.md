@@ -80,3 +80,4 @@ individually, since a region can't be mechanically re-cased out of them.
 - **English** — `en` in this project, phpBB's **British English** pack, Hugo locale `en-GB` (see row above)
 - **Danish** — `da` in this project, phpBB's **Danish** pack, Hugo locale `da-DK` (see row above)
 - **French** — `fr` in this project, phpBB's **French** pack, Hugo locale `fr-FR` (see row above). Screenshots reuse the English set (`content/en/images`, copied verbatim) since this project has no live French-language phpBB install to source real localized captures from, unlike the Danish set.
+- **German** — `de` in this project, phpBB's **German (Formal Honorifics)** pack (`de-x-sie`), Hugo locale `de-DE` (see row above). Formal register ("Sie") chosen, matching French's formal-register choice — this project doesn't offer the casual ("Du") variant separately. Screenshots reuse the English set, same reasoning as French.

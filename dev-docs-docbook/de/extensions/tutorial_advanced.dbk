@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Advanced Lessons</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Einführung</title>
+    <para>
+      Dieses Tutorial erklärt:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <link linkend="adding-a-php-event-to-your-extension">Ein
+          PHP-Event zu Ihrer Extension hinzufügen</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="adding-a-template-event-to-your-extension">Ein
+          Template-Event zu Ihrer Extension hinzufügen</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-installation-commands-in-ext.php">Installationsbefehle
+          in ext.php verwenden</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-service-collections">Service-Collections
+          verwenden</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-the-phpbb-finder-tool">Das
+          phpBB-Finder-Tool verwenden</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-service-replacement">Service-Replacement
+          verwenden</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="using-service-decoration">Service-Decoration
+          verwenden</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="replacing-the-phpbb-datetime-class">Die
+          phpBB-Datetime-Klasse ersetzen</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="extension-version-checking">Versionsprüfung
+          für Extensions</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="implementing-filesystem-changes-to-phpbb">Dateisystemänderungen
+          an phpBB implementieren</link>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="adding-a-php-event-to-your-extension">
+    <title>Ein PHP-Event zu Ihrer Extension hinzufügen</title>
+    <para>
+      Sie können Ihrer eigenen Extension PHP-Events hinzufügen, sodass
+      sich andere Extensions in Teile Ihrer Extension einklinken
+      können, um Funktionalität hinzuzufügen oder deren Verhalten zu
+      verändern. Im Grunde bedeutet dies, dass Sie als Autor der
+      Extension an entscheidenden Stellen im Code Ihrer Extension
+      eigene Events erzeugen, auf die andere Extensions dann lauschen
+      können. Ist Ihre Extension nicht aktiviert, wird der
+      entsprechende Code in anderen Extensions ignoriert. Ist Ihre
+      Extension aktiviert und wird das betreffende Event ausgelöst,
+      werden die Listener in den anderen aktivierten Extensions
+      ausgeführt.
+    </para>
+    <para>
+      So sieht ein Event aus:
+    </para>
+    <programlisting>
+&lt;?php
+/**
+* Short description of the event
+*
+* @event acme.demo.identifier
+* @var  string  var1  A variable to make available to the event
+* @var  string  var2  A second variable to make available to the event
+* @since 3.1-A1
+*/
+$vars = ['var1', 'var2'];
+extract($phpbb_dispatcher-&gt;trigger_event('acme.demo.identifier', compact($vars)));
+</programlisting>
+    <para>
+      Sie müssen <literal>identifier</literal> durch den Namen Ihres
+      Events ersetzen. Diesem muss der Name Ihres Vendors und Ihrer
+      Extension vorangestellt werden, wobei für das Präfix und den
+      Namen ausschließlich Unterstriche und Kleinbuchstaben zu
+      verwenden sind, die durch einen Punkt getrennt werden müssen.
+    </para>
+    <para>
+      Des Weiteren beziehen sich <literal>var1</literal> und
+      <literal>var2</literal> auf die implizit vorhandenen Variablen
+      <literal>$var1</literal> und <literal>$var2</literal> aus dem
+      aktuellen Gültigkeitsbereich. Diese werden an das Event
+      übergeben und stehen über das Array $event zur Verfügung. Sie
+      können nach Bedarf verwendet und verändert und anschließend
+      wieder aus dem Event zurückgegeben werden. Wenn Sie ein eigenes
+      Event erstellen, achten Sie darauf, so viele Variablen wie
+      möglich aus dem Gültigkeitsbereich des Events für Listener
+      bereitzustellen.
+    </para>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Sobald Sie ein Event erstellt haben, das in einer vollständigen
+        Veröffentlichung enthalten ist, ist es wichtig, dass Sie den
+        Bezeichner des Events nicht ändern oder das Event auf andere
+        Weise so verändern, dass die Abwärtskompatibilität verletzt
+        wird, es sei denn, dies ist unbedingt erforderlich.
+        Andernfalls können andere Extensions ohne Vorwarnung
+        beschädigt werden! Es empfiehlt sich vermutlich, eine Liste
+        der von Ihrer Extension bereitgestellten Events zu
+        veröffentlichen und Änderungen an Events vor der
+        Veröffentlichung einer neuen Version öffentlich bekannt zu
+        geben.
+      </para>
+    </warning>
+    <para>
+      Wenn ein Event keine Argumente benötigt, können Sie diese
+      kurze Version verwenden:
+    </para>
+    <programlisting>
+$phpbb_dispatcher-&gt;dispatch('acme.demo.identifier');
+</programlisting>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Das Objekt <literal>$phpbb_dispatcher</literal> steht über
+        den Dependency-Injection-Container von phpBB oder als globale
+        Variable zur Verfügung. Wenn Sie es also nicht als Parameter
+        an Ihre Methode übergeben, verwenden Sie global
+        <literal>$phpbb_dispatcher</literal>, um es verfügbar zu
+        machen.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="adding-a-template-event-to-your-extension">
+    <title>Ein Template-Event zu Ihrer Extension hinzufügen</title>
+    <para>
+      Neben PHP-Events gibt es auch Template-Events. Template-Events
+      können verwendet werden, um das Template einer Extension zu
+      erweitern, sodass andere Extensions die Ausgabe Ihrer Extension
+      manipulieren können. Um ein Template-Event zu erstellen, fügen
+      Sie einfach das EVENT-Tag zu Ihrem Template hinzu:
+    </para>
+    <programlisting>
+{% EVENT acme_demo_identifier %}
+</programlisting>
+    <para>
+      Das Event kann auf dieselbe Weise verwendet werden wie die
+      Template-Events im phpBB-Kern. Wie diese Events verwendet
+      werden, wird in <literal>tutorial_events</literal> beschrieben.
+    </para>
+    <para>
+      Sie müssen Ihren Event-Namen immer den Namen Ihres Vendors und
+      Ihrer Extension voranstellen. Achten Sie darauf, ausschließlich
+      Unterstriche, Ziffern und Kleinbuchstaben zu verwenden.
+    </para>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Wie bei PHP-Events sollten Sie den Bezeichner des Events
+        nach einer Veröffentlichung Ihrer Extension nicht mehr
+        ändern. Andere Extensions verwenden Ihr Event möglicherweise
+        bereits und liefen sonst Gefahr zu brechen.
+      </para>
+    </warning>
+    <caution>
+      <title>Vorsicht</title>
+      <para>
+        Es wird nicht empfohlen, bestehende Event-Namen an
+        unterschiedlichen Stellen wiederzuverwenden. Dies sollte nur
+        geschehen, wenn der Code (verschachtelte HTML-Elemente) rund
+        um das Event an beiden Stellen identisch ist. Denken Sie
+        außerdem an andere Extensions: Möchten diese immer an beiden
+        Stellen lauschen, oder nur an einer? Im Zweifelsfall
+        verwenden Sie ein neues, eindeutiges Event.
+      </para>
+    </caution>
+  </sect1>
+  <sect1 id="using-installation-commands-in-ext.php">
+    <title>Installationsbefehle in ext.php verwenden</title>
+    <para>
+      Es gibt Situationen, in denen eine Extension Code ausführen
+      muss, während sie aktiviert, deaktiviert oder gelöscht wird.
+      Beispiele hierfür sind das Prüfen, ob das Board die
+      Anforderungen der Extension erfüllt, oder das Ausführen
+      bestimmter Einrichtungs- oder Aufräumprozesse.
+    </para>
+    <para>
+      Dies geschieht, indem im Root-Verzeichnis einer Extension eine
+      Klasse namens <literal>ext.php</literal> hinzugefügt wird. Sie
+      muss <literal>\phpbb\extension\base</literal> erweitern. Durch
+      das Erweitern der Basisklasse kann eigener Code während der
+      Aktivierung, Deaktivierung oder Löschung einer Extension mit
+      folgenden geerbten Methoden ausgeführt werden:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>is_enableable()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>enable_step()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>disable_step()</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>purge_step()</literal>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Angenommen, eine Extension setzt zwingend phpBB 3.1.5 oder
+      neuer voraus. Wir können die Methode
+      <literal>is_enableable()</literal> überschreiben und
+      verwenden, um die Version von phpBB zu prüfen und ein
+      boolesches Ergebnis zurückzugeben.
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo;
+
+class ext extends \phpbb\extension\base
+{
+    public function is_enableable()
+    {
+        $config = $this-&gt;container-&gt;get('config');
+        return phpbb_version_compare($config['version'], '3.1.5', '&gt;=');
+    }
+}
+</programlisting>
+    <para>
+      Wird false zurückgegeben, wird die Extension nicht installiert,
+      und der Benutzer wird darüber informiert, dass sein Board die
+      Anforderungen der Extension nicht erfüllt. Wird true
+      zurückgegeben, wird die Installation fortgesetzt.
+    </para>
+    <para>
+      Die Klasse <literal>ext.php</literal> kann in den Methoden
+      <literal>enable_step()</literal>, <literal>disable_step()</literal>
+      und <literal>purge_step()</literal> beliebige besondere
+      Installationsbefehle enthalten. Diese Methoden sind bereits in
+      <literal>\phpbb\extension\base</literal> definiert, das diese
+      Klasse erweitert, Sie können sie jedoch überschreiben, um für
+      jeden Schritt besondere Anweisungen zu geben. Zum Beispiel:
+    </para>
+    <programlisting>
+public function enable_step($old_state)
+{
+    if ($old_state === false)
+    {
+        // do something...
+
+        return 'did_something';
+    }
+
+    return parent::enable_step($old_state);
+}
+</programlisting>
+    <para>
+      Beachten Sie, dass wir unseren Code nur dann ausführen, wenn
+      der übergebene Wert <literal>$old_state</literal> false ist.
+      Sobald wir fertig sind, müssen wir einen beliebigen Wert
+      zurückgeben. Andernfalls geben wir einfach den Zustand der
+      Elternklasse zurück.
+    </para>
+    <para>
+      Die phpBB-Extension
+      <ulink url="https://github.com/phpbb-extensions/boardrules/blob/master/ext.php">Board
+      Rules</ulink> zeigt ein weiteres Beispiel hierfür, um das
+      Benachrichtigungssystem für die Extension beim Aktivieren,
+      Deaktivieren und Löschen der Extension vorzubereiten.
+    </para>
+    <para>
+      Die Methoden für den Aktivierungs-, Deaktivierungs- und
+      Löschschritt ermöglichen es, umfangreiche Prozesse zu
+      pausieren und fortzusetzen. Wenn der von der Schrittmethode
+      zurückgegebene Wert nicht false ist, wird der zurückgegebene
+      Wert serialisiert und in der Datenbank gespeichert. Wird die
+      Schrittmethode erneut aufgerufen, wird der zuletzt bekannte
+      Zustand deserialisiert, und die Ausführung wird fortgesetzt,
+      bis irgendwann false zurückgegeben wird.
+    </para>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Die serialisierten Daten werden in der Tabelle
+        <emphasis>phpbb_ext</emphasis> im Feld
+        <emphasis>ext_state</emphasis> gespeichert. Entwickler
+        sollten dieses Feld niemals direkt bearbeiten, da die
+        Serialisierung intern von phpBB verwaltet wird.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-service-collections">
+    <title>Service-Collections verwenden</title>
+    <para>
+      In 3.1 wurde das neue Konzept der „Services“ eingeführt. Was
+      genau ein Service ist, können Sie
+      <ulink url="https://symfony.com/doc/current/book/service_container.html">hier</ulink>
+      nachlesen. Der Rest dieses Leitfadens setzt voraus, dass Sie
+      grundlegende Kenntnisse über Services und deren Verwendung
+      haben. Eine Service-Collection ist im Grunde genau das, wonach
+      es klingt: eine Sammlung von Services. Wenn Sie Ihren Service
+      definieren, geben Sie ihm einen speziellen „Tag“, der ihn mit
+      einer Sammlung von Services verknüpft. Später kann dies
+      verwendet werden, um bequem eine Liste von Services für die
+      Verwendung durch Ihre Extension zu erhalten.
+    </para>
+    <para>
+      Um dies zu nutzen, erstellen Sie zunächst einen Service für
+      Ihre Service-Collection. Dieser verweist eigentlich auf ein
+      phpBB-Kernobjekt namens
+      <literal>phpbb\di\service_collection</literal>.
+    </para>
+    <programlisting language="yaml">
+acme.demo.foobar_collection:
+    class: phpbb\di\service_collection
+    arguments:
+        - '@service_container'
+    tags:
+        - { name: service_collection, tag: acme.demo.foobar_service }
+</programlisting>
+    <para>
+      Der Service-Name und der Tag-Name können natürlich beliebig
+      gewählt werden.
+    </para>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Um Duplikate bei Ihrem Tag zu vermeiden, sollten Sie einen
+        eindeutigen Tag-Namen verwenden, vorzugsweise in der Form
+        vendor.extname.tag_name.
+      </para>
+    </note>
+    <para>
+      Wenn Sie nun einen Service zu Ihrer Collection hinzufügen
+      möchten, versehen Sie ihn einfach mit dem Tag:
+    </para>
+    <programlisting language="yaml">
+acme.demo.thing_one:
+    class: acme\demo\thingy\thing_one
+    tags:
+        - { name: acme.demo.foobar_service }
+</programlisting>
+    <para>
+      Beachten Sie, dass der hier angegebene Wert für „name“ des
+      Tags dem Wert für „tag“ in der vorherigen Definition der
+      Service-Collection entspricht. Denken Sie außerdem daran,
+      dass Sie, falls die Klasse (in diesem Fall
+      <literal>thing_one</literal>) eine andere Klasse erweitert, für
+      alle im Konstruktor der Elternklasse definierten Parameter bei
+      Bedarf die richtigen Services und Werte bereitstellen müssen.
+    </para>
+    <para>
+      Um schließlich die Sammlung von Services zu verwenden, geben
+      Sie einfach den ersten Service als Argument an eine andere
+      Service-Klasse weiter. Angenommen, Sie haben ein
+      Manager-Objekt für Ihre foobar-Extension, und der Manager soll
+      alle Services in „foobar_collection“ kennen. Geben Sie bei
+      der Definition der Manager-Klasse einfach die Service-Collection
+      als Argument an.
+    </para>
+    <programlisting language="yaml">
+acme.demo.foobar_manager:
+    arguments:
+        - '@acme.demo.foobar_collection'
+</programlisting>
+    <para>
+      Dieses Argument liefert eine Instanz von
+      <literal>phpbb\di\service_collection</literal>, die
+      <literal>ArrayObject</literal> erweitert und somit als Array
+      verwendet werden kann, das den Service-Namen jedes Elements
+      der Collection als Schlüssel und eine Instanz jedes
+      Service-Elements als zugehörigen Wert enthält.
+    </para>
+    <para>
+      Dieses System wird im Kern für mehrere Funktionen verwendet,
+      unter anderem für Benachrichtigungen und
+      Authentifizierungsanbieter.
+    </para>
+    <sect2 id="ordered-service-collection">
+      <title>Sortierte Service-Collection</title>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Sortierte Service-Collections wurden in phpBB 3.2
+          eingeführt.
+        </para>
+      </note>
+      <para>
+        Sortierte Service-Collections erlauben es Ihnen, die
+        Reihenfolge festzulegen, in der Services geladen werden, was
+        besonders in Fällen nützlich ist, in denen die Priorität
+        und/oder Abhängigkeit von Services erfordert, dass sie in
+        einer bestimmten Reihenfolge geladen werden.
+      </para>
+      <para>
+        Sortierte Service-Collections basieren auf einer normalen
+        Service-Collection, die Collection wird jedoch mit
+        <ulink url="https://php.net/ksort">ksort</ulink> sortiert.
+        Die Verwendung der sortierten Service-Collection ist nahezu
+        identisch mit der einer normalen Service-Collection, außer
+        dass Sie anstelle von <literal>service_collection</literal>
+        <literal>ordered_service_collection</literal> verwenden
+        sollten:
+      </para>
+      <programlisting language="yaml">
+acme.demo.foobar_collection:
+    class: phpbb\di\ordered_service_collection
+    arguments:
+        - '@service_container'
+    tags:
+        - { name: service_collection, tag: acme.demo.foobar_service }
+</programlisting>
+      <para>
+        Und einen Service zur sortierten Service-Collection
+        hinzufügen:
+      </para>
+      <programlisting language="yaml">
+acme.demo.foobar_foo:
+     class: acme\demo\foobar_foo
+     tags:
+         - { name: acme.demo.foobar_service, order: 1 }
+
+ acme.demo.foobar_bar:
+     class: acme\demo\foobar_bar
+     tags:
+         - { name: acme.demo.foobar_service, order: 2 }
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-phpbb-finder-tool">
+    <title>Das phpBB-Finder-Tool verwenden</title>
+    <para>
+      Dies ist vermutlich die am seltensten verwendete Methode, da
+      sie eine strikte Namensstruktur für Dateien und Verzeichnisse
+      erfordert. Dadurch bietet sie jedoch die zuverlässigste
+      Organisation von Dateien, sodass Sie stets sicher wissen, wo
+      Sie nachsehen müssen, wenn Sie eine bestimmte Funktion finden
+      möchten. Das Extension-Finder-Objekt wird verwendet, um den
+      Verzeichnisbaum zu durchsuchen und Dateien zu finden, die sich
+      in bestimmten Ordnern befinden und einer Reihe von
+      Anforderungen entsprechen. Es wird zum Beispiel verwendet, um
+      Migrationsdateien sowohl im Kern als auch in Extensions zu
+      finden, ohne dass diese Dateien als Services registriert
+      werden müssen.
+    </para>
+    <para>
+      <literal>\phpbb\extension\finder</literal> steht über den
+      Service-Container als <literal>ext.finder</literal> zur
+      Verfügung und kann wie folgt verwendet werden. Das folgende
+      Beispiel ist Teil dessen, was verwendet wird, um alle
+      Routing-Dateien zu finden, sowohl für Extensions als auch für
+      Core-Routen.
+    </para>
+    <programlisting>
+$finder
+    -&gt;directory('config')
+    -&gt;suffix('routing.yml')
+    -&gt;find();
+</programlisting>
+    <para>
+      Wie Sie sehen können, lassen sich Methodenaufrufe
+      aneinanderreihen (Chaining), abschließend mit
+      <literal>find()</literal>. Werfen Sie einen Blick auf die
+      Klassendefinition, um weitere Informationen zu den
+      verschiedenen verfügbaren Methoden zu erhalten (etwa, um für
+      Extensions ein anderes Verzeichnis als für Core-Dateien
+      anzugeben, oder um Klassennamen basierend auf gefundenen
+      Dateien zu erhalten). Die Methode <literal>find()</literal>
+      gibt ein Array von Dateipfaden zurück, die den angegebenen
+      Kriterien entsprechen.
+    </para>
+    <para>
+      Angenommen, Sie haben eine Extension und benötigen eine
+      Sammlung aller PNG-Bilddateien aus einem ihrer Verzeichnisse.
+      Sie könnten den Extension-Manager verwenden, um den Finder zu
+      laden, und das Bilderverzeichnis der Extension wie folgt
+      durchsuchen:
+    </para>
+    <programlisting>
+$finder = $extension_manager-&gt;get_finder();
+
+$images = $finder
+    -&gt;extension_suffix('.png')
+    -&gt;extension_directory('/images')
+    -&gt;find_from_extension('demo', $phpbb_root_path . 'ext/acme/demo/');
+</programlisting>
+    <para>
+      Das Array <literal>$images</literal> würde ungefähr so
+      aussehen (wie Sie sehen können, sind die Bildpfade in den
+      Array-Schlüsseln enthalten):
+    </para>
+    <programlisting>
+[
+    'ext/acme/demo/images/image1.png' =&gt; 'demo',
+    'ext/acme/demo/images/image2.png' =&gt; 'demo',
+];
+</programlisting>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Die oben verwendete Methode
+        <literal>find_from_extension</literal> sucht nur in der
+        angegebenen Extension. Möchten Sie in allen
+        Extension-Verzeichnissen nach PNG-Dateien suchen, können Sie
+        Folgendes verwenden:
+      </para>
+      <programlisting>
+$finder = $extension_manager-&gt;get_finder();
+
+$images = $finder
+    -&gt;find('.png')
+    -&gt;core_path('ext/')
+    -&gt;find();
+</programlisting>
+    </note>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Je nachdem, wie die Finder-Klasse konfiguriert ist, durchsucht
+        die find-Methode sowohl die phpBB-Kerndateien als auch die
+        Extension-Verzeichnisse. Sie können die
+        <literal>extension_*</literal>-Methoden der Finder-Klasse
+        verwenden, um extension-spezifische Suchen zu konfigurieren,
+        und die <literal>core_*</literal>-Methoden, um
+        kern-spezifische Suchen zu konfigurieren.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="using-service-replacement">
+    <title>Service-Replacement verwenden</title>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Verwenden Sie Service-Replacement nur, wenn Ihre Extension
+        mit phpBB 3.1 kompatibel sein muss. Für 3.2 und neuer siehe
+        <link linkend="using-service-decoration">Service-Decoration
+        verwenden</link>.
+      </para>
+    </warning>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Sie können nicht davon ausgehen, in welcher Reihenfolge ein
+        Service in phpBB definiert wird, wenn andere Extensions
+        installiert sind. Seien Sie bei der Verwendung von
+        Service-Replacement wirklich vorsichtig.
+      </para>
+    </warning>
+    <para>
+      Mit Service-Replacement können Sie einen bestehenden Service
+      in phpBB (oder in einer Extension) durch Ihren eigenen Service
+      ersetzen. Ihr Ersatz-Service sollte im Typ mit dem ursprünglichen
+      Service übereinstimmen (implementiert der ursprüngliche
+      Service also ein Interface, sollten Sie zumindest dasselbe
+      Interface implementieren; handelt es sich um eine konkrete
+      Klasse, müssen Sie diese Klasse erweitern). Der beste Weg
+      dies zu erreichen, besteht darin, die ursprüngliche Klasse zu
+      erweitern und nur die Funktionen zu ersetzen, die Sie ändern
+      möchten.
+    </para>
+    <para>
+      Um einen phpBB-Kern-Service zu ersetzen, benennen Sie einfach
+      den Service-Namen Ihrer Extension mit demselben Namen wie den
+      Service im Kern von phpBB.
+    </para>
+    <para>
+      Um zum Beispiel die config-Klasse zu ersetzen, ersetzen Sie
+      den Service <literal>config</literal> in phpBB durch Ihre
+      eigene Implementierung:
+    </para>
+    <programlisting language="yaml">
+config:
+    class: acme\demo\config\db
+    arguments:
+        - '@auth'
+        - '@passwords.manager'
+        - '@acme.demo.db_reader'
+</programlisting>
+    <para>
+      Die ursprüngliche config-Klasse in
+      <literal>\phpbb\config\db</literal> implementiert kein
+      Interface. Das bedeutet, dass Sie das ursprüngliche
+      <literal>\phpbb\config\db</literal> erweitern müssen,
+      andernfalls stimmt der Typ nicht mit dem Type-Hinting in den
+      Konstruktoren überein, die den config-Service verwenden. Wenn
+      der ursprüngliche Service direkt ein Interface implementiert
+      und alle Type-Hints auf das Interface verweisen, müssen Sie
+      die ursprüngliche Klasse nicht erweitern, sondern sollten
+      stattdessen das Interface implementieren.
+    </para>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Wenn Sie EPV in einem Github-Repository oder bei der
+        Einreichung in die Extensions-Datenbank auf phpBB.com
+        verwenden, erhalten Sie eine Warnung, dass Ihre
+        Service-Konfiguration nicht den Richtlinien der
+        Extensions-Datenbank entspricht. Da Sie einen Kern-Service
+        überschreiben, können Sie diese Meldung einfach ignorieren.
+        In jedem Fall sollten Sie das phpBB-Extensions-Team jedoch
+        darüber informieren, warum Sie die Warnung erhalten haben.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-service-decoration">
+    <title>Service-Decoration verwenden</title>
+    <para>
+      Die vollständige Dokumentation zur Service-Decoration finden
+      Sie bei
+      <ulink url="https://symfony.com/doc/current/components/dependency_injection/advanced.html#decorating-services">Symfony</ulink>.
+    </para>
+    <para>
+      Ab phpBB 3.2 können Sie Service-Decoration als bevorzugte
+      Methode verwenden, um bestehende Services im Kern oder aus
+      anderen Extensions zu ersetzen. Bei der Decoration wird ein
+      bestehender Service unter einem neuen Namen aktualisiert,
+      wobei er unverändert erhalten bleibt, sodass er im neuen
+      Service referenziert werden kann.
+    </para>
+    <para>
+      Um zum Beispiel <literal>config</literal> durch
+      <literal>acme.demo.decorated.config</literal> zu ersetzen,
+      fügen Sie einfach die Option <literal>decorates</literal> zu
+      dessen Service-Definition hinzu:
+    </para>
+    <programlisting language="yaml">
+acme.demo.decorated.config:
+  class: '\acme\demo\decorated\config'
+  decorates: 'config'
+</programlisting>
+    <para>
+      In Symfony wird der alte config-Service in
+      <literal>acme.demo.decorated.config.inner</literal>
+      umbenannt, sodass Sie ihn in Ihren neuen Service einschleusen
+      können, indem Sie ihn zu den Argumenten Ihres Service
+      hinzufügen:
+    </para>
+    <programlisting language="yaml">
+acme.demo.decorated.config:
+  class: '\acme\demo\decorated\config'
+  decorates: 'config'
+  arguments:
+    - '@acme.demo.decorated.config.inner'
+</programlisting>
+    <para>
+      Denken Sie auch hier daran, dass der Typ Ihrer neuen Klasse
+      mit dem der ursprünglichen Klasse übereinstimmt.
+    </para>
+  </sect1>
+  <sect1 id="replacing-the-phpbb-datetime-class">
+    <title>Die phpBB-Datetime-Klasse ersetzen</title>
+    <para>
+      Wenn Sie die phpBB-Datetime-Klasse ersetzen möchten, zum
+      Beispiel um einen anderen Kalendertyp zu verwenden, können Sie
+      den Parameter <literal>datetime.class</literal> in Ihrer
+      `services.yml` festlegen:
+    </para>
+    <programlisting language="yaml">
+parameters:
+    datetime.class: '\acme\demo\datetime'
+</programlisting>
+    <para>
+      Ihre Klasse sollte die phpBB-Datetime-Klasse
+      <literal>\phpbb\datetime</literal> erweitern.
+    </para>
+  </sect1>
+  <sect1 id="extension-version-checking">
+    <title>Versionsprüfung für Extensions</title>
+    <para>
+      Der Extension-Manager kann nach der neuesten Version Ihrer
+      Extension suchen und Benutzer benachrichtigen, wenn ihre
+      installierte Version Ihrer Extension veraltet ist.
+    </para>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Für über die Customisation Database von phpBB veröffentlichte
+        Extensions wird diese Funktion kostenlos bereitgestellt; sie
+        können diesen Abschnitt ignorieren.
+      </para>
+    </note>
+    <para>
+      Dazu sind die Metadaten <literal>version-check</literal> in
+      der Datei <literal>composer.json</literal> Ihrer Extension
+      erforderlich:
+    </para>
+    <programlisting language="yaml">
+&quot;extra&quot;: {
+    &quot;version-check&quot;: {
+        &quot;host&quot;: &quot;my.site.com&quot;,
+        &quot;directory&quot;: &quot;/versions&quot;,
+        &quot;filename&quot;: &quot;acme_version_file.json&quot;,
+    &quot;ssl&quot;: false
+    }
+}
+</programlisting>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Parameter
+            </entry>
+            <entry>
+              Beschreibung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>host</literal>
+            </entry>
+            <entry>
+              Vollständige URL zum Host-Domain-Server.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>directory</literal>
+            </entry>
+            <entry>
+              Pfad vom Domain-Root zum Verzeichnis, das die Datei
+              enthält, beginnend mit einem führenden Schrägstrich.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>filename</literal>
+            </entry>
+            <entry>
+              Eine JSON-Datei mit den aktuellen Versionsinformationen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>ssl</literal>
+            </entry>
+            <entry>
+              true oder false, je nachdem, ob der Host-Domain-Server
+              SSL verwendet
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Beachten Sie, dass eine auf Ihrem eigenen Server gehostete
+      JSON-Datei erforderlich ist. Im obigen Beispiel wäre dies:
+      <literal>http://my.site.com/versions/acme_version_file.json</literal>
+    </para>
+    <para>
+      Der Inhalt der JSON-Datei sollte folgendermaßen aussehen:
+    </para>
+    <programlisting language="json">
+{
+    &quot;stable&quot;: {
+        &quot;1.0&quot;: {
+            &quot;current&quot;: &quot;1.0.0&quot;,
+            &quot;announcement&quot;: &quot;http://my.site.com/version_1.0.0&quot;,
+            &quot;download&quot;: &quot;http://my.site.com/version_1.0.0.zip&quot;,
+            &quot;eol&quot;: null,
+            &quot;security&quot;: false
+        }
+    },
+    &quot;unstable&quot;: {
+        &quot;1.0&quot;: {
+            &quot;current&quot;: &quot;1.0.1&quot;,
+            &quot;announcement&quot;: &quot;http://my.site.com/version_1.0.1&quot;,
+            &quot;eol&quot;: null,
+            &quot;security&quot;: false
+        },
+        &quot;1.1&quot;: {
+            &quot;current&quot;: &quot;1.1.0-b4&quot;,
+            &quot;announcement&quot;: &quot;http://my.site.com/version_1.1.0&quot;,
+            &quot;eol&quot;: null,
+            &quot;security&quot;: false
+        }
+    }
+}
+</programlisting>
+    <para>
+      Die Zweige „stable“ und „unstable“ sind optional,
+      mindestens einer davon muss jedoch definiert werden. Der
+      Extension-Manager verfügt über eine Einstellung, mit der
+      Administratoren nach instabilen Versionen suchen können. Aus
+      diesem Grund sollten stabile Zweige nur für stabile
+      Veröffentlichungsversionen verwendet werden, die für ein
+      produktives Forum geeignet sind. Der instabile Zweig kann
+      verwendet werden, um Links zu Versionen in Entwicklung
+      bereitzustellen.
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Parameter
+            </entry>
+            <entry>
+              Beschreibung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>current</literal>
+            </entry>
+            <entry>
+              Die aktuelle Version der Extension in einem
+              gegebenen Zweig.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>announcement</literal>
+            </entry>
+            <entry>
+              Eine URL zu einer Seite über diese Version der
+              Extension (z. B. ein Thema im phpBB-Forum „Extensions
+              in Development“).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>download</literal>
+            </entry>
+            <entry>
+              (Optional) Eine URL zum Herunterladen dieser Version
+              der Extension.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>eol</literal>
+            </entry>
+            <entry>
+              Wird derzeit noch nicht verwendet. Verwenden Sie
+              <literal>null</literal>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>security</literal>
+            </entry>
+            <entry>
+              Wird derzeit noch nicht verwendet. Verwenden Sie
+              <literal>false</literal>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="implementing-filesystem-changes-to-phpbb">
+    <title>Dateisystemänderungen an phpBB implementieren</title>
+    <para>
+      In bestimmten Szenarien muss eine Extension
+      Dateisystemänderungen innerhalb von phpBB implementieren, die
+      über die in sich geschlossene Struktur der Extension
+      hinausgehen. Dieser Ansatz wird zwar im Allgemeinen nicht
+      empfohlen, es gibt jedoch bestimmte Bedingungen, unter denen er
+      angemessen sein kann. Extensions können in den Verzeichnissen
+      <literal>files</literal>, <literal>images</literal> und
+      <literal>store</literal> von phpBB gefahrlos Dateien und
+      Ordner hinzufügen oder entfernen, da diese für
+      benutzergenerierte Inhalte vorgesehen sind und in der Regel
+      bei Aktualisierungen von phpBB oder Extensions nicht ersetzt
+      werden.
+    </para>
+    <para>
+      Es gibt zwei wesentliche Methoden, um Dateisystemänderungen
+      in phpBB über eine Extension zu implementieren:
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            Mit Migrationen
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Über den Aktivierungsprozess der Extension (ext.php)
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+    <para>
+      Im Folgenden finden Sie Beispiele, wie Sie im Verzeichnis
+      <literal>store</literal> ein Verzeichnis namens
+      <literal>acme_demo_dir</literal> zum Speichern zusätzlicher,
+      mit der Extension zusammenhängender Dateien erstellen können.
+    </para>
+    <sect2 id="using-migrations">
+      <title>Migrationen verwenden</title>
+      <para>
+        Migrationen sind zwar in erster Linie für
+        Datenbankänderungen vorgesehen, bieten aber auch bei der
+        Verwaltung von Dateisystemänderungen spezifische Vorteile:
+      </para>
+      <blockquote>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              Existenzprüfung: Verwenden Sie die Methode
+              <literal>effectively_installed</literal>, um zu
+              prüfen, ob die Dateien oder Verzeichnisse bereits
+              existieren.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Installationsreihenfolge: Verwenden Sie die Methode
+              <literal>depends_on</literal>, um sicherzustellen,
+              dass das Verzeichnis in der richtigen Phase des
+              Installationsprozesses der Extension erstellt wird.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Führen Sie separate (optionale) Dateisystemprozesse
+              während der Installation und Deinstallation aus.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </blockquote>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\migrations;
+
+class add_acme_demo_dir extends \phpbb\db\migration\container_aware_migration
+{
+    /** @var \phpbb\filesystem\filesystem */
+    protected $filesystem;
+
+    /** @var string */
+    protected $acme_demo_dir;
+
+    /**
+     * Initialize class properties
+     */
+    protected function init()
+    {
+        if (!isset($this-&gt;filesystem))
+        {
+            $this-&gt;filesystem = $this-&gt;container-&gt;get('filesystem');
+            $this-&gt;acme_demo_dir = $this-&gt;container-&gt;getParameter('core.root_path') . 'store/acme_demo_dir';
+        }
+    }
+
+    public function effectively_installed()
+    {
+        $this-&gt;init();
+        return $this-&gt;filesystem-&gt;exists($this-&gt;acme_demo_dir);
+    }
+
+    public static function depends_on()
+    {
+        return ['\acme\demo\migrations\first_migration'];
+    }
+
+    public function update_data(): array
+    {
+        return [
+            ['custom', [[$this, 'add_dir']]],
+        ];
+    }
+
+    public function revert_data(): array
+    {
+        return [
+            ['custom', [[$this, 'remove_dir']]],
+        ];
+    }
+
+    public function add_dir()
+    {
+        $this-&gt;init();
+
+        try
+        {
+            $this-&gt;filesystem-&gt;mkdir($this-&gt;acme_demo_dir, 0755);
+            $this-&gt;filesystem-&gt;touch($this-&gt;acme_demo_dir . '/index.htm');
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+    }
+
+    public function remove_dir()
+    {
+        $this-&gt;init();
+
+        try
+        {
+            $this-&gt;filesystem-&gt;remove($this-&gt;acme_demo_dir);
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+    }
+}
+</programlisting>
+    </sect2>
+    <sect2 id="using-ext.php">
+      <title>ext.php verwenden</title>
+      <para>
+        Dateisystemänderungen können auch innerhalb der Datei
+        <literal>ext.php</literal> der Extension implementiert
+        werden. Diese Methode ist vorzuziehen, wenn:
+      </para>
+      <blockquote>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              Die Änderungen keine spezifischen Anforderungen oder
+              Abhängigkeiten haben, die über einen Migrationsschritt
+              überwacht werden müssen.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Die Änderungen zu einem bestimmten Zeitpunkt
+              erfolgen sollen, etwa beim Aktivieren, Deaktivieren
+              oder Löschen der Extension.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </blockquote>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo;
+
+class ext extends \phpbb\extension\base
+{
+    /**
+     * Create acme_demo_dir when extension is enabled
+     */
+    public function enable_step($old_state)
+    {
+        if ($old_state !== false)
+        {
+            return parent::enable_step($old_state);
+        }
+
+        $filesystem = $this-&gt;container-&gt;get('filesystem');
+        $my_dir_path = $this-&gt;container-&gt;getParameter('core.root_path') . 'store/acme_demo_dir';
+
+        try
+        {
+            $filesystem-&gt;mkdir($my_dir_path, 0755);
+            $filesystem-&gt;touch($my_dir_path . '/index.htm');
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+
+        return 'added acme_demo_dir';
+    }
+
+    /**
+     * Delete acme_demo_dir when deleting extension data
+     */
+    public function purge_step($old_state)
+    {
+        if ($old_state !== false)
+        {
+            return parent::purge_step($old_state);
+        }
+
+        $filesystem = $this-&gt;container-&gt;get('filesystem');
+        $my_dir_path = $this-&gt;container-&gt;getParameter('core.root_path') . 'store/acme_demo_dir';
+
+        try
+        {
+            $filesystem-&gt;remove($my_dir_path);
+        }
+        catch (\phpbb\filesystem\exception\filesystem_exception $e)
+        {
+            // log or handle any errors here using $e-&gt;get_filename() or $e-&gt;getMessage()
+        }
+
+        return 'removed acme_demo_dir';
+    }
+}
+</programlisting>
+      <para>
+        Durch die Nutzung einer dieser Methoden können Sie die
+        erforderlichen Dateisystemänderungen implementieren und
+        dabei die Kompatibilität mit der Struktur und den
+        Best Practices von phpBB wahren.
+      </para>
+    </sect2>
+  </sect1>
+</article>

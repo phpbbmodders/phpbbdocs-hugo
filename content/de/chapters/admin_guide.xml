@@ -1,0 +1,1601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="admin_guide">
+	<?dbhtml dir="adminguide" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2009</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
+	<title>Administrationshandbuch</title>
+	<abstract>
+		<para>Dieses Kapitel beschreibt die Administrationsfunktionen von phpBB 3.3.</para>
+	</abstract>
+	<section id="admin_control_panel">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Der Administrationsbereich</title>
+		<para>Noch mehr als sein Vorgänger ist phpBB 3.3 „Proteus“ in hohem Maße konfigurierbar. Sie können nahezu alle Funktionen anpassen, einstellen oder deaktivieren. Um diese Fülle an Einstellungen so zugänglich wie möglich zu gestalten, haben wir den Administrationsbereich (ACP) vollständig neu gestaltet. </para>
+		<para>Klicken Sie auf den Link <guilabel>Administrationsbereich</guilabel> am unteren Rand des Standardstils, um den <acronym>ACP</acronym> aufzurufen.</para>
+		<para>Der <acronym>ACP</acronym> besteht standardmäßig aus sieben verschiedenen Bereichen, die jeweils mehrere Unterabschnitte enthalten. Wir werden jeden Bereich in diesem Administrationshandbuch besprechen. </para>
+
+		<figure id="img_acp_index">
+			<title>Startseite des Administrationsbereichs</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/admin_guide/acp_index.png"/>
+				</imageobject>
+				<caption>
+					<para>Die Startseite des Administrationsbereichs, von der aus Sie Ihr phpBB-Board verwalten. Die Verwaltungsfunktionen sind in acht verschiedene Kategorien unterteilt: <guimenuitem>Allgemein</guimenuitem>, <guimenuitem>Foren</guimenuitem>, <guimenuitem>Beiträge</guimenuitem>, <guimenuitem>Benutzer und Gruppen</guimenuitem>, <guimenuitem>Berechtigungen</guimenuitem>, <guimenuitem>Stile</guimenuitem>, <guimenuitem>Wartung</guimenuitem> und <guimenuitem>System</guimenuitem>. Jede Kategorie ist als Reiter am oberen Rand der Seite angeordnet. Die spezifischen Funktionen der jeweiligen Kategorie finden Sie in der linken Seitenleiste jeder Seite.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+	</section>
+
+	<section id="acp_general">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Allgemeine Konfiguration und Startseite</title>
+		<para>Der Bereich <guimenuitem>Allgemein</guimenuitem> ist der erste Bildschirm, den Sie bei jeder Anmeldung im <acronym>ACP</acronym> sehen. Er enthält einige grundlegende Statistiken und Informationen über Ihr Forum. Außerdem gibt es einen Unterabschnitt namens <guimenuitem>Schnellzugriff</guimenuitem>. Dieser bietet schnellen Zugriff auf einige häufig genutzte Administrationsseiten, wie zum Beispiel die <link linkend="acp_users">Benutzerverwaltung</link> oder die <link linkend="acp_maintenance">Moderatorenprotokolle</link>. Wir werden auf die einzelnen Punkte später in ihren jeweiligen Abschnitten eingehen.</para>
+		<para>Wir konzentrieren uns auf die anderen drei Unterabschnitte: <link linkend="acp_general_config">Boardkonfiguration</link>, <link linkend="acp_general_client">Client-Kommunikation</link> und <link linkend="acp_general_server">Serverkonfiguration</link>.</para>
+		<section id="acp_general_config">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Boardkonfiguration</title>
+			<para>Dieser Unterabschnitt enthält Einträge zur Anpassung der allgemeinen Funktionen und Einstellungen des Forums. </para>
+
+			<section id="acp_board_attachments">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Anhang-Einstellungen</title>
+				<para>Eine der vielen Funktionen von phpBB 3.3 sind <glossterm>Anhänge</glossterm>. Anhänge sind Dateien, die an Beiträge angehängt werden können, ähnlich wie E-Mail-Anhänge. Bestimmte, vom Boardadministrator festgelegte Einschränkungen bestimmen, was Benutzer anhängen können. Sie können diese Einschränkungen über die Seite <guimenuitem>Anhang-Einstellungen</guimenuitem> festlegen.</para>
+				<para>Weitere Informationen finden Sie im Abschnitt über die <link linkend="acp_attach_settings">Konfiguration der Anhang-Einstellungen Ihres Boards</link>.</para>
+			</section>
+
+			<section id="acp_general_settings">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Board-Einstellungen</title>
+				<para>Die <guimenuitem>Board-Einstellungen</guimenuitem> ermöglichen es Ihnen, viele Einstellungen zu ändern, die Ihr Board betreffen. Zu diesen Einstellungen gehören wichtige Dinge wie der Name Ihres Forums! Es gibt zwei Hauptgruppen von Board-Einstellungen: die allgemeinen <guilabel>Board-Einstellungen</guilabel> und die <guilabel>Verwarnungen</guilabel>-Einstellungen.</para>
+
+				<itemizedlist>
+					<title>Board-Einstellungen</title>
+					<listitem><para>Die allererste Board-Einstellung, die Sie bearbeiten können, ist vielleicht die wichtigste von allen: der Name Ihres Boards. Ihre Benutzer identifizieren Ihr Board anhand dieses Namens. Tragen Sie den Namen Ihrer Seite in das Textfeld <guilabel>Seitenname</guilabel> ein; er wird im Kopfbereich des Standardstils angezeigt und ist der Präfix des Fenstertitels Ihres Browsers.</para></listitem>
+					<listitem><para>Die <guilabel>Kurzbeschreibung der Seite</guilabel> ist der Slogan oder Untertitel Ihres Forums. Sie erscheint unterhalb des <guilabel>Seitennamens</guilabel> im Kopfbereich des Standardstils.</para></listitem>
+					<listitem><para>Sie können außerdem die Felder <guilabel>Haupt-Website-URL</guilabel> und <guilabel>Haupt-Website-Text</guilabel> nutzen, um einen Link zu Ihrer Homepage in den Breadcrumbs hinzuzufügen. Das Logo des Boards verwendet ebenfalls diesen Link.</para></listitem>
+					<listitem><para>Wenn Sie Ihr gesamtes Forum beispielsweise für Wartungsarbeiten schließen müssen, können Sie dies über den Schalter <guilabel>Board deaktivieren</guilabel> tun. Um Ihr Board vorübergehend zu deaktivieren, wählen Sie <guilabel>Ja</guilabel>. Dadurch wird verhindert, dass Mitglieder Ihres Forums, die keine Administratoren oder Moderatoren sind, auf Ihr Board zugreifen können. Sie sehen entweder eine Standardmeldung anstelle des Forums oder eine von Ihnen erstellte Meldung. Sie können Ihre eigene Meldung, die bei deaktiviertem Board angezeigt wird, in das Textfeld unterhalb der Optionsfelder <guilabel>Board deaktivieren</guilabel> eingeben. Administratoren und Moderatoren können weiterhin Foren durchsuchen und ihre jeweiligen Kontrollzentren nutzen, wenn das Board deaktiviert ist.</para></listitem>
+					<listitem><para>Sie müssen außerdem die <guilabel>Standardsprache</guilabel> Ihres Boards festlegen. Dies ist die Sprache, die Gäste beim Besuch Ihres Boards sehen. Sie können registrierten Benutzern erlauben, andere Sprachen auszuwählen. Standardmäßig ist nur die Sprache <guilabel>English [GB]</guilabel> installiert, aber Sie können <ulink url="https://www.phpbb.com/languages">weitere Sprachen von der phpBB-Website herunterladen</ulink> und auf Ihrem Board installieren. Weitere Informationen zur Arbeit mit Sprachen finden Sie im <link linkend="acp_customise_language">Abschnitt zur Konfiguration von Sprachpaketen</link>.</para></listitem>
+					<listitem><para>Sie können außerdem das Standard-Datumsformat Ihres Boards konfigurieren. phpBB3 verfügt über einige grundlegende Datumsformate, die Sie für Ihr Board verwenden können; falls diese nicht ausreichen und Sie das Datumsformat Ihres Boards anpassen möchten, wählen Sie <guimenuitem>Benutzerdefiniert</guimenuitem> aus dem Auswahlmenü <guilabel>Datumsformat</guilabel>. Geben Sie dann in das danebenliegende Textfeld das gewünschte Format ein. Dies entspricht der <ulink url="http://www.php.net/date">PHP-Funktion date()</ulink>.</para></listitem>
+					<listitem><para>Zusammen mit dem Standard-Datumsformat Ihres Boards können Sie auch die bevorzugte Zeitzone Ihres Boards festlegen. Die im Auswahlmenü <guilabel>Systemzeitzone</guilabel> verfügbaren Zeitzonen basieren alle auf relativen <acronym>UTC</acronym>-Zeiten (für die meisten Zwecke entspricht dies <acronym>GMT</acronym>, der Greenwich Mean Time).</para></listitem>
+					<listitem><para>Sie können außerdem den Standardstil Ihres Boards festlegen. Das Board wird Ihren Gästen und Mitgliedern im <guilabel>Standardstil</guilabel> angezeigt. In der Standardinstallation von phpBB sind zwei Stile verfügbar: prosilver und subsilver2. Sie können Benutzern entweder erlauben, einen anderen Stil als den Standardstil auszuwählen, indem Sie bei der Einstellung <guilabel>Benutzerstil überschreiben</guilabel> <guilabel>Nein</guilabel> wählen, oder dies untersagen. Im <link linkend="acp_customise_styles">Abschnitt über Stile</link> erfahren Sie, wie Sie neue Stile hinzufügen und wo Sie welche finden.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Verwarnungen</title>
+					<listitem><para>Moderatoren können Benutzern, die gegen die Forenregeln verstoßen, Verwarnungen erteilen. Der Wert <guilabel>Dauer der Verwarnung</guilabel> legt fest, wie viele Tage eine Verwarnung gültig ist, bevor sie abläuft. Alle positiven ganzen Zahlen sind gültige Werte. Weitere Informationen zu Verwarnungen finden Sie unter <xref linkend="moderator_mcp" />.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_board_features">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Board-Funktionen</title>
+				<para>Über den Bereich <guimenuitem>Board-Funktionen</guimenuitem> können Sie mehrere Funktionen boardweit aktivieren oder deaktivieren. Beachten Sie, dass jede hier deaktivierte Funktion auf Ihrem Forum nicht verfügbar ist, selbst wenn Sie Ihren Benutzern die entsprechenden Berechtigungen erteilen.</para>
+				<para>Der Bereich <guimenuitem>Lasteinstellungen</guimenuitem> ermöglicht es Ihnen, einige rechenintensive Funktionen zu deaktivieren, falls Sie ein Shared- oder eingeschränktes Hosting nutzen.</para>
+			</section>
+
+			<section id="acp_board_avatars">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Avatar-Einstellungen</title>
+				<para>Avatare sind in der Regel kleine, individuelle Bilder, die ein Benutzer mit sich selbst verknüpfen kann. Je nach Stil werden sie üblicherweise unterhalb des Benutzernamens beim Betrachten von Themen angezeigt. Hier können Sie festlegen, wie Benutzer ihre Avatare definieren können.</para>
+				<para>Es gibt mehrere Möglichkeiten, wie ein Benutzer seinem Profil einen Avatar hinzufügen kann. Die erste Möglichkeit ist <guilabel>Gravatar</guilabel>. Ist diese Funktion aktiviert, können Benutzer festlegen, dass das Board das mit ihrer E-Mail-Adresse verknüpfte Gravatar.com-Bild lädt.</para>
+				<para>Die zweite Möglichkeit ist eine von Ihnen bereitgestellte Avatar-Galerie. Beachten Sie, dass in einer phpBB-Standardinstallation keine Avatar-Galerie vorhanden ist. Der <guilabel>Avatar-Galerie-Pfad</guilabel> ist der Pfad zu den Galeriebildern. Der Standardpfad lautet <guilabel>images/avatars/gallery</guilabel>. Der Galerieordner existiert in der Standardinstallation nicht, Sie müssen ihn also manuell anlegen, wenn Sie ihn nutzen möchten.</para>
+				<para>Die Bilder, die Sie für Ihre Galerie verwenden möchten, müssen sich in einem Ordner innerhalb des Galeriepfads befinden. Bilder direkt im Galeriepfad werden nicht erkannt.</para>
+				<para>Die dritte Möglichkeit für Avatare ist der <guilabel>Avatar-Upload</guilabel>. Ihre Mitglieder können ein Bild von ihrem lokalen System hochladen, das dann auf Ihrem Server gespeichert wird. Es wird in den von Ihnen festgelegten <guilabel>Avatar-Speicherpfad</guilabel> hochgeladen. Der Standardpfad lautet <guilabel>images/avatars/upload</guilabel> und existiert bereits nach der Installation. Sie müssen sicherstellen, dass er <glossterm>vom Server beschreibbar</glossterm> ist. Das Dateiformat der Bilder muss entweder gif, jpeg oder png sein, und die Avatare werden nach dem Hochladen automatisch auf Datei- und Bildgröße überprüft. Sie können die <guilabel>Maximale Avatar-Dateigröße</guilabel> anpassen; Bilder, die größer als der zulässige Wert sind, werden verworfen.</para>
+			</section>
+
+			<section id="acp_board_pms">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Private Nachrichten</title>
+				<para><glossterm>Private Nachrichten</glossterm> sind eine Möglichkeit für registrierte Mitglieder, privat über Ihr Board zu kommunizieren, ohne auf E-Mail oder Instant Messaging zurückgreifen zu müssen. </para>
+				<para>Sie können diese Funktion mit der Einstellung <guilabel>Private Nachrichten</guilabel> deaktivieren. Dadurch wird die Funktion für das gesamte Board abgeschaltet. Sie können private Nachrichten für ausgewählte Benutzer oder Gruppen über <link linkend="acp_permissions">Berechtigungen</link> deaktivieren. Weitere Informationen finden Sie im <link linkend="acp_permissions">Abschnitt Berechtigungen</link>. </para>
+				<para>Proteus erlaubt es Benutzern, eigene persönliche Ordner zur Organisation privater Nachrichten anzulegen. Die Einstellung <guilabel>Maximale Anzahl privater Nachrichtenordner</guilabel> legt fest, wie viele Nachrichtenordner sie anlegen können. Der Standardwert ist 4. Sie können die Funktion deaktivieren, indem Sie den Wert auf 0 setzen. </para>
+				<para><guilabel>Maximale Anzahl privater Nachrichten pro Ordner</guilabel> legt fest, wie viele private Nachrichten jeder Ordner enthalten kann. Der Standardwert ist <guilabel>50</guilabel>; setzen Sie ihn auf 0, um eine unbegrenzte Anzahl von Nachrichten pro Ordner zuzulassen. </para>
+				<para>Wenn Sie die Anzahl der Nachrichten begrenzen, die Benutzer in ihren Ordnern speichern können, müssen Sie eine Standardaktion festlegen, die ausgeführt wird, sobald ein Ordner voll ist. Dies können Sie in der Liste „Standardaktion bei vollem Ordner“ ändern. Entweder wird die älteste Nachricht gelöscht, oder die neue Nachricht wird zurückgehalten, bis im Ordner wieder Platz vorhanden ist. Beachten Sie, dass Benutzer dies in ihren PN-Optionen selbst festlegen können; diese Einstellung ändert nur den Standardwert, dem sie begegnen. Sie überschreibt nicht die vom Benutzer gewählte Aktion. </para>
+				<para>Beim Versenden einer privaten Nachricht ist es weiterhin möglich, die Nachricht zu bearbeiten, solange der Empfänger sie noch nicht gelesen hat. Nachdem eine gesendete private Nachricht gelesen wurde, ist eine Bearbeitung nicht mehr möglich. Um die Zeit zu begrenzen, in der eine Nachricht bearbeitet werden kann, bevor der Empfänger sie liest, können Sie die <guilabel>Bearbeitungszeit begrenzen</guilabel> festlegen. Der Standardwert ist 0, was eine Bearbeitung erlaubt, bis die Nachricht gelesen wird. Beachten Sie, dass Sie Benutzern oder Gruppen über <link linkend="acp_permissions">Berechtigungen</link> untersagen können, private Nachrichten nach dem Senden zu bearbeiten. Ist die Berechtigung zum Bearbeiten von Nachrichten verweigert, überschreibt dies diese Einstellung. </para>
+				<para>Die <guilabel>Allgemeinen Optionen</guilabel> erlauben es Ihnen, die Funktionsweise privater Nachrichten auf Ihrem Board weiter zu definieren.
+					<itemizedlist>
+						<listitem>
+							<para><guilabel>Massen-PNs erlauben:</guilabel> ermöglicht das Versenden privater Nachrichten an mehrere Empfänger. Diese Funktion ist standardmäßig aktiviert. Wird sie deaktiviert, ist auch das Versenden privater Nachrichten an Gruppen nicht mehr möglich. </para>
+							<tip>
+								<para>Im <link linkend="acp_groups">Abschnitt Gruppen</link> finden Sie Informationen dazu, wie Sie die Möglichkeit aktivieren, eine Nachricht an eine ganze Gruppe zu senden.</para>
+							</tip>
+						</listitem>
+						<listitem>
+							<para>Standardmäßig sind <glossterm>BBCode</glossterm> und <glossterm>Smilies</glossterm> in privaten Nachrichten erlaubt.</para>
+							<tip>
+								<para>Auch wenn dies aktiviert ist, können Sie Benutzern oder Gruppen über <link linkend="acp_permissions">Berechtigungen</link> weiterhin die Verwendung von <glossterm>BBCode</glossterm> und <glossterm>Smilies</glossterm> in privaten Nachrichten untersagen.</para>
+							</tip>
+						</listitem>
+						<listitem>
+							<para>Anhänge sind standardmäßig nicht erlaubt. Weitere Einstellungen für Anhänge in privaten Nachrichten finden Sie in den <link linkend="acp_board_attachments">Anhang-Einstellungen</link>. Dort können Sie beispielsweise die Anzahl der Anhänge pro Nachricht festlegen.</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_captcha">
+        <sectioninfo>
+           <authorgroup>
+              <author>
+                 <othername>Kellanved</othername>
+              </author>
+           </authorgroup>
+        </sectioninfo>
+        <title>Spambot-Gegenmaßnahmen</title>
+        <para>phpBB 3.3 verwendet ein Plugin-System, das ein einfaches Umschalten zwischen verschiedenen Spambot-Gegenmaßnahmen ermöglicht. Verfügbare Plugins werden automatisch aus dem Verzeichnis includes/captcha/plugins Ihrer Installation geladen. </para>
+        <itemizedlist>
+           <title>phpBB wird mit folgenden vorinstallierten Plugins ausgeliefert:</title>
+           <listitem><para>GD 3D-Bild: ein grafisches CAPTCHA mit dreidimensionalen Zeichen auf einer Welle.</para></listitem>
+           <listitem><para>GD-Bild: ein grafisches CAPTCHA mit schwebenden 3D-Zeichen.</para></listitem>
+           <listitem><para>Einfaches Bild: ein einfaches 2D-CAPTCHA, das in jeder Konfiguration funktionieren sollte.</para></listitem>
+           <listitem><para>reCaptcha: der reCaptcha-Dienst. Sie müssen sich bei reCaptcha registrieren, bevor Sie dieses Plugin nutzen können.</para></listitem>
+           <listitem><para>Frage &amp; Antwort: konfigurierbare Fragen und Antworten.</para></listitem>
+        </itemizedlist>
+		<note><para><glossterm>CAPTCHA</glossterm>, oder „Completely Automated Public Turing Test To Tell Computers and Humans Apart“, ist ein Begriff für Rätsel, die vermeintlich für Menschen leicht, für Computer jedoch schwer zu lösen sind. </para></note>
+        <para>Die Seite ist in zwei Bereiche unterteilt: Der obere Bereich, „Allgemeine Optionen“, enthält Einstellungen dazu, wo Spambot-Gegenmaßnahmen eingesetzt werden. Der andere Bereich befasst sich mit der Auswahl, Konfiguration und Demonstration der Plugins.</para>
+        <figure id="img_acp_captcha">
+           <title>Spambot-Gegenmaßnahmen</title>
+           <mediaobject>
+              <imageobject>
+                 <imagedata format="PNG" fileref="../images/admin_guide/captcha.png"/>
+              </imageobject>
+           <caption>
+           <para>Die ACP-Seite zur Auswahl der Spambot-Gegenmaßnahmen-Plugins.</para>
+           </caption>
+           </mediaobject>
+        </figure>
+        <tip>
+           <para>Prüfen Sie die Erweiterungsdatenbank auf neue vorhandene Plugins.</para>
+        </tip>
+        <itemizedlist>
+           <title>So wählen Sie ein Plugin aus</title>
+           <listitem><para>Klicken Sie auf das Dropdown-Menü „Installierte Plugins“ und wählen Sie das gewünschte Modul aus. Lassen Sie sich nicht von ausgegrauten Einträgen aufhalten, sie bedeuten lediglich, dass ein weiterer Schritt erforderlich ist. Falls das gewünschte Modul nicht in der Liste erscheint, prüfen Sie, ob die Dateien im Plugin-Verzeichnis vorhanden sind.</para></listitem>
+           <listitem><para>Klicken Sie auf die Schaltfläche „Konfigurieren“, um die ACP-Seite des Moduls aufzurufen. Viele Plugins müssen vor der Nutzung konfiguriert werden. Beachten Sie, dass Plugins ohne Konfigurationsoptionen diese Schaltfläche nicht anzeigen.</para></listitem>
+           <listitem><para>Konfigurieren Sie das Plugin nach Ihren Anforderungen.</para></listitem>
+           <listitem><para>Wählen Sie nach der Konfiguration des Plugins Ihr gewünschtes Plugin erneut im Dropdown-Menü aus. Es sollte nun nicht mehr ausgegraut sein.</para></listitem>
+           <listitem><para>Klicken Sie auf „Absenden“.</para></listitem>
+           <listitem><para>Herzlichen Glückwunsch, Sie sind fertig.</para></listitem>
+        </itemizedlist>
+     </section>
+			<section id="acp_contact_page">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Noxwizard</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Einstellungen der Kontaktseite</title>
+				<para>Die Kontaktseite ermöglicht es Benutzern, den Boardadministratoren eine E-Mail zu senden, wenn sie Probleme mit der Seite haben. Dieses Formular ist für alle Benutzer sichtbar, einschließlich Gäste.</para>
+				<para>Sie können diese Funktion aktivieren oder deaktivieren sowie die Nachricht festlegen, die Benutzern beim Besuch der Seite angezeigt werden soll. Die Nachricht kann BBCodes, Smilies und Links enthalten, jedoch kein rohes HTML.</para>
+			</section>
+		</section>
+
+		<section id="acp_general_client">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Client-Kommunikation</title>
+			<para>Neben seinem eigenen Authentifizierungssystem unterstützt phpBB3 auch andere <glossterm>Client</glossterm>-Kommunikationsarten. phpBB3 unterstützt Authentifizierungs-Plugins (standardmäßig die Plugins Apache, native DB, LDAP und OAuth), E-Mail und <glossterm>Jabber</glossterm>. Hier können Sie all diese Kommunikationsmethoden konfigurieren. Es folgen Unterabschnitte, die jede Client-Kommunikationsmethode beschreiben.</para>
+
+			<section id="acp_client_auth">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Authentifizierung</title>
+
+				<para>phpBB3 bietet Unterstützung für Authentifizierung über Plugins. Standardmäßig werden die Plugins Apache, DB, LDAP und OAuth unterstützt. Bevor Sie von phpBBs nativem Authentifizierungssystem (der DB-Methode) zu einem dieser Systeme wechseln, müssen Sie sicherstellen, dass Ihr Server dies unterstützt.</para>
+				<para>Nachdem Sie die Authentifizierungsmethode aus dem Dropdown-Menü ausgewählt haben, füllen Sie alle erscheinenden Felder aus, um die Konfiguration abzuschließen.</para>
+
+				<itemizedlist>
+					<title>Apache-Authentifizierung</title>
+					<listitem><para>Für diese Methode gibt es keine speziellen Konfigurationseinträge. Sie müssen die Authentifizierung in Apache so einrichten, dass Ihre Benutzer auf das Board zugreifen können. Die folgende Dokumentation kann Ihnen dabei helfen: <ulink url="http://httpd.apache.org/docs/current/howto/auth.html">Apache: Authentication and Authorization</ulink>.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>DB-Authentifizierung</title>
+					<listitem><para>Dies ist die Standard-Authentifizierungsmethode und wird in config.php konfiguriert.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>LDAP-Authentifizierung</title>
+					<listitem><para><guilabel>LDAP-Servername</guilabel>: Dies ist der Name oder die IP-Adresse des LDAP-Servers.</para></listitem>
+					<listitem><para><guilabel>LDAP-Benutzer</guilabel>: phpBB verbindet sich mit dem LDAP-Server als dieser angegebene Benutzer. Wenn Sie einen anonymen Zugriff verwenden möchten, lassen Sie dieses Feld leer.</para></listitem>
+					<listitem><para><guilabel>LDAP-Passwort</guilabel>: Das Passwort für den oben angegebenen LDAP-Benutzer. Wenn Sie einen anonymen Zugriff verwenden, lassen Sie dieses Feld leer.</para><important><para>Dieses Passwort wird als Klartext in der Datenbank gespeichert und ist für jeden sichtbar, der Zugriff auf Ihre Datenbank hat.</para></important></listitem>
+					<listitem><para><guilabel>LDAP-Basis-DN</guilabel>: Der Distinguished Name, über den die Benutzerinformationen gefunden werden.</para></listitem>
+					<listitem><para><guilabel>LDAP-UID</guilabel>: Der Schlüssel, unter dem phpBB nach einer angegebenen Login-Identität sucht.</para></listitem>
+					<listitem><para><guilabel>LDAP-E-Mail-Attribut</guilabel>: setzen Sie dies auf den Namen des E-Mail-Attributs Ihres Benutzereintrags (falls vorhanden), um die E-Mail-Adresse für neue Benutzer automatisch festzulegen. Wenn Sie dieses Feld leer lassen, haben Benutzer, die sich zum ersten Mal auf Ihrem Board anmelden, eine leere E-Mail-Adresse.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>OAuth-Authentifizierung</title>
+					<listitem><para>OAuth benötigt einen Schlüssel und ein Geheimnis. Diese werden Ihnen vom OAuth-Anbieter zur Verfügung gestellt. Jeder Anbieter kann für den Schlüssel und das Geheimnis einen anderen Namen verwenden</para></listitem>
+					<listitem><para><guilabel>Bitly</guilabel>: Ihre Token-Informationen finden Sie hier: <ulink url="https://bitly.com/a/oauth_apps">https://bitly.com/a/oauth_apps</ulink>. Ihr Schlüssel ist die <emphasis>Client ID</emphasis>, Ihr Geheimnis ist das <emphasis>Client Secret</emphasis>.</para></listitem>
+					<listitem><para><guilabel>Facebook</guilabel>: Sie müssen bei Facebook <ulink url="https://developers.facebook.com/apps">eine Anwendung erstellen</ulink>, um Ihre Token-Informationen zu erhalten. Die <emphasis>App ID</emphasis> ist Ihr Schlüssel, das <emphasis>App Secret</emphasis> ist Ihr Geheimnis.</para></listitem>
+					<listitem><para><guilabel>Google</guilabel>: Besuchen Sie die <ulink url="https://console.developers.google.com/">Google Developers Console</ulink>, um eine neue OAuth-Client-ID zu erstellen. Sie finden diese auf der linken Seite unter „APIs and auth --> Credentials“. Ihre <emphasis>Client ID</emphasis> dient als Schlüssel und Ihr <emphasis>Client Secret</emphasis> als Geheimnis. Zusätzlich müssen Sie in der Developers Console auch einen „Consent screen“ erstellen. Geben Sie beim Einrichten Ihrer Client-ID in der Google Developers Console folgende <guilabel>Request URIs</guilabel> an:</para>
+					<itemizedlist>
+						<listitem><para>http://{ihre_board_URL}/ucp.php?mode=login&amp;login=external&amp;oauth_service=google</para></listitem>
+						<listitem><para>http://{ihre_board_URL}/ucp.php?i=ucp_auth_link&amp;mode=auth_link&amp;link=1&amp;oauth_service=google</para>
+						<para>Die Link-ID kann bei Ihrem Board abweichen. Falls dies der Fall ist, erhalten Sie beim Versuch, ein Konto zu verknüpfen, eine Fehlermeldung. Ändern Sie die „1“ auf die Zahl, die in der Fehlermeldung zur Request-URI von Google angegeben wird.</para></listitem>
+					</itemizedlist>
+					</listitem>
+					<listitem><para><guilabel>Twitter</guilabel>: Erstellen Sie eine <ulink url="https://developer.twitter.com/en/apps">Twitter-App</ulink>. Ihr <emphasis>Consumer Key</emphasis> dient als Schlüssel, Ihr <emphasis>Consumer Secret</emphasis> als Geheimnis. </para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_client_email">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>E-Mail-Einstellungen</title>
+
+				<para>phpBB3 ist in der Lage, E-Mails an Ihre Benutzer zu versenden. Hier können Sie die Informationen konfigurieren, die verwendet werden, wenn Ihr Board diese E-Mails versendet. phpBB3 kann E-Mails entweder über den nativen, PHP-basierten E-Mail-Dienst oder über einen angegebenen <glossterm>SMTP</glossterm>-Server versenden. Wenn Sie sich nicht sicher sind, ob Ihnen ein SMTP-Server zur Verfügung steht, verwenden Sie den nativen E-Mail-Dienst. Weitere Einzelheiten erfahren Sie von Ihrem Hoster. Wenn Sie mit der Konfiguration der E-Mail-Einstellungen fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
+
+				<note>
+					<para>Bitte stellen Sie sicher, dass die von Ihnen angegebene E-Mail-Adresse gültig ist, da unzustellbare oder zurückgewiesene Nachrichten wahrscheinlich an diese Adresse gesendet werden.</para>
+				</note>
+
+				<itemizedlist>
+					<title>Allgemeine Einstellungen</title>
+					<listitem><para><guilabel>Boardweite E-Mails aktivieren</guilabel>: Wenn dies deaktiviert ist, werden vom Board überhaupt keine E-Mails versendet.</para></listitem>
+					<listitem><para><guilabel>Benutzer versenden E-Mails über das Board:</guilabel>: Wenn dies aktiviert ist, wird anstelle einer E-Mail-Adresse ein Formular angezeigt, über das Benutzer sich gegenseitig über das Board E-Mails senden können.</para></listitem>
+					<listitem><para><guilabel>Name der E-Mail-Funktion</guilabel>: Wenn Sie den nativen, PHP-basierten E-Mail-Dienst verwenden, sollte dies der Name der E-Mail-Funktion sein. Höchstwahrscheinlich lautet dieser „mail“.</para></listitem>
+					<listitem><para><guilabel>Paketgröße für E-Mails</guilabel>: Dies ist die Anzahl der E-Mails, die in einem Paket versendet werden können. Dies ist nützlich, wenn Sie Massen-E-Mails versenden möchten und eine große Anzahl von Benutzern haben.</para></listitem>
+					<listitem><para><guilabel>Kontakt-E-Mail-Adresse</guilabel>: Dies ist die Adresse, an die E-Mail-Rückmeldungen zu Ihrem Board gesendet werden. Dies ist außerdem die Adresse, die die Felder „Von“ und „Antwort an“ in allen von Ihrem Board versendeten E-Mails ausfüllt.</para></listitem>
+					<listitem><para><guilabel>Rückantwort-E-Mail-Adresse</guilabel>: Dies ist die Rückantwortadresse, die als technische Kontakt-E-Mail-Adresse in allen E-Mails eingetragen wird. Sie füllt immer die Felder „Return-Path“ und „Sender“ in allen von Ihrem Board versendeten E-Mails aus.</para></listitem>
+					<listitem><para><guilabel>E-Mail-Signatur</guilabel>: Dieser Text wird an das Ende aller von Ihrem Board versendeten E-Mails angehängt.</para></listitem>
+					<listitem><para><guilabel>E-Mail-Adressen verbergen</guilabel>: Wenn Sie E-Mail-Adressen vollständig privat halten möchten, setzen Sie diesen Wert auf <guilabel>Ja</guilabel>.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>SMTP-Einstellungen</title>
+					<listitem><para><guilabel>SMTP-Server für E-Mail verwenden</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihr Board E-Mails über einen SMTP-Server versenden soll. Wenn Sie sich nicht sicher sind, ob Ihnen ein SMTP-Server zur Verfügung steht, setzen Sie dies auf <guilabel>Nein</guilabel>; dadurch verwendet Ihr Board den nativen, PHP-basierten E-Mail-Dienst, was in den meisten Fällen die sicherste verfügbare Option ist.</para></listitem>
+					<listitem><para><guilabel>SMTP-Serveradresse</guilabel>: Die Adresse des SMTP-Servers.</para></listitem>
+					<listitem><para><guilabel>SMTP-Server-Port</guilabel>: Der Port, auf dem sich der SMTP-Server befindet. In den meisten Fällen befinden sich SMTP-Server auf Port 25; ändern Sie diesen Wert nicht, wenn Sie sich diesbezüglich unsicher sind.</para></listitem>
+					<listitem><para><guilabel>Authentifizierungsmethode für SMTP</guilabel>: Dies ist die Authentifizierungsmethode, die Ihr Board beim Verbinden mit dem angegebenen SMTP-Server verwendet. Dies gilt nur, wenn ein SMTP-Benutzername und -Passwort festgelegt sind und vom Server benötigt werden. Die verfügbaren Methoden sind PLAIN, LOGIN, CRAM-MD5, DIGEST-MD5 und POP-BEFORE-SMTP. Wenn Sie sich nicht sicher sind, welche Authentifizierungsmethode Sie verwenden müssen, fragen Sie Ihren Hoster um weitere Informationen.</para></listitem>
+					<listitem><para><guilabel>SMTP-Benutzername</guilabel>: Der Benutzername, den phpBB beim Verbinden mit dem angegebenen SMTP-Server verwendet. Füllen Sie dies nur aus, wenn der SMTP-Server dies erfordert.</para></listitem>
+					<listitem><para><guilabel>SMTP-Passwort</guilabel>: Das Passwort für den oben angegebenen Benutzernamen, das phpBB beim Verbinden mit dem angegebenen SMTP-Server verwendet. Füllen Sie dies nur aus, wenn der SMTP-Server dies erfordert.</para><important><para>Dieses Passwort wird als Klartext in der Datenbank gespeichert und ist für jeden sichtbar, der Zugriff auf Ihre Datenbank hat oder diese Konfigurationsseite einsehen kann.</para></important></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_client_jabber">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Jabber-Einstellungen</title>
+
+				<para>phpBB3 kann Nachrichten an Benutzer auch über <glossterm>Jabber</glossterm> kommunizieren; Ihr Board kann so konfiguriert werden, dass es Benachrichtigungen über Jabber versendet. Hier können Sie genau festlegen, ob und wie Ihr Board Jabber für die Kommunikation nutzt.</para>
+
+				<note>
+					<para>Manche Jabber-Server bieten Gateways oder Transporte, über die Sie Benutzer in anderen Netzwerken kontaktieren können. Nicht alle Server bieten alle Transporte an, und Protokolländerungen können den Betrieb von Transporten verhindern. Beachten Sie, dass die Aktualisierung der Jabber-Kontodaten einige Sekunden dauern kann; brechen Sie das Skript daher nicht ab, bevor es fertig ist!</para>
+				</note>
+
+				<itemizedlist>
+					<title>Jabber-Einstellungen</title>
+					<listitem><para><guilabel>Jabber aktivieren</guilabel>: Setzen Sie dies auf <guilabel>Aktiviert</guilabel>, wenn Sie die Nutzung von Jabber für Nachrichten und Benachrichtigungen aktivieren möchten.</para></listitem>
+					<listitem><para><guilabel>Jabber-Server</guilabel>: Der Jabber-Server, den Ihr Board verwendet. Eine Liste öffentlicher Server finden Sie bei <ulink url="http://www.jabber.org">jabber.org</ulink> in der <ulink url="http://www.jabber.org/user/publicservers.shtml">Liste offener, öffentlicher Server</ulink>.</para></listitem>
+					<listitem><para><guilabel>Jabber-Port</guilabel>: Der Port, auf dem sich der oben angegebene Jabber-Server befindet. Port 5222 ist der gängigste Port; wenn Sie sich diesbezüglich unsicher sind, lassen Sie diesen Wert unverändert.</para></listitem>
+					<listitem><para><guilabel>Jabber-Benutzername oder JID</guilabel>: Der Jabber-Benutzername oder eine vollständige Jabber-ID (sieht wie eine E-Mail-Adresse aus), die Ihr Board beim Verbinden mit dem angegebenen Jabber-Server verwendet. Sie müssen ein bereits registriertes Konto angeben.</para></listitem>
+					<listitem><para><guilabel>Jabber-Passwort</guilabel>: Das Passwort für den oben angegebenen Jabber-Benutzernamen. Ist der Jabber-Benutzername nicht registriert, versucht phpBB3, den oben angegebenen Jabber-Benutzernamen mit diesem Wert als Passwort zu registrieren.</para><important><para>Dieses Passwort wird als Klartext in der Datenbank gespeichert und ist für jeden sichtbar, der Zugriff auf Ihre Datenbank hat oder diese Konfigurationsseite einsehen kann.</para></important></listitem>
+					<listitem><para><guilabel>Paketgröße für Jabber</guilabel>: Dies ist die Anzahl der Nachrichten, die in einem Paket versendet werden können. Ist dies auf „0“ gesetzt, werden Nachrichten sofort versendet und nicht für einen späteren Versand in eine Warteschlange gestellt.</para></listitem>
+				</itemizedlist>
+			</section>
+		</section>
+		<section id="acp_general_server">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Serverkonfiguration</title>
+			<para>Als Administrator eines Boards ist es unerlässlich, die Servereinstellungen Ihres phpBB-Boards fein abstimmen zu können. Die Konfiguration der Servereinstellungen Ihres Boards ist sehr einfach. Es gibt fünf Hauptkategorien von Servereinstellungen: <guimenuitem>Cookie-Einstellungen</guimenuitem>, <guimenuitem>Servereinstellungen</guimenuitem>, <guimenuitem>Sicherheitseinstellungen</guimenuitem>, <guimenuitem>Lasteinstellungen</guimenuitem> und <guimenuitem>Sucheinstellungen</guimenuitem>. Die korrekte Konfiguration dieser Einstellungen trägt dazu bei, dass Ihr Board nicht nur funktioniert, sondern auch effizient und wie beabsichtigt arbeitet. Die folgenden Unterabschnitte beschreiben jede Kategorie der Serverkonfiguration. Denken Sie daran, nach dem Aktualisieren der Einstellungen jeweils auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen zu übernehmen.</para>
+
+			<section id="acp_server_cookies">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Cookie-Einstellungen</title>
+				<para>Ihr Board verwendet ständig Cookies. Cookies können Informationen und Daten speichern; sie ermöglichen es Benutzern beispielsweise, sich beim Besuch des Boards automatisch anzumelden. Die Einstellungen auf dieser Seite legen die Daten fest, die zum Versenden von Cookies an die Browser Ihrer Benutzer verwendet werden.</para>
+
+				<warning>
+					<para>Gehen Sie beim Bearbeiten der Cookie-Einstellungen Ihres Boards mit Vorsicht vor. Falsche Einstellungen können Folgen wie das Verhindern der Anmeldung Ihrer Benutzer nach sich ziehen.</para>
+				</warning>
+
+				<para>Um die Cookie-Einstellungen Ihres Boards zu bearbeiten, suchen Sie das Formular <guilabel>Cookie-Einstellungen</guilabel>. Folgende vier Einstellungen können Sie bearbeiten:
+
+					<itemizedlist>
+						<title>Cookie-Einstellungen</title>
+						<listitem><para><guilabel>Cookie-Domain</guilabel>: Dies ist die Domain, auf der Ihr Board läuft. Geben Sie nicht den Pfad an, unter dem phpBB installiert ist; nur die Domain selbst ist hier von Bedeutung.</para></listitem>
+						<listitem><para><guilabel>Cookie-Name</guilabel>: Dies ist der Name, der dem Cookie zugewiesen wird, wenn er an die Browser Ihrer Benutzer gesendet und dort gespeichert wird. Dies sollte ein eindeutiger Cookie-Name sein, der nicht mit anderen Cookies kollidiert.</para></listitem>
+						<listitem><para><guilabel>Cookie-Pfad</guilabel>: Dies ist der Pfad, für den der Cookie gilt. In den meisten Fällen sollte dies als „/“ belassen werden, damit der Cookie auf Ihrer gesamten Seite zugänglich ist. Wenn Sie den Cookie aus irgendeinem Grund auf den Pfad beschränken müssen, unter dem Ihr Board installiert ist, setzen Sie den Wert auf den Pfad Ihres Boards.</para></listitem>
+						<listitem><para><guilabel>Cookie sicher</guilabel>: Wenn Ihr Board nur über <acronym>SSL</acronym> erreichbar ist, setzen Sie dies auf <guilabel>Aktiviert</guilabel>. Ist das Board nicht ausschließlich über SSL erreichbar, belassen Sie diesen Wert auf <guilabel>Deaktiviert</guilabel>, da es sonst bei Weiterleitungen zu Serverfehlern kommen kann und Benutzer möglicherweise Schwierigkeiten haben, angemeldet zu bleiben.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Wenn Sie mit der Bearbeitung der Servereinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+			</section>
+			<section id="acp_server_settings">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Servereinstellungen</title>
+				<para>Auf dieser Seite können Sie server- und domainabhängige Einstellungen festlegen. Es gibt drei Hauptkategorien von Servereinstellungen: <guilabel>Servereinstellungen</guilabel>, <guilabel>Pfadeinstellungen</guilabel> und <guilabel>Server-URL-Einstellungen</guilabel>. Im Folgenden werden jede Kategorie der Servereinstellungen und die zugehörigen Einstellungen näher beschrieben. Wenn Sie mit der Konfiguration der Servereinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+
+				<warning>
+					<para>Gehen Sie beim Bearbeiten der Servereinstellungen Ihres Boards mit Vorsicht vor. Falsche Einstellungen können Folgen wie den Versand von E-Mails mit falschen Links und/oder Informationen oder sogar die Unerreichbarkeit des Boards nach sich ziehen.</para>
+				</warning>
+
+				<para>Das Formular <guilabel>Servereinstellungen</guilabel> ermöglicht es Ihnen, einige Einstellungen festzulegen, die phpBB auf Serverebene verwendet:
+					<itemizedlist>
+						<title>Servereinstellungen</title>
+						<listitem><para><guilabel>GZip-Komprimierung aktivieren</guilabel>: Diese Einstellung aktiviert die <glossterm>GZip</glossterm>-Komprimierung auf Ihrem Server. Das bedeutet, dass sämtlicher vom Server erzeugter Inhalt komprimiert wird, bevor er an die Browser der Benutzer gesendet wird, sofern deren Browser dies unterstützen. Dies kann zwar den Netzwerkverkehr bzw. die genutzte Bandbreite reduzieren, erhöht jedoch auch die Server- und CPU-Last, sowohl auf Benutzer- als auch auf Serverseite.</para></listitem>
+						<listitem><para><guilabel>Regelmäßige Aufgaben über den System-Cron ausführen</guilabel>: Ist dies deaktiviert, sorgt phpBB dafür, dass regelmäßige Aufgaben automatisch ausgeführt werden, wenn Benutzer das Board besuchen. Ist dies aktiviert, plant phpBB keine regelmäßigen Aufgaben mehr selbst; ein Systemadministrator muss dafür sorgen, dass <emphasis>bin/phpbbcli.php cron:run</emphasis> in regelmäßigen Abständen (z. B. alle 5 Minuten) über den System-Cron ausgeführt wird.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Anschließend ermöglicht Ihnen das Formular <guilabel>Pfadeinstellungen</guilabel>, die verschiedenen Pfade festzulegen, die phpBB für bestimmte Board-Inhalte verwendet. Für Standardinstallationen sollten die Standardeinstellungen ausreichen. Folgende vier Werte können Sie festlegen:
+					<itemizedlist>
+						<title>Pfadeinstellungen</title>
+						<listitem><para><guilabel>URL-Rewriting aktivieren</guilabel>: Ist dies aktiviert, werden URLs, die „app.php“ enthalten, so umgeschrieben, dass der Dateiname entfällt (d. h. app.php/foo wird zu /foo). Dies ist in der Regel nur sichtbar, wenn Sie Erweiterungen installieren. Diese Funktion ist derzeit auf Apache-Webserver mit aktiviertem mod_rewrite beschränkt.</para></listitem>
+						<listitem><para><guilabel>Speicherpfad für Smilies</guilabel>: Dies ist der Pfad zum Verzeichnis, relativ zum Verzeichnis, in dem Ihr Board installiert ist, in dem sich Ihre Smilies befinden.</para></listitem>
+						<listitem><para><guilabel>Speicherpfad für Beitragssymbole</guilabel>: Dies ist der Pfad zum Verzeichnis, relativ zum Verzeichnis, in dem Ihr Board installiert ist, in dem die Themensymbole gespeichert sind.</para></listitem>
+						<listitem><para><guilabel>Speicherpfad für Symbole der Anhang-Erweiterungsgruppen</guilabel>: Dies ist der Pfad zum Verzeichnis, relativ zum Verzeichnis, in dem Ihr Board installiert ist, in dem sich die Symbole für die <link linkend="acp_attach_extension_groups">Erweiterungsgruppen von Anhängen</link> befinden.</para></listitem>
+						<listitem><para><guilabel>Speicherpfad für Rangbilder</guilabel>: Dies ist der Pfad zum Verzeichnis, relativ zum Verzeichnis, in dem Ihr Board installiert ist, in dem sich Ihre <link linkend="acp_user_ranks">Rangbilder</link> befinden.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Die letzte Kategorie der Servereinstellungen sind die <guilabel>Server-URL-Einstellungen</guilabel>. Die Kategorie <guilabel>Server-URL-Einstellungen</guilabel> enthält Einstellungen, mit denen Sie die tatsächliche <acronym>URL</acronym> konfigurieren können, unter der sich Ihr Board befindet, sowie das Serverprotokoll und die Portnummer, über die auf das Board zugegriffen wird. Folgende fünf Einstellungen können Sie bearbeiten:
+					<itemizedlist>
+						<title>Server-URL-Einstellungen</title>
+						<listitem><para><guilabel>Server-URL-Einstellungen erzwingen</guilabel>: Falls die Standardeinstellungen für die Server-URL aus irgendeinem Grund fehlerhaft sind, können Sie Ihr phpBB-Board zwingen, die unten von Ihnen angegebenen Server-URL-Einstellungen zu verwenden, indem Sie das Optionsfeld <guilabel>Ja</guilabel> auswählen.</para></listitem>
+						<listitem><para><guilabel>Serverprotokoll</guilabel>: Dies ist das Serverprotokoll (z. B. http:// oder https://), das Ihr Board verwendet, sofern die Standardeinstellungen erzwungen werden. Ist dieser Wert leer oder die obige Einstellung <guilabel>Server-URL-Einstellungen erzwingen</guilabel> deaktiviert, wird das Protokoll anhand der Cookie-Sicherheitseinstellungen bestimmt.</para></listitem>
+						<listitem><para><guilabel>Domainname</guilabel>: Dies ist der Name der Domain, auf der Ihr Board läuft. Geben Sie gegebenenfalls „www“ mit an. Auch dieser Wert wird nur verwendet, wenn die Server-URL-Einstellungen erzwungen werden.</para></listitem>
+						<listitem><para><guilabel>Server-Port</guilabel>: Dies ist der Port, auf dem der Server läuft. In den meisten Fällen ist der Wert „80“ der richtige Port. Sie sollten diesen Wert nur ändern, wenn Ihr Server aus irgendeinem Grund auf einem anderen Port läuft. Auch dieser Wert wird nur verwendet, wenn die Server-URL-Einstellungen erzwungen werden.</para></listitem>
+						<listitem><para><guilabel>Skriptpfad</guilabel>: Dies ist das Verzeichnis, relativ zum Domainnamen, in dem phpBB installiert ist. Befindet sich Ihr Board beispielsweise unter www.example.com/phpBB3/, lautet der einzutragende Skriptpfad „/phpBB3“. Auch dieser Wert wird nur verwendet, wenn die Server-URL-Einstellungen erzwungen werden.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Wenn Sie mit der Bearbeitung der Servereinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+			</section>
+
+			<section id="acp_server_security">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Sicherheitseinstellungen</title>
+				<para>Hier, auf der Seite <guimenuitem>Sicherheitseinstellungen</guimenuitem>, können Sie sicherheitsrelevante Einstellungen verwalten; genauer gesagt können Sie sitzungs- und anmeldebezogene Einstellungen festlegen und bearbeiten. Im Folgenden werden die verfügbaren Sicherheitseinstellungen beschrieben, die Sie verwalten können. Wenn Sie mit der Konfiguration der Sicherheitseinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+
+				<!-- Perhaps include more introduction information? :-/ -->
+
+				<variablelist>
+					<varlistentry>
+						<term>Persistente Anmeldungen erlauben</term>
+						<listitem>
+							<para>Dies legt fest, ob sich Benutzer beim Besuch Ihres Boards automatisch anmelden können.</para>
+							<para>Die verfügbaren Optionen sind <guilabel>Ja</guilabel> und <guilabel>Nein</guilabel>. Die Wahl von <guilabel>Ja</guilabel> aktiviert automatische Anmeldungen.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Ablaufzeit des persistenten Anmeldeschlüssels (in Tagen)</term>
+						<listitem>
+							<para>Dies ist die festgelegte Anzahl von Tagen, die Anmeldeschlüssel gültig bleiben, bevor sie ablaufen und aus der Datenbank entfernt werden.</para>
+							<para>Sie können eine ganze Zahl in das Textfeld links neben dem Wort <guilabel>Tage</guilabel> eingeben. Diese Zahl gibt die Anzahl der Tage für den Ablauf des persistenten Anmeldeschlüssels an. Wenn Sie diese Einstellung deaktivieren möchten (und dadurch die zeitlich unbegrenzte Nutzung von Anmeldeschlüsseln erlauben), geben Sie eine „0“ in das Textfeld ein.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Sitzungs-IP-Validierung</term>
+						<listitem>
+							<para>Dies legt fest, wie viel von der <glossterm>IP-Adresse</glossterm> der Benutzer zur Validierung einer Sitzung verwendet wird.</para>
+							<para>Es stehen vier Einstellungen zur Verfügung: <guilabel>Alle</guilabel>, <guilabel>A.B.C</guilabel>, <guilabel>A.B</guilabel> und <guilabel>Keine</guilabel>. Die Einstellung <guilabel>Alle</guilabel> vergleicht die vollständige IP-Adresse. Die Einstellung <guilabel>A.B.C</guilabel> vergleicht die ersten x.x.x der IP-Adresse. Die Einstellung <guilabel>A.B</guilabel> vergleicht die ersten x.x der IP-Adresse. Die Auswahl von <guilabel>Keine</guilabel> schließlich deaktiviert die IP-Adressprüfung vollständig.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Browser validieren</term>
+						<listitem>
+							<para>Dies aktiviert die Validierung des Browsers der Benutzer für jede Sitzung. Dies kann die Sicherheit der Benutzer verbessern.</para>
+							<para>Die verfügbaren Optionen sind <guilabel>Ja</guilabel> und <guilabel>Nein</guilabel>. Die Wahl von <guilabel>Ja</guilabel> aktiviert diese Browser-Validierung.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>X_FORWARDED_FOR-Header validieren</term>
+						<listitem>
+							<para>Diese Einstellung legt fest, ob Sitzungen nur fortgesetzt werden, wenn der gesendete X_FORWARDED_FOR-Header mit dem der vorherigen Anfrage übereinstimmt. Sperren werden ebenfalls gegen <glossterm>IP-Adresse</glossterm>n im X_FORWARDED_FOR-Header geprüft.</para>
+							<para>Die verfügbaren Optionen sind <guilabel>Ja</guilabel> und <guilabel>Nein</guilabel>. Die Wahl von <guilabel>Ja</guilabel> aktiviert die Validierung des X_FORWARDED_FOR-Headers.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>IP gegen DNS-Blackhole-Liste prüfen:</term>
+						<listitem>
+							<para>Sie können außerdem die <glossterm>IP-Adresse</glossterm>n Ihrer Benutzer gegen DNS-Blackhole-Listen prüfen lassen. Diese Listen sind schwarze Listen, die bekannte schlechte IP-Adressen enthalten. Durch Aktivieren dieser Einstellung kann Ihr Board die IP-Adressen Ihrer Benutzer prüfen und mit den DNS-Blackhole-Listen abgleichen. Derzeit werden die DNS-Blacklist-Dienste der Seiten <ulink url="http://www.spamcop.net">spamcop.net</ulink>, <ulink url="http://www.dsbl.org">dsbl.org</ulink> und <ulink url="http://www.spamhaus.org">spamhaus.org</ulink> genutzt.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>E-Mail-Domain auf gültigen MX-Eintrag prüfen</term>
+						<listitem>
+							<para>Es ist außerdem möglich, die von den Benutzern Ihres Boards verwendeten E-Mail-Adressen zu validieren. Ist diese Einstellung aktiviert, werden E-Mail-Adressen, die bei der Registrierung oder bei der Änderung der E-Mail-Adresse im Profil eingegeben werden, auf einen gültigen <ulink url="http://www.wikipedia.org/wiki/MX_record">MX-Eintrag</ulink> geprüft.</para>
+							<para>Die verfügbaren Optionen sind <guilabel>Ja</guilabel> und <guilabel>Nein</guilabel>. Die Wahl von <guilabel>Ja</guilabel> aktiviert die Prüfung von MX-Einträgen für E-Mails.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Passwortkomplexität</term>
+						<listitem>
+							<para>Üblicherweise sind komplexere Passwörter besser als einfache Passwörter. Um Ihren Benutzern zu helfen, ihr Konto so sicher wie möglich zu gestalten, haben Sie auch die Möglichkeit, ein Passwort mit der von Ihnen festgelegten Komplexität zu verlangen. Diese Anforderung gilt für alle Benutzer, die ein neues Konto registrieren, oder wenn bestehende Benutzer ihr aktuelles Passwort ändern.</para>
+							<para>Im Auswahlmenü stehen vier Optionen zur Verfügung. <guimenuitem>Keine Anforderungen</guimenuitem> deaktiviert die Prüfung der Passwortkomplexität vollständig. Die Einstellung <guimenuitem>Muss Groß- und Kleinschreibung enthalten</guimenuitem> verlangt, dass die Passwörter Ihrer Benutzer sowohl Klein- als auch Großbuchstaben enthalten. Die Einstellung <guimenuitem>Muss alphanumerische Zeichen enthalten</guimenuitem> verlangt, dass die Passwörter Ihrer Benutzer sowohl Buchstaben als auch Zahlen enthalten. Die Einstellung <guimenuitem>Muss Symbole enthalten</guimenuitem> schließlich verlangt, dass die Passwörter Ihrer Benutzer Symbole enthalten.</para>
+							<note>
+								<para>Für jede Anforderung an die Passwortkomplexität gelten auch die im Auswahlmenü darüber liegenden Einstellungen. Wählen Sie beispielsweise <guimenuitem>Muss alphanumerische Zeichen enthalten</guimenuitem>, müssen die Passwörter Ihrer Benutzer nicht nur alphanumerische Zeichen enthalten, sondern auch sowohl Klein- als auch Großbuchstaben aufweisen.</para>
+							</note>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Passwortänderung erzwingen</term>
+						<listitem>
+							<para>Es ist immer sinnvoll, Passwörter von Zeit zu Zeit zu ändern. Mit dieser Einstellung können Sie Ihre Benutzer zwingen, ihre Passwörter nach einer festgelegten Anzahl von Tagen der Nutzung zu ändern.</para>
+							<para>In das Textfeld neben der Beschriftung <guilabel>Tage</guilabel> können nur ganze Zahlen eingegeben werden. Diese Zahl gibt an, nach wie vielen Tagen Ihre Benutzer ihr Passwort ändern müssen. Wenn Sie diese Funktion deaktivieren möchten, geben Sie den Wert „0“ ein.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Maximale Anzahl an Anmeldeversuchen</term>
+						<listitem>
+							<para>Es ist außerdem möglich, die Anzahl der Versuche zu begrenzen, die Ihre Benutzer zur Anmeldung haben. Durch Festlegen eines bestimmten Grenzwerts wird diese Funktion aktiviert. Dies kann nützlich sein, um Bots oder andere Benutzer vorübergehend davon abzuhalten, sich in fremde Benutzerkonten einzuloggen.</para>
+							<para>Für diese Einstellung können nur ganze Zahlen eingegeben werden. Die eingegebene Zahl ist die maximale Anzahl an Versuchen, die ein Benutzer zur Anmeldung an einem Konto unternehmen kann, bevor er seine Anmeldung visuell bestätigen muss, mittels der visuellen Bestätigung.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>PHP in Vorlagen erlauben</term>
+						<listitem>
+							<para>Im Gegensatz zu phpBB2 erlaubt phpBB3, sofern aktiviert, die Verwendung von PHP-Code in den Vorlagendateien selbst. Ist diese Option aktiviert, werden <guilabel>PHP</guilabel>- und <guilabel>INCLUDEPHP</guilabel>-Anweisungen von der Vorlagen-Engine erkannt und verarbeitet.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</section>
+
+			<section id="acp_server_load">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Lasteinstellungen</title>
+				<para>Auf besonders großen Boards kann es notwendig sein, bestimmte lastbezogene Einstellungen zu verwalten, damit Ihr Board so reibungslos wie möglich läuft. Doch auch wenn Ihr Board nicht übermäßig aktiv ist, ist es dennoch wichtig, die Lasteinstellungen Ihres Boards anpassen zu können. Die richtige Anpassung dieser Einstellungen kann dazu beitragen, den von Ihrem Server benötigten Verarbeitungsaufwand zu verringern. Denken Sie daran, nach dem Bearbeiten der serverlastbezogenen Einstellungen auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen tatsächlich zu übermitteln und anzuwenden.</para>
+
+				<para>Die erste Gruppe von Einstellungen, <guilabel>Allgemeine Einstellungen</guilabel>, ermöglicht es Ihnen, die grundlegenden lastbezogenen Einstellungen zu steuern, wie zum Beispiel die maximale Systemlast und die Sitzungsdauer. Im Folgenden wird jede Option im Detail beschrieben.
+					<itemizedlist>
+						<title>Allgemeine Einstellungen</title>
+						<listitem><para><guilabel>Systemlast begrenzen</guilabel>: Mit dieser Option können Sie die maximale Last festlegen, die der Server verkraften kann, bevor das Board automatisch offline geht. Übersteigt der Ein-Minuten-Lastdurchschnitt des Systems diesen Wert, geht das Board automatisch offline. Ein Wert von „1,0“ entspricht etwa 100 % Auslastung eines Prozessors. Beachten Sie, dass diese Option nur bei *nix-basierten Servern funktioniert, bei denen diese Information verfügbar ist. Kann Ihr Board den Lastgrenzwert nicht ermitteln, setzt sich dieser Wert selbst auf „0“ zurück. Alle positiven Zahlen sind gültige Werte für diese Option. (Hat Ihr Server beispielsweise zwei Prozessoren, würde eine Einstellung von 2,0 einer 100%igen Serverauslastung beider Prozessoren entsprechen.) Setzen Sie diesen Wert auf „0“, wenn Sie diese Option nicht aktivieren möchten.</para></listitem>
+						<listitem><para><guilabel>Sitzungsdauer</guilabel>: Dies ist die Zeit in Sekunden, bevor die Sitzungen Ihrer Benutzer ablaufen. Gültige Werte sind positive ganze Zahlen größer oder gleich 60.</para></listitem>
+						<listitem><para><guilabel>Sitzungen begrenzen</guilabel>: Es ist außerdem möglich, die maximale Anzahl an Sitzungen zu steuern, die Ihr Board verarbeitet, bevor es offline geht und vorübergehend deaktiviert wird. Übersteigt die Anzahl der von Ihrem Board innerhalb einer Minute bedienten Sitzungen diesen Wert, geht das Board offline und wird vorübergehend deaktiviert. Alle positiven ganzen Zahlen sind gültige Werte. Setzen Sie diesen Wert auf „0“, wenn Sie eine unbegrenzte Anzahl an Sitzungen zulassen möchten.</para></listitem>
+						<listitem><para><guilabel>Zeitspanne für „Wer ist online“</guilabel>: Dies ist die Anzahl an Minuten, nach der inaktive Benutzer nicht mehr in der Auflistung <guilabel>Wer ist online</guilabel> erscheinen. Je höher der angegebene Wert, desto größer die zur Erstellung der Auflistung benötigte Rechenleistung. Alle positiven ganzen Zahlen sind gültige Werte und geben die Länge der Zeitspanne in Minuten an.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Die zweite Gruppe von Einstellungen, <guilabel>Allgemeine Optionen</guilabel>, ermöglicht es Ihnen zu steuern, ob bestimmte Optionen für Ihre Benutzer auf Ihrem Board verfügbar sind. Im Folgenden wird jede Option näher beschrieben.
+					<itemizedlist>
+						<title>Allgemeine Optionen</title>
+						<listitem><para><guilabel>Gepunktete Themensymbole aktivieren</guilabel>: Themen, in denen ein Verfasser bereits gepostet hat, zeigen für diesen gepunktete Themensymbole an. Um diese Funktion zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Serverseitige Themenmarkierung aktivieren</guilabel>: Eine der vielen neuen Funktionen von phpBB3 ist die serverseitige Lesestatusverfolgung. Dies unterscheidet sich von phpBB2, das die Lesestatusverfolgung nur auf Basis von Cookies anbot. Um Informationen zum Gelesen-/Ungelesen-Status in der Datenbank statt in einem Cookie zu speichern, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Themenmarkierung für Gäste aktivieren</guilabel>: Es ist außerdem möglich, Gästen Informationen zum Gelesen-/Ungelesen-Status zur Verfügung zu stellen. Wenn Ihr Board Gelesen-/Ungelesen-Statusinformationen für Gäste speichern soll, wählen Sie <guilabel>Ja</guilabel>. Ist diese Option deaktiviert, werden Beiträge für Gäste als „gelesen“ angezeigt.</para></listitem>
+						<listitem><para><guilabel>Online-Benutzerlisten aktivieren</guilabel>: Die Online-Benutzerlisten können auf der Indexseite Ihres Boards, in jedem Forum und auf den Themenseiten angezeigt werden. Um diese Option zu aktivieren und die Anzeige der Online-Benutzerlisten zu erlauben, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Anzeige von Online-Gästen bei „Wer ist online“ aktivieren</guilabel>: Wenn Sie die Anzeige von Gastbenutzer-Informationen im Bereich <guilabel>Wer ist online</guilabel> aktivieren möchten, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Anzeige des Online-/Offline-Status von Benutzern aktivieren</guilabel>: Mit dieser Option können Sie steuern, ob Online-/Offline-Statusinformationen für Benutzer in Profilen und auf den Themenanzeige-Seiten angezeigt werden. Um diese Anzeigeoption zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Geburtstagsanzeige aktivieren</guilabel>: Geburtstage sind eine neue Funktion in phpBB3. Um die Anzeige von Geburtstagen zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Anzeige der Moderatoren aktivieren</guilabel>: Auch wenn es besonders nützlich sein kann, die Moderatoren jedes Forums aufzulisten, lässt sich diese Funktion deaktivieren, was helfen kann, den benötigten Verarbeitungsaufwand zu verringern. Um die Anzeige der Moderatoren zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Anzeige der Sprungbox aktivieren</guilabel>: Die Sprungbox kann ein nützliches Werkzeug zur Navigation innerhalb Ihres Boards sein. Sie können jedoch steuern, ob diese angezeigt wird. Um die Sprungboxen anzuzeigen, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Aktivität des Benutzers anzeigen</guilabel>: Diese Option steuert, ob die aktiven Themen-/Forumsinformationen in den Profilen Ihrer Benutzer und im <glossterm>UCP</glossterm> angezeigt werden. Wenn Sie diese Aktivitätsinformationen anzeigen möchten, wählen Sie <guilabel>Ja</guilabel>. Hat Ihr Board jedoch mehr als eine Million Beiträge, wird empfohlen, diese Funktion zu deaktivieren.</para></listitem>
+						<listitem><para><guilabel>Veraltete Vorlagen neu kompilieren</guilabel>: Diese Option steuert die Neukompilierung alter Vorlagen. Ist dies aktiviert, prüft Ihr Board, ob es aktualisierte Vorlagen in Ihrem Dateisystem gibt; falls ja, kompiliert Ihr Board die Vorlagen neu. Wählen Sie <guilabel>Ja</guilabel>, um diese Option zu aktivieren.</para></listitem>
+						<listitem><para><guilabel>Nutzung von Content Delivery Networks Dritter erlauben</guilabel>: Ist diese Einstellung aktiviert, werden einige Dateien von externen Servern Dritter (ajax.googleapis.com) statt von Ihrem eigenen Server ausgeliefert. Dies verringert die von Ihrem Server benötigte Netzwerkbandbreite, kann jedoch für manche Boardadministratoren ein Datenschutzproblem darstellen. In einer phpBB-Standardinstallation betrifft dies das Laden von „jQuery“ und der Schriftart „Open Sans“ vom Content Delivery Network von Google.</para></listitem>
+						<listitem><para><guilabel>Live-Suchen erlauben</guilabel>: Ist dies aktiviert, zeigen bestimmte Suchfelder (Mitgliederlisten-Suchen) automatisch Suchergebnisse an, während Sie tippen.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Zuletzt betrifft die letzte Gruppe von Lasteinstellungen die <guilabel>Benutzerdefinierten Profilfelder</guilabel>, eine neue Funktion in phpBB3. Im Folgenden werden diese Optionen im Detail beschrieben.
+					<itemizedlist>
+						<title>Benutzerdefinierte Profilfelder</title>
+						<listitem><para><guilabel>Stilen erlauben, benutzerdefinierte Profilfelder in der Mitgliederliste anzuzeigen</guilabel>: Mit dieser Option können Sie steuern, ob die Stile Ihres Boards die benutzerdefinierten Profilfelder (falls vorhanden) in der Mitgliederliste anzeigen können. Um dies zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Benutzerdefinierte Profilfelder in Benutzerprofilen anzeigen</guilabel>: Wenn Sie die Anzeige benutzerdefinierter Profilfelder (falls vorhanden) in den Profilen der Benutzer aktivieren möchten, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Benutzerdefinierte Profilfelder in der Themenansicht anzeigen</guilabel>: Wenn Sie die Anzeige benutzerdefinierter Profilfelder (falls vorhanden) auf den Themenanzeige-Seiten aktivieren möchten, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+
+			<section id="acp_server_search">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Sucheinstellungen</title>
+
+				<para>Ihr Board kann ein wahrer Wissensschatz sein. Diese Informationen effektiv durchsuchen zu können ist sehr wichtig, insbesondere wenn Sie die Anzahl redundanter Themen auf Ihrem Board verringern möchten. Hier, auf der Seite <guimenuitem>Sucheinstellungen</guimenuitem>, können Sie festlegen, welche Suchmethode die Suchfunktion Ihres Boards zur Indizierung von Beiträgen und zur Suche verwendet, sowie verschiedene damit verbundene Optionen festlegen. Es gibt vier Hauptkategorien von Sucheinstellungen: <guilabel>Allgemeine Sucheinstellungen</guilabel>, <guilabel>Such-Backend</guilabel>, <guilabel>Fulltext mysql</guilabel> und <guilabel>Fulltext native</guilabel>. Im Folgenden werden die einzelnen Gruppen von Sucheinstellungen im Detail beschrieben.</para>
+
+				<para>Die erste Gruppe von Sucheinstellungen ist allgemeiner Natur und richtet sich an die Benutzer, die die Suchfunktion direkt nutzen.
+					<itemizedlist>
+						<title>Allgemeine Sucheinstellungen</title>
+						<listitem><para><guilabel>Suchfunktion aktivieren</guilabel>: Setzen Sie diese Option auf <guilabel>Ja</guilabel>, um die Suchfunktion für Ihre Benutzer zu aktivieren; auch die Mitgliedersuche wird dadurch aktiviert.</para></listitem>
+						<listitem><para><guilabel>Sperrintervall für Benutzersuche</guilabel>: Dieser Wert gibt die Anzahl an Sekunden an, die Ihre Benutzer zwischen aufeinanderfolgenden Suchen warten müssen. Dieser Wert wird für jeden Benutzer unabhängig geprüft. Alle positiven ganzen Zahlen sind gültige Werte. Wenn Sie die Prüfung der Suchintervalle für Benutzer deaktivieren möchten, setzen Sie diesen Wert auf „0“.</para></listitem>
+						<listitem><para><guilabel>Sperrintervall für Gästesuche</guilabel>: Dies ist die Anzahl an Sekunden zwischen Suchen, die Gastbenutzer warten müssen. Dieser Wert gilt gemeinsam für alle Gastbenutzer; sucht ein Gast, müssen die anderen warten, bis dieses Intervall verstrichen ist. Alle positiven ganzen Zahlen sind gültige Werte. Wenn Sie die Prüfung der Suchintervalle für Gäste deaktivieren möchten, setzen Sie diesen Wert auf „0“.</para></listitem>
+						<listitem><para><guilabel>Systemlastgrenze für Suchseite</guilabel>: Sie können außerdem die Systemlast begrenzen, die durch Suchen entsteht. Übersteigt die Systemlast diesen Wert, geht Ihr Board offline und wird vorübergehend deaktiviert. Alle Zahlen zwischen 0 und 1,0 (einschließlich) sind gültige Werte. Ein Wert von „1,0“ entspricht beispielsweise etwa 100 % Auslastung eines einzelnen Prozessors; übersteigt die Systemlast diesen Wert, geht das Board offline. Beachten Sie, dass diese Funktion nur bei *nix-basierten Servern funktioniert.</para></listitem>
+						<listitem><para><guilabel>Mindestanzahl an Zeichen für Autorennamen</guilabel>: Benutzer müssen bei einer Autoren-Platzhaltersuche mindestens diese Anzahl an Zeichen des Namens eingeben. Ist der Benutzername des Autors kürzer als diese Zahl, können Ihre Benutzer dennoch nach den Beiträgen des Autors suchen, indem sie den vollständigen Benutzernamen eingeben. Alle positiven ganzen Zahlen sind gültige Werte.</para></listitem>
+						<listitem><para><guilabel>Zwischenspeicherdauer für Suchergebnisse</guilabel>: phpBB3 kann Suchergebnisse zwischenspeichern. Diese zwischengespeicherten Suchergebnisse laufen nach dieser Anzahl an Sekunden ab. Alle positiven ganzen Zahlen sind gültige Werte. Setzen Sie diesen Wert auf „0“, wenn Sie das Zwischenspeichern von Suchen deaktivieren möchten.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para>Die nächste Gruppe von Sucheinstellungen enthält eigentlich nur eine einzige Einstellung: die Wahl der Suchmethode, die die Suchfunktion Ihres Boards, sofern aktiviert, verwendet. Im Folgenden wird diese Option näher beschrieben.
+					<itemizedlist>
+						<title>Such-Backend</title>
+						<listitem><para><guilabel>Such-Backend</guilabel>: Diese Option legt die Suchmethode fest, die die Suchfunktion Ihres Boards verwendet, sofern diese aktiviert ist. Das Backend ist im Wesentlichen das System bzw. die Methode, die tatsächlich für die Durchführung der Suchen anhand der übergebenen Anfragen zuständig ist. Es gibt vier verfügbare Optionen: <guimenuitem>MySQL Fulltext</guimenuitem>, <guimenuitem>phpBB Native Fulltext</guimenuitem>, <guimenuitem>PostgreSQL Fulltext</guimenuitem> und <guimenuitem>Sphinx Fulltext</guimenuitem>.</para></listitem>
+					</itemizedlist>
+					<note>
+						<para>Wenn Sie sich entscheiden, die aktuelle Suchmethode Ihres Boards zu ändern, müssen Sie einen Index der Inhalte Ihres Boards für die neue Suchmethode erstellen. Wenn Sie sicher wissen, dass Sie den Index, der mit der zuvor gewählten Suchmethode verwendet wurde, nicht mehr benötigen, können Sie diesen auch löschen, um Systemressourcen freizugeben. Weitere Informationen zur Pflege der Suchindizes Ihres Boards finden Sie unter <xref linkend="acp_maintenance_search" />.</para>
+					</note>
+				</para>
+
+				<para><guimenuitem>MySQL Fulltext</guimenuitem> bewirkt, dass Ihr Board die Volltextsuche von MySQL als Suchmethode verwendet. Dadurch führt der SQL-Server die Suchen selbst durch, anstatt eigene Suchtabellen aufzubauen. Die angezeigten Einstellungen dienen nur zur Information; Änderungen erfordern den Systemadministrator des Servers.
+					<itemizedlist>
+						<title>Fulltext mysql</title>
+						<listitem><para><guilabel>Unterstützung für nicht-lateinische UTF-8-Zeichen mittels PCRE</guilabel>: Dies zeigt Ihnen an, ob Ihr System die Suche nach nicht-lateinischen <acronym>UTF</acronym>-8-Zeichen unterstützt. Dies ist nur in <glossterm>PHP</glossterm>-Versionen ab 4.4 sowie ab 5.1 verfügbar. Dies ist nur relevant, wenn Ihre Benutzer tatsächlich nach nicht-lateinischen Zeichen suchen können sollen.</para></listitem>
+						<listitem><para><guilabel>Unterstützung für nicht-lateinische UTF-8-Zeichen mittels mbstring</guilabel>: Unterstützt Ihr System keine UTF-8-Zeichen mittels <acronym>PCRE</acronym> (wie in der obigen Einstellung angegeben), versucht die mySQL-Fulltext-Suchmethode, die reguläre Ausdruckssuche von mbstring zu nutzen. Auch dies ist nur relevant, wenn Ihre Benutzer tatsächlich nach nicht-lateinischen Zeichen suchen können sollen.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para><guimenuitem>phpBB Native Fulltext</guimenuitem> ist die Standardoption, die eigene native Volltextsuche von phpBB.
+					<itemizedlist>
+						<title>Fulltext native</title>
+						<listitem><para><guilabel>Volltext-Aktualisierung aktivieren</guilabel>: Mit dieser Option können Sie steuern, ob der Suchindex Ihres Boards bei neuen Beiträgen aktualisiert wird. Wenn Sie dies aktivieren möchten, wählen Sie <guilabel>Ja</guilabel>. Beachten Sie, dass diese Einstellung nicht relevant ist, wenn die Suchfunktion Ihres Boards vollständig deaktiviert ist.</para></listitem>
+						<listitem><para><guilabel>Minimale von der Suche indizierte Zeichenanzahl</guilabel>: Sie können außerdem die Mindestanzahl an Zeichen festlegen, die Wörter enthalten müssen, um in den Suchindex Ihres Boards aufgenommen zu werden. Es wird empfohlen, diesen Wert nicht zu niedrig anzusetzen, um einen qualitativ hochwertigen Suchindex zu erhalten. Alle positiven ganzen Zahlen sind gültige Werte.</para></listitem>
+						<listitem><para><guilabel>Maximale von der Suche indizierte Zeichenanzahl</guilabel>: Ebenso wie bei der obigen Einstellung können Sie die maximale Anzahl an Zeichen festlegen, die Wörter enthalten dürfen, um in den Suchindex Ihres Boards aufgenommen zu werden. Enthält ein Wort mehr Zeichen als diese Zahl, wird es nicht in den Suchindex aufgenommen. Alle positiven ganzen Zahlen sind gültige Werte.</para></listitem>
+						<listitem><para><guilabel>Schwellenwert für häufige Wörter</guilabel>: Ähnlich wie die Stoppwort-Funktion von phpBB2 können Sie die Verwendung häufiger, von Ihnen festgelegter Wörter unterbinden. In phpBB3 wurde diese Funktion jedoch erweitert. Sie können nun einen Schwellenwert festlegen, den ein Wort erreichen kann; das bedeutet, dass ein Wort, das in mehr als einem bestimmten Prozentsatz der Beiträge auf Ihrem Board vorkommt, als häufiges Wort eingestuft und bei Suchanfragen ignoriert wird. Alle positiven ganzen Zahlen sind gültige Werte und geben den Prozentsatz der Beiträge Ihres Boards an, in denen Wörter enthalten sein dürfen. Wenn Sie diesen Schwellenwert deaktivieren und dadurch Suchen mit allen Wörtern, auch häufig vorkommenden, zulassen möchten, setzen Sie diesen Wert auf „0“. Diese Einstellung gilt nur, wenn Ihr Board mehr als 100 Beiträge hat.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para><guimenuitem>PostgreSQL Fulltext</guimenuitem> ähnelt MySQL Fulltext, ist jedoch für Seiten gedacht, die auf einer PostgreSQL-Datenbank laufen.
+					<itemizedlist>
+						<title>PostgreSQL Fulltext</title>
+						<listitem><para><guilabel>PostgreSQL-Version</guilabel>: Dies zeigt an, ob Sie eine Version von PostgreSQL verwenden, die Volltextsuchen unterstützt. Diese Funktion ist ab PostgreSQL 8.3 verfügbar.</para></listitem>
+						<listitem><para><guilabel>Textsuche-Konfigurationsprofil</guilabel>: Verfügt Ihr Datenbankserver über mehrere angelegte Suchkonfigurationen, können Sie hier zwischen ihnen wählen. Der Standardwert ist <emphasis>simple</emphasis>, allerdings kann eine sprachspezifische Konfiguration passender sein, wenn Ihr Board nicht-lateinischen Text enthält.</para></listitem>
+						<listitem><para><guilabel>Mindestwortlänge für Schlüsselwörter</guilabel>: Sie können außerdem die Mindestanzahl an Zeichen festlegen, die Wörter enthalten müssen, um in den Suchindex Ihres Boards aufgenommen zu werden. Es wird empfohlen, diesen Wert nicht zu niedrig anzusetzen, um einen qualitativ hochwertigen Suchindex zu erhalten. Alle positiven ganzen Zahlen sind gültige Werte.</para></listitem>
+						<listitem><para><guilabel>Maximale Wortlänge für Schlüsselwörter</guilabel>: Ebenso wie bei der obigen Einstellung können Sie die maximale Anzahl an Zeichen festlegen, die Wörter enthalten dürfen, um in den Suchindex Ihres Boards aufgenommen zu werden. Enthält ein Wort mehr Zeichen als diese Zahl, wird es nicht in den Suchindex aufgenommen. Alle positiven ganzen Zahlen sind gültige Werte.</para></listitem>
+					</itemizedlist>
+				</para>
+
+				<para><guimenuitem>Sphinx Fulltext</guimenuitem> nutzt einen speziellen Suchserver namens <ulink url="http://sphinxsearch.com/">Sphinx</ulink>. Sphinx muss installiert sein, bevor Sie es hier konfigurieren können. Wenn Sie ein großes Board mit Hunderttausenden oder mehr Beiträgen haben, werden Sie höchstwahrscheinlich Sphinx verwenden wollen.
+					<itemizedlist>
+						<title>Sphinx Fulltext</title>
+						<listitem><para><guilabel>Pfad zum Datenverzeichnis</guilabel>: Der absolute Pfad zum Datenverzeichnis, in dem Sphinx seine Indizes und Protokolldateien speichern soll. Der Pfad sollte am Ende einen Schrägstrich haben.</para></listitem>
+						<listitem><para><guilabel>Host des Sphinx-Suchdaemons</guilabel>: Der Hostname oder die IP-Adresse des Suchservers. Für localhost leer lassen.</para></listitem>
+						<listitem><para><guilabel>Port des Sphinx-Suchdaemons</guilabel>: Der Port, auf dem der Suchserver läuft. Für den Standardport 9312 leer lassen.</para></listitem>
+						<listitem><para><guilabel>Speichergrenze des Indexers</guilabel>: Die Speichermenge, die der Suchserver nutzen darf. Dieser Wert sollte kleiner sein als der maximal auf dem System verfügbare Speicher.</para></listitem>
+						<listitem><para><guilabel>Sphinx-Konfigurationsdatei</guilabel>: Die generierte Ausgabe für Ihre sphinx.conf-Datei für den Suchserver.</para></listitem>
+					</itemizedlist>
+					Nach dem Absenden des Formulars wird eine Sphinx-Suchtabelle in der Datenbank erstellt. Die Such-Indexer müssen weiterhin manuell gestartet werden, bevor die Indizes erstellt werden. Die genauen dafür benötigten Befehle und mehr finden Sie im Serverhandbuch: <link linkend="server_sphinx">Konfiguration der Sphinx-Suche</link>.
+				</para>
+			</section>
+		</section>
+	</section>
+
+	<section id="acp_forums">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Forenverwaltung</title>
+		<para>Der Bereich <guilabel>Foren</guilabel> bietet die Werkzeuge zur Verwaltung Ihrer Foren. Egal, ob Sie neue Foren hinzufügen, neue Kategorien anlegen, Forenbeschreibungen ändern oder Ihre Foren neu anordnen oder umbenennen möchten – hier sind Sie richtig.</para>
+		<section id="acp_forums_types">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Erklärung der Forentypen</title>
+			<para>In phpBB 3.3 gibt es drei Forentypen. Ein Forum kann ein normales Forum sein, in dem Beiträge verfasst werden können, eine Kategorie, die Foren enthält, oder ein einfacher Link.</para>
+			<variablelist>
+				<varlistentry>
+					<term>Forum</term>
+					<listitem>
+						<para>In einem Forum können Benutzer ihre Themen erstellen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Link</term>
+					<listitem>
+						<para>Die Forenliste zeigt einen Forenlink wie ein normales Forum an. Anstatt jedoch auf ein Forum zu verlinken, können Sie ihn auf eine URL Ihrer Wahl verweisen lassen. Er kann einen Klickzähler anzeigen, der angibt, wie oft der Link angeklickt wurde.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Kategorie</term>
+					<listitem>
+						<para>Wenn Sie mehrere Foren oder Links zu einem bestimmten Thema zusammenfassen möchten, können Sie sie in eine Kategorie einordnen. Die Foren erscheinen dann unterhalb des Kategorietitels, klar von anderen Kategorien getrennt. Benutzer können in Kategorien keine Beiträge verfassen.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		<section id="acp_forums_subforums">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Unterforen</title>
+			<para>Eine der Funktionen von phpBB 3.3 sind <glossterm>Unterforen</glossterm>. Besonders Foren mit einer großen Anzahl an Bereichen profitieren davon. Beim einfachen, flachen Ansatz aus Kategorien und Foren in phpBB 2.0 wurden alle Foren und Kategorien im Forenindex aufgelistet. In Proteus können Sie nun beliebig viele Foren, Links oder Kategorien in andere Foren einfügen.</para>
+			<!-- (TODO: Diagram of a 2.0 / 3.0 comparison) -->
+			<para>Haben Sie beispielsweise ein Forum über Haustiere, können Sie darin Unterforen für Katzen, Hunde oder Meerschweinchen anlegen, ohne dass das übergeordnete Forum „Haustiere“ dadurch zu einer Kategorie wird. In diesem Beispiel wird nur das Forum „Haustiere“ wie ein normales Forum im Index aufgeführt. Seine Unterforen erscheinen als einfache Links unterhalb der Forenbeschreibung (sofern Sie dies nicht deaktiviert haben).</para>
+
+			<figure id="img_acp_subforums_list">
+				<title>Unterforen erstellen</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/subforums_list.png"/>
+					</imageobject>
+					<caption>
+						<para>Erstellen von Unterforen. In diesem Beispiel gehören die Unterforen „Katzen“ und „Hunde“ zum übergeordneten Forum „Haustiere“. Achten Sie genau auf die Breadcrumbs auf der Seite, direkt über der Liste der Unterforen. Sie zeigen Ihnen genau, wo Sie sich in der Forenhierarchie befinden.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<para>Dieses System erlaubt theoretisch unbegrenzt viele Ebenen an Unterforen. Sie können beliebig viele Unterforen innerhalb von Unterforen anlegen. Übertreiben Sie es jedoch bitte nicht mit dieser Funktion. Bei Boards mit fünf bis zehn Foren oder weniger ist es keine gute Idee, Unterforen zu verwenden. Denken Sie daran: Je weniger Foren Sie haben, desto aktiver wirkt Ihr Forum. Sie können später jederzeit weitere Foren hinzufügen.</para>
+			<para>Lesen Sie den <link linkend="acp_forums_manage">Abschnitt zur Forenverwaltung</link>, um zu erfahren, wie Sie Unterforen erstellen.</para>
+		</section>
+		<section id="acp_forums_manage">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Foren verwalten</title>
+			<para>Hier können Sie Foren, Kategorien und Links hinzufügen, bearbeiten, löschen und neu anordnen.</para>
+
+			<figure id="img_acp_forums_manage_legend">
+				<title>Symbollegende der Forenverwaltung</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/manage_forums_icon_legend.png"/>
+					</imageobject>
+					<caption>
+						<para>Dies ist die Legende für die Symbole auf der Seite zur Forenverwaltung. Jedes Symbol führt eine bestimmte Aktion aus. Achten Sie bei der Verwaltung Ihrer Foren genau darauf, auf welche Aktion Sie klicken.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<para>Die erste Seite von <guilabel>Foren verwalten</guilabel> zeigt Ihnen eine Liste Ihrer obersten Foren und Kategorien. Beachten Sie, dass dies nicht dem Forenindex entspricht, da Kategorien hier nicht aufgeklappt werden. Wenn Sie die Foren innerhalb einer Kategorie neu anordnen möchten, müssen Sie zuerst die Kategorie öffnen.</para>
+		</section>
+	</section>
+	<section id="acp_posting">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Beitragseinstellungen</title>
+
+		<para>Foren sind ohne Inhalt nutzlos. Inhalte werden von Ihren Benutzern erstellt und veröffentlicht; daher ist es sehr wichtig, die richtigen Beitragseinstellungen zu haben, die steuern, wie Inhalte veröffentlicht werden. Diesen Bereich erreichen Sie über den Navigationsreiter <guimenuitem>Beiträge</guimenuitem>.</para>
+		<para>Die erste Seite, die Sie im Bereich <guimenuitem>Beitragseinstellungen</guimenuitem> sehen, ist <guilabel>BBCodes</guilabel>. Die übrigen verfügbaren Unterabschnitte sind in zwei Hauptgruppen unterteilt: <guilabel>Nachrichten</guilabel> und <guilabel>Anhänge</guilabel>. <guimenuitem>Einstellungen für private Nachrichten</guimenuitem>, <guimenuitem>Themensymbole</guimenuitem>, <guimenuitem>Smilies</guimenuitem> und <guimenuitem>Wortzensur</guimenuitem> sind nachrichtenbezogene Einstellungen. <guimenuitem>Anhang-Einstellungen</guimenuitem>, <guimenuitem>Erweiterungen verwalten</guimenuitem>, <guimenuitem>Erweiterungsgruppen verwalten</guimenuitem> und <guimenuitem>Verwaiste Anhänge</guimenuitem> sind anhangbezogene Einstellungen.</para>
+
+		<section id="acp_posting_bbcodes">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>BBCodes</title>
+
+			<para><glossterm>BBCodes</glossterm> sind eine spezielle Methode zur Formatierung von Beiträgen, ähnlich wie HTML. phpBB 3.3 erlaubt es Ihnen, sehr einfach eigene BBCodes zu erstellen. Auf dieser Seite sehen Sie die aktuell vorhandenen benutzerdefinierten BBCodes.</para>
+			<para>Das Hinzufügen eines BBCodes ist sehr einfach. Richtig umgesetzt, kann es sicherer sein, Benutzern die Verwendung Ihres neuen BBCodes zu erlauben, als ihnen die Verwendung von HTML-Code zu gestatten. Um einen BBCode hinzuzufügen, klicken Sie auf <guilabel>Neuen BBCode hinzufügen</guilabel>. Beim Hinzufügen eines BBCodes gibt es vier wesentliche Punkte zu beachten: wie Ihre Benutzer den BBCode verwenden sollen, welchen HTML-Code der BBCode tatsächlich verwendet (dies sehen die Benutzer nicht), welche Kurzinfo-Meldung Sie für den BBCode wünschen und ob für den neuen BBCode eine Schaltfläche auf dem Beitragsbildschirm angezeigt werden soll. Wenn Sie mit der Konfiguration aller Einstellungen des benutzerdefinierten BBCodes fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihren neuen BBCode hinzuzufügen.</para>
+
+			<figure id="img_acp_creating_bbcodes">
+				<title>BBCodes erstellen</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/creating_bbcodes.png"/>
+					</imageobject>
+					<caption>
+						<para>Erstellen eines neuen BBCodes. In diesem Beispiel erstellen wir einen neuen [font]-BBCode, mit dem Benutzer die Schriftart des angegebenen Textes festlegen können.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<para>Im Formular <guilabel>BBCode-Verwendung</guilabel> können Sie festlegen, wie Ihre Benutzer den BBCode verwenden sollen. Angenommen, Sie möchten einen neuen font-BBCode erstellen, mit dem Ihre Benutzer eine Schriftart für ihren Text auswählen können. Ein Beispiel für den Eintrag unter <guilabel>BBCode-Verwendung</guilabel> wäre
+				<code>[font={SIMPLETEXT}]{TEXT}[/font]</code>
+				Dies würde einen neuen [font]-BBCode erzeugen und dem Benutzer erlauben, die gewünschte Schriftart für den Text auszuwählen. Der Text des Benutzers wird durch <guilabel>TEXT</guilabel> dargestellt, während <guilabel>SIMPLETEXT</guilabel> den vom Benutzer eingegebenen Schriftartnamen darstellt.
+			</para>
+			<para>Im Formular <guilabel>HTML-Ersetzung</guilabel> können Sie festlegen, welchen HTML-Code Ihr neuer BBCode tatsächlich zur Formatierung des Textes verwendet. Versuchen Sie beim Erstellen eines neuen [font]-BBCodes zum Beispiel
+				<code>&lt;span style="font-family: {SIMPLETEXT}"&gt;{TEXT}&lt;span&gt;</code>
+				Dieser HTML-Code wird zur tatsächlichen Formatierung des Textes des Benutzers verwendet.
+			</para>
+			<para>Der dritte Punkt, den Sie beim Hinzufügen eines benutzerdefinierten BBCodes berücksichtigen sollten, ist, welche Art von Hilfetext Ihren Benutzern angezeigt werden soll, wenn sie den neuen BBCode verwenden möchten. Idealerweise ist die Hilfetext-Meldung ein kurzer Hinweis oder Tipp für den Benutzer, der den BBCode verwendet. Diese Meldung wird unterhalb der BBCode-Zeile auf den Beitragsbildschirmen angezeigt.</para>
+			<note>
+				<para>Ist die als Nächstes beschriebene Option <guilabel>Beim Posten anzeigen</guilabel> nicht aktiviert, wird die Hilfetext-Meldung nicht angezeigt.</para>
+			</note>
+			<para>Zuletzt können Sie beim Hinzufügen eines neuen BBCodes entscheiden, ob für Ihren neuen BBCode auf den Beitragsbildschirmen eine eigentliche BBCode-Schaltfläche angezeigt werden soll. Falls gewünscht, aktivieren Sie das Kontrollkästchen <guilabel>Beim Posten anzeigen</guilabel>.</para>
+			<para>Es ist wichtig, beim Erstellen Ihrer benutzerdefinierten BBCodes geeignete Platzhalter (Tokens) zu wählen. Die Tokens begrenzen die Art der akzeptierten Eingabe. Wenn Sie nur URLs zulassen möchten, verwenden Sie den Platzhalter <guilabel>URL</guilabel>. Wenn Sie nur Zahlen zulassen möchten, verwenden Sie den Platzhalter <guilabel>NUMBER</guilabel>.</para>
+
+			<variablelist>
+				<title>BBCode-Platzhalter</title>
+				<varlistentry>
+					<term>{TEXT}</term>
+					<listitem>
+						<para>Beliebiger Text, einschließlich fremdsprachiger Zeichen, Zahlen usw. Sie sollten diesen Platzhalter <emphasis role="strong">NICHT</emphasis> in HTML-Element-Attributen verwenden (z. B. <code>&lt;a href="{TEXT}"&gt;</code>). Verwenden Sie stets den restriktivsten möglichen Platzhalter.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{SIMPLETEXT}</term>
+					<listitem>
+						<para>Zeichen des lateinischen Alphabets (A-Z), Zahlen, Leerzeichen, Kommas, Punkte, Minus, Plus, Bindestrich und Unterstrich. Enthält keine Apostrophe oder Anführungszeichen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{INTTEXT}</term>
+					<listitem>
+						<para>Unicode-Buchstaben, Zahlen, Leerzeichen, Kommas, Punkte, Minus, Plus, Bindestrich, Unterstrich und Leerraumzeichen. Enthält keine Apostrophe oder Anführungszeichen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{IDENTIFIER}</term>
+					<listitem>
+						<para>Zeichen des lateinischen Alphabets (A-Z), Zahlen, Bindestrich und Unterstrich. Enthält die meisten Satzzeichen nicht.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{NUMBER}</term>
+					<listitem>
+						<para>Eine beliebige Ziffernfolge.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{EMAIL}</term>
+					<listitem>
+						<para>Eine gültige E-Mail-Adresse.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{URL}</term>
+					<listitem>
+						<para>Eine gültige URL mit einem beliebigen Protokoll (http, ftp usw.; kann nicht für JavaScript-Angriffe verwendet werden). Wird keines angegeben, wird der Zeichenkette „http://“ vorangestellt.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{LOCAL_URL}</term>
+					<listitem>
+						<para>Eine lokale URL. Die URL muss relativ zur Themenseite sein und darf keinen Servernamen oder Protokoll enthalten, da Links mit „http://ihredomain/forum/“ vorangestellt werden.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{RELATIVE_URL}</term>
+					<listitem>
+						<para>Eine relative URL. Sie können dies verwenden, um Teile einer URL abzugleichen, aber Vorsicht: Eine vollständige URL ist ebenfalls eine gültige relative URL. Wenn Sie relative URLs Ihres Boards verwenden möchten, nutzen Sie den Platzhalter LOCAL_URL.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>{COLOR}</term>
+					<listitem>
+						<para>Eine HTML-Farbe, entweder in der numerischen Form #FF1234 oder als <ulink url="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">CSS-Farbschlüsselwort</ulink> wie fuchsia oder InactiveBorder.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			Wenn Sie denselben Platzhaltertyp mehr als einmal verwenden müssen, können Sie zwischen ihnen unterscheiden, indem Sie als letztes Zeichen innerhalb der geschweiften Klammern eine Zahl hinzufügen, z. B. {TEXT1}, {TEXT2}.
+		</section>
+
+		<section id="acp_posting_pm_settings">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Einstellungen für private Nachrichten</title>
+
+			<para>Viele Benutzer nutzen das System für private Nachrichten Ihres Boards. Hier können Sie alle Standardeinstellungen zu <glossterm>privaten Nachrichten</glossterm> verwalten. Nachfolgend sind die Einstellungen aufgeführt, die Sie ändern können. Wenn Sie mit dem Festlegen der Beitragseinstellungen fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+			<itemizedlist>
+				<title>Allgemeine Einstellungen</title>
+				<listitem><para><guilabel>Private Nachrichten</guilabel>: Sie können das System für private Nachrichten Ihres Boards aktivieren oder deaktivieren. Um es zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+				<listitem><para><guilabel>Maximale Anzahl privater Nachrichtenordner</guilabel>: Dies ist die maximale Anzahl neuer Ordner für private Nachrichten, die Ihre Benutzer jeweils anlegen können.</para></listitem>
+				<listitem><para><guilabel>Maximale Anzahl privater Nachrichten pro Ordner</guilabel>: Dies ist die maximale Anzahl privater Nachrichten, die Ihre Benutzer in jedem ihrer Ordner haben können.</para></listitem>
+				<listitem><para><guilabel>Standardaktion bei vollem Ordner</guilabel>: Manchmal möchten Ihre Benutzer sich gegenseitig eine private Nachricht senden, doch der vorgesehene Empfänger hat einen vollen Ordner. Diese Einstellung legt fest, was mit der gesendeten Nachricht genau geschieht. Sie können entweder festlegen, dass eine alte Nachricht gelöscht wird, um Platz für die neue zu schaffen, oder dass neue Nachrichten zurückgehalten werden, bis der Empfänger in seinem Posteingang Platz schafft. Beachten Sie, dass die Standardaktion für den <guilabel>Gesendet-Ordner</guilabel> das Löschen alter Nachrichten ist.</para></listitem>
+				<listitem><para><guilabel>Bearbeitungszeit begrenzen</guilabel>: Benutzern ist es üblicherweise erlaubt, ihre gesendeten privaten Nachrichten zu bearbeiten, bevor der Empfänger sie liest, selbst wenn sie sich bereits im Postausgang befinden. Sie können festlegen, wie viel Zeit Ihre Benutzer zum Bearbeiten gesendeter privater Nachrichten haben.</para></listitem>
+			</itemizedlist>
+
+			<itemizedlist>
+				<title>Allgemeine Optionen</title>
+				<listitem><para><guilabel>Versenden privater Nachrichten an mehrere Benutzer und Gruppen erlauben</guilabel>: In phpBB 3.3 ist es möglich, eine private Nachricht an mehr als einen Benutzer zu senden. Um dies zu erlauben, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+				<listitem><para><guilabel>BBCode in privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, um die Verwendung von BBCode in privaten Nachrichten zu erlauben.</para></listitem>
+				<listitem><para><guilabel>Smilies in privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, um die Verwendung von Smilies in privaten Nachrichten zu erlauben.</para></listitem>
+				<listitem><para><guilabel>Anhänge in privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, um die Verwendung von Anhängen in privaten Nachrichten zu erlauben.</para></listitem>
+				<listitem><para><guilabel>Signatur in privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, damit Ihre Benutzer ihre <glossterm>Signatur</glossterm> in ihren privaten Nachrichten einfügen können.</para></listitem>
+				<listitem><para><guilabel>Druckansicht in privaten Nachrichten erlauben</guilabel>: Eine weitere neue Funktion in phpBB 3.3 ist eine druckerfreundliche Ansicht. Wählen Sie <guilabel>Ja</guilabel>, damit Ihre Benutzer ihre privaten Nachrichten in der Druckansicht betrachten können.</para></listitem>
+				<listitem><para><guilabel>Weiterleiten von privaten Nachrichten erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, damit Ihre Benutzer private Nachrichten weiterleiten können.</para></listitem>
+				<listitem><para><guilabel>Verwendung des [img]-BBCode-Tags erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihre Benutzer in ihren privaten Nachrichten eingebettete Bilder posten können sollen.</para></listitem>
+				<listitem><para><guilabel>Verwendung des [flash]-BBCode-Tags erlauben</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Ihre Benutzer in ihren privaten Nachrichten eingebettete Macromedia-Flash-Objekte posten können sollen.</para></listitem>
+				<listitem><para><guilabel>Verwendung von Themensymbolen in privaten Nachrichten aktivieren</guilabel>: Wählen Sie <guilabel>Ja</guilabel>, wenn Sie Ihren Benutzern erlauben möchten, Themensymbole zu ihren privaten Nachrichten hinzuzufügen. (Themensymbole werden neben den Titeln der privaten Nachrichten angezeigt.)</para></listitem>
+			</itemizedlist>
+
+			<tip>
+				<para>Wenn Sie eine der obigen numerischen Einstellungen so festlegen möchten, dass eine unbegrenzte Anzahl zulässig ist, setzen Sie die numerische Einstellung auf 0.</para>
+			</tip>
+		</section>
+
+		<section id="acp_posting_topic_icons">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Themensymbole</title>
+
+			<para>Eine neue Funktion in phpBB3 ist die Möglichkeit, Themen Symbole zuzuweisen. Auf dieser Seite können Sie verwalten, welche Themensymbole auf Ihrem Board zur Verfügung stehen. Sie können Themensymbole hinzufügen, bearbeiten, löschen oder verschieben. Das Formular <guilabel>Themensymbole</guilabel> zeigt die derzeit auf Ihrem Board installierten Themensymbole an. Sie können Themensymbole manuell hinzufügen, ein vorgefertigtes Symbolpaket installieren, ein Symbolpaket exportieren oder herunterladen oder Ihre derzeit installierten Themensymbole bearbeiten.</para>
+
+			<para>Ihre erste Möglichkeit, Themensymbole zu Ihrem Board hinzuzufügen, ist die Verwendung eines vorgefertigten Symbolpakets. Symbolpakete haben die Dateiendung <filename>pak</filename>. Um ein Symbolpaket zu installieren, müssen Sie zunächst ein Symbolpaket herunterladen. Laden Sie die Symboldateien selbst sowie die Paketdatei in das Verzeichnis <filename>/images/icons/</filename> hoch. Klicken Sie dann auf <guilabel>Symbolpaket installieren</guilabel>. Das Formular <guilabel>Symbolpaket installieren</guilabel> zeigt alle Optionen zur Installation von Themensymbolen an. Wählen Sie das Symbolpaket aus, das Sie hinzufügen möchten (es kann jeweils nur ein Symbolpaket installiert werden). Anschließend können Sie festlegen, was mit den bereits installierten Themensymbolen geschehen soll, falls das neue Symbolpaket Symbole enthält, die mit diesen in Konflikt stehen. Sie können entweder die vorhandenen Symbole beibehalten (es kann dann Duplikate geben), die Übereinstimmungen ersetzen (die bereits vorhandenen Symbole überschreiben) oder einfach alle in Konflikt stehenden Symbole löschen. Wenn Sie die gewünschte Option ausgewählt haben, klicken Sie auf <guilabel>Symbolpaket installieren</guilabel>.</para>
+
+			<para>Um Themensymbol(e) manuell hinzuzufügen, müssen Sie die Symbole zunächst in das Symbolverzeichnis Ihrer Seite hochladen. Rufen Sie die Seite <guimenuitem>Themensymbole</guimenuitem> auf. Klicken Sie auf <guilabel>Mehrere Symbole hinzufügen</guilabel>, zu finden im Formular <guilabel>Themensymbole</guilabel>. Haben Sie Ihre neuen gewünschten Themensymbole korrekt in das entsprechende Verzeichnis <filename>/images/icons/</filename> hochgeladen, sollten Sie für jedes neu hochgeladene Symbol eine Zeile mit Einstellungen sehen. Im Folgenden wird beschrieben, wofür jedes Feld dient. Wenn Sie mit dem Hinzufügen der Themensymbole fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Ergänzungen zu übermitteln.</para>
+
+			<itemizedlist>
+				<listitem><para><guilabel>Symboldatei</guilabel>: Diese Spalte zeigt das eigentliche Symbol an.</para></listitem>
+				<listitem><para><guilabel>Symbolpfad</guilabel>: Diese Spalte zeigt den Pfad an, in dem sich das Symbol befindet, relativ zum Verzeichnis <filename>/images/icons/</filename>.</para></listitem>
+				<listitem><para><guilabel>Symbolbreite</guilabel>: Dies ist die Breite (in Pixeln), auf die das Symbol gestreckt werden soll.</para></listitem>
+				<listitem><para><guilabel>Symbolhöhe</guilabel>: Dies ist die Höhe (in Pixeln), auf die das Symbol gestreckt werden soll.</para></listitem>
+				<listitem><para><guilabel>Beim Posten anzeigen</guilabel>: Ist dieses Kontrollkästchen aktiviert, wird das Themensymbol tatsächlich auf dem Beitragsbildschirm angezeigt.</para></listitem>
+				<listitem><para><guilabel>Symbolreihenfolge</guilabel>: Sie können außerdem festlegen, in welcher Reihenfolge das Themensymbol angezeigt wird. Sie können das Themensymbol entweder an die erste Stelle setzen oder nach einem beliebigen anderen bereits installierten Themensymbol.</para></listitem>
+				<listitem><para><guilabel>Hinzufügen</guilabel>: Sind Sie mit den Einstellungen zum Hinzufügen Ihres neuen Themensymbols zufrieden, aktivieren Sie dieses Kontrollkästchen.</para></listitem>
+			</itemizedlist>
+
+			<para>Sie können auch die Einstellungen Ihrer derzeit installierten Themensymbole bearbeiten. Klicken Sie dazu auf <guilabel>Symbole bearbeiten</guilabel>. Sie sehen dann das Formular <guilabel>Symbolkonfiguration</guilabel>. Weitere Informationen zu jedem Feld finden Sie im obigen Absatz zum Hinzufügen von Themensymbolen.</para>
+
+			<para>Zuletzt können Sie die Themensymbole auch neu anordnen, die Einstellungen eines Themensymbols bearbeiten oder ein Themensymbol entfernen. Um ein Themensymbol neu anzuordnen, klicken Sie auf das entsprechende Symbol „nach oben“ oder „nach unten“. Um die aktuellen Einstellungen eines Themensymbols zu bearbeiten, klicken Sie auf die Schaltfläche „Einstellungen“. Um ein Themensymbol zu löschen, klicken Sie auf die rote Schaltfläche „Löschen“.</para>
+		</section>
+
+		<section id="acp_posting_smilies">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Smilies</title>
+
+			<para>Smilies bzw. Emoticons sind in der Regel kleine, teils animierte Bilder, mit denen eine Emotion oder ein Gefühl ausgedrückt wird. Über diese Seite können Sie die Smilies auf Ihrem Board verwalten. Um Smilies hinzuzufügen, können Sie entweder ein vorgefertigtes Smiley-Paket installieren oder Smilies manuell hinzufügen. Auf der Seite finden Sie das Formular <guilabel>Smilies</guilabel>, das die derzeit auf Ihrem Board installierten Smilies auflistet. </para>
+
+			<para>Ihre erste Möglichkeit, Smilies zu Ihrem Board hinzuzufügen, ist die Verwendung eines vorgefertigten Smiley-Pakets. Smiley-Pakete haben die Dateiendung <filename>pak</filename>. Um ein Smiley-Paket zu installieren, müssen Sie zunächst ein Smiley-Paket herunterladen. Laden Sie die Smiley-Dateien selbst sowie die Paketdatei in das Verzeichnis <filename>/images/smilies/</filename> hoch. Klicken Sie dann auf <guilabel>Smiley-Paket installieren</guilabel>. Das Formular <guilabel>Smiley-Paket installieren</guilabel> zeigt alle Optionen zur Installation von Smilies an. Wählen Sie das Smiley-Paket aus, das Sie hinzufügen möchten (es kann jeweils nur ein Smiley-Paket installiert werden). Anschließend können Sie festlegen, was mit den bereits installierten Smilies geschehen soll, falls das neue Smiley-Paket Symbole enthält, die mit diesen in Konflikt stehen. Sie können entweder die vorhandenen Smilies beibehalten (es kann dann Duplikate geben), die Übereinstimmungen ersetzen (die bereits vorhandenen Smilies überschreiben) oder einfach alle in Konflikt stehenden Smilies löschen. Wenn Sie die gewünschte Option ausgewählt haben, klicken Sie auf <guilabel>Smiley-Paket installieren</guilabel>.</para>
+
+			<para>Um Ihrem Board manuell ein Smiley hinzuzufügen, müssen Sie die Smilies zunächst in das Verzeichnis <filename>/images/smilies/</filename> hochladen. Klicken Sie dann auf <guilabel>Mehrere Smilies hinzufügen</guilabel>. Von hier aus können Sie ein Smiley hinzufügen und konfigurieren. Im Folgenden sind die Einstellungen aufgeführt, die Sie für die neuen Smilies festlegen können. Wenn Sie mit dem Hinzufügen eines Smileys fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
+
+			<itemizedlist>
+				<listitem><para><guilabel>Smiley-Bilddatei</guilabel>: So sieht das Smiley tatsächlich aus.</para></listitem>
+				<listitem><para><guilabel>Smiley-Pfad</guilabel>: Hier befindet sich das Smiley, relativ zum Verzeichnis <filename>/images/smilies/</filename>.</para></listitem>
+				<listitem><para><guilabel>Smiley-Code</guilabel>: Dies ist der Text, der durch das Smiley ersetzt wird.</para></listitem>
+				<listitem><para><guilabel>Bezeichnung</guilabel>: Dies ist der Titel des Smileys.</para></listitem>
+				<listitem><para><guilabel>Smiley-Breite</guilabel>: Dies ist die Breite in Pixeln, auf die das Smiley gestreckt wird.</para></listitem>
+				<listitem><para><guilabel>Smiley-Höhe</guilabel>: Dies ist die Höhe in Pixeln, auf die das Smiley gestreckt wird.</para></listitem>
+				<listitem><para><guilabel>Beim Posten anzeigen</guilabel>: Ist dieses Kontrollkästchen aktiviert, wird dieses Smiley tatsächlich auf dem Beitragsbildschirm angezeigt.</para></listitem>
+				<listitem><para><guilabel>Smiley-Reihenfolge</guilabel>: Sie können außerdem festlegen, in welcher Reihenfolge das Smiley angezeigt wird. Sie können das Smiley entweder an die erste Stelle setzen oder nach einem beliebigen anderen bereits installierten Smiley.</para></listitem>
+				<listitem><para><guilabel>Hinzufügen</guilabel>: Sind Sie mit den Einstellungen zum Hinzufügen Ihres neuen Smileys zufrieden, aktivieren Sie dieses Kontrollkästchen.</para></listitem>
+			</itemizedlist>
+
+			<para>Sie können auch die Einstellungen Ihrer derzeit installierten Smilies bearbeiten. Klicken Sie dazu auf <guilabel>Smilies bearbeiten</guilabel>. Sie sehen dann das Formular <guilabel>Smiley-Konfiguration</guilabel>. Weitere Informationen zu jedem Feld finden Sie im obigen Absatz zum Hinzufügen von Smilies.</para>
+
+			<para>Zuletzt können Sie die Smilies auch neu anordnen, die Einstellungen eines Smileys bearbeiten oder ein Smiley entfernen. Um ein Smiley neu anzuordnen, klicken Sie auf das entsprechende Symbol „nach oben“ oder „nach unten“. Um die aktuellen Einstellungen eines Smileys zu bearbeiten, klicken Sie auf die Schaltfläche „Einstellungen“. Um ein Smiley zu löschen, klicken Sie auf die rote Schaltfläche „Löschen“.</para>
+		</section>
+
+		<section id="acp_posting_censors">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Wortzensur</title>
+
+			<para>In manchen Foren wird ein gewisses Maß an angemessener, unanstößiger Sprache verlangt. Wie phpBB2 bietet auch phpBB3 weiterhin eine Wortzensur an. Wörter, die den im Bereich <guilabel>Wortzensur</guilabel> festgelegten Mustern entsprechen, werden automatisch mit einem von Ihnen, dem Administrator, festgelegten Text zensiert. Um die Wortzensur Ihres Boards zu verwalten, klicken Sie auf <guimenuitem>Wortzensur</guimenuitem>.</para>
+
+			<para>Um eine neue Wortzensur hinzuzufügen, klicken Sie auf <guilabel>Neues Wort hinzufügen</guilabel>. Es gibt zwei Felder: <guilabel>Wort</guilabel> und <guilabel>Ersetzung</guilabel>. Geben Sie das Wort, das automatisch zensiert werden soll, in das Textfeld <guilabel>Wort</guilabel> ein. (Beachten Sie, dass Sie Platzhalter (*) verwenden können.) Geben Sie dann den Text, durch den das zensierte Wort ersetzt werden soll, in das Textfeld <guilabel>Ersetzung</guilabel> ein. Wenn Sie fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um das neue zensierte Wort zu Ihrem Board hinzuzufügen.</para>
+
+			<para>Um eine bestehende Wortzensur zu bearbeiten, suchen Sie die Zeile des zensierten Wortes. Klicken Sie auf das „Bearbeiten“-Symbol in dieser Zeile und fahren Sie mit der Änderung der Einstellungen des zensierten Wortes fort.</para>
+		</section>
+
+		<section id="acp_attach_settings">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Anhang-Einstellungen</title>
+
+			<para>Wenn Sie Ihren Benutzern das Posten von Anhängen erlauben, ist es wichtig, die Anhang-Einstellungen Ihres Boards steuern zu können. Hier können Sie die Haupteinstellungen für Anhänge sowie die zugehörigen speziellen Kategorien konfigurieren. Wenn Sie mit der Konfiguration der Anhang-Einstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
+
+			<itemizedlist>
+				<title>Anhang-Einstellungen</title>
+				<listitem><para><guilabel>Anhänge erlauben</guilabel>: Wenn Anhänge auf Ihrem Board aktiviert sein sollen, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+				<listitem><para><guilabel>Anhänge in privaten Nachrichten erlauben</guilabel>: Wenn Sie das Posten von Anhängen in privaten Nachrichten aktivieren möchten, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
+				<listitem><para><guilabel>Upload-Verzeichnis</guilabel>: Das Verzeichnis, in das Anhänge hochgeladen werden. Das Standardverzeichnis ist <filename>/files/</filename>.</para></listitem>
+				<listitem><para><guilabel>Anzeigereihenfolge der Anhänge</guilabel>: Die Reihenfolge, in der Anhänge angezeigt werden, basierend auf dem Zeitpunkt, zu dem der Anhang gepostet wurde.</para></listitem>
+				<listitem><para><guilabel>Gesamtkontingent für Anhänge</guilabel>: Der maximale Speicherplatz, der für alle Anhänge Ihres Boards zur Verfügung steht. Soll dieses Kontingent unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
+				<listitem><para><guilabel>Maximale Dateigröße</guilabel>: Die maximal zulässige Dateigröße eines Anhangs. Soll dieser Wert unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
+				<listitem><para><guilabel>Maximale Dateigröße bei Nachrichten</guilabel>: Der maximale Speicherplatz, der pro Benutzer für Anhänge in privaten Nachrichten zur Verfügung steht. Soll dieses Kontingent unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
+				<listitem><para><guilabel>Max. Anhänge pro Beitrag</guilabel>: Die maximale Anzahl an Anhängen, die in einem Beitrag gepostet werden können. Soll dieser Wert unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
+				<listitem><para><guilabel>Max. Anhänge pro Nachricht</guilabel>: Die maximale Anzahl an Anhängen, die in einer privaten Nachricht gepostet werden können. Soll dieser Wert unbegrenzt sein, verwenden Sie den Wert 0.</para></listitem>
+				<listitem><para><guilabel>Sichere Downloads aktivieren</guilabel>: Wenn Sie Anhänge nur für bestimmte <glossterm>IP-Adresse</glossterm>n oder Hostnamen verfügbar machen möchten, sollte diese Option aktiviert werden. Sie können sichere Downloads nach der Aktivierung hier weiter konfigurieren; die spezifischen Einstellungen für sichere Downloads befinden sich in den Formularen <guilabel>Erlaubte IPs/Hostnamen festlegen</guilabel> und <guilabel>Erlaubte IPs/Hostnamen entfernen oder deren Ausschluss aufheben</guilabel> am unteren Ende der Seite.</para></listitem>
+				<listitem><para><guilabel>Erlauben-/Verweigern-Liste</guilabel>: Hiermit können Sie das Standardverhalten konfigurieren, wenn sichere Downloads aktiviert sind. Eine Positivliste (<guilabel>Erlauben</guilabel>) lässt nur <glossterm>IP-Adresse</glossterm>n oder Hostnamen auf Downloads zugreifen, während eine Negativliste (<guilabel>Verweigern</guilabel>) alle Benutzer außer denen mit einer auf der Negativliste stehenden <glossterm>IP-Adresse</glossterm> oder einem dort stehenden Hostnamen zulässt. <emphasis>Diese Einstellung gilt nur, wenn sichere Downloads aktiviert sind.</emphasis></para></listitem>
+				<listitem><para><guilabel>Leeren Referrer erlauben</guilabel>: Sichere Downloads basieren auf Referrern. Diese Einstellung legt fest, ob Downloads für Anfragen ohne Referrer-Information erlaubt sind. <emphasis>Diese Einstellung gilt nur, wenn sichere Downloads aktiviert sind.</emphasis></para></listitem>
+				<listitem><para><guilabel>Anhangdateien prüfen</guilabel>: Manche Browser lassen sich dazu verleiten, für hochgeladene Dateien einen falschen MIME-Typ anzunehmen. Diese Option sorgt dafür, dass solche potenziell problematischen Dateien zurückgewiesen werden. <emphasis>Es wird empfohlen, diese Einstellung aktiviert zu lassen.</emphasis></para></listitem>
+			</itemizedlist>
+
+			<itemizedlist>
+				<title>Einstellungen der Bildkategorie</title>
+				<listitem><para><guilabel>Bilder inline anzeigen</guilabel>: Legt fest, wie Bildanhänge angezeigt werden. Ist dies auf <guilabel>Nein</guilabel> gesetzt, wird stattdessen ein Link zum Anhang angezeigt, anstatt das Bild selbst (oder ein Vorschaubild) inline darzustellen.</para></listitem>
+				<listitem><para><guilabel>Vorschaubild erstellen</guilabel>: Diese Einstellung legt fest, ob Ihr Board für jedes angehängte Bild ein Vorschaubild erstellt oder nicht.</para></listitem>
+				<listitem><para><guilabel>Maximale Vorschaubildbreite in Pixeln</guilabel>: Dies ist die maximale Breite in Pixeln für die erzeugten Vorschaubilder.</para></listitem>
+				<listitem><para><guilabel>Maximale Vorschaubild-Dateigröße</guilabel>: Für Bilder werden keine Vorschaubilder erstellt, wenn die Dateigröße des erzeugten Vorschaubilds diesen Wert (in Byte) übersteigt. Dies ist nützlich bei besonders großen geposteten Bildern.</para></listitem>
+				<listitem><para><guilabel>Maximale Bildabmessungen</guilabel>: Die maximale Größe von Bildanhängen in Pixeln. Wenn Sie die Größenprüfung deaktivieren möchten (und dadurch Bildanhänge beliebiger Größe zulassen), setzen Sie jeden Wert auf 0.</para></listitem>
+				<listitem><para><guilabel>Abmessungen für Bildlinks</guilabel>: Ist ein Bildanhang größer als diese Abmessungen (in Pixeln), wird stattdessen ein Link zum Bild im Beitrag angezeigt. Wenn Bilder unabhängig von ihrer Größe inline angezeigt werden sollen, setzen Sie jeden Wert auf 0.</para></listitem>
+			</itemizedlist>
+
+			<itemizedlist>
+				<title>Erlaubte/nicht erlaubte IPs/Hostnamen festlegen</title>
+				<listitem><para><guilabel>IP-Adressen oder Hostnamen</guilabel>: Haben Sie sichere Downloads aktiviert, können Sie die erlaubten oder nicht erlaubten <glossterm>IP-Adresse</glossterm>n oder Hostnamen festlegen. Geben Sie mehr als eine <glossterm>IP-Adresse</glossterm> oder einen Hostnamen an, sollte jede <glossterm>IP-Adresse</glossterm> bzw. jeder Hostname in einer eigenen Zeile stehen. Eingegebene Werte können Platzhalter (*) enthalten. Um einen Bereich für eine <glossterm>IP-Adresse</glossterm> anzugeben, trennen Sie Anfang und Ende mit einem Bindestrich (-).</para></listitem>
+				<listitem><para><guilabel>IP von erlaubten/nicht erlaubten IPs/Hostnamen ausschließen</guilabel>: Aktivieren Sie dies, um die eingegebenen IP(s)/Hostnamen auszuschließen.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="acp_attach_extensions">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Erweiterungen verwalten</title>
+
+			<para>Sie können die Anhang-Einstellungen Ihres Boards weiter konfigurieren, indem Sie festlegen, welche Dateiendungen angehängte Dateien beim Hochladen haben dürfen. Es wird empfohlen, aus Sicherheitsgründen keine Skript-Dateiendungen (wie php, php3, php4, phtml, pl, cgi, py, rb, asp, aspx usw.) zuzulassen. Diese Seite finden Sie, indem Sie im <glossterm>ACP</glossterm> auf <guimenuitem>Erweiterungen verwalten</guimenuitem> klicken.</para>
+
+			<para>Um eine erlaubte Dateiendung hinzuzufügen, suchen Sie auf der Seite das Formular <guilabel>Erweiterung hinzufügen</guilabel>. Geben Sie in das Feld <guilabel>Erweiterung</guilabel> die Dateiendung ein. Geben Sie den Punkt vor der Dateiendung nicht mit an. Wählen Sie dann über das Auswahlmenü <guilabel>Erweiterungsgruppe</guilabel> die Erweiterungsgruppe aus, der diese neue Dateiendung zugeordnet werden soll. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+
+			<para>Sie können außerdem die derzeit erlaubten Dateiendungen Ihres Boards einsehen. Auf der Seite sollten Sie eine Tabelle mit allen erlaubten Dateiendungen sehen. Um die Gruppe zu ändern, der eine Erweiterung angehört, wählen Sie im Auswahlmenü in der Zeile der Erweiterung eine neue Erweiterungsgruppe aus. Um eine Erweiterung zu löschen, aktivieren Sie das Kontrollkästchen in der Spalte <guilabel>Löschen</guilabel>. Sind Sie mit der Verwaltung der aktuellen Dateiendungen Ihres Boards fertig, klicken Sie am unteren Ende der Seite auf <guilabel>Absenden</guilabel>.</para>
+		</section>
+
+		<section id="acp_attach_extension_groups">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Erweiterungsgruppen verwalten</title>
+
+			<para>Erlaubte Dateiendungen können zur einfacheren Verwaltung und Übersicht in Gruppen zusammengefasst werden. Um die Erweiterungsgruppen zu verwalten, klicken Sie im Bereich <guilabel>Beiträge</guilabel> des <glossterm>ACP</glossterm> auf <guimenuitem>Erweiterungsgruppen verwalten</guimenuitem>. Sie können spezifische Einstellungen für jede Erweiterungsgruppe konfigurieren.</para>
+
+			<para>Um eine neue Dateiendungsgruppe hinzuzufügen, suchen Sie das Textfeld neben der Schaltfläche <guilabel>Neue Gruppe erstellen</guilabel>. Geben Sie den Namen der Erweiterungsgruppe ein und klicken Sie dann auf <guilabel>Absenden</guilabel>. Sie gelangen dann zum Formular für die Erweiterungsgruppen-Einstellungen. Im Folgenden werden alle verfügbaren Optionen beschrieben; sie gelten sowohl für bereits bestehende als auch für neu angelegte Erweiterungsgruppen.</para>
+
+			<itemizedlist>
+				<title>Erweiterungsgruppe hinzufügen</title>
+				<listitem><para><guilabel>Gruppenname</guilabel>: Der Name der Erweiterungsgruppe.</para></listitem>
+				<listitem><para><guilabel>Spezialkategorie</guilabel>: Dateien in dieser Erweiterungsgruppe können unterschiedlich angezeigt werden. Wählen Sie in diesem Auswahlmenü eine Spezialkategorie, um festzulegen, wie die Anhänge dieser Erweiterungsgruppe innerhalb eines Beitrags dargestellt werden.</para></listitem>
+				<listitem><para><guilabel>Erlaubt</guilabel>: Aktivieren Sie dies, wenn Anhänge dieser Erweiterungsgruppe erlaubt sein sollen.</para></listitem>
+				<listitem><para><guilabel>In privaten Nachrichten erlaubt</guilabel>: Aktivieren Sie dies, wenn Anhänge dieser Erweiterungsgruppe in privaten Nachrichten erlaubt sein sollen.</para></listitem>
+				<listitem><para><guilabel>Upload-Symbol</guilabel>: Das kleine Symbol, das neben allen Anhängen dieser Erweiterungsgruppe angezeigt wird.</para></listitem>
+				<listitem><para><guilabel>Maximale Dateigröße</guilabel>: Die maximale Dateigröße für Anhänge in dieser Erweiterungsgruppe.</para></listitem>
+				<listitem><para><guilabel>Zugewiesene Erweiterungen</guilabel>: Dies ist eine Liste aller Dateiendungen, die dieser Erweiterungsgruppe angehören. Klicken Sie auf <guilabel>Zur Erweiterungsverwaltung wechseln</guilabel>, um zu verwalten, welche Erweiterungen dieser Gruppe angehören.</para></listitem>
+				<listitem><para><guilabel>Erlaubte Foren</guilabel>: Hiermit können Sie festlegen, in welchen Foren Ihre Benutzer Anhänge dieser Erweiterungsgruppe posten dürfen. Um diese Erweiterungsgruppe in allen Foren zu aktivieren, wählen Sie das Optionsfeld <guilabel>Alle Foren erlauben</guilabel>. Um festzulegen, in welchen bestimmten Foren diese Erweiterungsgruppe erlaubt ist, wählen Sie das Optionsfeld <guilabel>Nur unten ausgewählte Foren</guilabel> und wählen Sie dann die Foren im Auswahlmenü aus.</para></listitem>
+			</itemizedlist>
+
+			<para>Um die Einstellungen einer aktuellen Dateiendungsgruppe zu bearbeiten, klicken Sie auf das Symbol „Einstellungen“ in der Zeile der Erweiterungsgruppe. Bearbeiten Sie dann die Einstellungen der Erweiterungsgruppe. Weitere Informationen zu jeder Einstellung finden Sie oben.</para>
+
+			<para>Um eine Erweiterungsgruppe zu löschen, klicken Sie auf das Symbol „Löschen“ in der Zeile der Erweiterungsgruppe.</para>
+		</section>
+
+		<section id="acp_attach_orphaned">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Verwaiste Anhänge</title>
+
+			<para>Manchmal können Anhänge verwaisen; das bedeutet, sie existieren im angegebenen Dateiverzeichnis (zur Konfiguration dieses Verzeichnisses siehe den Abschnitt zu den <link linkend="acp_attach_settings">Anhang-Einstellungen</link>), sind jedoch keinem Beitrag zugeordnet. Dies kann passieren, wenn Beiträge gelöscht oder bearbeitet werden, oder auch, wenn Benutzer eine Datei anhängen, ihren Beitrag jedoch nicht absenden.</para>
+
+			<para>Um verwaiste Anhänge zu verwalten, klicken Sie im linken Menü im Bereich <guimenuitem>Beiträge</guimenuitem> des <glossterm>ACP</glossterm> auf <guimenuitem>Verwaiste Anhänge</guimenuitem>. Sie sollten eine Tabelle mit allen verwaisten Anhängen sowie allen wichtigen Informationen zu jedem verwaisten Anhang sehen.</para>
+
+			<para>Sie können einen verwaisten Anhang einem bestimmten Beitrag zuweisen. Ermitteln Sie dazu zunächst die Beitrags-ID des Beitrags. Geben Sie diesen Wert in die Spalte <guilabel>Beitrags-ID</guilabel> für den jeweiligen verwaisten Anhang ein. Aktivieren Sie <guilabel>Datei an Beitrag anhängen</guilabel> und klicken Sie dann auf <guilabel>Absenden</guilabel>.</para>
+
+			<para>Um einen verwaisten Anhang zu löschen, aktivieren Sie das Kontrollkästchen <guilabel>Löschen</guilabel> des verwaisten Anhangs und klicken Sie dann auf <guilabel>Absenden</guilabel>. Beachten Sie, dass dies nicht rückgängig gemacht werden kann.</para>
+		</section>
+	</section>
+
+	<section id="acp_users">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Benutzerverwaltung</title>
+
+		<section id="acp_users_manage">
+			<title>Benutzer verwalten</title>
+			<para>Benutzer sind die Grundlage Ihres Forums. Als Forenadministrator ist es sehr wichtig, Ihre Benutzer verwalten zu können. Die Verwaltung Ihrer Benutzer sowie ihrer Informationen und spezifischen Optionen ist einfach und kann über das <acronym>ACP</acronym> erfolgen.</para>
+
+			<para>Melden Sie sich zunächst an und rufen Sie Ihr <acronym>ACP</acronym> auf. Suchen und klicken Sie auf <guimenuitem>Benutzer und Gruppen</guimenuitem>, um zur entsprechenden Seite zu gelangen. Sehen Sie <guimenuitem>Benutzerverwaltung</guimenuitem> nicht, suchen und klicken Sie einfach im Navigationsmenü auf der linken Seite auf <guimenuitem>Benutzer verwalten</guimenuitem>.</para>
+
+			<para>Um fortzufahren und einen Benutzer zu verwalten, müssen Sie den bzw. die Benutzernamen kennen, den bzw. die Sie verwalten möchten. Geben Sie in das Textfeld für <guilabel>„Ein Mitglied suchen:“</guilabel> den Benutzernamen des Benutzers ein, dessen Informationen und Einstellungen Sie verwalten möchten. Möchten Sie hingegen ein Mitglied suchen, klicken Sie auf <guilabel>[ Ein Mitglied suchen ]</guilabel> (unterhalb des Textfelds) und folgen Sie den entsprechenden Schritten, um einen Benutzer zu finden und auszuwählen. Möchten Sie die Informationen und Einstellungen für den anonymen Benutzer verwalten (jeder nicht angemeldete Besucher wird als anonymer Benutzer geführt), aktivieren Sie das Kontrollkästchen <guilabel>„Anonymen Benutzer auswählen“</guilabel>. Haben Sie einen Benutzer ausgewählt, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
+
+			<para>Es gibt viele Bereiche, die die Einstellungen eines Benutzers betreffen. Im Folgenden finden Sie Unterabschnitte mit weiteren Informationen zu jedem Formular. Jedes Formular ermöglicht es Ihnen, spezifische Einstellungen für den von Ihnen ausgewählten Benutzer zu verwalten. Wenn Sie mit der Bearbeitung der Daten in jedem Formular fertig sind, klicken Sie auf <guilabel>Absenden</guilabel> (am unteren Ende jedes Formulars), um Ihre Änderungen zu übermitteln.</para>
+
+			<section id="acp_users_manage_overview">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzerübersicht</title>
+				<para>Dies ist das erste Formular, das erscheint, wenn Sie zunächst einen Benutzer zur Verwaltung auswählen. Hier werden alle allgemeinen Informationen und Einstellungen für jeden Benutzer angezeigt.</para>
+
+				<variablelist>
+					<varlistentry>
+						<term>Benutzername</term>
+						<listitem>
+							<para>Dies ist der Name des Benutzers, den Sie gerade verwalten. Möchten Sie den Benutzernamen ändern, geben Sie einen neuen, drei bis zwanzig Zeichen langen Benutzernamen in das Textfeld <guilabel>Benutzername:</guilabel> ein.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Registriert</term>
+						<listitem>
+							<para>Dies ist das vollständige Datum, an dem sich der Benutzer registriert hat. Sie können diesen Wert nicht bearbeiten.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Registriert von IP</term>
+
+						<listitem>
+							<para>Dies ist die <acronym>IP</acronym>-Adresse, von der aus der Benutzer sein Konto registriert hat. Möchten Sie den <acronym>IP</acronym>-Hostnamen ermitteln, klicken Sie auf die <acronym>IP</acronym>-Adresse selbst. Die aktuelle Seite wird neu geladen und zeigt die entsprechenden Informationen an. Möchten Sie eine Whois-Abfrage für die <acronym>IP</acronym>-Adresse durchführen, klicken Sie auf den Link <guilabel>Whois</guilabel>. Ein neues Fenster mit diesen Daten öffnet sich.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Zuletzt aktiv</term>
+						<listitem>
+							<para>Dies ist das vollständige Datum, an dem der Benutzer zuletzt aktiv war.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Beiträge</term>
+						<listitem>
+							<para>Diese Zahl gibt an, wie viele Beiträge der Benutzer im Board verfasst hat.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Verwarnungen</term>
+						<listitem>
+							<para>Dies ist die Anzahl der Verwarnungen, die der Benutzer derzeit hat.</para>
+							<para>Weitere Informationen zu Verwarnungen finden Sie unter <xref linkend="mcp_warnings"/>.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Gründer</term>
+						<listitem>
+							<para>Gründer sind Benutzer, die über alle Administratorberechtigungen verfügen und von Nicht-Gründer-Mitgliedern niemals gesperrt, gelöscht oder verändert werden können. Möchten Sie diesen Benutzer als Gründer festlegen, wählen Sie das Optionsfeld <guilabel>Ja</guilabel>. Um den Gründerstatus eines Benutzers zu entfernen, wählen Sie das Optionsfeld <guilabel>Nein</guilabel>.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>E-Mail</term>
+						<listitem>
+							<para>Dies ist die derzeit festgelegte E-Mail-Adresse des Benutzers. Um die E-Mail-Adresse zu ändern, füllen Sie das Textfeld <guilabel>E-Mail:</guilabel> mit einer gültigen E-Mail-Adresse aus.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>E-Mail-Adresse bestätigen</term>
+						<listitem>
+							<para>Dieses Textfeld sollte nur ausgefüllt werden, wenn Sie die E-Mail-Adresse des Benutzers ändern. Ändern Sie die E-Mail-Adresse, sollten sowohl das Textfeld <guilabel>E-Mail:</guilabel> als auch dieses mit derselben E-Mail-Adresse ausgefüllt werden. Füllen Sie dieses Feld nicht aus, wird die E-Mail-Adresse des Benutzers nicht geändert.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Neues Passwort</term>
+						<listitem>
+							<para>Als Administrator können Sie die Passwörter Ihrer Benutzer nicht einsehen. Es ist jedoch möglich, Passwörter zu ändern. Um das Passwort des Benutzers zu ändern, geben Sie ein neues Passwort in das Textfeld <guilabel>Neues Passwort:</guilabel> ein. Das neue Passwort muss zwischen sechs und dreißig Zeichen lang sein.</para>
+
+							<important><para>Stellen Sie vor dem Absenden von Änderungen am Benutzer sicher, dass dieses Feld leer ist, es sei denn, Sie möchten das Passwort des Benutzers tatsächlich ändern. Ändern Sie das Passwort des Benutzers versehentlich, kann das ursprüngliche Passwort nicht wiederhergestellt werden!</para></important>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Neues Passwort bestätigen</term>
+						<listitem>
+							<para>Dieses Textfeld sollte nur ausgefüllt werden, wenn Sie das Passwort des Benutzers ändern. Ändern Sie das Passwort des Benutzers, muss das Textfeld <guilabel>Neues Passwort bestätigen:</guilabel> mit demselben Passwort ausgefüllt werden, das Sie im obigen Textfeld <guilabel>Neues Passwort:</guilabel> eingegeben haben.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Schnellwerkzeuge</term>
+						<listitem>
+							<para>Die Optionen im Auswahlmenü <guilabel>Schnellwerkzeuge</guilabel> ermöglichen es Ihnen, schnell und einfach eine der Optionen des Benutzers zu ändern. Die verfügbaren Optionen sind <guilabel>Signatur löschen</guilabel>, <guilabel>Avatar löschen</guilabel>, <guilabel>Alle Beiträge verschieben</guilabel>, <guilabel>Alle Beiträge löschen</guilabel> und <guilabel>Alle Anhänge löschen</guilabel>.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</section>
+
+			<section id="acp_users_manage_feedback">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzer-Feedback</title>
+				<para>Ein weiterer Aspekt der Benutzerverwaltung ist das Bearbeiten der Feedback-Daten. Feedback umfasst jede Art von Benutzerverwarnung, die einem Benutzer von einem Forenadministrator erteilt wird.</para>
+
+				<para>Um die Anzeige der vorhandenen Protokolleinträge des Benutzers anzupassen, wählen Sie in den Auswahlmenüs <guilabel>Einträge anzeigen von vorherigen:</guilabel> und <guilabel>Sortieren nach:</guilabel> die gewünschten Kriterien aus. <guilabel>Einträge anzeigen von vorherigen:</guilabel> ermöglicht es Ihnen, einen bestimmten Zeitraum festzulegen, in dem das Feedback erteilt wurde. <guilabel>Sortieren nach:</guilabel> ermöglicht es Ihnen, die vorhandenen Protokolleinträge nach <guimenuitem>Benutzername</guimenuitem>, <guimenuitem>Datum</guimenuitem>, <guimenuitem>IP-Adresse</guimenuitem> und <guimenuitem>Protokollaktion</guimenuitem> zu sortieren. Die Protokolleinträge können dann aufsteigend oder absteigend sortiert werden. Wenn Sie mit dem Festlegen dieser Optionen fertig sind, klicken Sie auf die Schaltfläche <guilabel>Los</guilabel>, um die Seite mit Ihren Anpassungen zu aktualisieren.</para>
+
+				<para>Eine weitere Möglichkeit zur Verwaltung der Feedback-Daten eines Benutzers ist das Hinzufügen von Feedback. Suchen Sie einfach den Bereich <guilabel>Feedback hinzufügen</guilabel> und geben Sie Ihre Nachricht in das Textfeld <guilabel>FEEDBACK</guilabel> ein. Wenn Sie fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um das Feedback hinzuzufügen.</para>
+			</section>
+
+			<section id="acp_users_manage_profile">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzerprofil</title>
+
+				<para>Benutzer haben manchmal Inhalte in ihrem Forenprofil, die aktualisiert oder gelöscht werden müssen. Möchten Sie ein Feld nicht ändern, lassen Sie es leer. Im Folgenden sind die Profilfelder aufgeführt, die Sie ändern können:
+					<itemizedlist>
+						<listitem><para><guilabel>ICQ-Nummer</guilabel> muss eine Zahl mit mindestens drei Stellen sein.</para></listitem>
+						<listitem><para><guilabel>AOL Instant Messenger</guilabel> kann beliebige alphanumerische Zeichen und Symbole enthalten.</para></listitem>
+						<listitem><para><guilabel>MSN Messenger</guilabel> kann beliebige alphanumerische Zeichen enthalten, sollte jedoch einer E-Mail-Adresse ähneln (max.mustermann@example.com).</para></listitem>
+						<listitem><para><guilabel>Yahoo Messenger</guilabel> kann beliebige alphanumerische Zeichen und Symbole enthalten.</para></listitem>
+						<listitem><para><guilabel>Jabber-Adresse</guilabel> kann beliebige alphanumerische Zeichen enthalten, muss jedoch wie eine E-Mail-Adresse aussehen (max.mustermann@example.com).</para></listitem>
+						<listitem><para><guilabel>Website</guilabel> kann beliebige alphanumerische Zeichen und Symbole enthalten, muss aber das Protokoll enthalten (z. B. http://www.example.com).</para></listitem>
+						<listitem><para><guilabel>Ort</guilabel> kann beliebige alphanumerische Zeichen und Symbole enthalten.</para></listitem>
+						<listitem><para><guilabel>Beruf</guilabel> kann beliebige alphanumerische Zeichen und Symbole enthalten.</para></listitem>
+						<listitem><para><guilabel>Interessen</guilabel> kann beliebige alphanumerische Zeichen und Symbole enthalten.</para></listitem>
+						<listitem><para><guilabel>Geburtstag</guilabel> kann über drei verschiedene Auswahlmenüs festgelegt werden: <guilabel>Tag:</guilabel>, <guilabel>Monat:</guilabel> und <guilabel>Jahr:</guilabel>. Wird ein Jahr festgelegt, wird am Geburtstag des Benutzers dessen Alter angezeigt.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+
+			<section id="acp_users_manage_preferences">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzereinstellungen</title>
+
+				<para>Benutzer haben viele Einstellungen, die sie für ihr Konto nutzen können. Als Administrator können Sie jede dieser Einstellungen ändern. Die Benutzereinstellungen (auch als Präferenzen bezeichnet) sind in drei Hauptkategorien unterteilt: <guilabel>Allgemeine Einstellungen</guilabel>, <guilabel>Standardeinstellungen für Beiträge</guilabel> und <guilabel>Anzeigeoptionen</guilabel>.</para>
+			</section>
+
+			<section id="acp_users_manage_avatar">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzer-Avatar</title>
+
+				<para>Hier können Sie den <glossterm>Avatar</glossterm> des Benutzers verwalten. Hat der Benutzer bereits einen Avatar für sich festgelegt, können Sie das Avatarbild sehen.</para>
+				<para>Abhängig von Ihren Avatar-Einstellungen (weitere Informationen zu den Avatar-Einstellungen finden Sie unter <link linkend="acp_board_avatars">Avatar-Einstellungen</link>) können Sie jede verfügbare Option zum Ändern des Avatars des Benutzers wählen: <guilabel>Von Ihrem Computer hochladen</guilabel>, <guilabel>Von einer URL hochladen</guilabel> oder <guilabel>Extern verlinken</guilabel>. Sie können auch einen Avatar aus der Avatar-Galerie Ihres Boards auswählen, indem Sie auf die Schaltfläche <guilabel>Galerie anzeigen</guilabel> neben <guilabel>Lokale Galerie:</guilabel> klicken.</para>
+				<note>
+					<para>Die von Ihnen am Avatar des Benutzers vorgenommenen Änderungen müssen weiterhin den in den Avatar-Einstellungen festgelegten Beschränkungen entsprechen.</para>
+				</note>
+				<para>Um das Avatarbild zu löschen, aktivieren Sie einfach das Kontrollkästchen <guilabel>Bild löschen</guilabel> unterhalb des Avatarbilds.</para>
+				<para>Wenn Sie mit der Auswahl des Avatars für den Benutzer fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um den Avatar des Benutzers zu aktualisieren.</para>
+			</section>
+
+			<section id="acp_users_manage_rank">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzerrang</title>
+
+				<para>Hier können Sie den <glossterm>Rang</glossterm> des Benutzers festlegen. Sie können den Rang des Benutzers festlegen, indem Sie den Rang aus dem Auswahlmenü <guilabel>Benutzerrang:</guilabel> auswählen. Haben Sie den Rang ausgewählt, klicken Sie auf <guilabel>Absenden</guilabel>, um den Rang des Benutzers zu aktualisieren.</para>
+				<para>Weitere Informationen zu Rängen finden Sie unter <xref linkend="acp_user_ranks"/>.</para>
+			</section>
+
+			<section id="acp_users_manage_signature">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzersignatur</title>
+
+				<para>Hier können Sie die <glossterm>Signatur</glossterm> des Benutzers hinzufügen, bearbeiten oder löschen.</para>
+				<para>Die aktuelle Signatur des Benutzers sollte im Formular <guilabel>Signatur</guilabel> angezeigt werden. Bearbeiten Sie die Signatur einfach, indem Sie den gewünschten Text in das Textfeld eingeben. Sie können <glossterm>BBCode</glossterm> und andere spezielle Formatierungen verwenden, sofern vorhanden. Wenn Sie mit der Bearbeitung der Signatur des Benutzers fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um die Signatur des Benutzers zu aktualisieren.</para>
+				<note>
+					<para>Die von Ihnen festgelegte Signatur muss den derzeit geltenden Signaturbeschränkungen des Boards entsprechen.</para>
+				</note>
+			</section>
+
+			<section id="acp_users_manage_groups">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Gruppen</title>
+
+				<para>Hier sehen Sie alle <glossterm>Benutzergruppen</glossterm>, in denen sich der Benutzer befindet. Auf dieser Seite können Sie den Benutzer einfach aus einer Benutzergruppe entfernen oder ihn einer bestehenden Gruppe hinzufügen. Die Tabelle <guilabel>Spezielle Gruppen, in denen der Benutzer Mitglied ist</guilabel> listet die Benutzergruppen auf, in denen der Benutzer derzeit Mitglied ist.</para>
+				<para>Das Hinzufügen des Benutzers zu einer neuen Benutzergruppe ist sehr einfach. Suchen Sie dazu das Auswahlmenü <guilabel>Benutzer zu Gruppe hinzufügen:</guilabel> und wählen Sie eine Benutzergruppe aus diesem Menü aus. Ist die Benutzergruppe ausgewählt, klicken Sie auf <guilabel>Absenden</guilabel>. Ihre Ergänzung wird sofort wirksam.</para>
+				<para>Um den Benutzer aus einer Gruppe zu entfernen, in der er/sie derzeit Mitglied ist, suchen Sie die Zeile, in der sich die Benutzergruppe befindet, und klicken Sie auf <guilabel>Löschen</guilabel>. Sie erhalten dann einen Bestätigungsbildschirm; möchten Sie fortfahren, klicken Sie auf <guilabel>Ja</guilabel>.</para>
+			</section>
+
+			<section id="acp_users_manage_permissions">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Berechtigungen</title>
+
+				<para>Hier sehen Sie alle derzeit für den Benutzer festgelegten Berechtigungen. Für jede Gruppe, in der sich der Benutzer befindet, gibt es einen eigenen Bereich auf der Seite für die zugehörigen Berechtigungen. Um die Berechtigungen des Benutzers tatsächlich festzulegen, siehe <xref linkend="acp_permissions"/>.</para>
+			</section>
+
+			<section id="acp_users_manage_attachments">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Anhänge</title>
+
+				<para>Je nach den aktuellen Anhang-Einstellungen haben Ihre Benutzer möglicherweise bereits <glossterm>Anhänge</glossterm> gepostet. Hat der Benutzer bereits mindestens einen Anhang hochgeladen, sehen Sie die Auflistung der Anhänge in der Tabelle. Die verfügbaren Daten zu jedem Anhang umfassen: <guilabel>Dateiname</guilabel>, <guilabel>Themen-Titel</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Dateigröße</guilabel> und <guilabel>Downloads</guilabel>.</para>
+				<para>Um Sie bei der Verwaltung der Anhänge des Benutzers zu unterstützen, können Sie die Sortierreihenfolge der Anhangsliste wählen. Suchen Sie das Auswahlmenü <guilabel>Sortieren nach:</guilabel> und wählen Sie die Kategorie, nach der die Liste sortiert werden soll (mögliche Optionen sind <guimenuitem>Dateiname</guimenuitem>, <guimenuitem>Erweiterung</guimenuitem>, <guimenuitem>Dateigröße</guimenuitem>, <guimenuitem>Downloads</guimenuitem>, <guimenuitem>Beitragszeit</guimenuitem> und <guimenuitem>Themen-Titel</guimenuitem>. Um die Sortierreihenfolge festzulegen, wählen Sie im Auswahlmenü neben der Sortierkategorie entweder <guimenuitem>Absteigend</guimenuitem> oder <guimenuitem>Aufsteigend</guimenuitem>. Wenn Sie fertig sind, klicken Sie auf <guilabel>Los</guilabel>.</para>
+				<para>Um den Anhang anzuzeigen, klicken Sie auf den Dateinamen des Anhangs. Der Anhang öffnet sich im selben Browserfenster. Sie können auch das Thema anzeigen, in dem der Anhang gepostet wurde, indem Sie auf den Link neben der Beschriftung <guilabel>Thema:</guilabel> unterhalb des Dateinamens klicken. Das Löschen der Anhänge des Benutzers ist sehr einfach. Aktivieren Sie in der Anhangsliste die Kontrollkästchen neben den Anhängen, die Sie löschen möchten. Haben Sie alles Gewünschte ausgewählt, klicken Sie auf <guilabel>Markierte löschen</guilabel> unterhalb der Anhangsliste.</para>
+				<tip>
+					<para>Um alle auf der Seite angezeigten Anhänge auszuwählen, klicken Sie auf den Link <guilabel>Alle markieren</guilabel> unterhalb der Anhangsliste. Dies ist besonders hilfreich, wenn Sie alle auf der Seite angezeigten Anhänge auf einmal löschen möchten.</para>
+				</tip>
+			</section>
+		</section>
+		<section id="acp_users_inactive">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Graham</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Inaktive Benutzer</title>
+			<para>Hier können Sie Details zu allen Benutzern einsehen, die derzeit als inaktiv markiert sind, zusammen mit dem Grund, warum ihr Konto als inaktiv markiert ist, sowie dem Zeitpunkt, zu dem dies geschah.</para>
+			<para>Mithilfe der Kontrollkästchen auf dieser Seite können Sie Massenaktionen für die Benutzer durchführen, darunter das Aktivieren der Konten, das Versenden einer Erinnerungs-E-Mail mit dem Hinweis, dass sie ihr Konto aktivieren müssen, oder das Löschen des Kontos.</para>
+			<para>Es gibt 5 Gründe, die für die Inaktivität eines Kontos angegeben werden können:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Konto vom Administrator deaktiviert</term>
+					<listitem>
+						<para>Dieses Konto wurde manuell von einem Administrator über die <link linkend="acp_users_manage">Werkzeuge zur Benutzerverwaltung</link> deaktiviert. Weitere Details dazu, wer diese Aktion durchgeführt hat und aus welchen Gründen, sind gegebenenfalls über die Benutzernotizen verfügbar.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Profildetails geändert</term>
+					<listitem>
+						<para>Das Board ist so konfiguriert, dass eine Benutzeraktivierung erforderlich ist, und dieser Benutzer hat wichtige kontobezogene Informationen wie die E-Mail-Adresse geändert und muss das Konto reaktivieren, um diese Änderungen zu bestätigen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Neu registriertes Konto</term>
+					<listitem>
+						<para>Das Board ist so konfiguriert, dass eine Benutzeraktivierung erforderlich ist, und entweder der Benutzer oder ein Administrator (je nach Einstellungen) hat dieses neue Konto noch nicht aktiviert.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Erzwungene Reaktivierung des Benutzerkontos</term>
+					<listitem>
+						<para>Ein Administrator hat diesen Benutzer über die <link linkend="acp_users_manage">Werkzeuge zur Benutzerverwaltung</link> zur Reaktivierung seines Kontos gezwungen. Weitere Details dazu, wer diese Aktion durchgeführt hat und aus welchen Gründen, sind gegebenenfalls über die Benutzernotizen verfügbar.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Unbekannt</term>
+					<listitem>
+						<para>Für die Inaktivität dieses Benutzers wurde kein Grund erfasst; wahrscheinlich wurde die Änderung von einer externen Anwendung vorgenommen oder dieser Benutzer wurde aus einer anderen Quelle hinzugefügt.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+
+		<section id="acp_users_permissions">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Benutzerberechtigungen</title>
+			<para>Neben der Verwaltung der Informationen von Benutzern ist es auch wichtig, die Berechtigungen der Benutzer auf Ihrem Board regelmäßig zu pflegen und zu steuern. Zu den Benutzerberechtigungen gehören Fähigkeiten wie die Verwendung von Avataren und das Versenden privater Nachrichten. Zu den Berechtigungen globaler Moderatoren gehören Fähigkeiten wie das Genehmigen von Beiträgen, das Verwalten von Themen und das Verwalten von Sperren. Zu den Administratorberechtigungen schließlich gehören Dinge wie das Ändern von Berechtigungen, das Definieren benutzerdefinierter BBCodes und das Verwalten von Foren.</para>
+
+			<para>Um mit der Verwaltung der Berechtigungen eines Benutzers zu beginnen, suchen Sie den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und klicken Sie im linken Navigationsmenü auf <guimenuitem>Benutzerberechtigungen</guimenuitem>. Hier können Sie Benutzern globale Berechtigungen zuweisen. Im Feld <guilabel>Benutzer suchen</guilabel>. Geben Sie im Feld <guilabel>Ein Mitglied suchen</guilabel> den Benutzernamen des Benutzers ein, dessen Berechtigungen Sie bearbeiten möchten. (Möchten Sie den anonymen Benutzer bearbeiten, aktivieren Sie das Kontrollkästchen <guilabel>Anonymen Benutzer auswählen</guilabel>.) Klicken Sie auf <guilabel>Absenden</guilabel>.</para>
+
+			<para>Berechtigungen sind in drei verschiedene Kategorien unterteilt: Benutzer, Moderator und Administrator. Jeder Benutzer kann in jeder Berechtigungskategorie spezifische Einstellungen haben. Um die Bearbeitung von Benutzerberechtigungen zu erleichtern, ist es möglich, dem Benutzer bestimmte vordefinierte Rollen zuzuweisen.</para>
+
+			<important>
+				<para>Für die im Folgenden beschriebenen Aktionen zur Berechtigungsbearbeitung stehen Ihnen drei Auswahlmöglichkeiten zur Verfügung. Sie können entweder <guilabel>Ja</guilabel>, <guilabel>Nein</guilabel> oder <guilabel>Nie</guilabel> wählen. Die Wahl von <guilabel>Ja</guilabel> aktiviert die gewählte Berechtigung für den Benutzer, während die Wahl von <guilabel>Nein</guilabel> dem Benutzer die Berechtigung für die gewählte Einstellung verweigert, <emphasis>es sei denn, eine andere Berechtigungseinstellung aus einem anderen Bereich überschreibt diese Einstellung</emphasis>. Möchten Sie dem Benutzer die gewählte Berechtigung <emphasis>dauerhaft</emphasis> vollständig verweigern, wählen Sie <guilabel>Nie</guilabel>. Die Einstellung <guilabel>Nie</guilabel> überschreibt alle anderen dieser Einstellung zugewiesenen Werte.</para>
+			</important>
+
+			<para>Um die <guilabel>Benutzerberechtigungen</guilabel> des Benutzers zu bearbeiten, wählen Sie im Auswahlmenü <guilabel>Typ auswählen</guilabel> „<guimenuitem>Benutzerberechtigungen</guimenuitem>“ und klicken Sie dann auf <guilabel>Los</guilabel>. Wählen Sie die dem Benutzer zuzuweisende Rolle. Möchten Sie das erweiterte Formular verwenden, das eine detailliertere Berechtigungskonfiguration bietet, klicken Sie auf den Link <guilabel>Erweiterte Berechtigungen</guilabel>. Ein neues Formular erscheint unterhalb des Auswahlmenüs <guilabel>Rolle</guilabel>. Es gibt vier Berechtigungskategorien, die Sie bearbeiten können: <guilabel>Beitrag</guilabel>, <guilabel>Profil</guilabel>, <guilabel>Verschiedenes</guilabel> und <guilabel>Private Nachrichten</guilabel>. </para>
+
+			<para>Um die <guilabel>Moderationsberechtigungen</guilabel> des Benutzers zu bearbeiten, wählen Sie im Auswahlmenü <guilabel>Typ auswählen</guilabel> „<guimenuitem>Moderatorberechtigungen</guimenuitem>“ und klicken Sie dann auf <guilabel>Los</guilabel>. Wählen Sie die dem Benutzer zuzuweisende Rolle. Möchten Sie das erweiterte Formular verwenden, das eine detailliertere Berechtigungskonfiguration bietet, klicken Sie auf den Link <guilabel>Erweiterte Berechtigungen</guilabel>. Ein neues Formular erscheint unterhalb des Auswahlmenüs <guilabel>Rolle</guilabel>. Es gibt drei Berechtigungskategorien, die Sie bearbeiten können: <guilabel>Beitragsaktionen</guilabel>, <guilabel>Verschiedenes</guilabel> und <guilabel>Themenaktionen</guilabel>.</para>
+
+			<para>Um die <guilabel>Administrationsberechtigungen</guilabel> des Benutzers zu bearbeiten, wählen Sie im Auswahlmenü <guilabel>Typ auswählen</guilabel> „<guimenuitem>Admin-Berechtigungen</guimenuitem>“ und klicken Sie dann auf <guilabel>Los</guilabel>. Wählen Sie die dem Benutzer zuzuweisende Rolle. Möchten Sie das erweiterte Formular verwenden, das eine detailliertere Berechtigungskonfiguration bietet, klicken Sie auf den Link <guilabel>Erweiterte Berechtigungen</guilabel>. Ein neues Formular erscheint unterhalb des Auswahlmenüs <guilabel>Rolle</guilabel>. Es gibt sechs Berechtigungskategorien, die Sie bearbeiten können: <guilabel>Berechtigungen</guilabel>, <guilabel>Beiträge</guilabel>, <guilabel>Verschiedenes</guilabel>, <guilabel>Benutzer &amp; Gruppen</guilabel>, <guilabel>Einstellungen</guilabel> und <guilabel>Foren</guilabel>.</para>
+		</section>
+
+		<section id="acp_users_forum_permissions">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Forenberechtigungen der Benutzer</title>
+
+			<para>Neben der Bearbeitung der kontobezogenen Berechtigungen Ihrer Benutzer können Sie auch deren Forenberechtigungen bearbeiten, die sich auf die Foren Ihres Boards beziehen. Forenberechtigungen unterscheiden sich von Benutzerberechtigungen dadurch, dass sie direkt mit den Foren verbunden sind. <guimenuitem>Forenberechtigungen der Benutzer</guimenuitem> ermöglicht es Ihnen, die Forenberechtigungen Ihrer Benutzer zu bearbeiten. Dabei können Sie Forenberechtigungen jeweils nur einem Benutzer gleichzeitig zuweisen.</para>
+
+			<para>Um mit der Bearbeitung der Forenberechtigungen eines Benutzers zu beginnen, geben Sie zunächst den Benutzernamen in das Textfeld <guilabel>Ein Mitglied suchen</guilabel> ein. Möchten Sie die Forenberechtigungen bearbeiten, die den anonymen Benutzer betreffen, aktivieren Sie das Kontrollkästchen <guilabel>Anonymen Benutzer auswählen</guilabel>. Klicken Sie auf <guilabel>Absenden</guilabel>, um fortzufahren.</para>
+
+			<figure id="img_acp_u_forum_permissions">
+				<title>Foren für Forenberechtigungen der Benutzer auswählen</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/users_forum_permissions.png"/>
+					</imageobject>
+					<caption>
+						<para>Auswahl von Foren zur Zuweisung von Forenberechtigungen an Benutzer. In diesem Beispiel sind die Unterforen „Katzen“ und „Hunde“ (deren übergeordnetes Forum „Haustiere“ ist) ausgewählt. Die Forenberechtigungen des Benutzers für diese beiden Foren werden bearbeitet/aktualisiert.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<para>Sie sollten nun in der Lage sein, dem Benutzer Forenberechtigungen zuzuweisen. Sie haben nun zwei Möglichkeiten, dem Benutzer Forenberechtigungen zuzuweisen: Sie können entweder das Forum bzw. die Foren manuell über ein Mehrfachauswahlmenü auswählen, oder ein bestimmtes Forum oder eine Kategorie zusammen mit den zugehörigen Unterforen auswählen. Klicken Sie auf <guilabel>Absenden</guilabel>, um mit dem bzw. den ausgewählten Forum/Foren fortzufahren. Nun sollte der Bildschirm <guilabel>Berechtigungen festlegen</guilabel> erscheinen, auf dem Sie dem Benutzer die Forenberechtigungen tatsächlich zuweisen können. Wählen Sie nun aus, welche Art von Forenberechtigungen Sie bearbeiten möchten; Sie können entweder die <guimenuitem>Forenberechtigungen</guimenuitem> oder die <guimenuitem>Moderatorberechtigungen</guimenuitem> des Benutzers bearbeiten. Klicken Sie auf <guilabel>Los</guilabel>. Sie sollten nun in der Lage sein, die Rolle auszuwählen, die dem Benutzer für jedes zuvor ausgewählte Forum zugewiesen wird. Möchten Sie diese Berechtigungen detaillierter konfigurieren, klicken Sie auf den Link <guilabel>Erweiterte Berechtigungen</guilabel> im entsprechenden Forenberechtigungsfeld und aktualisieren Sie die Berechtigungen entsprechend. Wenn Sie fertig sind, klicken Sie auf <guilabel>Alle Berechtigungen anwenden</guilabel>, wenn Sie sich im Bereich <guilabel>Erweiterte Berechtigungen</guilabel> befinden, oder klicken Sie am unteren Ende der Seite auf <guilabel>Alle Berechtigungen anwenden</guilabel>, um alle Ihre Änderungen auf der Seite zu übermitteln.</para>
+		</section>
+
+		<section id="acp_users_custom_profile_fields">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Benutzerdefinierte Profilfelder</title>
+
+			<para>Eine der vielen neuen Funktionen in phpBB3, die das Benutzererlebnis verbessern, sind <guilabel>Benutzerdefinierte Profilfelder</guilabel>. Früher konnten Benutzer nur Informationen in den angezeigten gemeinsamen Profilfeldern eintragen; Administratoren mussten ihrem Board Modifikationen hinzufügen, um ihren individuellen Bedürfnissen gerecht zu werden. In phpBB3 können Administratoren jedoch bequem über das <acronym>ACP</acronym> benutzerdefinierte Profilfelder erstellen.</para>
+
+			<para>Um Ihr benutzerdefiniertes Profilfeld zu erstellen, melden Sie sich in Ihrem ACP an. Klicken Sie auf den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und suchen Sie dann im linken Menü den Link <guimenuitem>Benutzerdefinierte Profilfelder</guimenuitem>, um darauf zu klicken. Sie sollten sich nun auf der richtigen Seite befinden. Suchen Sie das leere Textfeld unterhalb der Überschriften für benutzerdefinierte Profilfelder, das sich neben einem Auswahlmenü und der Schaltfläche <guilabel>Neues Feld erstellen</guilabel> befindet. Geben Sie in das leere Textfeld zunächst den Namen des neuen Profilfelds ein, das Sie erstellen möchten. Wählen Sie dann im Auswahlmenü den Feldtyp aus. Verfügbare Optionen sind <guimenuitem>Zahlen</guimenuitem>, <guimenuitem>Einzeiliges Textfeld</guimenuitem>, <guimenuitem>Textbereich</guimenuitem>, <guimenuitem>Boolesch (Ja/Nein)</guimenuitem>, <guimenuitem>Dropdown-Feld</guimenuitem> und <guimenuitem>Datum</guimenuitem>. Klicken Sie auf die Schaltfläche <guilabel>Neues Feld erstellen</guilabel>, um fortzufahren. Im Folgenden werden die drei Gruppen von Einstellungen beschrieben, die das neue benutzerdefinierte Profilfeld hat.
+				<itemizedlist>
+					<title>Profilfeld hinzufügen</title>
+					<listitem><para><guilabel>Feldtyp:</guilabel> Dies ist die Art des Feldes, um das es sich bei Ihrem neuen benutzerdefinierten Profilfeld handelt. Das bedeutet, es kann aus Zahlen, Daten usw. bestehen. Dies sollte bereits festgelegt sein.</para></listitem>
+					<listitem><para><guilabel>Feldkennung:</guilabel> Dies ist der Name des Profilfelds. Dieser Name identifiziert das Profilfeld innerhalb der Datenbank und der Vorlagen von phpBB3.</para></listitem>
+					<listitem><para><guilabel>Profilfeld anzeigen:</guilabel> Diese Einstellung legt fest, ob das neue Profilfeld überhaupt angezeigt wird. Das Profilfeld wird auf Themenseiten, in Profilen und in der Mitgliederliste angezeigt, sofern dies in den Lasteinstellungen aktiviert ist. Standardmäßig ist nur die Anzeige im Benutzerprofil aktiviert.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Sichtbarkeitsoption</title>
+					<listitem><para><guilabel>Im Benutzer-Kontrollzentrum anzeigen:</guilabel> Diese Einstellung legt fest, ob Ihre Benutzer das Profilfeld im <acronym>UCP</acronym> ändern können.</para></listitem>
+					<listitem><para><guilabel>Bei der Registrierung anzeigen:</guilabel> Ist diese Option aktiviert, wird das Profilfeld auf der Registrierungsseite angezeigt. Benutzer können dieses Feld im <acronym>UCP</acronym> ändern.</para></listitem>
+					<listitem><para><guilabel>Pflichtfeld:</guilabel> Diese Einstellung legt fest, ob Sie Ihre Benutzer zum Ausfüllen dieses Profilfelds zwingen möchten. Dadurch wird das Profilfeld bei der Registrierung sowie im Benutzer-Kontrollzentrum angezeigt.</para></listitem>
+					<listitem><para><guilabel>Profilfeld verbergen:</guilabel> Ist diese Option aktiviert, erscheint dieses Profilfeld nur in den Profilen der Benutzer. In diesem Fall können nur Administratoren und Moderatoren dieses Feld sehen oder ausfüllen.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Sprachspezifische Optionen</title>
+					<listitem><para><guilabel>Feldname/-titel, der dem Benutzer angezeigt wird:</guilabel> Dies ist der tatsächliche Name des Profilfelds, der Ihren Benutzern angezeigt wird.</para></listitem>
+					<listitem><para><guilabel>Feldbeschreibung:</guilabel> Dies ist eine einfache Beschreibung/Erklärung für Ihre Benutzer, die dieses Feld ausfüllen.</para></listitem>
+				</itemizedlist>
+			</para>
+
+			<para>Wenn Sie mit den obigen Einstellungen fertig sind, klicken Sie auf die Schaltfläche <guilabel>Feldtyp-spezifische Optionen</guilabel>, um fortzufahren. Füllen Sie die entsprechenden Einstellungen nach Ihren Wünschen aus und klicken Sie dann auf die Schaltfläche <guilabel>Weiter</guilabel>. Wurde Ihr neues benutzerdefiniertes Profilfeld erfolgreich erstellt, erhalten Sie eine grüne Erfolgsmeldung. Herzlichen Glückwunsch!</para>
+		</section>
+
+		<section id="acp_user_ranks">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Ränge verwalten</title>
+
+			<para>Ränge sind besondere Titel, die Forenbenutzern zugewiesen werden können. Als Administrator liegt es an Ihnen, die auf Ihrem Board vorhandenen Ränge zu erstellen und zu verwalten. Die tatsächlichen Namen der Ränge liegen ganz bei Ihnen; es ist meist am besten, sie auf den Hauptzweck Ihres Boards abzustimmen.</para>
+
+			<note>
+				<para>Denken Sie beim Zuweisen eines besonderen Rangnamens an einen Benutzer daran, dass damit keine Berechtigungen verbunden sind. Erstellen Sie beispielsweise einen Rang „Support-Moderator“ und weisen Sie diesen einem Benutzer zu, erhält dieser Benutzer nicht automatisch Moderatorberechtigungen. Sie müssen dem Benutzer die besonderen Berechtigungen separat zuweisen.</para>
+			</note>
+
+			<para>Um die Ränge Ihres Boards zu verwalten, melden Sie sich in Ihrem <acronym>ACP</acronym> an, klicken Sie auf den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und klicken Sie dann im linken Menü auf den Link <guimenuitem>Ränge verwalten</guimenuitem>. Sie sollten sich nun auf der Seite zur Rangverwaltung befinden. Alle derzeit vorhandenen Ränge werden angezeigt.</para>
+
+			<para>Um einen neuen Rang zu erstellen, klicken Sie auf die Schaltfläche <guilabel>Neuen Rang hinzufügen</guilabel> unterhalb der Liste der vorhandenen Ränge. Füllen Sie das erste Feld <guilabel>Rangtitel</guilabel> mit dem Namen des Rangs aus. Haben Sie ein Bild, das Sie dem Rang zuordnen möchten, in den Ordner <filename>/images/ranks/</filename> hochgeladen, können Sie im Auswahlmenü ein Bild auswählen. Die letzte Einstellung, die Sie festlegen können, ist, ob der Rang ein „spezieller“ Rang sein soll. Spezielle Ränge sind Ränge, die Administratoren Benutzern zuweisen; sie werden Benutzern nicht automatisch anhand ihrer Beitragszahl zugewiesen. Wählen Sie <guilabel>Nein</guilabel>, können Sie im Feld <guilabel>Mindestbeiträge</guilabel> die Mindestanzahl an Beiträgen festlegen, die Ihre Benutzer haben müssen, bevor ihnen dieser Rang zugewiesen wird. Wenn Sie fertig sind, klicken Sie auf die Schaltfläche <guilabel>Absenden</guilabel>, um diesen neuen Rang hinzuzufügen.</para>
+
+			<para>Um die aktuellen Einstellungen eines Rangs zu bearbeiten, suchen Sie die Zeile des Rangs und klicken Sie dann in der Spalte <guilabel>Aktion</guilabel> auf dessen Schaltfläche „Bearbeiten“.</para>
+
+			<para>Um einen Rang zu löschen, suchen Sie die Zeile des Rangs und klicken Sie dann in der Spalte <guilabel>Aktion</guilabel> auf dessen Schaltfläche „Löschen“. Bestätigen Sie die Aktion anschließend, indem Sie bei der entsprechenden Aufforderung auf die Schaltfläche <guilabel>Ja</guilabel> klicken.</para>
+		</section>
+
+		<section id="acp_user_security">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Benutzersicherheit</title>
+			<para>Neben der Verwaltung Ihrer Benutzer auf Ihrem Board ist es auch wichtig, Ihr Board schützen und unerwünschte Registrierungen und Benutzer verhindern zu können. Der Bereich <guilabel>Benutzersicherheit</guilabel> ermöglicht es Ihnen, gesperrte E-Mails, IPs und Benutzernamen zu verwalten sowie nicht erlaubte Benutzernamen und das Ausdünnen von Benutzern zu verwalten. Gesperrte Benutzer, deren Informationen einer dieser Sperrregeln entsprechen, können auf keinen Teil Ihres Boards zugreifen.</para>
+
+			<section id="acp_ban_emails">
+<!-- PART4_END -->
+</chapter>

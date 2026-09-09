@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Erste Schritte</title>
+  </articleinfo>
+  <para>
+    Um mit Migrations zu beginnen, müssen wir zunächst eine
+    Migration-Datei erstellen, die die Liste der Datenbankänderungen
+    enthält.
+  </para>
+  <para>
+    Bevor wir beginnen, sollten Sie zunächst bedenken, dass es bei
+    Migrations keine Begrenzung für die Anzahl der Migration-Dateien
+    gibt. Das bedeutet, dass Sie beliebig viele Migration-Dateien
+    erstellen können, egal ob Sie eine einzelne Datei pro Version, pro
+    Feature oder sogar für jede Änderung an der Datenbank anlegen
+    möchten -- das bleibt vollständig Ihnen überlassen!
+  </para>
+  <sect1 id="where-do-i-create-the-migration-file">
+    <title>Wo erstelle ich die Migration-Datei?</title>
+    <sect2 id="extension-author">
+      <title>Erweiterungsautor</title>
+      <para>
+        Erstellen Sie ein Verzeichnis in
+        <literal>ext/vendor/extension/</literal> namens migrations.
+        Alle Ihre Migration-Dateien sollten sich in diesem Verzeichnis
+        befinden.
+      </para>
+    </sect2>
+    <sect2 id="developer">
+      <title>Entwickler</title>
+      <para>
+        phpBB-Migration-Dateien befinden sich in
+        <literal>phpbb/db/migration/data/</literal>. Sie können eine
+        Datei in diesem Verzeichnis anlegen ODER ein Unterverzeichnis
+        erstellen, falls Sie vorhaben, mehrere Migration-Dateien für
+        ein einzelnes Feature zu erstellen.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="what-must-go-in-the-migration-file">
+    <title>Was muss in die Migration-Datei?</title>
+    <para>
+      Die einzige zwingende Voraussetzung ist die Erstellung einer
+      neuen Klasse, die
+      <literal>\phpbb\db\migration\migration</literal> erweitert:
+    </para>
+    <programlisting>
+&lt;?php
+class new_migration_class extends \phpbb\db\migration\migration
+{
+    // Data for database changes will go in here!
+}
+</programlisting>
+    <sect2 id="what-should-the-new-migration-class-name-be">
+      <title>Wie sollte der Name der neuen Migration-Klasse lauten?</title>
+      <para>
+        Das Namensschema der Klasse muss den allgemeinen
+        Coding-Richtlinien folgen und kann ansonsten beliebig gewählt
+        werden.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="what-else-goes-in-a-migration-file">
+    <title>Was gehört noch in eine Migration-Datei?</title>
+    <para>
+      Jetzt sind Sie bereit, mit dem Hinzufügen von Anweisungen zu
+      beginnen, damit der Migrator weiß, was zu tun ist, wenn er auf
+      Ihre Migration-Datei stößt.
+    </para>
+    <sect2 id="migration-dependencies">
+      <title>Migration-Abhängigkeiten</title>
+      <para>
+        Bevor Sie damit beginnen, Migration-Dateien zu erstellen, die
+        Sie verwenden möchten, sollten Sie Migration-Abhängigkeiten
+        und deren Funktionsweise verstehen.
+      </para>
+      <para>
+        <literal>dependencies</literal>
+      </para>
+    </sect2>
+    <sect2 id="schema-changes">
+      <title>Schemaänderungen</title>
+      <para>
+        Wenn Sie Schemaänderungen vornehmen müssen (Erstellen/Ändern/
+        Entfernen von Tabellen/Spalten/Indizes), sollten Sie die
+        folgende Seite lesen.
+      </para>
+      <para>
+        <literal>schema_changes</literal>
+      </para>
+    </sect2>
+    <sect2 id="data-changes">
+      <title>Datenänderungen</title>
+      <para>
+        Wenn Sie Datenänderungen vornehmen müssen
+        (Konfigurationseinstellungen,
+        Hinzufügen/Entfernen von Modulen,
+        Hinzufügen/Entfernen/Setzen/Zurücksetzen von Berechtigungen
+        oder andere benutzerdefinierte Änderungen), sollten Sie die
+        folgende Seite lesen.
+      </para>
+      <para>
+        <literal>data_changes</literal>
+      </para>
+    </sect2>
+    <sect2 id="check-if-effectively-installed">
+      <title>Prüfung, ob effektiv installiert</title>
+      <para>
+        Die Funktion <literal>effectively_installed()</literal> wird
+        vor der Installation einer Migration aufgerufen. Dies
+        ermöglicht Ihnen einen einfachen Übergang von einer früheren
+        Datenbank-Installer-Methode zu Migrations.
+      </para>
+      <para>
+        <emphasis role="strong">Wenn sie true zurückgibt, wird die
+        Migration als installiert markiert, ohne Änderungen
+        anzuwenden.</emphasis>
+        <emphasis>Diese Funktion ist nicht erforderlich und wird in
+        der Regel nicht benötigt. Sie wird nur benötigt, wenn Sie
+        Aktualisierungen von einem System aus ermöglichen möchten, das
+        derzeit möglicherweise installiert ist, bei dem Migrations
+        aber noch nicht ausgeführt wurden (z. B. beim Aktualisieren
+        einer Mod von 3.0.x auf 3.1.x).</emphasis>
+      </para>
+    </sect2>
+  </sect1>
+</article>

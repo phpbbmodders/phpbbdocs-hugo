@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Text parsen</title>
+  </articleinfo>
+  <sect1 id="database-fields">
+    <title>Datenbankfelder</title>
+    <para>
+      phpBB verwendet die folgenden Datenbankfelder überall dort, wo
+      BBCode erlaubt ist (Forumbeschreibung, Forumregeln,
+      Beitragsinhalt, ...):
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <emphasis role="strong">foo</emphasis> - Der eigentliche Text
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_bbcode_uid</emphasis> - ein
+          zufällig generierter eindeutiger Bezeichner, um die BBCodes zu
+          markieren, der für schnelleres Parsen verwendet wird
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_bbcode_bitfield</emphasis> - ein
+          <ulink url="https://en.wikipedia.org/wiki/Bit_field">Bitfeld
+          (bit field)</ulink>, das die Information enthält, welcher
+          BBCode im Text verwendet wird, damit nur die relevanten aus
+          der Datenbank geladen werden müssen. <emphasis role="strong">HINWEIS:
+          Wird bei Beiträgen, die in phpBB 3.2+ erstellt werden, nicht
+          mehr verwendet</emphasis>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_options</emphasis> - ein Bitfeld,
+          das die Information enthält, ob BBCode, Smilies und magische
+          URLs aktiviert sind (OPTION_FLAG_BBCODE, OPTION_FLAG_SMILIES
+          und OPTION_FLAG_LINKS). Manchmal finden Sie dies aufgeteilt in
+          enable_bbcode, enable_smilies und enable_magic_url
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Die Spaltennamen variieren; ersetzen Sie <literal>foo</literal>
+      durch den jeweiligen Spaltennamen (z. B. <literal>text</literal>,
+      <literal>text_bbcode_uid</literal>, ...).
+    </para>
+  </sect1>
+  <sect1 id="parsing-text-with-bbcodes-smilies">
+    <title>Text mit BBCodes &amp; Smilies parsen</title>
+    <sect2 id="inserting-text-into-db">
+      <title>Text in die Datenbank einfügen</title>
+      <programlisting>
+$text = $this-&gt;request-&gt;variable('text', '', true);
+$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+$allow_bbcode = $allow_urls = $allow_smilies = true;
+generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+
+$sql_ary = array(
+    'text'              =&gt; $text,
+    'bbcode_uid'        =&gt; $uid,
+    'bbcode_bitfield'   =&gt; $bitfield,
+    'bbcode_options'    =&gt; $options,
+);
+
+$sql = 'INSERT INTO ' . YOUR_TABLE . ' ' . $this-&gt;db-&gt;sql_build_array('INSERT', $sql_ary);
+$this-&gt;db-&gt;sql_query($sql);
+</programlisting>
+      <para>
+        Die obige Methode verwendet das Datenbankfeld bbcode_options,
+        das an vielen Stellen anstelle von enable_smiles, enable_bbcode
+        und enable_magic_url verwendet wird. So fügen Sie es unter
+        Verwendung der Spalten enable_smilies, enable_bbcode und
+        enable_magic_url in die Datenbank ein.
+      </para>
+      <programlisting>
+$text = $this-&gt;request-&gt;variable('text', '', true);
+$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+$allow_bbcode = $allow_urls = $allow_smilies = true;
+generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+
+$sql_ary = array(
+    'text'              =&gt; $text,
+    'bbcode_uid'        =&gt; $uid,
+    'bbcode_bitfield'   =&gt; $bitfield,
+    'enable_bbcode'     =&gt; $allow_bbcode,
+    'enable_magic_url'  =&gt; $allow_urls,
+    'enable_smilies'    =&gt; $allow_smilies,
+);
+
+$sql = 'INSERT INTO ' . YOUR_TABLE . ' ' . $this-&gt;db-&gt;sql_build_array('INSERT', $sql_ary);
+$this-&gt;db-&gt;sql_query($sql);
+</programlisting>
+    </sect2>
+    <sect2 id="displaying-text-from-db">
+      <title>Text aus der Datenbank anzeigen</title>
+      <para>
+        Dieses Beispiel verwendet das Feld bbcode_options, das beim
+        Parsen von Forum- und Gruppenbeschreibungen verwendet wird:
+      </para>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_bitfield, bbcode_options
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query($sql);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'TEXT'  =&gt; $text,
+]);
+</programlisting>
+      <para>
+        Das nächste Beispiel verwendet die Flags enable_bbcode,
+        enable_smilies und enable_magic_url, die anstelle der obigen
+        Methode verwendet werden können und beim Parsen von Beiträgen
+        eingesetzt werden:
+      </para>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_bitfield, enable_bbcode, enable_smilies, enable_magic_url
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query($sql);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$row['bbcode_options'] = (($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
+    (($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
+    (($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'TEXT'  =&gt; $text,
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="generating-text-for-editing">
+      <title>Text zur Bearbeitung generieren</title>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_options
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query_limit($sql, 1);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$post_data = generate_text_for_edit($row['text'], $row['bbcode_uid'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'POST_TEXT'         =&gt; $post_data['text'],
+    'S_ALLOW_BBCODES'   =&gt; $post_data['allow_bbcode'],
+    'S_ALLOW_SMILIES'   =&gt; $post_data['allow_smilies'],
+    'S_ALLOW_URLS'      =&gt; $post_data['allow_urls'],
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="database-fields-for-bbcode">
+      <title>Datenbankfelder für BBCode</title>
+      <para>
+        Die folgenden Spaltendefinitionen werden für BBCodes erwartet:
+      </para>
+      <programlisting>
+&quot;text&quot;: [
+    &quot;MTEXT_UNI&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_uid&quot;: [
+    &quot;VCHAR:8&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_bitfield&quot;: [
+    &quot;VCHAR:255&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_options&quot;: [
+    &quot;UINT:11&quot;,
+    7 // Default all enabled
+],
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

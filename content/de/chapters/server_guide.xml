@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="server_guide">
+    <?dbhtml dir="serverguide" filename="index.html" ?>
+    <chapterinfo>
+        <releaseinfo>$Id$</releaseinfo>
+        <copyright>
+            <year>2022</year>
+            <holder>phpBB Group</holder>
+        </copyright>
+    </chapterinfo>
+    <title>Server-Handbuch</title>
+    <abstract>
+        <para>Dieses Kapitel beschreibt die serverseitige Konfiguration im Zusammenhang mit phpBB.</para>
+    </abstract>
+
+    <section id="server_sphinx">
+        <title>Sphinx-Suchkonfiguration</title>
+        <para>
+            Die Sphinx-Volltextsuche ermöglicht die Verwendung des <ulink url="https://sphinxsearch.com/">Sphinx Open Source Search Server</ulink> für die Suche in phpBB 3.1. Die Verwendung von Sphinx
+            verbessert die Leistung sowohl der Suche als auch der Indizierung, insbesondere bei Foren mit großen Datenbanken.
+            Da der Sphinx-Server sowohl flexibel als auch schnell ist, bietet er eine bessere Alternative als Such-Backend.
+        </para>
+        <section id="server_sphinx_requirements">
+            <title>Mindestanforderungen</title>
+            <para>Die Mindestanforderungen für die Verwendung von Sphinx sind wie folgt:</para>
+            <itemizedlist>
+                <listitem><para>Sphinx Search server >2.0.1 &amp;&amp; &lt;3.0</para></listitem>
+                <listitem><para>phpBB 3.1+</para></listitem>
+                <listitem><para>MySQL- oder PostgreSQL-Datenbank</para></listitem>
+            </itemizedlist>
+        </section>
+        <section id="server_sphinx_installation">
+            <title>Installationsanweisungen</title>
+            <section id="server_sphinx_installation_sphinx">
+                <title>Sphinx-Installation</title>
+                <para>Folgen Sie den <ulink url="https://sphinxsearch.com/docs/current.html#installation">Anweisungen</ulink>, um Sphinx zu installieren. Für die phpBB-Suche ist nur die eigentliche Installation erforderlich; die "Sphinx Quick Usage Tour" muss nicht befolgt werden.</para>
+            </section>
+            <section id="server_sphinx_installation_config">
+                <title>Sphinx-Konfiguration</title>
+                <para>
+                    Die Daten der Sphinx-Konfigurationsdatei können entweder über den ACP generiert und anschließend in die
+                    <code>sphinx.conf</code> hineinkopiert werden, oder die <ulink url="https://github.com/phpbb/phpbb/blob/master/phpBB/docs/sphinx.sample.conf">Sphinx-Beispielkonfiguration</ulink>
+                    kann manuell bearbeitet und verwendet werden. Die folgenden Ordner/Dateien müssen erstellt und in der sphinx.conf definiert werden:
+                </para>
+                <itemizedlist>
+                    <listitem><para>Konfigurationsverzeichnis, das die sphinx.conf und die stopwords.txt enthält (falls definiert).</para></listitem>
+                    <listitem><para>Datenverzeichnis, das die Binär- und Indexdateien enthält.</para></listitem>
+                    <listitem><para>Protokollverzeichnis als Unterverzeichnis des Datenverzeichnisses, in dem alle Protokolle im Zusammenhang mit dem Sphinx-Suchserver gespeichert werden.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section id="server_sphinx_installation_dirs">
+                <title>Erforderliche Verzeichnisse erstellen</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Datenverzeichnis</para>
+                        <para><code>mkdir -p {DATA_PATH}</code></para>
+                    </listitem>
+                    <listitem>
+                        <para>Protokollverzeichnis</para>
+                        <para><code>mkdir -p {DATA_PATH}/log</code></para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section id="server_sphinx_installation_indexing">
+                <title>Indizierung</title>
+                <para>
+                    Der Forumsadministrator muss über die ACP-Oberfläche <code>Sphinx Fulltext Search</code> als Such-Backend auswählen und
+                    den Suchindex erstellen. Dadurch wird eine <code>SPHINX_TABLE</code> in der Datenbank erstellt.
+                    Anschließend sollte der Sphinx-Indexer manuell über die Shell ausgeführt werden.
+                </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Hauptindex</para>
+                        <para><code>indexer --config {CONFIG_PATH}/sphinx.conf index_phpbb_{SPHINX_ID}_main >> {DATA_PATH}/log/indexer.log 2>&amp;1 &amp;</code></para>
+                    </listitem>
+                    <listitem>
+                        <para>Delta-Index</para>
+                        <para><code>indexer --config {CONFIG_PATH}/sphinx.conf index_phpbb_{SPHINX_ID}_delta >> {DATA_PATH}/log/indexer.log 2>&amp;1 &amp;</code></para>
+                    </listitem>
+                    <listitem>
+                        <para>Neu indizieren</para>
+                        <para><code>indexer --rotate --config {CONFIG_PATH}/sphinx.conf index_phpbb_{SPHINX_ID}_delta >> {DATA_PATH}/log/indexer.log 2>&amp;1 &amp;</code></para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section id="server_sphinx_installation_test">
+                <title>Sphinx testen</title>
+                <para>Testen Sie, ob Sphinx funktioniert. Der folgende Befehl liefert das Suchergebnis zurück.</para>
+                <para><code>search --config {CONFIG_PATH}/sphinx.conf search string</code></para>
+            </section>
+            <section id="server_sphinx_installation_updates">
+                <title>Inkrementelle Aktualisierungen</title>
+                <para>Die Crontab-Datei kann auf den meisten Unix-Systemen bearbeitet werden mit</para>
+                <para><code>crontab -e</code></para>
+                <para>Fügen Sie diese Zeile hinzu, um den Delta-Index alle fünf Minuten zu aktualisieren</para>
+                <para><code>*/5 * * * * indexer --rotate --config {CONFIG_PATH}/sphinx.conf index_phpbb_{SPHINX_ID}_delta >> {DATA_PATH}/log/indexer.log 2>&amp;1 &amp;</code></para>
+                <para>Fügen Sie diese Zeile hinzu, um einen Cronjob für die vollständige Indizierung einmal pro Nacht einzurichten</para>
+                <para><code>0 3 * * * indexer --rotate --config {CONFIG_PATH}/sphinx.conf index_phpbb_{SPHINX_ID}_main >> {DATA_PATH}/log/indexer.log 2>&amp;1 &amp;</code></para>
+            </section>
+            <section id="server_sphinx_installation_start">
+                <title>Searchd starten</title>
+                <para>Starten Sie den Sphinx-Daemon.</para>
+                <para><code>searchd --config {CONFIG_PATH}/sphinx.conf >> {DATA_PATH}/log/searchd-startup.log 2>&amp;1 &amp;</code></para>
+            </section>
+            <section id="server_sphinx_installation_trouble">
+                <title>Fehlerbehebung</title>
+                <para>Protokolldateien im Verzeichnis <code>{DATA_PATH}/log/</code> können auf Fehler überprüft werden. Weitere Einzelheiten finden Sie in der <ulink url="https://sphinxsearch.com/docs/">Sphinx-Dokumentation</ulink>.</para>
+            </section>
+        </section>
+        <section id="server_sphinx_manual">
+            <title>Manuelle Konfiguration</title>
+            <para>
+                Eine Beispiel-Konfigurationsdatei für das phpBB-Sphinx-Such-Backend ist <ulink url="https://github.com/phpbb/phpbb/blob/master/phpBB/docs/sphinx.sample.conf">hier</ulink> verfügbar. Sie enthält viele Optionen,
+                darunter Datenbankdetails sowie Verzeichnisdetails für die Sphinx-Daten- und Konfigurationsordner.
+            </para>
+            <section id="server_sphinx_manual_db">
+                <title>Datenbankdetails</title>
+                <para>Details zur Datenbank, auf der der Sphinx-Daemon und das Forum laufen.</para>
+                <itemizedlist>
+                    <listitem><para><emphasis role="bold">type</emphasis> - Datenbanktyp, Standard mysql.</para></listitem>
+                    <listitem><para><emphasis role="bold">sql_host</emphasis> - Hostname, Standard localhost</para></listitem>
+                    <listitem><para><emphasis role="bold">sql_user</emphasis></para></listitem>
+                    <listitem><para><emphasis role="bold">sql_pass</emphasis></para></listitem>
+                    <listitem><para><emphasis role="bold">sql_port</emphasis> - Datenbank-Port, Standard 3306 für mysql</para></listitem>
+                    <listitem><para><emphasis role="bold">db_name</emphasis></para></listitem>
+                </itemizedlist>
+            </section>
+            <section id="server_sphinx_manual_searchd">
+                <title>Searchd-Details</title>
+                <itemizedlist>
+                    <listitem><para><emphasis role="bold">listen</emphasis> - IP-Adresse : Port des Sphinx-Daemons, Standard <code>127.0.0.1:3312</code></para></listitem>
+                    <listitem><para><emphasis role="bold">read_timeout</emphasis> - Timeout für das Lesen von Client-Anfragen über das Netzwerk in Sekunden, Standard 5</para></listitem>
+                    <listitem><para><emphasis role="bold">max_children</emphasis> - Maximale Anzahl an Kindprozessen (parallel laufende Suchanfragen), Standard 30</para></listitem>
+                    <listitem><para><emphasis role="bold">max_matches</emphasis> - die Anzahl der anzuzeigenden Suchtreffer pro Ergebnisseite, Standard 20000</para></listitem>
+                </itemizedlist>
+            </section>
+            <section id="server_sphinx_manual_wildcard">
+                <title>Wildcard-Suche</title>
+                <para>Standardmäßig ist die Wildcard-Suche DEAKTIVIERT, und die Verwendung des *-Operators funktioniert nicht. Um die Wildcard-Suche zu aktivieren, sollten Sie die folgenden Parameter konfigurieren:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">ignore_chars</emphasis> - Zeichen (im Unicode-Format), die im Suchindex ignoriert und entfernt werden. Standard keine.
+                            <code>ignore_chars = U+00AD, U+002D</code> führt dazu, dass Bindestrich-Wörter zu einem einzelnen Wort zusammengeführt werden, z. B. wird "re-establish" als "reestablish" indiziert.
+                            Ignorierte Zeichen dürfen nicht in charset_table aufgeführt sein.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">min_prefix_len</emphasis> - minimale zu indizierende Präfixlänge. Ein Wert größer als 0 aktiviert die teilweise Wortübereinstimmung mittels der wordstart*-Wildcard,
+                            Standard 0 (Wildcards deaktiviert). Empfohlener Wert 3 (tes* findet test, tested, testing usw.)
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis role="bold">min_infix_len</emphasis> - minimale zu indizierende Infixlänge. Ein Wert größer als 0 aktiviert die teilweise Wortübereinstimmung mittels der Wildcards 'start*', '*end',
+                            und '*middle*', Standard 0 (Wildcards deaktiviert). Empfohlener Wert 3 (*est* findet test, tested, testing, estimated, shortest usw.).
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <note>Verwenden Sie nur entweder min_prefix_len oder min_infix_len, nicht beide. Der nicht verwendete Parameter sollte auf 0 gesetzt werden. Das Aktivieren der Wildcard-Indizierung vergrößert den Suchindex.</note>
+            </section>
+            <section id="server_sphinx_manual_stopwords">
+                <title>Stoppwörter</title>
+                <para>
+                    Die Sphinx-Konfigurationsdatei bietet eine Option zur Angabe einer Datei mit Suchstoppwörtern. Stoppwörter sind jene häufigen Wörter wie 'a' und 'the', die häufig in Texten vorkommen
+                    und von der Suche eigentlich ausgeschlossen werden sollten. Eine einigermaßen vollständige Liste englischer Stoppwörter finden Sie <ulink url="https://github.com/stopwords-iso/stopwords-en">hier</ulink>. Diese Wörter können in eine Textdatei kopiert und
+                    in der sphinx.conf im Abschnitt index_phpbb wie folgt hinzugefügt werden:
+                </para>
+                <para><code>stopwords = path/to/stopwords.txt</code></para>
+            </section>
+        </section>
+    </section>
+</chapter>

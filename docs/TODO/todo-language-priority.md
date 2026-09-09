@@ -1,11 +1,11 @@
 # Next translation priority
 
-Ranks the phpBB language packs not yet done in this project (English, Danish,
-and French are already complete — see
-[phpbb-hugo-languages.md](../phpbb-hugo-languages.md)) from highest to lowest
-priority for the next translation. Grouped by language rather than by raw
-phpBB code, so an honorific-split pack (e.g. German casual/formal) counts as
-one entry, not two.
+Ranks the phpBB language packs not yet done in this project (English,
+Danish, French, and German — formal register only — are already complete;
+see [phpbb-hugo-languages.md](../phpbb-hugo-languages.md)) from highest to
+lowest priority for the next translation. Grouped by language rather than
+by raw phpBB code, so an honorific-split pack (e.g. German casual/formal)
+counts as one entry, not two.
 
 **Ranking criteria**, in order of weight:
 
@@ -40,7 +40,6 @@ complexity factor.
 
 | Language | Complexity | Notes |
 |---|---|---|
-| German | Honorific split (Du/Sie) | Pick one register, as done for French |
 | Spanish (Formal) | Honorific split (Tú/Usted) | Pick one register |
 | Italian | None | Lowest-friction large-community option |
 | Russian | Cyrillic script | Not RTL, no layout risk expected |
@@ -82,6 +81,11 @@ parent language exists.
   Argentinian Spanish, Mexican Spanish — after Spanish (Formal)
   American English — after nothing else is blocking, but English (British)
   already covers the language; lowest-value duplicate
+- **Second (informal) register of an already-done honorific-split
+  language**: German (Du) — deferred; the formal register (Sie) already
+  covers the core need, so the informal variant is a nice-to-have refinement
+  rather than new coverage. The same deferral pattern will apply to Spanish
+  (Tú) and Dutch (informal) once their own formal/casual variant is done.
 - **Compounding complexity**: Croatian (honorific split), Serbian (dual
   script, Cyrillic/Latin, same phpBB code — needs the `sr-Latn-RS` handling
   noted in the language reference doc)

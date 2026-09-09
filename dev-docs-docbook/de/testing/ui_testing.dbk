@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>UI-Tests</title>
+  </articleinfo>
+  <para>
+    UI-Tests erweitern funktionale Tests, indem sie zusätzlich zur
+    reinen HTML-Ausführung auch die Ausführung von JavaScript und
+    jQuery unterstützen. Sie sollten in Fällen eingesetzt werden, in
+    denen Funktionalität getestet werden soll, die nur mit jQuery oder
+    JS ausgeführt wird. phpBB ermöglicht es Ihnen, solche Tests zu
+    schreiben. Dieses Dokument erklärt, wie.
+  </para>
+  <sect1 id="running-ui-tests">
+    <title>UI-Tests ausführen</title>
+    <para>
+      Informationen zum Ausführen von UI-Tests finden Sie im
+      GitHub-Repository unter
+      <ulink url="https://github.com/phpbb/phpbb/blob/3.3.x/tests/RUNNING_TESTS.md">https://github.com/phpbb/phpbb/blob/3.3.x/tests/RUNNING_TESTS.md</ulink>.
+      Sie können den Branch wechseln, um die Anweisungen für eine
+      bestimmte phpBB-Version anzuzeigen.
+    </para>
+  </sect1>
+  <sect1 id="writing-ui-tests">
+    <title>UI-Tests schreiben</title>
+    <para>
+      Ihr Testfall muss von der Klasse
+      <literal>phpbb_ui_test_case</literal> erben. Sie können dann
+      Anfragen an eine frische phpBB-Installation stellen. Achten Sie
+      außerdem darauf, die Datei im Ordner <literal>tests/ui/</literal>
+      abzulegen und den Doc-Block <literal>@group ui</literal> über
+      der Klasse hinzuzufügen, damit die Tests korrekt ausgeführt
+      werden.
+    </para>
+    <programlisting>
+&lt;?php
+// tests/ui/my_test.php
+
+/**
+ * @group ui
+ */
+class phpbb_ui_my_test extends phpbb_ui_test_case
+{
+    public function setUp()
+    {
+        parent::setUp();
+        // setup code
+    }
+
+    public function test_index()
+    {
+        // test code
+    }
+}
+</programlisting>
+    <para>
+      Es gibt eine Methode <literal>setUp()</literal>, in der Sie Code
+      unterbringen können, der vor dem Test ausgeführt wird. Hier
+      können Sie nach der Installation einige Objekte einrichten, die
+      für Ihren Test erforderlich sind. Anschließend können Sie Ihre
+      Tests wie gewohnt definieren, indem Sie Methoden mit
+      <literal>test_</literal> beginnen lassen. In diesem Fall testen
+      wir den Index.
+    </para>
+    <sect2 id="webdriver-and-assertions">
+      <title>WebDriver und Assertions</title>
+      <para>
+        Das UI-Testframework basiert auf
+        <ulink url="https://github.com/facebook/php-webdriver">Facebooks
+        PHP WebDriver</ulink>, der HTTP-Anfragen stellt und es uns
+        ermöglicht, mit der Seite zu interagieren. Der Remote-WebDriver
+        ist in Ihren Tests über <literal>$this-&gt;visit($url)</literal>
+        verfügbar. Alternativ können Sie ihn auch direkt über
+        <literal>$this-&gt;getDriver()</literal> verwenden. Der PHP
+        WebDriver bietet ein Wiki mit mehreren Beispielen zur
+        Verwendung des WebDrivers:
+        <ulink url="https://github.com/facebook/php-webdriver/wiki">PHP
+        WebDriver Wiki</ulink>
+      </para>
+      <para>
+        Hier ist ein Beispiel für die Verwendung des WebDrivers:
+      </para>
+      <programlisting>
+&lt;?php
+// tests/ui/my_test.php
+
+/**
+ * @group ui
+ */
+class phpbb_ui_my_test extends phpbb_ui_test_case
+{
+    public function test_index()
+    {
+        $this-&gt;visit('index.php');
+        $this-&gt;assertGreaterThan(0, count($this-&gt;getDriver()-&gt;findElements(WebDriverBy::cssSelector('.topiclist'))));
+    }
+}
+</programlisting>
+      <para>
+        Wir führen eine GET-Anfrage an <literal>index.php</literal>
+        aus und suchen anschließend nach Elementen, die dem
+        CSS-Selektor entsprechen. Anschließend stellen wir sicher,
+        dass unsere Abfrage etwas gefunden hat.
+      </para>
+      <para>
+        Wäre die Indexseite des Boards fehlerhaft, würde unser Test
+        dies erkennen und uns ermöglichen, das Problem zu entdecken
+        und zu beheben. Je mehr Dinge Sie testen, desto mehr Fehler
+        erkennen Sie frühzeitig.
+      </para>
+    </sect2>
+    <sect2 id="authentication">
+      <title>Authentifizierung</title>
+      <para>
+        Viele UI-Tests erfordern, dass der Benutzer angemeldet ist.
+        Verwenden Sie dazu die Methoden <literal>login()</literal> und
+        <literal>admin_login()</literal>, die von der Klasse
+        <literal>phpbb_ui_test_case</literal> geerbt werden. Diese
+        Methode weist die SID des Benutzers der geerbten
+        Klasseneigenschaft <literal>$this-&gt;sid</literal> zu. Sie
+        müssen diese an die URLs anhängen, zu denen der angemeldete
+        Benutzer navigiert, um die Sitzung aufrechtzuerhalten.
+        Anwendungsbeispiele finden Sie im Test der
+        Berechtigungsrollen in
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.3.x/tests/ui/permission_roles_test.php">tests/ui/permission_roles_test.php</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="localisation">
+      <title>Lokalisierung</title>
+      <para>
+        Verwenden Sie in Tests, wie auch in phpBB selbst, keine fest
+        codierte Sprache, es sei denn, dies ist unbedingt erforderlich.
+        Verwenden Sie stattdessen die Methoden
+        <literal>$this-&gt;add_lang()</literal> und
+        <literal>$this-&gt;lang()</literal>. Beide verhalten sich sehr
+        ähnlich wie ihre Gegenstücke in der Klasse
+        <literal>\phpbb\user</literal>. Beachten Sie, dass
+        <literal>language/en/common.php</literal> automatisch vom
+        Testframework geladen wird.
+      </para>
+      <programlisting>
+public function test_example()
+{
+    // include the file at ./phpBB/language/en/ucp.php
+    $this-&gt;add_lang('ucp');
+
+    // we can also include multiple ones:
+    $this-&gt;add_lang(['memberlist', 'mcp']);
+
+    // Let's use a language key
+    $this-&gt;assertEquals('Login', $this-&gt;lang('LOGIN'));
+
+    // And let's use a language key formatted for use with sprintf
+    $this-&gt;assertEquals('Logout [ user ]', $this-&gt;lang('LOGOUT_USER', 'user'));
+}
+</programlisting>
+      <para>
+        Weitere Anwendungsbeispiele finden Sie in
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.3.x/tests/ui/permission_roles_test.php">tests/ui/permission_roles_test.php</ulink>.
+      </para>
+    </sect2>
+  </sect1>
+</article>

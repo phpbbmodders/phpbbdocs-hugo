@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Working With BBCodes</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Einführung</title>
+    <para>
+      phpBB 3.2 hat eine komplett neue BBCode-Engine eingeführt, die
+      von der Bibliothek s9e/TextFormatter angetrieben wird. Dieses
+      Tutorial erklärt mehrere Möglichkeiten, wie Extensions die neue
+      BBCode-Engine nutzen können, um leistungsfähigere BBCodes zu
+      erstellen und zu verändern.
+    </para>
+    <para>
+      Dieses Tutorial erklärt:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <link linkend="toggle-bbcodes-on-off">BBCodes ein-/
+          ausschalten</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="executing-php-code-with-bbcodes">PHP-Code mit
+          BBCodes ausführen</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="template-parameters">Template-Parameter</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="registering-custom-variables">Eigene
+          Variablen registrieren</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="enable-text-formatter-plugins">Text-Formatter-Plugins
+          aktivieren</link>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="toggle-bbcodes-on-off">
+    <title>BBCodes ein-/ausschalten</title>
+    <para>
+      BBCodes und andere Tags können vor oder nach dem Parsen mit
+      einem der folgenden Events ein- oder ausgeschaltet werden:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Event
+            </entry>
+            <entry>
+              Beschreibung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parser_setup</literal>
+            </entry>
+            <entry>
+              Wird einmalig ausgelöst, wenn der Text-Parser-Service
+              erstmals erstellt wird.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parse_before</literal>
+            </entry>
+            <entry>
+              Wird bei jedem Parsen von Text ausgelöst, bevor das
+              Parsen beginnt.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_parse_after</literal>
+            </entry>
+            <entry>
+              Wird bei jedem Parsen von Text ausgelöst,
+              <emphasis role="strong">nachdem</emphasis> das Parsen
+              abgeschlossen ist. Dies kann z. B. verwendet werden, um
+              Werte in ihren ursprünglichen Zustand
+              zurückzuversetzen.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Die meisten gängigen Operationen stehen über den
+      Parser-Service mittels der API
+      <literal>phpbb\textformatter\parser_interface</literal> zur
+      Verfügung. Dazu gehören folgende Funktionen:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Funktion
+            </entry>
+            <entry>
+              Beschreibung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>disable_bbcode($name)</literal>
+            </entry>
+            <entry>
+              Deaktiviert einen BBCode
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_bbcodes()</literal>
+            </entry>
+            <entry>
+              Deaktiviert BBCodes allgemein
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_censor()</literal>
+            </entry>
+            <entry>
+              Deaktiviert den Zensor
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_magic_url()</literal>
+            </entry>
+            <entry>
+              Deaktiviert Magic URLs
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>disable_smilies()</literal>
+            </entry>
+            <entry>
+              Deaktiviert Smilies
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_bbcode($name)</literal>
+            </entry>
+            <entry>
+              Aktiviert einen bestimmten BBCode
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_bbcodes()</literal>
+            </entry>
+            <entry>
+              Aktiviert BBCodes allgemein
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_censor()</literal>
+            </entry>
+            <entry>
+              Aktiviert den Zensor
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_magic_url()</literal>
+            </entry>
+            <entry>
+              Aktiviert Magic URLs
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>enable_smilies()</literal>
+            </entry>
+            <entry>
+              Aktiviert Smilies
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Für weiterführende Funktionen kann die Instanz von
+      <literal>s9e\TextFormatter\Parser</literal> über
+      <literal>get_parser()</literal> abgerufen werden, um auf deren
+      API zuzugreifen.
+    </para>
+    <para>
+      Der folgende Beispielcode zeigt, wie BBCodes mithilfe eines
+      PHP-Event-Listeners ein-/ausgeschaltet und verändert werden
+      können:
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_parse_before' =&gt; 'toggle_bbcodes',
+        ];
+    }
+
+    public function toggle_bbcodes($event)
+    {
+        // Get the parser service: \phpbb\textformatter\parser_interface
+        $service = $event['parser'];
+
+        // Disable the [color] BBCode through the parser service
+        $service-&gt;disable_bbcode('color');
+
+        // Set the [url] BBCode to only parse the first occurrence.
+        // Note this requires an instance of \s9e\TextFormatter\Parser
+        $service-&gt;get_parser()-&gt;setTagLimit('URL', 1);
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://area51.phpbb.com/docs/code/3.3.x/phpbb/textformatter/parser_interface.html">phpBB
+          API Documentation</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Getting_started/Runtime_configuration/">Runtime
+          configuration - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="executing-php-code-with-bbcodes">
+    <title>PHP-Code mit BBCodes ausführen</title>
+    <para>
+      Extensions können BBCodes so konfigurieren, dass sie
+      PHP-Funktionen ausführen. Dadurch lassen sich BBCodes
+      erstellen, die weit mehr tun, als Text nur allgemein zu
+      formatieren.
+    </para>
+    <para>
+      Im folgenden einfachen Beispiel konfigurieren wir das Tag
+      <literal>QUOTE</literal> (das den BBCode
+      <literal>[quote]</literal> verarbeitet) so um, dass es während
+      des Parsens eine PHP-Methode ausführt, um seine Attribute zu
+      lesen und abhängig davon zu ändern, wer im BBCode zitiert
+      wird.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after' =&gt; 'configure_quotes'
+        ];
+    }
+
+    public function configure_quotes($event)
+    {
+        // Add self::filter_quote() to filter the QUOTE tag that handles quotes
+        $event['configurator']-&gt;tags['QUOTE']-&gt;filterChain
+            -&gt;append([__CLASS__, 'filter_quote']);
+    }
+
+    static public function filter_quote(\s9e\TextFormatter\Parser\Tag $tag)
+    {
+        if (!$tag-&gt;hasAttribute('author'))
+        {
+            // If the author is empty, we attribute the quote to Mark Twain
+            $tag-&gt;setAttribute('author', 'Mark Twain');
+        }
+        elseif (stripos($tag-&gt;getAttribute('author'), 'Gary Oak') !== false)
+        {
+            // If the author is Gary Oak we invalidate the tag to disallow it
+            $tag-&gt;invalidate();
+
+            // Return FALSE for backward compatibility
+            return false;
+        }
+
+        // We return TRUE for backward compatibility, to indicate that the tag is allowed
+        return true;
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Attribute_filters/">Attribute
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Tag_filters/">Tag
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Callback_signature/">Callback
+          signatures - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="template-parameters">
+    <title>Template-Parameter</title>
+    <para>
+      Einige der Template-Variablen von phpBB können in BBCodes
+      verwendet werden, um dynamische Ausgaben zu erzeugen. Zum
+      Beispiel, um einen BBCode zu erstellen, dessen Inhalt nur
+      registrierten Benutzern angezeigt wird.
+    </para>
+    <para>
+      Standard-Template-Parameter von phpBB:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Variable
+            </entry>
+            <entry>
+              Beschreibung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>S_IS_BOT</literal>
+            </entry>
+            <entry>
+              Ob der aktuelle Benutzer ein Bot ist.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_REGISTERED_USER</literal>
+            </entry>
+            <entry>
+              Ob der aktuelle Benutzer registriert ist.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_USER_LOGGED_IN</literal>
+            </entry>
+            <entry>
+              Ob der aktuelle Benutzer angemeldet ist.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWCENSORS</literal>
+            </entry>
+            <entry>
+              Ob die Einstellungen des aktuellen Benutzers zensierte
+              Wörter ausblenden.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWFLASH</literal>
+            </entry>
+            <entry>
+              Ob die Einstellungen des aktuellen Benutzers
+              Flash-Objekte anzeigen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWIMG</literal>
+            </entry>
+            <entry>
+              Ob die Einstellungen des aktuellen Benutzers Bilder
+              anzeigen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>S_VIEWSMILIES</literal>
+            </entry>
+            <entry>
+              Ob die Einstellungen des aktuellen Benutzers Smilies
+              anzeigen.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>STYLE_ID</literal>
+            </entry>
+            <entry>
+              ID des aktuellen Stils.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>T_SMILIES_PATH</literal>
+            </entry>
+            <entry>
+              Pfad zum Smilies-Verzeichnis.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Im folgenden Beispiel verwenden wir den Configurator, um
+      dynamisch einen eigenen BBCode zu erstellen, dessen Inhalt nur
+      registrierte Benutzer sehen können:
+    </para>
+    <programlisting>
+[noguests]{TEXT}[/noguests]
+</programlisting>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after'   =&gt; 'configure_noguests',
+        ];
+    }
+
+    public function configure_noguests($event)
+    {
+        // Get the BBCode configurator
+        $configurator = $event['configurator'];
+
+        // Let's unset any existing BBCode that might already exist
+        unset($configurator-&gt;BBCodes['noguests']);
+        unset($configurator-&gt;tags['noguests']);
+
+        // Let's create the new BBCode
+        $configurator-&gt;BBCodes-&gt;addCustom(
+            '[noguests]{TEXT}[/noguests]',
+            '&lt;xsl:choose&gt;
+                &lt;xsl:when test=&quot;$S_USER_LOGGED_IN and not($S_IS_BOT)&quot;&gt;
+                    &lt;div&gt;{TEXT}&lt;/div&gt;
+                &lt;/xsl:when&gt;
+                &lt;xsl:otherwise&gt;
+                    &lt;div&gt;Only registered users can read this content&lt;/div&gt;
+                &lt;/xsl:otherwise&gt;
+            &lt;/xsl:choose&gt;'
+        );
+    }
+}
+</programlisting>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Beachten Sie, dass im obigen Code eine Prüfung des Werts der
+        Template-Variable <literal>S_USER_LOGGED_IN</literal>
+        verwendet wird und dementsprechend die passende
+        BBCode-HTML-Ausgabe erzeugt wird.
+      </para>
+    </note>
+    <para>
+      Template-Parameter können außerdem mit einem der folgenden
+      Events festgelegt werden:
+    </para>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Event
+            </entry>
+            <entry>
+              Beschreibung
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_renderer_setup</literal>
+            </entry>
+            <entry>
+              Wird einmalig ausgelöst, wenn der Renderer-Service
+              erstellt wird.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_render_before</literal>
+            </entry>
+            <entry>
+              Wird bei jedem Rendern eines Textes ausgelöst, bevor
+              das HTML erzeugt wird.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <literal>core.text_formatter_s9e_render_after</literal>
+            </entry>
+            <entry>
+              Wird bei jedem Rendern eines Textes ausgelöst,
+              <emphasis>nachdem</emphasis> das HTML erzeugt wurde. Es
+              kann verwendet werden, um Werte in ihren
+              ursprünglichen Zustand zurückzuversetzen.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Im folgenden einfachen Beispiel setzen wir einen
+      Template-Parameter, der in jedem Text eine Zufallszahl
+      erzeugt. Die Zahl ändert sich bei jedem neuen Rendern eines
+      Textes. Auch wenn dies keinen praktischen Nutzen hat, zeigt es
+      doch, wie dies zusammen mit den obigen Events und Techniken
+      genutzt werden kann, um pragmatisch eigene Template-Parameter
+      zu erstellen, zusätzlich zu den bereits in phpBB verfügbaren
+      Standardparametern.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_render_before' =&gt; 'set_random'
+        ];
+    }
+
+    public function set_random($event)
+    {
+        $event['renderer']-&gt;get_renderer()-&gt;setParameter('RANDOM', mt_rand());
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Templating/Template_parameters/">Template
+          parameters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Plugins/BBCodes/Use_template_parameters/">Use
+          template parameters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="registering-custom-variables">
+    <title>Eigene Variablen registrieren</title>
+    <para>
+      Es ist möglich, eigene Variablen zu registrieren, die während
+      des Parsens verwendet werden. phpBB verwendet beispielsweise
+      <literal>max_font_size</literal>, um die im Tag
+      <literal>[font]</literal> verwendeten Werte dynamisch zu
+      begrenzen. Während des Parsens verwendete Callbacks müssen
+      statisch und serialisierbar sein, da der Parser selbst in
+      serialisierter Form zwischengespeichert wird. Eigene Variablen
+      werden hingegen zum Zeitpunkt des Parsens gesetzt und sind
+      nicht auf skalare Typen beschränkt. Sie können beispielsweise
+      verwendet werden, um während des Parsens auf das aktuelle
+      Benutzerobjekt zuzugreifen.
+    </para>
+    <para>
+      Im folgenden Beispiel fügen wir einen Attributfilter hinzu,
+      um URLs zu verändern, die in <literal>[url]</literal>-BBCodes
+      und Links verwendet werden. Zusätzlich zum Wert des Attributs
+      (der URL) fordern wir an, dass die eigene Variable
+      <literal>my.id</literal> als zweiter Parameter übergeben
+      wird. Es empfiehlt sich, Variablennamen mit einem Namensraum
+      zu versehen, um Kollisionen mit anderen Extensions oder phpBB
+      selbst zu vermeiden.
+    </para>
+    <para>
+      Das Event <literal>core.text_formatter_s9e_parser_setup</literal>
+      verwendet <literal>$event['parser']-&gt;set_var()</literal>, um
+      einmalig bei der Initialisierung einen Wert für die Variable
+      <literal>my.id</literal> zu setzen. Das Event
+      <literal>core.text_formatter_s9e_parse_before</literal> könnte
+      verwendet werden, um den Wert vor jedem Parsen zu setzen.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after' =&gt; 'configure_links',
+            'core.text_formatter_s9e_parser_setup'    =&gt; 'set_random_id'
+        ];
+    }
+
+    static public function add_link_id($url, $my_id)
+    {
+        return $url . '#' . $my_id;
+    }
+
+    public function configure_links($event)
+    {
+        // Add self::add_link_id() to filter the attribute value of [url] BBCodes and links
+        $event['configurator']-&gt;tags['url']-&gt;attributes['url']-&gt;filterChain
+            -&gt;append([__CLASS__, 'add_link_id'])
+            -&gt;resetParameters()
+            -&gt;addParameterByName('attrValue')
+            -&gt;addParameterByName('my.id');
+    }
+
+    public function set_random_id($event)
+    {
+        // We set my.id to a random number in this example
+        $event['parser']-&gt;set_var('my.id', mt_rand(111, 999));
+    }
+}
+</programlisting>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://area51.phpbb.com/docs/code/3.3.x/phpbb/textformatter/parser_interface.html">phpBB
+          API Documentation</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Callback_signature/">Callback
+          signature - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Attribute_filters/">Attribute
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://s9etextformatter.readthedocs.io/Filters/Tag_filters/">Tag
+          filters - s9e\TextFormatter</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="enable-text-formatter-plugins">
+    <title>Text-Formatter-Plugins aktivieren</title>
+    <para>
+      Die Text-Formatter-Bibliothek verfügt über eine Sammlung von
+      Plugins, die über eine Extension aktiviert werden können, wie
+      z. B. MediaEmbed, Pipe Tables usw.
+    </para>
+    <para>
+      Plugins können über die Variable
+      <literal>configurator</literal> ein- oder ausgeschaltet
+      werden, die über die Events
+      <literal>core.text_formatter_s9e_configure_before</literal>
+      und
+      <literal>core.text_formatter_s9e_configure_after</literal>
+      zur Verfügung steht, welche jeweils vor bzw. nach der
+      Konfiguration der Standardeinstellungen ausgelöst werden.
+    </para>
+    <programlisting>
+class listener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'core.text_formatter_s9e_configure_after' =&gt; 'configure'
+        ];
+    }
+
+    public function configure($event)
+    {
+        $configurator = $event['configurator'];
+
+        // Disable the Autolink plugin
+        unset($configurator-&gt;Autolink);
+
+        // Enable the PipeTables plugin
+        $configurator-&gt;PipeTables;
+
+        // Do something if the MediaEmbed plugin is enabled
+        $is_enabled = isset($configurator-&gt;MediaEmbed);
+        if ($is_enabled)
+        {
+            // ...
+        }
+
+        // Get the names of all loaded plugins
+        $names = [];
+        foreach ($configurator-&gt;plugins as $plugin_name =&gt; $plugin_configurator)
+        {
+            $names[] = $plugin_name;
+        }
+    }
+}
+</programlisting>
+    <para>
+      <ulink url="https://s9etextformatter.readthedocs.io">s9e\TextFormatter</ulink>
+    </para>
+  </sect1>
+</article>

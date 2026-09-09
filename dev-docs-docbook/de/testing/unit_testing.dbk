@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Unit-Tests</title>
+  </articleinfo>
+  <para>
+    Unit-Tests überprüfen lediglich, ob bestimmte Teile des
+    Quellcodes ordnungsgemäß funktionieren. Diese Tests befinden sich
+    im Haupt-phpBB-Repository unter <literal>tests/</literal> und
+    sind in Ordner gruppiert, basierend auf Gemeinsamkeiten zwischen
+    den getesteten Funktionalitäten. Tests, die beispielsweise die
+    Konfiguration testen sollen, befinden sich in
+    <literal>tests/config/</literal>.
+  </para>
+  <sect1 id="running-unit-tests">
+    <title>Unit-Tests ausführen</title>
+    <para>
+      Informationen zum Ausführen von Tests finden Sie im
+      GitHub-Repository unter
+      <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md">https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md</ulink>.
+      Sie können den Branch wechseln, um die Anweisungen für eine
+      bestimmte phpBB-Version anzuzeigen.
+    </para>
+  </sect1>
+  <sect1 id="writing-unit-tests">
+    <title>Unit-Tests schreiben</title>
+    <para>
+      Dateien, die Tests enthalten, sollten das Suffix
+      <literal>_test</literal> tragen, z. B.:
+      <literal>tests/demo/demo_test.php</literal>
+    </para>
+    <para>
+      Innerhalb der Unit-Tests gibt es zwei Kategorien: Tests, die
+      eine Datenbank benötigen, und solche, die keine benötigen.
+      <emphasis role="strong">Wenn ein Test keine Datenbank benötigt,
+      verwenden Sie sie nicht!</emphasis>
+    </para>
+    <sect2 id="without-a-database">
+      <title>Ohne Datenbank</title>
+      <programlisting>
+&lt;?php
+// tests/demo/demo_test.php
+
+require_once dirname(__FILE__) . '/../phpBB/includes/functions.php';
+
+class phpbb_demo_demo_test extends phpbb_test_case
+{
+    public function phpbb_email_hash_data()
+    {
+        return [
+            ['wiki@phpbb.com', 126830126620],
+            ['', 0],
+        ];
+    }
+
+    /**
+     * @dataProvider phpbb_email_hash_data
+     */
+    public function test_phpbb_email_hash($email, $expected)
+    {
+        $this-&gt;assertEquals($expected, phpbb_email_hash($email));
+    }
+}
+</programlisting>
+      <para>
+        Sie haben vielleicht bemerkt, dass in der Test-Funktion
+        selbst tatsächlich keine Daten stehen. Im Kommentar ist eine
+        dataProvider-Funktion angegeben, die für den Test verwendet
+        wird. Der Test wird dann mit jedem Array im dataProvider-Array
+        ausgeführt, wobei die Werte als Parameter für den Aufruf der
+        Test-Funktion dienen.
+      </para>
+    </sect2>
+    <sect2 id="using-a-database">
+      <title>Mit Datenbank</title>
+      <programlisting>
+&lt;?php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+class phpbb_demo_db_demo_test extends phpbb_database_test_case
+{
+    public function getDataSet()
+    {
+        return $this-&gt;createXMLDataSet(dirname(__FILE__) . '/fixtures/three_users.xml');
+    }
+
+    public function fetchrow_data()
+    {
+        return [
+            ['', [['username_clean' =&gt; 'barfoo'],
+                ['username_clean' =&gt; 'foobar'],
+                ['username_clean' =&gt; 'bertie']]],
+            ['user_id = 2', [['username_clean' =&gt; 'foobar']]],
+            [&quot;username_clean = 'bertie'&quot;, [['username_clean' =&gt; 'bertie']]],
+            [&quot;username_clean = 'phpBB'&quot;, []],
+        ];
+    }
+
+    /**
+     * @dataProvider fetchrow_data
+     */
+    public function test_fetchrow($where, $expected)
+    {
+        // The function from phpbb_test_case_helpers returns a new db for every test.
+        $db = $this-&gt;new_dbal();
+
+        $result = $db-&gt;sql_query('SELECT username_clean
+            FROM phpbb_users
+            ' . (($where) ? ' WHERE ' . $where : '') . '
+            ORDER BY user_id ASC');
+
+        $ary = [];
+        while ($row = $db-&gt;sql_fetchrow($result))
+        {
+            $ary[] = $row;
+        }
+        $db-&gt;sql_freeresult($result);
+
+        $this-&gt;assertEquals($expected, $ary);
+    }
+}
+</programlisting>
+      <para>
+        Am wichtigsten für DB-Tests ist Folgendes zu wissen:
+      </para>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            Alle Daten der Datenbank werden zunächst geleert.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Die Daten der Funktion getDataSet werden in die Datenbank
+            geladen. <emphasis role="strong">Es stehen keine Daten aus
+            einem anderen Test zur Verfügung!</emphasis>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Wenn Sie eine Tabelle mit einer Spalte verwenden, für die
+            kein Standardwert angegeben ist (etwa Textspalten),
+            stellen Sie sicher, dass Sie diese angeben. (siehe
+            <ulink url="http://tracker.phpbb.com/browse/PHPBB3-10667">PHPBB3-10667</ulink>)
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="code-of-a-db-dataset">
+      <title>Code eines DB-Datensatzes</title>
+      <programlisting language="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;dataset&gt;
+    &lt;table name=&quot;table_name&quot;&gt;
+        &lt;column&gt;column_name_1&lt;/column&gt;
+        &lt;column&gt;column_name_2&lt;/column&gt;
+        &lt;row&gt;
+            &lt;value&gt;value for column 1&lt;/value&gt;
+            &lt;value&gt;value for column 2&lt;/value&gt;
+        &lt;/row&gt;
+        &lt;row&gt;
+            &lt;value&gt;another row, value for column 1&lt;/value&gt;
+            &lt;value&gt;another row, value for column 2&lt;/value&gt;
+        &lt;/row&gt;
+    &lt;/table&gt;
+&lt;/dataset&gt;
+</programlisting>
+    </sect2>
+    <sect2 id="using-permissions-auth">
+      <title>Verwendung von Berechtigungen ($auth)</title>
+      <para>
+        Wenn Sie die auth-Klasse verwenden müssen, sollten Sie dafür
+        ein Mock-Objekt einsetzen. Hier ist ein kurzes Beispiel für
+        die Verwendung. Bitte beachten Sie, dass Sie das Ergebnis für
+        jede Funktion und alle verwendeten Werte angeben müssen. Wenn
+        forum_id außerdem nicht auf int gecastet wird, müssen Sie für
+        jede Berechtigung eine zweite Zeile angeben. (Gekennzeichnet
+        mit <literal>// Called without int cast</literal> weiter
+        unten) Weitere Informationen dazu, wie diese Test Doubles
+        funktionieren, finden Sie unter:
+        <ulink url="https://phpunit.de/manual/current/en/test-doubles.html">https://phpunit.de/manual/current/en/test-doubles.html</ulink>
+      </para>
+      <programlisting>
+&lt;?php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+require_once dirname(__FILE__) . '/../phpBB/includes/auth.php';
+
+class phpbb_demo_demo_test extends phpbb_test_case
+{
+    public function test_auth_mock_hash($email, $expected)
+
+        $auth = $this-&gt;getMock('auth');
+        $acl_get_map = [
+            ['f_read', 23, true],
+            ['f_read', '23', true],// Called without int cast
+            ['m_', 23, true],
+            ['m_', '23', true],// Called without int cast
+        ];
+
+        $auth-&gt;expects($this-&gt;any())
+            -&gt;method('acl_get')
+            -&gt;with($this-&gt;stringContains('_'),
+                $this-&gt;anything())
+            -&gt;will($this-&gt;returnValueMap($acl_get_map));
+        $this-&gt;assertTrue($auth-&gt;acl_get('f_read', 23));
+        $this-&gt;assertTrue($auth-&gt;acl_get('f_read', '23'));
+        $this-&gt;assertFalse($auth-&gt;acl_get('f_read', 12));
+        $this-&gt;assertFalse($auth-&gt;acl_get('f_read', '12'));
+    }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

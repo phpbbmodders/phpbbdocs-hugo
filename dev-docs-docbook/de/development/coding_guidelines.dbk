@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Programmierrichtlinien</title>
+  </articleinfo>
+  <para>
+    Die Programmierrichtlinien von phpBB werden in seinem
+    <ulink url="https://github.com/phpbb/phpbb">Quellcode-Repository</ulink>
+    gepflegt. Die aktuellsten Versionen finden Sie auf area51:
+  </para>
+  <itemizedlist spacing="compact">
+    <listitem>
+      <para>
+        Regeln für
+        <ulink url="https://area51.phpbb.com/docs/30x/coding-guidelines.html">Olympus
+        (3.0.x)-Code</ulink>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Regeln für
+        <ulink url="https://area51.phpbb.com/docs/31x/coding-guidelines.html">Ascraeus
+        (3.1.x)-Code</ulink>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Regeln für
+        <ulink url="https://area51.phpbb.com/docs/32x/coding-guidelines.html">Rhea
+        (3.2.x)-Code</ulink>
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Regeln für
+        <ulink url="https://area51.phpbb.com/docs/33x/coding-guidelines.html">Proteus
+        (3.3.x)-Code</ulink>
+      </para>
+    </listitem>
+  </itemizedlist>
+  <para>
+    Diese Dokumente werden automatisch aktualisiert, wenn Änderungen an
+    ihnen vorgenommen werden.
+  </para>
+  <sect1 id="javascript-linting">
+    <title>JavaScript-Linting</title>
+    <para>
+      Wir verwenden JSHint und JSCS zur Überprüfung der Qualität des
+      JavaScript-Codes—JSHint für das Linting und JSCS zur
+      Sicherstellung einheitlichen Codes. Im Wurzelverzeichnis des
+      Projekts befinden sich eine .jshintrc- und eine .jscs-Datei, und
+      Ihr Editor verfügt wahrscheinlich über ein Plugin, das Ihnen
+      anzeigt, wenn Sie gegen diese Standards verstoßen.
+    </para>
+  </sect1>
+</article>

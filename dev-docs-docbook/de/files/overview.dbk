@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Die files-Klassen</title>
+  </articleinfo>
+  <para>
+    phpBB 3.2 führt zwei neue Klassen für den Datei-Upload ein:
+    filespec und upload. Diese wurden überarbeitet und basieren auf
+    den zuvor vorhandenen Klassen filespec und fileupload. Zusätzlich
+    gibt es eine factory-Klasse, die für einen einfachen Zugriff auf
+    die files-Klassen verwendet werden kann.
+  </para>
+  <warning>
+    <title>Warnung</title>
+    <para>
+      Die zuvor verwendete Datei
+      <literal>functions_upload.php</literal> existiert nicht mehr.
+      Stattdessen sollten die neu hinzugefügten Klassen mithilfe der
+      Container-Infrastruktur an Ihre Klassen, Controller usw.
+      übergeben werden.
+    </para>
+  </warning>
+  <sect1 id="overview-of-available-classes">
+    <title>Übersicht der verfügbaren Klassen</title>
+    <sect2 id="factory">
+      <title>factory</title>
+      <para>
+        <literal>\phpbb\files\factory</literal>
+      </para>
+      <para>
+        Bietet einfacheren Zugriff auf die files-Klassen, z. B.
+        innerhalb der files-Klassen selbst.
+      </para>
+    </sect2>
+    <sect2 id="filespec">
+      <title>filespec</title>
+      <para>
+        <literal>\phpbb\files\filespec</literal>
+      </para>
+      <para>
+        Zuständig für das Vorhalten aller relevanten Dateiinformationen
+        sowie für die Durchführung dateispezifischer Operationen.
+      </para>
+    </sect2>
+    <sect2 id="upload">
+      <title>upload</title>
+      <para>
+        <literal>\phpbb\files\upload</literal>
+      </para>
+      <para>
+        Wird für die eigentlichen Datei-Uploads verwendet. Wird auch
+        zur Prüfung gültiger Dateien und zum Verschieben von Dateien
+        verwendet.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-container-to-retrieve-the-classes">
+    <title>Verwendung des Containers zum Abrufen der Klassen</title>
+    <para>
+      Die files-Klassen können einfach mithilfe des Containers
+      abgerufen werden:
+    </para>
+    <programlisting>
+$factory = $phpbb_container-&gt;get('files.factory');
+$upload = $phpbb_container-&gt;get('files.upload');
+$filespec = $phpbb_container-&gt;get('files.filespec');
+</programlisting>
+    <para>
+      Die Klassen filespec und upload sind mit dem Prototype-Scope
+      definiert. Das führt dazu, dass der Container bei jedem Aufruf
+      der Methode get() eine neue Instanz dieser Klassen zurückgibt.
+    </para>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Wenn einer Klasse außerhalb des Prototype-Scope eine Instanz
+        der upload- oder filespec-Klasse übergeben wird, verwendet
+        diese Klasse immer dieselbe Instanz. Daher wird empfohlen, die
+        factory-Klasse zu verwenden, um zur Laufzeit eine neue Instanz
+        der benötigten Klasse(n) abzurufen.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-the-factory-to-retrieve-the-classes">
+    <title>Verwendung der factory-Klasse zum Abrufen der Klassen</title>
+    <para>
+      Die factory-Klasse kann verwendet werden, um die files-Klassen
+      abzurufen, ohne den Container selbst verwenden zu müssen. Sie
+      kann einer Klasse als Service übergeben werden:
+    </para>
+    <programlisting language="yaml">
+myclass:
+    class: some\namespace\myclass
+    arguments:
+        - '@files.factory'
+</programlisting>
+    <para>
+      Natürlich kann die Klasse auch manuell instanziiert werden:
+    </para>
+    <programlisting>
+$files_factory = new phpbb\files\factory($phpbb_container);
+</programlisting>
+    <para>
+      Sobald die factory-Klasse verfügbar ist, kann die andere Klasse
+      mit der Methode <literal>get()</literal> abgerufen werden:
+    </para>
+    <programlisting>
+$filespec = $files_factory-&gt;get('files.filespec');
+</programlisting>
+  </sect1>
+</article>

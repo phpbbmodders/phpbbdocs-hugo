@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Kommandozeilenschnittstelle</title>
+  </articleinfo>
+  <para>
+    phpBB wird mit einer Reihe von Werkzeugen für die
+    Kommandozeilenschnittstelle (Command Line Interface, CLI)
+    ausgeliefert, die eine einfache Steuerung administrativer und
+    entwicklungsbezogener Funktionen über Konsole oder
+    Terminalanwendung ermöglichen.
+  </para>
+  <para>
+    getting_started
+  </para>
+</article>

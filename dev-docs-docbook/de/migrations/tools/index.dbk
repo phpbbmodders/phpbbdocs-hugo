@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tools</title>
+  </articleinfo>
+  <para>
+    Migration Tools helfen Ihnen, gängige Aktionen im
+    Datainstallationsprogramm Ihrer Migration einfacher durchzuführen.
+  </para>
+  <itemizedlist spacing="compact">
+    <listitem>
+    </listitem>
+  </itemizedlist>
+</article>

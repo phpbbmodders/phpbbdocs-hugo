@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Extensions</title>
+  </articleinfo>
+  <para>
+    Willkommen zum Tutorial und zur Dokumentation für die Entwicklung von phpBB-Extensions.
+  </para>
+  <para>
+    tutorial_basics tutorial_key_concepts tutorial_events
+    tutorial_controllers tutorial_migrations tutorial_modules
+    tutorial_notifications tutorial_permissions tutorial_authentication
+    tutorial_parsing_text tutorial_bbcodes tutorial_templates
+    tutorial_advanced tutorial_testing modification_to_extension
+    new_in_rhea new_in_proteus skeleton_extension events_list
+    database_types_list
+  </para>
+</article>
