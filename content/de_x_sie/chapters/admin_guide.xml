@@ -795,10 +795,10 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Beitragseinstellungen</title>
+		<title>Beiträge</title>
 
 		<para>Foren sind ohne Inhalt nutzlos. Inhalte werden von Ihren Benutzern erstellt und veröffentlicht; daher ist es sehr wichtig, die richtigen Beitragseinstellungen zu haben, die steuern, wie Inhalte veröffentlicht werden. Diesen Bereich erreichen Sie über den Navigationsreiter <guimenuitem>Beiträge</guimenuitem>.</para>
-		<para>Die erste Seite, die Sie im Bereich <guimenuitem>Beitragseinstellungen</guimenuitem> sehen, ist <guilabel>BBCodes</guilabel>. Die übrigen verfügbaren Unterabschnitte sind in zwei Hauptgruppen unterteilt: <guilabel>Nachrichten</guilabel> und <guilabel>Anhänge</guilabel>. <guimenuitem>Private Nachrichten</guimenuitem>, <guimenuitem>Beitrags-Symbole</guimenuitem>, <guimenuitem>Smileys</guimenuitem> und <guimenuitem>Wortzensur</guimenuitem> sind nachrichtenbezogene Einstellungen. <guimenuitem>Dateianhänge</guimenuitem>, <guimenuitem>Dateitypen verwalten</guimenuitem>, <guimenuitem>Dateityp-Gruppen verwalten</guimenuitem> und <guimenuitem>Verwaiste Dateianhänge</guimenuitem> sind anhangbezogene Einstellungen.</para>
+		<para>Die erste Seite, die Sie im Bereich <guimenuitem>Beiträge</guimenuitem> sehen, ist <guilabel>BBCodes</guilabel>. Die übrigen verfügbaren Unterabschnitte sind in zwei Hauptgruppen unterteilt: <guilabel>Nachrichten</guilabel> und <guilabel>Anhänge</guilabel>. <guimenuitem>Private Nachrichten</guimenuitem>, <guimenuitem>Beitrags-Symbole</guimenuitem>, <guimenuitem>Smileys</guimenuitem> und <guimenuitem>Wortzensur</guimenuitem> sind nachrichtenbezogene Einstellungen. <guimenuitem>Dateianhänge</guimenuitem>, <guimenuitem>Dateitypen verwalten</guimenuitem>, <guimenuitem>Dateityp-Gruppen verwalten</guimenuitem> und <guimenuitem>Verwaiste Dateianhänge</guimenuitem> sind anhangbezogene Einstellungen.</para>
 
 		<section id="acp_posting_bbcodes">
 			<sectioninfo>
@@ -926,7 +926,7 @@
 				<listitem><para><guilabel>Private Nachrichten</guilabel>: Sie können das System für private Nachrichten Ihres Boards aktivieren oder deaktivieren. Um es zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
 				<listitem><para><guilabel>Maximale Anzahl von Ordnern</guilabel>: Dies ist die maximale Anzahl neuer Ordner für private Nachrichten, die Ihre Benutzer jeweils anlegen können.</para></listitem>
 				<listitem><para><guilabel>Maximale Anzahl von Nachrichten pro Ordner</guilabel>: Dies ist die maximale Anzahl privater Nachrichten, die Ihre Benutzer in jedem ihrer Ordner haben können.</para></listitem>
-				<listitem><para><guilabel>Standard-Verhalten bei vollem Ordner</guilabel>: Manchmal möchten Ihre Benutzer sich gegenseitig eine private Nachricht senden, doch der vorgesehene Empfänger hat einen vollen Ordner. Diese Einstellung legt fest, was mit der gesendeten Nachricht genau geschieht. Sie können entweder festlegen, dass eine alte Nachricht gelöscht wird, um Platz für die neue zu schaffen, oder dass neue Nachrichten zurückgehalten werden, bis der Empfänger in seinem Posteingang Platz schafft. Beachten Sie, dass die Standardaktion für den <guilabel>Gesendet-Ordner</guilabel> das Löschen alter Nachrichten ist.</para></listitem>
+				<listitem><para><guilabel>Standard-Verhalten bei vollem Ordner</guilabel>: Manchmal möchten Ihre Benutzer sich gegenseitig eine private Nachricht senden, doch der vorgesehene Empfänger hat einen vollen Ordner. Diese Einstellung legt fest, was mit der gesendeten Nachricht genau geschieht. Sie können entweder festlegen, dass eine alte Nachricht gelöscht wird, um Platz für die neue zu schaffen, oder dass neue Nachrichten zurückgehalten werden, bis der Empfänger in seinem Posteingang Platz schafft. Beachten Sie, dass die Standardaktion für den <guilabel>Gesendete Nachrichten</guilabel> das Löschen alter Nachrichten ist.</para></listitem>
 				<listitem><para><guilabel>Nachträgliche Bearbeitung einschränken</guilabel>: Benutzern ist es üblicherweise erlaubt, ihre gesendeten privaten Nachrichten zu bearbeiten, bevor der Empfänger sie liest, selbst wenn sie sich bereits im Postausgang befinden. Sie können festlegen, wie viel Zeit Ihre Benutzer zum Bearbeiten gesendeter privater Nachrichten haben.</para></listitem>
 			</itemizedlist>
 
@@ -1063,7 +1063,7 @@
 				<title>Bildkategorie-Einstellungen</title>
 				<listitem><para><guilabel>Bilder im Beitrag anzeigen</guilabel>: Legt fest, wie Bildanhänge angezeigt werden. Ist dies auf <guilabel>Nein</guilabel> gesetzt, wird stattdessen ein Link zum Anhang angezeigt, anstatt das Bild selbst (oder ein Vorschaubild) inline darzustellen.</para></listitem>
 				<listitem><para><guilabel>Vorschaubild erstellen</guilabel>: Diese Einstellung legt fest, ob Ihr Board für jedes angehängte Bild ein Vorschaubild erstellt oder nicht.</para></listitem>
-				<listitem><para><guilabel>Maximale Vorschaubildbreite in Pixeln</guilabel>: Dies ist die maximale Breite in Pixeln für die erzeugten Vorschaubilder.</para></listitem>
+				<listitem><para><guilabel>Maximale Breite/Höhe der Vorschaubilder in Pixeln</guilabel>: Dies ist die maximale Breite in Pixeln für die erzeugten Vorschaubilder.</para></listitem>
 				<listitem><para><guilabel>Maximale Vorschaubild-Dateigröße</guilabel>: Für Bilder werden keine Vorschaubilder erstellt, wenn die Dateigröße des erzeugten Vorschaubilds diesen Wert (in Byte) übersteigt. Dies ist nützlich bei besonders großen geposteten Bildern.</para></listitem>
 				<listitem><para><guilabel>Maximale Abmessungen von Bildern</guilabel>: Die maximale Größe von Bildanhängen in Pixeln. Wenn Sie die Größenprüfung deaktivieren möchten (und dadurch Bildanhänge beliebiger Größe zulassen), setzen Sie jeden Wert auf 0.</para></listitem>
 				<listitem><para><guilabel>Abmessungen für Bildlinks</guilabel>: Ist ein Bildanhang größer als diese Abmessungen (in Pixeln), wird stattdessen ein Link zum Bild im Beitrag angezeigt. Wenn Bilder unabhängig von ihrer Größe inline angezeigt werden sollen, setzen Sie jeden Wert auf 0.</para></listitem>
@@ -2018,7 +2018,7 @@
 
 			<para>Wenn die Berechtigungseinstellungen einer Rolle nicht ganz zu Ihrem Forum passen – Sie möchten zum Beispiel nicht, dass irgendjemand seinen Online-Status ausblenden kann –, können Sie einer Standard-Rolle eine Berechtigung hinzufügen oder entziehen. Überall, wo diese Rolle verwendet wird, ändert sich dann diese Berechtigung.</para>
 
-			<para>Sie können auch eigene, benutzerdefinierte Rollen erstellen, indem Sie einen neuen Namen in das Feld <guilabel>Rolle erstellen</guilabel> eingeben, im Auswahlmenü <guilabel>Einstellungen verwenden von</guilabel> eine zu kopierende Rolle auswählen und auf „Absenden" klicken. Anschließend können Sie Ihre neue Rolle anpassen und für die Zuweisung dieser Berechtigungen verwenden.</para>
+			<para>Sie können auch eigene, benutzerdefinierte Rollen erstellen, indem Sie einen neuen Namen in das Feld <guilabel>Rolle erstellen</guilabel> eingeben, im Auswahlmenü <guilabel>Verwende Einstellungen von</guilabel> eine zu kopierende Rolle auswählen und auf „Absenden" klicken. Anschließend können Sie Ihre neue Rolle anpassen und für die Zuweisung dieser Berechtigungen verwenden.</para>
 
 			<para>Die Verwendung solcher benutzerdefinierten Rollen ist einfacher als das Bearbeiten der erweiterten Berechtigungen für mehrere Foren und sollte den Ressourcenbedarf Ihres Forums bei der Berechtigungsprüfung verringern.</para>
 		</section>
