@@ -178,8 +178,8 @@
               </author>
            </authorgroup>
         </sectioninfo>
-        <title>Spambot-Gegenmaßnahmen</title>
-        <para>phpBB 3.3 verwendet ein Plugin-System, das ein einfaches Umschalten zwischen verschiedenen Spambot-Gegenmaßnahmen ermöglicht. Verfügbare Plugins werden automatisch aus dem Verzeichnis includes/captcha/plugins Ihrer Installation geladen. </para>
+        <title>Anti-Spam-Bot-Maßnahmen</title>
+        <para>phpBB 3.3 verwendet ein Plugin-System, das ein einfaches Umschalten zwischen verschiedenen Anti-Spam-Bot-Maßnahmen ermöglicht. Verfügbare Plugins werden automatisch aus dem Verzeichnis includes/captcha/plugins Ihrer Installation geladen. </para>
         <itemizedlist>
            <title>phpBB wird mit folgenden vorinstallierten Plugins ausgeliefert:</title>
            <listitem><para>GD 3D-Bild: ein grafisches CAPTCHA mit dreidimensionalen Zeichen auf einer Welle.</para></listitem>
@@ -189,15 +189,15 @@
            <listitem><para>Frage &amp; Antwort: konfigurierbare Fragen und Antworten.</para></listitem>
         </itemizedlist>
 		<note><para><glossterm>CAPTCHA</glossterm>, oder „Completely Automated Public Turing Test To Tell Computers and Humans Apart“, ist ein Begriff für Rätsel, die vermeintlich für Menschen leicht, für Computer jedoch schwer zu lösen sind. </para></note>
-        <para>Die Seite ist in zwei Bereiche unterteilt: Der obere Bereich, „Allgemeine Optionen“, enthält Einstellungen dazu, wo Spambot-Gegenmaßnahmen eingesetzt werden. Der andere Bereich befasst sich mit der Auswahl, Konfiguration und Demonstration der Plugins.</para>
+        <para>Die Seite ist in zwei Bereiche unterteilt: Der obere Bereich, „Allgemeine Optionen“, enthält Einstellungen dazu, wo Anti-Spam-Bot-Maßnahmen eingesetzt werden. Der andere Bereich befasst sich mit der Auswahl, Konfiguration und Demonstration der Plugins.</para>
         <figure id="img_acp_captcha">
-           <title>Spambot-Gegenmaßnahmen</title>
+           <title>Anti-Spam-Bot-Maßnahmen</title>
            <mediaobject>
               <imageobject>
                  <imagedata format="PNG" fileref="../images/admin_guide/captcha.png"/>
               </imageobject>
            <caption>
-           <para>Die ACP-Seite zur Auswahl der Spambot-Gegenmaßnahmen-Plugins.</para>
+           <para>Die ACP-Seite zur Auswahl der Anti-Spam-Bot-Maßnahmen-Plugins.</para>
            </caption>
            </mediaobject>
         </figure>
@@ -2350,7 +2350,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Forums-Protokolle</title>
-			<para>Der Bereich <guilabel>Forums-Protokoll</guilabel> des <acronym>ACP</acronym> bietet einen Überblick darüber, was auf dem Board geschehen ist. Dies im Blick zu behalten ist für Sie als Administrator wichtig. Es gibt vier Arten von Protokollen:</para>
+			<para>Der Bereich <guilabel>Forums-Protokolle</guilabel> des <acronym>ACP</acronym> bietet einen Überblick darüber, was auf dem Board geschehen ist. Dies im Blick zu behalten ist für Sie als Administrator wichtig. Es gibt vier Arten von Protokollen:</para>
 			<variablelist>
 				<varlistentry>
 					<term>Administrations-Protokoll</term>
