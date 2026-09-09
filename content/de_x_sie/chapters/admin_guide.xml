@@ -601,7 +601,7 @@
 					</itemizedlist>
 				</para>
 
-				<para>Zuletzt betrifft die letzte Gruppe von Lasteinstellungen die <guilabel>Benutzerdefinierten Profilfelder</guilabel>, eine neue Funktion in phpBB3. Im Folgenden werden diese Optionen im Detail beschrieben.
+				<para>Zuletzt betrifft die letzte Gruppe von Lasteinstellungen die <guilabel>Benutzerdefinierten Profil-Felder</guilabel>, eine neue Funktion in phpBB3. Im Folgenden werden diese Optionen im Detail beschrieben.
 					<itemizedlist>
 						<title>Benutzerdefinierte Profilfelder</title>
 						<listitem><para><guilabel>Erlaubt Styles, benutzerdefinierte Profil-Felder in der Mitgliederliste anzuzeigen</guilabel>: Mit dieser Option können Sie steuern, ob die Stile Ihres Boards die benutzerdefinierten Profilfelder (falls vorhanden) in der Mitgliederliste anzeigen können. Um dies zu aktivieren, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
@@ -957,13 +957,13 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Beitragssymbole</title>
+			<title>Beitrags-Symbole</title>
 
-			<para>Eine neue Funktion in phpBB3 ist die Möglichkeit, Beiträgen Symbole zuzuweisen. Auf dieser Seite können Sie verwalten, welche Beitragssymbole auf Ihrem Board zur Verfügung stehen. Sie können Beitragssymbole hinzufügen, bearbeiten, löschen oder verschieben. Das Formular <guilabel>Beitragssymbole</guilabel> zeigt die derzeit auf Ihrem Board installierten Beitragssymbole an. Sie können Beitragssymbole manuell hinzufügen, ein vorgefertigtes Symbolpaket installieren, ein Symbolpaket exportieren oder herunterladen oder Ihre derzeit installierten Beitragssymbole bearbeiten.</para>
+			<para>Eine neue Funktion in phpBB3 ist die Möglichkeit, Beiträgen Symbole zuzuweisen. Auf dieser Seite können Sie verwalten, welche Beitragssymbole auf Ihrem Board zur Verfügung stehen. Sie können Beitragssymbole hinzufügen, bearbeiten, löschen oder verschieben. Das Formular <guilabel>Beitrags-Symbole</guilabel> zeigt die derzeit auf Ihrem Board installierten Beitragssymbole an. Sie können Beitragssymbole manuell hinzufügen, ein vorgefertigtes Symbolpaket installieren, ein Symbolpaket exportieren oder herunterladen oder Ihre derzeit installierten Beitragssymbole bearbeiten.</para>
 
 			<para>Ihre erste Möglichkeit, Beitragssymbole zu Ihrem Board hinzuzufügen, ist die Verwendung eines vorgefertigten Symbolpakets. Symbolpakete haben die Dateiendung <filename>pak</filename>. Um ein Symbolpaket zu installieren, müssen Sie zunächst ein Symbolpaket herunterladen. Laden Sie die Symboldateien selbst sowie die Paketdatei in das Verzeichnis <filename>/images/icons/</filename> hoch. Klicken Sie dann auf <guilabel>Symbolpaket installieren</guilabel>. Das Formular <guilabel>Symbolpaket installieren</guilabel> zeigt alle Optionen zur Installation von Beitragssymbolen an. Wählen Sie das Symbolpaket aus, das Sie hinzufügen möchten (es kann jeweils nur ein Symbolpaket installiert werden). Anschließend können Sie festlegen, was mit den bereits installierten Beitragssymbolen geschehen soll, falls das neue Symbolpaket Symbole enthält, die mit diesen in Konflikt stehen. Sie können entweder die vorhandenen Symbole beibehalten (es kann dann Duplikate geben), die Übereinstimmungen ersetzen (die bereits vorhandenen Symbole überschreiben) oder einfach alle in Konflikt stehenden Symbole löschen. Wenn Sie die gewünschte Option ausgewählt haben, klicken Sie auf <guilabel>Symbolpaket installieren</guilabel>.</para>
 
-			<para>Um Beitragssymbol(e) manuell hinzuzufügen, müssen Sie die Symbole zunächst in das Symbolverzeichnis Ihrer Seite hochladen. Rufen Sie die Seite <guimenuitem>Beitragssymbole</guimenuitem> auf. Klicken Sie auf <guilabel>Mehrere Symbole hinzufügen</guilabel>, zu finden im Formular <guilabel>Beitragssymbole</guilabel>. Haben Sie Ihre neuen gewünschten Beitragssymbole korrekt in das entsprechende Verzeichnis <filename>/images/icons/</filename> hochgeladen, sollten Sie für jedes neu hochgeladene Symbol eine Zeile mit Einstellungen sehen. Im Folgenden wird beschrieben, wofür jedes Feld dient. Wenn Sie mit dem Hinzufügen der Beitragssymbole fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Ergänzungen zu übermitteln.</para>
+			<para>Um Beitragssymbol(e) manuell hinzuzufügen, müssen Sie die Symbole zunächst in das Symbolverzeichnis Ihrer Seite hochladen. Rufen Sie die Seite <guimenuitem>Beitrags-Symbole</guimenuitem> auf. Klicken Sie auf <guilabel>Mehrere Beitrags-Symbole hinzufügen</guilabel>, zu finden im Formular <guilabel>Beitrags-Symbole</guilabel>. Haben Sie Ihre neuen gewünschten Beitragssymbole korrekt in das entsprechende Verzeichnis <filename>/images/icons/</filename> hochgeladen, sollten Sie für jedes neu hochgeladene Symbol eine Zeile mit Einstellungen sehen. Im Folgenden wird beschrieben, wofür jedes Feld dient. Wenn Sie mit dem Hinzufügen der Beitragssymbole fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Ergänzungen zu übermitteln.</para>
 
 			<itemizedlist>
 				<listitem><para><guilabel>Symboldatei</guilabel>: Diese Spalte zeigt das eigentliche Symbol an.</para></listitem>
@@ -1156,13 +1156,13 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Benutzerverwaltung</title>
+		<title>Benutzer-Verwaltung</title>
 
 		<section id="acp_users_manage">
 			<title>Benutzer verwalten</title>
 			<para>Benutzer sind die Grundlage Ihres Forums. Als Forenadministrator ist es sehr wichtig, Ihre Benutzer verwalten zu können. Die Verwaltung Ihrer Benutzer sowie ihrer Informationen und spezifischen Optionen ist einfach und kann über das <acronym>ACP</acronym> erfolgen.</para>
 
-			<para>Melden Sie sich zunächst an und rufen Sie Ihr <acronym>ACP</acronym> auf. Suchen und klicken Sie auf <guimenuitem>Benutzer und Gruppen</guimenuitem>, um zur entsprechenden Seite zu gelangen. Sehen Sie <guimenuitem>Benutzerverwaltung</guimenuitem> nicht, suchen und klicken Sie einfach im Navigationsmenü auf der linken Seite auf <guimenuitem>Benutzer verwalten</guimenuitem>.</para>
+			<para>Melden Sie sich zunächst an und rufen Sie Ihr <acronym>ACP</acronym> auf. Suchen und klicken Sie auf <guimenuitem>Benutzer und Gruppen</guimenuitem>, um zur entsprechenden Seite zu gelangen. Sehen Sie <guimenuitem>Benutzer-Verwaltung</guimenuitem> nicht, suchen und klicken Sie einfach im Navigationsmenü auf der linken Seite auf <guimenuitem>Benutzer verwalten</guimenuitem>.</para>
 
 			<para>Um fortzufahren und einen Benutzer zu verwalten, müssen Sie den bzw. die Benutzernamen kennen, den bzw. die Sie verwalten möchten. Geben Sie in das Textfeld für <guilabel>„Ein Mitglied suchen:“</guilabel> den Benutzernamen des Benutzers ein, dessen Informationen und Einstellungen Sie verwalten möchten. Möchten Sie hingegen ein Mitglied suchen, klicken Sie auf <guilabel>[ Ein Mitglied suchen ]</guilabel> (unterhalb des Textfelds) und folgen Sie den entsprechenden Schritten, um einen Benutzer zu finden und auszuwählen. Möchten Sie die Informationen und Einstellungen für den anonymen Benutzer verwalten (jeder nicht angemeldete Besucher wird als anonymer Benutzer geführt), aktivieren Sie das Kontrollkästchen <guilabel>„Anonymen Benutzer auswählen“</guilabel>. Haben Sie einen Benutzer ausgewählt, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
 
@@ -1262,9 +1262,9 @@
 					</varlistentry>
 
 					<varlistentry>
-						<term>Schnellwerkzeuge</term>
+						<term>Schnellauswahl</term>
 						<listitem>
-							<para>Die Optionen im Auswahlmenü <guilabel>Schnellwerkzeuge</guilabel> ermöglichen es Ihnen, schnell und einfach eine der Optionen des Benutzers zu ändern. Die verfügbaren Optionen sind <guilabel>Signatur löschen</guilabel>, <guilabel>Avatar löschen</guilabel>, <guilabel>Alle Beiträge verschieben</guilabel>, <guilabel>Alle Beiträge löschen</guilabel> und <guilabel>Alle Anhänge löschen</guilabel>.</para>
+							<para>Die Optionen im Auswahlmenü <guilabel>Schnellauswahl</guilabel> ermöglichen es Ihnen, schnell und einfach eine der Optionen des Benutzers zu ändern. Die verfügbaren Optionen sind <guilabel>Signatur löschen</guilabel>, <guilabel>Avatar löschen</guilabel>, <guilabel>Alle Beiträge verschieben</guilabel>, <guilabel>Alle Beiträge löschen</guilabel> und <guilabel>Alle Dateianhänge löschen</guilabel>.</para>
 						</listitem>
 					</varlistentry>
 				</variablelist>
@@ -1340,7 +1340,7 @@
 				<note>
 					<para>Die von Ihnen am Avatar des Benutzers vorgenommenen Änderungen müssen weiterhin den in den Avatar-Einstellungen festgelegten Beschränkungen entsprechen.</para>
 				</note>
-				<para>Um das Avatarbild zu löschen, aktivieren Sie einfach das Kontrollkästchen <guilabel>Bild löschen</guilabel> unterhalb des Avatarbilds.</para>
+				<para>Um das Avatarbild zu löschen, aktivieren Sie einfach das Kontrollkästchen <guilabel>Avatar löschen</guilabel> unterhalb des Avatarbilds.</para>
 				<para>Wenn Sie mit der Auswahl des Avatars für den Benutzer fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um den Avatar des Benutzers zu aktualisieren.</para>
 			</section>
 
@@ -1385,7 +1385,7 @@
 				</sectioninfo>
 				<title>Gruppen</title>
 
-				<para>Hier sehen Sie alle <glossterm>Benutzergruppen</glossterm>, in denen sich der Benutzer befindet. Auf dieser Seite können Sie den Benutzer einfach aus einer Benutzergruppe entfernen oder ihn einer bestehenden Gruppe hinzufügen. Die Tabelle <guilabel>Spezielle Gruppen, in denen der Benutzer Mitglied ist</guilabel> listet die Benutzergruppen auf, in denen der Benutzer derzeit Mitglied ist.</para>
+				<para>Hier sehen Sie alle <glossterm>Benutzergruppen</glossterm>, in denen sich der Benutzer befindet. Auf dieser Seite können Sie den Benutzer einfach aus einer Benutzergruppe entfernen oder ihn einer bestehenden Gruppe hinzufügen. Die Tabelle <guilabel>Systemgruppen, in denen der Benutzer Mitglied ist</guilabel> listet die Benutzergruppen auf, in denen der Benutzer derzeit Mitglied ist.</para>
 				<para>Das Hinzufügen des Benutzers zu einer neuen Benutzergruppe ist sehr einfach. Suchen Sie dazu das Auswahlmenü <guilabel>Benutzer zu Gruppe hinzufügen:</guilabel> und wählen Sie eine Benutzergruppe aus diesem Menü aus. Ist die Benutzergruppe ausgewählt, klicken Sie auf <guilabel>Absenden</guilabel>. Ihre Ergänzung wird sofort wirksam.</para>
 				<para>Um den Benutzer aus einer Gruppe zu entfernen, in der er/sie derzeit Mitglied ist, suchen Sie die Zeile, in der sich die Benutzergruppe befindet, und klicken Sie auf <guilabel>Löschen</guilabel>. Sie erhalten dann einen Bestätigungsbildschirm; möchten Sie fortfahren, klicken Sie auf <guilabel>Ja</guilabel>.</para>
 			</section>
