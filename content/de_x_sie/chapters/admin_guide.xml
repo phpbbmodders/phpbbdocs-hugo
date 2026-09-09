@@ -1835,7 +1835,7 @@
 					<listitem><para>Die Beschreibung der Gruppe, die in der Gruppenübersicht angezeigt wird.</para></listitem>
 				</varlistentry>
 				<varlistentry id="acp_groups_edit_legend">
-					<term>Gruppe in der Legende anzeigen:</term>
+					<term>Gruppe in der Legende der Online-Liste anzeigen:</term>
 					<listitem><para>Dies aktiviert die Anzeige des Gruppennamens in der Legende der Liste „Wer ist online". Beachten Sie, dass dies nur sinnvoll ist, wenn Sie für die Gruppe eine Farbe festgelegt haben.</para></listitem>
 				</varlistentry>
 				<varlistentry>
@@ -1848,7 +1848,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>Gruppen-Farbe</term>
-					<listitem><para>Der Name von Mitgliedern, die diese Gruppe als Hauptgruppe haben (siehe <xref linkend="acp_groups_default" />), wird auf allen Forenseiten in dieser Farbe angezeigt. Wenn Sie <link linkend="acp_groups_edit_legend"><guilabel>Gruppe in der Legende anzeigen</guilabel></link> aktivieren, erscheint unterhalb der Liste „Wer ist online" ein Legendeneintrag in derselben Farbe.</para></listitem>
+					<listitem><para>Der Name von Mitgliedern, die diese Gruppe als Hauptgruppe haben (siehe <xref linkend="acp_groups_default" />), wird auf allen Forenseiten in dieser Farbe angezeigt. Wenn Sie <link linkend="acp_groups_edit_legend"><guilabel>Gruppe in der Legende der Online-Liste anzeigen</guilabel></link> aktivieren, erscheint unterhalb der Liste „Wer ist online" ein Legendeneintrag in derselben Farbe.</para></listitem>
 				</varlistentry>
 				<varlistentry>
 					<term>Gruppenrang</term>
@@ -2396,7 +2396,7 @@
 			<para>phpBB verwendet eine Datenbank, um alle auf dem Board verwendeten Daten zu speichern, einschließlich Benutzer, Beiträge, Themen usw. Das Sichern der Datenbank kann als Schutzmaßnahme im Falle von Zwischenfällen nützlich sein, die zu Datenverlust oder Beschädigung der Datenbank führen könnten. Sollte ein solcher Zwischenfall auftreten, hätten Sie die Möglichkeit, die Datenbank aus dem Backup auf einen früheren Zustand zurückzusetzen. Sie können das Backup-Werkzeug auch verwenden, um Ihr Board zu einem anderen Anbieter umzuziehen – Sie erstellen ein Backup auf Ihrem aktuellen Server und stellen es auf dem neuen wieder her, um alle Daten zu erhalten.</para>
 			<itemizedlist>
 				<title>Datenbank-Backup</title>
-				<listitem><para><guilabel>Backup-Art</guilabel>: Sie können die gesamte Datenbank sichern oder entweder die <guilabel>Struktur</guilabel> oder die <guilabel>Daten</guilabel> sichern. Die Struktur enthält nur die Hierarchie, in der die Daten gespeichert sind; sichern Sie hingegen nur die Daten, benötigen Sie beim Wiederherstellen/Importieren eine bereits vorbereitete Struktur.</para></listitem>
+				<listitem><para><guilabel>Backup-Art</guilabel>: Sie können die gesamte Datenbank sichern oder entweder die <guilabel>Struktur</guilabel> oder <guilabel>Nur Daten</guilabel> sichern. Die Struktur enthält nur die Hierarchie, in der die Daten gespeichert sind; sichern Sie hingegen nur die Daten, benötigen Sie beim Wiederherstellen/Importieren eine bereits vorbereitete Struktur.</para></listitem>
 				<listitem><para><guilabel>Dateityp</guilabel>: Abhängig von Ihrer Serverkonfiguration können Sie das Backup in verschiedenen Formaten speichern. Die Option <guilabel>Text</guilabel> speichert das Backup im Klartext, andere Optionen komprimieren die Datei, um die Dateigröße des Dumps zu verringern.</para></listitem>
 				<listitem>
 					<para><guilabel>Tabellen-Auswahl</guilabel>: Sie können entweder <guilabel>Alle markieren</guilabel> oder einzelne Tabellen zum Sichern auswählen. Beim Sichern einer großen Datenbank können Sie die Suchtabellen ausschließen (vergessen Sie nicht, deren Struktur wiederherzustellen) und den Suchindex auf dem neuen Server neu erstellen.</para>
