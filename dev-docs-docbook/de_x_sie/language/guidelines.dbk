@@ -277,9 +277,9 @@ languagename_versionnumber.zip
     </listitem>
     <listitem>
       <para>
-        Der Revisionsname in der Customisations Database sollte leer
-        gelassen werden und die phpBB-Paketversion und/oder den Namen
-        der Paketversion enthalten (z. B. „**3.3.10 / Bertie's New
+        Der Revisionsname in der Customisations Database sollte entweder
+        leer gelassen werden oder die phpBB-Paketversion und/oder den
+        Namen der Paketversion enthalten (z. B. „**3.3.10 / Bertie's New
         Translation**“ für 3.3.10).
       </para>
     </listitem>

@@ -60,8 +60,8 @@
           <para>
             Der Revisionsname in der
             <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
-            Database</ulink> sollte leer gelassen werden und die
-            phpBB-Paketversion und/oder den Namen der Paketversion
+            Database</ulink> sollte entweder leer gelassen werden oder
+            die phpBB-Paketversion und/oder den Namen der Paketversion
             enthalten (z. B. <literal>3.3.10</literal> / `Bertie's
             translation for 3.3.10) für ein besseres Verständnis.
           </para>
