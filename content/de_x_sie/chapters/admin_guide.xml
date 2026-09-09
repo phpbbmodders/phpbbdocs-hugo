@@ -116,7 +116,7 @@
 				</sectioninfo>
 				<title>Board-Funktionalitäten</title>
 				<para>Über den Bereich <guimenuitem>Board-Funktionalitäten</guimenuitem> können Sie mehrere Funktionen boardweit aktivieren oder deaktivieren. Beachten Sie, dass jede hier deaktivierte Funktion auf Ihrem Forum nicht verfügbar ist, selbst wenn Sie Ihren Benutzern die entsprechenden Berechtigungen erteilen.</para>
-				<para>Der Bereich <guimenuitem>Lasteinstellungen</guimenuitem> ermöglicht es Ihnen, einige rechenintensive Funktionen zu deaktivieren, falls Sie ein Shared- oder eingeschränktes Hosting nutzen.</para>
+				<para>Der Bereich <guimenuitem>Serverlast</guimenuitem> ermöglicht es Ihnen, einige rechenintensive Funktionen zu deaktivieren, falls Sie ein Shared- oder eingeschränktes Hosting nutzen.</para>
 			</section>
 
 			<section id="acp_board_avatars">
@@ -370,7 +370,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Serverkonfiguration</title>
-			<para>Als Administrator eines Boards ist es unerlässlich, die Servereinstellungen Ihres phpBB-Boards fein abstimmen zu können. Die Konfiguration der Servereinstellungen Ihres Boards ist sehr einfach. Es gibt fünf Hauptkategorien von Servereinstellungen: <guimenuitem>Cookies</guimenuitem>, <guimenuitem>Servereinstellungen</guimenuitem>, <guimenuitem>Sicherheitseinstellungen</guimenuitem>, <guimenuitem>Lasteinstellungen</guimenuitem> und <guimenuitem>Suchfunktion</guimenuitem>. Die korrekte Konfiguration dieser Einstellungen trägt dazu bei, dass Ihr Board nicht nur funktioniert, sondern auch effizient und wie beabsichtigt arbeitet. Die folgenden Unterabschnitte beschreiben jede Kategorie der Serverkonfiguration. Denken Sie daran, nach dem Aktualisieren der Einstellungen jeweils auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen zu übernehmen.</para>
+			<para>Als Administrator eines Boards ist es unerlässlich, die Servereinstellungen Ihres phpBB-Boards fein abstimmen zu können. Die Konfiguration der Servereinstellungen Ihres Boards ist sehr einfach. Es gibt fünf Hauptkategorien von Servereinstellungen: <guimenuitem>Cookies</guimenuitem>, <guimenuitem>Server und Domain</guimenuitem>, <guimenuitem>Sicherheit</guimenuitem>, <guimenuitem>Serverlast</guimenuitem> und <guimenuitem>Suchfunktion</guimenuitem>. Die korrekte Konfiguration dieser Einstellungen trägt dazu bei, dass Ihr Board nicht nur funktioniert, sondern auch effizient und wie beabsichtigt arbeitet. Die folgenden Unterabschnitte beschreiben jede Kategorie der Serverkonfiguration. Denken Sie daran, nach dem Aktualisieren der Einstellungen jeweils auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen zu übernehmen.</para>
 
 			<section id="acp_server_cookies">
 				<sectioninfo>
@@ -416,8 +416,8 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Servereinstellungen</title>
-				<para>Auf dieser Seite können Sie server- und domainabhängige Einstellungen festlegen. Es gibt drei Hauptkategorien von Servereinstellungen: <guilabel>Servereinstellungen</guilabel>, <guilabel>Pfadeinstellungen</guilabel> und <guilabel>Server-URL-Einstellungen</guilabel>. Im Folgenden werden jede Kategorie der Servereinstellungen und die zugehörigen Einstellungen näher beschrieben. Wenn Sie mit der Konfiguration der Servereinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+				<title>Server und Domain</title>
+				<para>Auf dieser Seite können Sie server- und domainabhängige Einstellungen festlegen. Es gibt drei Hauptkategorien von Servereinstellungen: <guilabel>Servereinstellungen</guilabel>, <guilabel>Pfad-Einstellungen</guilabel> und <guilabel>Server URL-Einstellungen</guilabel>. Im Folgenden werden jede Kategorie der Servereinstellungen und die zugehörigen Einstellungen näher beschrieben. Wenn Sie mit der Konfiguration der Servereinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
 
 				<warning>
 					<para>Gehen Sie beim Bearbeiten der Servereinstellungen Ihres Boards mit Vorsicht vor. Falsche Einstellungen können Folgen wie den Versand von E-Mails mit falschen Links und/oder Informationen oder sogar die Unerreichbarkeit des Boards nach sich ziehen.</para>
@@ -431,9 +431,9 @@
 					</itemizedlist>
 				</para>
 
-				<para>Anschließend ermöglicht Ihnen das Formular <guilabel>Pfadeinstellungen</guilabel>, die verschiedenen Pfade festzulegen, die phpBB für bestimmte Board-Inhalte verwendet. Für Standardinstallationen sollten die Standardeinstellungen ausreichen. Folgende vier Werte können Sie festlegen:
+				<para>Anschließend ermöglicht Ihnen das Formular <guilabel>Pfad-Einstellungen</guilabel>, die verschiedenen Pfade festzulegen, die phpBB für bestimmte Board-Inhalte verwendet. Für Standardinstallationen sollten die Standardeinstellungen ausreichen. Folgende vier Werte können Sie festlegen:
 					<itemizedlist>
-						<title>Pfadeinstellungen</title>
+						<title>Pfad-Einstellungen</title>
 						<listitem><para><guilabel>URL-Rewriting aktivieren</guilabel>: Ist dies aktiviert, werden URLs, die „app.php“ enthalten, so umgeschrieben, dass der Dateiname entfällt (d. h. app.php/foo wird zu /foo). Dies ist in der Regel nur sichtbar, wenn Sie Erweiterungen installieren. Diese Funktion ist derzeit auf Apache-Webserver mit aktiviertem mod_rewrite beschränkt.</para></listitem>
 						<listitem><para><guilabel>Speicherpfad für Smileys</guilabel>: Dies ist der Pfad zum Verzeichnis, relativ zum Verzeichnis, in dem Ihr Board installiert ist, in dem sich Ihre Smileys befinden.</para></listitem>
 						<listitem><para><guilabel>Speicherpfad für Themen-Symbole</guilabel>: Dies ist der Pfad zum Verzeichnis, relativ zum Verzeichnis, in dem Ihr Board installiert ist, in dem die Themensymbole gespeichert sind.</para></listitem>
@@ -442,9 +442,9 @@
 					</itemizedlist>
 				</para>
 
-				<para>Die letzte Kategorie der Servereinstellungen sind die <guilabel>Server-URL-Einstellungen</guilabel>. Die Kategorie <guilabel>Server-URL-Einstellungen</guilabel> enthält Einstellungen, mit denen Sie die tatsächliche <acronym>URL</acronym> konfigurieren können, unter der sich Ihr Board befindet, sowie das Serverprotokoll und die Portnummer, über die auf das Board zugegriffen wird. Folgende fünf Einstellungen können Sie bearbeiten:
+				<para>Die letzte Kategorie der Servereinstellungen sind die <guilabel>Server URL-Einstellungen</guilabel>. Die Kategorie <guilabel>Server URL-Einstellungen</guilabel> enthält Einstellungen, mit denen Sie die tatsächliche <acronym>URL</acronym> konfigurieren können, unter der sich Ihr Board befindet, sowie das Serverprotokoll und die Portnummer, über die auf das Board zugegriffen wird. Folgende fünf Einstellungen können Sie bearbeiten:
 					<itemizedlist>
-						<title>Server-URL-Einstellungen</title>
+						<title>Server URL-Einstellungen</title>
 						<listitem><para><guilabel>Erzwinge Server-URL-Einstellungen</guilabel>: Falls die Standardeinstellungen für die Server-URL aus irgendeinem Grund fehlerhaft sind, können Sie Ihr phpBB-Board zwingen, die unten von Ihnen angegebenen Server-URL-Einstellungen zu verwenden, indem Sie das Optionsfeld <guilabel>Ja</guilabel> auswählen.</para></listitem>
 						<listitem><para><guilabel>Server-Protokoll</guilabel>: Dies ist das Serverprotokoll (z. B. http:// oder https://), das Ihr Board verwendet, sofern die Standardeinstellungen erzwungen werden. Ist dieser Wert leer oder die obige Einstellung <guilabel>Erzwinge Server-URL-Einstellungen</guilabel> deaktiviert, wird das Protokoll anhand der Cookie-Sicherheitseinstellungen bestimmt.</para></listitem>
 						<listitem><para><guilabel>Domain-Name</guilabel>: Dies ist der Name der Domain, auf der Ihr Board läuft. Geben Sie gegebenenfalls „www“ mit an. Auch dieser Wert wird nur verwendet, wenn die Server-URL-Einstellungen erzwungen werden.</para></listitem>
@@ -464,8 +464,8 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Sicherheitseinstellungen</title>
-				<para>Hier, auf der Seite <guimenuitem>Sicherheitseinstellungen</guimenuitem>, können Sie sicherheitsrelevante Einstellungen verwalten; genauer gesagt können Sie sitzungs- und anmeldebezogene Einstellungen festlegen und bearbeiten. Im Folgenden werden die verfügbaren Sicherheitseinstellungen beschrieben, die Sie verwalten können. Wenn Sie mit der Konfiguration der Sicherheitseinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
+				<title>Sicherheit</title>
+				<para>Hier, auf der Seite <guimenuitem>Sicherheit</guimenuitem>, können Sie sicherheitsrelevante Einstellungen verwalten; genauer gesagt können Sie sitzungs- und anmeldebezogene Einstellungen festlegen und bearbeiten. Im Folgenden werden die verfügbaren Sicherheitseinstellungen beschrieben, die Sie verwalten können. Wenn Sie mit der Konfiguration der Sicherheitseinstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um Ihre Änderungen zu übermitteln.</para>
 
 				<!-- Perhaps include more introduction information? :-/ -->
 
@@ -569,7 +569,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Lasteinstellungen</title>
+				<title>Serverlast</title>
 				<para>Auf besonders großen Boards kann es notwendig sein, bestimmte lastbezogene Einstellungen zu verwalten, damit Ihr Board so reibungslos wie möglich läuft. Doch auch wenn Ihr Board nicht übermäßig aktiv ist, ist es dennoch wichtig, die Lasteinstellungen Ihres Boards anpassen zu können. Die richtige Anpassung dieser Einstellungen kann dazu beitragen, den von Ihrem Server benötigten Verarbeitungsaufwand zu verringern. Denken Sie daran, nach dem Bearbeiten der serverlastbezogenen Einstellungen auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen tatsächlich zu übermitteln und anzuwenden.</para>
 
 				<para>Die erste Gruppe von Einstellungen, <guilabel>Allgemeine Einstellungen</guilabel>, ermöglicht es Ihnen, die grundlegenden lastbezogenen Einstellungen zu steuern, wie zum Beispiel die maximale Systemlast und die Sitzungsdauer. Im Folgenden wird jede Option im Detail beschrieben.
@@ -1667,7 +1667,7 @@
 					</authorgroup>
 				</sectioninfo>
 				<title>Benutzer sperren</title>
-				<para>Wann immer Sie auf Ihrem Board auf problematische Benutzer treffen, müssen Sie diese unter Umständen sperren. Auf der Seite <guimenuitem>Benutzernamen sperren</guimenuitem> können Sie genau das tun. Auf dieser Seite verwalten Sie alle gesperrten Benutzernamen.</para>
+				<para>Wann immer Sie auf Ihrem Board auf problematische Benutzer treffen, müssen Sie diese unter Umständen sperren. Auf der Seite <guimenuitem>Benutzer sperren</guimenuitem> können Sie genau das tun. Auf dieser Seite verwalten Sie alle gesperrten Benutzernamen.</para>
 
 				<para>Um einen oder mehrere Benutzer zu sperren oder auszunehmen, füllen Sie das Formular <guilabel>Einen oder mehrere Benutzer sperren</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
 				<itemizedlist>
