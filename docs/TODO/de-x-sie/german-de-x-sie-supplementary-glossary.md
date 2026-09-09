@@ -8,7 +8,7 @@ pack to check against (background and reasoning for each one is in
 **How to use this file:** for each row, fill in "Agreed German term"
 with the wording the team settles on (it can just be the current
 wording, confirmed as-is, or something new), "Confirmed by" with a
-name, and "Date" (MM/DD/YYYY). Once a row is filled in, its term is
+name, and "Date" (YYYY-MM-DD). Once a row is filled in, its term is
 the project's standing glossary decision — future edits to
 `admin_guide.xml` should use it, and it's worth checking new content
 against this table before introducing a competing translation for the
