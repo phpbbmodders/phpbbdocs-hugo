@@ -19,13 +19,16 @@ full read-through for translation fidelity and technical accuracy.
 had a large chunk of missing content (roughly the second half of the
 admin guide) filled in from scratch, and every button label, field
 name, and menu item that could be matched against the real language
-pack has been cross-checked and corrected where wrong — for example
-"Smilies" became "Smileys" (the real board never uses "Smilies" as a
-German word), and a section that had been calling something
-"Themensymbole" (topic icons) now correctly says "Beitrags-Symbole"
-(post icons). What's left is tracked in detail in
+pack has been cross-checked and corrected where wrong — around 70
+real mismatches found and fixed so far, from small things ("Smilies"
+became "Smileys", since the real board never uses "Smilies" as a
+German word) to larger ones (an entire section calling something
+"Themensymbole"/topic icons now correctly says "Beitrags-Symbole"/post
+icons; the dotted-topics and password-complexity toggles; several ACP
+page titles that didn't match the real navigation label). What's left
+is tracked in detail in
 [`todo-german-terminology-audit.md`](todo-german-terminology-audit.md)
-(about 155 unmatched strings, mostly grammatical case forms and
+(about 149 unmatched strings, mostly grammatical case forms and
 English-source paraphrases rather than real errors).
 
 ## Content that's never had a native read
@@ -62,21 +65,18 @@ matching official string couldn't be found in the files on hand. That
 doesn't mean anything is known to be wrong, just unconfirmed either
 way:
 
-- The "Name der E-Mail-Funktion" field.
-- The "dotted topics" setting (topics you've already posted in getting
-  a visual marker). It currently reads "Gepunktete Themensymbole
-  aktivieren".
+- The "Name der E-Mail-Funktion" field (mail function name) — no
+  corresponding key found in the current language pack; the ACP
+  setting this describes may no longer exist under that name.
 - The base `[flash]`/`[img]` BBCode-tag toggles outside of private
-  messages (the private-message versions were confirmed and fixed).
-- The permission-role labels used for delegating permission-management
-  (e.g. "Kann die Berechtigungen anderer verwenden").
-- A handful of module-management fields ("Modulmodus auswählen",
-  "Formular auswählen") and the online-user-list toggle
-  ("Online-Benutzerlisten aktivieren").
+  messages aren't documented at all yet (only the private-message
+  versions are covered, and those are confirmed correct) — this is a
+  content gap, not a wording error.
 
-None of these are guessed wildly. They're existing, presumably
-reasonable German, just not independently verified against the live
-board's own wording.
+Everything else previously listed here — the dotted-topics wording,
+the permission-delegation role label, the module-management fields,
+and the online-user-list toggle — has since been checked against the
+real language pack and corrected where it was wrong.
 
 If you'd rather the remaining official-string cross-checking in
 `admin_guide.xml` gets finished first instead of (or before) a human

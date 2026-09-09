@@ -34,19 +34,19 @@ int ranges, broken smart-quotes in a code sample in
 English source, so they're upstream content bugs rather than
 translation errors; they're left as-is and out of this audit's scope.
 
-Only `admin_guide.xml` still has open ground: about 155 unmatched
-`<guilabel>`/`<guimenuitem>`/`<title>` strings, most of which fall into
-one of three buckets: genuine remaining mismatches still to find and
-fix, grammatical case forms that will never literally match a
-dictionary-form language-pack value (e.g. "Namens des Boards"), and
-strings the English source itself paraphrases rather than quotes
-literally (in which case the German mirrors the same paraphrase and
-isn't actually wrong). A representative sample of what's left: "Name
-der E-Mail-Funktion", the base `[flash]`/`[img]` BBCode-tag toggles
-outside private messages, the permission-delegation role label, a few
-module-management fields, and the online-user-list toggle. See
-`docs/TODO/todo-german-translation-human-review.md` for more detail on
-what's confirmed-fine versus genuinely unconfirmed.
+Only `admin_guide.xml` still has open ground. It started with 219
+unmatched `<guilabel>`/`<guimenuitem>`/`<title>` strings; about 70 have
+since been tracked down to real key matches and fixed — wrong ACP page
+titles, dropdown labels, table column headers, and settings
+descriptions that didn't match the real board's wording. About 149
+remain unmatched, and nearly all of them fall into one of two buckets
+rather than being live bugs: grammatical case forms that will never
+literally match a dictionary-form language-pack value (e.g. "Namens des
+Boards", correct genitive case), and strings the English source itself
+paraphrases rather than quotes literally, which the German mirrors
+faithfully. A small number are genuinely unconfirmed rather than
+either — no matching key could be found at all — and those are listed
+in `docs/TODO/todo-german-translation-human-review.md`.
 
 ## How to do this
 
