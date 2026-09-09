@@ -542,7 +542,7 @@
 				<itemizedlist>
 					<listitem><para>Eine phpBB3-Installation muss auf Ihrem Server vorhanden sein. Weitere Informationen zur Installation von phpBB3 finden Sie unter <xref linkend="quick_requirements" />.</para></listitem>
 					<listitem><para>Bereiten Sie die Verbindungsdaten zu der Datenbank vor, in der das alte Forum gespeichert war. Wenn Sie sich nicht sicher sind, finden Sie diese Angaben in der Konfigurationsdatei.</para></listitem>
-					<listitem><para>Stellen Sie sicher, dass das alte Forum weiterhin neben der phpBB3-Installation auf Ihrem Server installiert ist. Die Dateien des alten Forums sollten unverändert erhalten bleiben, da einige davon (z. B. Avatare, Anhänge, Smilies oder Ränge) zu phpBB3 übertragen werden.</para></listitem>
+					<listitem><para>Stellen Sie sicher, dass das alte Forum weiterhin neben der phpBB3-Installation auf Ihrem Server installiert ist. Die Dateien des alten Forums sollten unverändert erhalten bleiben, da einige davon (z. B. Avatare, Anhänge, Smileys oder Ränge) zu phpBB3 übertragen werden.</para></listitem>
 					<listitem><para>Die Dateien und die Datenbank müssen sich auf demselben Server wie die phpBB3-Installation befinden, und die Dateien müssen sich in derselben Domain befinden. Wenn Sie Subdomains verwenden, müssen sich die Dateien in derselben Subdomain befinden.</para></listitem>
 				</itemizedlist>
 			</section>
@@ -589,7 +589,7 @@
 Ist alles in Ordnung, wird Ihnen eine Schaltfläche <guilabel>Konvertierung fortsetzen</guilabel> angezeigt.</para></listitem>
 					<listitem><para>Der Konverter fährt nun mit der Konvertierung Ihres alten Forums fort. Es werden Seiten angezeigt, die Sie über den Fortschritt der Konvertierung informieren.</para></listitem>
 					<listitem><para>Wenn der Konverter fertig ist, sehen Sie eine Meldung, dass der Suchindex nicht konvertiert wurde. Sie müssen in das Administrationskontrollzentrum gehen und den <guilabel>Suchindex</guilabel> aufbauen. Klicken Sie im <acronym>ACP</acronym> auf den Reiter <guilabel>Wartung</guilabel> und wählen Sie <guilabel>Suchindex</guilabel> aus dem Untermenü. Der standardmäßige Such-Backend-Index ist <guilabel>Fulltext native</guilabel> und wird als aktiv markiert sein. Dies ist normalerweise der Index, den Sie zum Erstellen Ihres Suchindex verwenden möchten. Weitere Informationen zur Suchindexierung finden Sie unter <xref linkend="acp_maintenance_search" /></para></listitem>
-					<listitem><para>Sie sollten nun Ihr phpBB3-Forum auf ordnungsgemäßen Betrieb überprüfen, sicherstellen, dass die Berechtigungen korrekt gesetzt sind und Foren &amp; Beiträge korrekt angezeigt werden. Stellen Sie außerdem sicher, dass Dateien vom alten Speicherort kopiert wurden, zum Beispiel Avatare, Smilies und Anhänge (sofern vorhanden).</para></listitem>
+					<listitem><para>Sie sollten nun Ihr phpBB3-Forum auf ordnungsgemäßen Betrieb überprüfen, sicherstellen, dass die Berechtigungen korrekt gesetzt sind und Foren &amp; Beiträge korrekt angezeigt werden. Stellen Sie außerdem sicher, dass Dateien vom alten Speicherort kopiert wurden, zum Beispiel Avatare, Smileys und Anhänge (sofern vorhanden).</para></listitem>
 				</orderedlist>
 			</section>
 
