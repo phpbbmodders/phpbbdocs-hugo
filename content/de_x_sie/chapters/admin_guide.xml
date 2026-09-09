@@ -1597,5 +1597,1005 @@
 			<para>Neben der Verwaltung Ihrer Benutzer auf Ihrem Board ist es auch wichtig, Ihr Board schützen und unerwünschte Registrierungen und Benutzer verhindern zu können. Der Bereich <guilabel>Benutzersicherheit</guilabel> ermöglicht es Ihnen, gesperrte E-Mails, IPs und Benutzernamen zu verwalten sowie nicht erlaubte Benutzernamen und das Ausdünnen von Benutzern zu verwalten. Gesperrte Benutzer, deren Informationen einer dieser Sperrregeln entsprechen, können auf keinen Teil Ihres Boards zugreifen.</para>
 
 			<section id="acp_ban_emails">
-<!-- PART4_END -->
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>E-Mail-Adressen sperren</title>
+				<para>Manchmal ist es notwendig, E-Mail-Adressen zu sperren, um unerwünschte Registrierungen zu verhindern. Es könnte bestimmte Benutzer oder Spam-Bots geben, die Ihnen bekannte E-Mail-Adressen verwenden. Im Bereich <guimenuitem>E-Mail-Adressen sperren</guimenuitem> können Sie genau das tun. Sie legen fest, welche E-Mail-Adressen gesperrt werden, wie lange die Sperre gilt und welche Begründung(en) dafür angegeben werden.</para>
+
+				<para>Um eine oder mehrere E-Mail-Adressen zu sperren oder auszunehmen, füllen Sie das Formular <guilabel>Eine oder mehrere E-Mail-Adressen sperren</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+				<itemizedlist>
+					<title>Eine oder mehrere E-Mail-Adressen sperren</title>
+					<listitem><para><guilabel>E-Mail-Adresse</guilabel>: Dieses Textfeld sollte alle E-Mail-Adressen enthalten, die Sie unter einer einzigen Regel sperren möchten. Wenn Sie zu diesem Zeitpunkt mehr als eine E-Mail-Adresse sperren möchten, geben Sie jede Adresse in einer eigenen Zeile ein. Sie können auch Platzhalter (*) verwenden, um Teile einer Adresse zu vergleichen.</para></listitem>
+					<listitem><para><guilabel>Dauer der Sperre</guilabel>: Hier legen Sie fest, wie lange die E-Mail-Adresse(n) gesperrt werden sollen. Die verfügbaren Optionen umfassen einige gängige Zeiträume, etwa eine Anzahl von Stunden oder Tagen. Sie können auch ein Datum festlegen, bis zu dem die E-Mail-Adresse(n) gesperrt bleiben; wählen Sie dazu <guilabel>Bis zum -></guilabel> aus dem Auswahlmenü und geben Sie ein Datum im Format „JJJJ-MM-TT" in das darunter liegende Textfeld ein.</para></listitem>
+					<listitem><para><guilabel>Von Sperre ausnehmen</guilabel>: Aktivieren Sie diese Option, wenn Sie die eingegebene E-Mail-Adresse von allen aktuellen Sperren ausnehmen möchten.</para></listitem>
+					<listitem><para><guilabel>Grund für die Sperre</guilabel>: Dies ist eine kurze Begründung, warum Sie die E-Mail-Adresse(n) sperren möchten. Diese Angabe ist optional und kann Ihnen helfen, sich später an den Grund der Sperre zu erinnern.</para></listitem>
+					<listitem><para><guilabel>Dem Gesperrten angezeigter Grund</guilabel>: Dies ist eine kurze Erklärung, die den Benutzern mit der gesperrten E-Mail-Adresse tatsächlich angezeigt wird. Sie kann sich vom obigen <guilabel>Grund für die Sperre</guilabel> unterscheiden.</para></listitem>
+				</itemizedlist>
+
+				<para>Neben dem Hinzufügen zu sperrender E-Mail-Adressen können Sie Sperren für E-Mail-Adressen auch aufheben oder deren Ausnahme entfernen. Um eine oder mehrere E-Mail-Adressen zu entsperren oder deren Ausnahme aufzuheben, füllen Sie das Formular <guilabel>E-Mail-Adressen entsperren oder Ausnahmen entfernen</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+				<itemizedlist>
+					<title>E-Mail-Adressen entsperren oder Ausnahmen entfernen</title>
+					<listitem><para><guilabel>E-Mail-Adresse</guilabel>: Dieses Mehrfachauswahlmenü listet alle derzeit gesperrten E-Mail-Adressen auf. Wählen Sie die E-Mail-Adresse aus, die Sie entsperren oder deren Ausnahme Sie aufheben möchten, indem Sie im Mehrfachauswahlmenü darauf klicken. <tip><para>Um mehr als eine E-Mail-Adresse auszuwählen, benötigen Sie die passende Tasten- und Mauskombination. Am gebräuchlichsten ist es, die STRG-Taste gedrückt zu halten und dabei alle gewünschten E-Mail-Adressen anzuklicken. Lassen Sie die STRG-Taste los, sobald Sie fertig sind.</para></tip></para></listitem>
+					<listitem><para><guilabel>Dauer der Sperre</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das die Dauer der Sperre für die derzeit ausgewählte E-Mail-Adresse anzeigt. Sind mehrere E-Mail-Adressen ausgewählt, wird nur eine der Sperrdauern angezeigt.</para></listitem>
+					<listitem><para><guilabel>Grund für die Sperre</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das den Grund für die Sperre der derzeit ausgewählten E-Mail-Adresse anzeigt. Sind mehrere E-Mail-Adressen ausgewählt, wird nur einer der Sperrgründe angezeigt.</para></listitem>
+					<listitem><para><guilabel>Dem Gesperrten angezeigter Grund</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das den dem Gesperrten angezeigten Grund für die derzeit ausgewählte E-Mail-Adresse anzeigt. Sind mehrere E-Mail-Adressen ausgewählt, wird nur einer der angezeigten Gründe dargestellt.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_ban_ips">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>IP-Adressen sperren</title>
+				<para>Manchmal ist es notwendig, <glossterm>IP-Adressen</glossterm> oder Hostnamen zu sperren, um unerwünschte Benutzer zu verhindern. Es könnte bestimmte Benutzer oder Spam-Bots geben, die Ihnen bekannte IP-Adressen oder Hostnamen verwenden. Im Bereich <guimenuitem>IP-Adressen sperren</guimenuitem> können Sie genau das tun. Sie legen fest, welche IP-Adressen oder Hostnamen gesperrt werden, wie lange die Sperre gilt und welche Begründung(en) dafür angegeben werden.</para>
+
+				<para>Um eine oder mehrere IP-Adressen und/oder Hostnamen zu sperren oder auszunehmen, füllen Sie das Formular <guilabel>Eine oder mehrere IP-Adressen sperren</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+				<itemizedlist>
+					<title>Eine oder mehrere IP-Adressen sperren</title>
+					<listitem><para><guilabel>IP-Adressen oder Hostnamen</guilabel>: Dieses Textfeld sollte alle IP-Adressen und/oder Hostnamen enthalten, die Sie unter einer einzigen Regel sperren möchten. Wenn Sie zu diesem Zeitpunkt mehr als eine IP-Adresse und/oder einen Hostnamen sperren möchten, geben Sie jede(n) in einer eigenen Zeile ein. Sie können auch Platzhalter (*) verwenden, um Teile einer Adresse zu vergleichen.</para></listitem>
+					<listitem><para><guilabel>Dauer der Sperre</guilabel>: Hier legen Sie fest, wie lange die IP-Adresse(n) und/oder Hostname(n) gesperrt werden sollen. Die verfügbaren Optionen umfassen einige gängige Zeiträume, etwa eine Anzahl von Stunden oder Tagen. Sie können auch ein Datum festlegen, bis zu dem die IP-Adresse(n) und/oder Hostname(n) gesperrt bleiben; wählen Sie dazu <guilabel>Bis zum -></guilabel> aus dem Auswahlmenü und geben Sie ein Datum im Format „JJJJ-MM-TT" in das darunter liegende Textfeld ein.</para></listitem>
+					<listitem><para><guilabel>Von Sperre ausnehmen</guilabel>: Aktivieren Sie diese Option, wenn Sie die eingegebene(n) IP-Adresse(n) und/oder Hostname(n) von allen aktuellen Sperren ausnehmen möchten.</para></listitem>
+					<listitem><para><guilabel>Grund für die Sperre</guilabel>: Dies ist eine kurze Begründung, warum Sie die IP-Adresse(n) und/oder Hostname(n) sperren möchten. Diese Angabe ist optional und kann Ihnen helfen, sich später an den Grund der Sperre zu erinnern.</para></listitem>
+					<listitem><para><guilabel>Dem Gesperrten angezeigter Grund</guilabel>: Dies ist eine kurze Erklärung, die den Benutzern mit der gesperrten IP-Adresse und/oder dem gesperrten Hostnamen tatsächlich angezeigt wird. Sie kann sich vom obigen <guilabel>Grund für die Sperre</guilabel> unterscheiden.</para></listitem>
+				</itemizedlist>
+
+				<para>Neben dem Hinzufügen zu sperrender IP-Adressen und/oder Hostnamen können Sie Sperren dafür auch aufheben oder deren Ausnahme entfernen. Um eine oder mehrere IP-Adressen und/oder Hostnamen zu entsperren oder deren Ausnahme aufzuheben, füllen Sie das Formular <guilabel>IP-Adressen entsperren oder Ausnahmen entfernen</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+				<itemizedlist>
+					<title>IP-Adressen entsperren oder Ausnahmen entfernen</title>
+					<listitem><para><guilabel>IP-Adressen oder Hostnamen</guilabel>: Dieses Mehrfachauswahlmenü listet alle derzeit gesperrten IP-Adressen und/oder Hostnamen auf. Wählen Sie die IP-Adresse(n) und/oder Hostname(n) aus, die Sie entsperren oder deren Ausnahme Sie aufheben möchten, indem Sie im Mehrfachauswahlmenü darauf klicken. <tip><para>Um mehr als eine IP-Adresse und/oder einen Hostnamen auszuwählen, benötigen Sie die passende Tasten- und Mauskombination. Am gebräuchlichsten ist es, die STRG-Taste gedrückt zu halten und dabei alle gewünschten IP-Adressen und/oder Hostnamen anzuklicken. Lassen Sie die STRG-Taste los, sobald Sie fertig sind.</para></tip></para></listitem>
+					<listitem><para><guilabel>Dauer der Sperre</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das die Dauer der Sperre für die derzeit ausgewählte IP-Adresse oder den Hostnamen anzeigt. Sind mehrere IP-Adressen oder Hostnamen ausgewählt, wird nur eine der Sperrdauern angezeigt.</para></listitem>
+					<listitem><para><guilabel>Grund für die Sperre</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das den Grund für die Sperre der derzeit ausgewählten IP-Adresse oder des Hostnamens anzeigt. Sind mehrere IP-Adressen oder Hostnamen ausgewählt, wird nur einer der Sperrgründe angezeigt.</para></listitem>
+					<listitem><para><guilabel>Dem Gesperrten angezeigter Grund</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das den dem Gesperrten angezeigten Grund für die derzeit ausgewählte IP-Adresse oder den Hostnamen anzeigt. Sind mehrere IP-Adressen oder Hostnamen ausgewählt, wird nur einer der angezeigten Gründe dargestellt.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_ban_users">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzer sperren</title>
+				<para>Wann immer Sie auf Ihrem Board auf problematische Benutzer treffen, müssen Sie diese unter Umständen sperren. Auf der Seite <guimenuitem>Benutzernamen sperren</guimenuitem> können Sie genau das tun. Auf dieser Seite verwalten Sie alle gesperrten Benutzernamen.</para>
+
+				<para>Um einen oder mehrere Benutzer zu sperren oder auszunehmen, füllen Sie das Formular <guilabel>Einen oder mehrere Benutzer sperren</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+				<itemizedlist>
+					<title>Einen oder mehrere Benutzernamen sperren</title>
+					<listitem><para><guilabel>Benutzername</guilabel>: Dieses Textfeld sollte alle Benutzernamen enthalten, die Sie unter einer einzigen Regel sperren möchten. Wenn Sie zu diesem Zeitpunkt mehr als einen Benutzernamen sperren möchten, geben Sie jeden Namen in einer eigenen Zeile ein. Sie können auch Platzhalter (*) verwenden, um Benutzernamen teilweise zu vergleichen.</para></listitem>
+					<listitem><para><guilabel>Dauer der Sperre</guilabel>: Hier legen Sie fest, wie lange der/die Benutzername(n) gesperrt werden sollen. Die verfügbaren Optionen umfassen einige gängige Zeiträume, etwa eine Anzahl von Stunden oder Tagen. Sie können auch ein Datum festlegen, bis zu dem der/die Benutzername(n) gesperrt bleiben; wählen Sie dazu <guilabel>Bis zum -></guilabel> aus dem Auswahlmenü und geben Sie ein Datum im Format „JJJJ-MM-TT" in das darunter liegende Textfeld ein.</para></listitem>
+					<listitem><para><guilabel>Von Sperre ausnehmen</guilabel>: Aktivieren Sie diese Option, wenn Sie den/die eingegebenen Benutzernamen von allen aktuellen Sperren ausnehmen möchten.</para></listitem>
+					<listitem><para><guilabel>Grund für die Sperre</guilabel>: Dies ist eine kurze Begründung, warum Sie den/die Benutzernamen sperren möchten. Diese Angabe ist optional und kann Ihnen helfen, sich später an den Grund der Sperre zu erinnern.</para></listitem>
+					<listitem><para><guilabel>Dem Gesperrten angezeigter Grund</guilabel>: Dies ist eine kurze Erklärung, die den gesperrten Benutzern tatsächlich angezeigt wird. Sie kann sich vom obigen <guilabel>Grund für die Sperre</guilabel> unterscheiden.</para></listitem>
+				</itemizedlist>
+
+				<para>Neben dem Hinzufügen zu sperrender Benutzer können Sie Sperren für Benutzernamen auch aufheben oder deren Ausnahme entfernen. Um einen oder mehrere Benutzer zu entsperren oder deren Ausnahme aufzuheben, füllen Sie das Formular <guilabel>Benutzernamen entsperren oder Ausnahmen entfernen</guilabel> aus. Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+				<itemizedlist>
+					<title>Benutzernamen entsperren oder Ausnahmen entfernen</title>
+					<listitem><para><guilabel>Benutzername</guilabel>: Dieses Mehrfachauswahlmenü listet alle derzeit gesperrten Benutzernamen auf. Wählen Sie den/die Benutzernamen aus, die Sie entsperren oder deren Ausnahme Sie aufheben möchten, indem Sie im Mehrfachauswahlmenü darauf klicken. <tip><para>Um mehr als einen Benutzernamen auszuwählen, benötigen Sie die passende Tasten- und Mauskombination. Am gebräuchlichsten ist es, die STRG-Taste gedrückt zu halten und dabei alle gewünschten Benutzernamen anzuklicken. Lassen Sie die STRG-Taste los, sobald Sie fertig sind.</para></tip></para></listitem>
+					<listitem><para><guilabel>Dauer der Sperre</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das die Dauer der Sperre für den derzeit ausgewählten Benutzernamen anzeigt. Ist mehr als ein Benutzername ausgewählt, wird nur eine der Sperrdauern angezeigt.</para></listitem>
+					<listitem><para><guilabel>Grund für die Sperre</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das den Grund für die Sperre des derzeit ausgewählten Benutzernamens anzeigt. Ist mehr als ein Benutzername ausgewählt, wird nur einer der Sperrgründe angezeigt.</para></listitem>
+					<listitem><para><guilabel>Dem Gesperrten angezeigter Grund</guilabel>: Dies ist ein nicht bearbeitbares Informationsfeld, das den dem Gesperrten angezeigten Grund für den derzeit ausgewählten Benutzernamen anzeigt. Ist mehr als ein Benutzername ausgewählt, wird nur einer der angezeigten Gründe dargestellt.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_disallow_users">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzernamen verbieten</title>
+
+				<para>In phpBB3 ist es auch möglich, die Registrierung bestimmter Benutzernamen zu verbieten, die mit von Ihnen festgelegten Mustern übereinstimmen. (Dies ist nützlich, wenn Sie verhindern möchten, dass sich Benutzer mit Namen registrieren, die mit einem wichtigen Board-Mitglied verwechselt werden könnten.) Um verbotene Benutzernamen zu verwalten, gehen Sie in Ihr <acronym>ACP</acronym>, klicken Sie auf den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und dann im linken Menü auf <guimenuitem>Benutzernamen verbieten</guimenuitem>.</para>
+
+				<para>Um einen verbotenen Benutzernamen hinzuzufügen, suchen Sie das Formular <guilabel>Einen verbotenen Benutzernamen hinzufügen</guilabel> und geben Sie den Benutzernamen in das Textfeld <guilabel>Benutzername</guilabel> ein. <tip><para>Sie können Platzhalter (*) verwenden, um beliebige Zeichen zu vergleichen. Um beispielsweise jeden Benutzernamen zu verbieten, der auf „JoeBloggs" passt, könnten Sie „Joe*" eingeben. Dies würde verhindern, dass sich Benutzer mit einem Namen registrieren, der mit „Joe" beginnt.</para></tip> Klicken Sie anschließend auf <guilabel>Absenden</guilabel>.</para>
+
+				<para>Um einen verbotenen Benutzernamen zu entfernen, suchen Sie das Formular <guilabel>Einen verbotenen Benutzernamen entfernen</guilabel>. Wählen Sie den verbotenen Benutzernamen, den Sie entfernen möchten, aus dem Auswahlmenü <guilabel>Benutzername</guilabel> aus. Klicken Sie auf <guilabel>Absenden</guilabel>, um den ausgewählten verbotenen Benutzernamen zu entfernen.</para>
+			</section>
+
+			<section id="acp_prune_users">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Benutzer ausdünnen</title>
+
+				<para>In phpBB3 können Sie Benutzer Ihres Boards ausdünnen, um nur Ihre aktiven Mitglieder zu behalten. Sie können auch ein ganzes Benutzerkonto samt allem, was damit verbunden ist, löschen. <guimenuitem>Benutzer ausdünnen</guimenuitem> erlaubt es Ihnen, Benutzerkonten auf Ihrem Board anhand der Beitragszahl, des letzten Besuchsdatums und weiterer Kriterien auszudünnen und zu deaktivieren.</para>
+
+				<para>Um den Ausdünnungsvorgang zu starten, suchen Sie das Formular <guilabel>Benutzer ausdünnen</guilabel>. Sie können Benutzer anhand einer beliebigen Kombination der verfügbaren Kriterien ausdünnen. (Mit anderen Worten: Füllen Sie jedes Feld des Formulars aus, das auf die von Ihnen für das Ausdünnen vorgesehenen Benutzer zutrifft.) Wenn Sie bereit sind, die Benutzer auszudünnen, die Ihren angegebenen Einstellungen entsprechen, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
+
+				<itemizedlist>
+					<title>Benutzer ausdünnen</title>
+					<listitem><para><guilabel>Benutzername</guilabel>: Geben Sie einen Benutzernamen ein, der ausgedünnt werden soll. Sie können Platzhalter (*) verwenden, um Benutzer auszudünnen, deren Benutzername dem angegebenen Muster entspricht.</para></listitem>
+					<listitem><para><guilabel>E-Mail</guilabel>: Die E-Mail-Adresse, die ausgedünnt werden soll. Sie können Platzhalter (*) verwenden, um Benutzer auszudünnen, deren E-Mail-Adresse dem angegebenen Muster entspricht.</para></listitem>
+					<listitem><para><guilabel>Registriert</guilabel>: Sie können Benutzer auch anhand ihres Registrierungsdatums ausdünnen. Um Benutzer auszudünnen, die sich vor einem bestimmten Datum registriert haben (gehen Sie mit dieser Einstellung vorsichtig um), wählen Sie <guilabel>Vor dem</guilabel> aus dem Auswahlmenü. Um Benutzer auszudünnen, die sich nach einem bestimmten Datum registriert haben, wählen Sie <guilabel>Nach dem</guilabel> aus dem Auswahlmenü. Das Datum muss im Format JJJJ-MM-TT angegeben werden.</para></listitem>
+					<listitem><para><guilabel>Letzte Aktivität</guilabel>: Sie können Benutzer auch anhand ihrer letzten Aktivität ausdünnen. Um Benutzer auszudünnen, die vor einem bestimmten Datum zuletzt aktiv waren (gehen Sie mit dieser Einstellung vorsichtig um), wählen Sie <guilabel>Vor dem</guilabel> aus dem Auswahlmenü. Um Benutzer auszudünnen, die nach einem bestimmten Datum zuletzt aktiv waren (dies ist nützlich, um Benutzer auszudünnen, die von Ihrem Board verschwunden sind), wählen Sie <guilabel>Nach dem</guilabel> aus dem Auswahlmenü. Das Datum muss im Format JJJJ-MM-TT angegeben werden.</para></listitem>
+					<listitem><para><guilabel>Beiträge</guilabel>: Sie können Benutzer auch anhand ihrer Beitragszahl ausdünnen. Das Kriterium für die Beitragszahl kann darüber, darunter oder gleich einer angegebenen Zahl liegen. Der eingegebene Wert muss eine positive ganze Zahl sein.</para></listitem>
+					<listitem><para><guilabel>Zu löschende Benutzer</guilabel>: Die Benutzernamen der Benutzer, die Sie ausdünnen möchten. Jeder auszudünnende Benutzername sollte in einer eigenen Zeile stehen. Auch hier können Sie Platzhalter (*) in Benutzernamen-Mustern verwenden.</para></listitem>
+					<listitem><para><guilabel>Lösche Beiträge der gelöschten Benutzer</guilabel>: Wenn Benutzer entfernt (also tatsächlich gelöscht und nicht nur deaktiviert) werden, müssen Sie festlegen, was mit deren Beiträgen geschehen soll. Um alle Beiträge der ausgedünnten Benutzer zu löschen, wählen Sie das Optionsfeld <guilabel>Ja</guilabel>. Andernfalls wählen Sie <guilabel>Nein</guilabel>, und die Beiträge der ausgedünnten Benutzer bleiben unangetastet im Board erhalten.</para></listitem>
+					<listitem><para><guilabel>Deaktivieren oder löschen</guilabel>: Sie müssen festlegen, ob Sie die Konten der ausgedünnten Benutzer deaktivieren oder vollständig aus der Datenbank des Boards löschen und entfernen möchten.</para></listitem>
+				</itemizedlist>
+
+				<warning>
+					<para>Das Ausdünnen von Benutzern kann nicht rückgängig gemacht werden! Gehen Sie vorsichtig mit den Kriterien um, die Sie beim Ausdünnen von Benutzern wählen.</para>
+				</warning>
+			</section>
+		</section>
+	</section>
+	<section id="acp_groups">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+
+		<title>Gruppenverwaltung</title>
+
+		<para><glossterm>Benutzergruppen</glossterm> sind eine Möglichkeit, Benutzer zu gruppieren. Dies erleichtert es, vielen Personen gleichzeitig Berechtigungen zu erteilen. phpBB 3.3 verfügt über sechs vordefinierte Gruppen: Administratoren, Bots, Globale Moderatoren, Gäste, Registrierte Benutzer und Registrierte COPPA-Benutzer.</para>
+
+		<section id="acp_groups_types">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+
+			<title>Gruppentypen</title>
+			<para>Es gibt zwei Arten von Gruppen:</para>
+
+			<variablelist>
+				<varlistentry>
+					<term>Vordefinierte Gruppen</term>
+					<listitem>
+						<para>Dies sind Gruppen, die standardmäßig in phpBB 3.3 verfügbar sind. Sie können diese <emphasis>nicht</emphasis> löschen, da das Board sie für verschiedene Funktionen benötigt. Sie können aber weiterhin ihre Attribute (Beschreibung, Farbe, Rang, Avatar usw.) und ihre Gruppenleiter ändern. Benutzer, die sich auf Ihrem Board registrieren, werden beispielsweise automatisch der vordefinierten Gruppe „Registrierte Benutzer" hinzugefügt. Versuchen Sie nicht, diese Gruppen manuell über die Datenbank zu entfernen, da Ihr Board danach nicht mehr ordnungsgemäß funktioniert.
+
+							<variablelist>
+								<varlistentry>
+									<term>Administratoren</term>
+									<listitem><para>Diese Benutzergruppe enthält alle Administratoren Ihres Boards. Alle Gründer sind Administratoren, aber nicht alle Administratoren sind Gründer. Sie können festlegen, was Administratoren tun dürfen, indem Sie diese Gruppe verwalten.</para></listitem>
+								</varlistentry>
+
+								<varlistentry>
+									<term>Bots</term>
+									<listitem><para>Diese Benutzergruppe ist für Suchmaschinen-Bots vorgesehen. phpBB 3.3 kann die üblichen Probleme umgehen, auf die Suchmaschinen-Spider beim Durchsuchen Ihres Boards stoßen. Weitere Informationen zur Verwaltung der Einstellungen für die einzelnen Bots finden Sie im Abschnitt zu Spiders und Bots.</para></listitem>
+								</varlistentry>
+
+								<varlistentry>
+									<term>Globale Moderatoren</term>
+									<listitem><para>Globale Moderatoren sind Moderatoren, die für jedes Forum Ihres Boards Moderationsrechte besitzen. Sie können festlegen, welche Berechtigungen diese Moderatoren haben, indem Sie diese Gruppe verwalten.</para></listitem>
+								</varlistentry>
+
+								<varlistentry>
+									<term>Gäste</term>
+									<listitem><para>Gäste sind Besucher Ihres Boards, die nicht angemeldet sind. Sie können festlegen, was Gäste tun dürfen, indem Sie diese Benutzergruppe verwalten.</para></listitem>
+								</varlistentry>
+
+								<varlistentry>
+									<term>Registrierte Benutzer</term>
+									<listitem><para>Registrierte Benutzer machen einen großen Teil Ihres Boards aus. Registrierte Benutzer haben sich bereits auf Ihrem Board registriert. Um festzulegen, was registrierte Benutzer tun dürfen, verwalten Sie diese Benutzergruppe.</para></listitem>
+								</varlistentry>
+
+								<varlistentry>
+									<term>Registrierte COPPA-Benutzer</term>
+									<listitem><para>Registrierte COPPA-Benutzer entsprechen im Wesentlichen registrierten Benutzern, mit dem Unterschied, dass sie unter den <acronym>COPPA</acronym> (Child Online Privacy Protection Act) fallen, also in den USA unter 13 Jahre alt sind. Die Verwaltung der Berechtigungen dieser Benutzergruppe ist wichtig, um diese Benutzer zu schützen. <acronym>COPPA</acronym> gilt nicht für Benutzer außerhalb der USA und kann vollständig deaktiviert werden.</para></listitem>
+								</varlistentry>
+							</variablelist>
+
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Benutzerdefinierte Gruppen</term>
+					<listitem>
+						<para>Die Gruppen, die Sie selbst erstellen, werden „Benutzerdefinierte Gruppen" genannt. Diese Gruppen entsprechen den Gruppen in Version 2.0. Sie können beliebig viele erstellen, entfernen, Gruppenleiter festlegen und ihre Attribute (Beschreibung, Farbe, Rang, Avatar usw.) ändern.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>Der Bereich <guimenuitem>Gruppen verwalten</guimenuitem> im <acronym>ACP</acronym> zeigt Ihnen getrennte Listen Ihrer „Benutzerdefinierten Gruppen" und der „Vordefinierten Gruppen" an.</para>
+
+		</section>
+		<section id="acp_groups_edit">
+			<title>Gruppenattribute</title>
+			<para>Eine Liste der Attribute, die eine Gruppe haben kann:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Gruppenname</term>
+					<listitem><para>Der Name Ihrer Gruppe.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Gruppenbeschreibung</term>
+					<listitem><para>Die Beschreibung der Gruppe, die in der Gruppenübersicht angezeigt wird.</para></listitem>
+				</varlistentry>
+				<varlistentry id="acp_groups_edit_legend">
+					<term>Gruppe in der Legende anzeigen:</term>
+					<listitem><para>Dies aktiviert die Anzeige des Gruppennamens in der Legende der Liste „Wer ist online". Beachten Sie, dass dies nur sinnvoll ist, wenn Sie für die Gruppe eine Farbe festgelegt haben.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Gruppe kann Private Nachrichten empfangen</term>
+					<listitem><para>Dies erlaubt das Senden von Privaten Nachrichten an diese Gruppe. Bitte beachten Sie, dass dies beispielsweise für Registrierte Benutzer gefährlich sein kann. Es gibt keine Berechtigung, das Senden an Gruppen zu verweigern, sodass jeder, der Private Nachrichten senden kann, auch dieser Gruppe eine Nachricht senden kann!</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Limit an Privaten Nachrichten pro Ordner für diese Gruppe</term>
+					<listitem><para>Diese Einstellung überschreibt das Nachrichtenlimit pro Ordner für einzelne Benutzer. Der Wert „0" bedeutet, dass das Standardlimit des Benutzers verwendet wird. Weitere Informationen zu den Einstellungen für Private Nachrichten finden Sie im <link linkend="ucp_preferences">Abschnitt zu den Benutzereinstellungen</link>.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Gruppen-Farbe</term>
+					<listitem><para>Der Name von Mitgliedern, die diese Gruppe als Hauptgruppe haben (siehe <xref linkend="acp_groups_default" />), wird auf allen Forenseiten in dieser Farbe angezeigt. Wenn Sie <link linkend="acp_groups_edit_legend"><guilabel>Gruppe in der Legende anzeigen</guilabel></link> aktivieren, erscheint unterhalb der Liste „Wer ist online" ein Legendeneintrag in derselben Farbe.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Gruppenrang</term>
+					<listitem><para>Ein Mitglied, das diese Gruppe als Hauptgruppe hat (siehe <xref linkend="acp_groups_default" />), erhält diesen Rang unterhalb seines Benutzernamens. Beachten Sie, dass Sie den Rang dieses Mitglieds auf einen anderen ändern können, der die Gruppeneinstellung überschreibt. Weitere Informationen finden Sie im <link linkend="acp_user_ranks">Abschnitt zu Rängen</link>.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Gruppen-Avatar</term>
+					<listitem><para>Ein Mitglied, das diese Gruppe als Hauptgruppe hat (siehe <xref linkend="acp_groups_default" />), verwendet diesen Avatar. Beachten Sie, dass ein Mitglied seinen Avatar ändern kann, sofern es die entsprechende Berechtigung besitzt. Weitere Informationen zu Avatar-Einstellungen finden Sie im <link linkend="ucp_avatar">Abschnitt zu Avataren im Benutzerhandbuch</link>.</para></listitem>
+				</varlistentry>
+			</variablelist>
+
+		</section>
+		<section id="acp_groups_default">
+			<title>Hauptgruppen</title>
+			<para>Da es nun möglich ist, Gruppen Attribute wie Farben oder Avatare zuzuweisen (siehe <xref linkend="acp_groups_edit"/>), kann es vorkommen, dass ein Benutzer Mitglied zweier oder mehrerer Gruppen ist, die unterschiedliche Avatare oder andere Attribute haben. Welchen Avatar erhält der Benutzer nun also?</para>
+			<para>Um dieses Problem zu lösen, können Sie jedem Benutzer genau eine „Hauptgruppe" zuweisen. Der Benutzer erhält nur die Attribute dieser Gruppe. Beachten Sie, dass es nicht möglich ist, Attribute zu mischen: Wenn eine Gruppe einen Rang, aber keinen Avatar hat, und eine andere Gruppe nur einen Avatar hat, ist es nicht möglich, den Avatar der einen Gruppe und den Rang der anderen anzuzeigen. Sie müssen sich für eine „Hauptgruppe" entscheiden.</para>
+			<important>
+				<para>Hauptgruppen haben keinen Einfluss auf Berechtigungen. Für die Hauptgruppe gibt es keinen zusätzlichen Berechtigungsbonus, sodass die Berechtigungen eines Benutzers unabhängig davon gleich bleiben, welche Gruppe seine Hauptgruppe ist.</para>
+			</important>
+			<para>Sie können Hauptgruppen auf zwei Arten ändern: entweder über die Benutzerverwaltung (siehe <xref linkend="acp_users"/>) oder direkt über die Gruppenverwaltung (<guilabel>Gruppen verwalten</guilabel>). Gehen Sie mit der zweiten Möglichkeit vorsichtig um, denn wenn Sie die Hauptgruppe direkt über eine Gruppe ändern, wird dadurch die Hauptgruppe für <emphasis>alle</emphasis> Mitglieder dieser Gruppe geändert und deren bisherige Hauptgruppen überschrieben. Wenn Sie also die Hauptgruppe für die Gruppe „Registrierte Benutzer" über den Link <guilabel>Hauptgruppe</guilabel> ändern, erhalten alle Mitglieder Ihres Forums diese Gruppe als Hauptgruppe – selbst Mitglieder der Gruppen Administratoren und Moderatoren, da sie ebenfalls Mitglieder von „Registrierte Benutzer" sind.</para>
+			<important>
+				<para>Wenn Sie eine Gruppe mit festgelegtem Rang und Avatar zur Hauptgruppe machen, werden der bisherige Avatar und Rang des Benutzers durch die Gruppe überschrieben.</para>
+			</important>
+		</section>
+		<section id="acp_groups_position">
+			<title>Gruppenreihenfolge</title>
+			<para>Wenn Gruppen zur Anzeige in der Legende festgelegt sind, können Sie ihre Reihenfolge auf dieser Seite ändern. Sie können automatisch nach Namen sortiert oder manuell mit den Pfeilen nach oben und unten angeordnet werden. Wird eine Gruppe nicht in der Liste angezeigt, steht ein Auswahlmenü zur Verfügung, um sie der Legende hinzuzufügen.</para>
+			<para>Es ist außerdem möglich, festzulegen, welche Gruppen auf der Seite <guilabel>Team</guilabel> angezeigt werden. Es gibt drei Optionen, wie Mitglieder auf der Seite <guilabel>Team</guilabel> aufgelistet werden.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Nur die erste Gruppe</guilabel>: Von den zur Anzeige auf der Team-Seite ausgewählten Gruppen erscheinen Mitglieder nur in der ersten Gruppe, in der sie in der Liste vorkommen.</para></listitem>
+				<listitem><para><guilabel>Nur die Hauptgruppe</guilabel>: Von den zur Anzeige auf der Team-Seite ausgewählten Gruppen erscheinen Mitglieder nur in ihrer Hauptgruppe.</para></listitem>
+				<listitem><para><guilabel>Alle Mitgliedschaften</guilabel>: Benutzer werden in jeder zur Anzeige auf der Team-Seite ausgewählten Gruppe angezeigt, sofern sie Mitglied dieser Gruppe sind.</para></listitem>
+			</itemizedlist>
+			<para>Sie können außerdem festlegen, für welche Foren jedes Team-Mitglied als Moderator angezeigt wird.</para>
+			<para>Es können Kategorien erstellt werden, um Mitglieder mehrerer Benutzergruppen unter einem gemeinsamen Titel zusammenzufassen.</para>
+			<para>Schließlich können Sie festlegen, welche Gruppen als <guilabel>Team</guilabel>-Positionen gelten und auf der Team-Seite angezeigt werden sollen.</para>
+		</section>
+	</section>
+	<section id="acp_permissions">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>ameeck</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Berechtigungen</title>
+		<para>Auf Ihrem Board müssen Sie festlegen, was Benutzer tun und nicht tun dürfen, sowie was sie sehen und nicht sehen dürfen. Mit dem flexiblen und detaillierten System, das Proteus bietet, haben Sie umfassende Möglichkeiten, Berechtigungen zu verwalten. In phpBB3 gibt es fünf Arten von Berechtigungen:</para>
+		<itemizedlist>
+			<listitem><para>Allgemeine Benutzerrechte</para></listitem>
+			<listitem><para>Globale Moderator-Berechtigungen</para></listitem>
+			<listitem><para>Globale Administrator-Berechtigungen</para></listitem>
+			<listitem><para>Benutzerspezifische Forenrechte</para></listitem>
+			<listitem><para>Foren-Moderator-Berechtigungen</para></listitem>
+		</itemizedlist>
+		<para>Die drei <guilabel>Allgemeinen Berechtigungen</guilabel> gelten für jedes Forum oder haben überhaupt keinen Bezug zu Foren.</para>
+		<para>Die zwei <guilabel>Forenrechte</guilabel> gelten jeweils nur für ein einzelnes Forum.</para>
+		<para>Jede dieser fünf Berechtigungsarten kann einzelnen Benutzern oder Benutzergruppen zugewiesen werden.</para>
+		<para>Beim Festlegen von Berechtigungen stehen Ihnen drei mögliche Werte zur Verfügung – <guilabel>NEIN</guilabel>, <guilabel>JA</guilabel> und <guilabel>NIE</guilabel> – wobei <guilabel>NEIN</guilabel> der Standardwert für jede Berechtigung ist. Setzen Sie eine Berechtigung auf <guilabel>JA</guilabel>, überschreibt dies ein <guilabel>NEIN</guilabel>; ist eine Berechtigung jedoch auf <guilabel>NIE</guilabel> gesetzt, können Sie dies an keiner anderen Stelle durch ein <guilabel>JA</guilabel> überschreiben. Wenn Sie mit diesem System noch Schwierigkeiten haben, lesen Sie den Abschnitt <link linkend="acp_permissions_mask">Effektive Berechtigungen</link>.</para>
+		<para>Um zu verstehen, wie Sie Berechtigungen festlegen und die Oberfläche verwenden, ist es wichtig, die verschiedenen Arten von Berechtigungen und Werkzeugen zu kennen, die der Reiter „Berechtigungen" im <acronym>ACP</acronym> bietet:</para>
+
+		<section id="acp_permissions_global">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+					<author>
+						<othername>stevemaury</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Allgemeine Berechtigungen</title>
+			<para>Diese betreffen das gesamte Board und sind nicht an bestimmte Foren gebunden. Dazu zählen Benutzerrechte, die die Nutzung des Benutzerbereichs, der Suche, Privater Nachrichten sowie die Verwendung von Avataren/Signaturen usw. einschränken. Administrator-Berechtigungen werden ebenfalls hier festgelegt, da sie allgemeiner Natur sind.</para>
+
+			<section id="acp_permissions_global_user">
+				<title>Allgemeine Benutzerrechte</title>
+				<para>Allgemeine Benutzerrechte sind Berechtigungen, die für alle Foren gelten, etwa Rechte zum Anhängen oder Herunterladen von Dateien oder zur Verwendung einer Signatur, oder Berechtigungen, die keinen Bezug zu einem Forum haben, wie Berechtigungen zu Profilen, Privaten Nachrichten und E-Mail.</para>
+
+				<para>Allgemeine Benutzerrechte können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Benutzerrechte</guilabel> wählen. Obwohl dies möglich ist, ist es im Allgemeinen deutlich vorzuziehen, keine Benutzerrechte, sondern Gruppenrechte zu verwenden. Dies erleichtert die Verwaltung von Berechtigungen sowie die zukünftige Zuweisung von Berechtigungen an Benutzer. Der einzige praktische Unterschied zwischen Benutzerrechten und Gruppenrechten besteht darin, dass Sie bei Benutzerrechten die Berechtigungen für jeden Benutzer einzeln festlegen müssen, während Sie bei Gruppenrechten eine Gruppe erstellen und deren Mitgliedern eine Reihe von Berechtigungen zuweisen können. Wenn Sie dann möchten, dass weitere Benutzer dieselben Berechtigungen erhalten, können Sie diese einfach der Gruppe hinzufügen.</para>
+
+				<para>Allgemeine Benutzerrechte können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Benutzerrechte</guilabel> wählen.</para>
+
+				<para>In beiden Fällen können Sie im Auswahlmenü eine vorgefertigte Benutzer-Rolle auswählen, oder Sie klicken auf <guilabel>Erweiterte Berechtigungen</guilabel>, um die Berechtigungen individuell anzupassen. Der bessere Weg, eine der vorgefertigten Rollen anzupassen, ist jedoch, eine neue Benutzer-Rolle auf Basis der Einstellungen einer bestehenden Rolle zu erstellen. Sie können auch eine neue Benutzer-Rolle von Grund auf erstellen. Rollen benötigen weniger Ressourcen, als wenn Sie Änderungen durch Bearbeiten der Erweiterten Berechtigungen vornehmen.</para>
+			</section>
+			<section id="acp_permissions_global_moderator">
+				<title>Globale Moderator-Berechtigungen</title>
+				<para>Globale Moderator-Berechtigungen sind Berechtigungen, die das Bearbeiten, Löschen oder sonstige Beeinflussen der Themen und Beiträge anderer Benutzer betreffen, oder die Möglichkeit, andere Benutzer durch Meldungen, Verwarnungen oder Sperren zu beeinflussen. Hier vergebene Berechtigungen gelten für jedes Forum, das der Benutzer oder die Benutzergruppe sehen kann.</para>
+
+				<para>Globale Moderator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Moderator-Berechtigungen</guilabel> wählen.</para>
+
+				<para>Globale Moderator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Moderator-Berechtigungen</guilabel> wählen.</para>
+
+				<para>Globale Moderator-Berechtigungen können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Globale Moderatoren</guilabel> klicken. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen derzeit globale Moderator-Berechtigungen zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
+
+				<para>In beiden Fällen können Sie im Rollen-Auswahlmenü eine vorgefertigte Moderator-Rolle auswählen, oder Sie klicken auf <guilabel>Erweiterte Berechtigungen</guilabel>, um die Berechtigungen anzupassen, oder – vorzugsweise – erstellen Sie eine neue Rolle mit den von Ihnen gewünschten Berechtigungen.</para>
+			</section>
+			<section id="acp_permissions_global_administrator">
+				<title>Globale Administrator-Berechtigungen</title>
+				<para>Globale Administrator-Berechtigungen sind Berechtigungen, die die Verwaltung Ihres Boards über das Administrations-Kontrollzentrum betreffen. Dazu zählen Berechtigungen zur Verwaltung von Foren, Benutzern und Benutzergruppen, zur Verwaltung und Zuweisung von Berechtigungen, zum Ändern der Board-Konfiguration und andere derartige Verwaltungsaufgaben.</para>
+
+				<para>Globale Administrator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Administrator-Berechtigungen</guilabel> wählen.</para>
+
+				<para>Globale Administrator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Administrator-Berechtigungen</guilabel> wählen.</para>
+
+				<para>Globale Administrator-Berechtigungen können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Administratoren</guilabel> klicken. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen derzeit Administrator-Berechtigungen zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
+
+				<para>In beiden Fällen können Sie im Rollen-Auswahlmenü eine vorgefertigte Administrator-Rolle auswählen, oder Sie klicken auf <guilabel>Erweiterte Berechtigungen</guilabel>, um die Berechtigungen anzupassen, oder – vorzugsweise – erstellen Sie eine neue Rolle mit den von Ihnen gewünschten Berechtigungen.</para>
+			</section>
+		</section>
+		<section id="acp_permissions_forumbased">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>stevemaury</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Forenrechte</title>
+			<para>Diese Berechtigungen werden für jede Kombination aus Forum und Benutzer oder Gruppe einzeln festgelegt. Sie lassen sich in zwei Arten unterteilen: Benutzerrechte und Moderator-Berechtigungen. Erstere legen fest, ob ein Benutzer oder eine Gruppe das Forum sehen, darin schreiben kann usw., während die Moderator-Berechtigungen festlegen, ob der Benutzer oder die Gruppe moderationsbezogene Aktionen darin durchführen kann.</para>
+
+			<section id="acp_permissions_forumbased_user">
+				<title>Benutzerspezifische Forenrechte</title>
+				<para>Benutzerspezifische Forenrechte sind Berechtigungen, die das Erstellen und Bearbeiten eigener Beiträge in einem bestimmten Forum sowie das Drucken und Melden von Themen betreffen. Sie legen außerdem fest, ob Beiträge eine Freigabe erfordern oder den Beitragszähler erhöhen, sowie einige weitere Benutzermöglichkeiten in einem bestimmten Forum.</para>
+
+				<para>Benutzerspezifische Forenrechte können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerspezifische Forenrechte</guilabel> klicken, einen Benutzer auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Forenrechte</guilabel> wählen.</para>
+
+				<para>Benutzerspezifische Forenrechte können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenspezifische Forenrechte</guilabel> klicken, eine Benutzergruppe auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Forenrechte</guilabel> wählen.</para>
+
+				<para>Benutzerspezifische Forenrechte können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Forenrechte</guilabel> klicken und dann ein oder mehrere Foren aus der Liste auswählen. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen für dieses Forum derzeit benutzerspezifische Forenrechte zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
+
+				<para>In beiden Fällen können Sie im Rollen-Auswahlmenü eine vorgefertigte Forums-Rolle auswählen, oder Sie klicken auf <guilabel>Erweiterte Berechtigungen</guilabel>, um die Berechtigungen anzupassen, oder – vorzugsweise – erstellen Sie eine neue Rolle mit den von Ihnen gewünschten Berechtigungen.</para>
+			</section>
+			<section id="acp_permissions_forumbased_moderator">
+				<title>Foren-Moderator-Berechtigungen</title>
+				<para>Foren-Moderator-Berechtigungen sind Berechtigungen, die das Bearbeiten, Löschen oder sonstige Beeinflussen der Themen und Beiträge anderer Benutzer in einem bestimmten Forum betreffen, oder die Möglichkeit, andere Benutzer durch Meldungen, Verwarnungen oder Sperren zu beeinflussen.</para>
+
+				<para>Foren-Moderator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerspezifische Forenrechte</guilabel> klicken, einen Benutzer auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Moderator-Berechtigungen</guilabel> wählen.</para>
+
+				<para>Foren-Moderator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenspezifische Forenrechte</guilabel> klicken, eine Benutzergruppe auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Moderator-Berechtigungen</guilabel> wählen.</para>
+
+				<para>Foren-Moderator-Berechtigungen können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Foren-Moderatoren</guilabel> klicken und dann ein oder mehrere Foren aus der Liste auswählen. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen für dieses Forum derzeit Foren-Moderator-Berechtigungen zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
+
+				<para>In beiden Fällen können Sie im Rollen-Auswahlmenü eine vorgefertigte Moderator-Rolle auswählen, oder Sie klicken auf <guilabel>Erweiterte Berechtigungen</guilabel>, um die Berechtigungen anzupassen, oder – vorzugsweise – erstellen Sie eine neue Rolle mit den von Ihnen gewünschten Berechtigungen.</para>
+			</section>
+		</section>
+		<section id="acp_permissions_roles">
+			<title>Berechtigungs-Rollen</title>
+			<para>Um das Festlegen von Berechtigungen zu erleichtern, können Sie Rollen erstellen, die eine vordefinierte Menge an Berechtigungen enthalten und die Sie dann Benutzern oder Gruppen zuweisen können. phpBB hat bereits einige vordefinierte Rollen für Sie vorbereitet – so können Sie beispielsweise bei forenbasierten Berechtigungen jeden Benutzer zu einem „Standard-Moderator", „Vollmoderator" oder „Eingeschränkten Moderator" usw. machen.</para>
+
+			<para>Es gibt vier Arten von Berechtigungs-Rollen:
+				<itemizedlist>
+					<listitem><para>Administrator-Rollen, verwendet mit <guilabel>Globalen Administrator-Berechtigungen</guilabel></para></listitem>
+					<listitem><para>Benutzer-Rollen, verwendet mit <guilabel>Allgemeinen Benutzerrechten</guilabel></para></listitem>
+					<listitem><para>Moderator-Rollen, verwendet mit <guilabel>Globalen Moderator-Berechtigungen</guilabel> und <guilabel>Foren-Moderator-Berechtigungen</guilabel></para></listitem>
+					<listitem><para>Forums-Rollen, verwendet mit <guilabel>Benutzerspezifischen Forenrechten</guilabel></para></listitem>
+				</itemizedlist>
+			</para>
+
+			<para>Berechtigungs-Rollen können über den entsprechenden Link im Reiter „Berechtigungen" des <acronym>ACP</acronym> verwaltet werden. Rollen bieten eine praktische Berechtigungsvorlage, die bei der Zuweisung von Berechtigungen an Benutzer oder Benutzergruppen verwendet werden kann. Die Berechtigungseinstellungen einer Rolle können durch Klicken auf das grüne Zahnrad der jeweiligen Rolle angesehen oder bearbeitet werden.</para>
+
+			<para>Die meisten Standard-Rollen verwenden Kombinationen aus <guilabel>Ja</guilabel> und <guilabel>Nein</guilabel>. Das bedeutet: Wenn einem Benutzer durch die Mitgliedschaft in zwei verschiedenen Gruppen zwei unterschiedliche Rollen zugewiesen werden – zum Beispiel „Eingeschränkter Zugriff" und „Regulärer Zugriff" – überschreiben die <guilabel>Ja</guilabel>-Werte die <guilabel>Nein</guilabel>-Werte, sodass dem Benutzer der reguläre Zugriff verbleibt.</para>
+
+			<para>Die Ausnahmen bilden Rollen mit <guilabel>Nie</guilabel>-Einstellungen, wie die Benutzer-Rollen <guilabel>Kein Avatar</guilabel>, <guilabel>Keine PNs</guilabel> und <guilabel>Funktionen für neu registrierte Benutzer</guilabel>, sowie die Forums-Rolle <guilabel>In Freigabe-Warteschlange</guilabel>. Diese vier Rollen verwenden <guilabel>Nie</guilabel>-Einstellungen und überschreiben daher die <guilabel>Ja</guilabel>-Einstellungen, die durch andere Rollen gewährt worden wären.</para>
+
+			<para>Sie sollten niemals eine dieser vier Rollen oder andere <guilabel>Nie</guilabel>-Einstellungen für Ihre Gruppe „Registrierte Benutzer" verwenden. Andernfalls würden diese Berechtigungen allen entzogen, auch Ihnen selbst.</para>
+
+			<para>Wenn die Berechtigungseinstellungen einer Rolle nicht ganz zu Ihrem Forum passen – Sie möchten zum Beispiel nicht, dass irgendjemand seinen Online-Status ausblenden kann –, können Sie einer Standard-Rolle eine Berechtigung hinzufügen oder entziehen. Überall, wo diese Rolle verwendet wird, ändert sich dann diese Berechtigung.</para>
+
+			<para>Sie können auch eigene, benutzerdefinierte Rollen erstellen, indem Sie einen neuen Namen in das Feld <guilabel>Rolle erstellen</guilabel> eingeben, im Auswahlmenü <guilabel>Einstellungen verwenden von</guilabel> eine zu kopierende Rolle auswählen und auf „Absenden" klicken. Anschließend können Sie Ihre neue Rolle anpassen und für die Zuweisung dieser Berechtigungen verwenden.</para>
+
+			<para>Die Verwendung solcher benutzerdefinierten Rollen ist einfacher als das Bearbeiten der erweiterten Berechtigungen für mehrere Foren und sollte den Ressourcenbedarf Ihres Forums bei der Berechtigungsprüfung verringern.</para>
+		</section>
+		<section id="acp_permissions_mask">
+			<title>Effektive Berechtigungen</title>
+			<para>In diesem Bereich legen Sie nichts fest und ändern nichts, sondern können die endgültigen Berechtigungen eines Benutzers oder einer Gruppe einsehen, basierend auf dem kombinierten Ergebnis der Berechtigungen, die ein Benutzer aus seinen eigenen Rechten oder seinen Gruppenmitgliedschaften erhält. Diese Funktion ist besonders nützlich, wenn Sie Ihre Berechtigungen fehlersuchen müssen und beispielsweise nicht herausfinden können, warum jemand nicht die Berechtigung hat, die er haben sollte. Die effektiven Berechtigungen sind ein Werkzeug zur Anzeige der Berechtigungseinstellungen für alle fünf Berechtigungsarten, sowohl für Benutzer als auch für Benutzergruppen.</para>
+
+			<para>Jeder Link im Bereich „Effektive Berechtigungen" des Reiters „Berechtigungen" im <acronym>ACP</acronym> entspricht einer der fünf Berechtigungsarten:
+				<itemizedlist>
+					<listitem><para>Administrative Berechtigungen für <guilabel>Globale Administrator-Berechtigungen</guilabel> ansehen</para></listitem>
+					<listitem><para>Benutzerbasierte Berechtigungen für <guilabel>Allgemeine Benutzerrechte</guilabel> ansehen</para></listitem>
+					<listitem><para>Globale Moderationsrechte für <guilabel>Globale Moderator-Berechtigungen</guilabel> ansehen</para></listitem>
+					<listitem><para>Forums-Moderationsrechte für <guilabel>Foren-Moderator-Berechtigungen</guilabel> ansehen</para></listitem>
+					<listitem><para>Forenbasierte Berechtigungen für <guilabel>Benutzerspezifische Forenrechte</guilabel> ansehen</para></listitem>
+				</itemizedlist>
+			Jeder dieser fünf Links führt Sie zu einer Seite mit den Benutzern und Benutzergruppen, denen diese globalen oder Foren-Berechtigungen zugewiesen sind.</para>
+
+			<para>Wenn Sie eine oder mehrere Benutzergruppen auswählen, werden die Berechtigungen dieser Gruppen genauso angezeigt, wie sie auf den Berechtigungs-Bearbeitungsseiten dargestellt werden – es bringt also keinen zusätzlichen Nutzen, die effektiven Berechtigungen für Gruppennamen auszuführen. Die effektiven Berechtigungen sind am nützlichsten, wenn Sie sie für einen Benutzernamen und nicht für einen Gruppennamen ausführen, da Letzteres nur dieselben Informationen liefert, die Sie auch durch Ansehen der Berechtigungen dieser Gruppe erhalten.</para>
+
+			<para>Die Anzeige der Berechtigungen eines Benutzers unterscheidet sich stark davon. Wenn Sie den Namen eines Benutzers in das Feld <guilabel>Mitglied suchen</guilabel> für eine der fünf Berechtigungsarten eingeben und auf <guilabel>Berechtigungen ansehen</guilabel> klicken, werden die daraus resultierenden Berechtigungen dieses Benutzers angezeigt, unter Berücksichtigung aller Berechtigungen seiner Gruppen. Die Maske für <guilabel>Forums-Moderation</guilabel> berücksichtigt außerdem die globalen Moderationsrechte.</para>
+
+			<para>Jede einzelne Berechtigung verfügt über einen Kreispfeil, der als Link alle Gruppen des Benutzers anzeigt und welche Gruppen diese Berechtigung gewähren oder verweigern.</para>
+			<figure id="img_choose_group_permissions">
+				<title>Effektive Berechtigungen</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="GIF" fileref="../images/admin_guide/permission_masks.gif"/>
+					</imageobject>
+					<caption>
+						<para>Die Bildschirme, die Sie beim Verfolgen von Berechtigungen mit dem Werkzeug <guilabel>Effektive Berechtigungen</guilabel> sehen.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<note><para>In diesem Beispiel sehen Sie, wie ein <guilabel>Ja</guilabel> bei der globalen Moderation ein <guilabel>Nie</guilabel> bei der Forums-Moderation überschreibt. Dies ist eine Ausnahme von der Regel, dass <guilabel>Nie</guilabel>-Werte <guilabel>Ja</guilabel>-Werte überschreiben.
+			Die andere Ausnahme sind <guilabel>Gründer</guilabel>. Ist ein Benutzer auf seiner Benutzerverwaltungs-Übersichtsseite als Gründer markiert, erhält er alle globalen Administrator-Berechtigungen, wodurch jede <guilabel>Nein</guilabel>- oder <guilabel>Nie</guilabel>-Einstellung, die diesem Benutzer oder seinen Benutzergruppen zugewiesen wurde, überschrieben wird.</para></note>
+		</section>
+		<section id="acp_permissions_shortcuts">
+			<title>Weitere Abkürzungen</title>
+			<para>Die Abkürzungen im Reiter „Berechtigungen" des <acronym>ACP</acronym> sind über weitere Stellen im <acronym>ACP</acronym> verteilt.
+				<itemizedlist>
+					<listitem><para>Die Links „Benutzerrechte", „Benutzerspezifische Forenrechte", „Gruppenrechte" und „Gruppenspezifische Forenrechte" sind auch im Reiter <guilabel>Benutzer und Gruppen</guilabel> des <acronym>ACP</acronym> vorhanden</para></listitem>
+					<listitem><para>Die Links „Forenrechte", „Foren-Moderatoren", „Benutzerspezifische Forenrechte" und „Gruppenspezifische Forenrechte" sind auch im Reiter <guilabel>Foren</guilabel> des <acronym>ACP</acronym> vorhanden</para></listitem>
+					<listitem><para>Auf der Seite <guilabel>Benutzer verwalten</guilabel> können Sie nach Auswahl eines Benutzers im Auswahlmenü <guilabel>Formular auswählen</guilabel> die Option <guilabel>Berechtigungen</guilabel> wählen:
+						<itemizedlist>
+							<listitem><para>Standardmäßig werden die drei allgemeinen Berechtigungsmasken angezeigt</para></listitem>
+							<listitem><para>Das Auswahlmenü <guilabel>Forum auswählen</guilabel> zeigt die beiden Forenrechte-Masken an</para></listitem>
+							<listitem><para>Der Link zum Festlegen der Benutzerrechte führt zur Aktualisierung der drei allgemeinen Berechtigungen</para></listitem>
+							<listitem><para>Der Link zum Festlegen der benutzerspezifischen Forenrechte führt zur Aktualisierung der beiden Forenrechte</para></listitem>
+						</itemizedlist>
+					</para></listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		<section id="acp_permissions_quickstart">
+			<title>Schnelleinstieg in Berechtigungen</title>
+			<para>Die folgenden Berechtigungen können festgelegt werden, um den Einstieg in ein neues Forum zu erleichtern.</para>
+			<section id="acp_permissions_quickstart_global_admin">
+				<title>Globale Administrator-Berechtigungen</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Standardmäßig hat die Benutzergruppe „Administratoren" die Rolle „Standard-Administrator". Dies verhindert, dass jemand außer dem Gründer weitere Administratoren zuweisen, Rollen bearbeiten und Sprachpakete, Styles oder Module in Ihrem Forum installieren kann.</para></listitem>
+						<listitem><para>Standardmäßig kann die Rolle „Standard-Administrator" die Berechtigungen anderer nicht verwenden. Dies erschwert die Verwaltung von Berechtigungen; es wird daher empfohlen, die Administrator-Rolle <guilabel>Standard-Administrator</guilabel> zu bearbeiten und die Berechtigung <guilabel>Kann die Berechtigungen anderer verwenden</guilabel> hinzuzufügen.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_global_mod">
+				<title>Globale Moderator-Berechtigungen</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Standardmäßig hat die Benutzergruppe „Globale Moderatoren" die Rolle „Standard-Moderator". Dies erlaubt es ihnen, jedes Forum zu moderieren, das sie sehen können, erlaubt ihnen aber nicht, den Autor eines Beitrags zu ändern oder Benutzer zu sperren.</para></listitem>
+						<listitem><para>Fügen Sie der Benutzergruppe „Administratoren" die Rolle <guilabel>Standard-Moderator</guilabel> oder <guilabel>Vollmoderator</guilabel> hinzu. Dies erlaubt es Ihren Administratoren, jedes Forum zu moderieren, ohne sie zur Benutzergruppe „Globale Moderatoren" hinzufügen zu müssen.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_global_user">
+				<title>Allgemeine Benutzerrechte</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Die Benutzergruppen „Administratoren" und „Globale Moderatoren" starten mit der Rolle „Alle Funktionen", was in Ordnung ist.</para></listitem>
+						<listitem><para>„Registrierte Benutzer" starten mit der Rolle „Standardfunktionen", die ihnen die meisten normalen Benutzerrechte gibt, ihnen jedoch nicht erlaubt, ihren Benutzernamen oder ihre Hauptgruppe zu ändern, sowie einige weitere Dinge.</para></listitem>
+						<listitem><para>Die Rolle „Standardfunktionen" erlaubt es Benutzern, ihren Online-Status auszublenden. Möglicherweise möchten Sie diese Rolle <guilabel>Standardfunktionen</guilabel> bearbeiten und diese Berechtigung auf <guilabel>Nein</guilabel> setzen.</para></listitem>
+						<listitem><para>„Gäste" starten mit benutzerdefinierten allgemeinen Benutzerrechten, die nur das Herunterladen und Suchen erlauben.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_forum_mod">
+				<title>Foren-Moderator-Berechtigungen</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Administratoren und globale Moderatoren besitzen bereits globale Moderator-Berechtigungen; es ist daher nicht notwendig, sie zusätzlich als <guilabel>Foren-Moderatoren</guilabel> einzutragen.</para></listitem>
+						<listitem><para>Wenn Sie Junior-Moderatoren haben, die einzelne Foren moderieren sollen, fügen Sie diese Benutzer den Moderatorenlisten dieser Foren hinzu, oder erstellen Sie Moderator-Benutzergruppen für diese Moderatoren und fügen Sie die Benutzergruppen hier hinzu. Weisen Sie den Benutzern oder Benutzergruppen passende Moderator-Rollen zu.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_user_forum">
+				<title>Benutzerspezifische Forenrechte</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Geben Sie Ihren Benutzergruppen „Administratoren" und „Globale Moderatoren" für die meisten Foren die Forums-Rolle „Vollzugriff". Dies erlaubt es ihnen, wichtige Themen und Bekanntmachungen zu erstellen.</para></listitem>
+						<listitem><para>Geben Sie Ihrer Benutzergruppe „Registrierte Benutzer" die Forums-Rolle <guilabel>Standardzugriff</guilabel> für alle Foren außer Ihren reinen Admin-/Mod-Foren oder anderen versteckten Foren.</para></listitem>
+						<listitem><para>Geben Sie der Benutzergruppe „Gäste" die Forums-Rolle <guilabel>Nur Lesen</guilabel> für Foren, die nicht registrierte Gäste lesen können sollen.</para></listitem>
+						<listitem><para>Fügen Sie der Benutzergruppe „Bots" die Forums-Rolle <guilabel>Bot-Zugriff</guilabel> für dieselben Foren hinzu, die Gäste lesen sollen, damit Webcrawler-Suchbots diese Foren indizieren können.</para></listitem>
+						<listitem><para>Die Forums-Rolle <guilabel>Kein Zugriff</guilabel> wäre mit <guilabel>Nie</guilabel>-Berechtigungen nützlicher als mit ihren derzeitigen <guilabel>Nein</guilabel>-Werten. Bearbeiten Sie die Forums-Rolle <guilabel>Kein Zugriff</guilabel> und ändern Sie <guilabel>Kann Forum sehen</guilabel> und <guilabel>Kann Forum lesen</guilabel> von <guilabel>Nein</guilabel> auf <guilabel>Nie</guilabel>. So können Sie diese Rolle verwenden, um einer kleinen Gruppe den Zugriff auf ein Forum zu verwehren.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+		</section>
+		<section id="acp_permissions_quick_answers">
+			<title>Kurze Antworten</title>
+			<variablelist>
+				<varlistentry>
+					<term>Niemand kann meine neuen Foren sehen</term>
+					<listitem>
+						<para>Standardmäßig haben neue Foren keine zugewiesenen Berechtigungen. Sie müssen Forenrechte zuweisen oder von einem anderen Forum kopieren, bevor jemand sie sehen kann.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ich habe alle Administrator-Berechtigungen. Warum kann ich meine neuen Foren nicht sehen?</term>
+					<listitem>
+						<para>Administrator-Berechtigungen haben nichts mit Forenrechten zu tun. Sie müssen sich selbst oder Ihrer Benutzergruppe Forenrechte zuweisen, bevor Sie ein Forum sehen oder darin schreiben können.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ich habe meinen neuen Foren Berechtigungen hinzugefügt, kann sie aber immer noch nicht sehen.</term>
+					<listitem>
+						<para>Sie müssen auch den übergeordneten Kategorien Ihrer Foren Berechtigungen hinzufügen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ich habe eine neue Kategorie mit passenden Berechtigungen hinzugefügt, kann sie aber nicht sehen.</term>
+					<listitem>
+						<para>Kategorien werden nicht angezeigt, sofern sich darunter keine sichtbaren Foren befinden.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Wie kann ich meinen Moderatoren erlauben, wichtige Themen oder Bekanntmachungen zu erstellen?</term>
+					<listitem>
+						<para>Die Berechtigungen für wichtige Themen und Bekanntmachungen befinden sich bei den Forenrechten. Die Zuweisung der Forums-Rolle <guilabel>Vollzugriff</guilabel> erlaubt es ihnen, wichtige Themen und Bekanntmachungen zu erstellen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ich habe für ein Unterforum festgelegt, die Berechtigungen vom übergeordneten Forum zu kopieren. Als ich jedoch die Berechtigungen des übergeordneten Forums geändert habe, hat sich das Unterforum nicht geändert.</term>
+					<listitem>
+						<para><guilabel>Berechtigungen kopieren</guilabel> ist eine Aktion, keine Einstellung. Wenn Sie „Berechtigungen kopieren" auswählen, werden die Berechtigungen beim Klicken auf „Absenden" kopiert. Zukünftige Änderungen werden nicht kopiert, sofern Sie nicht erneut in „Foren verwalten" &gt; „Bearbeiten" das Kopieren auswählen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ich habe ein privates Forum mit einer speziellen Gruppe erstellt, die Berechtigungen zum Sehen des Forums hat. Jetzt können nicht einmal Mitglieder dieser Gruppe das Forum sehen.</term>
+					<listitem>
+						<para>Sie haben wahrscheinlich für die Gruppe „Registrierte Benutzer" <guilabel>Nie</guilabel>-Berechtigungen gesetzt. Da Mitglieder Ihrer speziellen Gruppe auch Mitglieder von „Registrierte Benutzer" sind, überschreibt diese Nie-Berechtigung die Ja-Berechtigung, die durch die neue Benutzergruppe zugewiesen wurde. Sie sollten die Gruppe „Registrierte Benutzer" aus der Forenrechte-Liste dieses Forums entfernen, statt Nie-Berechtigungen zuzuweisen.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+	</section>
+	<section id="acp_customise">
+		<title>Anpassen</title>
+		<para>phpBB 3.3 erlaubt es Ihnen, sein Erscheinungsbild und Interaktionen auf verschiedene Arten anzupassen:</para>
+		<variablelist>
+				<varlistentry>
+					<term>Styles</term>
+					<listitem>
+						<para>Das Erscheinungsbild Ihres Boards kann durch die Installation neuer Styles oder das Anpassen des Standard-Styles verändert werden.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Erweiterungen</term>
+					<listitem>
+						<para>Erweiterungen erlauben es Ihnen, Ihrem Board leicht neue Funktionen hinzuzufügen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Sprachpakete</term>
+					<listitem>
+						<para>Wenn Ihre Board-Benutzer eine andere Sprache als Englisch sprechen, können Sie ein Sprachpaket installieren, um die Systemtexte (nicht die Inhalte des Boards) in eine andere Sprache zu übersetzen.</para>
+					</listitem>
+				</varlistentry>
+		</variablelist>
+
+		<section id="acp_customise_styles">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Styles</title>
+			<para>Das Styling ist einer der Aspekte dieser Anpassbarkeit. Die Fähigkeit, die von Ihrem Board verwendeten Styles zu verwalten, ist wichtig, um ein interessantes Board zu erhalten. Der Style Ihres Boards kann sogar den Zweck Ihres Boards widerspiegeln. <guimenuitem>Styles</guimenuitem> erlaubt es Ihnen, alle auf Ihrem Board verfügbaren Styles zu verwalten.</para>
+
+			<figure id="img_styles_overview">
+				<title>Style-Übersicht</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/styles_overview.png"/>
+					</imageobject>
+					<caption>
+						<para>Dies ist eine Liste der auf dem Board installierten Styles. Sie sehen die Anzahl der Benutzer, die den Style verwenden, und können den Links folgen, um die Details des Styles zu ändern.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<para>Einen Style zu erstellen ist keine leichte Aufgabe und nimmt einige Zeit in Anspruch. Erfahrene Designer aus der phpBB-Community erstellen Styles, die öffentlich verfügbar sind und die jeder herunterladen kann. Dies ist ein guter Ausgangspunkt, wenn Sie einen neuen Style herunterladen und installieren möchten und es sich aus irgendeinem Grund nicht leisten können, einen eigenen zu erstellen. Der erste Anlaufpunkt sollte der <ulink url="https://www.phpbb.com/styles/">Styles-Bereich auf phpBB.com</ulink> sein; dort finden Sie eine Liste nützlicher Links, unter anderem zu:
+				<variablelist>
+					<varlistentry>
+						<term><ulink url="https://www.phpbb.com/styles/demo/3.3/">Styles-Demo</ulink></term>
+						<listitem><para>Die Styles-Demo erlaubt es Ihnen, jeden Style auf einem laufenden Forum darzustellen und zu sehen, wie jeder Teil des Boards mit dem jeweiligen Style aussieht. Sie können durch die Styles blättern, bis Sie einen finden, der zu Ihnen und/oder Ihrem Board passt. Die Styles-Demo bietet Links zum Herunterladen des Styles und zur Ansicht seines Eintrags in der Styles-Datenbank.</para></listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term><ulink url="https://www.phpbb.com/styles/db/">Styles-Datenbank</ulink></term>
+						<listitem><para>Die Styles-Datenbank enthält alle Styles, die vom phpBB.com-Styles-Team geprüft wurden. Alle Styles werden geprüft, um sicherzustellen, dass sie sicher verwendbar sind, korrekt funktionieren und keine anderen Einschränkungen aufweisen. Sie können Styles nach Kriterien wie Version, Farbe oder Kategorie filtern, um leicht einen Style zu finden, der Ihnen gefällt. Jeder Style-Eintrag in der Datenbank enthält einen Link zur Styles-Demo, um ein Live-Beispiel des verwendeten Styles zu zeigen.</para></listitem>
+					</varlistentry>
+
+				</variablelist>
+			</para>
+
+
+			<section id="acp_styles_manage">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>ameeck</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Styles installieren und verwalten</title>
+				<para>Nachdem Sie einen Style ausgewählt haben und ihn installieren möchten, entpacken Sie ihn auf Ihrem PC und laden Sie das Verzeichnis mit dem Style auf den Server Ihres Boards hoch. Stellen Sie sicher, dass das Verzeichnis, das Sie in das Verzeichnis <filename class='directory'>styles</filename> des Servers hochladen, die Verzeichnisse <filename class='directory'>template</filename> und <filename class='directory'>theme</filename> sowie eine Datei <filename class='file'>style.cfg</filename> enthält. Die einzige Ausnahme besteht, wenn ein Style sein Template oder Theme auf einem anderen aufbaut; Sie werden beim Herunterladen des Styles jedoch darauf hingewiesen. Um einen solchen Style zu installieren, muss die abhängige Style-Komponente installiert sein.</para>
+
+				<para>Da Sie nun alle notwendigen Dateien hochgeladen haben, können Sie mit der Installation Ihres Styles fortfahren. Gehen Sie im <acronym>ACP</acronym> zum Reiter <guilabel>Anpassen</guilabel> und klicken Sie auf den Link <guilabel>Styles installieren</guilabel>. Sie sollten eine Tabelle mit einer Liste Ihrer hochgeladenen Styles sehen. Wenn Sie Ihren heruntergeladenen Style installieren möchten, klicken Sie auf den Link <guilabel>Style installieren</guilabel> neben dessen Titel.</para>
+
+				<para>An dieser Stelle sollten Sie wissen, wie Sie einen neuen Style installieren. Es gibt jedoch noch einige Links und Funktionen auf der Style-Übersichtsseite, die wir bisher nicht behandelt haben. Dies sind:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Details</guilabel>: Dieser Link führt Sie zu den Details des Styles, wo Sie dessen Namen ändern, festlegen können, ob der Style aktiv ist, sowie ob er der Standard-Style des Boards sein soll.</para></listitem>
+					<listitem><para><guilabel>Aktivieren/Deaktivieren</guilabel>: Ohne weitere Erklärung recht eindeutig – dieser Link erlaubt es Ihnen, den Style sehr schnell und einfach ein- und auszuschalten.</para></listitem>
+					<listitem><para><guilabel>Deinstallieren</guilabel>: Wenn Ihnen oder Ihren Benutzern der Style nicht mehr gefällt, verwenden Sie diesen Link. Wenn Sie einen Style deinstallieren, werden dessen Benutzer auf den Standard-Style des Boards umgestellt. Sie haben außerdem die Möglichkeit, den Style vollständig zu löschen, indem Sie das Kästchen <guilabel>Vom Dateisystem löschen</guilabel> aktivieren. Dadurch wird der Style deinstalliert und seine Dateien gelöscht; dies kann nicht rückgängig gemacht werden.</para></listitem>
+					<listitem><para><guilabel>Vorschau</guilabel>: Dies ist eine sehr nützliche und mächtige Funktion für Administratoren. Wenn Sie auf diesen Link klicken, werden Sie zum Board weitergeleitet und der von Ihnen ausgewählte Style wird angewendet – das ist praktisch, wenn Sie sehen möchten, ob der Style auf Ihrem Board gut aussieht und sicherstellen möchten, dass Sie ihn aktivieren sollten. Diese Funktion kann auch mit deaktivierten Styles verwendet werden. Die Style-ID wird über die URL übergeben, sodass Sie durch das Board blättern und jede benötigte Seite ansehen können.</para></listitem>
+				</itemizedlist>
+			</section>
+
+		</section>
+		<section id="acp_customise_extensions">
+			<title>Erweiterungen</title>
+			<para>Erweiterungen sind eigenständige Pakete, die in das Verzeichnis <filename class='directory'>ext</filename> Ihres Boards hochgeladen werden. Mit dem <guilabel>Erweiterungs-Manager</guilabel> können Sie die auf Ihrem Board laufenden Erweiterungen installieren und verwalten.</para>
+			<figure id="img_extensions_overview">
+				<title>Erweiterungs-Übersicht</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/extensions_overview.png"/>
+					</imageobject>
+					<caption>
+						<para>Dies ist eine Liste der Erweiterungen, die auf Ihrem Board aktiviert oder einsatzbereit sind.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>Nachdem Sie die Erweiterung hochgeladen haben, erscheint sie im <guilabel>Erweiterungs-Manager</guilabel>, wo Sie nur auf den Link <guilabel>Aktivieren</guilabel> klicken müssen, um die Erweiterung zu aktivieren. Sobald eine Erweiterung aktiviert ist, erscheint im Administrations-Kontrollzentrum ein Reiter <guilabel>Erweiterungen</guilabel>, sofern die Erweiterung Konfigurationseinstellungen besitzt. Der Link <guilabel>Details</guilabel> zeigt Ihnen Informationen über die Erweiterung, etwa deren Autoren, Homepage, Beschreibung und Versionsanforderungen. Die Spalte <guilabel>Aktuelle Version</guilabel> zeigt an, ob Sie die neueste Version der Erweiterung verwenden. Der Link <guilabel>Einstellungen</guilabel> am oberen Bildschirmrand erlaubt es Ihnen, nach Updates für Vorabversionen von Erweiterungen zu suchen, die noch nicht als stabil gelten. Ihr Board prüft regelmäßig, ob Sie die neuesten Erweiterungen verwenden; Sie können jedoch auf den Link <guilabel>Alle Versionen erneut prüfen</guilabel> klicken, um eine erneute Prüfung der Versionen Ihrer Erweiterungen zu erzwingen.</para>
+
+			<para>Wenn eine neuere Version Ihrer Erweiterung verfügbar ist, können Sie diese durch folgende Schritte aktualisieren:</para>
+			<orderedlist>
+				<listitem><para>Deaktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Deaktivieren</guilabel> klicken.</para></listitem>
+				<listitem><para>Löschen Sie die Dateien der Erweiterung aus dem Verzeichnis <filename class='directory'>ext</filename> des Boards. Löschen Sie nur den Ordner, der der Erweiterung entspricht, die Sie aktualisieren möchten.</para></listitem>
+				<listitem><para>Laden Sie die neueste Version der Dateien in das Verzeichnis <filename class='directory'>ext</filename> hoch.</para></listitem>
+				<listitem><para>Aktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Aktivieren</guilabel> klicken.</para></listitem>
+			</orderedlist>
+
+			<para>Wenn Sie eine Erweiterung vollständig von Ihrem Board entfernen möchten, folgen Sie diesen Schritten:</para>
+			<orderedlist>
+				<listitem><para>Deaktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Deaktivieren</guilabel> klicken.</para></listitem>
+				<listitem><para>Löschen Sie alle von der Erweiterung hinzugefügten Daten, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Daten löschen</guilabel> klicken.</para></listitem>
+				<listitem><para>Löschen Sie die Dateien der Erweiterung aus dem Verzeichnis <filename class='directory'>ext</filename> des Boards. Löschen Sie nur den Ordner, der der Erweiterung entspricht, die Sie aktualisieren möchten.</para></listitem>
+			</orderedlist>
+
+		</section>
+		<section id="acp_customise_language">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Sprachpakete</title>
+			<para>In phpBB können Sie mehrere Sprachpakete für Ihre Benutzer hochladen. Jede vom System angezeigte Textzeichenfolge sollte übersetzt sein, nachdem Sie ein neues Sprachpaket hochgeladen haben. Die Verwendung eines anderen Sprachpakets ändert nicht die Inhalte von Beiträgen, da deren Übersetzung aufgrund ihrer unterschiedlichen Inhalte und der Grenzen maschineller Übersetzung nicht möglich ist.</para>
+			<para>Sprachpakete können von der Seite <ulink url="https://www.phpbb.com/downloads/">Downloads</ulink> auf phpbb.com herunterladen werden.</para>
+			<para>Um ein Sprachpaket hinzuzufügen, entpacken Sie die heruntergeladene Datei und laden Sie deren Inhalt, also die Verzeichnisse <filename class='directory'>language</filename> und <filename class='directory'>styles</filename>, in das Wurzelverzeichnis Ihres Boards hoch. Das Verzeichnis <filename class='directory'>language/</filename> des Boards sollte danach ein zusätzliches Verzeichnis mit dem ISO-Code der hinzugefügten Sprache enthalten; wenn beispielsweise Französisch zusätzlich zum Standard-Paket Britisches Englisch hinzugefügt wird, dem Verzeichnis <filename class='directory'>en/</filename>, gibt es dann auch ein Verzeichnis <filename class='directory'>fr/</filename>. Nachdem Sie die Dateien in das System hochgeladen haben, sollte das Paket in der Liste <guilabel>Nicht installierte Sprachpakete</guilabel> erscheinen. Klicken Sie auf <guilabel>Installieren</guilabel>, um es dem Board hinzuzufügen und für Benutzer verfügbar zu machen.</para>
+			<para>Sobald das Sprachpaket installiert ist, können Benutzer es unter Benutzerbereich » Board-Einstellungen » Allgemeine Einstellungen bearbeiten auswählen.</para>
+			<note>
+				<para>Um ein Sprachpaket zur Standardsprache des Boards zu machen, müssen Sie die <link linkend="acp_general_config">Board-Konfiguration</link> ändern.</para>
+			</note>
+			<para>Falls Sie mehrere Sprachpakete installiert haben und ein anderes als das Standardpaket auswählen, wird Ihnen eine Liste nicht übersetzter Variablen angezeigt, sofern die Pakete nicht synchron sind. Dies ist beispielsweise nützlich, wenn Sie MODs für eine Sprache installieren und nicht wissen, welche Sprachzeichenfolgen Ihnen in den anderen fehlen.</para>
+			<important>
+				<para>Sprachpakete außer dem Standardpaket Britisches Englisch werden nicht automatisch aktualisiert, wenn das Board aktualisiert wird. Wenn Sie andere Sprachpakete installiert haben, müssen Sie diese ebenfalls aktualisieren.</para>
+			</important>
+		</section>
+	</section>
+
+	<section id="acp_maintenance">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>dhn</othername>
+				</author>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+				<author>
+					<othername>ameeck</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Board-Wartung</title>
+
+		<para>Ein phpBB-3.3-Board zu betreiben ist eine sehr wichtige Aufgabe, die den Administratoren zufällt. Das Board so zu pflegen, dass es möglichst reibungslos und ordnungsgemäß läuft, ist die Aufgabe des Administrators.</para>
+
+		<para><guimenuitem>Board-Wartung</guimenuitem> ist ein Bereich im <acronym>ACP</acronym>, der es Ihnen erlaubt, interne phpBB-Informationen wie Protokolle im Blick zu behalten sowie Ihre Datenbank (die Ihre phpBB-bezogenen Daten enthält) zu pflegen, etwa durch das Sichern und Wiederherstellen von Daten.</para>
+
+		<section id="acp_maintenance_logs">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Graham</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Forums-Protokolle</title>
+			<para>Der Bereich <guilabel>Forums-Protokoll</guilabel> des <acronym>ACP</acronym> bietet einen Überblick darüber, was auf dem Board geschehen ist. Dies im Blick zu behalten ist für Sie als Administrator wichtig. Es gibt vier Arten von Protokollen:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Administrations-Protokoll</term>
+					<listitem>
+						<para>Dieses Protokoll erfasst alle Aktionen, die innerhalb des Administrationsbereichs selbst durchgeführt wurden.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Moderations-Protokoll</term>
+					<listitem>
+						<para>Dieses Protokoll erfasst die Aktionen, die von Moderatoren Ihres Boards durchgeführt wurden. Wann immer ein Thema verschoben oder gesperrt wird, wird dies hier erfasst, sodass Sie sehen können, wer eine bestimmte Aktion durchgeführt hat.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Benutzer-Protokoll</term>
+					<listitem>
+						<para>Dieses Protokoll erfasst alle wichtigen Aktionen, die von Benutzern oder an Benutzern durchgeführt wurden. Alle E-Mail- und Passwortänderungen werden in diesem Protokoll erfasst.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Fehler-Protokoll</term>
+					<listitem>
+						<para>Dieses Protokoll zeigt Ihnen alle Fehler, die durch Aktionen des Boards selbst verursacht wurden, etwa Fehler beim Versenden von E-Mails. Wenn eine bestimmte Funktion nicht funktioniert, ist dieses Protokoll ein guter Ausgangspunkt. Sofern aktiviert, können zusätzliche Debug-Informationen in dieses Protokoll geschrieben werden.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>Klicken Sie auf einen der Protokoll-Links im linken Bereich <guilabel>Forums-Protokolle</guilabel>.</para>
+
+			<para>Wenn Sie die entsprechenden Berechtigungen besitzen, können Sie einzelne oder alle Protokolleinträge aus den obigen Bereichen entfernen. Um Protokolleinträge zu entfernen, gehen Sie zum entsprechenden Protokollbereich, aktivieren Sie die Kontrollkästchen der Protokolleinträge und klicken Sie anschließend auf das Kästchen <guilabel>Markierte löschen</guilabel>, um die Protokolleinträge zu löschen.</para>
+
+		</section>
+
+		<section id="acp_maintenance_database">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Datenbank sichern und wiederherstellen</title>
+			<para>phpBB verwendet eine Datenbank, um alle auf dem Board verwendeten Daten zu speichern, einschließlich Benutzer, Beiträge, Themen usw. Das Sichern der Datenbank kann als Schutzmaßnahme im Falle von Zwischenfällen nützlich sein, die zu Datenverlust oder Beschädigung der Datenbank führen könnten. Sollte ein solcher Zwischenfall auftreten, hätten Sie die Möglichkeit, die Datenbank aus dem Backup auf einen früheren Zustand zurückzusetzen. Sie können das Backup-Werkzeug auch verwenden, um Ihr Board zu einem anderen Anbieter umzuziehen – Sie erstellen ein Backup auf Ihrem aktuellen Server und stellen es auf dem neuen wieder her, um alle Daten zu erhalten.</para>
+			<itemizedlist>
+				<title>Datenbank-Backup</title>
+				<listitem><para><guilabel>Backup-Art</guilabel>: Sie können die gesamte Datenbank sichern oder entweder die <guilabel>Struktur</guilabel> oder die <guilabel>Daten</guilabel> sichern. Die Struktur enthält nur die Hierarchie, in der die Daten gespeichert sind; sichern Sie hingegen nur die Daten, benötigen Sie beim Wiederherstellen/Importieren eine bereits vorbereitete Struktur.</para></listitem>
+				<listitem><para><guilabel>Dateityp</guilabel>: Abhängig von Ihrer Serverkonfiguration können Sie das Backup in verschiedenen Formaten speichern. Die Option <guilabel>Text</guilabel> speichert das Backup im Klartext, andere Optionen komprimieren die Datei, um die Dateigröße des Dumps zu verringern.</para></listitem>
+				<listitem>
+					<para><guilabel>Tabellen-Auswahl</guilabel>: Sie können entweder <guilabel>Alle markieren</guilabel> oder einzelne Tabellen zum Sichern auswählen. Beim Sichern einer großen Datenbank können Sie die Suchtabellen ausschließen (vergessen Sie nicht, deren Struktur wiederherzustellen) und den Suchindex auf dem neuen Server neu erstellen.</para>
+					<tip>
+						<para>Verwenden Sie die STRG- und Umschalttaste zusammen mit der Maus, um einzelne Tabellen auszuwählen.</para>
+					</tip>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<title>Datenbank-Wiederherstellung</title>
+				<listitem><para>Dateiauswahl: Ihnen wird eine Liste der im Speicherordner gesicherten Datenbank-Backups angeboten. Wählen Sie das gewünschte Backup aus und klicken Sie auf <guilabel>Wiederherstellung starten</guilabel>. Die Wiederherstellung kann einige Zeit in Anspruch nehmen und überschreibt alle vorhandenen Daten auf dem Board.</para></listitem>
+			</itemizedlist>
+			<figure id="img_database_restore">
+				<title>Liste der verfügbaren Backups</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/database_restore.png"/>
+					</imageobject>
+					<caption>
+						<para>In dieser Liste auf der Seite <guilabel>Wiederherstellen</guilabel> finden Sie eine Liste der über das phpBB-<acronym>ACP</acronym> erstellten Backups, die ausgewählt und wiederhergestellt werden können.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<note><para>Die Möglichkeit, Backups aus dem ACP herunterzuladen, wurde in 3.2.6 entfernt. Backups müssen über FTP, SCP oder ein anderes Verfahren vom Server heruntergeladen werden.</para></note>
+		</section>
+		<section id="acp_maintenance_search">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Such-Indizierung</title>
+			<para>phpBB 3.3 bietet Ihnen ein leistungsfähiges Suchsystem, mit dem Sie Ihr gesamtes Board durchsuchen können. Die Haupteinstellungen für die Suchfunktion befinden sich im Bereich <link linkend="acp_server_search">Sucheinstellungen</link>. Hier können Sie den <guilabel>Suchindex</guilabel> verwalten, der die für schnelle und präzise Suchergebnisse notwendigen Daten enthält – so etwas wie ein riesiges Inhaltsverzeichnis. Standardmäßig sind zwei Such-Backends verfügbar – die native Volltextsuche, die im phpBB-Code enthalten ist und mit allen <glossterm>Datenbanksystemen</glossterm> funktioniert, und die MySQL-Volltextsuche, die die eingebaute Volltextsuchfunktion von MySQL verwendet. Die erste bietet eine flexiblere Konfiguration, während die zweite weniger Speicherplatz in der Datenbank benötigt und der Index deutlich schneller erstellt wird.</para>
+			<note>
+				<para>Das Erstellen eines Suchindex kann sehr lange dauern; ein neues Fenster öffnet sich und aktualisiert sich selbst, während die notwendigen Einträge der Suchtabelle erstellt werden. Bitte haben Sie Geduld, der Vorgang kann bei großen Boards mehrere Stunden dauern.</para>
+			</note>
+			<para>Die native Volltextsuche funktioniert folgendermaßen: Sie verwendet zwei Tabellen – eine enthält die auf dem Board verwendeten Wörter, denen eine numerische ID zugewiesen wird, und eine zweite Tabelle verknüpft Beitrags-IDs mit Wort-IDs. Dieses System ist sehr schnell, wenn Sie ein oder mehrere bestimmte Wörter in der gesamten Datenbank suchen müssen. Die folgenden Statistiken, die auf der Seite „Suchindex" angeboten werden, beschreiben, wie viele Wörter und Beziehungen das System enthält:</para>
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Insgesamt indizierte Wörter</guilabel></term>
+					<listitem>
+						<para>Diese Einstellung erklärt sich weitgehend selbst; sie gibt die Anzahl der unterschiedlichen Wörter an, die jemals auf Ihrem Board gepostet wurden. Es werden nur Wörter berücksichtigt, die den in den <link linkend="acp_server_search">Sucheinstellungen</link> festgelegten Kriterien für die Indizierung entsprechen.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Insgesamt indizierte Wort-Beitrags-Beziehungen</guilabel></term>
+					<listitem>
+						<para>Wie oben beschrieben, enthält die zweite Suchtabelle eine Liste von Beziehungen zwischen Beiträgen und Wörtern. Würde beispielsweise jemand „Flugzeug" in zwei verschiedenen Beiträgen schreiben, würde das System das Wort einmal hinzufügen und zwei Beziehungen anlegen, jeweils eine zu jedem Beitrag.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Insgesamt indizierte Beiträge</guilabel></term>
+					<listitem>
+						<para>Diese Statistik wird für das MySQL-Volltext-Backend angezeigt, bei dem die Suche über einen internen Mechanismus des Datenbanksystems erfolgt. Sie gibt an, wie viele Beiträge auf dem Board indiziert wurden.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+	</section>
+
+	<section id="acp_system">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>ameeck</othername>
+				</author>
+				<author>
+					<othername>Graham</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Systemkonfiguration</title>
+		<para>Einstellungen, die das gesamte Board betreffen und ein zentraler Bestandteil der Konfiguration und des Betriebs von phpBB sind, befinden sich im Bereich System. Die meisten dieser Einstellungen erfordern mehr Aufmerksamkeit vom Administrator und sind nicht so leicht zu konfigurieren; glücklicherweise werden Sie sie wahrscheinlich nicht allzu oft ändern müssen. Dazu zählen das Aktuellhalten Ihrer Installation, die Verwaltung der Sprachen des Boards oder das Bearbeiten der Struktur der Kontrollzentren von phpBB.</para>
+		<section id="acp_system_updates">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Auf Updates prüfen</title>
+			<para>Der phpBB-3.3.x-Zweig wird bei Bedarf üblicherweise alle paar Monate aktualisiert. Fehlerkorrekturen, neue Funktionen und andere Änderungen sind in diesen Updates enthalten. Die Unterversionsnummer wird dabei jeweils erhöht. Es wird dringend empfohlen, Ihre phpBB-Installation aktuell zu halten. Das Aktualisieren von älteren Versionen ist schwieriger, und Sie werden es schwer haben, Lösungen für mögliche Konflikte zu finden. Sie sollten das Vollständige Update-Paket verwenden, um Ihr Board zu aktualisieren, besonders wenn Ihr Board keine Änderungen an den Kerndateien aufweist. Alternativ können erfahrene Benutzer mit dem Erweiterten Update-Paket aktualisieren, das Änderungen an Kerndateien zusammenführen kann.</para>
+			<para>Sie werden in Ihrem ACP benachrichtigt, wenn eine neue Version veröffentlicht wird; Sie erhalten außerdem einen Link zur neuesten Ankündigung der Veröffentlichung, die Sie über die hinzugefügten Funktionen und den gesamten Änderungsverlauf informiert.</para>
+			<para>Die Aktualisierung mit dem Vollständigen Paket ist sehr einfach. Zunächst gehen Sie zur verlinkten phpBB.com-Downloadseite und laden das vollständige Paket der neuesten Version herunter. Sie entpacken den Inhalt auf Ihrem PC, entfernen config.php sowie die Verzeichnisse images/, files/ und store/ aus dem entpackten Paket und laden es in das Wurzelverzeichnis Ihres Boards hoch, wobei alte Dateien überschrieben und Verzeichnisse zusammengeführt werden. Das Board wird für normale Benutzer währenddessen offline sein. Gehen Sie anschließend einfach in das Verzeichnis <filename class='directory'>install/</filename>, wählen Sie den Reiter <guilabel>Update</guilabel> und fahren Sie mit der Aktualisierung Ihres Boards fort, indem Sie auf „Nur Datenbank aktualisieren" klicken.</para>
+			<para>Bitte lesen Sie die ausführlichere Anleitung zum <ulink url="https://www.phpbb.com/support/docs/en/3.3/ug/upgradeguide/update_full/">Vollständigen Update-Paket</ulink> (englisch).</para>
+		</section>
+		<section id="acp_system_spiders">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Suchroboter verwalten</title>
+			<para>phpBB 3 führte ein neues System zur Verwaltung von Such-Indizierern und Bot-Konten ein. Es erlaubt Ihnen, diese automatisierten Bots anhand ihrer IP oder eines Teils ihres User-Agents zu identifizieren, einer Einstellung, die normalerweise den Browser eines Benutzers kennzeichnet. Nachdem Sie einen Bot hinzugefügt haben und er erkannt wird, behandelt phpBB die Sitzung nicht mehr als anonym, sondern verwendet das erstellte Bot-Konto. Bots verwenden die von der vordefinierten Gruppe „Bots" festgelegten Berechtigungen. Das Erkennen von Bots ist wichtig, damit phpBB ihnen Inhalte liefern kann, die für Suchmaschinen besser geeignet sind – toten Links zu Seiten ohne Inhalt, wie etwa Beitrags- oder Meldungsseiten, wird dabei ausgewichen. Bots erhalten niemals eine Sitzungs-ID in der URL, die nicht in den Suchergebnissen erscheinen sollte. Sie können Bots außerdem einen bestimmten Style und eine bestimmte Sprache zuweisen.</para>
+			<para>Sie können leicht nachverfolgen, ob ein bestimmter Such-Indizierer Ihre Seite in letzter Zeit besucht hat, indem Sie die Spalte <guilabel>Letzter Besuch</guilabel> auf der Bot-Listenseite prüfen.</para>
+			<note>
+				<para>Bots verwenden keine Berechtigungen der Gruppe „Gäste", sondern die der Gruppe „Bots". Weitere Informationen zu vordefinierten Gruppen finden Sie unter <xref linkend="acp_groups_types"/>.</para>
+			</note>
+			<itemizedlist>
+				<title>Einen Bot hinzufügen</title>
+				<listitem><para><guilabel>Name des Bot</guilabel>: Dies ist der Titel des Bots, der im Forum verwendet wird. Sie sehen ihn in der Liste der Bots im <acronym>ACP</acronym> und in der Liste „Wer ist online".</para></listitem>
+				<listitem><para><guilabel>Style für den Bot</guilabel>: Sie können den Style auswählen, der dem Bot aus der Liste der auf dem Board installierten Styles bereitgestellt wird.</para></listitem>
+				<listitem><para><guilabel>Sprache für den Bot</guilabel>: Ebenso können Sie mit der Sprache verfahren. Der Bot verwendet die hier ausgewählte Sprache.</para></listitem>
+				<listitem><para><guilabel>Bot ist aktiv</guilabel>: Die Bot-Sitzung wird nur erstellt, wenn ein Bot aktiv ist; andernfalls werden die in diesem Formular für einen Bot festgelegten Daten nirgends verwendet.</para></listitem>
+				<listitem><para><guilabel>Agenten-Übereinstimmung</guilabel>: Sie können einen Bot entweder anhand seines User-Agents oder seiner IP erkennen. Sie können einen Teil des User-Agents angeben, nach dem gesucht werden soll. Der Such-Indizierer von Google hat beispielsweise „Googlebot" in seinem User-Agent, sodass Sie dies hier eingeben würden, um zu erkennen, wenn Google Ihr Board durchsucht.</para></listitem>
+				<listitem><para><guilabel>IP-Adresse des Bot</guilabel>: Auch dieses Feld wird zur Erkennung des Bots verwendet. Kann ein Bot nicht anhand des User-Agents erkannt werden, können Sie festlegen, welche <glossterm>IP-Adresse</glossterm> zu seiner Erkennung verwendet werden soll. Teilweise Übereinstimmungen sind erlaubt, das heißt, Sie können nur die ersten zwei oder drei Oktette der IP angeben, wenn sich der Rest dynamisch ändert. Sie können auch mehrere IPs, durch Kommas getrennt, eingeben.</para></listitem>
+			</itemizedlist>
+			<note>
+				<para>Wenn Sie sowohl einen User-Agent als auch eine <glossterm>IP-Adresse</glossterm> eingeben, müssen beide übereinstimmen, um den Bot zu erkennen.</para>
+			</note>
+		</section>
+		<section id="acp_system_mail">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Massen-E-Mail</title>
+			<para>phpBB erlaubt es Ihnen, eine E-Mail oder Nachricht an jeden Benutzer des Boards zu senden, der dies in seinen <link linkend="ucp_preferences">Board-Einstellungen</link> zulässt. Die Nachricht kann als Newsletter, Benachrichtigung über Änderungen am Board usw. dienen. Sie können wählen, ob die E-Mail an alle Benutzer, eine bestimmte Gruppe oder eine Liste bestimmter Benutzer gesendet wird. Die E-Mail wird von der E-Mail-Adresse des Administrators gesendet, und alle Empfänger werden als BCC – Blindkopie – eingetragen.</para>
+			<para>Bei manchen Anbietern kann das Versenden einer Massen-E-Mail ein Problem darstellen, da manche Hosting-Unternehmen die Anzahl der auf einmal versendbaren E-Mails begrenzen. Um dies zu verhindern, bezieht phpBB nur 50 Empfänger pro E-Mail ein und sendet für die nächste Gruppe eine weitere E-Mail. Sollten Sie dennoch keine Massen-E-Mail versenden können, klären Sie die Situation mit Ihrem Hosting-Anbieter.</para>
+			<itemizedlist>
+				<title>Eine Massen-E-Mail verfassen</title>
+				<listitem><para><guilabel>An Gruppe senden</guilabel>: Wählen Sie die Gruppe aus, an die Sie die E-Mail senden möchten. Die Gruppe „Registrierte Benutzer" enthält alle Benutzer des Boards.</para></listitem>
+				<listitem><para><guilabel>An Benutzer senden</guilabel>: Sie können auch eine Liste von Benutzern angeben. Die Eingabe von Benutzernamen in diesem Feld überschreibt die erste Einstellung. Jeder Benutzername sollte in einer neuen Zeile stehen.</para></listitem>
+				<listitem><para><guilabel>Betreff</guilabel>: Dies ist der Betreff der Nachricht, den Sie wie gewohnt beim Versenden einer E-Mail eingeben.</para></listitem>
+				<listitem><para><guilabel>Ihre Nachricht</guilabel>: Dieses Feld enthält die Nachricht; Sie können nur Klartext eingeben. <glossterm>BBCode</glossterm> oder HTML werden als HTML-Entitäten kodiert und dem Empfänger unformatiert genau so angezeigt, wie sie eingegeben wurden.</para></listitem>
+				<listitem><para><guilabel>Priorität der E-Mail</guilabel>: Dies ist die Priorität der E-Mail, die mit den E-Mail-Headern versendet wird.</para></listitem>
+				<listitem><para><guilabel>Gesperrte Benutzer einschließen</guilabel>: Standardmäßig erhalten gesperrte Benutzer keine Massen-E-Mails. Aktivieren Sie dieses Kästchen, wenn diese Benutzer den Versand ebenfalls erhalten sollen.</para></listitem>
+				<listitem><para><guilabel>Sofort senden</guilabel>: Sie können wählen, ob die E-Mail sofort versendet wird oder die Nachrichten an das Cache-System übergeben und schrittweise versendet werden.</para></listitem>
+			</itemizedlist>
+			<note>
+				<para>Das Versenden von E-Mails an alle Benutzer des Boards oder eine große Gruppe kann ein langwieriger Vorgang sein. Warten Sie, bis das Skript bestätigt, dass die E-Mails versendet wurden.</para>
+			</note>
+		</section>
+		<section id="acp_system_phpinfo">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Graham</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>PHP-Information</title>
+			<para>Diese Option liefert Ihnen Informationen über die auf Ihrem Server installierte PHP-Version, zusammen mit Informationen zu geladenen Modulen und der für den aktuellen Ort geltenden Konfiguration. Diese Informationen können für Mitglieder des phpBB-Teams nützlich sein, um Ihnen bei der Diagnose von Problemen mit Ihrer phpBB-Installation zu helfen. Die hier angezeigten Informationen können sicherheitsrelevant sein; es wird empfohlen, den Zugriff auf diese Option nur den Benutzern zu gewähren, die die Informationen benötigen, und diese nicht ohne Notwendigkeit weiterzugeben.</para>
+			<para>Bitte beachten Sie, dass manche Hosting-Anbieter die auf dieser Seite verfügbaren Informationen aus Sicherheitsgründen einschränken können.</para>
+		</section>
+		<section id="acp_system_reasons">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Melde- und Ablehnungs-Gründe verwalten</title>
+			<para>phpBB verfügt über eine Funktion, mit der neue Beiträge in eine Warteschlange gestellt werden können, in der der Beitrag wartet, bis er von einem Moderator freigegeben oder abgelehnt wird; dies kann über Berechtigungen oder in den <guilabel>Beitrags-Einstellungen</guilabel> für Benutzer festgelegt werden, die nicht genügend Beiträge haben. Entscheidet sich ein Moderator, einen Beitrag in der Warteschlange abzulehnen, kann er einen Grund für die Ablehnung angeben. Die vordefinierten Optionen, aus denen er wählen kann, werden hier festgelegt. Diese Gründe werden auch Benutzern angeboten, die einen Beitrag im Board melden.</para>
+			<para>Weitere Informationen zur Warteschlangen-Moderation finden Sie unter <xref linkend="mcp_queue"/>.</para>
+			<figure id="img_denial_reasons">
+				<title>Seite für Melde-/Ablehnungs-Gründe</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/denial_reasons.png"/>
+					</imageobject>
+					<caption>
+						<para>Dies ist die Seite, auf der Sie Gründe verwalten können, die beim Ablehnen oder Melden eines Beitrags angezeigt werden. Vier Standardgründe, die in einer normalen phpBB-Installation enthalten sind, werden angezeigt. Der fünfte wurde manuell hinzugefügt und ist nicht lokalisiert; dies kann erreicht werden, indem Sie im Feld <guilabel>Titel des Grundes</guilabel> eine Kennung angeben, die nur Buchstaben und Unterstriche enthält, und anschließend lokalisierte Titel und Gründe in der Sprachdatei <filename>mcp.php</filename> im Verzeichnis <filename>language/</filename> hinzufügen. Die vordefinierten Gründe befinden sich am Ende der Datei; Sie müssen Ihren Grund auf die gleiche Art hinzufügen, wie die anderen gespeichert sind. Wenn Sie einen Grund lokalisieren, wird er in der korrekten Übersetzung für jedes auf dem Board verwendete Sprachpaket angezeigt.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+		</section>
+		<section id="acp_system_modules">
+		 	<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>ameeck</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Modulverwaltung</title>
+			<para>Module werden verwendet, um die Struktur und den Inhalt von <acronym>UCP</acronym>, <acronym>MCP</acronym> und <acronym>ACP</acronym> zu bilden. Einzelne Module können optional deaktiviert werden, und es ist möglich, sie zu einer anderen Struktur umzuorganisieren. Module für den Benutzerbereich und das Moderator-Kontrollzentrum haben eine zweistufige Struktur aus Kategorie » Modul, während die Administrationsmodule drei Ebenen haben: Kategorie (Reiter oben) » Kategorie (Überschriften auf der linken Seite) » Modul (einzelne Bereiche).</para>
+			<para>Sehr häufig fügen Erweiterungen mit steuerbaren Funktionen dem ACP Module hinzu, um eine komfortable Bearbeitung verschiedener Einstellungen zu ermöglichen.</para>
+			<para>Um eine Modulkategorie zu erstellen, verwenden Sie das Textfeld neben der Schaltfläche <guilabel>Neues Modul erstellen</guilabel>. Geben Sie den Titel der Kategorie ein, klicken Sie auf die Schaltfläche und stellen Sie auf der nächsten Seite sicher, dass der <guilabel>Modul-Typ</guilabel> auf <guilabel>Kategorie</guilabel> gesetzt, das Modul <guilabel>aktiviert</guilabel> ist und das <guilabel>übergeordnete Modul</guilabel> korrekt festgelegt ist. Nachdem Sie eine Kategorie erstellt haben, können Sie über die Liste der Module zu ihr navigieren und ein bestimmtes, in einer Datei gespeichertes Modul hinzufügen. Module werden im entsprechenden Verzeichnis (acp/, mcp/ oder /ucp) im Verzeichnis <filename>includes/</filename> gespeichert.</para>
+			<warning><para>Durch das Deaktivieren des Moduls zur Modulverwaltung ist es möglich, sich selbst vom ACP und anderen Kontrollzentren auszuschließen. Seien Sie vorsichtig, wenn Sie Module bearbeiten.</para></warning>
+			<itemizedlist>
+				<title>Ein Modul hinzufügen</title>
+				<listitem><para><guilabel>Sprachvariable für Modulname</guilabel>: Dies sollte auf die Sprachkonstante gesetzt werden, die den Modulnamen in den verschiedenen auf dem Board verwendeten Sprachen enthält. Sie können hier auch einen normalen Titel angeben, wenn Sie den Modultitel nicht übersetzt haben.</para></listitem>
+				<listitem><para><guilabel>Modul-Typ</guilabel>: Sie können eine Kategorie oder ein Modul hinzufügen. Wie oben erwähnt, enthalten Kategorien eine weitere Ebene von Kategorien oder Modulen und werden verwendet, um die Kontrollzentren zu organisieren.</para></listitem>
+				<listitem><para><guilabel>Übergeordnet</guilabel>: Diese Einstellung legt fest, unter welcher Kategorie das Modul oder die Kategorie angezeigt wird.</para></listitem>
+				<listitem><para><guilabel>Modul aktiviert</guilabel>: Ist ein Modul deaktiviert, ist es überhaupt nicht zugänglich; Sie müssen es aktivieren, um es zu verwenden.</para></listitem>
+				<listitem><para><guilabel>Modul anzeigen</guilabel>: Ist das Modul aktiviert, aber nicht zur Anzeige freigegeben, können Sie es über eine direkte URL aufrufen, es erscheint jedoch nicht in den Menüs. Diese Einstellung wird nur angezeigt, wenn der <guilabel>Modul-Typ</guilabel> auf Modul gesetzt ist.</para></listitem>
+				<listitem><para><guilabel>Modul auswählen</guilabel>: Einzelne Moduldateien enthalten die verschiedenen Kontrollzentren. Ähnliche Module werden in einer Datei zusammengefasst und über die Angabe eines Modus aufgerufen. Hier wählen Sie die Datei aus, in der sich das gewünschte Modul befindet. Diese Einstellung wird nur angezeigt, wenn der <guilabel>Modul-Typ</guilabel> auf Modul gesetzt ist.</para></listitem>
+				<listitem><para><guilabel>Modulmodus auswählen</guilabel>: Hier legen Sie fest, welcher Modus in der oben ausgewählten Moduldatei verwendet werden soll. Der endgültige Inhalt des Moduls basiert auf dieser Einstellung. Diese Einstellung wird nur angezeigt, wenn der <guilabel>Modul-Typ</guilabel> auf Modul gesetzt ist.</para></listitem>
+			</itemizedlist>
+		</section>
+	</section>
 </chapter>
