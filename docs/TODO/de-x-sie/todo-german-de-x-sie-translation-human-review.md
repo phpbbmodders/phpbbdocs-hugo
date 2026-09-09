@@ -26,7 +26,7 @@ and password-complexity toggles; several ACP page titles and dropdown
 labels that didn't match the real navigation). Full details and the
 "why" behind what's left unmatched (grammatical case forms, hyphenation,
 and untranslated technical strings, mostly) are in
-[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md).
+[`todo-german-de-x-sie-terminology-audit.md`](todo-german-de-x-sie-terminology-audit.md).
 
 ## Content that's never had a native read
 

@@ -5,11 +5,11 @@ plans live under `docs/TODO/`; this file stays a concise summary.
 
 ## Detailed TODOs
 
-- [German translation review notes](TODO/todo-german-translation-human-review.md) —
+- [German (de-x-sie) translation review notes](TODO/de-x-sie/todo-german-de-x-sie-translation-human-review.md) —
   a plain-English list, for a native German speaker, of what's worth
   reading over now that the terminology cross-checking pass has covered
   real ground.
-- [Exhaustive German terminology audit](TODO/todo-german-terminology-audit.md) —
+- [German (de-x-sie) terminology audit](TODO/de-x-sie/todo-german-de-x-sie-terminology-audit.md) —
   every chapter and all of dev-docs-docbook have had a full,
   string-by-string pass against phpBB's real German language pack;
   a small residual set of genuinely unconfirmed strings (no matching

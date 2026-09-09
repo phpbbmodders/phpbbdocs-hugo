@@ -81,7 +81,7 @@ has a specific, checked reason it isn't a translation bug:
   it from the (equally wrong) English original.
 - **Genuinely unconfirmed** — a small residual set where no matching
   key could be found in the fetched reference files at all. These are
-  listed in `docs/TODO/todo-german-translation-human-review.md` rather
+  listed in `docs/TODO/de-x-sie/todo-german-de-x-sie-translation-human-review.md` rather
   than repeated here.
 
 ## How to do this

@@ -9,17 +9,25 @@ blocks. Compiled 08/30/2026.
 phpBB currently lists 55 language packs; all 55 are captured below.
 
 **Directory naming convention:** every per-language directory in this
-project (`content/<code>/`, `dev-docs-docbook/<code>/`, and any future
-per-language directory) is named after phpBB's own ISO Code for that
-pack, not the Hugo locale and not a generic English language name. This
-is what already makes `de_x_sie` (not `de` or `german`) the directory
-for German, matching phpBB's own code for the Formal Honorifics pack
-exactly. The point is to keep the register/variant unambiguous for both
-future maintenance and translators: a bare `de` would leave it unclear
-whether a directory holds the casual (`de`) or formal (`de-x-sie`)
-German pack, whereas `de_x_sie` names the exact variant. Apply the same
-rule to every future language added to this project — including
-honorific splits (Spanish `es` vs `es-x-tu`, Dutch `nl` vs
+project is named after phpBB's own ISO Code for that pack, not the Hugo
+locale and not a generic English language name. The point is to keep
+the register/variant unambiguous for both future maintenance and
+translators: a bare `de` would leave it unclear whether a directory
+holds the casual (`de`) or formal (`de-x-sie`) German pack, whereas
+naming it after the exact code removes the ambiguity.
+
+- **Hugo content directories** (`content/<code>/`, `dev-docs-docbook/<code>/`)
+  use the code with underscores in place of hyphens, since that's what
+  this project's existing directories already do — `de_x_sie`, not
+  `de-x-sie` or `german`, for German (Formal Honorifics).
+- **Plain repository documentation** (e.g. `docs/TODO/<code>/` for
+  per-language TODO notes) uses phpBB's code exactly as published,
+  hyphens included — `docs/TODO/de-x-sie/`, not `de_x_sie` — since
+  these aren't Hugo content and have no reason to substitute the
+  hyphen.
+
+Apply the same rule to every future language added to this project —
+including honorific splits (Spanish `es` vs `es-x-tu`, Dutch `nl` vs
 `nl-x-formal`, Croatian `hr` vs `hr-x-vi`) and other variant packs
 (Portuguese `pt` vs `pt-preao`, Serbian's Cyrillic/Latin split). The
 Hugo `locale` value (the "Suggested Hugo locale" column below) is a
