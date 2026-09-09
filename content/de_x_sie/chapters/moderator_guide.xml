@@ -96,7 +96,7 @@
 		<para>Unterhalb von Themen verfügt der Moderator über verschiedene Optionen in einem Auswahlfeld, mit denen sich das Thema auf unterschiedliche Weise ändern lässt. Dazu gehört die Möglichkeit, das Thema zu sperren, zu entsperren, zu löschen, zu verschieben, aufzuteilen, zusammenzuführen und zu kopieren. Ebenso können sie die Themenart ändern (Wichtig/Ankündigung/Global) und die Themenprotokolle einsehen. Die folgenden Unterabschnitte beschreiben jede Aktion an einem Thema, die ein Moderator durchführen kann.</para>
 
 		<figure id="quick_mod_tools">
-			<title>Schnelle MOD-Werkzeuge</title>
+			<title>Schnellmoderation</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata format="PNG" fileref="../images/moderator_guide/quick_mod_tools.png"/>
@@ -109,7 +109,7 @@
 
 		<section id="modtools_lock">
 			<title>Ein Thema oder einen Beitrag sperren</title>
-			<para>Dies beschreibt, wie ein Moderator ganze Themen oder einzelne Beiträge sperren kann. Ein Moderator kann dies auf verschiedene Weise tun: entweder über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> beim Betrachten eines Forums, über das Auswahlmenü unterhalb des betreffenden Themas, oder durch Bearbeiten eines beliebigen Beitrags innerhalb eines Themas und Aktivieren des entsprechenden Kästchens.</para>
+			<para>Dies beschreibt, wie ein Moderator ganze Themen oder einzelne Beiträge sperren kann. Ein Moderator kann dies auf verschiedene Weise tun: entweder über den <link linkend="moderator_mcp">Moderations-Bereich</link> beim Betrachten eines Forums, über das Auswahlmenü unterhalb des betreffenden Themas, oder durch Bearbeiten eines beliebigen Beitrags innerhalb eines Themas und Aktivieren des entsprechenden Kästchens.</para>
 			<para>Das Sperren eines gesamten Themas stellt sicher, dass kein Benutzer darauf antworten kann, während das Sperren einzelner Beiträge dem Verfasser des Beitrags jegliche Bearbeitungsrechte für diesen Beitrag entzieht.</para>
 		</section>
 
@@ -125,9 +125,9 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Ein Thema oder einen Beitrag löschen</title>
-			<para>Wenn dies in den Berechtigungen des <link linkend="admin_control_panel">Administrationskontrollzentrums</link> aktiviert ist, kann ein Benutzer seine eigenen Beiträge löschen, entweder beim Betrachten eines Themas oder beim Bearbeiten eines vorherigen Beitrags. Der Benutzer darf ein Thema oder einen Beitrag nur löschen, wenn noch nicht darauf geantwortet wurde.</para>
-			<para>Um die Beiträge anderer Benutzer zu löschen, benötigt man die entsprechende forenbasierte Moderatorenberechtigung – <guilabel>Kann Beiträge löschen</guilabel>. Die Verwendung des Auswahlmenüs unterhalb der Themen erlaubt ein schnelles Entfernen. Das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> erlaubt das Löschen mehrerer einzelner Beiträge gleichzeitig.</para>
-			<para>Beim Löschen eines Themas oder Beitrags werden Sie aufgefordert, einen Grund für die Löschung anzugeben. Diese Nachricht erscheint in den Moderatorprotokollen. Wenn Sie zusätzlich über die Moderatorenberechtigung <guilabel>Vorübergehend löschen</guilabel> verfügen, werden Sie gefragt, ob Sie das Thema/den Beitrag endgültig löschen möchten oder nicht. Wenn Sie sich dagegen entscheiden, wird es nur ausgeblendet, mit der Möglichkeit, es wiederherzustellen.</para>
+			<para>Wenn dies in den Berechtigungen des <link linkend="admin_control_panel">Administrations-Bereichs</link> aktiviert ist, kann ein Benutzer seine eigenen Beiträge löschen, entweder beim Betrachten eines Themas oder beim Bearbeiten eines vorherigen Beitrags. Der Benutzer darf ein Thema oder einen Beitrag nur löschen, wenn noch nicht darauf geantwortet wurde.</para>
+			<para>Um die Beiträge anderer Benutzer zu löschen, benötigt man die entsprechende forenbasierte Moderatorenberechtigung – <guilabel>Kann Beiträge dauerhaft löschen</guilabel>. Die Verwendung des Auswahlmenüs unterhalb der Themen erlaubt ein schnelles Entfernen. Der <link linkend="moderator_mcp">Moderations-Bereich</link> erlaubt das Löschen mehrerer einzelner Beiträge gleichzeitig.</para>
+			<para>Beim Löschen eines Themas oder Beitrags werden Sie aufgefordert, einen Grund für die Löschung anzugeben. Diese Nachricht erscheint in den Moderatorprotokollen. Wenn Sie zusätzlich über die Moderatorenberechtigung <guilabel>Kann Beiträge als gelöscht markieren</guilabel> verfügen, werden Sie gefragt, ob Sie das Thema/den Beitrag endgültig löschen möchten oder nicht. Wenn Sie sich dagegen entscheiden, wird es nur ausgeblendet, mit der Möglichkeit, es wiederherzustellen.</para>
 			<tip>
 				<para>Bitte beachten Sie, dass ein endgültig gelöschtes Thema oder ein endgültig gelöschter Beitrag nicht rückgängig gemacht werden kann.</para>
 			</tip>
@@ -151,7 +151,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Ein Thema in ein anderes Forum verschieben</title>
-			<para>Um ein Thema in ein anderes Forum zu verschieben, navigieren Sie zum Bereich <guilabel>Schnelle MOD-Werkzeuge</guilabel> unterhalb des Themas und wählen Sie <guilabel>Thema verschieben</guilabel> aus dem Auswahlmenü. Anschließend erscheint ein weiteres Auswahlmenü mit einem Zielort (einem anderen Forum), in das es verschoben werden soll. Wenn Sie ein <link linkend="modtools_move_shadow">Schattenthema</link> zurücklassen möchten, lassen Sie das Kästchen aktiviert. Wählen Sie das gewünschte Forum aus und klicken Sie auf <guilabel>Ja</guilabel>.</para>
+			<para>Um ein Thema in ein anderes Forum zu verschieben, navigieren Sie zum Bereich <guilabel>Schnellmoderation</guilabel> unterhalb des Themas und wählen Sie <guilabel>Thema verschieben</guilabel> aus dem Auswahlmenü. Anschließend erscheint ein weiteres Auswahlmenü mit einem Zielort (einem anderen Forum), in das es verschoben werden soll. Wenn Sie ein <link linkend="modtools_move_shadow">Schattenthema</link> zurücklassen möchten, lassen Sie das Kästchen aktiviert. Wählen Sie das gewünschte Forum aus und klicken Sie auf <guilabel>Ja</guilabel>.</para>
 
 			<section id="modtools_move_shadow">
 				<sectioninfo>
@@ -166,7 +166,7 @@
 				</sectioninfo>
 				<title>Schattenthemen</title>
 				<para>Schattenthemen können erstellt werden, wenn ein Thema von einem Forum in ein anderes verschoben wird. Ein Schattenthema ist einfach ein Link zu dem Thema in dem Forum, aus dem es verschoben wurde. Sie können wählen, ob Sie ein Schattenthema zurücklassen möchten, indem Sie das Kästchen im Dialog <guilabel>Thema verschieben</guilabel> aktivieren oder deaktivieren.</para>
-				<para>Um ein Schattenthema zu löschen, navigieren Sie zu dem Forum, das das Schattenthema enthält, und verwenden Sie das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link>, um das Thema auszuwählen und zu löschen.</para>
+				<para>Um ein Schattenthema zu löschen, navigieren Sie zu dem Forum, das das Schattenthema enthält, und verwenden Sie den <link linkend="moderator_mcp">Moderations-Bereich</link>, um das Thema auszuwählen und zu löschen.</para>
 				<note>
 					<para>Das Löschen eines Schattenthemas löscht <emphasis>nicht</emphasis> das ursprüngliche Thema, dessen Schatten es ist.</para>
 				</note>
@@ -185,7 +185,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Ein Thema duplizieren</title>
-			<para>Moderatoren dürfen außerdem Themen duplizieren. Das Duplizieren eines Themas erstellt einfach eine Kopie des ausgewählten Themas in einem anderen Forum. Dies kann über den Bereich <guilabel>Schnelle MOD-Werkzeuge</guilabel> unterhalb des zu duplizierenden Themas oder über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> beim Betrachten des Forums erreicht werden. Von dort aus wählen Sie einfach das Zielforum aus, in das das Thema dupliziert werden soll. Klicken Sie auf <guilabel>Ja</guilabel>, um das Thema zu duplizieren.</para>
+			<para>Moderatoren dürfen außerdem Themen duplizieren. Das Duplizieren eines Themas erstellt einfach eine Kopie des ausgewählten Themas in einem anderen Forum. Dies kann über den Bereich <guilabel>Schnellmoderation</guilabel> unterhalb des zu duplizierenden Themas oder über den <link linkend="moderator_mcp">Moderations-Bereich</link> beim Betrachten des Forums erreicht werden. Von dort aus wählen Sie einfach das Zielforum aus, in das das Thema dupliziert werden soll. Klicken Sie auf <guilabel>Ja</guilabel>, um das Thema zu duplizieren.</para>
 		</section>
 
 		<section id="modtools_type">
@@ -200,7 +200,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Ankündigungen und wichtige Themen</title>
-			<para>Es gibt verschiedene Themenarten, die Forenadministratoren und Moderatoren (sofern sie über die entsprechenden Berechtigungen verfügen) bestimmten Themen zuweisen können. Diese besonderen Themenarten sind: <guilabel>Globale Ankündigungen</guilabel>, <guilabel>Ankündigungen</guilabel> und <guilabel>Wichtige Themen</guilabel>. Die <link linkend="posting_special">Themenart</link> kann beim Verfassen eines neuen Themas oder beim Bearbeiten des ersten Beitrags eines bereits veröffentlichten Themas gewählt werden. Sie können auswählen, welche Themenart Sie bevorzugen, indem Sie das entsprechende Optionsfeld aktivieren. Beim Betrachten des Forums werden <guilabel>globale Ankündigungen</guilabel> und einfache <guilabel>Ankündigungen</guilabel> unter einer anderen Überschrift angezeigt als <guilabel>wichtige Themen</guilabel> und normale Themen.</para>
+			<para>Es gibt verschiedene Themenarten, die Forenadministratoren und Moderatoren (sofern sie über die entsprechenden Berechtigungen verfügen) bestimmten Themen zuweisen können. Diese besonderen Themenarten sind: <guilabel>Globale Bekanntmachungen</guilabel>, <guilabel>Bekanntmachungen</guilabel> und <guilabel>Wichtige Themen</guilabel>. Die <link linkend="posting_special">Themenart</link> kann beim Verfassen eines neuen Themas oder beim Bearbeiten des ersten Beitrags eines bereits veröffentlichten Themas gewählt werden. Sie können auswählen, welche Themenart Sie bevorzugen, indem Sie das entsprechende Optionsfeld aktivieren. Beim Betrachten des Forums werden <guilabel>globale Bekanntmachungen</guilabel> und einfache <guilabel>Bekanntmachungen</guilabel> unter einer anderen Überschrift angezeigt als <guilabel>wichtige Themen</guilabel> und normale Themen.</para>
 		</section>
 
 		<section id="modtools_split">
@@ -215,7 +215,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Beiträge von einem Thema abtrennen</title>
-			<para>Moderatoren haben außerdem die Möglichkeit, Beiträge von einem Thema abzutrennen. Dies kann nützlich sein, wenn bestimmte Diskussionen eine neue, einen eigenen Thread wert seiende Idee hervorgebracht haben und daher vom ursprünglichen Thema abgetrennt werden müssen. Das Abtrennen von Beiträgen bedeutet, einzelne Beiträge aus einem bestehenden Thema in ein neues Thema zu verschieben. Sie können dies über den Bereich <guilabel>Schnelle MOD-Werkzeuge</guilabel> unterhalb des abzutrennenden Themas oder über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> innerhalb des Themas tun.</para>
+			<para>Moderatoren haben außerdem die Möglichkeit, Beiträge von einem Thema abzutrennen. Dies kann nützlich sein, wenn bestimmte Diskussionen eine neue, einen eigenen Thread wert seiende Idee hervorgebracht haben und daher vom ursprünglichen Thema abgetrennt werden müssen. Das Abtrennen von Beiträgen bedeutet, einzelne Beiträge aus einem bestehenden Thema in ein neues Thema zu verschieben. Sie können dies über den Bereich <guilabel>Schnellmoderation</guilabel> unterhalb des abzutrennenden Themas oder über den <link linkend="moderator_mcp">Moderations-Bereich</link> innerhalb des Themas tun.</para>
 			<para>Beim Abtrennen können Sie einen Titel für das neue Thema, ein anderes Forum für das neue Thema und auch ein anderes Symbol auswählen. Sie können außerdem die Standardeinstellung des Forums für die Anzahl der pro Seite angezeigten Beiträge überschreiben. Die Option <guilabel>Thema ab dem gewählten Beitrag teilen</guilabel> trennt alle Beiträge vom markierten Beitrag bis zum letzten Beitrag ab. Die Option <guilabel>Ausgewählte Beiträge abtrennen</guilabel> trennt nur die aktuell ausgewählten Beiträge ab. </para>
 		</section>
 
@@ -232,7 +232,7 @@
 			</sectioninfo>
 			<title>Themen zusammenführen</title>
 			<para>In phpBB3 ist es nun möglich, Themen zusätzlich zum Abtrennen auch zusammenzuführen. Dies kann nützlich sein, wenn beispielsweise zwei separate Themen zusammenhängen und dieselbe Diskussion betreffen. Die Funktion zum Zusammenführen von Themen erlaubt es, bestehende Themen ineinander zusammenzuführen.</para>
-			<para>Um Themen zusammenzuführen, suchen Sie zunächst das Auswahlmenü unterhalb des betreffenden Themas, das Sie zum <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> führt. Von dort aus müssen Sie die Themen-ID des Themas eingeben, in das Sie die Beiträge verschieben möchten. Sie können auf <guilabel>Thema auswählen</guilabel> klicken, um eine Liste der verfügbaren Themen anzuzeigen und das gewünschte auszuwählen. Durch Aktivieren des Bereichs <guilabel>Alle markieren</guilabel> werden alle Beiträge im aktuellen Thema ausgewählt und können in das bestehende Thema verschoben werden. Die in das neue Thema zusammengeführten Beiträge behalten ihren bestehenden Zeitstempel (das heißt, sie erscheinen nicht am Ende des Themas, in das sie zusammengeführt werden, sondern werden nach ihrem Zeitstempel sortiert).</para>
+			<para>Um Themen zusammenzuführen, suchen Sie zunächst das Auswahlmenü unterhalb des betreffenden Themas, das Sie zum <link linkend="moderator_mcp">Moderations-Bereich</link> führt. Von dort aus müssen Sie die Themen-ID des Themas eingeben, in das Sie die Beiträge verschieben möchten. Sie können auf <guilabel>Thema auswählen</guilabel> klicken, um eine Liste der verfügbaren Themen anzuzeigen und das gewünschte auszuwählen. Durch Aktivieren des Bereichs <guilabel>Alle markieren</guilabel> werden alle Beiträge im aktuellen Thema ausgewählt und können in das bestehende Thema verschoben werden. Die in das neue Thema zusammengeführten Beiträge behalten ihren bestehenden Zeitstempel (das heißt, sie erscheinen nicht am Ende des Themas, in das sie zusammengeführt werden, sondern werden nach ihrem Zeitstempel sortiert).</para>
 		</section>
 
 		<section id="modtools_mergeposts">
@@ -248,7 +248,7 @@
 			</sectioninfo>
 			<title>Beiträge in ein anderes Thema zusammenführen</title>
 			<para>Anstatt nur Themen zusammenzuführen, können Sie auch bestimmte Beiträge in ein beliebiges anderes Thema zusammenführen.</para>
-			<para>Um bestimmte Beiträge in ein anderes Thema zusammenzuführen, suchen Sie zunächst das Auswahlmenü unterhalb des Themas und gelangen Sie zum <link linkend="moderator_mcp">Moderatorkontrollzentrum</link>. Von dort aus müssen Sie die Themen-ID des Themas eingeben, in das Sie die Beiträge verschieben möchten. Sie können auf <guilabel>Thema auswählen</guilabel> klicken, um eine Liste der verfügbaren Themen anzuzeigen und das gewünschte auszuwählen. Wählen Sie die Beiträge aus, die Sie aus dem aktuellen Thema in das bestehende Thema zusammenführen möchten. Die in das neue Thema zusammengeführten Beiträge behalten ihren bestehenden Zeitstempel (das heißt, sie erscheinen nicht am Ende des Themas, in das sie zusammengeführt werden, sondern werden nach ihrem Zeitstempel sortiert).</para>
+			<para>Um bestimmte Beiträge in ein anderes Thema zusammenzuführen, suchen Sie zunächst das Auswahlmenü unterhalb des Themas und gelangen Sie zum <link linkend="moderator_mcp">Moderations-Bereich</link>. Von dort aus müssen Sie die Themen-ID des Themas eingeben, in das Sie die Beiträge verschieben möchten. Sie können auf <guilabel>Thema auswählen</guilabel> klicken, um eine Liste der verfügbaren Themen anzuzeigen und das gewünschte auszuwählen. Wählen Sie die Beiträge aus, die Sie aus dem aktuellen Thema in das bestehende Thema zusammenführen möchten. Die in das neue Thema zusammengeführten Beiträge behalten ihren bestehenden Zeitstempel (das heißt, sie erscheinen nicht am Ende des Themas, in das sie zusammengeführt werden, sondern werden nach ihrem Zeitstempel sortiert).</para>
 		</section>
 	</section>
 
@@ -264,10 +264,10 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Was ist die &#x201E;Moderationswarteschlange&#x201C;?</title>
-		<para>Die <guilabel>Moderations-Warteschlange</guilabel> ist ein Bereich, in dem Themen und Beiträge aufgelistet werden, die freigegeben werden müssen. Wenn die Berechtigungen eines Forums oder Benutzers über das <link linkend="admin_control_panel">Administrationskontrollzentrum</link> auf <guilabel>Moderations-Warteschlange</guilabel> gesetzt sind, müssen alle in diesem Forum oder von diesem Benutzer erstellten Beiträge von einem Administrator oder Moderator freigegeben werden, bevor sie anderen Benutzern angezeigt werden. Themen und Beiträge, die eine Freigabe benötigen, können über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> eingesehen werden.</para>
-		<para>Beim Betrachten eines Forums werden noch nicht freigegebene Themen mit einem Symbol gekennzeichnet; ein Klick auf dieses Symbol führt Sie direkt zum Moderatorkontrollzentrum, wo Sie das Thema freigeben oder ablehnen können. Ebenso wird beim Betrachten des Themas selbst der freizugebende Beitrag von einer Nachricht begleitet, die ebenfalls auf den auf Freigabe wartenden Beitrag verweist.</para>
+		<para>Die <guilabel>Moderations-Warteschlange</guilabel> ist ein Bereich, in dem Themen und Beiträge aufgelistet werden, die freigegeben werden müssen. Wenn die Berechtigungen eines Forums oder Benutzers über den <link linkend="admin_control_panel">Administrations-Bereich</link> auf <guilabel>Moderations-Warteschlange</guilabel> gesetzt sind, müssen alle in diesem Forum oder von diesem Benutzer erstellten Beiträge von einem Administrator oder Moderator freigegeben werden, bevor sie anderen Benutzern angezeigt werden. Themen und Beiträge, die eine Freigabe benötigen, können über den <link linkend="moderator_mcp">Moderations-Bereich</link> eingesehen werden.</para>
+		<para>Beim Betrachten eines Forums werden noch nicht freigegebene Themen mit einem Symbol gekennzeichnet; ein Klick auf dieses Symbol führt Sie direkt zum Moderations-Bereich, wo Sie das Thema freigeben oder ablehnen können. Ebenso wird beim Betrachten des Themas selbst der freizugebende Beitrag von einer Nachricht begleitet, die ebenfalls auf den auf Freigabe wartenden Beitrag verweist.</para>
 		<para>Wenn Sie sich dafür entscheiden, ein Thema oder einen Beitrag freizugeben, erhalten Sie die Möglichkeit, den Benutzer über die Freigabe zu benachrichtigen. Wenn Sie sich dafür entscheiden, ein Thema oder einen Beitrag abzulehnen, erhalten Sie die Möglichkeit, den Benutzer über die Ablehnung zu benachrichtigen und zudem anzugeben, warum Sie den Beitrag abgelehnt haben, sowie eine Beschreibung einzugeben.</para>
-		<para>Weitere Informationen zum Moderatorkontrollzentrum finden Sie unter <xref linkend="moderator_mcp" />.</para>
+		<para>Weitere Informationen zum Moderations-Bereich finden Sie unter <xref linkend="moderator_mcp" />.</para>
 	</section>
 
 	<section id="moderator_reported">
@@ -282,9 +282,9 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Was sind &#x201E;gemeldete Beiträge&#x201C;?</title>
-		<para>Anders als phpBB2 erlaubt phpBB3 Benutzern nun, einen Beitrag zu melden, aus Gründen, die der Forenadministrator im <link linkend="admin_control_panel">Administrationskontrollzentrum</link> festlegen kann. Findet ein Benutzer einen Beitrag aus irgendeinem Grund unangemessen, kann er ihn über die Schaltfläche <guilabel>Beitrag melden</guilabel> neben der betreffenden Nachricht melden. Diese Meldung wird dann im Moderatorkontrollzentrum angezeigt, wo der Administrator oder die Moderatoren die Meldung einsehen, schließen oder löschen können.</para>
-		<para>Beim Betrachten eines Forums mit gemeldeten Beiträgen innerhalb von Themen wird der Themen­titel von einem roten Ausrufezeichen-Symbol begleitet. Dies weist den/die Administrator(en) oder Moderatoren darauf hin, dass ein Beitrag gemeldet wurde. Beim Betrachten von Themen werden gemeldete Beiträge von einem roten Ausrufezeichen und Text begleitet. Ein Klick auf dieses Symbol oder den Text bringt sie zum Bereich Gemeldete Beiträge des Moderatorkontrollzentrums.</para>
-		<para>Weitere Informationen zum Moderatorkontrollzentrum finden Sie unter <xref linkend="moderator_mcp" />.</para>
+		<para>Anders als phpBB2 erlaubt phpBB3 Benutzern nun, einen Beitrag zu melden, aus Gründen, die der Forenadministrator im <link linkend="admin_control_panel">Administrations-Bereich</link> festlegen kann. Findet ein Benutzer einen Beitrag aus irgendeinem Grund unangemessen, kann er ihn über die Schaltfläche <guilabel>Diesen Beitrag melden</guilabel> neben der betreffenden Nachricht melden. Diese Meldung wird dann im Moderations-Bereich angezeigt, wo der Administrator oder die Moderatoren die Meldung einsehen, schließen oder löschen können.</para>
+		<para>Beim Betrachten eines Forums mit gemeldeten Beiträgen innerhalb von Themen wird der Themen­titel von einem roten Ausrufezeichen-Symbol begleitet. Dies weist den/die Administrator(en) oder Moderatoren darauf hin, dass ein Beitrag gemeldet wurde. Beim Betrachten von Themen werden gemeldete Beiträge von einem roten Ausrufezeichen und Text begleitet. Ein Klick auf dieses Symbol oder den Text bringt sie zum Bereich Gemeldete Beiträge des Moderations-Bereichs.</para>
+		<para>Weitere Informationen zum Moderations-Bereich finden Sie unter <xref linkend="moderator_mcp" />.</para>
 	</section>
 
 	<section id="moderator_mcp">
@@ -298,8 +298,8 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Das Moderatorkontrollzentrum (MCP)</title>
-		<para>Eine weitere neue Funktion in phpBB3 ist das <guilabel>Moderatorkontrollzentrum</guilabel>, in dem sich jeder Moderator zurechtfinden wird. Ähnlich wie das Administrationskontrollzentrum zeigt dieser Bereich alle aktuellen Moderatorenaufgaben an, die erledigt werden müssen. Nach dem Navigieren zum MCP wird der Moderator mit allen auf Freigabe wartenden Beiträgen, allen Beitragsmeldungen und den fünf zuletzt protokollierten Aktionen begrüßt – durchgeführt von Administratoren, Moderatoren und Benutzern.</para>
+		<title>Der Moderations-Bereich (MCP)</title>
+		<para>Eine weitere neue Funktion in phpBB3 ist der <guilabel>Moderations-Bereich</guilabel>, in dem sich jeder Moderator zurechtfinden wird. Ähnlich wie der Administrations-Bereich zeigt dieser Bereich alle aktuellen Moderatorenaufgaben an, die erledigt werden müssen. Nach dem Navigieren zum MCP wird der Moderator mit allen auf Freigabe wartenden Beiträgen, allen Beitragsmeldungen und den fünf zuletzt protokollierten Aktionen begrüßt – durchgeführt von Administratoren, Moderatoren und Benutzern.</para>
 		<para>Auf der linken Seite befindet sich ein Menü mit allen relevanten Bereichen innerhalb des MCP. Dieser Leitfaden beschreibt jeden einzelnen Abschnitt und welche Art von Informationen er jeweils enthält:
 			<variablelist>
 				<varlistentry>
@@ -365,7 +365,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Moderationswarteschlange</title>
-			<para>Die Moderationswarteschlange listet Themen oder Beiträge auf, die eine Moderatorenaktion erfordern. Die Moderationswarteschlange ist über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> zugänglich. Weitere Informationen zur Moderationswarteschlange finden Sie unter <xref linkend="moderator_queue" />.</para>
+			<para>Die Moderationswarteschlange listet Themen oder Beiträge auf, die eine Moderatorenaktion erfordern. Die Moderationswarteschlange ist über den <link linkend="moderator_mcp">Moderations-Bereich</link> zugänglich. Weitere Informationen zur Moderationswarteschlange finden Sie unter <xref linkend="moderator_queue" />.</para>
 		</section>
 
 		<section id="mcp_reported">
@@ -380,12 +380,12 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Gemeldete Beiträge</title>
-			<para>Gemeldete Beiträge sind von Benutzern eingereichte Meldungen zu problematischen Beiträgen. Alle aktuellen gemeldeten Beiträge sind über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> zugänglich. Weitere Informationen zu gemeldeten Beiträgen finden Sie unter <xref linkend="moderator_reported" />.</para>
+			<para>Gemeldete Beiträge sind von Benutzern eingereichte Meldungen zu problematischen Beiträgen. Alle aktuellen gemeldeten Beiträge sind über den <link linkend="moderator_mcp">Moderations-Bereich</link> zugänglich. Weitere Informationen zu gemeldeten Beiträgen finden Sie unter <xref linkend="moderator_reported" />.</para>
 		</section>
 
 		<section id="mcp_forum">
 			<title>Forenmoderation</title>
-			<para>Beim Betrachten eines bestimmten Forums bringt Sie ein Klick auf <guilabel>Moderatorkontrollzentrum</guilabel> zum Bereich der Forenmoderation. Hier können Sie über das Auswahlfeld Themen innerhalb dieses Forums massenmoderieren. Die verfügbaren Aktionen sind:
+			<para>Beim Betrachten eines bestimmten Forums bringt Sie ein Klick auf <guilabel>Moderations-Bereich</guilabel> zum Bereich der Forenmoderation. Hier können Sie über das Auswahlfeld Themen innerhalb dieses Forums massenmoderieren. Die verfügbaren Aktionen sind:
 				<itemizedlist>
 					<listitem><para><guilabel>Löschen</guilabel>: Löscht das/die ausgewählte(n) Thema/Themen.</para></listitem>
 					<listitem><para><guilabel>Wiederherstellen</guilabel>: Stellt das/die ausgewählte(n) vorübergehend gelöschte(n) Thema/Themen wieder her.</para></listitem>
@@ -393,15 +393,15 @@
 					<listitem><para><guilabel>Kopieren</guilabel>: Erstellt ein Duplikat des/der ausgewählten Themas/Themen in einem anderen Forum Ihrer Wahl.</para></listitem>
 					<listitem><para><guilabel>Sperren</guilabel>: Sperrt das/die ausgewählte(n) Thema/Themen.</para></listitem>
 					<listitem><para><guilabel>Entsperren</guilabel>: Entsperrt das/die ausgewählte(n) Thema/Themen.</para></listitem>
-					<listitem><para><guilabel>Resynchronisieren</guilabel>: Gleicht das/die ausgewählte(n) Thema/Themen neu ab.</para></listitem>
-					<listitem><para><guilabel>Themenart ändern</guilabel>: Ändert die Themenart entweder zu <guilabel>Globale Ankündigung</guilabel>, <guilabel>Ankündigung</guilabel>, <guilabel>Wichtig</guilabel> oder <guilabel>Normales Thema</guilabel>.</para></listitem>
+					<listitem><para><guilabel>Resynchronisierung</guilabel>: Gleicht das/die ausgewählte(n) Thema/Themen neu ab.</para></listitem>
+					<listitem><para><guilabel>Themenart ändern</guilabel>: Ändert die Themenart entweder zu <guilabel>Globale Bekanntmachung</guilabel>, <guilabel>Bekanntmachung</guilabel>, <guilabel>Wichtig</guilabel> oder <guilabel>Normal</guilabel>.</para></listitem>
 				</itemizedlist>
 			</para>
 
 			<para>Sie können auch Beiträge innerhalb von Themen massenmoderieren. Dies kann erreicht werden, indem Sie beim Betrachten des Forums durch das MCP navigieren und auf das Thema selbst klicken. Eine andere Möglichkeit besteht darin, beim Betrachten des jeweiligen zu moderierenden Themas auf den MCP-Link zu klicken.</para>
 			<para>Beim Moderieren innerhalb eines Themas können Sie: den Themen­titel umbenennen, das Thema in ein anderes Forum verschieben, das Themensymbol ändern, das Thema mit einem anderen Thema zusammenführen oder festlegen, wie viele Beiträge pro Seite angezeigt werden (dies überschreibt die Foreneinstellung).</para>
 			<para>Über das Auswahlmenü können Sie außerdem: einzelne Beiträge sperren und entsperren, die ausgewählten Beiträge löschen, die ausgewählten Beiträge zusammenführen oder die ausgewählten Beiträge abtrennen bzw. ab dem ausgewählten Beitrag abtrennen.</para>
-			<para>Der Link <guilabel>Beitragsdetails</guilabel> neben Beiträgen berechtigt Sie außerdem, weitere Einstellungen zu ändern. Neben der Ansicht der <glossterm>IP-Adresse</glossterm>, des Profils und der Notizen des Verfassers sowie der Möglichkeit, den Verfasser zu verwarnen, haben Sie auch die Möglichkeit, die dem Beitrag zugewiesene Verfasser-ID zu ändern. Sie können den Beitrag von dieser Seite aus auch sperren oder löschen.</para>
+			<para>Der Link <guilabel>Beitrags-Details</guilabel> neben Beiträgen berechtigt Sie außerdem, weitere Einstellungen zu ändern. Neben der Ansicht der <glossterm>IP-Adresse</glossterm>, des Profils und der Notizen des Verfassers sowie der Möglichkeit, den Verfasser zu verwarnen, haben Sie auch die Möglichkeit, die dem Beitrag zugewiesene Verfasser-ID zu ändern. Sie können den Beitrag von dieser Seite aus auch sperren oder löschen.</para>
 
 			<note>
 				<para>Je nach den für Ihr Benutzerkonto festgelegten spezifischen Berechtigungen stehen Ihnen möglicherweise nicht alle der genannten Optionen und Fähigkeiten zur Verfügung.</para>
