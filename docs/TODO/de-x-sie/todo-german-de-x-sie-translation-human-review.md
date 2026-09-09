@@ -59,7 +59,12 @@ oddly phrased, or like it was translated rather than written.
 
 For these, no matching key could be found at all in the fetched
 language-pack files, so there's nothing to check the wording against.
-That doesn't mean anything is known to be wrong, just unverified:
+That doesn't mean anything is known to be wrong, just unverified. Full
+detail — English source, exact location, and why each one couldn't be
+confirmed — is in
+[`todo-german-de-x-sie-supplementary-glossary.md`](todo-german-de-x-sie-supplementary-glossary.md),
+which is meant to make it easy to turn these into entries in a
+project-specific supplementary glossary:
 
 - "Name der E-Mail-Funktion" (mail function name) — the ACP setting
   this describes may no longer exist under that name in current phpBB.
