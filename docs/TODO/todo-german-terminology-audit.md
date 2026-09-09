@@ -34,26 +34,62 @@ int ranges, broken smart-quotes in a code sample in
 English source, so they're upstream content bugs rather than
 translation errors; they're left as-is and out of this audit's scope.
 
-Only `admin_guide.xml` still has open ground. It started with 219
-unmatched `<guilabel>`/`<guimenuitem>`/`<title>` strings; about 70 have
-since been tracked down to real key matches and fixed — wrong ACP page
-titles, dropdown labels, table column headers, and settings
-descriptions that didn't match the real board's wording. About 149
-remain unmatched, and nearly all of them fall into one of two buckets
-rather than being live bugs: grammatical case forms that will never
-literally match a dictionary-form language-pack value (e.g. "Namens des
-Boards", correct genitive case), and strings the English source itself
-paraphrases rather than quotes literally, which the German mirrors
-faithfully. A small number are genuinely unconfirmed rather than
-either — no matching key could be found at all — and those are listed
-in `docs/TODO/todo-german-translation-human-review.md`.
+`admin_guide.xml` started this audit with 219 unmatched
+`<guilabel>`/`<guimenuitem>`/`<title>` strings. Every single one of
+them has since been individually traced to its English source line,
+matched against a real phpBB language key where one exists, and
+resolved — around 75 turned out to be genuine mismatches and were
+fixed (wrong ACP page titles, dropdown labels, table column headers,
+password-complexity and settings descriptions that didn't match the
+real board's wording). The remaining 144 are not open questions; each
+has a specific, checked reason it isn't a translation bug:
+
+- **Confirmed correct, flagged only by a crude string comparison** —
+  the real value matches exactly once you account for inline
+  `<code>`/`<em>` markup in the source PHP file, curly quotes, or two
+  separate real strings concatenated with a slash (e.g.
+  "Aktivieren/Deaktivieren" = the real `ACTIVATE` + `DEACTIVATE`
+  values joined).
+- **Grammatical case forms** of an already-correct term (dative/
+  genitive), which will never literally match the pack's dictionary
+  form — e.g. "Namens des Boards" is the correct genitive of "Name des
+  Boards".
+- **Colon or hyphenation differences only** — the real language pack
+  never stores the trailing colon a form label gets in the template,
+  and a few compound nouns are hyphenated differently without changing
+  meaning.
+- **Untranslated technical strings by design** — product names (AOL/
+  MSN Messenger, the Fulltext search engine names), file paths
+  (`images/avatars/upload`), template placeholder tokens (`NUMBER`,
+  `TEXT`, `INCLUDEPHP`), and bare acronyms (`PHP`, `URL`).
+- **Descriptive section/chapter titles**, mirroring the English
+  source's own non-literal heading style (e.g. "Adding a bot",
+  "Database backup and restore") rather than quoting a real UI string
+  — this covers the great majority of `<title>`-tagged entries.
+- **Pre-existing content issues shared identically by the English
+  source** — e.g. the "Maximum thumbnail filesize" setting's
+  description matches a `MIN_THUMB_FILESIZE`-shaped behavior in both
+  languages, and "Recompile stale templates" may describe an
+  older/renamed feature; these are flagged for awareness, not silently
+  patched in German only, since fixing only the translation would fork
+  it from the (equally wrong) English original.
+- **Genuinely unconfirmed** — a small residual set where no matching
+  key could be found in the fetched reference files at all. These are
+  listed in `docs/TODO/todo-german-translation-human-review.md` rather
+  than repeated here.
 
 ## How to do this
 
-For each `<guilabel>`/`<guimenuitem>` string, identify the real phpBB
-language key it corresponds to (grep the relevant `language/de_x_sie/`
-or `language/de_x_sie/acp/` file from
+For each `<guilabel>`/`<guimenuitem>`/`<title>` string, identify the
+real phpBB language key it corresponds to (grep the relevant
+`language/de_x_sie/` or `language/de_x_sie/acp/` file from
 [phpbb-de/phpbb-translation](https://github.com/phpbb-de/phpbb-translation)
 by its English string first, via `language/en/`, to find the key, then
-check the German value) and fix the document if it differs. Verify
-with a real `./phpbbdocs_hugo.sh de_x_sie` build afterward.
+check the German value) and fix the document if it differs. Watch for
+false positives from crude string matching: inline `<code>`/`<em>`
+markup inside the PHP source, curly vs straight quotes, and labels
+built by concatenating two separate keys all cause a real match to
+look unmatched. When the English source itself is a non-literal
+paraphrase of a heading or description (not a literal UI quote), the
+German mirroring that same paraphrase is not a bug. Verify with a real
+`./phpbbdocs_hugo.sh de_x_sie` build afterward.

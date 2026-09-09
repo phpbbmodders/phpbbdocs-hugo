@@ -7,29 +7,26 @@ broken. It's just where a second pair of eyes would help most.
 ## Current status
 
 `content/de_x_sie/` (the German docs, formal "Sie" register) has had a
-line-by-line terminology cross-check against phpBB's real German
-language pack (the same one used on live German phpBB boards) for
-every chapter except `admin_guide.xml`: `user_guide.xml`,
+full, exhaustive line-by-line terminology cross-check against phpBB's
+real German language pack (the same one used on live German phpBB
+boards), covering every chapter — `admin_guide.xml`, `user_guide.xml`,
 `moderator_guide.xml`, `quick_start_guide.xml`, `upgrade_guide.xml`,
-`server_guide.xml`, and `glossary.xml` are all fully checked and clean.
-The 50 files under `dev-docs-docbook/de_x_sie/` have likewise had a
-full read-through for translation fidelity and technical accuracy.
+`server_guide.xml`, `glossary.xml` — and all 50 files under
+`dev-docs-docbook/de_x_sie/`. Every `<guilabel>`/`<guimenuitem>`/
+`<title>` string in every one of these files has been individually
+traced to its English source line and checked against the real
+language pack, not sampled.
 
-`admin_guide.xml` is the one file that isn't fully exhaustive yet. It
-had a large chunk of missing content (roughly the second half of the
-admin guide) filled in from scratch, and every button label, field
-name, and menu item that could be matched against the real language
-pack has been cross-checked and corrected where wrong — around 70
-real mismatches found and fixed so far, from small things ("Smilies"
-became "Smileys", since the real board never uses "Smilies" as a
-German word) to larger ones (an entire section calling something
-"Themensymbole"/topic icons now correctly says "Beitrags-Symbole"/post
-icons; the dotted-topics and password-complexity toggles; several ACP
-page titles that didn't match the real navigation label). What's left
-is tracked in detail in
-[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md)
-(about 149 unmatched strings, mostly grammatical case forms and
-English-source paraphrases rather than real errors).
+Around 75 real mismatches were found and fixed in `admin_guide.xml`
+alone, from small things ("Smilies" became "Smileys", since the real
+board never uses "Smilies" as a German word) to larger ones (an entire
+section calling something "Themensymbole"/topic icons now correctly
+says "Beitrags-Symbole"/post icons; the dotted-topics, read-marking,
+and password-complexity toggles; several ACP page titles and dropdown
+labels that didn't match the real navigation). Full details and the
+"why" behind what's left unmatched (grammatical case forms, hyphenation,
+and untranslated technical strings, mostly) are in
+[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md).
 
 ## Content that's never had a native read
 
@@ -58,32 +55,47 @@ oddly phrased, or like it was translated rather than written.
   board uses; just the little bit of embedded formatting got dropped.
   Take a look and confirm they still read naturally without it.
 
-## Areas in admin_guide.xml not yet checked against the real board
+## Genuinely unconfirmed items in admin_guide.xml
 
-A few settings groups weren't cross-referenced, mostly because the
-matching official string couldn't be found in the files on hand. That
-doesn't mean anything is known to be wrong, just unconfirmed either
-way:
+For these, no matching key could be found at all in the fetched
+language-pack files, so there's nothing to check the wording against.
+That doesn't mean anything is known to be wrong, just unverified:
 
-- The "Name der E-Mail-Funktion" field (mail function name) — no
-  corresponding key found in the current language pack; the ACP
-  setting this describes may no longer exist under that name.
+- "Name der E-Mail-Funktion" (mail function name) — the ACP setting
+  this describes may no longer exist under that name in current phpBB.
+- "Abmessungen für Bildlinks" (image link dimensions), "Neues Passwort
+  bestätigen" (confirm new password, in the admin's edit-user form),
+  "Rückantwort-E-Mail-Adresse" (return email address), "übergeordnetes
+  Modul" (module parent), "Berechtigungen kopieren" (copy permissions),
+  "Benutzernamen entsperren oder Ausnahmen entfernen" (un-ban or
+  un-exclude usernames), and "IP von erlaubten/nicht erlaubten
+  IPs/Hostnamen ausschließen" (the exclude-IP checkbox) — all
+  plausible, existing German, just not independently verified.
+- The two system-requirement checks for non-Latin UTF-8 character
+  support (`mbstring`/`PCRE`) — no matching key found either.
+
+## Pre-existing issues shared with the English source
+
+These aren't translation problems — the German is a faithful mirror of
+an English original that has the same issue — but they're worth
+knowing about, possibly for an upstream report:
+
+- The "Maximum thumbnail filesize" setting's description talks about a
+  maximum that gets exceeded, but the real phpBB key for that setting
+  is a *minimum* filesize threshold (`MIN_THUMB_FILESIZE`). Both
+  language versions describe the old/wrong behavior identically.
+- "Recompile stale templates" may describe a feature that's since been
+  renamed — the closest real key found is about recompiling "stale
+  style components," not templates.
 - The base `[flash]`/`[img]` BBCode-tag toggles outside of private
-  messages aren't documented at all yet (only the private-message
-  versions are covered, and those are confirmed correct) — this is a
-  content gap, not a wording error.
-
-Everything else previously listed here — the dotted-topics wording,
-the permission-delegation role label, the module-management fields,
-and the online-user-list toggle — has since been checked against the
-real language pack and corrected where it was wrong.
-
-If you'd rather the remaining official-string cross-checking in
-`admin_guide.xml` gets finished first instead of (or before) a human
-pass, that's tracked separately in
-[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md).
-This document is specifically about the parts that benefit from a
-native speaker's judgment, not another round of string-matching.
+  messages aren't documented at all (only the private-message versions
+  are covered, and those are confirmed correct) — a content gap in
+  both languages, not a wording error.
+- Four issues already noted from the dev-docs pass: a version-number
+  inconsistency in `tutorial_basics.dbk`, corrupted smart-quotes in a
+  code sample in `tutorial_key_concepts.dbk`, an off-by-one in
+  `database_types_list.dbk`'s int ranges, and a typo plus imprecise
+  example in `tutorial_templates.dbk`.
 
 Thanks for taking a look. This kind of review is what makes a
 machine-assisted translation trustworthy.
