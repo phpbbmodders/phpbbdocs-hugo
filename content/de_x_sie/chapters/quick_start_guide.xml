@@ -235,7 +235,7 @@
 		<!--/board_settings-->
 		<section id="quick_settings_boardfeatures">
 			<title>Forum-Funktionen</title>
-			<para>Wenn Sie einige der grundlegenden Funktionen Ihres Forums aktivieren oder deaktivieren möchten, sind Sie hier richtig. Hier können Sie zum Beispiel Benutzernamenänderungen (<guilabel>Benutzernamenänderung erlauben</guilabel>) oder das Erstellen von Anhängen (<guilabel>Anhänge erlauben</guilabel>) erlauben oder verbieten. Sie können <acronym>BBCode</acronym> sogar vollständig deaktivieren (<guilabel>BBCode erlauben</guilabel>).</para>
+			<para>Wenn Sie einige der grundlegenden Funktionen Ihres Forums aktivieren oder deaktivieren möchten, sind Sie hier richtig. Hier können Sie zum Beispiel Benutzernamenänderungen (<guilabel>Namenswechsel erlauben</guilabel>) oder das Erstellen von Anhängen (<guilabel>Anhänge erlauben</guilabel>) erlauben oder verbieten. Sie können <acronym>BBCode</acronym> sogar vollständig deaktivieren (<guilabel>BBCode erlauben</guilabel>).</para>
 			<figure id="img_quick_settings_features">
 				<title>Forum-Funktionen</title>
 				<mediaobject>

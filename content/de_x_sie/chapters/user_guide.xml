@@ -201,13 +201,13 @@
 				<para>
 					<itemizedlist>
 						<listitem><para><guilabel>Benutzer können mich per E-Mail kontaktieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über die Schaltfläche „E-Mail“ in Ihrem Profil eine E-Mail senden.</para></listitem>
-						<listitem><para><guilabel>Administratoren dürfen mir Informationen per E-Mail zusenden</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, erhalten Sie vom Forenadministrator versendete Massen-E-Mails.</para></listitem>
-						<listitem><para><guilabel>Benutzern erlauben, mir private Nachrichten zu senden</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über das Forum private Nachrichten senden.</para></listitem>
-						<listitem><para><guilabel>Meinen Online-Status verbergen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihr Online-Status vor anderen Benutzern verborgen. Beachten Sie, dass Administratoren und Moderatoren Ihren Online-Status weiterhin sehen können.</para></listitem>
+						<listitem><para><guilabel>Administratoren dürfen mir Informationen per E-Mail schicken</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, erhalten Sie vom Forenadministrator versendete Massen-E-Mails.</para></listitem>
+						<listitem><para><guilabel>Andere Mitglieder dürfen mir Private Nachrichten schicken</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, können Benutzer Ihnen über das Forum private Nachrichten senden.</para></listitem>
+						<listitem><para><guilabel>Verberge meinen Online-Status</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihr Online-Status vor anderen Benutzern verborgen. Beachten Sie, dass Administratoren und Moderatoren Ihren Online-Status weiterhin sehen können.</para></listitem>
 						<listitem><para><guilabel>Mein Forenstil</guilabel>: Erlaubt Ihnen festzulegen, welchen Stil das Forum verwendet. Diese Einstellung ist möglicherweise nicht verfügbar, wenn der Forenadministrator festgelegt hat, die Stile der Benutzer zu überschreiben.</para></listitem>
 						<listitem><para><guilabel>Meine Sprache</guilabel>: Erlaubt Ihnen festzulegen, welches Sprachpaket das Forum verwendet. Beachten Sie, dass diese Einstellung sich nur auf die Sprachtexte des Forums bezieht; Beiträge werden in der Sprache dargestellt, in der sie verfasst wurden.</para></listitem>
 						<listitem><para><guilabel>Meine Zeitzone</guilabel>: Erlaubt Ihnen festzulegen, in welcher Zeitzone die Forenzeiten angezeigt werden sollen.</para></listitem>
-						<listitem><para><guilabel>Mein Datumsformat</guilabel>: Steuert, in welchem Format Zeiten dargestellt werden. Sie können eine der Optionen im Auswahlfeld wählen – fortgeschrittene Benutzer können „<guilabel>Benutzerdefiniert</guilabel>“ wählen und ein eigenes Format eingeben (im Format der <ulink url="http://www.php.net/date">date-Funktion von php.net</ulink>).</para></listitem>
+						<listitem><para><guilabel>Mein Datums-Format</guilabel>: Steuert, in welchem Format Zeiten dargestellt werden. Sie können eine der Optionen im Auswahlfeld wählen – fortgeschrittene Benutzer können „<guilabel>Benutzerdefiniert</guilabel>“ wählen und ein eigenes Format eingeben (im Format der <ulink url="http://www.php.net/date">date-Funktion von php.net</ulink>).</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -242,14 +242,14 @@
 					<itemizedlist>
 						<listitem><para><guilabel>Themen der letzten Tage anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Themen, die angezeigt werden sollen. Standardmäßig werden alle Themen angezeigt.</para></listitem>
 						<listitem><para><guilabel>Themen sortieren nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Themen angezeigt werden. Themen können nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
-						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Themen können entweder <guilabel>aufsteigend</guilabel> oder <guilabel>absteigend</guilabel> angezeigt werden.</para></listitem>
+						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Themen können entweder <guilabel>Aufsteigend</guilabel> oder <guilabel>Absteigend</guilabel> angezeigt werden.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Die folgenden Einstellungen steuern, wie Beiträge in der Themenansicht angezeigt werden.
 					<itemizedlist>
 						<listitem><para><guilabel>Beiträge der letzten Tage anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Beiträge, die angezeigt werden sollen. Standardmäßig werden alle Beiträge angezeigt.</para></listitem>
 						<listitem><para><guilabel>Beiträge sortieren nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Beiträge angezeigt werden. Beiträge können nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
-						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Beiträge können entweder <guilabel>aufsteigend</guilabel> oder <guilabel>absteigend</guilabel> angezeigt werden.</para></listitem>
+						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Beiträge können entweder <guilabel>Aufsteigend</guilabel> oder <guilabel>Absteigend</guilabel> angezeigt werden.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -259,24 +259,24 @@
 				<para>
 					Die folgenden Einstellungen steuern Ereignisse rund um das Verfassen von Beiträgen.
 					<itemizedlist>
-						<listitem><para><guilabel>Jemand antwortet auf ein von Ihnen mit einem Lesezeichen versehenes Thema</guilabel>: Ein Benutzer hat auf ein Thema geantwortet, das Sie mit einem Lesezeichen versehen haben.</para></listitem>
-						<listitem><para><guilabel>Jemand antwortet auf ein von Ihnen abonniertes Thema</guilabel>: Ein Benutzer hat auf ein Thema geantwortet, das Sie abonniert haben.</para></listitem>
+						<listitem><para><guilabel>Jemand antwortet auf ein Thema, für das Sie ein Lesezeichen gesetzt haben</guilabel>: Ein Benutzer hat auf ein Thema geantwortet, das Sie mit einem Lesezeichen versehen haben.</para></listitem>
+						<listitem><para><guilabel>Jemand antwortet auf ein Thema, das Sie abonniert haben</guilabel>: Ein Benutzer hat auf ein Thema geantwortet, das Sie abonniert haben.</para></listitem>
 						<listitem><para><guilabel>Jemand zitiert Sie in einem Beitrag</guilabel>: Ein von Ihnen verfasster Beitrag wurde von einem anderen Benutzer zitiert.</para></listitem>
-						<listitem><para><guilabel>Jemand erstellt ein Thema in einem von Ihnen abonnierten Forum</guilabel>: Ein Benutzer hat ein neues Thema in einem von Ihnen abonnierten Forum erstellt.</para></listitem>
+						<listitem><para><guilabel>Jemand erstellt einen Beitrag in einem Forum, das Sie abonniert haben</guilabel>: Ein Benutzer hat ein neues Thema in einem von Ihnen abonnierten Forum erstellt.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>
 					Die folgenden Einstellungen steuern Ereignisse rund um die Moderation.
 					<itemizedlist>
-						<listitem><para><guilabel>Ein Beitrag oder Thema muss freigegeben werden</guilabel>: Ein Benutzer hat einen neuen Beitrag oder ein neues Thema erstellt, der/das eine Freigabe erfordert.</para></listitem>
-						<listitem><para><guilabel>Jemand meldet einen Beitrag</guilabel>: Ein Benutzer hat einen Beitrag gemeldet.</para></listitem>
+						<listitem><para><guilabel>Ein Beitrag oder ein Thema muss freigegeben werden</guilabel>: Ein Benutzer hat einen neuen Beitrag oder ein neues Thema erstellt, der/das eine Freigabe erfordert.</para></listitem>
+						<listitem><para><guilabel>Jemand hat einen Beitrag gemeldet</guilabel>: Ein Benutzer hat einen Beitrag gemeldet.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>
 					Die folgenden Einstellungen steuern verschiedene andere Ereignisse.
 					<itemizedlist>
-						<listitem><para><guilabel>Jemand beantragt die Mitgliedschaft in einer von Ihnen geleiteten Gruppe</guilabel>: Ein Benutzer hat beantragt, einer Benutzergruppe beizutreten, deren Leiter Sie sind.</para></listitem>
-						<listitem><para><guilabel>Jemand sendet Ihnen eine private Nachricht</guilabel>: Sie haben eine private Nachricht erhalten.</para></listitem>
+						<listitem><para><guilabel>Jemand möchte einer Gruppe beitreten, deren Leiter Sie sind</guilabel>: Ein Benutzer hat beantragt, einer Benutzergruppe beizutreten, deren Leiter Sie sind.</para></listitem>
+						<listitem><para><guilabel>Jemand sendet Ihnen eine Private Nachricht</guilabel>: Sie haben eine private Nachricht erhalten.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -373,7 +373,7 @@
 				<listitem><para><guilabel>BBCode deaktivieren</guilabel>: Wenn BBCode im Forum aktiviert ist und Sie es verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens wird BBCode in Ihrem Beitragsinhalt nicht in die entsprechende Ausgabe umgewandelt. Zum Beispiel wird [b]Fettgedruckter Text[/b] in Ihrem Beitrag genau als [b]Fettgedruckter Text[/b] angezeigt.</para></listitem>
 				<listitem><para><guilabel>Smilies deaktivieren</guilabel>: Wenn Smilies im Forum aktiviert sind und Sie diese verwenden dürfen, ist diese Option verfügbar. Durch Aktivieren dieses Kästchens werden die Zeichen der Smilies nicht in das entsprechende Bild umgewandelt. Zum Beispiel wird ;) in Ihrem Beitrag genau als ;) angezeigt.</para></listitem>
 				<listitem><para><guilabel>URLs nicht automatisch erkennen</guilabel>: Wenn Sie eine URL direkt in Ihren Beitragsinhalt eingeben (im Format http://....com oder www.etc.com), wird diese standardmäßig in einen anklickbaren Textstring umgewandelt. Wenn dieses Kästchen beim Verfassen des Beitrags jedoch aktiviert ist, bleiben diese URLs als normaler Textstring erhalten.</para></listitem>
-				<listitem><para><guilabel>Signatur anhängen (Signaturen können über das UCP geändert werden)</guilabel>: Wenn dieses Kästchen aktiviert ist, wird die in Ihrem Profil festgelegte Signatur an den Beitrag angehängt, sofern Signaturen vom Administrator aktiviert wurden und Sie über die entsprechenden Berechtigungen verfügen. Weitere Informationen zu Signaturen finden Sie unter <link linkend="ucp_signature">UCP-Signatur</link>.</para></listitem>
+				<listitem><para><guilabel>Signatur anhängen (die Signatur kann im persönlichen Bereich geändert werden)</guilabel>: Wenn dieses Kästchen aktiviert ist, wird die in Ihrem Profil festgelegte Signatur an den Beitrag angehängt, sofern Signaturen vom Administrator aktiviert wurden und Sie über die entsprechenden Berechtigungen verfügen. Weitere Informationen zu Signaturen finden Sie unter <link linkend="ucp_signature">UCP-Signatur</link>.</para></listitem>
 				<listitem><para><guilabel>Mich per E-Mail benachrichtigen, wenn eine Antwort gepostet wird</guilabel>: Wenn dieses Kästchen aktiviert ist, erhalten Sie jedes Mal eine Benachrichtigung (per E-Mail, Jabber usw.), wenn ein anderer Benutzer auf das Thema antwortet. Dies wird als Abonnieren des Themas bezeichnet. Weitere Informationen finden Sie unter <link linkend="ucp_subscriptions">UCP-Abonnements</link>.</para></listitem>
 				<listitem><para><guilabel>Thema sperren</guilabel>: Sofern Sie über Moderationsberechtigungen in diesem Forum verfügen, wird das Thema durch Aktivieren dieses Kästchens gesperrt, nachdem Ihre Antwort veröffentlicht wurde. Ab diesem Zeitpunkt darf niemand außer Moderatoren oder Administratoren auf das Thema antworten. Weitere Informationen finden Sie unter <link linkend="modtools_lock">Sperren eines Themas oder Beitrags</link>.</para></listitem>
 			</itemizedlist>
@@ -688,8 +688,8 @@
 				<title>Die Suchanfrage</title>
 				<para>Um eine Suche im Forum durchzuführen, müssen Sie angeben, wonach Sie suchen möchten. Sie können Stichwörter angeben, nach denen gesucht werden soll, sowie einen Beitragsautor. Für die Durchführung der Suche stehen zwei Abfrageoptionen zur Verfügung:</para>
 				<itemizedlist>
-					<listitem><para><guilabel>Nach allen Begriffen suchen oder Suchanfrage wie eingegeben verwenden</guilabel> – Wenn mehrere Stichwörter angegeben werden, müssen <emphasis role="strong">alle</emphasis> Stichwörter im Ergebnis gefunden werden. Alternativ können Sie eine Abfrage mit speziellen Kennzeichnern angeben.</para></listitem>
-					<listitem><para><guilabel>Nach beliebigen Begriffen suchen</guilabel> – Wenn mehrere Stichwörter angegeben werden, werden Ergebnisse zurückgegeben, die <emphasis role="strong">eines</emphasis> der angegebenen Stichwörter enthalten.</para></listitem>
+					<listitem><para><guilabel>Nach allen Begriffen suchen oder Suche wie angegeben verwenden</guilabel> – Wenn mehrere Stichwörter angegeben werden, müssen <emphasis role="strong">alle</emphasis> Stichwörter im Ergebnis gefunden werden. Alternativ können Sie eine Abfrage mit speziellen Kennzeichnern angeben.</para></listitem>
+					<listitem><para><guilabel>Nach einem Begriff suchen</guilabel> – Wenn mehrere Stichwörter angegeben werden, werden Ergebnisse zurückgegeben, die <emphasis role="strong">eines</emphasis> der angegebenen Stichwörter enthalten.</para></listitem>
 				</itemizedlist>
 				<section id="user_search_query_keywords">
 					<title>Stichwörter</title>
@@ -771,15 +771,15 @@
 					<listitem>
 						<para><guilabel>Suchen in</guilabel> – Damit können Sie festlegen, welcher Teil der Beiträge durchsucht werden soll.</para>
 						<itemizedlist>
-							<listitem><para><guilabel>Beitragsbetreff und Nachrichtentext</guilabel> – Sowohl der Beitragsbetreff als auch der Beitragstext werden durchsucht.</para></listitem>
-							<listitem><para><guilabel>Nur Nachrichtentext</guilabel> – Nur der Text der Beiträge wird durchsucht, nicht der Titel.</para></listitem>
-							<listitem><para><guilabel>Nur Themen­titel</guilabel> – Nur die Themen­titel werden durchsucht.</para></listitem>
+							<listitem><para><guilabel>Betreff und Text der Beiträge</guilabel> – Sowohl der Beitragsbetreff als auch der Beitragstext werden durchsucht.</para></listitem>
+							<listitem><para><guilabel>Nur im Text der Beiträge</guilabel> – Nur der Text der Beiträge wird durchsucht, nicht der Titel.</para></listitem>
+							<listitem><para><guilabel>Nur im Betreff der Themen</guilabel> – Nur der Betreff der Themen wird durchsucht.</para></listitem>
 							<listitem><para><guilabel>Nur erster Beitrag der Themen</guilabel> – Nur der erste Beitrag jedes Themas wird durchsucht, keine anderen Beiträge im Thema.</para></listitem>
 						</itemizedlist>
 					</listitem>
 					<listitem><para><guilabel>Ergebnisse anzeigen als</guilabel> – Diese Option formatiert die Suchergebnisse so, dass entweder nur der Beitragsinhalt oder nur die Themen­titel angezeigt werden.</para></listitem>
-					<listitem><para><guilabel>Ergebnisse sortieren nach</guilabel> – Ordnet die Ergebnisse nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Forum</guilabel>, <guilabel>Themen­titel</guilabel> oder <guilabel>Beitragsbetreff</guilabel>. Die Ergebnisse können in <guilabel>aufsteigender</guilabel> oder <guilabel>absteigender</guilabel> Reihenfolge angezeigt werden.</para></listitem>
-					<listitem><para><guilabel>Ergebnisse begrenzen auf die letzten</guilabel> – Begrenzt die Ergebnisse auf Beiträge, die in einem bestimmten Zeitraum erstellt wurden.</para></listitem>
+					<listitem><para><guilabel>Ergebnisse sortieren nach</guilabel> – Ordnet die Ergebnisse nach <guilabel>Autor</guilabel>, <guilabel>Erstellungsdatum des Beitrags</guilabel>, <guilabel>Forum</guilabel> oder <guilabel>Betreff des Beitrags</guilabel>. Die Ergebnisse können in <guilabel>aufsteigender</guilabel> oder <guilabel>absteigender</guilabel> Reihenfolge angezeigt werden.</para></listitem>
+					<listitem><para><guilabel>Suchzeitraum begrenzen</guilabel> – Begrenzt die Ergebnisse auf Beiträge, die in einem bestimmten Zeitraum erstellt wurden.</para></listitem>
 					<listitem><para><guilabel>Erste zurückgeben</guilabel> – Formatiert die Ergebnisse so, dass sie nur eine bestimmte Anzahl von Zeichen der übereinstimmenden Beiträge enthalten.</para></listitem>
 				</itemizedlist>
 			</section>
