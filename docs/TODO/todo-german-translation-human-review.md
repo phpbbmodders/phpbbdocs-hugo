@@ -89,16 +89,15 @@ User" controls used throughout the user-management pages. See
 [`todo-german-terminology-audit.md`](todo-german-terminology-audit.md)
 for the ongoing exhaustive pass.
 
-## Bigger pieces not touched this round at all
+## Bigger pieces since fully checked
 
-- Five of the seven end-user chapters (`glossary.xml`, `server_guide.xml`,
-  `upgrade_guide.xml`, and to a lesser extent `moderator_guide.xml` and
-  `quick_start_guide.xml`) only got a partial check, not a full
-  line-by-line one.
-- The 55 files under `dev-docs-docbook/de_x_sie/` (the developer
-  documentation) haven't been looked at for terminology at all yet. They
-  lean more technical and less UI-label-heavy than the end-user guides, so
-  they may need less of this kind of check, but nobody's actually looked.
+All six end-user chapters other than `admin_guide.xml` (`user_guide.xml`,
+`moderator_guide.xml`, `quick_start_guide.xml`, `upgrade_guide.xml`,
+`server_guide.xml`, `glossary.xml`) and all 50 files under
+`dev-docs-docbook/de_x_sie/` have since had a full pass — line-by-line
+terminology cross-checking for the chapters, and a prose/technical-
+accuracy read-through for dev-docs. `admin_guide.xml` remains the one
+file that's not fully exhaustive yet.
 
 If you'd rather we keep working through the remaining official-string
 cross-checking ourselves instead of (or before) a human pass, that's
