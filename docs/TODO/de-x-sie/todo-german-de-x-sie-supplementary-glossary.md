@@ -7,9 +7,10 @@ could not find a matching string anywhere in phpBB's real German
 language pack (`phpbb-de/phpbb-translation`). That's not the same as
 "wrong" — it just means there's no official phpBB string to check the
 wording against, so a native speaker has to judge it on its own merits
-rather than by comparison. This list exists to make it easy to turn
-these into entries in a project-specific supplementary glossary,
-should one be started.
+rather than by comparison. The fillable glossary itself is
+[`german-de-x-sie-supplementary-glossary.md`](german-de-x-sie-supplementary-glossary.md)
+— this document is the background and reasoning behind each of its
+rows.
 
 For each entry: the German text currently in the document, the English
 source phrase it translates, and the line in `admin_guide.xml` where
