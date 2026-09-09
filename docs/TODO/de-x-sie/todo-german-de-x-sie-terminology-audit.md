@@ -105,3 +105,12 @@ look unmatched. When the English source itself is a non-literal
 paraphrase of a heading or description (not a literal UI quote), the
 German mirroring that same paraphrase is not a bug. Verify with a real
 `./phpbbdocs_hugo.sh de_x_sie` build afterward.
+
+**Where this applies to future dev-docs edits:** any `.dbk` file under
+`dev-docs-docbook/de_x_sie/`. **How:** if the new or edited text
+references a literal phpBB UI string (a button, field, menu item, or
+page name the reader would actually click), wrap it in `<guilabel>` or
+`<guimenuitem>` and run it through the same check as above before
+merging — if there's no matching key, add a row to
+[`german-de-x-sie-supplementary-glossary.md`](german-de-x-sie-supplementary-glossary.md)
+instead of leaving it unverified.
