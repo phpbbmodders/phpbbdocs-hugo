@@ -45,15 +45,25 @@ concept.
 
 These aren't candidates for a glossary entry, since the English
 original has the identical problem — any fix belongs in a report
-against the upstream documentation source, not in this glossary:
+against the upstream documentation source, not in this glossary. Both
+are confirmed directly against phpBB's real language pack files (not
+guessed): the German value is from `phpbb-de/phpbb-translation`, the
+English value is from `phpbb/phpbb`'s own `language/en/`, same key,
+same file, in both repos.
 
 - **Maximale Vorschaubild-Dateigröße** (admin_guide.xml:1067,
   "Maximum thumbnail filesize"): the description talks about a maximum
-  that gets exceeded, but the real phpBB key for this setting
-  (`MIN_THUMB_FILESIZE`) is a *minimum* filesize threshold. Both
-  languages describe the same outdated/incorrect behavior.
+  that gets exceeded, but the real phpBB setting for this is
+  `MIN_THUMB_FILESIZE` in `acp/attachments.php` — English:
+  `'Minimum thumbnail file size'`, German:
+  `'Minimale Vorschaubild-Dateigröße'` — a *minimum* filesize
+  threshold, not a maximum. Both languages describe the same
+  outdated/incorrect behavior.
 - **Veraltete Vorlagen neu kompilieren** (admin_guide.xml:598,
-  "Recompile stale templates"): the closest real key
-  (`RECOMPILE_STYLES`) is about recompiling stale *style components*,
-  not templates — this may describe a renamed feature in both
-  languages.
+  "Recompile stale templates"): the closest real key is
+  `RECOMPILE_STYLES`, also in `acp/board.php` — English:
+  `'Recompile stale style components'`, German:
+  `'Rekompilieren veralteter Style-Komponenten'` — about style
+  components, not templates. No key for "templates" specifically
+  exists in either language file; this may describe a renamed feature
+  in both languages.
