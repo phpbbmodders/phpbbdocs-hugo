@@ -1580,9 +1580,9 @@
 
 			<para>Um einen neuen Rang zu erstellen, klicken Sie auf die Schaltfläche <guilabel>Neuen Rang hinzufügen</guilabel> unterhalb der Liste der vorhandenen Ränge. Füllen Sie das erste Feld <guilabel>Rang-Titel</guilabel> mit dem Namen des Rangs aus. Haben Sie ein Bild, das Sie dem Rang zuordnen möchten, in den Ordner <filename>/images/ranks/</filename> hochgeladen, können Sie im Auswahlmenü ein Bild auswählen. Die letzte Einstellung, die Sie festlegen können, ist, ob der Rang ein „spezieller“ Rang sein soll. Spezielle Ränge sind Ränge, die Administratoren Benutzern zuweisen; sie werden Benutzern nicht automatisch anhand ihrer Beitragszahl zugewiesen. Wählen Sie <guilabel>Nein</guilabel>, können Sie im Feld <guilabel>Minimale Anzahl von Beiträgen</guilabel> die Mindestanzahl an Beiträgen festlegen, die Ihre Benutzer haben müssen, bevor ihnen dieser Rang zugewiesen wird. Wenn Sie fertig sind, klicken Sie auf die Schaltfläche <guilabel>Absenden</guilabel>, um diesen neuen Rang hinzuzufügen.</para>
 
-			<para>Um die aktuellen Einstellungen eines Rangs zu bearbeiten, suchen Sie die Zeile des Rangs und klicken Sie dann in der Spalte <guilabel>Aktion</guilabel> auf dessen Schaltfläche „Bearbeiten“.</para>
+			<para>Um die aktuellen Einstellungen eines Rangs zu bearbeiten, suchen Sie die Zeile des Rangs und klicken Sie dann in der Spalte <guilabel>Vorgang</guilabel> auf dessen Schaltfläche „Bearbeiten“.</para>
 
-			<para>Um einen Rang zu löschen, suchen Sie die Zeile des Rangs und klicken Sie dann in der Spalte <guilabel>Aktion</guilabel> auf dessen Schaltfläche „Löschen“. Bestätigen Sie die Aktion anschließend, indem Sie bei der entsprechenden Aufforderung auf die Schaltfläche <guilabel>Ja</guilabel> klicken.</para>
+			<para>Um einen Rang zu löschen, suchen Sie die Zeile des Rangs und klicken Sie dann in der Spalte <guilabel>Vorgang</guilabel> auf dessen Schaltfläche „Löschen“. Bestätigen Sie die Aktion anschließend, indem Sie bei der entsprechenden Aufforderung auf die Schaltfläche <guilabel>Ja</guilabel> klicken.</para>
 		</section>
 
 		<section id="acp_user_security">
@@ -2281,16 +2281,16 @@
 
 			<para>Wenn eine neuere Version Ihrer Erweiterung verfügbar ist, können Sie diese durch folgende Schritte aktualisieren:</para>
 			<orderedlist>
-				<listitem><para>Deaktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Deaktivieren</guilabel> klicken.</para></listitem>
+				<listitem><para>Deaktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Vorgänge</guilabel> auf den Link <guilabel>Deaktivieren</guilabel> klicken.</para></listitem>
 				<listitem><para>Löschen Sie die Dateien der Erweiterung aus dem Verzeichnis <filename class='directory'>ext</filename> des Boards. Löschen Sie nur den Ordner, der der Erweiterung entspricht, die Sie aktualisieren möchten.</para></listitem>
 				<listitem><para>Laden Sie die neueste Version der Dateien in das Verzeichnis <filename class='directory'>ext</filename> hoch.</para></listitem>
-				<listitem><para>Aktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Aktivieren</guilabel> klicken.</para></listitem>
+				<listitem><para>Aktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Vorgänge</guilabel> auf den Link <guilabel>Aktivieren</guilabel> klicken.</para></listitem>
 			</orderedlist>
 
 			<para>Wenn Sie eine Erweiterung vollständig von Ihrem Board entfernen möchten, folgen Sie diesen Schritten:</para>
 			<orderedlist>
-				<listitem><para>Deaktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Deaktivieren</guilabel> klicken.</para></listitem>
-				<listitem><para>Löschen Sie alle von der Erweiterung hinzugefügten Daten, indem Sie in der Spalte <guilabel>Aktionen</guilabel> auf den Link <guilabel>Daten löschen</guilabel> klicken.</para></listitem>
+				<listitem><para>Deaktivieren Sie die Erweiterung, indem Sie in der Spalte <guilabel>Vorgänge</guilabel> auf den Link <guilabel>Deaktivieren</guilabel> klicken.</para></listitem>
+				<listitem><para>Löschen Sie alle von der Erweiterung hinzugefügten Daten, indem Sie in der Spalte <guilabel>Vorgänge</guilabel> auf den Link <guilabel>Daten löschen</guilabel> klicken.</para></listitem>
 				<listitem><para>Löschen Sie die Dateien der Erweiterung aus dem Verzeichnis <filename class='directory'>ext</filename> des Boards. Löschen Sie nur den Ordner, der der Erweiterung entspricht, die Sie aktualisieren möchten.</para></listitem>
 			</orderedlist>
 
