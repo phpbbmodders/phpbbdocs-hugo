@@ -1537,8 +1537,8 @@
 			<para>Um Ihr benutzerdefiniertes Profilfeld zu erstellen, melden Sie sich in Ihrem ACP an. Klicken Sie auf den Reiter <guimenuitem>Benutzer und Gruppen</guimenuitem> und suchen Sie dann im linken Menü den Link <guimenuitem>Benutzerdefinierte Profilfelder</guimenuitem>, um darauf zu klicken. Sie sollten sich nun auf der richtigen Seite befinden. Suchen Sie das leere Textfeld unterhalb der Überschriften für benutzerdefinierte Profilfelder, das sich neben einem Auswahlmenü und der Schaltfläche <guilabel>Neues Feld erstellen</guilabel> befindet. Geben Sie in das leere Textfeld zunächst den Namen des neuen Profilfelds ein, das Sie erstellen möchten. Wählen Sie dann im Auswahlmenü den Feldtyp aus. Verfügbare Optionen sind <guimenuitem>Zahlen</guimenuitem>, <guimenuitem>Einzeiliges Textfeld</guimenuitem>, <guimenuitem>Textbereich</guimenuitem>, <guimenuitem>Boolesch (Ja/Nein)</guimenuitem>, <guimenuitem>Dropdown-Feld</guimenuitem> und <guimenuitem>Datum</guimenuitem>. Klicken Sie auf die Schaltfläche <guilabel>Neues Feld erstellen</guilabel>, um fortzufahren. Im Folgenden werden die drei Gruppen von Einstellungen beschrieben, die das neue benutzerdefinierte Profilfeld hat.
 				<itemizedlist>
 					<title>Profilfeld hinzufügen</title>
-					<listitem><para><guilabel>Feldtyp:</guilabel> Dies ist die Art des Feldes, um das es sich bei Ihrem neuen benutzerdefinierten Profilfeld handelt. Das bedeutet, es kann aus Zahlen, Daten usw. bestehen. Dies sollte bereits festgelegt sein.</para></listitem>
-					<listitem><para><guilabel>Feldkennung:</guilabel> Dies ist der Name des Profilfelds. Dieser Name identifiziert das Profilfeld innerhalb der Datenbank und der Vorlagen von phpBB3.</para></listitem>
+					<listitem><para><guilabel>Art des Feldes:</guilabel> Dies ist die Art des Feldes, um das es sich bei Ihrem neuen benutzerdefinierten Profilfeld handelt. Das bedeutet, es kann aus Zahlen, Daten usw. bestehen. Dies sollte bereits festgelegt sein.</para></listitem>
+					<listitem><para><guilabel>Feld-Kennung:</guilabel> Dies ist der Name des Profilfelds. Dieser Name identifiziert das Profilfeld innerhalb der Datenbank und der Vorlagen von phpBB3.</para></listitem>
 					<listitem><para><guilabel>Profilfeld anzeigen:</guilabel> Diese Einstellung legt fest, ob das neue Profilfeld überhaupt angezeigt wird. Das Profilfeld wird auf Themenseiten, in Profilen und in der Mitgliederliste angezeigt, sofern dies in den Lasteinstellungen aktiviert ist. Standardmäßig ist nur die Anzeige im Benutzerprofil aktiviert.</para></listitem>
 				</itemizedlist>
 
@@ -1546,14 +1546,14 @@
 					<title>Sichtbarkeitsoption</title>
 					<listitem><para><guilabel>Im Benutzer-Kontrollzentrum anzeigen:</guilabel> Diese Einstellung legt fest, ob Ihre Benutzer das Profilfeld im <acronym>UCP</acronym> ändern können.</para></listitem>
 					<listitem><para><guilabel>Bei der Registrierung anzeigen:</guilabel> Ist diese Option aktiviert, wird das Profilfeld auf der Registrierungsseite angezeigt. Benutzer können dieses Feld im <acronym>UCP</acronym> ändern.</para></listitem>
-					<listitem><para><guilabel>Pflichtfeld:</guilabel> Diese Einstellung legt fest, ob Sie Ihre Benutzer zum Ausfüllen dieses Profilfelds zwingen möchten. Dadurch wird das Profilfeld bei der Registrierung sowie im Benutzer-Kontrollzentrum angezeigt.</para></listitem>
-					<listitem><para><guilabel>Profilfeld verbergen:</guilabel> Ist diese Option aktiviert, erscheint dieses Profilfeld nur in den Profilen der Benutzer. In diesem Fall können nur Administratoren und Moderatoren dieses Feld sehen oder ausfüllen.</para></listitem>
+					<listitem><para><guilabel>Erforderliches Feld:</guilabel> Diese Einstellung legt fest, ob Sie Ihre Benutzer zum Ausfüllen dieses Profilfelds zwingen möchten. Dadurch wird das Profilfeld bei der Registrierung sowie im Benutzer-Kontrollzentrum angezeigt.</para></listitem>
+					<listitem><para><guilabel>Profilfeld verstecken:</guilabel> Ist diese Option aktiviert, erscheint dieses Profilfeld nur in den Profilen der Benutzer. In diesem Fall können nur Administratoren und Moderatoren dieses Feld sehen oder ausfüllen.</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Sprachspezifische Optionen</title>
-					<listitem><para><guilabel>Feldname/-titel, der dem Benutzer angezeigt wird:</guilabel> Dies ist der tatsächliche Name des Profilfelds, der Ihren Benutzern angezeigt wird.</para></listitem>
-					<listitem><para><guilabel>Feldbeschreibung:</guilabel> Dies ist eine einfache Beschreibung/Erklärung für Ihre Benutzer, die dieses Feld ausfüllen.</para></listitem>
+					<listitem><para><guilabel>Dem Benutzer angezeigter Name/Titel:</guilabel> Dies ist der tatsächliche Name des Profilfelds, der Ihren Benutzern angezeigt wird.</para></listitem>
+					<listitem><para><guilabel>Feld-Beschreibung:</guilabel> Dies ist eine einfache Beschreibung/Erklärung für Ihre Benutzer, die dieses Feld ausfüllen.</para></listitem>
 				</itemizedlist>
 			</para>
 
