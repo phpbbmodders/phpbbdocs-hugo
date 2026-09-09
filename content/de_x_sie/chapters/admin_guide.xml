@@ -57,7 +57,7 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Boardkonfiguration</title>
+			<title>Board-Konfiguration</title>
 			<para>Dieser Unterabschnitt enthält Einträge zur Anpassung der allgemeinen Funktionen und Einstellungen des Forums. </para>
 
 			<section id="acp_board_attachments">
@@ -68,7 +68,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Anhang-Einstellungen</title>
+				<title>Dateianhänge</title>
 				<para>Eine der vielen Funktionen von phpBB 3.3 sind <glossterm>Anhänge</glossterm>. Anhänge sind Dateien, die an Beiträge angehängt werden können, ähnlich wie E-Mail-Anhänge. Bestimmte, vom Boardadministrator festgelegte Einschränkungen bestimmen, was Benutzer anhängen können. Sie können diese Einschränkungen über die Seite <guimenuitem>Dateianhänge</guimenuitem> festlegen.</para>
 				<para>Weitere Informationen finden Sie im Abschnitt über die <link linkend="acp_attach_settings">Konfiguration der Anhang-Einstellungen Ihres Boards</link>.</para>
 			</section>
@@ -127,7 +127,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Avatar-Einstellungen</title>
+				<title>Avatare</title>
 				<para>Avatare sind in der Regel kleine, individuelle Bilder, die ein Benutzer mit sich selbst verknüpfen kann. Je nach Stil werden sie üblicherweise unterhalb des Benutzernamens beim Betrachten von Themen angezeigt. Hier können Sie festlegen, wie Benutzer ihre Avatare definieren können.</para>
 				<para>Es gibt mehrere Möglichkeiten, wie ein Benutzer seinem Profil einen Avatar hinzufügen kann. Die erste Möglichkeit ist <guilabel>Gravatar</guilabel>. Ist diese Funktion aktiviert, können Benutzer festlegen, dass das Board das mit ihrer E-Mail-Adresse verknüpfte Gravatar.com-Bild lädt.</para>
 				<para>Die zweite Möglichkeit ist eine von Ihnen bereitgestellte Avatar-Galerie. Beachten Sie, dass in einer phpBB-Standardinstallation keine Avatar-Galerie vorhanden ist. Der <guilabel>Avatar-Galeriepfad</guilabel> ist der Pfad zu den Galeriebildern. Der Standardpfad lautet <guilabel>images/avatars/gallery</guilabel>. Der Galerieordner existiert in der Standardinstallation nicht, Sie müssen ihn also manuell anlegen, wenn Sie ihn nutzen möchten.</para>
@@ -222,7 +222,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Einstellungen der Kontaktseite</title>
+				<title>Kontaktseite</title>
 				<para>Die Kontaktseite ermöglicht es Benutzern, den Boardadministratoren eine E-Mail zu senden, wenn sie Probleme mit der Seite haben. Dieses Formular ist für alle Benutzer sichtbar, einschließlich Gäste.</para>
 				<para>Sie können diese Funktion aktivieren oder deaktivieren sowie die Nachricht festlegen, die Benutzern beim Besuch der Seite angezeigt werden soll. Die Nachricht kann BBCodes, Smileys und Links enthalten, jedoch kein rohes HTML.</para>
 			</section>
@@ -299,7 +299,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>E-Mail-Einstellungen</title>
+				<title>Board-E-Mails</title>
 
 				<para>phpBB3 ist in der Lage, E-Mails an Ihre Benutzer zu versenden. Hier können Sie die Informationen konfigurieren, die verwendet werden, wenn Ihr Board diese E-Mails versendet. phpBB3 kann E-Mails entweder über den nativen, PHP-basierten E-Mail-Dienst oder über einen angegebenen <glossterm>SMTP</glossterm>-Server versenden. Wenn Sie sich nicht sicher sind, ob Ihnen ein SMTP-Server zur Verfügung steht, verwenden Sie den nativen E-Mail-Dienst. Weitere Einzelheiten erfahren Sie von Ihrem Hoster. Wenn Sie mit der Konfiguration der E-Mail-Einstellungen fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
 
@@ -369,7 +369,7 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Serverkonfiguration</title>
+			<title>Server-Konfiguration</title>
 			<para>Als Administrator eines Boards ist es unerlässlich, die Servereinstellungen Ihres phpBB-Boards fein abstimmen zu können. Die Konfiguration der Servereinstellungen Ihres Boards ist sehr einfach. Es gibt fünf Hauptkategorien von Servereinstellungen: <guimenuitem>Cookies</guimenuitem>, <guimenuitem>Server und Domain</guimenuitem>, <guimenuitem>Sicherheit</guimenuitem>, <guimenuitem>Serverlast</guimenuitem> und <guimenuitem>Suchfunktion</guimenuitem>. Die korrekte Konfiguration dieser Einstellungen trägt dazu bei, dass Ihr Board nicht nur funktioniert, sondern auch effizient und wie beabsichtigt arbeitet. Die folgenden Unterabschnitte beschreiben jede Kategorie der Serverkonfiguration. Denken Sie daran, nach dem Aktualisieren der Einstellungen jeweils auf <guilabel>Absenden</guilabel> zu klicken, um Ihre Änderungen zu übernehmen.</para>
 
 			<section id="acp_server_cookies">
@@ -1038,12 +1038,12 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Anhang-Einstellungen</title>
+			<title>Dateianhänge</title>
 
 			<para>Wenn Sie Ihren Benutzern das Posten von Anhängen erlauben, ist es wichtig, die Anhang-Einstellungen Ihres Boards steuern zu können. Hier können Sie die Haupteinstellungen für Anhänge sowie die zugehörigen speziellen Kategorien konfigurieren. Wenn Sie mit der Konfiguration der Anhang-Einstellungen Ihres Boards fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>.</para>
 
 			<itemizedlist>
-				<title>Anhang-Einstellungen</title>
+				<title>Dateianhänge</title>
 				<listitem><para><guilabel>Dateianhänge erlauben</guilabel>: Wenn Anhänge auf Ihrem Board aktiviert sein sollen, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
 				<listitem><para><guilabel>Dateianhänge in Privaten Nachrichten erlauben</guilabel>: Wenn Sie das Posten von Anhängen in privaten Nachrichten aktivieren möchten, wählen Sie <guilabel>Ja</guilabel>.</para></listitem>
 				<listitem><para><guilabel>Verzeichnis für hochgeladene Dateien</guilabel>: Das Verzeichnis, in das Anhänge hochgeladen werden. Das Standardverzeichnis ist <filename>/files/</filename>.</para></listitem>
@@ -1060,7 +1060,7 @@
 			</itemizedlist>
 
 			<itemizedlist>
-				<title>Einstellungen der Bildkategorie</title>
+				<title>Bildkategorie-Einstellungen</title>
 				<listitem><para><guilabel>Bilder im Beitrag anzeigen</guilabel>: Legt fest, wie Bildanhänge angezeigt werden. Ist dies auf <guilabel>Nein</guilabel> gesetzt, wird stattdessen ein Link zum Anhang angezeigt, anstatt das Bild selbst (oder ein Vorschaubild) inline darzustellen.</para></listitem>
 				<listitem><para><guilabel>Vorschaubild erstellen</guilabel>: Diese Einstellung legt fest, ob Ihr Board für jedes angehängte Bild ein Vorschaubild erstellt oder nicht.</para></listitem>
 				<listitem><para><guilabel>Maximale Vorschaubildbreite in Pixeln</guilabel>: Dies ist die maximale Breite in Pixeln für die erzeugten Vorschaubilder.</para></listitem>
@@ -1283,7 +1283,7 @@
 
 				<para>Um die Anzeige der vorhandenen Protokolleinträge des Benutzers anzupassen, wählen Sie in den Auswahlmenüs <guilabel>Einträge der letzten Zeit anzeigen:</guilabel> und <guilabel>Sortiere nach:</guilabel> die gewünschten Kriterien aus. <guilabel>Einträge der letzten Zeit anzeigen:</guilabel> ermöglicht es Ihnen, einen bestimmten Zeitraum festzulegen, in dem das Feedback erteilt wurde. <guilabel>Sortiere nach:</guilabel> ermöglicht es Ihnen, die vorhandenen Protokolleinträge nach <guimenuitem>Benutzername</guimenuitem>, <guimenuitem>Datum</guimenuitem>, <guimenuitem>IP-Adresse</guimenuitem> und <guimenuitem>Vorgang</guimenuitem> zu sortieren. Die Protokolleinträge können dann aufsteigend oder absteigend sortiert werden. Wenn Sie mit dem Festlegen dieser Optionen fertig sind, klicken Sie auf die Schaltfläche <guilabel>Los</guilabel>, um die Seite mit Ihren Anpassungen zu aktualisieren.</para>
 
-				<para>Eine weitere Möglichkeit zur Verwaltung der Feedback-Daten eines Benutzers ist das Hinzufügen von Feedback. Suchen Sie einfach den Bereich <guilabel>Feedback hinzufügen</guilabel> und geben Sie Ihre Nachricht in das Textfeld <guilabel>FEEDBACK</guilabel> ein. Wenn Sie fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um das Feedback hinzuzufügen.</para>
+				<para>Eine weitere Möglichkeit zur Verwaltung der Feedback-Daten eines Benutzers ist das Hinzufügen von Feedback. Suchen Sie einfach den Bereich <guilabel>Feedback hinzufügen</guilabel> und geben Sie Ihre Nachricht in das Textfeld <guilabel>Feedback</guilabel> ein. Wenn Sie fertig sind, klicken Sie auf <guilabel>Absenden</guilabel>, um das Feedback hinzuzufügen.</para>
 			</section>
 
 			<section id="acp_users_manage_profile">
@@ -1294,7 +1294,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Benutzerprofil</title>
+				<title>Benutzer-Profil</title>
 
 				<para>Benutzer haben manchmal Inhalte in ihrem Forenprofil, die aktualisiert oder gelöscht werden müssen. Möchten Sie ein Feld nicht ändern, lassen Sie es leer. Im Folgenden sind die Profilfelder aufgeführt, die Sie ändern können:
 					<itemizedlist>
@@ -1333,7 +1333,7 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Benutzer-Avatar</title>
+				<title>Benutzeravatar</title>
 
 				<para>Hier können Sie den <glossterm>Avatar</glossterm> des Benutzers verwalten. Hat der Benutzer bereits einen Avatar für sich festgelegt, können Sie das Avatarbild sehen.</para>
 				<para>Abhängig von Ihren Avatar-Einstellungen (weitere Informationen zu den Avatar-Einstellungen finden Sie unter <link linkend="acp_board_avatars">Avatar-Einstellungen</link>) können Sie jede verfügbare Option zum Ändern des Avatars des Benutzers wählen: <guilabel>Von Ihrem Rechner hochladen</guilabel>, <guilabel>Von URL hochladen</guilabel> oder <guilabel>Von extern verlinken</guilabel>. Sie können auch einen Avatar aus der Avatar-Galerie Ihres Boards auswählen, indem Sie auf die Schaltfläche <guilabel>Galerie anzeigen</guilabel> neben <guilabel>Lokale Galerie:</guilabel> klicken.</para>
@@ -1751,7 +1751,7 @@
 			</authorgroup>
 		</sectioninfo>
 
-		<title>Gruppenverwaltung</title>
+		<title>Gruppen-Verwaltung</title>
 
 		<para><glossterm>Benutzergruppen</glossterm> sind eine Möglichkeit, Benutzer zu gruppieren. Dies erleichtert es, vielen Personen gleichzeitig Berechtigungen zu erteilen. phpBB 3.3 verfügt über sechs vordefinierte Gruppen: Administratoren, Bots, Globale Moderatoren, Gäste, Registrierte Benutzer und Registrierte COPPA-Benutzer.</para>
 
@@ -1928,9 +1928,9 @@
 				<title>Allgemeine Benutzerrechte</title>
 				<para>Allgemeine Benutzerrechte sind Berechtigungen, die für alle Foren gelten, etwa Rechte zum Anhängen oder Herunterladen von Dateien oder zur Verwendung einer Signatur, oder Berechtigungen, die keinen Bezug zu einem Forum haben, wie Berechtigungen zu Profilen, Privaten Nachrichten und E-Mail.</para>
 
-				<para>Allgemeine Benutzerrechte können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Benutzerrechte</guilabel> wählen. Obwohl dies möglich ist, ist es im Allgemeinen deutlich vorzuziehen, keine Benutzerrechte, sondern Gruppenrechte zu verwenden. Dies erleichtert die Verwaltung von Berechtigungen sowie die zukünftige Zuweisung von Berechtigungen an Benutzer. Der einzige praktische Unterschied zwischen Benutzerrechten und Gruppenrechten besteht darin, dass Sie bei Benutzerrechten die Berechtigungen für jeden Benutzer einzeln festlegen müssen, während Sie bei Gruppenrechten eine Gruppe erstellen und deren Mitgliedern eine Reihe von Berechtigungen zuweisen können. Wenn Sie dann möchten, dass weitere Benutzer dieselben Berechtigungen erhalten, können Sie diese einfach der Gruppe hinzufügen.</para>
+				<para>Allgemeine Benutzerrechte können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Benutzerrechte</guilabel> wählen. Obwohl dies möglich ist, ist es im Allgemeinen deutlich vorzuziehen, keine Benutzerrechte, sondern Gruppenrechte zu verwenden. Dies erleichtert die Verwaltung von Berechtigungen sowie die zukünftige Zuweisung von Berechtigungen an Benutzer. Der einzige praktische Unterschied zwischen Benutzerrechten und Gruppenrechten besteht darin, dass Sie bei Benutzerrechten die Berechtigungen für jeden Benutzer einzeln festlegen müssen, während Sie bei Gruppenrechten eine Gruppe erstellen und deren Mitgliedern eine Reihe von Berechtigungen zuweisen können. Wenn Sie dann möchten, dass weitere Benutzer dieselben Berechtigungen erhalten, können Sie diese einfach der Gruppe hinzufügen.</para>
 
-				<para>Allgemeine Benutzerrechte können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Benutzerrechte</guilabel> wählen.</para>
+				<para>Allgemeine Benutzerrechte können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Benutzerrechte</guilabel> wählen.</para>
 
 				<para>In beiden Fällen können Sie im Auswahlmenü eine vorgefertigte Benutzer-Rolle auswählen, oder Sie klicken auf <guilabel>Erweiterte Berechtigungen</guilabel>, um die Berechtigungen individuell anzupassen. Der bessere Weg, eine der vorgefertigten Rollen anzupassen, ist jedoch, eine neue Benutzer-Rolle auf Basis der Einstellungen einer bestehenden Rolle zu erstellen. Sie können auch eine neue Benutzer-Rolle von Grund auf erstellen. Rollen benötigen weniger Ressourcen, als wenn Sie Änderungen durch Bearbeiten der Erweiterten Berechtigungen vornehmen.</para>
 			</section>
@@ -1938,9 +1938,9 @@
 				<title>Globale Moderator-Berechtigungen</title>
 				<para>Globale Moderator-Berechtigungen sind Berechtigungen, die das Bearbeiten, Löschen oder sonstige Beeinflussen der Themen und Beiträge anderer Benutzer betreffen, oder die Möglichkeit, andere Benutzer durch Meldungen, Verwarnungen oder Sperren zu beeinflussen. Hier vergebene Berechtigungen gelten für jedes Forum, das der Benutzer oder die Benutzergruppe sehen kann.</para>
 
-				<para>Globale Moderator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Moderator-Berechtigungen</guilabel> wählen.</para>
+				<para>Globale Moderator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Globale Moderator-Berechtigungen</guilabel> wählen.</para>
 
-				<para>Globale Moderator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Moderator-Berechtigungen</guilabel> wählen.</para>
+				<para>Globale Moderator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Globale Moderator-Berechtigungen</guilabel> wählen.</para>
 
 				<para>Globale Moderator-Berechtigungen können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Globale Moderatoren</guilabel> klicken. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen derzeit globale Moderator-Berechtigungen zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
 
@@ -1950,9 +1950,9 @@
 				<title>Globale Administrator-Berechtigungen</title>
 				<para>Globale Administrator-Berechtigungen sind Berechtigungen, die die Verwaltung Ihres Boards über das Administrations-Kontrollzentrum betreffen. Dazu zählen Berechtigungen zur Verwaltung von Foren, Benutzern und Benutzergruppen, zur Verwaltung und Zuweisung von Berechtigungen, zum Ändern der Board-Konfiguration und andere derartige Verwaltungsaufgaben.</para>
 
-				<para>Globale Administrator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Administrator-Berechtigungen</guilabel> wählen.</para>
+				<para>Globale Administrator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerrechte</guilabel> klicken, einen Benutzer auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Globale Administrator-Berechtigungen</guilabel> wählen.</para>
 
-				<para>Globale Administrator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Globale Administrator-Berechtigungen</guilabel> wählen.</para>
+				<para>Globale Administrator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenrechte</guilabel> klicken, eine Benutzergruppe auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Globale Administrator-Berechtigungen</guilabel> wählen.</para>
 
 				<para>Globale Administrator-Berechtigungen können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Administratoren</guilabel> klicken. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen derzeit Administrator-Berechtigungen zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
 
@@ -1974,9 +1974,9 @@
 				<title>Benutzerspezifische Forenrechte</title>
 				<para>Benutzerspezifische Forenrechte sind Berechtigungen, die das Erstellen und Bearbeiten eigener Beiträge in einem bestimmten Forum sowie das Drucken und Melden von Themen betreffen. Sie legen außerdem fest, ob Beiträge eine Freigabe erfordern oder den Beitragszähler erhöhen, sowie einige weitere Benutzermöglichkeiten in einem bestimmten Forum.</para>
 
-				<para>Benutzerspezifische Forenrechte können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerspezifische Forenrechte</guilabel> klicken, einen Benutzer auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Forenrechte</guilabel> wählen.</para>
+				<para>Benutzerspezifische Forenrechte können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerspezifische Forenrechte</guilabel> klicken, einen Benutzer auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Forenrechte</guilabel> wählen.</para>
 
-				<para>Benutzerspezifische Forenrechte können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenspezifische Forenrechte</guilabel> klicken, eine Benutzergruppe auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Forenrechte</guilabel> wählen.</para>
+				<para>Benutzerspezifische Forenrechte können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenspezifische Forenrechte</guilabel> klicken, eine Benutzergruppe auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Forenrechte</guilabel> wählen.</para>
 
 				<para>Benutzerspezifische Forenrechte können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Forenrechte</guilabel> klicken und dann ein oder mehrere Foren aus der Liste auswählen. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen für dieses Forum derzeit benutzerspezifische Forenrechte zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
 
@@ -1986,9 +1986,9 @@
 				<title>Moderator-Berechtigungen</title>
 				<para>Foren-Moderator-Berechtigungen sind Berechtigungen, die das Bearbeiten, Löschen oder sonstige Beeinflussen der Themen und Beiträge anderer Benutzer in einem bestimmten Forum betreffen, oder die Möglichkeit, andere Benutzer durch Meldungen, Verwarnungen oder Sperren zu beeinflussen.</para>
 
-				<para>Foren-Moderator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerspezifische Forenrechte</guilabel> klicken, einen Benutzer auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Moderator-Berechtigungen</guilabel> wählen.</para>
+				<para>Foren-Moderator-Berechtigungen können Benutzern zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Benutzerspezifische Forenrechte</guilabel> klicken, einen Benutzer auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Moderator-Berechtigungen</guilabel> wählen.</para>
 
-				<para>Foren-Moderator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenspezifische Forenrechte</guilabel> klicken, eine Benutzergruppe auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Typ auswählen</guilabel> die Option <guilabel>Moderator-Berechtigungen</guilabel> wählen.</para>
+				<para>Foren-Moderator-Berechtigungen können Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Gruppenspezifische Forenrechte</guilabel> klicken, eine Benutzergruppe auswählen, ein oder mehrere Foren aus der Liste auswählen und dann im Auswahlmenü <guilabel>Berechtigungs-Art</guilabel> die Option <guilabel>Moderator-Berechtigungen</guilabel> wählen.</para>
 
 				<para>Foren-Moderator-Berechtigungen können auch Benutzern und Benutzergruppen zugewiesen werden, indem Sie im Reiter „Berechtigungen" Ihres <acronym>ACP</acronym> auf <guilabel>Foren-Moderatoren</guilabel> klicken und dann ein oder mehrere Foren aus der Liste auswählen. Diese Option zeigt alle Benutzer und Benutzergruppen an, denen für dieses Forum derzeit Foren-Moderator-Berechtigungen zugewiesen sind. Von hier aus können Sie Benutzer und Benutzergruppen hinzufügen, bearbeiten oder entfernen.</para>
 
@@ -2581,7 +2581,7 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Modulverwaltung</title>
+			<title>Modul-Konfiguration</title>
 			<para>Module werden verwendet, um die Struktur und den Inhalt von <acronym>UCP</acronym>, <acronym>MCP</acronym> und <acronym>ACP</acronym> zu bilden. Einzelne Module können optional deaktiviert werden, und es ist möglich, sie zu einer anderen Struktur umzuorganisieren. Module für den Benutzerbereich und das Moderator-Kontrollzentrum haben eine zweistufige Struktur aus Kategorie » Modul, während die Administrationsmodule drei Ebenen haben: Kategorie (Reiter oben) » Kategorie (Überschriften auf der linken Seite) » Modul (einzelne Bereiche).</para>
 			<para>Sehr häufig fügen Erweiterungen mit steuerbaren Funktionen dem ACP Module hinzu, um eine komfortable Bearbeitung verschiedener Einstellungen zu ermöglichen.</para>
 			<para>Um eine Modulkategorie zu erstellen, verwenden Sie das Textfeld neben der Schaltfläche <guilabel>Neues Modul erstellen</guilabel>. Geben Sie den Titel der Kategorie ein, klicken Sie auf die Schaltfläche und stellen Sie auf der nächsten Seite sicher, dass der <guilabel>Modul-Typ</guilabel> auf <guilabel>Kategorie</guilabel> gesetzt, das Modul <guilabel>Aktiviert</guilabel> ist und das <guilabel>übergeordnetes Modul</guilabel> korrekt festgelegt ist. Nachdem Sie eine Kategorie erstellt haben, können Sie über die Liste der Module zu ihr navigieren und ein bestimmtes, in einer Datei gespeichertes Modul hinzufügen. Module werden im entsprechenden Verzeichnis (acp/, mcp/ oder /ucp) im Verzeichnis <filename>includes/</filename> gespeichert.</para>
