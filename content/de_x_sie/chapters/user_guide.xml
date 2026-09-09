@@ -219,7 +219,7 @@
 						<listitem><para><guilabel>BBCode standardmäßig aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, ist BBCode im Beitrags-Editor aktiviert.</para></listitem>
 						<listitem><para><guilabel>Smileys standardmäßig aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Smileys in Ihren Beiträgen dargestellt.</para></listitem>
 						<listitem><para><guilabel>Meine Signatur standardmäßig anhängen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird Ihre Signatur an Ihre Beiträge angehängt.</para></listitem>
-						<listitem><para><guilabel>Mich standardmäßig über Antworten informieren</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Sie per E-Mail benachrichtigt, wenn eine Antwort auf Ihren Beitrag erfolgt.</para></listitem>
+						<listitem><para><guilabel>Mich standardmäßig über Antworten informieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Sie per E-Mail benachrichtigt, wenn eine Antwort auf Ihren Beitrag erfolgt.</para></listitem>
 					</itemizedlist>
 
 				</para>
@@ -232,24 +232,24 @@
 					<itemizedlist>
 						<listitem><para><guilabel>Bilder in Beiträgen anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Bilder angezeigt.</para></listitem>
 						<listitem><para><guilabel>Flash-Animationen anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Flash-Animationen dargestellt.</para></listitem>
-						<listitem><para><guilabel>Smileys als Bilder anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Smileys als Bilder anstelle ihrer Textentsprechung dargestellt.</para></listitem>
-						<listitem><para><guilabel>Signaturen anzeigen</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Benutzersignaturen angezeigt.</para></listitem>
-						<listitem><para><guilabel>Avatare anzeigen</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, werden Benutzeravatare angezeigt.</para></listitem>
-						<listitem><para><guilabel>Wortzensur aktivieren</guilabel>: Wenn <guilabel>ja</guilabel> ausgewählt ist, wird der Text von Beiträgen und privaten Nachrichten gemäß der vom Administrator festgelegten <link linkend="acp_posting_censors">Zensurliste</link> zensiert.</para></listitem>
+						<listitem><para><guilabel>Smileys als Grafiken anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Smileys als Bilder anstelle ihrer Textentsprechung dargestellt.</para></listitem>
+						<listitem><para><guilabel>Signaturen anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Benutzersignaturen angezeigt.</para></listitem>
+						<listitem><para><guilabel>Avatare anzeigen</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, werden Benutzeravatare angezeigt.</para></listitem>
+						<listitem><para><guilabel>Wortzensur aktivieren</guilabel>: Wenn <guilabel>Ja</guilabel> ausgewählt ist, wird der Text von Beiträgen und privaten Nachrichten gemäß der vom Administrator festgelegten <link linkend="acp_posting_censors">Zensurliste</link> zensiert.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Die folgenden Einstellungen steuern, wie Themen in der Forenansicht angezeigt werden.
 					<itemizedlist>
-						<listitem><para><guilabel>Themen der letzten Tage anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Themen, die angezeigt werden sollen. Standardmäßig werden alle Themen angezeigt.</para></listitem>
-						<listitem><para><guilabel>Themen sortieren nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Themen angezeigt werden. Themen können nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
-						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Themen können entweder <guilabel>Aufsteigend</guilabel> oder <guilabel>Absteigend</guilabel> angezeigt werden.</para></listitem>
+						<listitem><para><guilabel>Themen der letzten Zeit anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Themen, die angezeigt werden sollen. Standardmäßig werden alle Themen angezeigt.</para></listitem>
+						<listitem><para><guilabel>Zeige Themen sortiert nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Themen angezeigt werden. Themen können nach <guilabel>Autor</guilabel>, <guilabel>Erstellungsdatum</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
+						<listitem><para><guilabel>Sortiere Themen</guilabel>: Themen können entweder <guilabel>Aufsteigend</guilabel> oder <guilabel>Absteigend</guilabel> angezeigt werden.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Die folgenden Einstellungen steuern, wie Beiträge in der Themenansicht angezeigt werden.
 					<itemizedlist>
-						<listitem><para><guilabel>Beiträge der letzten Tage anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Beiträge, die angezeigt werden sollen. Standardmäßig werden alle Beiträge angezeigt.</para></listitem>
-						<listitem><para><guilabel>Beiträge sortieren nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Beiträge angezeigt werden. Beiträge können nach <guilabel>Autor</guilabel>, <guilabel>Beitragszeit</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
-						<listitem><para><guilabel>Sortierreihenfolge der Themen</guilabel>: Beiträge können entweder <guilabel>Aufsteigend</guilabel> oder <guilabel>Absteigend</guilabel> angezeigt werden.</para></listitem>
+						<listitem><para><guilabel>Beiträge der letzten Zeit anzeigen</guilabel>: Diese Einstellung begrenzt das Alter der Beiträge, die angezeigt werden sollen. Standardmäßig werden alle Beiträge angezeigt.</para></listitem>
+						<listitem><para><guilabel>Zeige Beiträge sortiert nach</guilabel>: Diese Einstellung ändert die Reihenfolge, in der Beiträge angezeigt werden. Beiträge können nach <guilabel>Autor</guilabel>, <guilabel>Erstellungsdatum</guilabel>, <guilabel>Anzahl der Antworten</guilabel>, <guilabel>Betreff</guilabel> oder <guilabel>Anzahl der Aufrufe</guilabel> sortiert werden.</para></listitem>
+						<listitem><para><guilabel>Sortiere Beiträge</guilabel>: Beiträge können entweder <guilabel>Aufsteigend</guilabel> oder <guilabel>Absteigend</guilabel> angezeigt werden.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -380,7 +380,7 @@
 
 			<section id="posting_special">
 				<title>Themenarten</title>
-				<para>Sofern Sie über die entsprechenden Berechtigungen verfügen, haben Sie beim Erstellen eines neuen Themas mit <guilabel>Thema veröffentlichen als</guilabel> die Möglichkeit, verschiedene Themenarten auszuwählen. Die vier möglichen Arten sind: <guilabel>Normal</guilabel>, <guilabel>Wichtig</guilabel>, <guilabel>Bekanntmachung</guilabel> und <guilabel>Global</guilabel>. Standardmäßig sind alle neuen Beiträge <guilabel>Normal</guilabel>.</para>
+				<para>Sofern Sie über die entsprechenden Berechtigungen verfügen, haben Sie beim Erstellen eines neuen Themas mit <guilabel>Thema schreiben als</guilabel> die Möglichkeit, verschiedene Themenarten auszuwählen. Die vier möglichen Arten sind: <guilabel>Normal</guilabel>, <guilabel>Wichtig</guilabel>, <guilabel>Bekanntmachung</guilabel> und <guilabel>Global</guilabel>. Standardmäßig sind alle neuen Beiträge <guilabel>Normal</guilabel>.</para>
 				<itemizedlist>
 					<listitem><para><guilabel>Normal</guilabel>: Durch Auswahl von Normal wird Ihr neues Thema ein Standardthema im Forum.</para></listitem>
 					<listitem><para><guilabel>Wichtig</guilabel>: Wichtige Themen sind besondere Themen im Forum. Sie werden oberhalb aller normalen Themen oben auf der ersten Seite des Forums, in dem sie veröffentlicht wurden, „festgepinnt“.</para></listitem>
@@ -642,7 +642,7 @@
 				<itemizedlist>
 					<listitem><para><guilabel>In Ordner verschieben -&gt; X</guilabel> – Verschiebt die Nachricht in den angegebenen Ordner.</para></listitem>
 					<listitem><para><guilabel>Als gelesen markieren</guilabel> – Die Nachricht wird sofort als gelesen markiert. Benachrichtigungen informieren Sie weiterhin über eine neue Nachricht, aber die Nachricht wird bereits als gelesen markiert sein, wenn Sie Ihre Liste privater Nachrichten ansehen.</para></listitem>
-					<listitem><para><guilabel>Nachricht markieren</guilabel> – Die Nachricht wird als wichtig markiert und in Ihrer Liste privater Nachrichten hervorgehoben.</para></listitem>
+					<listitem><para><guilabel>Markieren</guilabel> – Die Nachricht wird als wichtig markiert und in Ihrer Liste privater Nachrichten hervorgehoben.</para></listitem>
 					<listitem><para><guilabel>Nachricht löschen</guilabel> – Die Nachricht wird gelöscht, anstatt angezeigt zu werden. Es wird eine Nachricht angezeigt, die Sie darüber informiert, dass gemäß Ihren Nachrichtenregeln Nachrichten empfangen und gelöscht wurden. Nachrichten von Forenadministratoren und Moderatoren werden <emphasis role="strong">nicht</emphasis> gelöscht.</para></listitem>
 				</itemizedlist>
 			</section>
@@ -769,18 +769,18 @@
 					<listitem><para><guilabel>Zu durchsuchende Foren</guilabel> – Hier können Sie bestimmte Foren auswählen, in denen die Suche durchgeführt werden soll. Mehrere Foren können durch Gedrückthalten der Taste „Strg“ oder „Befehl“ ausgewählt werden.</para></listitem>
 					<listitem><para><guilabel>Unterforen durchsuchen</guilabel> – Wenn diese Option ausgewählt ist, werden auch alle Unterforen der ausgewählten Foren durchsucht.</para></listitem>
 					<listitem>
-						<para><guilabel>Suchen in</guilabel> – Damit können Sie festlegen, welcher Teil der Beiträge durchsucht werden soll.</para>
+						<para><guilabel>Innerhalb suchen</guilabel> – Damit können Sie festlegen, welcher Teil der Beiträge durchsucht werden soll.</para>
 						<itemizedlist>
 							<listitem><para><guilabel>Betreff und Text der Beiträge</guilabel> – Sowohl der Beitragsbetreff als auch der Beitragstext werden durchsucht.</para></listitem>
 							<listitem><para><guilabel>Nur im Text der Beiträge</guilabel> – Nur der Text der Beiträge wird durchsucht, nicht der Titel.</para></listitem>
 							<listitem><para><guilabel>Nur im Betreff der Themen</guilabel> – Nur der Betreff der Themen wird durchsucht.</para></listitem>
-							<listitem><para><guilabel>Nur erster Beitrag der Themen</guilabel> – Nur der erste Beitrag jedes Themas wird durchsucht, keine anderen Beiträge im Thema.</para></listitem>
+							<listitem><para><guilabel>Nur im ersten Beitrag der Themen</guilabel> – Nur der erste Beitrag jedes Themas wird durchsucht, keine anderen Beiträge im Thema.</para></listitem>
 						</itemizedlist>
 					</listitem>
 					<listitem><para><guilabel>Ergebnisse anzeigen als</guilabel> – Diese Option formatiert die Suchergebnisse so, dass entweder nur der Beitragsinhalt oder nur die Themen­titel angezeigt werden.</para></listitem>
 					<listitem><para><guilabel>Ergebnisse sortieren nach</guilabel> – Ordnet die Ergebnisse nach <guilabel>Autor</guilabel>, <guilabel>Erstellungsdatum des Beitrags</guilabel>, <guilabel>Forum</guilabel> oder <guilabel>Betreff des Beitrags</guilabel>. Die Ergebnisse können in <guilabel>aufsteigender</guilabel> oder <guilabel>absteigender</guilabel> Reihenfolge angezeigt werden.</para></listitem>
 					<listitem><para><guilabel>Suchzeitraum begrenzen</guilabel> – Begrenzt die Ergebnisse auf Beiträge, die in einem bestimmten Zeitraum erstellt wurden.</para></listitem>
-					<listitem><para><guilabel>Erste zurückgeben</guilabel> – Formatiert die Ergebnisse so, dass sie nur eine bestimmte Anzahl von Zeichen der übereinstimmenden Beiträge enthalten.</para></listitem>
+					<listitem><para><guilabel>Die ersten</guilabel> – Formatiert die Ergebnisse so, dass sie nur eine bestimmte Anzahl von Zeichen der übereinstimmenden Beiträge enthalten.</para></listitem>
 				</itemizedlist>
 			</section>
 			<section id="user_search_refinement">
