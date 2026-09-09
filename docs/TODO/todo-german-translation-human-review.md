@@ -1,9 +1,8 @@
-# A friendly ask: could a German speaker read over the translation?
+# German translation review notes
 
-Hi! If you're reading this, thank you in advance — a native speaker's ear
-catches things that cross-referencing official strings simply can't. Nothing
-below is urgent or assumed to be broken; it's just the honest list of spots
-where a second pair of eyes (yours, ideally) would be genuinely useful.
+A native speaker's ear catches things that cross-referencing official
+strings can't. Nothing below is urgent, and nothing here is known to be
+broken. It's just where a second pair of eyes would help most.
 
 ## What's already been done
 
@@ -18,16 +17,15 @@ big pass this round:
 - On top of that, a good number of *pre-existing* terms elsewhere in
   `admin_guide.xml`, and in `user_guide.xml`, `moderator_guide.xml`, and
   `quick_start_guide.xml`, turned out not to match the real board's wording
-  and got corrected — things like "Smilies" → "Smileys" (the real board
-  never uses "Smilies" as a German word), or a whole section that had been
-  calling something "Themensymbole" (topic icons) when the real ACP page is
-  actually named "Beitrags-Symbole" (post icons).
+  and got corrected. For example, "Smilies" became "Smileys" (the real
+  board never uses "Smilies" as a German word), and a whole section that
+  had been calling something "Themensymbole" (topic icons) now correctly
+  says "Beitrags-Symbole" (post icons), matching the real ACP page.
 
-So there's real, verified improvement here. But it's honest to say this
-wasn't (and realistically couldn't be, in one sitting) a word-for-word
-comparison of every sentence against the live board — it was a targeted
-pass guided by whichever official strings we could look up. That leaves a
-few kinds of gaps a human read-through would close nicely.
+This pass fixed mismatches that are checkable against the real board, but
+it wasn't a word-for-word comparison of every sentence. It was a targeted
+pass guided by whichever official strings we could look up, and that
+leaves a few kinds of gaps a human read-through would close nicely.
 
 ## Content that's new and has never had a native read
 
@@ -36,9 +34,9 @@ emails" section through to the end, covering groups, permissions,
 moderation, styles/extensions/language packs, and system settings) is
 brand new prose. Every UI label in it was cross-checked, but the
 connecting sentences around those labels are new writing that no German
-speaker has read yet. If you only have time for one thing, this is the
-one worth it — just reading it start to finish for anything that sounds
-stiff, oddly phrased, or like it was translated rather than written.
+speaker has read yet. If you only have time for one thing, read this
+section start to finish and flag anything that sounds stiff, oddly
+phrased, or like it was translated rather than written.
 
 ## Spots where we made a judgment call worth double-checking
 
@@ -46,34 +44,34 @@ stiff, oddly phrased, or like it was translated rather than written.
   phpBB's own official strings usually call "Löschen"/"Automatisches
   Löschen" (English "pruning"). We kept "Ausdünnen" deliberately, since it
   was already established earlier in the document and switching mid-way
-  would have been more jarring than helpful — but if it doesn't sound
-  right to you, we're glad to change it everywhere.
+  would have been more jarring than helpful. If it doesn't sound right to
+  you, we're glad to change it everywhere.
 - A handful of ACP field labels reference LDAP settings (`LDAP-Basis-DN`,
   `LDAP-UID`, `LDAP-Benutzer`) using simplified plain text, because the
   real board's own strings embed small inline HTML tags around parts of
   the label that don't translate cleanly into this document format. The
   words themselves are the same as the real board uses; just the little
-  bit of embedded formatting got dropped. Worth a glance to confirm they
+  bit of embedded formatting got dropped. Take a look and confirm they
   still read naturally without it.
 
 ## Areas we didn't get to check against the real board yet
 
 A few settings groups in `admin_guide.xml` weren't cross-referenced this
 round, mostly because we couldn't find the matching official string in the
-files we had on hand — not because anything is known to be wrong, just
-unconfirmed either way:
+files we had on hand. That doesn't mean anything is known to be wrong,
+just unconfirmed either way:
 
 - Mass-email batch size settings ("Paketgröße für E-Mails", "Paketgröße für
   Jabber") and the "Name der E-Mail-Funktion" field.
 - The private-message attachment storage quota field.
 - The "dotted topics" setting (topics you've already posted in getting a
-  visual marker) — currently reads "Gepunktete Themensymbole aktivieren".
+  visual marker). It currently reads "Gepunktete Themensymbole aktivieren".
 - Avatar upload/gallery paths, word censor management, and the contact
   page settings.
 
-None of these are guessed wildly — they're existing, presumably
-reasonable German — just not independently verified against the live
-board's own wording the way most of the rest of the document was.
+None of these are guessed wildly. They're existing, presumably reasonable
+German, just not independently verified against the live board's own
+wording the way most of the rest of the document was.
 
 ## Bigger pieces not touched this round at all
 
@@ -89,9 +87,9 @@ board's own wording the way most of the rest of the document was.
 If you'd rather we keep working through the remaining official-string
 cross-checking ourselves instead of (or before) a human pass, that's
 tracked separately in
-[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md) —
-this document is specifically about the parts that benefit from a native
-speaker's judgment rather than another round of string-matching.
+[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md).
+This document is specifically about the parts that benefit from a native
+speaker's judgment, not another round of string-matching.
 
-Thank you again for taking a look — this kind of review is exactly what
-makes a machine-assisted translation actually trustworthy.
+Thanks for taking a look. This kind of review is what makes a
+machine-assisted translation trustworthy.
