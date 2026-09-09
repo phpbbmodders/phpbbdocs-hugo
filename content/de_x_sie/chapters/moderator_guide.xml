@@ -264,7 +264,7 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Was ist die &#x201E;Moderationswarteschlange&#x201C;?</title>
-		<para>Die <guilabel>Moderationswarteschlange</guilabel> ist ein Bereich, in dem Themen und Beiträge aufgelistet werden, die freigegeben werden müssen. Wenn die Berechtigungen eines Forums oder Benutzers über das <link linkend="admin_control_panel">Administrationskontrollzentrum</link> auf <guilabel>Moderationswarteschlange</guilabel> gesetzt sind, müssen alle in diesem Forum oder von diesem Benutzer erstellten Beiträge von einem Administrator oder Moderator freigegeben werden, bevor sie anderen Benutzern angezeigt werden. Themen und Beiträge, die eine Freigabe benötigen, können über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> eingesehen werden.</para>
+		<para>Die <guilabel>Moderations-Warteschlange</guilabel> ist ein Bereich, in dem Themen und Beiträge aufgelistet werden, die freigegeben werden müssen. Wenn die Berechtigungen eines Forums oder Benutzers über das <link linkend="admin_control_panel">Administrationskontrollzentrum</link> auf <guilabel>Moderations-Warteschlange</guilabel> gesetzt sind, müssen alle in diesem Forum oder von diesem Benutzer erstellten Beiträge von einem Administrator oder Moderator freigegeben werden, bevor sie anderen Benutzern angezeigt werden. Themen und Beiträge, die eine Freigabe benötigen, können über das <link linkend="moderator_mcp">Moderatorkontrollzentrum</link> eingesehen werden.</para>
 		<para>Beim Betrachten eines Forums werden noch nicht freigegebene Themen mit einem Symbol gekennzeichnet; ein Klick auf dieses Symbol führt Sie direkt zum Moderatorkontrollzentrum, wo Sie das Thema freigeben oder ablehnen können. Ebenso wird beim Betrachten des Themas selbst der freizugebende Beitrag von einer Nachricht begleitet, die ebenfalls auf den auf Freigabe wartenden Beitrag verweist.</para>
 		<para>Wenn Sie sich dafür entscheiden, ein Thema oder einen Beitrag freizugeben, erhalten Sie die Möglichkeit, den Benutzer über die Freigabe zu benachrichtigen. Wenn Sie sich dafür entscheiden, ein Thema oder einen Beitrag abzulehnen, erhalten Sie die Möglichkeit, den Benutzer über die Ablehnung zu benachrichtigen und zudem anzugeben, warum Sie den Beitrag abgelehnt haben, sowie eine Beschreibung einzugeben.</para>
 		<para>Weitere Informationen zum Moderatorkontrollzentrum finden Sie unter <xref linkend="moderator_mcp" />.</para>
@@ -393,7 +393,7 @@
 					<listitem><para><guilabel>Kopieren</guilabel>: Erstellt ein Duplikat des/der ausgewählten Themas/Themen in einem anderen Forum Ihrer Wahl.</para></listitem>
 					<listitem><para><guilabel>Sperren</guilabel>: Sperrt das/die ausgewählte(n) Thema/Themen.</para></listitem>
 					<listitem><para><guilabel>Entsperren</guilabel>: Entsperrt das/die ausgewählte(n) Thema/Themen.</para></listitem>
-					<listitem><para><guilabel>Neu abgleichen</guilabel>: Gleicht das/die ausgewählte(n) Thema/Themen neu ab.</para></listitem>
+					<listitem><para><guilabel>Resynchronisieren</guilabel>: Gleicht das/die ausgewählte(n) Thema/Themen neu ab.</para></listitem>
 					<listitem><para><guilabel>Themenart ändern</guilabel>: Ändert die Themenart entweder zu <guilabel>Globale Ankündigung</guilabel>, <guilabel>Ankündigung</guilabel>, <guilabel>Wichtig</guilabel> oder <guilabel>Normales Thema</guilabel>.</para></listitem>
 				</itemizedlist>
 			</para>

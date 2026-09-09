@@ -766,8 +766,8 @@
 				<title>Die Suchoptionen</title>
 				<para>Suchen können weiter auf bestimmte Foren oder bestimmte Teile der Themen eingeschränkt werden.</para>
 				<itemizedlist>
-					<listitem><para><guilabel>In Foren suchen</guilabel> – Hier können Sie bestimmte Foren auswählen, in denen die Suche durchgeführt werden soll. Mehrere Foren können durch Gedrückthalten der Taste „Strg“ oder „Befehl“ ausgewählt werden.</para></listitem>
-					<listitem><para><guilabel>In Unterforen suchen</guilabel> – Wenn diese Option ausgewählt ist, werden auch alle Unterforen der ausgewählten Foren durchsucht.</para></listitem>
+					<listitem><para><guilabel>Zu durchsuchende Foren</guilabel> – Hier können Sie bestimmte Foren auswählen, in denen die Suche durchgeführt werden soll. Mehrere Foren können durch Gedrückthalten der Taste „Strg“ oder „Befehl“ ausgewählt werden.</para></listitem>
+					<listitem><para><guilabel>Unterforen durchsuchen</guilabel> – Wenn diese Option ausgewählt ist, werden auch alle Unterforen der ausgewählten Foren durchsucht.</para></listitem>
 					<listitem>
 						<para><guilabel>Suchen in</guilabel> – Damit können Sie festlegen, welcher Teil der Beiträge durchsucht werden soll.</para>
 						<itemizedlist>
@@ -838,7 +838,7 @@
 			<varlistentry>
 				<term>Sortierung nach Spaltenüberschriften</term>
 				<listitem>
-					<para>Jede der Spaltenüberschriften ist ebenfalls ein Sortierlink. Das bedeutet, Sie können auf <guilabel>Benutzername</guilabel>, <guilabel>Rang</guilabel>, <guilabel>Beiträge</guilabel>, <guilabel>Website</guilabel>, <guilabel>Wohnort</guilabel>, <guilabel>>Beigetreten</guilabel> oder <guilabel>Zuletzt aktiv</guilabel> klicken, um nach dieser Gruppe zu sortieren. Beim ersten Klicken werden die Listen in aufsteigender Reihenfolge sortiert (das heißt, Benutzernamen würden von A bis Z aufgelistet, und das Beitrittsdatum würde vom frühesten zum jüngsten aufgelistet). Wenn Sie die Liste in absteigender Reihenfolge anordnen möchten, warten Sie, bis die Seite in aufsteigender Reihenfolge geladen wurde, und klicken Sie ein zweites Mal auf die gewünschte Spaltenüberschrift.</para>
+					<para>Jede der Spaltenüberschriften ist ebenfalls ein Sortierlink. Das bedeutet, Sie können auf <guilabel>Benutzername</guilabel>, <guilabel>Rang</guilabel>, <guilabel>Beiträge</guilabel>, <guilabel>Website</guilabel>, <guilabel>Wohnort</guilabel>, <guilabel>Registriert</guilabel> oder <guilabel>Zuletzt aktiv</guilabel> klicken, um nach dieser Gruppe zu sortieren. Beim ersten Klicken werden die Listen in aufsteigender Reihenfolge sortiert (das heißt, Benutzernamen würden von A bis Z aufgelistet, und das Beitrittsdatum würde vom frühesten zum jüngsten aufgelistet). Wenn Sie die Liste in absteigender Reihenfolge anordnen möchten, warten Sie, bis die Seite in aufsteigender Reihenfolge geladen wurde, und klicken Sie ein zweites Mal auf die gewünschte Spaltenüberschrift.</para>
 				</listitem>
 			</varlistentry>
 

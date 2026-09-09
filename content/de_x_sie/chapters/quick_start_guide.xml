@@ -134,16 +134,16 @@
 			<para>Sie müssen sich nun entscheiden, welche Datenbank Sie verwenden möchten. Informationen darüber, welche Datenbanken unterstützt werden, finden Sie im <link linkend="quick_requirements">Abschnitt Voraussetzungen</link>. Wenn Sie Ihre Datenbankeinstellungen nicht kennen, wenden Sie sich bitte an Ihren Hosting-Anbieter und fragen Sie danach. Ohne diese Angaben können Sie nicht fortfahren. Sie benötigen:</para>
 			<itemizedlist>
 				<listitem>
-					<para>Den <guilabel>Datenbanktyp</guilabel> - die Datenbank, die Sie verwenden werden (z. B. MySQL, SQL Server, Oracle)</para>
+					<para>Den <guilabel>Datenbank-Typ</guilabel> - die Datenbank, die Sie verwenden werden (z. B. MySQL, SQL Server, Oracle)</para>
 				</listitem>
 				<listitem>
-					<para>Den <guilabel>Datenbank-Servername oder DSN</guilabel> - die Adresse des Datenbankservers.</para>
+					<para>Den <guilabel>Datenbankserver-Hostname oder DSN</guilabel> - die Adresse des Datenbankservers.</para>
 				</listitem>
 				<listitem>
-					<para>Den <guilabel>Datenbank-Server-Port</guilabel> - den Port des Datenbankservers (in den meisten Fällen wird dieser nicht benötigt).</para>
+					<para>Den <guilabel>Datenbankserver-Port</guilabel> - den Port des Datenbankservers (in den meisten Fällen wird dieser nicht benötigt).</para>
 				</listitem>
 				<listitem>
-					<para>Den <guilabel>Datenbankname</guilabel>- den Namen der Datenbank auf dem Server.</para>
+					<para>Den <guilabel>Namen der Datenbank</guilabel> - den Namen der Datenbank auf dem Server.</para>
 				</listitem>
 				<listitem>
 					<para>Den <guilabel>Datenbank-Benutzername</guilabel> und das <guilabel>Datenbank-Passwort</guilabel> - die Anmeldedaten für den Zugriff auf die Datenbank.</para>
@@ -164,7 +164,7 @@
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>Sie müssen die Einstellung <guilabel>Präfix für Tabellen in der Datenbank</guilabel> nicht ändern, es sei denn, Sie planen, mehrere phpBB-Installationen auf einer Datenbank zu verwenden. In diesem Fall können Sie für jede Installation ein anderes Präfix verwenden, damit dies funktioniert.</para>
+			<para>Sie müssen die Einstellung <guilabel>Präfix der Tabellen in der Datenbank</guilabel> nicht ändern, es sei denn, Sie planen, mehrere phpBB-Installationen auf einer Datenbank zu verwenden. In diesem Fall können Sie für jede Installation ein anderes Präfix verwenden, damit dies funktioniert.</para>
 			<para>Nachdem Sie Ihre Angaben eingegeben haben, können Sie fortfahren, indem Sie auf die Schaltfläche <guilabel>Absenden</guilabel> klicken. phpBB 3.3 wird nun die von Ihnen eingegebenen Daten testen und überprüfen.</para>
 			<para>Wenn die Fehlermeldung "<guilabel>Verbindung zur Datenbank konnte nicht hergestellt werden</guilabel>" angezeigt wird, bedeutet dies, dass Sie die Datenbankinformationen nicht korrekt eingegeben haben und es phpBB nicht möglich ist, eine Verbindung herzustellen. Stellen Sie sicher, dass alle Ihre Angaben korrekt sind, und versuchen Sie es erneut. Wenn Sie sich bei Ihren Datenbankeinstellungen unsicher sind, wenden Sie sich bitte an Ihren Hoster.</para>
 			<tip>
