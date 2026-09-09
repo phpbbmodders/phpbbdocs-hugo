@@ -5,6 +5,10 @@ plans live under `docs/TODO/`; this file stays a concise summary.
 
 ## Detailed TODOs
 
+- [German translation: ask for a human review](TODO/todo-german-translation-human-review.md) —
+  a friendly, plain-English list of what a native German speaker should
+  read over, now that the terminology cross-checking pass has made real
+  progress.
 - [Exhaustive German terminology audit](TODO/todo-german-terminology-audit.md) —
   a representative pass fixed real terminology mismatches against phpBB's
   real German language pack; a full line-by-line pass across all chapters

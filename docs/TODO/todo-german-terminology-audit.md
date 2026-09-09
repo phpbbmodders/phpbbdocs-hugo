@@ -1,19 +1,27 @@
 # Exhaustive German terminology audit
 
-A representative pass (commit `af72adf`) cross-referenced UI terms in
+Several passes (starting at commit `af72adf`, continuing through
+`322eaad`) cross-referenced UI terms across `admin_guide.xml`,
 `user_guide.xml`, `moderator_guide.xml`, and `quick_start_guide.xml`
 against phpBB's real German (Formal Honorifics) language pack
 (`phpbb-de/phpbb-translation`, `language/de_x_sie/`) and found real
 mismatches — not just close paraphrases, but different literal button
-and field labels (see that commit for examples). `upgrade_guide.xml`,
+and field labels, and in a couple of cases an entire section using the
+wrong feature name (see the commit log for examples). `upgrade_guide.xml`,
 `server_guide.xml`, and `glossary.xml` were spot-checked and already
 matched.
 
-That pass was representative, not exhaustive: there are roughly 730
-unique `<guilabel>`/`<guimenuitem>` strings across the six end-user
-chapters, and only a sample was actually checked against the real
-language files per chapter. Not yet covered at all:
+This has covered real ground, but it's still not exhaustive: there are
+roughly 730 unique `<guilabel>`/`<guimenuitem>` strings across the six
+end-user chapters, and `admin_guide.xml` alone still has well over 100
+unmatched terms that either need a real language-pack key found for
+them or are confirmed fine as-is. Not yet fully covered:
 
+- The remaining unmatched terms in `admin_guide.xml` (avatar/attachment
+  paths, contact page, word censor management, extension groups, and a
+  handful of settings where no matching official string was found at
+  all — see `docs/TODO/todo-german-translation-human-review.md` for the
+  specific list of those).
 - A full line-by-line pass of every remaining `<guilabel>`/
   `<guimenuitem>` string in `user_guide.xml`, `moderator_guide.xml`,
   and `quick_start_guide.xml` against the real pack.
@@ -21,11 +29,6 @@ language files per chapter. Not yet covered at all:
   these reference fewer end-user UI strings, but where they do (e.g.
   CLI flag names, ACP references), the same terminology-checking rule
   applies.
-- `admin_guide.xml`'s originally-shipped sections (everything before
-  `acp_ban_emails` — the part that predated the truncation fix in
-  commit `fc25f5c`) — only the newly-written sections in that commit
-  were checked against the real pack while writing them; the
-  pre-existing ~1,600 lines haven't been re-checked.
 
 ## How to do this
 
