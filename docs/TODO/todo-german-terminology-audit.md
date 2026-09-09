@@ -8,17 +8,23 @@ chapters (`admin_guide.xml`, `user_guide.xml`, `moderator_guide.xml`,
 Honorifics) language pack (`phpbb-de/phpbb-translation`,
 `language/de_x_sie/`).
 
-Six of the seven chapters — every one except `admin_guide.xml` — have
-had a full line-by-line pass and are confirmed clean. Real mismatches
-were found and fixed along the way, not just close paraphrases but
-different literal button and field labels, and in several cases an
-entire feature described with the wrong term: the "Manage extensions"
-pages being confused with phpBB's unrelated Extensions/mods feature,
-predefined permission-role names like "Vollmoderator" not matching the
-real "Umfassender Moderator", and "Moderatorkontrollzentrum"/
+All seven chapters have had a full line-by-line pass: every
+`<guilabel>`/`<guimenuitem>`/`<title>` string in every chapter has been
+individually checked against the real language pack. Six of them
+(`user_guide.xml`, `moderator_guide.xml`, `quick_start_guide.xml`,
+`upgrade_guide.xml`, `server_guide.xml`, `glossary.xml`) turned out
+clean after that pass, once the real mismatches found along the way
+were fixed — not just close paraphrases but different literal button
+and field labels, and in several cases an entire feature described
+with the wrong term: the "Manage extensions" pages being confused with
+phpBB's unrelated Extensions/mods feature, predefined permission-role
+names like "Vollmoderator" not matching the real "Umfassender
+Moderator", and "Moderatorkontrollzentrum"/
 "Administrationskontrollzentrum" not matching the real
 "Moderations-Bereich"/"Administrations-Bereich" (see the commit log
-for the full list).
+for the full list). `admin_guide.xml` is the seventh chapter, covered
+below — it had far more ground to cover, but it went through the exact
+same full pass as the other six.
 
 All 50 dev-docs files have had a full read-through against their
 English originals. Dev-docs reference far fewer phpBB UI strings than
