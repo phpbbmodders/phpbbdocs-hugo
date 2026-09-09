@@ -8,6 +8,23 @@ blocks. Compiled 08/30/2026.
 
 phpBB currently lists 55 language packs; all 55 are captured below.
 
+**Directory naming convention:** every per-language directory in this
+project (`content/<code>/`, `dev-docs-docbook/<code>/`, and any future
+per-language directory) is named after phpBB's own ISO Code for that
+pack, not the Hugo locale and not a generic English language name. This
+is what already makes `de_x_sie` (not `de` or `german`) the directory
+for German, matching phpBB's own code for the Formal Honorifics pack
+exactly. The point is to keep the register/variant unambiguous for both
+future maintenance and translators: a bare `de` would leave it unclear
+whether a directory holds the casual (`de`) or formal (`de-x-sie`)
+German pack, whereas `de_x_sie` names the exact variant. Apply the same
+rule to every future language added to this project — including
+honorific splits (Spanish `es` vs `es-x-tu`, Dutch `nl` vs
+`nl-x-formal`, Croatian `hr` vs `hr-x-vi`) and other variant packs
+(Portuguese `pt` vs `pt-preao`, Serbian's Cyrillic/Latin split). The
+Hugo `locale` value (the "Suggested Hugo locale" column below) is a
+separate, unrelated setting used only in `config.toml`.
+
 **How "Suggested Hugo locale" was derived:** if phpBB's own ISO Code already
 includes a region subtag (e.g. `pt-br`, `es-mx`), it is simply re-cased to
 the Hugo convention (lowercase language, uppercase region). If phpBB's code

@@ -7,6 +7,12 @@ lowest priority for the next translation. Grouped by language rather than
 by raw phpBB code, so an honorific-split pack (e.g. German casual/formal)
 counts as one entry, not two.
 
+Whichever variant is picked for any of these, name its `content/` and
+`dev-docs-docbook/` directories after phpBB's own ISO Code for that exact
+pack (e.g. `es-x-tu`, not `es` or `spanish`, for Spanish Casual) — see the
+directory naming convention in
+[phpbb-hugo-languages.md](../phpbb-hugo-languages.md).
+
 **Ranking criteria**, in order of weight:
 
 1. **Global reach** — native + second-language speaker count. General
