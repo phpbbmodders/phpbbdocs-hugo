@@ -1997,7 +1997,7 @@
 		</section>
 		<section id="acp_permissions_roles">
 			<title>Berechtigungs-Rollen</title>
-			<para>Um das Festlegen von Berechtigungen zu erleichtern, können Sie Rollen erstellen, die eine vordefinierte Menge an Berechtigungen enthalten und die Sie dann Benutzern oder Gruppen zuweisen können. phpBB hat bereits einige vordefinierte Rollen für Sie vorbereitet – so können Sie beispielsweise bei forenbasierten Berechtigungen jeden Benutzer zu einem „Standard-Moderator", „Vollmoderator" oder „Eingeschränkten Moderator" usw. machen.</para>
+			<para>Um das Festlegen von Berechtigungen zu erleichtern, können Sie Rollen erstellen, die eine vordefinierte Menge an Berechtigungen enthalten und die Sie dann Benutzern oder Gruppen zuweisen können. phpBB hat bereits einige vordefinierte Rollen für Sie vorbereitet – so können Sie beispielsweise bei forenbasierten Berechtigungen jeden Benutzer zu einem „Standard-Moderator", „Umfassender Moderator" oder „Eingeschränkten Moderator" usw. machen.</para>
 
 			<para>Es gibt vier Arten von Berechtigungs-Rollen:
 				<itemizedlist>
@@ -2012,7 +2012,7 @@
 
 			<para>Die meisten Standard-Rollen verwenden Kombinationen aus <guilabel>Ja</guilabel> und <guilabel>Nein</guilabel>. Das bedeutet: Wenn einem Benutzer durch die Mitgliedschaft in zwei verschiedenen Gruppen zwei unterschiedliche Rollen zugewiesen werden – zum Beispiel „Eingeschränkter Zugriff" und „Regulärer Zugriff" – überschreiben die <guilabel>Ja</guilabel>-Werte die <guilabel>Nein</guilabel>-Werte, sodass dem Benutzer der reguläre Zugriff verbleibt.</para>
 
-			<para>Die Ausnahmen bilden Rollen mit <guilabel>Nie</guilabel>-Einstellungen, wie die Benutzer-Rollen <guilabel>Kein Avatar</guilabel>, <guilabel>Keine PNs</guilabel> und <guilabel>Funktionen für neu registrierte Benutzer</guilabel>, sowie die Forums-Rolle <guilabel>In Freigabe-Warteschlange</guilabel>. Diese vier Rollen verwenden <guilabel>Nie</guilabel>-Einstellungen und überschreiben daher die <guilabel>Ja</guilabel>-Einstellungen, die durch andere Rollen gewährt worden wären.</para>
+			<para>Die Ausnahmen bilden Rollen mit <guilabel>Nie</guilabel>-Einstellungen, wie die Benutzer-Rollen <guilabel>Kein Avatar</guilabel>, <guilabel>Keine Privaten Nachrichten</guilabel> und <guilabel>Funktionalitäten für neu registrierte Benutzer</guilabel>, sowie die Forums-Rolle <guilabel>Mit Warteschlange</guilabel>. Diese vier Rollen verwenden <guilabel>Nie</guilabel>-Einstellungen und überschreiben daher die <guilabel>Ja</guilabel>-Einstellungen, die durch andere Rollen gewährt worden wären.</para>
 
 			<para>Sie sollten niemals eine dieser vier Rollen oder andere <guilabel>Nie</guilabel>-Einstellungen für Ihre Gruppe „Registrierte Benutzer" verwenden. Andernfalls würden diese Berechtigungen allen entzogen, auch Ihnen selbst.</para>
 
@@ -2089,7 +2089,7 @@
 				<para>
 					<itemizedlist>
 						<listitem><para>Standardmäßig hat die Benutzergruppe „Globale Moderatoren" die Rolle „Standard-Moderator". Dies erlaubt es ihnen, jedes Forum zu moderieren, das sie sehen können, erlaubt ihnen aber nicht, den Autor eines Beitrags zu ändern oder Benutzer zu sperren.</para></listitem>
-						<listitem><para>Fügen Sie der Benutzergruppe „Administratoren" die Rolle <guilabel>Standard-Moderator</guilabel> oder <guilabel>Vollmoderator</guilabel> hinzu. Dies erlaubt es Ihren Administratoren, jedes Forum zu moderieren, ohne sie zur Benutzergruppe „Globale Moderatoren" hinzufügen zu müssen.</para></listitem>
+						<listitem><para>Fügen Sie der Benutzergruppe „Administratoren" die Rolle <guilabel>Standard-Moderator</guilabel> oder <guilabel>Umfassender Moderator</guilabel> hinzu. Dies erlaubt es Ihren Administratoren, jedes Forum zu moderieren, ohne sie zur Benutzergruppe „Globale Moderatoren" hinzufügen zu müssen.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -2098,8 +2098,8 @@
 				<para>
 					<itemizedlist>
 						<listitem><para>Die Benutzergruppen „Administratoren" und „Globale Moderatoren" starten mit der Rolle „Alle Funktionen", was in Ordnung ist.</para></listitem>
-						<listitem><para>„Registrierte Benutzer" starten mit der Rolle „Standardfunktionen", die ihnen die meisten normalen Benutzerrechte gibt, ihnen jedoch nicht erlaubt, ihren Benutzernamen oder ihre Hauptgruppe zu ändern, sowie einige weitere Dinge.</para></listitem>
-						<listitem><para>Die Rolle „Standardfunktionen" erlaubt es Benutzern, ihren Online-Status auszublenden. Möglicherweise möchten Sie diese Rolle <guilabel>Standardfunktionen</guilabel> bearbeiten und diese Berechtigung auf <guilabel>Nein</guilabel> setzen.</para></listitem>
+						<listitem><para>„Registrierte Benutzer" starten mit der Rolle „Standard-Funktionalität", die ihnen die meisten normalen Benutzerrechte gibt, ihnen jedoch nicht erlaubt, ihren Benutzernamen oder ihre Hauptgruppe zu ändern, sowie einige weitere Dinge.</para></listitem>
+						<listitem><para>Die Rolle „Standard-Funktionalität" erlaubt es Benutzern, ihren Online-Status auszublenden. Möglicherweise möchten Sie diese Rolle <guilabel>Standard-Funktionalität</guilabel> bearbeiten und diese Berechtigung auf <guilabel>Nein</guilabel> setzen.</para></listitem>
 						<listitem><para>„Gäste" starten mit benutzerdefinierten allgemeinen Benutzerrechten, die nur das Herunterladen und Suchen erlauben.</para></listitem>
 					</itemizedlist>
 				</para>
@@ -2117,11 +2117,11 @@
 				<title>Benutzerspezifische Forenrechte</title>
 				<para>
 					<itemizedlist>
-						<listitem><para>Geben Sie Ihren Benutzergruppen „Administratoren" und „Globale Moderatoren" für die meisten Foren die Forums-Rolle „Vollzugriff". Dies erlaubt es ihnen, wichtige Themen und Bekanntmachungen zu erstellen.</para></listitem>
-						<listitem><para>Geben Sie Ihrer Benutzergruppe „Registrierte Benutzer" die Forums-Rolle <guilabel>Standardzugriff</guilabel> für alle Foren außer Ihren reinen Admin-/Mod-Foren oder anderen versteckten Foren.</para></listitem>
-						<listitem><para>Geben Sie der Benutzergruppe „Gäste" die Forums-Rolle <guilabel>Nur Lesen</guilabel> für Foren, die nicht registrierte Gäste lesen können sollen.</para></listitem>
-						<listitem><para>Fügen Sie der Benutzergruppe „Bots" die Forums-Rolle <guilabel>Bot-Zugriff</guilabel> für dieselben Foren hinzu, die Gäste lesen sollen, damit Webcrawler-Suchbots diese Foren indizieren können.</para></listitem>
-						<listitem><para>Die Forums-Rolle <guilabel>Kein Zugriff</guilabel> wäre mit <guilabel>Nie</guilabel>-Berechtigungen nützlicher als mit ihren derzeitigen <guilabel>Nein</guilabel>-Werten. Bearbeiten Sie die Forums-Rolle <guilabel>Kein Zugriff</guilabel> und ändern Sie <guilabel>Kann Forum sehen</guilabel> und <guilabel>Kann Forum lesen</guilabel> von <guilabel>Nein</guilabel> auf <guilabel>Nie</guilabel>. So können Sie diese Rolle verwenden, um einer kleinen Gruppe den Zugriff auf ein Forum zu verwehren.</para></listitem>
+						<listitem><para>Geben Sie Ihren Benutzergruppen „Administratoren" und „Globale Moderatoren" für die meisten Foren die Forums-Rolle „Voller Zugang". Dies erlaubt es ihnen, wichtige Themen und Bekanntmachungen zu erstellen.</para></listitem>
+						<listitem><para>Geben Sie Ihrer Benutzergruppe „Registrierte Benutzer" die Forums-Rolle <guilabel>Standard-Zugang</guilabel> für alle Foren außer Ihren reinen Admin-/Mod-Foren oder anderen versteckten Foren.</para></listitem>
+						<listitem><para>Geben Sie der Benutzergruppe „Gäste" die Forums-Rolle <guilabel>Nur lesender Zugriff</guilabel> für Foren, die nicht registrierte Gäste lesen können sollen.</para></listitem>
+						<listitem><para>Fügen Sie der Benutzergruppe „Bots" die Forums-Rolle <guilabel>Bot-/Spider-Zugang</guilabel> für dieselben Foren hinzu, die Gäste lesen sollen, damit Webcrawler-Suchbots diese Foren indizieren können.</para></listitem>
+						<listitem><para>Die Forums-Rolle <guilabel>Kein Zugang</guilabel> wäre mit <guilabel>Nie</guilabel>-Berechtigungen nützlicher als mit ihren derzeitigen <guilabel>Nein</guilabel>-Werten. Bearbeiten Sie die Forums-Rolle <guilabel>Kein Zugang</guilabel> und ändern Sie <guilabel>Kann Forum sehen</guilabel> und <guilabel>Kann Forum lesen</guilabel> von <guilabel>Nein</guilabel> auf <guilabel>Nie</guilabel>. So können Sie diese Rolle verwenden, um einer kleinen Gruppe den Zugriff auf ein Forum zu verwehren.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -2156,7 +2156,7 @@
 				<varlistentry>
 					<term>Wie kann ich meinen Moderatoren erlauben, wichtige Themen oder Bekanntmachungen zu erstellen?</term>
 					<listitem>
-						<para>Die Berechtigungen für wichtige Themen und Bekanntmachungen befinden sich bei den Forenrechten. Die Zuweisung der Forums-Rolle <guilabel>Vollzugriff</guilabel> erlaubt es ihnen, wichtige Themen und Bekanntmachungen zu erstellen.</para>
+						<para>Die Berechtigungen für wichtige Themen und Bekanntmachungen befinden sich bei den Forenrechten. Die Zuweisung der Forums-Rolle <guilabel>Voller Zugang</guilabel> erlaubt es ihnen, wichtige Themen und Bekanntmachungen zu erstellen.</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
