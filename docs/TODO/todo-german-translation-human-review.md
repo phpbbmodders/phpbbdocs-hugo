@@ -61,17 +61,33 @@ round, mostly because we couldn't find the matching official string in the
 files we had on hand. That doesn't mean anything is known to be wrong,
 just unconfirmed either way:
 
-- Mass-email batch size settings ("Paketgröße für E-Mails", "Paketgröße für
-  Jabber") and the "Name der E-Mail-Funktion" field.
-- The private-message attachment storage quota field.
+- The "Name der E-Mail-Funktion" field.
 - The "dotted topics" setting (topics you've already posted in getting a
   visual marker). It currently reads "Gepunktete Themensymbole aktivieren".
-- Avatar upload/gallery paths, word censor management, and the contact
-  page settings.
+- The base `[flash]`/`[img]` BBCode-tag toggles outside of private
+  messages (the private-message versions were confirmed and fixed).
+- The permission-role labels used for delegating permission-management
+  (e.g. "Kann die Berechtigungen anderer verwenden").
+- A handful of module-management fields ("Modulmodus auswählen", "Formular
+  auswählen") and the online-user-list toggle ("Online-Benutzerlisten
+  aktivieren").
 
 None of these are guessed wildly. They're existing, presumably reasonable
 German, just not independently verified against the live board's own
 wording the way most of the rest of the document was.
+
+A later pass fixed a much larger number of real mismatches than the first
+round caught, including several that were quietly wrong in a way that
+would mislead a German admin: the word-censor field labels, the "Manage
+extensions"/"Manage extension groups" pages (previously confused with
+phpBB's unrelated Extensions/mods feature, since both use the German word
+"Erweiterung"), the predefined permission-role names ("Vollmoderator" vs
+the real "Umfassender Moderator", and several others), the five
+server-configuration category tabs, avatar upload buttons, mass-email and
+Jabber package-size fields, and the "Find a member"/"Select Anonymous
+User" controls used throughout the user-management pages. See
+[`todo-german-terminology-audit.md`](todo-german-terminology-audit.md)
+for the ongoing exhaustive pass.
 
 ## Bigger pieces not touched this round at all
 
