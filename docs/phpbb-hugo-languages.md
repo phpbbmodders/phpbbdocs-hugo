@@ -26,6 +26,14 @@ naming it after the exact code removes the ambiguity.
   these aren't Hugo content and have no reason to substitute the
   hyphen.
 
+**One master-TODO entry per language, not one per file:** `docs/TODO/<code>/`
+holds its own `README.md` indexing every detailed TODO for that
+language (terminology audit, translation review notes, supplementary
+glossary, etc.). `docs/TODO.md` links to that one `README.md`, not to
+each individual file inside the directory — this is what keeps the
+master TODO a concise summary as a language accumulates more than one
+or two detail docs.
+
 Apply the same rule to every future language added to this project —
 including honorific splits (Spanish `es` vs `es-x-tu`, Dutch `nl` vs
 `nl-x-formal`, Croatian `hr` vs `hr-x-vi`) and other variant packs
