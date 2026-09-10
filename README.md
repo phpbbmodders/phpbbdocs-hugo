@@ -1,6 +1,6 @@
 # phpbbdocs-hugo
 
-A self-contained second copy of the phpBB documentation build pipeline (`phpbbdocs-hugo`, née `proteus-duex` — "Proteus 2"), independent of the project root's own `xsl/`, `content/`, and `proteus_doc_*.xml`. It started as a plain copy of the Hugo pipeline and grew from there: a way to pull the *current* upstream phpBB documentation, extend the site with the developer documentation (which the original pipeline never covered), and add Danish, French, and German translations of both.
+A self-contained second copy of the phpBB documentation build pipeline (`phpbbdocs-hugo`, née `proteus-duex` — "Proteus 2"), independent of the project root's own `xsl/`, `content/`, and `proteus_doc_*.xml`. It started as a plain copy of the Hugo pipeline and grew from there: a way to pull the *current* upstream phpBB documentation, extend the site with the developer documentation (which the original pipeline never covered), and add translations of both. See [`docs/phpbb-hugo-languages.md`](docs/phpbb-hugo-languages.md) for which languages are currently supported.
 
 Nothing in this folder touches the project root — the two pipelines are fully separate copies.
 
@@ -97,4 +97,4 @@ Ideas not yet built, practical and speculative alike: [`docs/TODO.md`](docs/TODO
 
 ## License
 
-This entire repository — build tooling (shell scripts, XSLT stylesheets, Hugo site templates/CSS) and documentation content alike (the English source pulled from [phpbb/documentation](https://github.com/phpbb/documentation), and its Danish, French, and German translations) &copy; phpBB Limited — is licensed under the [CC Attribution-NonCommercial-ShareAlike 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license, matching the single-license convention of phpBB's own upstream documentation repository. See [LICENSE](LICENSE).
+This entire repository — build tooling (shell scripts, XSLT stylesheets, Hugo site templates/CSS) and documentation content alike (the English source pulled from [phpbb/documentation](https://github.com/phpbb/documentation), and its translations) &copy; phpBB Limited — is licensed under the [CC Attribution-NonCommercial-ShareAlike 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license, matching the single-license convention of phpBB's own upstream documentation repository. See [LICENSE](LICENSE).
