@@ -1,6 +1,6 @@
 # phpbbdocs-hugo
 
-A self-contained second copy of the phpBB documentation build pipeline (`phpbbdocs-hugo`, née `proteus-duex` — "Proteus 2"), independent of the project root's own `xsl/`, `content/`, and `proteus_doc_*.xml`. It started as a plain copy of the Hugo pipeline and grew from there: a way to pull the *current* upstream phpBB documentation, extend the site with the developer documentation (which the original pipeline never covered), and add a Danish translation of both.
+A self-contained second copy of the phpBB documentation build pipeline (`phpbbdocs-hugo`, née `proteus-duex` — "Proteus 2"), independent of the project root's own `xsl/`, `content/`, and `proteus_doc_*.xml`. It started as a plain copy of the Hugo pipeline and grew from there: a way to pull the *current* upstream phpBB documentation, extend the site with the developer documentation (which the original pipeline never covered), and add Danish, French, and German translations of both.
 
 Nothing in this folder touches the project root — the two pipelines are fully separate copies.
 
@@ -24,7 +24,7 @@ Upstream is the source of truth for the English end-user docs, not a locally-mai
 
 Transforms `proteus_doc_<lang>.xml` (via `xsl/proteus_hugo.xsl`) into Hugo Markdown under `site/content/<lang>/`, copies that language's images, then runs `hugo`. `language` defaults to `all` (every `proteus_doc_*.xml` found — currently `en`, `da`, `fr`, and `de_x_sie`); `destination_dir` defaults to `site/public`.
 
-**No prerequisite script for `da`/`fr`** — those are hand-translated static source. For `en`, run step 1 first so it reflects current upstream rather than whatever was last synced.
+**No prerequisite script for `da`/`fr`/`de_x_sie`** — those are Claude-translated static source. For `en`, run step 1 first so it reflects current upstream rather than whatever was last synced.
 
 ### 3. `convert_dev_docs_to_docbook.sh` — pull and convert the developer docs
 
@@ -67,17 +67,18 @@ For every page that exists in `source_lang`'s content but has no counterpart at 
 ./phpbbdocs_hugo_devdocs.sh en             # re-pulls + re-converts dev docs from upstream itself
 ./phpbbdocs_hugo_devdocs.sh da
 ./phpbbdocs_hugo_devdocs.sh fr
-./fill_translation_fallbacks.sh en da fr
+./phpbbdocs_hugo_devdocs.sh de_x_sie
+./fill_translation_fallbacks.sh en da fr de_x_sie
 ./phpbbdocs_hugo.sh all                    # rebuild once more so the fallback pages are in the built site
 ```
 
-**Just want the latest end-user docs content?** `./pull_upstream_docs.sh && ./phpbbdocs_hugo.sh all` — the sync pulls current upstream chapters/images into `content/en/`, then the build picks them up. Follow with `./fill_translation_fallbacks.sh en da fr && ./phpbbdocs_hugo.sh all` if the sync introduced pages a translation doesn't have yet.
+**Just want the latest end-user docs content?** `./pull_upstream_docs.sh && ./phpbbdocs_hugo.sh all` — the sync pulls current upstream chapters/images into `content/en/`, then the build picks them up. Follow with `./fill_translation_fallbacks.sh en da fr de_x_sie && ./phpbbdocs_hugo.sh all` if the sync introduced pages a translation doesn't have yet.
 
-**Just want the latest developer docs?** `./phpbbdocs_hugo_devdocs.sh en` — pulls upstream, converts to DocBook, and builds in one step (and `./phpbbdocs_hugo_devdocs.sh da` / `./phpbbdocs_hugo_devdocs.sh fr` too, if those translated DocBook sources are still current — translating is a separate, manual step, so a fresh English pull doesn't automatically update the translated pages). Follow with `./fill_translation_fallbacks.sh en da fr` if it added anything a translation doesn't have yet.
+**Just want the latest developer docs?** `./phpbbdocs_hugo_devdocs.sh en` — pulls upstream, converts to DocBook, and builds in one step (and `./phpbbdocs_hugo_devdocs.sh da` / `./phpbbdocs_hugo_devdocs.sh fr` / `./phpbbdocs_hugo_devdocs.sh de_x_sie` too, if those translated DocBook sources are still current — translating is a separate, manual step, so a fresh English pull doesn't automatically update the translated pages). Follow with `./fill_translation_fallbacks.sh en da fr de_x_sie` if it added anything a translation doesn't have yet.
 
 ## Adding another language to the developer docs
 
-`convert_dev_docs_to_docbook.sh` only ever produces English (`dev-docs-docbook/en/`) — it pulls straight from upstream, which has no other language for the developer docs. `dev-docs-docbook/da/` and `dev-docs-docbook/fr/` were each produced by translating the English DocBook source directly (prose translated; code samples, file paths, `<literal>` technical identifiers, and `<ulink>` URLs left untouched; XML structure and `id` attributes preserved exactly), then verified for well-formedness and structural completeness (row/entry counts compared 1:1 against the English source) before building.
+`convert_dev_docs_to_docbook.sh` only ever produces English (`dev-docs-docbook/en/`) — it pulls straight from upstream, which has no other language for the developer docs. `dev-docs-docbook/da/`, `dev-docs-docbook/fr/`, and `dev-docs-docbook/de_x_sie/` were each produced by translating the English DocBook source directly (prose translated; code samples, file paths, `<literal>` technical identifiers, and `<ulink>` URLs left untouched; XML structure and `id` attributes preserved exactly), then verified for well-formedness and structural completeness (row/entry counts compared 1:1 against the English source) before building.
 
 To add a language `<lang>`:
 1. Translate every file in `dev-docs-docbook/en/` into `dev-docs-docbook/<lang>/`, mirroring the exact subdirectory structure and filenames, following the same translate-prose/preserve-code rules above.
