@@ -127,16 +127,16 @@
 					<para>Le <guilabel>Type de base de données</guilabel> - la base de données que vous allez utiliser (par exemple MySQL, SQL Server, Oracle)</para>
 				</listitem>
 				<listitem>
-					<para>Le <guilabel>Nom d'hôte du serveur de base de données ou DSN</guilabel> - l'adresse du serveur de base de données.</para>
+					<para>Le <guilabel>Nom d'hôte du serveur de votre base de données ou DSN</guilabel> - l'adresse du serveur de base de données.</para>
 				</listitem>
 				<listitem>
-					<para>Le <guilabel>Port du serveur de base de données</guilabel> - le port du serveur de base de données (la plupart du temps, ceci n'est pas nécessaire).</para>
+					<para>Le <guilabel>Port du serveur de votre base de données</guilabel> - le port du serveur de base de données (la plupart du temps, ceci n'est pas nécessaire).</para>
 				</listitem>
 				<listitem>
-					<para>Le <guilabel>Nom de la base de données</guilabel> - le nom de la base de données sur le serveur.</para>
+					<para>Le <guilabel>Nom de votre base de données</guilabel> - le nom de la base de données sur le serveur.</para>
 				</listitem>
 				<listitem>
-					<para>Le <guilabel>Nom d'utilisateur de la base de données</guilabel> et le <guilabel>Mot de passe de la base de données</guilabel> - les identifiants d'accès à la base de données.</para>
+					<para>Le <guilabel>Nom d'utilisateur de votre base de données</guilabel> et le <guilabel>Mot de passe de votre base de données</guilabel> - les identifiants d'accès à la base de données.</para>
 				</listitem>
 			</itemizedlist>
 			<tip>
@@ -154,7 +154,7 @@
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>Vous n'avez pas besoin de modifier le paramètre <guilabel>Préfixe des tables dans la base de données</guilabel>, sauf si vous prévoyez d'utiliser plusieurs installations de phpBB sur une même base de données. Dans ce cas, vous pouvez utiliser un préfixe différent pour chaque installation afin que cela fonctionne.</para>
+			<para>Vous n'avez pas besoin de modifier le paramètre <guilabel>Préfixe des tables de votre base de données</guilabel>, sauf si vous prévoyez d'utiliser plusieurs installations de phpBB sur une même base de données. Dans ce cas, vous pouvez utiliser un préfixe différent pour chaque installation afin que cela fonctionne.</para>
 			<para>Après avoir saisi vos informations, vous pouvez continuer en cliquant sur le bouton <guilabel>Envoyer</guilabel>. phpBB 3.3 va maintenant tester et vérifier les données que vous avez saisies.</para>
 			<para>Si vous voyez une erreur « <guilabel>Impossible de se connecter à la base de données</guilabel> », cela signifie que vous n'avez pas saisi correctement les informations de la base de données et que phpBB ne peut pas s'y connecter. Assurez-vous que tout ce que vous avez saisi est correct et réessayez. Là encore, si vous n'êtes pas sûr de vos paramètres de base de données, veuillez contacter votre hébergeur.</para>
 			<tip>
@@ -165,7 +165,7 @@
 		<section id="quick_installation_config">
 			<title>Fichier de configuration</title>
 			<para>À cette étape, phpBB va automatiquement essayer d'écrire le fichier de configuration. Le forum a besoin de cette configuration pour fonctionner correctement. Elle contient tous les paramètres de la base de données, donc sans elle, phpBB ne pourra pas accéder à la base de données.</para>
-			<para>Habituellement, l'écriture automatique du fichier de configuration fonctionne sans problème. Mais dans certains cas, cela peut échouer, par exemple en raison de permissions de fichiers incorrectes. Dans ce cas, vous devez téléverser le fichier manuellement. phpBB vous demande de <guilabel>télécharger</guilabel> le fichier config.php et vous indique ce qu'il faut en faire. Veuillez lire attentivement les instructions. Après avoir téléversé le fichier, cliquez sur <guilabel>Terminé</guilabel> pour passer à la dernière étape. Si <guilabel>Terminé</guilabel> vous ramène à la même page qu'avant, sans afficher de message de réussite, c'est que vous n'avez pas téléversé le fichier correctement.</para>
+			<para>Habituellement, l'écriture automatique du fichier de configuration fonctionne sans problème. Mais dans certains cas, cela peut échouer, par exemple en raison de permissions de fichiers incorrectes. Dans ce cas, vous devez téléverser le fichier manuellement. phpBB vous demande de <guilabel>Télécharger</guilabel> le fichier config.php et vous indique ce qu'il faut en faire. Veuillez lire attentivement les instructions. Après avoir téléversé le fichier, cliquez sur <guilabel>Effectué</guilabel> pour passer à la dernière étape. Si <guilabel>Effectué</guilabel> vous ramène à la même page qu'avant, sans afficher de message de réussite, c'est que vous n'avez pas téléversé le fichier correctement.</para>
 		</section>
 		<section id="quick_installation_advanced">
 			<title>Paramètres avancés</title>
@@ -175,22 +175,22 @@
 			<title>Dernières étapes</title>
 			<para>À la fin de l'installation, vous pouvez définir la langue par défaut de votre forum, un titre pour votre forum, ainsi qu'une courte description de celui-ci. Dans une installation basique (standard) de phpBB 3.3, seul <guilabel>Anglais [GB]</guilabel> est inclus. Vous pouvez télécharger d'autres langues depuis <ulink url="https://www.phpbb.com/languages/">www.phpbb.com</ulink> et les ajouter par la suite.</para>
 			<para>Après avoir cliqué sur <guilabel>Envoyer</guilabel>, une barre de progression apparaîtra et sera mise à jour avec l'état de l'installation du forum. Veuillez patienter, cela peut prendre quelques instants.</para>
-			<para>Si l'installation a réussi, vous pouvez maintenant utiliser le lien <guilabel>ACP</guilabel> pour accéder au <guilabel>Panneau de contrôle de l'administration</guilabel>. Félicitations, vous avez installé phpBB 3.3 avec succès. Mais il reste encore beaucoup de travail à faire !</para>
+			<para>Si l'installation a réussi, vous pouvez maintenant utiliser le lien <guilabel>ACP</guilabel> pour accéder au <guilabel>Panneau de contrôle d'administration</guilabel>. Félicitations, vous avez installé phpBB 3.3 avec succès. Mais il reste encore beaucoup de travail à faire !</para>
 			<para>Si vous n'arrivez pas à installer phpBB 3.3 même après avoir lu ce guide, veuillez consulter la <link linkend="quick_support">section support</link> pour savoir où obtenir une aide supplémentaire. </para>
-			<para>À ce stade, si vous effectuez une mise à niveau depuis phpBB 2.0 ou phpBB 3.0, vous devriez consulter le <link linkend="upgrade_guide">guide de mise à niveau</link> pour plus d'informations. Sinon, vous devriez supprimer le dossier install de votre serveur, car vous ne pourrez accéder au Panneau de contrôle de l'administration que tant qu'il est présent.</para>
+			<para>À ce stade, si vous effectuez une mise à niveau depuis phpBB 2.0 ou phpBB 3.0, vous devriez consulter le <link linkend="upgrade_guide">guide de mise à niveau</link> pour plus d'informations. Sinon, vous devriez supprimer le dossier install de votre serveur, car vous ne pourrez accéder au Panneau de contrôle d'administration que tant qu'il est présent.</para>
 		</section>
 		<section id="support_phpbb">
 			<title>Soutenir l'organisation phpBB</title>
 			<para>Lors de votre première visite de l'ACP après l'installation de phpBB, un écran s'affichera pour vous proposer différentes façons d'aider l'organisation phpBB.</para>
 			<itemizedlist>
 				<listitem>
-					<para><guilabel>Envoyer les statistiques</guilabel> - Nous envoie des informations sur votre serveur, telles que la version de PHP, le type de base de données sélectionné, certains paramètres PHP, etc. Toutes les informations sensibles ont été supprimées. Cliquer sur le lien <guilabel>Afficher les détails</guilabel> montre exactement quelles informations seront envoyées. Ces informations nous aident à prendre des décisions de conception pour les futures versions de phpBB.</para>
+					<para><guilabel>Envoyer les statistiques</guilabel> - Nous envoie des informations sur votre serveur, telles que la version de PHP, le type de base de données sélectionné, certains paramètres PHP, etc. Toutes les informations sensibles ont été supprimées. Cliquer sur le lien <guilabel>Afficher les informations</guilabel> montre exactement quelles informations seront envoyées. Ces informations nous aident à prendre des décisions de conception pour les futures versions de phpBB.</para>
 				</listitem>
 				<listitem>
-					<para><guilabel>VigLink</guilabel> - Cette option ajoute des codes de parrainage à certains liens publiés sur votre forum par vos utilisateurs. Lorsque certaines actions sont effectuées sur ces liens (comme l'achat d'un article via un lien Amazon publié), VigLink reçoit une commission, dont une partie est reversée au projet phpBB. Ces fonds serviront à poursuivre le développement de phpBB. Vous pouvez également choisir d'utiliser votre propre compte VigLink en cliquant sur <guilabel>Convertir le compte</guilabel> sous <guilabel>Paramètres VigLink</guilabel>, dans la section <guilabel>Configuration du forum</guilabel> du Panneau de contrôle de l'administration.</para>
+					<para><guilabel>VigLink</guilabel> - Cette option ajoute des codes de parrainage à certains liens publiés sur votre forum par vos utilisateurs. Lorsque certaines actions sont effectuées sur ces liens (comme l'achat d'un article via un lien Amazon publié), VigLink reçoit une commission, dont une partie est reversée au projet phpBB. Ces fonds serviront à poursuivre le développement de phpBB. Vous pouvez également choisir d'utiliser votre propre compte VigLink en cliquant sur <guilabel>Convertir le compte</guilabel> sous <guilabel>Paramètres VigLink</guilabel>, dans la section <guilabel>Configuration du forum</guilabel> du Panneau de contrôle d'administration.</para>
 				</listitem>
 			</itemizedlist>
-			<para>Ces deux actions sont facultatives et ne seront <emphasis role="strong">pas</emphasis> activées sans votre consentement explicite. Quitter cette page sans cliquer sur <guilabel>Envoyer</guilabel> désactivera les options. Si vous souhaitez activer ou désactiver ces options ultérieurement, vous pouvez le faire depuis la page <guilabel>Aider à soutenir phpBB</guilabel> du <guilabel>Panneau de contrôle de l'administration</guilabel>, sous <guilabel>Configuration du serveur</guilabel>.</para>
+			<para>Ces deux actions sont facultatives et ne seront <emphasis role="strong">pas</emphasis> activées sans votre consentement explicite. Quitter cette page sans cliquer sur <guilabel>Envoyer</guilabel> désactivera les options. Si vous souhaitez activer ou désactiver ces options ultérieurement, vous pouvez le faire depuis la page <guilabel>Aider et soutenir phpBB</guilabel> du <guilabel>Panneau de contrôle d'administration</guilabel>, sous <guilabel>Configuration du serveur</guilabel>.</para>
 		</section>
 	</section>
 	<section id="quick_settings">
@@ -203,10 +203,10 @@
 		</sectioninfo>
 		<title>Paramètres généraux</title>
 		<para>Dans cette section, vous apprendrez à modifier certains des paramètres de base de votre nouveau forum.</para>
-		<para>Juste après l'installation, vous serez redirigé vers le « Panneau de contrôle de l'administration » (<acronym>ACP</acronym>). Vous pouvez également accéder à ce panneau en cliquant sur le lien <guilabel>[Panneau de contrôle de l'administration]</guilabel> en bas de votre forum. Cette interface vous permet de tout modifier concernant votre forum.</para>
+		<para>Juste après l'installation, vous serez redirigé vers le « Panneau de contrôle d'administration » (<acronym>ACP</acronym>). Vous pouvez également accéder à ce panneau en cliquant sur le lien <guilabel>[Panneau de contrôle d'administration]</guilabel> en bas de votre forum. Cette interface vous permet de tout modifier concernant votre forum.</para>
 		<section id="quick_settings_boardsettings">
 			<title>Paramètres du forum</title>
-			<para>La première section de l'<acronym>ACP</acronym> que vous voudrez probablement consulter juste après l'installation est « Paramètres du forum ». Vous pouvez y modifier tout d'abord le nom (<guilabel>Nom du site</guilabel>) et la description (<guilabel>Description du site</guilabel>) de votre forum.</para>
+			<para>La première section de l'<acronym>ACP</acronym> que vous voudrez probablement consulter juste après l'installation est « Paramètres du forum ». Vous pouvez y modifier tout d'abord le nom (<guilabel>Nom du forum</guilabel>) et la description (<guilabel>Description du forum</guilabel>) de votre forum.</para>
 			<figure id="img_quick_settings_sitename">
 				<title>Paramètres du forum</title>
 				<mediaobject>
@@ -218,14 +218,14 @@
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>Ce formulaire contient également les options permettant de modifier des éléments tels que l'URL principale du site ainsi que le format de date utilisé pour afficher les dates et heures (<guilabel>Format de date</guilabel>).</para>
+			<para>Ce formulaire contient également les options permettant de modifier des éléments tels que l'URL principale du site ainsi que le format de date utilisé pour afficher les dates et heures (<guilabel>Format de la date</guilabel>).</para>
 			<para>Vous pouvez également y sélectionner un nouveau style (après l'avoir installé) pour votre forum et l'imposer à tous les membres, quel que soit le style qu'ils ont sélectionné dans leur « Panneau de contrôle utilisateur ». Ce style sera également utilisé pour tous les forums pour lesquels vous n'en avez pas spécifié un différent. Pour savoir où trouver de nouveaux styles et comment les installer, veuillez consulter la <ulink url="https://www.phpbb.com/styles/">page des styles</ulink> sur <ulink url="https://www.phpbb.com/">phpbb.com</ulink>.</para>
 			<para>Si vous souhaitez utiliser votre forum pour une communauté non anglophone, ce formulaire vous permet également de modifier la langue par défaut (<guilabel>Langue par défaut</guilabel>) (qui peut être remplacée par chaque utilisateur dans son PCU). Par défaut, phpBB3 n'est fourni qu'avec le pack de langue anglais. Vous devrez donc, avant d'utiliser ce champ, télécharger et installer le pack de langue correspondant à la langue que vous souhaitez utiliser. Pour plus de détails, veuillez lire <link linkend="acp_customise_language">Packs de langue</link> .</para>
 		</section>
 		<!--/board_settings-->
 		<section id="quick_settings_boardfeatures">
 			<title>Fonctionnalités du forum</title>
-			<para>Si vous souhaitez activer ou désactiver certaines des fonctionnalités de base de votre forum, c'est ici que cela se passe. Vous pouvez par exemple autoriser ou interdire les changements de nom d'utilisateur (<guilabel>Autoriser les changements de nom d'utilisateur</guilabel>) ou la création de pièces jointes (<guilabel>Autoriser les pièces jointes</guilabel>). Vous pouvez même désactiver complètement le <acronym>BBCode</acronym> (<guilabel>Autoriser le BBCode</guilabel>).</para>
+			<para>Si vous souhaitez activer ou désactiver certaines des fonctionnalités de base de votre forum, c'est ici que cela se passe. Vous pouvez par exemple autoriser ou interdire les changements de nom d'utilisateur (<guilabel>Autoriser la modification des noms d'utilisateurs</guilabel>) ou la création de pièces jointes (<guilabel>Activer les pièces jointes</guilabel>). Vous pouvez même désactiver complètement le <acronym>BBCode</acronym> (<guilabel>Activer les BBCodes</guilabel>).</para>
 			<figure id="img_quick_settings_features">
 				<title>Fonctionnalités du forum</title>
 				<mediaobject>
@@ -238,7 +238,7 @@
 				</mediaobject>
 			</figure>
 			<para>Si désactiver complètement le BBCode est un peu trop radical à votre goût, mais que vous ne voulez pas que vos utilisateurs abusent du champ signature avec des tonnes d'images ? Réglez simplement <guilabel>Autoriser l'utilisation de la balise BBCode IMG dans les signatures des utilisateurs</guilabel> sur « Non ». Si vous souhaitez être un peu plus précis sur ce que vous voulez autoriser ou interdire dans les signatures des utilisateurs, jetez un œil au formulaire « Paramètres de signature ».</para>
-			<para>Le formulaire « Fonctionnalités du forum » vous offre un excellent moyen de contrôler les fonctionnalités de manière globale, tout ou rien. Si vous souhaitez entrer dans les détails de chaque fonctionnalité, il existe également un formulaire distinct pour chacune, qui vous permet de définir tout, depuis le nombre maximal de caractères autorisés dans un message (<guilabel>Nombre maximal de caractères par message</guilabel> dans « Paramètres des messages ») jusqu'à la taille maximale de l'avatar d'un utilisateur (<guilabel>Dimensions maximales de l'avatar</guilabel> dans « Paramètres des avatars »).</para>
+			<para>Le formulaire « Fonctionnalités du forum » vous offre un excellent moyen de contrôler les fonctionnalités de manière globale, tout ou rien. Si vous souhaitez entrer dans les détails de chaque fonctionnalité, il existe également un formulaire distinct pour chacune, qui vous permet de définir tout, depuis le nombre maximal de caractères autorisés dans un message (<guilabel>Nombre maximal de caractères par message</guilabel> dans « Paramètres des messages ») jusqu'à la taille maximale de l'avatar d'un utilisateur (<guilabel>Dimensions maximales des avatars</guilabel> dans « Paramètres des avatars »).</para>
 			<important>
 				<para>Si vous désactivez des fonctionnalités, celles-ci seront également indisponibles pour les utilisateurs qui y auraient normalement accès selon leurs permissions respectives. Pour plus de détails sur le système de permissions, veuillez lire <xref linkend="quick_permissions" /> ou le <link linkend="acp_permissions">guide approfondi dans le Guide de l'administrateur.</link></para>
 			</important>
@@ -258,8 +258,8 @@
 		</sectioninfo>
 		<title>Créer et configurer des forums</title>
 		<para>Les forums sont les sections où sont stockés les sujets. Sans forums, vos utilisateurs n'auraient nulle part où poster ! Créer des forums est très simple.</para>
-		<para>Tout d'abord, assurez-vous d'être connecté. Trouvez le lien <guilabel>[ Panneau de contrôle de l'administration ]</guilabel> en bas de la page, et cliquez dessus. Vous devriez vous trouver dans l'index de l'administration. Vous pouvez administrer votre forum ici.</para>
-		<para>Des onglets se trouvent en haut du Panneau de contrôle de l'administration et vous guident vers chaque catégorie. Vous devez accéder à la section Administration des forums pour créer un forum, cliquez donc sur l'onglet <guilabel>Forums</guilabel>.</para>
+		<para>Tout d'abord, assurez-vous d'être connecté. Trouvez le lien <guilabel>[ Panneau de contrôle d'administration ]</guilabel> en bas de la page, et cliquez dessus. Vous devriez vous trouver dans l'index de l'administration. Vous pouvez administrer votre forum ici.</para>
+		<para>Des onglets se trouvent en haut du Panneau de contrôle d'administration et vous guident vers chaque catégorie. Vous devez accéder à la section Administration des forums pour créer un forum, cliquez donc sur l'onglet <guilabel>Forums</guilabel>.</para>
 		<para>L'index de l'administration des forums est l'endroit où vous pouvez gérer les forums de votre site. En plus de pouvoir créer des forums, vous pouvez également créer des sous-forums. Les sous-forums sont des forums situés dans un forum parent, formant une hiérarchie. Pour plus d'informations sur les sous-forums, consultez le <link linkend="acp_forums_subforums">guide d'administration sur les sous-forums</link>.</para>
 		<para>Trouvez le bouton <guilabel>Créer un nouveau forum</guilabel> sur le côté droit de la page. Saisissez le nom du forum souhaité dans la zone de texte située directement à gauche de ce bouton. Par exemple, si le nom du forum devait être Test, saisissez Test dans la zone de texte. Une fois cela fait, cliquez sur le bouton <guilabel>Créer un nouveau forum</guilabel> pour créer le forum.</para>
 		<para>Vous devriez voir une page intitulée « Créer un nouveau forum :: Test ». Vous pouvez modifier les options de votre forum ; vous pouvez par exemple définir quelle image de forum le forum peut utiliser, s'il s'agit d'une catégorie, ou à quel texte de règles du forum le forum sera associé. Vous devriez rédiger une brève description du forum, afin que les utilisateurs puissent comprendre à quoi il sert.</para>
@@ -276,7 +276,7 @@
 		</figure>
 		<para>Les paramètres par défaut sont généralement suffisants pour mettre votre nouveau forum en service ; vous pouvez toutefois les modifier selon vos besoins. Mais il y a trois paramètres clés du forum auxquels vous devriez prêter attention. Le paramètre Forum parent vous permet de choisir à quel forum votre nouveau forum appartiendra. Faites attention au niveau auquel vous souhaitez que votre forum se situe. (Le paramètre Forum parent est important lors de la création de sous-forums. Pour plus d'informations sur les sous-forums, continuez la lecture jusqu'à la section sur la création de sous-forums) Le paramètre « Copier les permissions » vous permet de copier les permissions d'un forum existant vers votre nouveau forum. Utilisez ceci si vous souhaitez garder des permissions constantes. Le paramètre de style du forum vous permet de définir le style qu'affichera votre nouveau forum. Votre nouveau forum peut afficher un style différent d'un autre. Pour plus d'informations sur chaque paramètre de forum, consultez la <xref linkend="acp_forums">section approfondie sur la création de forums</xref></para>
 		<para>Une fois la configuration des paramètres de votre nouveau forum terminée, faites défiler jusqu'en bas de la page et cliquez sur le bouton <guilabel>Envoyer</guilabel> pour créer votre forum et ses paramètres. Si votre nouveau forum a été créé avec succès, l'écran affichera un message de réussite.</para>
-		<para>Si vous souhaitez définir des permissions pour le forum (ou si vous ne cliquez sur rien), vous verrez l'écran des permissions du forum. Si vous ne le souhaitez pas (et voulez utiliser les permissions par défaut pour votre nouveau forum), cliquez sur le lien <guilabel>Retour à la page précédente</guilabel>. Sinon, continuez et définissez chaque paramètre selon vos souhaits. Une fois terminé, cliquez sur le bouton <guilabel>Appliquer toutes les permissions</guilabel> en bas de la page. Vous verrez l'écran de mise à jour réussie des permissions du forum si l'opération a fonctionné.</para>
+		<para>Si vous souhaitez définir des permissions pour le forum (ou si vous ne cliquez sur rien), vous verrez l'écran des permissions du forum. Si vous ne le souhaitez pas (et voulez utiliser les permissions par défaut pour votre nouveau forum), cliquez sur le lien <guilabel>Revenir à la page précédente</guilabel>. Sinon, continuez et définissez chaque paramètre selon vos souhaits. Une fois terminé, cliquez sur le bouton <guilabel>Appliquer toutes les permissions</guilabel> en bas de la page. Vous verrez l'écran de mise à jour réussie des permissions du forum si l'opération a fonctionné.</para>
 		<important>
 			<para>Si vous ne définissez aucune permission sur ce forum, il ne sera accessible à personne (y compris vous-même).</para>
 		</important>
@@ -328,8 +328,8 @@
 		</section>
 		<section id="quick_permissions_forum">
 			<title>Définir les permissions de forum</title>
-			<para>Pour définir les permissions de votre nouveau forum, nous avons besoin des <guilabel>Permissions basées sur le forum</guilabel> locales. Vous devez d'abord décider comment vous souhaitez les définir. Si vous voulez les définir pour un seul groupe ou utilisateur, vous devez utiliser les <guilabel>Permissions de forum par groupe</guilabel> ou <guilabel>par utilisateur</guilabel>. Elles vous permettront de sélectionner un groupe ou un utilisateur, puis de sélectionner les forums pour lesquels vous souhaitez définir les permissions. </para>
-			<para>Mais pour ce guide de démarrage rapide, nous allons nous concentrer sur les <guilabel>Permissions de forum</guilabel>. Au lieu de sélectionner un utilisateur ou un groupe, vous sélectionnez d'abord les forums que vous souhaitez modifier. Vous pouvez les sélectionner soit manuellement dans la liste du haut, soit par forum unique ou par forum unique plus ses sous-forums, respectivement dans les menus déroulants du bas. <guilabel>Envoyer</guilabel> vous amènera à la page suivante.</para>
+			<para>Pour définir les permissions de votre nouveau forum, nous avons besoin des <guilabel>Permissions liées aux forums</guilabel> locales. Vous devez d'abord décider comment vous souhaitez les définir. Si vous voulez les définir pour un seul groupe ou utilisateur, vous devez utiliser les <guilabel>Permissions de forum par groupe</guilabel> ou <guilabel>par utilisateur</guilabel>. Elles vous permettront de sélectionner un groupe ou un utilisateur, puis de sélectionner les forums pour lesquels vous souhaitez définir les permissions. </para>
+			<para>Mais pour ce guide de démarrage rapide, nous allons nous concentrer sur les <guilabel>Permissions des forums</guilabel>. Au lieu de sélectionner un utilisateur ou un groupe, vous sélectionnez d'abord les forums que vous souhaitez modifier. Vous pouvez les sélectionner soit manuellement dans la liste du haut, soit par forum unique ou par forum unique plus ses sous-forums, respectivement dans les menus déroulants du bas. <guilabel>Envoyer</guilabel> vous amènera à la page suivante.</para>
 			<figure id="img_quick_permissions_select">
 				<title>Sélectionner des groupes</title>
 				<mediaobject>
@@ -341,9 +341,9 @@
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>La page <guilabel>Permissions de forum</guilabel> vous présente deux colonnes, une pour les utilisateurs et une pour les groupes à sélectionner (voir <xref linkend="img_quick_permissions_select" />). Les listes en haut de chaque colonne, intitulées <guilabel>Gérer les utilisateurs</guilabel> et <guilabel> Gérer les groupes</guilabel>, affichent les utilisateurs et groupes qui possèdent déjà des permissions sur au moins un des forums que vous avez sélectionnés. Vous pouvez les sélectionner et modifier leurs permissions avec le bouton <guilabel>Modifier les permissions</guilabel>, ou utiliser <guilabel>Supprimer les permissions</guilabel> pour les retirer, ce qui fait qu'ils n'auront plus de permissions définies et ne pourront donc plus voir le forum ni y avoir accès (à moins d'y avoir accès via un autre groupe). Les cases du bas vous permettent d'ajouter de nouveaux utilisateurs ou groupes qui n'ont actuellement aucune permission définie sur au moins un des forums que vous avez sélectionnés.</para>
-			<para>Pour ajouter des permissions pour des groupes, sélectionnez un ou plusieurs groupes dans la liste <guilabel>Ajouter des groupes</guilabel> (le fonctionnement est similaire pour les utilisateurs, mais si vous souhaitez ajouter de nouveaux utilisateurs, vous devez les saisir manuellement dans la zone de texte <guilabel>Ajouter des utilisateurs</guilabel> ou utiliser la fonction <guilabel>Rechercher un membre</guilabel>). <guilabel>Ajouter des permissions</guilabel> vous amènera à l'interface des permissions. Chaque forum que vous avez sélectionné est répertorié, avec en dessous les groupes ou utilisateurs pour lesquels modifier les permissions. </para>
-			<para>Il existe deux façons de définir les permissions : vous pouvez les définir manuellement ou utiliser des <guilabel>Rôles de permission</guilabel> prédéfinis, pour une méthode plus simple mais moins puissante. Vous pouvez passer de l'une à l'autre approche à tout moment. Vous pouvez sauter l'introduction aux permissions manuelles et <link linkend="quick_permissions_roles">passer directement à la section sur les « Rôles de permission »</link>, si vous êtes impatient de tout mettre en route le plus rapidement possible. Mais rappelez-vous que les rôles de permission n'offrent qu'une petite partie de ce que le système de permissions propose, et nous pensons que pour être un bon administrateur de Proteus, vous devez pleinement comprendre les permissions. </para>
+			<para>La page <guilabel>Permissions des forums</guilabel> vous présente deux colonnes, une pour les utilisateurs et une pour les groupes à sélectionner (voir <xref linkend="img_quick_permissions_select" />). Les listes en haut de chaque colonne, intitulées <guilabel>Gérer les utilisateurs</guilabel> et <guilabel> Gérer les groupes</guilabel>, affichent les utilisateurs et groupes qui possèdent déjà des permissions sur au moins un des forums que vous avez sélectionnés. Vous pouvez les sélectionner et modifier leurs permissions avec le bouton <guilabel>Modifier les permissions</guilabel>, ou utiliser <guilabel>Supprimer des permissions</guilabel> pour les retirer, ce qui fait qu'ils n'auront plus de permissions définies et ne pourront donc plus voir le forum ni y avoir accès (à moins d'y avoir accès via un autre groupe). Les cases du bas vous permettent d'ajouter de nouveaux utilisateurs ou groupes qui n'ont actuellement aucune permission définie sur au moins un des forums que vous avez sélectionnés.</para>
+			<para>Pour ajouter des permissions pour des groupes, sélectionnez un ou plusieurs groupes dans la liste <guilabel>Ajouter des groupes d'utilisateurs</guilabel> (le fonctionnement est similaire pour les utilisateurs, mais si vous souhaitez ajouter de nouveaux utilisateurs, vous devez les saisir manuellement dans la zone de texte <guilabel>Ajouter des utilisateurs</guilabel> ou utiliser la fonction <guilabel>Trouver un membre</guilabel>). <guilabel>Ajouter des permissions</guilabel> vous amènera à l'interface des permissions. Chaque forum que vous avez sélectionné est répertorié, avec en dessous les groupes ou utilisateurs pour lesquels modifier les permissions. </para>
+			<para>Il existe deux façons de définir les permissions : vous pouvez les définir manuellement ou utiliser des <guilabel>Rôles des permissions</guilabel> prédéfinis, pour une méthode plus simple mais moins puissante. Vous pouvez passer de l'une à l'autre approche à tout moment. Vous pouvez sauter l'introduction aux permissions manuelles et <link linkend="quick_permissions_roles">passer directement à la section sur les « Rôles des permissions »</link>, si vous êtes impatient de tout mettre en route le plus rapidement possible. Mais rappelez-vous que les rôles de permission n'offrent qu'une petite partie de ce que le système de permissions propose, et nous pensons que pour être un bon administrateur de Proteus, vous devez pleinement comprendre les permissions. </para>
 			<para>Les deux méthodes ne diffèrent que par la façon dont vous les définissez. Elles partagent la même interface.</para>
 		</section>
 		<section id="quick_permissions_manual">
@@ -351,13 +351,13 @@
 			<para>Il s'agit de l'aspect le plus important des permissions. Vous devez le comprendre pour travailler correctement avec elles. Une permission peut prendre trois valeurs différentes :</para>
 			<itemizedlist>
 				<listitem>
-					<para><guilabel>OUI</guilabel> autorisera un paramètre de permission, <emphasis>sauf</emphasis> s'il est remplacé par un <guilabel>JAMAIS</guilabel>.</para>
+					<para><guilabel>Oui</guilabel> autorisera un paramètre de permission, <emphasis>sauf</emphasis> s'il est remplacé par un <guilabel>Jamais</guilabel>.</para>
 				</listitem>
 				<listitem>
-					<para><guilabel>NON</guilabel> interdira un paramètre de permission, <emphasis>sauf</emphasis> s'il est remplacé par un <guilabel>OUI</guilabel>.</para>
+					<para><guilabel>Non</guilabel> interdira un paramètre de permission, <emphasis>sauf</emphasis> s'il est remplacé par un <guilabel>Oui</guilabel>.</para>
 				</listitem>
 				<listitem>
-					<para><guilabel>JAMAIS</guilabel> interdira complètement un paramètre de permission pour un utilisateur. Il <emphasis>ne peut pas</emphasis> être remplacé par un <guilabel>OUI</guilabel>.</para>
+					<para><guilabel>Jamais</guilabel> interdira complètement un paramètre de permission pour un utilisateur. Il <emphasis>ne peut pas</emphasis> être remplacé par un <guilabel>Oui</guilabel>.</para>
 				</listitem>
 			</itemizedlist>
 			<para>Ces trois valeurs sont importantes, car il est possible qu'un utilisateur dispose de plusieurs jeux de permissions pour le même paramètre via plusieurs groupes. Si l'utilisateur est membre du groupe par défaut « Utilisateurs enregistrés » et d'un groupe personnalisé appelé « Utilisateurs seniors » que vous avez créé pour vos membres les plus assidus, les deux groupes pourraient avoir des permissions différentes pour voir un forum. Dans cet exemple, vous voulez rendre un forum appelé « Le bon vieux temps » accessible uniquement au groupe « Utilisateurs seniors », mais vous ne voulez pas que tous les « Utilisateurs enregistrés » le voient. Vous allez bien sûr régler la permission <guilabel>Peut voir le forum</guilabel> sur <guilabel>Oui</guilabel> pour « Utilisateurs seniors ». Mais <emphasis>ne réglez pas</emphasis> la permission sur <guilabel>Jamais</guilabel> pour « Utilisateurs enregistrés ». Si vous faites cela, les « Membres seniors » ne verront pas le forum, car le <guilabel>Jamais</guilabel> annule tout <guilabel>Oui</guilabel> qu'ils pourraient avoir. Laissez plutôt le paramètre sur <guilabel>Non</guilabel>. <guilabel>Non</guilabel> est un <guilabel>Jamais</guilabel> faible, qu'un <guilabel>Oui</guilabel> peut remplacer.</para>
@@ -374,10 +374,10 @@
 			</figure>
 		</section>
 		<section id="quick_permissions_roles">
-			<title>Rôles de permission</title>
+			<title>Rôles des permissions</title>
 			<para>phpBB 3.3 Proteus est fourni avec un certain nombre de rôles de permission par défaut, qui vous offrent une large gamme d'options pour définir les permissions. Plutôt que de devoir cocher chaque bouton radio manuellement, vous pouvez sélectionner un rôle prédéfini dans la liste déroulante <guilabel>Rôle</guilabel>. Chaque rôle dispose d'une description détaillée, qui apparaît lorsque vous passez la souris dessus. Validez vos modifications avec <guilabel>Appliquer les permissions</guilabel> ou <guilabel>Appliquer toutes les permissions</guilabel> lorsque vous en êtes satisfait. Cela définira les permissions et vous aurez terminé.</para>
 			<figure id="img_quick_permissions_roles">
-				<title>Rôles de permission</title>
+				<title>Rôles des permissions</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata format="PNG" fileref="../images/quick_start_guide/permissions_roles.png" />
@@ -399,7 +399,7 @@
 			</sectioninfo>
 			<title>Assigner des modérateurs aux forums</title>
 			<para>Un cas d'usage assez courant pour les permissions et les rôles est la modération de forum. phpBB3 rend l'attribution du rôle de modérateur de forum à des utilisateurs vraiment simple.</para>
-			<para>Comme vous l'avez peut-être déjà deviné, la modération de forums spécifiques est un paramètre local, vous pouvez donc trouver <guilabel>Modérateurs de forum</guilabel> dans la section <guilabel>Permissions basées sur le forum</guilabel>. Tout d'abord, vous devrez sélectionner le forum (ou les forums) auxquels vous souhaitez attribuer de nouveaux modérateurs. Ce formulaire est divisé en deux sections. Dans la première, vous pouvez sélectionner plusieurs forums (sélection multiple en maintenant la touche CTRL de votre clavier enfoncée, ou cmd sous MacOS X), où les paramètres de modérateur que vous définirez dans le formulaire suivant s'appliqueront uniquement à ces forums précis. La deuxième zone vous permet de sélectionner un seul forum, mais vos modifications s'appliqueront non seulement à ce forum, mais aussi à tous ses sous-forums.</para>
+			<para>Comme vous l'avez peut-être déjà deviné, la modération de forums spécifiques est un paramètre local, vous pouvez donc trouver <guilabel>Permissions des forums aux modérateurs</guilabel> dans la section <guilabel>Permissions liées aux forums</guilabel>. Tout d'abord, vous devrez sélectionner le forum (ou les forums) auxquels vous souhaitez attribuer de nouveaux modérateurs. Ce formulaire est divisé en deux sections. Dans la première, vous pouvez sélectionner plusieurs forums (sélection multiple en maintenant la touche CTRL de votre clavier enfoncée, ou cmd sous MacOS X), où les paramètres de modérateur que vous définirez dans le formulaire suivant s'appliqueront uniquement à ces forums précis. La deuxième zone vous permet de sélectionner un seul forum, mais vos modifications s'appliqueront non seulement à ce forum, mais aussi à tous ses sous-forums.</para>
 			<para>Après avoir sélectionné les forums et cliqué sur <guilabel>Envoyer</guilabel>, vous serez accueilli par un formulaire que vous devriez déjà connaître grâce à l'une des sections précédentes de ce guide : <xref linkend="img_quick_permissions_select"/>. Vous pouvez ici sélectionner les utilisateurs ou groupes qui devraient recevoir un certain type de capacité de modération sur les forums sélectionnés. Alors allez-y : sélectionnez des utilisateurs et/ou des groupes et appuyez sur le bouton <guilabel>Définir les permissions</guilabel>.</para>
 			<para>Dans le formulaire suivant, vous pouvez choisir quelles permissions de modérateur les utilisateurs/groupes sélectionnés devraient recevoir. Tout d'abord, il existe des rôles prédéfinis parmi lesquels vous pouvez choisir :</para>
 			<variablelist>

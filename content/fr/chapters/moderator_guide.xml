@@ -99,7 +99,7 @@
 
 		<section id="modtools_lock">
 			<title>Verrouiller un sujet ou un message</title>
-			<para>Cette section décrit comment un modérateur peut verrouiller des sujets entiers ou des messages individuels. Un modérateur dispose de plusieurs méthodes pour cela : soit en utilisant le <link linkend="moderator_mcp">Panneau de modération</link> lors de la consultation d'un forum, soit en accédant au menu de sélection sous le sujet concerné, soit en modifiant n'importe quel message d'un sujet et en cochant la case appropriée.</para>
+			<para>Cette section décrit comment un modérateur peut verrouiller des sujets entiers ou des messages individuels. Un modérateur dispose de plusieurs méthodes pour cela : soit en utilisant le <link linkend="moderator_mcp">Panneau de contrôle de modération</link> lors de la consultation d'un forum, soit en accédant au menu de sélection sous le sujet concerné, soit en modifiant n'importe quel message d'un sujet et en cochant la case appropriée.</para>
 			<para>Verrouiller un sujet entier empêche tout utilisateur d'y répondre, tandis que verrouiller des messages individuels retire à l'auteur du message toute permission de le modifier.</para>
 		</section>
 
@@ -116,7 +116,7 @@
 			</sectioninfo>
 			<title>Supprimer un sujet ou un message</title>
 			<para>Si cette option est activée dans les permissions du <link linkend="admin_control_panel">Panneau de contrôle de l'administration</link>, un utilisateur peut supprimer ses propres messages lorsqu'il consulte un sujet ou modifie un message précédent. L'utilisateur ne peut supprimer un sujet ou un message que si celui-ci n'a pas encore reçu de réponse.</para>
-			<para>Pour supprimer les messages d'un autre utilisateur, il faut disposer de la permission de modérateur appropriée pour ce forum - <guilabel>Peut supprimer les messages</guilabel>. L'utilisation du menu de sélection sous les sujets permet une suppression rapide. Le <link linkend="moderator_mcp">Panneau de modération</link> permet de supprimer plusieurs messages distincts à la fois.</para>
+			<para>Pour supprimer les messages d'un autre utilisateur, il faut disposer de la permission de modérateur appropriée pour ce forum - <guilabel>Peut supprimer les messages</guilabel>. L'utilisation du menu de sélection sous les sujets permet une suppression rapide. Le <link linkend="moderator_mcp">Panneau de contrôle de modération</link> permet de supprimer plusieurs messages distincts à la fois.</para>
 			<para>Lors de la suppression d'un sujet ou d'un message, il vous sera demandé de fournir une raison pour cette suppression. Ce message apparaîtra dans les journaux de modération. De plus, si vous disposez de la permission de modérateur <guilabel>Suppression réversible</guilabel>, il vous sera demandé si vous souhaitez supprimer définitivement le sujet/message ou non. Si vous choisissez de ne pas le faire, il sera simplement masqué, avec la possibilité de le restaurer.</para>
 			<tip>
 				<para>Veuillez noter que si vous choisissez de supprimer définitivement un sujet ou un message, cette action ne peut pas être annulée.</para>
@@ -156,7 +156,7 @@
 				</sectioninfo>
 				<title>Sujets fantômes</title>
 				<para>Les sujets fantômes peuvent être créés lors du déplacement d'un sujet d'un forum vers un autre. Un sujet fantôme est simplement un lien vers le sujet dans le forum depuis lequel il a été déplacé. Vous pouvez choisir de laisser ou non un sujet fantôme en cochant ou décochant la case dans la boîte de dialogue <guilabel>Déplacer le sujet</guilabel>.</para>
-				<para>Pour supprimer un sujet fantôme, accédez au forum contenant le sujet fantôme et utilisez le <link linkend="moderator_mcp">Panneau de modération</link> pour sélectionner et supprimer le sujet.</para>
+				<para>Pour supprimer un sujet fantôme, accédez au forum contenant le sujet fantôme et utilisez le <link linkend="moderator_mcp">Panneau de contrôle de modération</link> pour sélectionner et supprimer le sujet.</para>
 				<note>
 					<para>Supprimer un sujet fantôme ne supprimera <emphasis>pas</emphasis> le sujet d'origine dont il est le fantôme.</para>
 				</note>
@@ -175,7 +175,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Dupliquer un sujet</title>
-			<para>Les modérateurs sont également autorisés à dupliquer des sujets. Dupliquer un sujet crée simplement une copie du sujet sélectionné dans un autre forum. Cela peut être réalisé en utilisant la zone <guilabel>Outils de modération rapide</guilabel> sous le sujet que vous souhaitez dupliquer, ou via le <link linkend="moderator_mcp">Panneau de modération</link> lors de la consultation du forum. À partir de là, il vous suffit de sélectionner le forum de destination vers lequel vous souhaitez dupliquer le sujet. Cliquez sur <guilabel>Oui</guilabel> pour dupliquer le sujet.</para>
+			<para>Les modérateurs sont également autorisés à dupliquer des sujets. Dupliquer un sujet crée simplement une copie du sujet sélectionné dans un autre forum. Cela peut être réalisé en utilisant la zone <guilabel>Outils de modération rapide</guilabel> sous le sujet que vous souhaitez dupliquer, ou via le <link linkend="moderator_mcp">Panneau de contrôle de modération</link> lors de la consultation du forum. À partir de là, il vous suffit de sélectionner le forum de destination vers lequel vous souhaitez dupliquer le sujet. Cliquez sur <guilabel>Oui</guilabel> pour dupliquer le sujet.</para>
 		</section>
 
 		<section id="modtools_type">
@@ -190,7 +190,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Annonces et sujets épinglés</title>
-			<para>Il existe différents types de sujets que les administrateurs et modérateurs du forum (s'ils disposent des permissions appropriées) peuvent attribuer à des sujets spécifiques. Ces types de sujets spéciaux sont : <guilabel>Annonces globales</guilabel>, <guilabel>Annonces</guilabel>, et <guilabel>Sujets épinglés</guilabel>. Le <link linkend="posting_special">type de sujet</link> peut être choisi lors de la publication d'un nouveau sujet ou de la modification du premier message d'un sujet déjà publié. Vous pouvez choisir le type de sujet que vous préférez en sélectionnant le bouton radio correspondant. Lors de la consultation du forum, les <guilabel>annonces globales</guilabel> et les <guilabel>annonces</guilabel> classiques sont affichées sous un intitulé distinct de celui des <guilabel>sujets épinglés</guilabel> et des sujets normaux.</para>
+			<para>Il existe différents types de sujets que les administrateurs et modérateurs du forum (s'ils disposent des permissions appropriées) peuvent attribuer à des sujets spécifiques. Ces types de sujets spéciaux sont : <guilabel>Annonces générales</guilabel>, <guilabel>Annonces</guilabel>, et <guilabel>Sujets épinglés</guilabel>. Le <link linkend="posting_special">type de sujet</link> peut être choisi lors de la publication d'un nouveau sujet ou de la modification du premier message d'un sujet déjà publié. Vous pouvez choisir le type de sujet que vous préférez en sélectionnant le bouton radio correspondant. Lors de la consultation du forum, les <guilabel>annonces générales</guilabel> et les <guilabel>annonces</guilabel> classiques sont affichées sous un intitulé distinct de celui des <guilabel>sujets épinglés</guilabel> et des sujets normaux.</para>
 		</section>
 
 		<section id="modtools_split">
@@ -205,7 +205,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Diviser des messages d'un sujet</title>
-			<para>Les modérateurs ont également la possibilité de diviser des messages d'un sujet. Cela peut être utile si certaines discussions ont fait naître une nouvelle idée méritant son propre fil de discussion, nécessitant ainsi d'être séparée du sujet d'origine. Diviser des messages consiste à déplacer des messages individuels d'un sujet existant vers un nouveau sujet. Vous pouvez le faire en utilisant la zone <guilabel>Outils de modération rapide</guilabel> sous le sujet que vous souhaitez diviser, ou depuis le <link linkend="moderator_mcp">Panneau de modération</link> au sein du sujet.</para>
+			<para>Les modérateurs ont également la possibilité de diviser des messages d'un sujet. Cela peut être utile si certaines discussions ont fait naître une nouvelle idée méritant son propre fil de discussion, nécessitant ainsi d'être séparée du sujet d'origine. Diviser des messages consiste à déplacer des messages individuels d'un sujet existant vers un nouveau sujet. Vous pouvez le faire en utilisant la zone <guilabel>Outils de modération rapide</guilabel> sous le sujet que vous souhaitez diviser, ou depuis le <link linkend="moderator_mcp">Panneau de contrôle de modération</link> au sein du sujet.</para>
 			<para>Lors de la division, vous pouvez choisir un titre pour le nouveau sujet, un forum différent pour le nouveau sujet, ainsi qu'une icône différente. Vous pouvez également remplacer le paramètre par défaut du forum concernant le nombre de messages à afficher par page. L'option <guilabel>Diviser à partir du message sélectionné</guilabel> divisera tous les messages depuis le message coché jusqu'au dernier message. L'option <guilabel>Diviser les messages sélectionnés</guilabel> ne divisera que les messages actuellement sélectionnés. </para>
 		</section>
 
@@ -220,9 +220,9 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Fusionner des sujets</title>
+			<title>Fusionner les sujets</title>
 			<para>Dans phpBB3, il est désormais possible de fusionner des sujets entre eux, en plus de pouvoir les diviser. Cela peut être utile, par exemple, si deux sujets distincts sont liés et portent sur la même discussion. La fonctionnalité de fusion de sujets permet de fusionner des sujets existants les uns dans les autres.</para>
-			<para>Pour fusionner des sujets ensemble, commencez par repérer le menu de sélection sous le sujet concerné, ce qui vous amène au <link linkend="moderator_mcp">Panneau de modération</link>. À partir de là, vous devez saisir l'ID du sujet vers lequel vous souhaitez déplacer les messages. Vous pouvez cliquer sur <guilabel>Sélectionner un sujet</guilabel> pour voir la liste des sujets disponibles et préciser lequel choisir. Cocher la section <guilabel>Tout sélectionner</guilabel> sélectionnera tous les messages du sujet en cours et permettra de les déplacer vers le sujet existant. Les messages fusionnés dans le nouveau sujet conserveront leur horodatage d'origine (c'est-à-dire qu'ils n'apparaîtront pas à la fin du sujet vers lequel ils sont fusionnés, mais seront triés selon leur horodatage).</para>
+			<para>Pour fusionner des sujets ensemble, commencez par repérer le menu de sélection sous le sujet concerné, ce qui vous amène au <link linkend="moderator_mcp">Panneau de contrôle de modération</link>. À partir de là, vous devez saisir l'ID du sujet vers lequel vous souhaitez déplacer les messages. Vous pouvez cliquer sur <guilabel>Sélectionner le sujet</guilabel> pour voir la liste des sujets disponibles et préciser lequel choisir. Cocher la section <guilabel>Tout sélectionner</guilabel> sélectionnera tous les messages du sujet en cours et permettra de les déplacer vers le sujet existant. Les messages fusionnés dans le nouveau sujet conserveront leur horodatage d'origine (c'est-à-dire qu'ils n'apparaîtront pas à la fin du sujet vers lequel ils sont fusionnés, mais seront triés selon leur horodatage).</para>
 		</section>
 
 		<section id="modtools_mergeposts">
@@ -238,7 +238,7 @@
 			</sectioninfo>
 			<title>Fusionner des messages dans un autre sujet</title>
 			<para>Plutôt que de simplement fusionner des sujets entre eux, vous pouvez également fusionner des messages spécifiques dans n'importe quel autre sujet.</para>
-			<para>Pour fusionner des messages spécifiques dans un autre sujet, commencez par repérer le menu de sélection sous le sujet, et accédez au <link linkend="moderator_mcp">Panneau de modération</link>. À partir de là, vous devez saisir l'ID du sujet vers lequel vous souhaitez déplacer les messages. Vous pouvez cliquer sur <guilabel>Sélectionner un sujet</guilabel> pour voir la liste des sujets disponibles et préciser lequel choisir. Sélectionnez les messages que vous souhaitez fusionner depuis le sujet en cours vers le sujet existant. Les messages fusionnés dans le nouveau sujet conserveront leur horodatage d'origine (c'est-à-dire qu'ils n'apparaîtront pas à la fin du sujet vers lequel ils sont fusionnés, mais seront triés selon leur horodatage).</para>
+			<para>Pour fusionner des messages spécifiques dans un autre sujet, commencez par repérer le menu de sélection sous le sujet, et accédez au <link linkend="moderator_mcp">Panneau de contrôle de modération</link>. À partir de là, vous devez saisir l'ID du sujet vers lequel vous souhaitez déplacer les messages. Vous pouvez cliquer sur <guilabel>Sélectionner le sujet</guilabel> pour voir la liste des sujets disponibles et préciser lequel choisir. Sélectionnez les messages que vous souhaitez fusionner depuis le sujet en cours vers le sujet existant. Les messages fusionnés dans le nouveau sujet conserveront leur horodatage d'origine (c'est-à-dire qu'ils n'apparaîtront pas à la fin du sujet vers lequel ils sont fusionnés, mais seront triés selon leur horodatage).</para>
 		</section>
 	</section>
 
@@ -254,10 +254,10 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Qu'est-ce que la &#x201C;file d'attente de modération&#x201D; ?</title>
-		<para>La <guilabel>File d'attente de modération</guilabel> est une zone où sont listés les sujets et messages devant être approuvés. Si les permissions d'un forum ou d'un utilisateur sont définies sur <guilabel>file d'attente de modération</guilabel> via le <link linkend="admin_control_panel">Panneau de contrôle de l'administration</link>, tous les messages publiés dans ce forum ou par cet utilisateur devront être approuvés par un administrateur ou un modérateur avant d'être affichés aux autres utilisateurs. Les sujets et messages nécessitant une approbation peuvent être consultés via le <link linkend="moderator_mcp">Panneau de modération</link>.</para>
-		<para>Lors de la consultation d'un forum, les sujets qui n'ont pas encore été approuvés seront marqués d'une icône ; cliquer sur cette icône vous amènera directement au Panneau de modération où vous pourrez approuver ou rejeter le sujet. De même, lors de la consultation du sujet lui-même, le message nécessitant une approbation sera accompagné d'un message renvoyant également vers le message en attente d'approbation.</para>
+		<para>La <guilabel>File d'attente de modération</guilabel> est une zone où sont listés les sujets et messages devant être approuvés. Si les permissions d'un forum ou d'un utilisateur sont définies sur <guilabel>file d'attente de modération</guilabel> via le <link linkend="admin_control_panel">Panneau de contrôle de l'administration</link>, tous les messages publiés dans ce forum ou par cet utilisateur devront être approuvés par un administrateur ou un modérateur avant d'être affichés aux autres utilisateurs. Les sujets et messages nécessitant une approbation peuvent être consultés via le <link linkend="moderator_mcp">Panneau de contrôle de modération</link>.</para>
+		<para>Lors de la consultation d'un forum, les sujets qui n'ont pas encore été approuvés seront marqués d'une icône ; cliquer sur cette icône vous amènera directement au Panneau de contrôle de modération où vous pourrez approuver ou rejeter le sujet. De même, lors de la consultation du sujet lui-même, le message nécessitant une approbation sera accompagné d'un message renvoyant également vers le message en attente d'approbation.</para>
 		<para>Si vous choisissez d'approuver un sujet ou un message, vous aurez la possibilité de notifier l'utilisateur de son approbation. Si vous choisissez de rejeter un sujet ou un message, vous aurez la possibilité de notifier l'utilisateur de son rejet et de préciser pourquoi vous avez rejeté le message, en saisissant une description.</para>
-		<para>Pour plus d'informations concernant le Panneau de modération, consultez <xref linkend="moderator_mcp" />.</para>
+		<para>Pour plus d'informations concernant le Panneau de contrôle de modération, consultez <xref linkend="moderator_mcp" />.</para>
 	</section>
 
 	<section id="moderator_reported">
@@ -272,9 +272,9 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Que sont les &#x201C;messages signalés&#x201D; ?</title>
-		<para>Contrairement à phpBB2, phpBB3 permet désormais aux utilisateurs de signaler un message, pour des raisons que l'administrateur du forum peut définir dans le <link linkend="admin_control_panel">Panneau de contrôle de l'administration</link>. Si un utilisateur trouve un message inapproprié pour une raison quelconque, il peut le signaler à l'aide du bouton <guilabel>Signaler le message</guilabel> situé à côté du message concerné. Ce signalement est ensuite affiché dans le Panneau de modération, où l'administrateur ou les modérateurs peuvent le consulter, le clore ou le supprimer.</para>
-		<para>Lors de la consultation d'un forum contenant des sujets avec des messages signalés, le titre du sujet sera accompagné d'une icône rouge en forme de point d'exclamation. Cela avertit le ou les administrateurs ou modérateurs qu'un message a été signalé. Lors de la consultation des sujets, les messages signalés sont accompagnés d'un point d'exclamation rouge et d'un texte. Cliquer sur cette icône ou ce texte les amènera à la section Messages signalés du Panneau de modération.</para>
-		<para>Pour plus d'informations concernant le Panneau de modération, consultez <xref linkend="moderator_mcp" />.</para>
+		<para>Contrairement à phpBB2, phpBB3 permet désormais aux utilisateurs de signaler un message, pour des raisons que l'administrateur du forum peut définir dans le <link linkend="admin_control_panel">Panneau de contrôle de l'administration</link>. Si un utilisateur trouve un message inapproprié pour une raison quelconque, il peut le signaler à l'aide du bouton <guilabel>Signaler le message</guilabel> situé à côté du message concerné. Ce signalement est ensuite affiché dans le Panneau de contrôle de modération, où l'administrateur ou les modérateurs peuvent le consulter, le clore ou le supprimer.</para>
+		<para>Lors de la consultation d'un forum contenant des sujets avec des messages signalés, le titre du sujet sera accompagné d'une icône rouge en forme de point d'exclamation. Cela avertit le ou les administrateurs ou modérateurs qu'un message a été signalé. Lors de la consultation des sujets, les messages signalés sont accompagnés d'un point d'exclamation rouge et d'un texte. Cliquer sur cette icône ou ce texte les amènera à la section Messages signalés du Panneau de contrôle de modération.</para>
+		<para>Pour plus d'informations concernant le Panneau de contrôle de modération, consultez <xref linkend="moderator_mcp" />.</para>
 	</section>
 
 	<section id="moderator_mcp">
@@ -288,8 +288,8 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Le Panneau de modération (MCP)</title>
-		<para>Une autre nouvelle fonctionnalité de phpBB3 est le <guilabel>Panneau de modération</guilabel>, où tout modérateur se sentira comme chez lui. Semblable au Panneau de contrôle de l'administration, cette zone présente les tâches de modération en cours nécessitant une action. Après avoir accédé au MCP, le modérateur sera accueilli par les messages en attente d'approbation, les signalements de messages et les cinq dernières actions consignées - effectuées par les administrateurs, les modérateurs et les utilisateurs.</para>
+		<title>Le Panneau de contrôle de modération (MCP)</title>
+		<para>Une autre nouvelle fonctionnalité de phpBB3 est le <guilabel>Panneau de contrôle de modération</guilabel>, où tout modérateur se sentira comme chez lui. Semblable au Panneau de contrôle de l'administration, cette zone présente les tâches de modération en cours nécessitant une action. Après avoir accédé au MCP, le modérateur sera accueilli par les messages en attente d'approbation, les signalements de messages et les cinq dernières actions consignées - effectuées par les administrateurs, les modérateurs et les utilisateurs.</para>
 		<para>Sur le côté gauche se trouve un menu contenant toutes les zones pertinentes du MCP. Ce guide présente chaque section individuelle et le type d'informations qu'elle contient :
 			<variablelist>
 				<varlistentry>
@@ -355,7 +355,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>File d'attente de modération</title>
-			<para>La file d'attente de modération liste les sujets ou messages nécessitant une action du modérateur. La file d'attente de modération est accessible depuis le <link linkend="moderator_mcp">Panneau de modération</link>. Pour plus d'informations concernant la file d'attente de modération, consultez <xref linkend="moderator_queue" />.</para>
+			<para>La file d'attente de modération liste les sujets ou messages nécessitant une action du modérateur. La file d'attente de modération est accessible depuis le <link linkend="moderator_mcp">Panneau de contrôle de modération</link>. Pour plus d'informations concernant la file d'attente de modération, consultez <xref linkend="moderator_queue" />.</para>
 		</section>
 
 		<section id="mcp_reported">
@@ -370,12 +370,12 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Messages signalés</title>
-			<para>Les messages signalés sont des signalements soumis par les utilisateurs concernant des messages problématiques. Les signalements de messages en cours sont accessibles depuis le <link linkend="moderator_mcp">Panneau de modération</link>. Pour plus d'informations concernant les messages signalés, consultez <xref linkend="moderator_reported" />.</para>
+			<para>Les messages signalés sont des signalements soumis par les utilisateurs concernant des messages problématiques. Les signalements de messages en cours sont accessibles depuis le <link linkend="moderator_mcp">Panneau de contrôle de modération</link>. Pour plus d'informations concernant les messages signalés, consultez <xref linkend="moderator_reported" />.</para>
 		</section>
 
 		<section id="mcp_forum">
 			<title>Modération de forum</title>
-			<para>Lors de la consultation d'un forum en particulier, cliquer sur <guilabel>Panneau de modération</guilabel> vous amènera à la zone de modération du forum. Ici, vous pouvez modérer en masse les sujets de ce forum via la liste déroulante. Les actions disponibles sont :
+			<para>Lors de la consultation d'un forum en particulier, cliquer sur <guilabel>Panneau de contrôle de modération</guilabel> vous amènera à la zone de modération du forum. Ici, vous pouvez modérer en masse les sujets de ce forum via la liste déroulante. Les actions disponibles sont :
 				<itemizedlist>
 					<listitem><para><guilabel>Supprimer</guilabel>: Supprime le ou les sujets sélectionnés.</para></listitem>
 					<listitem><para><guilabel>Restaurer</guilabel>: Restaure le ou les sujets sélectionnés ayant fait l'objet d'une suppression réversible.</para></listitem>
@@ -384,14 +384,14 @@
 					<listitem><para><guilabel>Verrouiller</guilabel>: Verrouille le ou les sujets sélectionnés.</para></listitem>
 					<listitem><para><guilabel>Déverrouiller</guilabel>: Déverrouille le ou les sujets sélectionnés.</para></listitem>
 					<listitem><para><guilabel>Resynchroniser</guilabel>: Resynchronise le ou les sujets sélectionnés.</para></listitem>
-					<listitem><para><guilabel>Changer le type de sujet</guilabel>: Change le type de sujet en <guilabel>Annonce globale</guilabel>, <guilabel>Annonce</guilabel>, <guilabel>Sujet épinglé</guilabel>, ou <guilabel>Sujet normal</guilabel>.</para></listitem>
+					<listitem><para><guilabel>Changer le type de sujet</guilabel>: Change le type de sujet en <guilabel>Annonce générale</guilabel>, <guilabel>Annonce</guilabel>, <guilabel>Sujet épinglé</guilabel>, ou <guilabel>Sujet normal</guilabel>.</para></listitem>
 				</itemizedlist>
 			</para>
 
 			<para>Vous pouvez également modérer en masse les messages au sein des sujets. Cela peut être fait en naviguant via le MCP lors de la consultation du forum, puis en cliquant sur le sujet lui-même. Une autre façon d'y parvenir est de cliquer sur le lien MCP tout en consultant le sujet particulier que vous souhaitez modérer.</para>
 			<para>Lors de la modération à l'intérieur d'un sujet, vous pouvez : renommer le titre du sujet, déplacer le sujet vers un forum différent, modifier l'icône du sujet, fusionner le sujet avec un autre sujet, ou définir le nombre de messages par page à afficher (ceci remplacera le paramètre du forum).</para>
 			<para>Depuis le menu de sélection, vous pouvez également : verrouiller et déverrouiller des messages individuels, supprimer le ou les messages sélectionnés, fusionner le ou les messages sélectionnés, ou diviser à partir du ou des messages sélectionnés.</para>
-			<para>Le lien <guilabel>Détails du message</guilabel> à côté des messages vous permet également de modifier d'autres paramètres. En plus de consulter l'<glossterm>adresse IP</glossterm>, le profil et les notes de l'auteur du message, ainsi que la possibilité de l'avertir, vous avez également la possibilité de changer l'ID d'auteur attribué au message. Vous pouvez également verrouiller ou supprimer le message depuis cette page.</para>
+			<para>Le lien <guilabel>Informations sur le message</guilabel> à côté des messages vous permet également de modifier d'autres paramètres. En plus de consulter l'<glossterm>adresse IP</glossterm>, le profil et les notes de l'auteur du message, ainsi que la possibilité de l'avertir, vous avez également la possibilité de changer l'ID d'auteur attribué au message. Vous pouvez également verrouiller ou supprimer le message depuis cette page.</para>
 
 			<note>
 				<para>Selon les permissions spécifiques définies pour votre compte utilisateur, certaines des options et capacités mentionnées ci-dessus peuvent ne pas vous être accessibles.</para>
