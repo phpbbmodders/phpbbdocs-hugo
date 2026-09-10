@@ -11,7 +11,9 @@ Whichever variant is picked for any of these, name its `content/` and
 `dev-docs-docbook/` directories after phpBB's own ISO Code for that exact
 pack (e.g. `es-x-tu`, not `es` or `spanish`, for Spanish Casual) — see the
 directory naming convention in
-[phpbb-hugo-languages.md](../phpbb-hugo-languages.md).
+[phpbb-hugo-languages.md](../phpbb-hugo-languages.md). For the full
+translation-and-audit process, start from
+[`docs/translation-process-prompt.md`](../translation-process-prompt.md).
 
 **Ranking criteria**, in order of weight:
 
