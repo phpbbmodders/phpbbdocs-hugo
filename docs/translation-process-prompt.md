@@ -53,6 +53,17 @@ The goal: verify every literal UI string (button, field, menu item,
 page name) the translation quotes actually matches what the real phpBB
 software calls it — not just that the prose reads fluently.
 
+**Scope: "full review" means every end-user chapter (all seven —
+`admin_guide.xml`, `user_guide.xml`, `moderator_guide.xml`,
+`quick_start_guide.xml`, `upgrade_guide.xml`, `server_guide.xml`,
+`glossary.xml`) *and* every file under `dev-docs-docbook/<code>/`, not
+whichever subset is convenient or has the clearest tooling available.
+Report progress as "N of M files done" while working, and don't report
+the audit complete until every file — chapters and dev-docs alike —
+has actually been covered, adapting the review method per file type
+(string-matching for chapters, prose/technical-accuracy reading for
+dev-docs) rather than skipping the files the easy method doesn't fit.**
+
 1. **Get the real reference.** Find the authoritative language pack
    for this language and register (for German Formal Honorifics, that
    was `phpbb-de/phpbb-translation` on GitHub; other languages will
