@@ -38,7 +38,7 @@
 				</caption>
 			</mediaobject>
 		</figure>
-		<para>Après avoir cliqué sur le lien <guilabel>S'enregistrer</guilabel>, les conditions générales d'inscription s'affichent ; vous devez les accepter pour continuer. Certains sites vous demanderont de préciser si vous avez moins de treize ans, afin de respecter la loi <acronym>COPPA</acronym> (Children's Online Privacy Protection Act de 1998, la loi américaine sur la protection de la vie privée des enfants en ligne ; plus de détails sont disponibles sur <ulink url="http://www.coppa.org">http://www.coppa.org</ulink>). Si vous avez moins de treize ans, votre compte restera inactif jusqu'à ce qu'il soit approuvé par un parent ou un tuteur. Vous recevrez un e-mail détaillant les étapes suivantes nécessaires à l'activation de votre compte.</para>
+		<para>Après avoir cliqué sur le lien <guilabel>Inscription</guilabel>, les conditions générales d'inscription s'affichent ; vous devez les accepter pour continuer. Certains sites vous demanderont de préciser si vous avez moins de treize ans, afin de respecter la loi <acronym>COPPA</acronym> (Children's Online Privacy Protection Act de 1998, la loi américaine sur la protection de la vie privée des enfants en ligne ; plus de détails sont disponibles sur <ulink url="http://www.coppa.org">http://www.coppa.org</ulink>). Si vous avez moins de treize ans, votre compte restera inactif jusqu'à ce qu'il soit approuvé par un parent ou un tuteur. Vous recevrez un e-mail détaillant les étapes suivantes nécessaires à l'activation de votre compte.</para>
 		<para>Au-delà de l'acceptation des conditions générales, vous devez renseigner quelques informations importantes telles que le choix d'un nom d'utilisateur, la saisie de votre adresse e-mail et du mot de passe souhaité. Vous pouvez également choisir votre fuseau horaire et votre langue.</para>
 		<para>Si, dans le formulaire où vous indiquez votre nom d'utilisateur, votre mot de passe, etc., vous voyez une image comportant des caractères à l'aspect étrange, il s'agit de ce que l'on appelle la <emphasis>confirmation visuelle</emphasis>. De nombreux forums l'utilisent ; on parle aussi de <acronym>CAPTCHA</acronym>, une image contenant des lettres et des chiffres déformés que vous devez ensuite saisir dans un champ adjacent. Le but est de vérifier que vous êtes bien un utilisateur légitime en train de s'inscrire (et non un robot spammeur effectuant une inscription automatisée). Saisissez simplement les caractères que vous voyez dans le champ <guilabel>Code de confirmation</guilabel> et poursuivez l'inscription. Si vous ne parvenez pas à lire le code, actualisez la page pour en obtenir un nouveau.</para>
 		<figure id="user_registering_captcha">
@@ -148,7 +148,7 @@
 					<listitem><para><guilabel>Localisation</guilabel>: Votre emplacement géographique. Notez que cette information est généralement affichée avec vos informations d'utilisateur sur chaque message ; la prudence habituelle concernant la divulgation d'informations personnelles sur Internet s'applique donc.</para></listitem>
 					<listitem><para><guilabel>Profession</guilabel>: Votre profession. L'information saisie n'apparaîtra que sur la page de visualisation du profil.</para></listitem>
 					<listitem><para><guilabel>Centres d'intérêt</guilabel>: Vos centres d'intérêt personnels. L'information saisie ici n'apparaîtra que sur la page de visualisation du profil.</para></listitem>
-					<listitem><para><guilabel>Date de naissance</guilabel>: Votre date de naissance. Cette information est utilisée pour afficher votre nom d'utilisateur dans la section Anniversaires de l'index du forum. Si l'année est indiquée, votre âge sera affiché sur votre profil.</para></listitem>
+					<listitem><para><guilabel>Anniversaire</guilabel>: Votre date de naissance. Cette information est utilisée pour afficher votre nom d'utilisateur dans la section Anniversaires de l'index du forum. Si l'année est indiquée, votre âge sera affiché sur votre profil.</para></listitem>
 				</itemizedlist>
 			</section>
 			<section id="ucp_signature">
@@ -157,12 +157,12 @@
 			</section>
 			<section id="ucp_avatar">
 				<title>Avatar</title>
-				<para>Votre avatar est une image qui s'affiche avec chaque message que vous publiez. Selon les paramètres du forum, les avatars peuvent être entièrement désactivés, ou peuvent se présenter sous une (ou plusieurs) des trois formes suivantes : « <guilabel>Téléverser depuis votre ordinateur</guilabel> », « <guilabel>Téléverser depuis une URL</guilabel> » et « <guilabel>Lien externe</guilabel> ».</para>
+				<para>Votre avatar est une image qui s'affiche avec chaque message que vous publiez. Selon les paramètres du forum, les avatars peuvent être entièrement désactivés, ou peuvent se présenter sous une (ou plusieurs) des trois formes suivantes : « <guilabel>Importer depuis votre ordinateur</guilabel> », « <guilabel>Importer depuis un lien</guilabel> » et « <guilabel>Lien externe</guilabel> ».</para>
 				<para>
 					<itemizedlist>
-						<listitem><para><guilabel>Gravatar</guilabel>: Si vous utilisez le service d'avatar Gravatar.com, vous pouvez indiquer ici votre adresse e-mail Gravatar afin d'utiliser votre image Gravatar comme avatar.</para></listitem>
-						<listitem><para><guilabel>Téléverser depuis votre ordinateur</guilabel>: Vous pouvez téléverser un avatar depuis votre ordinateur pour qu'il soit hébergé sur le serveur du forum.</para></listitem>
-						<listitem><para><guilabel>Téléverser depuis une URL</guilabel>: Vous pouvez indiquer l'URL d'une image existante. L'image sera alors copiée sur le serveur du forum et y sera hébergée.</para></listitem>
+						<listitem><para><guilabel>Avatar de Gravatar</guilabel>: Si vous utilisez le service d'avatar Gravatar.com, vous pouvez indiquer ici votre adresse e-mail Gravatar afin d'utiliser votre image Gravatar comme avatar.</para></listitem>
+						<listitem><para><guilabel>Importer depuis votre ordinateur</guilabel>: Vous pouvez téléverser un avatar depuis votre ordinateur pour qu'il soit hébergé sur le serveur du forum.</para></listitem>
+						<listitem><para><guilabel>Importer depuis un lien</guilabel>: Vous pouvez indiquer l'URL d'une image existante. L'image sera alors copiée sur le serveur du forum et y sera hébergée.</para></listitem>
 						<listitem><para><guilabel>Lien externe</guilabel>: Vous pouvez indiquer l'URL d'une image existante. L'image ne sera pas hébergée sur le serveur du forum, mais sera plutôt liée directement à son emplacement actuel.</para></listitem>
 					</itemizedlist>
 				</para>
@@ -177,7 +177,7 @@
 			<section id="ucp_external_auth">
 				<title>Comptes externes</title>
 				<para>Si l'administrateur du forum a activé l'<link linkend="acp_client_auth">authentification OAuth</link>, vous pourrez vous connecter avec votre compte auprès de fournisseurs OAuth tels que Bitly, Facebook et Google.</para>
-				<para>Cliquez sur le bouton <guilabel>Lier</guilabel> pour chaque service afin de lier vos comptes au forum. Il vous sera demandé de vous reconnecter. Utilisez vos identifiants de connexion du forum. <emphasis role="strong">N'utilisez PAS</emphasis> encore votre compte externe. Lorsque vous vous connectez, vous serez redirigé vers votre page de compte, qui indiquera qu'un identifiant a été généré pour votre compte externe.</para>
+				<para>Cliquez sur le bouton <guilabel>Associer</guilabel> pour chaque service afin de lier vos comptes au forum. Il vous sera demandé de vous reconnecter. Utilisez vos identifiants de connexion du forum. <emphasis role="strong">N'utilisez PAS</emphasis> encore votre compte externe. Lorsque vous vous connectez, vous serez redirigé vers votre page de compte, qui indiquera qu'un identifiant a été généré pour votre compte externe.</para>
 				<para>Une fois qu'un compte a été lié, vous pouvez le délier depuis la même page.</para>
 				<para>Une fois le compte lié, vous pouvez désormais l'utiliser pour vous connecter au forum. Cliquez simplement sur le bouton du service approprié sur la page de connexion.</para>
 			</section>
@@ -190,11 +190,11 @@
 				<para>Les paramètres généraux contrôlent divers aspects globaux de l'interaction avec le logiciel phpBB.</para>
 				<para>
 					<itemizedlist>
-						<listitem><para><guilabel>Les utilisateurs peuvent me contacter par e-mail</guilabel>: Si <guilabel>Oui</guilabel> est sélectionné, les utilisateurs peuvent vous envoyer un e-mail via le bouton « e-mail » de votre profil.</para></listitem>
-						<listitem><para><guilabel>Les administrateurs peuvent m'envoyer des informations par e-mail</guilabel>: Si <guilabel>Oui</guilabel> est sélectionné, vous recevrez les e-mails groupés envoyés par l'administrateur du forum.</para></listitem>
-						<listitem><para><guilabel>Autoriser les utilisateurs à vous envoyer des messages privés</guilabel>:  Si <guilabel>Oui</guilabel> est sélectionné, les utilisateurs peuvent vous envoyer des messages privés via le forum.</para></listitem>
-						<listitem><para><guilabel>Masquer mon statut de connexion</guilabel>: Si <guilabel>Oui</guilabel> est sélectionné, votre statut de connexion sera masqué aux utilisateurs. Notez que les administrateurs et les modérateurs pourront toujours voir votre statut de connexion.</para></listitem>
-						<listitem><para><guilabel>Mon style de forum</guilabel>: Vous permet de définir le style utilisé par le forum. Ce paramètre peut ne pas être disponible si l'administrateur du forum a choisi de forcer le style pour tous les utilisateurs.</para></listitem>
+						<listitem><para><guilabel>Autoriser les utilisateurs à me contacter par e-mail</guilabel>: Si <guilabel>Oui</guilabel> est sélectionné, les utilisateurs peuvent vous envoyer un e-mail via le bouton « e-mail » de votre profil.</para></listitem>
+						<listitem><para><guilabel>Autoriser les administrateurs à me contacter par e-mail</guilabel>: Si <guilabel>Oui</guilabel> est sélectionné, vous recevrez les e-mails groupés envoyés par l'administrateur du forum.</para></listitem>
+						<listitem><para><guilabel>Autoriser les utilisateurs à me contacter par message privé</guilabel>:  Si <guilabel>Oui</guilabel> est sélectionné, les utilisateurs peuvent vous envoyer des messages privés via le forum.</para></listitem>
+						<listitem><para><guilabel>Masquer ma présence</guilabel>: Si <guilabel>Oui</guilabel> est sélectionné, votre statut de connexion sera masqué aux utilisateurs. Notez que les administrateurs et les modérateurs pourront toujours voir votre statut de connexion.</para></listitem>
+						<listitem><para><guilabel>Mon style sur le forum</guilabel>: Vous permet de définir le style utilisé par le forum. Ce paramètre peut ne pas être disponible si l'administrateur du forum a choisi de forcer le style pour tous les utilisateurs.</para></listitem>
 						<listitem><para><guilabel>Ma langue</guilabel>: Vous permet de définir le pack de langue utilisé par le forum. Notez que ce paramètre ne s'applique qu'aux chaînes de langue du forum ; les messages seront affichés dans la langue dans laquelle ils ont été écrits.</para></listitem>
 						<listitem><para><guilabel>Mon fuseau horaire</guilabel>: Vous permet de définir le fuseau horaire dans lequel les heures du forum doivent s'afficher.</para></listitem>
 						<listitem><para><guilabel>Mon format de date</guilabel>: Contrôle le format d'affichage des heures. Vous pouvez sélectionner l'une des options de la liste déroulante -- les utilisateurs avancés peuvent sélectionner  "<guilabel>Personnalisé</guilabel>" et saisir un format personnalisé (au format de la <ulink url="http://www.php.net/date">fonction date de php.net</ulink>).</para></listitem>
@@ -206,10 +206,10 @@
 				<para>Les paramètres de publication contrôlent les réglages par défaut des éditeurs de messages lorsque vous créez un message. Notez que ces options peuvent être modifiées individuellement lors de la publication.</para>
 				<para>
 					<itemizedlist>
-						<listitem><para><guilabel>Activer le BBCode par défaut</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, le BBCode est activé dans l'éditeur de messages.</para></listitem>
+						<listitem><para><guilabel>Activer les BBCodes par défaut</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, le BBCode est activé dans l'éditeur de messages.</para></listitem>
 						<listitem><para><guilabel>Activer les émoticônes par défaut</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, les émoticônes seront affichées dans vos messages.</para></listitem>
-						<listitem><para><guilabel>Joindre ma signature par défaut</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, votre signature sera ajoutée à vos messages.</para></listitem>
-						<listitem><para><guilabel>Me notifier des réponses par défaut</guilabel>: Lorsque <guilabel>oui</guilabel> est sélectionné, vous serez averti par e-mail lorsqu'une réponse est apportée à votre message.</para></listitem>
+						<listitem><para><guilabel>Insérer ma signature par défaut</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, votre signature sera ajoutée à vos messages.</para></listitem>
+						<listitem><para><guilabel>Recevoir une notification par défaut lors de la réception d'un nouveau message</guilabel>: Lorsque <guilabel>oui</guilabel> est sélectionné, vous serez averti par e-mail lorsqu'une réponse est apportée à votre message.</para></listitem>
 					</itemizedlist>
 
 				</para>
@@ -222,24 +222,24 @@
 					<itemizedlist>
 						<listitem><para><guilabel>Afficher les images dans les messages</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, les images seront affichées.</para></listitem>
 						<listitem><para><guilabel>Afficher les animations Flash</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, les animations Flash seront affichées.</para></listitem>
-						<listitem><para><guilabel>Afficher les émoticônes sous forme d'images</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, les émoticônes seront affichées sous forme d'images plutôt que sous leur forme textuelle.</para></listitem>
+						<listitem><para><guilabel>Afficher les émoticônes comme des images</guilabel>: Lorsque <guilabel>Oui</guilabel> est sélectionné, les émoticônes seront affichées sous forme d'images plutôt que sous leur forme textuelle.</para></listitem>
 						<listitem><para><guilabel>Afficher les signatures</guilabel>: Lorsque <guilabel>oui</guilabel> est sélectionné, les signatures des utilisateurs seront affichées.</para></listitem>
 						<listitem><para><guilabel>Afficher les avatars</guilabel>: Lorsque <guilabel>oui</guilabel> est sélectionné, les avatars des utilisateurs seront affichés.</para></listitem>
-						<listitem><para><guilabel>Activer la censure des mots</guilabel>: Lorsque <guilabel>oui</guilabel> est sélectionné, le texte des messages et des messages privés sera censuré selon la <link linkend="acp_posting_censors">liste de mots censurés</link> définie par l'administrateur.</para></listitem>
+						<listitem><para><guilabel>Activer la censure de mots</guilabel>: Lorsque <guilabel>oui</guilabel> est sélectionné, le texte des messages et des messages privés sera censuré selon la <link linkend="acp_posting_censors">liste de mots censurés</link> définie par l'administrateur.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Les paramètres suivants contrôlent la façon dont les sujets sont affichés dans la vue du forum.
 					<itemizedlist>
-						<listitem><para><guilabel>Afficher les sujets des derniers jours</guilabel>: Ce paramètre limite l'ancienneté des sujets à afficher. Par défaut, tous les sujets sont affichés.</para></listitem>
-						<listitem><para><guilabel>Trier les sujets par</guilabel>: Ce paramètre modifie l'ordre d'affichage des sujets. Les sujets peuvent être triés par <guilabel>auteur</guilabel>, <guilabel>date du message</guilabel>, <guilabel>nombre de réponses</guilabel>, <guilabel>sujet</guilabel>, ou <guilabel>nombre de vues</guilabel>.</para></listitem>
-						<listitem><para><guilabel>Sens du tri des sujets</guilabel>: Les sujets peuvent être affichés par ordre <guilabel>croissant</guilabel> ou <guilabel>décroissant</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Afficher les sujets triés selon leur ancienneté</guilabel>: Ce paramètre limite l'ancienneté des sujets à afficher. Par défaut, tous les sujets sont affichés.</para></listitem>
+						<listitem><para><guilabel>Afficher les sujets triés par</guilabel>: Ce paramètre modifie l'ordre d'affichage des sujets. Les sujets peuvent être triés par <guilabel>auteur</guilabel>, <guilabel>date du message</guilabel>, <guilabel>nombre de réponses</guilabel>, <guilabel>sujet</guilabel>, ou <guilabel>nombre de vues</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Afficher les sujets triés par ordre</guilabel>: Les sujets peuvent être affichés par ordre <guilabel>croissant</guilabel> ou <guilabel>décroissant</guilabel>.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Les paramètres suivants contrôlent la façon dont les messages sont affichés dans la vue du sujet.
 					<itemizedlist>
-						<listitem><para><guilabel>Afficher les messages des derniers jours</guilabel>: Ce paramètre limite l'ancienneté des messages à afficher. Par défaut, tous les messages sont affichés.</para></listitem>
-						<listitem><para><guilabel>Trier les messages par</guilabel>: Ce paramètre modifie l'ordre d'affichage des messages. Les messages peuvent être triés par <guilabel>auteur</guilabel>, <guilabel>date du message</guilabel>, <guilabel>nombre de réponses</guilabel>, <guilabel>sujet</guilabel>, ou <guilabel>nombre de vues</guilabel>.</para></listitem>
-						<listitem><para><guilabel>Sens du tri des sujets</guilabel>: Les messages peuvent être affichés par ordre <guilabel>croissant</guilabel> ou <guilabel>décroissant</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Afficher les messages triés selon leur ancienneté</guilabel>: Ce paramètre limite l'ancienneté des messages à afficher. Par défaut, tous les messages sont affichés.</para></listitem>
+						<listitem><para><guilabel>Afficher les messages triés par</guilabel>: Ce paramètre modifie l'ordre d'affichage des messages. Les messages peuvent être triés par <guilabel>auteur</guilabel>, <guilabel>date du message</guilabel>, <guilabel>nombre de réponses</guilabel>, <guilabel>sujet</guilabel>, ou <guilabel>nombre de vues</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Afficher les sujets triés par ordre</guilabel>: Les messages peuvent être affichés par ordre <guilabel>croissant</guilabel> ou <guilabel>décroissant</guilabel>.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -249,24 +249,24 @@
 				<para>
 					Les paramètres suivants contrôlent les événements liés à la publication.
 					<itemizedlist>
-						<listitem><para><guilabel>Quelqu'un répond à un sujet que vous avez mis en signet</guilabel>: Un utilisateur a publié une réponse à un sujet que vous avez mis en signet.</para></listitem>
-						<listitem><para><guilabel>Quelqu'un répond à un sujet auquel vous êtes abonné</guilabel>: Un utilisateur a publié une réponse à un sujet auquel vous êtes abonné.</para></listitem>
-						<listitem><para><guilabel>Quelqu'un vous cite dans un message</guilabel>: Un message que vous avez publié a été cité par un autre utilisateur.</para></listitem>
-						<listitem><para><guilabel>Quelqu'un crée un sujet dans un forum auquel vous êtes abonné</guilabel>: Un utilisateur a publié un nouveau sujet dans un forum auquel vous êtes abonné.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un a répondu à un sujet que vous avez mis en favori</guilabel>: Un utilisateur a publié une réponse à un sujet que vous avez mis en signet.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un a répondu à un sujet auquel vous êtes abonné</guilabel>: Un utilisateur a publié une réponse à un sujet auquel vous êtes abonné.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un vous a cité dans un message</guilabel>: Un message que vous avez publié a été cité par un autre utilisateur.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un a créé un sujet dans un forum auquel vous êtes abonné</guilabel>: Un utilisateur a publié un nouveau sujet dans un forum auquel vous êtes abonné.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>
 					Les paramètres suivants contrôlent les événements liés à la modération.
 					<itemizedlist>
-						<listitem><para><guilabel>Un message ou un sujet nécessite une validation</guilabel>: Un utilisateur a publié un nouveau message ou sujet qui nécessite une validation.</para></listitem>
-						<listitem><para><guilabel>Quelqu'un signale un message</guilabel>: Un utilisateur a signalé un message.</para></listitem>
+						<listitem><para><guilabel>Un sujet ou un message est en attente d'approbation</guilabel>: Un utilisateur a publié un nouveau message ou sujet qui nécessite une validation.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un a signalé un message</guilabel>: Un utilisateur a signalé un message.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>
 					Les paramètres suivants contrôlent divers autres événements.
 					<itemizedlist>
-						<listitem><para><guilabel>Quelqu'un demande à rejoindre un groupe que vous dirigez</guilabel>: Un utilisateur a demandé à rejoindre un groupe d'utilisateurs dont vous êtes le responsable.</para></listitem>
-						<listitem><para><guilabel>Quelqu'un vous envoie un message privé</guilabel>: Vous avez reçu un message privé.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un a demandé à rejoindre un groupe dont vous êtes responsable</guilabel>: Un utilisateur a demandé à rejoindre un groupe d'utilisateurs dont vous êtes le responsable.</para></listitem>
+						<listitem><para><guilabel>Quelqu'un vous a envoyé un message privé</guilabel>: Vous avez reçu un message privé.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
@@ -276,12 +276,12 @@
 			<para>Les utilisateurs peuvent être marqués comme <guilabel>Ami</guilabel> ou <guilabel>Ennemi</guilabel> afin de permettre le filtrage de leurs messages. Si un style le prend en charge, les messages publiés par les utilisateurs figurant sur votre liste d'ennemis seront masqués, et les messages des utilisateurs figurant sur votre liste d'amis seront mis en évidence. Les règles de messages privés peuvent utiliser les listes d'amis et d'ennemis pour filtrer les messages privés entrants.</para>
 		</section>
 		<section id="ucp_attachments">
-			<title>Fichiers joints</title>
+			<title>Pièces jointes</title>
 			<para>La section des fichiers joints de l'UCP affiche la liste de tous les fichiers que vous avez téléversés sur le forum. Chaque entrée contient un lien vers le message dans lequel se trouve le fichier joint, la taille du fichier, le nombre de fois qu'il a été téléchargé, ainsi que sa date de téléversement. Cette page vous permet de supprimer des fichiers joints du forum. Les références insérées dans le texte vers un fichier joint supprimé resteront présentes dans le message d'origine, mais le fichier ne sera plus affiché que sous la forme de son nom.</para>
 		</section>
 		<section id="ucp_usergroups">
 			<title>Groupes d'utilisateurs</title>
-			<para>L'appartenance aux groupes d'utilisateurs peut être gérée depuis la section Groupes d'utilisateurs de l'UCP. La page répertorie les groupes dont l'utilisateur est membre, ceux dont il est responsable, ainsi que tous les autres groupes d'utilisateurs. Les groupes ouverts à l'adhésion disposent d'un bouton radio permettant à l'utilisateur de faire une demande d'adhésion. Les utilisateurs peuvent également se retirer des groupes auxquels ils appartiennent. Si un utilisateur dispose de la permission <guilabel>Peut changer de groupe d'utilisateurs par défaut</guilabel>, il peut choisir ici quel groupe sera son groupe par défaut. Le groupe d'utilisateurs par défaut détermine la couleur du nom d'utilisateur affichée dans tout le forum.</para>
+			<para>L'appartenance aux groupes d'utilisateurs peut être gérée depuis la section Groupes d'utilisateurs de l'UCP. La page répertorie les groupes dont l'utilisateur est membre, ceux dont il est responsable, ainsi que tous les autres groupes d'utilisateurs. Les groupes ouverts à l'adhésion disposent d'un bouton radio permettant à l'utilisateur de faire une demande d'adhésion. Les utilisateurs peuvent également se retirer des groupes auxquels ils appartiennent. Si un utilisateur dispose de la permission <guilabel>Peut modifier son groupe d'utilisateurs par défaut</guilabel>, il peut choisir ici quel groupe sera son groupe par défaut. Le groupe d'utilisateurs par défaut détermine la couleur du nom d'utilisateur affichée dans tout le forum.</para>
 			<para>Les utilisateurs désignés comme responsables d'un groupe peuvent gérer l'appartenance à ce groupe. Il est possible d'ajouter ou de retirer des utilisateurs, d'approuver ou de refuser les demandes d'adhésion en attente, et de modifier leur groupe d'utilisateurs par défaut depuis cette page.</para>
 		</section>
 	</section>
@@ -360,32 +360,32 @@
 			</figure>
 			<para>L'état par défaut de ces options dépendra de vos paramètres <link linkend="ucp_posting">Publication</link> sur la page <guilabel>Préférences du forum</guilabel> du Panneau de configuration de l'utilisateur.</para>
 			<itemizedlist>
-				<listitem><para><guilabel>Désactiver le BBCode</guilabel>: Si le BBCode est activé sur le forum et que vous êtes autorisé à l'utiliser, cette option sera disponible. Cocher cette case empêchera la conversion de tout BBCode présent dans le contenu de votre message vers sa mise en forme correspondante. Par exemple, [b]Texte en gras[/b] apparaîtra dans votre message exactement tel quel : [b]Texte en gras[/b].</para></listitem>
+				<listitem><para><guilabel>Désactiver les BBCodes</guilabel>: Si le BBCode est activé sur le forum et que vous êtes autorisé à l'utiliser, cette option sera disponible. Cocher cette case empêchera la conversion de tout BBCode présent dans le contenu de votre message vers sa mise en forme correspondante. Par exemple, [b]Texte en gras[/b] apparaîtra dans votre message exactement tel quel : [b]Texte en gras[/b].</para></listitem>
 				<listitem><para><guilabel>Désactiver les émoticônes</guilabel>: Si les émoticônes sont activées sur le forum et que vous êtes autorisé à les utiliser, cette option sera disponible. Cocher cette case empêchera la conversion des caractères d'émoticônes vers leur image correspondante. Par exemple, ;) apparaîtra dans votre message exactement tel quel : ;).</para></listitem>
-				<listitem><para><guilabel>Ne pas analyser automatiquement les URL</guilabel>: Lorsque vous saisissez directement une URL dans le contenu de votre message (au format http://....com ou www.etc.com), elle est par défaut convertie en texte cliquable. Cependant, si cette case est cochée lors de la publication, ces URL resteront sous forme de texte standard.</para></listitem>
-				<listitem><para><guilabel>Joindre une signature (les signatures peuvent être modifiées depuis l'UCP)</guilabel>: Si cette case est cochée, la signature définie dans votre profil sera jointe au message, à condition que les signatures aient été activées par l'administrateur et que vous disposiez des permissions nécessaires. Pour plus d'informations sur les signatures, consultez <link linkend="ucp_signature">Signatures de l'UCP</link>.</para></listitem>
+				<listitem><para><guilabel>Ne pas analyser automatiquement la syntaxe des liens</guilabel>: Lorsque vous saisissez directement une URL dans le contenu de votre message (au format http://....com ou www.etc.com), elle est par défaut convertie en texte cliquable. Cependant, si cette case est cochée lors de la publication, ces URL resteront sous forme de texte standard.</para></listitem>
+				<listitem><para><guilabel>Insérer une signature (personnalisable dans le panneau de contrôle utilisateur)</guilabel>: Si cette case est cochée, la signature définie dans votre profil sera jointe au message, à condition que les signatures aient été activées par l'administrateur et que vous disposiez des permissions nécessaires. Pour plus d'informations sur les signatures, consultez <link linkend="ucp_signature">Signatures de l'UCP</link>.</para></listitem>
 				<listitem><para><guilabel>M'envoyer un e-mail lorsqu'une réponse est publiée</guilabel>: Si cette case est cochée, vous recevrez une notification (par e-mail, Jabber, etc.) chaque fois qu'un autre utilisateur répond au sujet. C'est ce que l'on appelle s'abonner au sujet. Pour plus d'informations, consultez <link linkend="ucp_subscriptions">Abonnements de l'UCP</link>.</para></listitem>
 				<listitem><para><guilabel>Verrouiller le sujet</guilabel>: Si vous disposez des permissions de modération dans ce forum, cocher cette case entraînera le verrouillage du sujet une fois votre réponse publiée. Seuls les modérateurs ou les administrateurs pourront alors répondre au sujet. Pour plus d'informations, consultez <link linkend="modtools_lock">Verrouiller un sujet ou un message</link>.</para></listitem>
 			</itemizedlist>
 
 			<section id="posting_special">
 				<title>Types de sujets</title>
-				<para>Si vous disposez des permissions appropriées, vous avez la possibilité de sélectionner différents types de sujets lors de la publication d'un nouveau sujet à l'aide de <guilabel>Poster le sujet en tant que</guilabel>. Les quatre types possibles sont : <guilabel>Normal</guilabel>, <guilabel>Épinglé</guilabel>, <guilabel>Annonce</guilabel>, et <guilabel>Global</guilabel>. Par défaut, tous les nouveaux messages sont de type <guilabel>Normal</guilabel>.</para>
+				<para>Si vous disposez des permissions appropriées, vous avez la possibilité de sélectionner différents types de sujets lors de la publication d'un nouveau sujet à l'aide de <guilabel>Publier le sujet comme</guilabel>. Les quatre types possibles sont : <guilabel>Normal</guilabel>, <guilabel>Épinglé</guilabel>, <guilabel>Annonce</guilabel>, et <guilabel>Annonce générale</guilabel>. Par défaut, tous les nouveaux messages sont de type <guilabel>Normal</guilabel>.</para>
 				<itemizedlist>
 					<listitem><para><guilabel>Normal</guilabel>: En sélectionnant Normal, votre nouveau sujet sera un sujet standard dans le forum.</para></listitem>
 					<listitem><para><guilabel>Épinglé</guilabel>: Les sujets épinglés sont des sujets spéciaux du forum. Ils sont « épinglés » en haut de la première page du forum dans lequel ils sont publiés, au-dessus de tous les sujets normaux.</para></listitem>
 					<listitem><para><guilabel>Annonce</guilabel>: Les annonces ressemblent beaucoup aux sujets épinglés, en ce sens qu'elles sont « épinglées » en haut du forum. Cependant, elles diffèrent des sujets épinglés sur deux points : 1) elles apparaissent au-dessus des sujets épinglés, et 2) elles apparaissent en haut de <emphasis>chaque</emphasis> page du forum, et non uniquement de la première page de sujets.</para></listitem>
-					<listitem><para><guilabel>Global</guilabel>: Les annonces globales sont un type spécial d'annonces qui apparaissent en haut de chaque page de chaque forum du site. Elles apparaissent au-dessus de tout autre type de sujet spécial.</para></listitem>
+					<listitem><para><guilabel>Annonce générale</guilabel>: Les annonces globales sont un type spécial d'annonces qui apparaissent en haut de chaque page de chaque forum du site. Elles apparaissent au-dessus de tout autre type de sujet spécial.</para></listitem>
 				</itemizedlist>
 				<para>Vous avez également la possibilité de spécifier la durée pendant laquelle les sujets spéciaux (sujets épinglés, annonces et annonces globales) conservent leur type. Par exemple, une annonce est créée avec une durée d'affichage de 4 jours. Une fois ces 4 jours écoulés, l'annonce sera automatiquement transformée en sujet normal.</para>
 			</section>
 		</section>
 
 		<section id="posting_attachments">
-			<title>Fichiers joints</title>
+			<title>Pièces jointes</title>
 			<para>Les fichiers joints permettent aux utilisateurs de téléverser des fichiers et de les joindre à leur message. La possibilité de joindre et de télécharger des fichiers est déterminée respectivement par les permissions &quot;Peut joindre des fichiers&quot; et &quot;Peut télécharger des fichiers&quot;.</para>
-			<para>Pour ajouter un fichier joint, recherchez la section <guilabel>Fichiers joints</guilabel> de la page de publication et cliquez sur le bouton <guilabel>Ajouter des fichiers</guilabel>. Un commentaire peut être ajouté dans la zone de texte <guilabel>Commentaire du fichier</guilabel>. Cliquer sur <guilabel>Ajouter le fichier</guilabel> permet de téléverser et de joindre le fichier au message. Pour téléverser plusieurs fichiers, répétez la procédure. Les fichiers joints peuvent également être téléversés en faisant glisser-déposer un fichier dans la zone de message de l'écran de publication.</para>
-			<para>Pour supprimer un fichier joint, recherchez la liste des fichiers joints en bas de la section <guilabel>Fichiers joints</guilabel> de la page de publication et cliquez sur le bouton <guilabel>Supprimer le fichier</guilabel> correspondant au fichier souhaité.</para>
+			<para>Pour ajouter un fichier joint, recherchez la section <guilabel>Pièces jointes</guilabel> de la page de publication et cliquez sur le bouton <guilabel>Ajouter des fichiers</guilabel>. Un commentaire peut être ajouté dans la zone de texte <guilabel>Description du fichier</guilabel>. Cliquer sur <guilabel>Ajouter le fichier</guilabel> permet de téléverser et de joindre le fichier au message. Pour téléverser plusieurs fichiers, répétez la procédure. Les fichiers joints peuvent également être téléversés en faisant glisser-déposer un fichier dans la zone de message de l'écran de publication.</para>
+			<para>Pour supprimer un fichier joint, recherchez la liste des fichiers joints en bas de la section <guilabel>Pièces jointes</guilabel> de la page de publication et cliquez sur le bouton <guilabel>Supprimer le fichier</guilabel> correspondant au fichier souhaité.</para>
 			<para>Les fichiers joints peuvent être affichés dans le texte du message en cliquant sur le bouton <guilabel>Insérer dans le texte</guilabel> correspondant au fichier souhaité. Lorsqu'un fichier joint est inséré dans le texte, un code semblable à du BBCode est ajouté au texte du message afin qu'il puisse être déplacé. Si un fichier joint n'est pas inséré dans le texte, il sera affiché à la fin du message.</para>
 			<para>Les fichiers joints sont soumis à un ensemble de restrictions, à savoir la taille et le type de fichier.</para>
 			<itemizedlist>
@@ -456,7 +456,7 @@
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>Les noms d'utilisateur doivent être saisis dans la zone de texte, puis les boutons <guilabel>Ajouter</guilabel> ou <guilabel>Ajouter [CCI]</guilabel> permettent d'ajouter l'utilisateur à la liste de destinataires appropriée. Si vous n'êtes pas sûr du nom d'un utilisateur, vous pouvez utiliser le lien <guilabel>Rechercher un membre</guilabel> pour rechercher l'utilisateur dans la liste des membres. Cochez la case à côté du ou des utilisateurs souhaités dans la liste des membres, puis cliquez sur <guilabel>Sélectionner les éléments cochés</guilabel> pour ajouter l'utilisateur au champ des destinataires.</para>
+			<para>Les noms d'utilisateur doivent être saisis dans la zone de texte, puis les boutons <guilabel>Ajouter</guilabel> ou <guilabel>Ajouter [CCI]</guilabel> permettent d'ajouter l'utilisateur à la liste de destinataires appropriée. Si vous n'êtes pas sûr du nom d'un utilisateur, vous pouvez utiliser le lien <guilabel>Trouver un membre</guilabel> pour rechercher l'utilisateur dans la liste des membres. Cochez la case à côté du ou des utilisateurs souhaités dans la liste des membres, puis cliquez sur <guilabel>Valider la sélection</guilabel> pour ajouter l'utilisateur au champ des destinataires.</para>
 		</section>
 		<section id="pm_folders">
 			<sectioninfo>
@@ -514,12 +514,12 @@
 				</sectioninfo>
 				<title>Marqueurs de message</title>
 
-				<para>Les messages présents dans les dossiers peuvent comporter des marquages de couleur. Reportez-vous à la légende <guilabel>Couleurs des messages</guilabel> pour connaître la signification de chaque couleur. Le type exact de coloration dépend du thème utilisé. Les messages colorés peuvent avoir quatre significations différentes :</para>
+				<para>Les messages présents dans les dossiers peuvent comporter des marquages de couleur. Reportez-vous à la légende <guilabel>Légende de couleurs des messages</guilabel> pour connaître la signification de chaque couleur. Le type exact de coloration dépend du thème utilisé. Les messages colorés peuvent avoir quatre significations différentes :</para>
 				<variablelist>
 					<varlistentry>
 						<term>Message marqué</term>
 						<listitem>
-							<para>Vous pouvez marquer un message avec l'option <guilabel>Marquer comme important</guilabel> du menu déroulant.</para>
+							<para>Vous pouvez marquer un message avec l'option <guilabel>Marquer ou non comme important</guilabel> du menu déroulant.</para>
 						</listitem>
 					</varlistentry>
 
@@ -563,7 +563,7 @@
 					<listitem><para><guilabel>Sujet</guilabel> - Le sujet du message.</para></listitem>
 					<listitem><para><guilabel>Expéditeur</guilabel> - Le nom d'utilisateur de l'expéditeur du message.</para></listitem>
 					<listitem><para><guilabel>Message</guilabel> - Le contenu du message.</para></listitem>
-					<listitem><para><guilabel>État du message</guilabel> - Si un message a fait l'objet d'une réponse ou d'un transfert.</para></listitem>
+					<listitem><para><guilabel>Statut du message</guilabel> - Si un message a fait l'objet d'une réponse ou d'un transfert.</para></listitem>
 					<listitem><para><guilabel>Envoyé à</guilabel> - Si le message vous a été envoyé directement ou à un groupe d'utilisateurs dont vous êtes membre.</para></listitem>
 				</itemizedlist>
 			</section>
@@ -572,16 +572,16 @@
 				<title>Conditions de correspondance</title>
 				<para>Plusieurs conditions sont disponibles pour filtrer les champs. Toutes les conditions listées ci-dessous ne sont pas disponibles pour chaque champ. Voici la liste complète des conditions disponibles :</para>
 				<itemizedlist>
-					<listitem><para><guilabel>Contient</guilabel> - Le champ contient la chaîne indiquée.</para></listitem>
-					<listitem><para><guilabel>Ne contient pas</guilabel> - Le champ ne contient <emphasis role="strong">pas</emphasis> la chaîne indiquée.</para></listitem>
+					<listitem><para><guilabel>Est comme</guilabel> - Le champ contient la chaîne indiquée.</para></listitem>
+					<listitem><para><guilabel>N'est pas comme</guilabel> - Le champ ne contient <emphasis role="strong">pas</emphasis> la chaîne indiquée.</para></listitem>
 					<listitem><para><guilabel>Est</guilabel> - Le champ correspond exactement à la chaîne indiquée.</para></listitem>
 					<listitem><para><guilabel>N'est pas</guilabel> - Le contenu du champ n'est <emphasis role="strong">pas</emphasis> identique à la chaîne indiquée.</para></listitem>
 					<listitem><para><guilabel>Commence par</guilabel> - Le champ commence par la chaîne indiquée.</para></listitem>
 					<listitem><para><guilabel>Se termine par</guilabel> - Le champ se termine par la chaîne indiquée.</para></listitem>
 					<listitem><para><guilabel>Est un ami</guilabel> - Si l'expéditeur figure sur votre liste d'amis.</para></listitem>
-					<listitem><para><guilabel>Est un ennemi</guilabel> - Si l'expéditeur figure sur votre liste d'ennemis.</para></listitem>
-					<listitem><para><guilabel>Est l'utilisateur</guilabel> - Le nom de l'expéditeur correspond à la chaîne indiquée.</para></listitem>
-					<listitem><para><guilabel>Appartient au groupe d'utilisateurs</guilabel> - L'expéditeur appartient au groupe d'utilisateurs indiqué.</para></listitem>
+					<listitem><para><guilabel>Est un ignoré</guilabel> - Si l'expéditeur figure sur votre liste d'ennemis.</para></listitem>
+					<listitem><para><guilabel>Est un utilisateur</guilabel> - Le nom de l'expéditeur correspond à la chaîne indiquée.</para></listitem>
+					<listitem><para><guilabel>Est dans un groupe d'utilisateurs</guilabel> - L'expéditeur appartient au groupe d'utilisateurs indiqué.</para></listitem>
 					<listitem><para><guilabel>Répondu</guilabel> - Si le message a fait l'objet d'une réponse.</para></listitem>
 					<listitem><para><guilabel>Transféré</guilabel> - Si le message a été transféré.</para></listitem>
 					<listitem><para><guilabel>À mon groupe d'utilisateurs par défaut</guilabel> - Si le message a été envoyé à votre groupe d'utilisateurs.</para></listitem>
@@ -592,21 +592,21 @@
 					<varlistentry>
 						<term>Sujet</term>
 						<listitem>
-							<para><guilabel>Contient</guilabel>, <guilabel>Ne contient pas</guilabel>, <guilabel>Est</guilabel>, <guilabel>N'est pas</guilabel>, <guilabel>Commence par</guilabel>, <guilabel>Se termine par</guilabel></para>
+							<para><guilabel>Est comme</guilabel>, <guilabel>N'est pas comme</guilabel>, <guilabel>Est</guilabel>, <guilabel>N'est pas</guilabel>, <guilabel>Commence par</guilabel>, <guilabel>Se termine par</guilabel></para>
 						</listitem>
 					</varlistentry>
 
 					<varlistentry>
 						<term>Expéditeur</term>
 						<listitem>
-							<para><guilabel>Contient</guilabel>, <guilabel>Ne contient pas</guilabel>, <guilabel>Est</guilabel>, <guilabel>N'est pas</guilabel>, <guilabel>Commence par</guilabel>, <guilabel>Se termine par</guilabel>, <guilabel>Est un ami</guilabel>, <guilabel>Est un ennemi</guilabel>, <guilabel>Est l'utilisateur</guilabel>, <guilabel>Appartient au groupe d'utilisateurs</guilabel></para>
+							<para><guilabel>Est comme</guilabel>, <guilabel>N'est pas comme</guilabel>, <guilabel>Est</guilabel>, <guilabel>N'est pas</guilabel>, <guilabel>Commence par</guilabel>, <guilabel>Se termine par</guilabel>, <guilabel>Est un ami</guilabel>, <guilabel>Est un ignoré</guilabel>, <guilabel>Est un utilisateur</guilabel>, <guilabel>Est dans un groupe d'utilisateurs</guilabel></para>
 						</listitem>
 					</varlistentry>
 
 					<varlistentry>
 						<term>Message</term>
 						<listitem>
-							<para><guilabel>Contient</guilabel>, <guilabel>Ne contient pas</guilabel>, <guilabel>Est</guilabel>, <guilabel>N'est pas</guilabel></para>
+							<para><guilabel>Est comme</guilabel>, <guilabel>N'est pas comme</guilabel>, <guilabel>Est</guilabel>, <guilabel>N'est pas</guilabel></para>
 						</listitem>
 					</varlistentry>
 
@@ -678,8 +678,8 @@
 				<title>La requête de recherche</title>
 				<para>Pour effectuer une recherche sur le forum, vous devez préciser ce que vous souhaitez rechercher. Vous pouvez indiquer des mots-clés à rechercher ainsi qu'un auteur de message. Deux options de requête sont proposées pour effectuer la recherche :</para>
 				<itemizedlist>
-					<listitem><para><guilabel>Rechercher tous les termes ou utiliser la requête telle qu'elle est saisie</guilabel> - Si plusieurs mots-clés sont fournis, <emphasis role="strong">tous</emphasis> les mots-clés doivent figurer dans le résultat. Vous pouvez également fournir une requête utilisant des identifiants spéciaux.</para></listitem>
-					<listitem><para><guilabel>Rechercher l'un des termes</guilabel> - Si plusieurs mots-clés sont fournis, les résultats contenant <emphasis role="strong">l'un quelconque</emphasis> des mots-clés fournis seront renvoyés.</para></listitem>
+					<listitem><para><guilabel>Rechercher tous les termes ou utiliser la requête telle que saisie</guilabel> - Si plusieurs mots-clés sont fournis, <emphasis role="strong">tous</emphasis> les mots-clés doivent figurer dans le résultat. Vous pouvez également fournir une requête utilisant des identifiants spéciaux.</para></listitem>
+					<listitem><para><guilabel>Rechercher l'un de ces termes</guilabel> - Si plusieurs mots-clés sont fournis, les résultats contenant <emphasis role="strong">l'un quelconque</emphasis> des mots-clés fournis seront renvoyés.</para></listitem>
 				</itemizedlist>
 				<section id="user_search_query_keywords">
 					<title>Mots-clés</title>
@@ -761,16 +761,16 @@
 					<listitem>
 						<para><guilabel>Rechercher dans</guilabel> - Cela vous permet de préciser quelle partie des messages doit être recherchée.</para>
 						<itemizedlist>
-							<listitem><para><guilabel>Sujets des messages et texte des messages</guilabel> - Le sujet et le corps du message seront tous deux recherchés.</para></listitem>
-							<listitem><para><guilabel>Texte des messages uniquement</guilabel> - Seul le corps des messages sera recherché, et non son titre.</para></listitem>
+							<listitem><para><guilabel>Titres des sujets et contenu des messages</guilabel> - Le sujet et le corps du message seront tous deux recherchés.</para></listitem>
+							<listitem><para><guilabel>Contenu des messages uniquement</guilabel> - Seul le corps des messages sera recherché, et non son titre.</para></listitem>
 							<listitem><para><guilabel>Titres des sujets uniquement</guilabel> - Seuls les titres des sujets seront recherchés.</para></listitem>
 							<listitem><para><guilabel>Premier message des sujets uniquement</guilabel> - Seul le premier message de chaque sujet sera recherché, et aucun autre message du sujet.</para></listitem>
 						</itemizedlist>
 					</listitem>
 					<listitem><para><guilabel>Afficher les résultats sous forme de</guilabel> - Cette option met en forme les résultats de recherche pour n'afficher soit que le contenu des messages, soit uniquement les titres des sujets.</para></listitem>
 					<listitem><para><guilabel>Trier les résultats par</guilabel> - Trie les résultats selon <guilabel>l'auteur</guilabel>, la <guilabel>date du message</guilabel>, le <guilabel>forum</guilabel>, le <guilabel>titre du sujet</guilabel> ou le <guilabel>sujet du message</guilabel>. Les résultats peuvent être affichés par ordre <guilabel>croissant</guilabel> ou <guilabel>décroissant</guilabel>.</para></listitem>
-					<listitem><para><guilabel>Limiter les résultats aux</guilabel> - Limite les résultats aux messages publiés au cours d'une période spécifique.</para></listitem>
-					<listitem><para><guilabel>Afficher les premiers</guilabel> - Met en forme les résultats pour ne contenir qu'un nombre de caractères spécifique des messages correspondants.</para></listitem>
+					<listitem><para><guilabel>Limiter les résultats selon leur ancienneté</guilabel> - Limite les résultats aux messages publiés au cours d'une période spécifique.</para></listitem>
+					<listitem><para><guilabel>Afficher seulement les premiers</guilabel> - Met en forme les résultats pour ne contenir qu'un nombre de caractères spécifique des messages correspondants.</para></listitem>
 				</itemizedlist>
 			</section>
 			<section id="user_search_refinement">
@@ -842,7 +842,7 @@
 			<varlistentry>
 				<term>Outil de recherche « Rechercher un membre »</term>
 				<listitem>
-					<para>Vous pouvez affiner vos résultats de recherche à l'aide de la fonction de recherche <guilabel>Rechercher un membre</guilabel>. Cette fonctionnalité vous permet de trouver des membres par leur nom d'utilisateur, leur numéro ICQ, leur adresse AIM, YIM, MSN Messenger/Windows Live Messenger, leur date d'inscription, leur date de dernière visite, leur nombre de messages, leur adresse IP et leur(s) appartenance(s) à des groupes d'utilisateurs. Toutes les dates doivent être saisies au format AAAA-MM-JJ (par exemple 2004-02-28 pour représenter le 28 février 2004). L'astérisque (*) peut être utilisé comme caractère générique pour des correspondances partielles, par exemple en saisissant « Ar* » dans le champ du nom d'utilisateur pour trouver tous les noms d'utilisateur commençant par Ar. Cliquez sur le bouton <guilabel>Envoyer</guilabel> pour lancer la recherche, ou sur le bouton <guilabel>Réinitialiser</guilabel> si vous souhaitez effacer tous les champs et recommencer la recherche.</para>
+					<para>Vous pouvez affiner vos résultats de recherche à l'aide de la fonction de recherche <guilabel>Trouver un membre</guilabel>. Cette fonctionnalité vous permet de trouver des membres par leur nom d'utilisateur, leur numéro ICQ, leur adresse AIM, YIM, MSN Messenger/Windows Live Messenger, leur date d'inscription, leur date de dernière visite, leur nombre de messages, leur adresse IP et leur(s) appartenance(s) à des groupes d'utilisateurs. Toutes les dates doivent être saisies au format AAAA-MM-JJ (par exemple 2004-02-28 pour représenter le 28 février 2004). L'astérisque (*) peut être utilisé comme caractère générique pour des correspondances partielles, par exemple en saisissant « Ar* » dans le champ du nom d'utilisateur pour trouver tous les noms d'utilisateur commençant par Ar. Cliquez sur le bouton <guilabel>Envoyer</guilabel> pour lancer la recherche, ou sur le bouton <guilabel>Réinitialiser</guilabel> si vous souhaitez effacer tous les champs et recommencer la recherche.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
