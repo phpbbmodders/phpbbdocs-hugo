@@ -1897,7 +1897,7 @@
 		<para>Les trois <guilabel>Permissions générales</guilabel> sont celles qui s'appliquent à tous les forums ou qui ne sont pas du tout liées aux forums.</para>
 		<para>Les deux <guilabel>Permissions des forums</guilabel> sont celles qui ne s'appliquent qu'à un seul forum à la fois.</para>
 		<para>Chacun de ces cinq types de permissions peut être attribué à des utilisateurs individuels ou à des groupes d'utilisateurs.</para>
-		<para>Lorsque vous définissez des permissions, vous rencontrerez trois valeurs possibles - <guilabel>NON</guilabel>, <guilabel>OUI</guilabel> et <guilabel>JAMAIS</guilabel>, <guilabel>NON</guilabel> étant la valeur par défaut pour chaque permission. Si vous définissez <guilabel>OUI</guilabel>, cela remplace <guilabel>NON</guilabel> ; cependant, si la permission est réglée sur <guilabel>JAMAIS</guilabel>, vous ne pouvez pas la remplacer en la réglant sur <guilabel>OUI</guilabel> ailleurs. Si vous avez encore du mal à comprendre ce système, consultez la section <link linkend="acp_permissions_mask">Masques de permissions</link>.</para>
+		<para>Lorsque vous définissez des permissions, vous rencontrerez trois valeurs possibles - <guilabel>Non</guilabel>, <guilabel>Oui</guilabel> et <guilabel>Jamais</guilabel>, <guilabel>Non</guilabel> étant la valeur par défaut pour chaque permission. Si vous définissez <guilabel>Oui</guilabel>, cela remplace <guilabel>Non</guilabel> ; cependant, si la permission est réglée sur <guilabel>Jamais</guilabel>, vous ne pouvez pas la remplacer en la réglant sur <guilabel>Oui</guilabel> ailleurs. Si vous avez encore du mal à comprendre ce système, consultez la section <link linkend="acp_permissions_mask">Masques de permissions</link>.</para>
 		<para>Pour comprendre comment définir des permissions et savoir utiliser l'interface, il est important de reconnaître les différents types de permissions et outils que propose l'onglet Permissions dans l'ACP :</para>
 
 		<section id="acp_permissions_global">
@@ -2152,7 +2152,7 @@
 				<varlistentry>
 					<term>J'ai configuré un sous-forum pour copier les permissions de son forum parent, mais lorsque j'ai modifié les permissions du parent, le sous-forum n'a pas changé.</term>
 					<listitem>
-						<para><guilabel>Copier les permissions</guilabel> est une action, pas un paramètre. Lorsque vous choisissez de copier les permissions, celles-ci sont copiées au moment où vous cliquez sur Envoyer. Cela ne copiera pas les modifications futures, sauf si vous choisissez de les copier à nouveau dans Gérer les forums, Modifier.</para>
+						<para><guilabel>Copier les permissions de</guilabel> est une action, pas un paramètre. Lorsque vous choisissez de copier les permissions, celles-ci sont copiées au moment où vous cliquez sur Envoyer. Cela ne copiera pas les modifications futures, sauf si vous choisissez de les copier à nouveau dans Gérer les forums, Modifier.</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
@@ -2339,7 +2339,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Historique des forums</title>
-			<para>La section <guilabel>Journal du forum</guilabel> de l'<acronym>ACP</acronym> fournit un aperçu de ce qui s'est passé sur le forum. Il est important pour vous, l'administrateur, d'en garder une trace. Il existe quatre types de journaux :</para>
+			<para>La section <guilabel>Historique du forum</guilabel> de l'<acronym>ACP</acronym> fournit un aperçu de ce qui s'est passé sur le forum. Il est important pour vous, l'administrateur, d'en garder une trace. Il existe quatre types de journaux :</para>
 			<variablelist>
 				<varlistentry>
 					<term>Journal d'administration</term>
