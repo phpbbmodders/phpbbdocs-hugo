@@ -78,6 +78,10 @@ For every page that exists in `source_lang`'s content but has no counterpart at 
 
 ## Adding another language to the developer docs
 
+For the full process — this section's mechanical steps, plus the
+terminology audit and TODO writeup that followed for German — see
+[`docs/translation-process-prompt.md`](docs/translation-process-prompt.md).
+
 `convert_dev_docs_to_docbook.sh` only ever produces English (`dev-docs-docbook/en/`) — it pulls straight from upstream, which has no other language for the developer docs. `dev-docs-docbook/da/`, `dev-docs-docbook/fr/`, and `dev-docs-docbook/de_x_sie/` were each produced by translating the English DocBook source directly (prose translated; code samples, file paths, `<literal>` technical identifiers, and `<ulink>` URLs left untouched; XML structure and `id` attributes preserved exactly), then verified for well-formedness and structural completeness (row/entry counts compared 1:1 against the English source) before building.
 
 To add a language `<lang>`:
