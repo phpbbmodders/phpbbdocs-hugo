@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tests</title>
+  </articleinfo>
+  <para>
+    Um die Codeintegrität sicherzustellen, während neue Funktionen
+    hinzugefügt und bestehende Funktionen durch Patches geändert
+    werden, verwendet phpBB das PHPUnit-Testframework. Auf diese Weise
+    kann das Entwicklungsteam nachverfolgen, ob eine am Kern
+    vorgenommene Änderung andere bestehende Funktionen auf
+    unvorhergesehene Weise beeinflusst.
+  </para>
+  <para>
+    Es gibt zwei Hauptarten von Tests, die geschrieben und ausgeführt
+    werden können: Unit-Tests und funktionale Tests.
+  </para>
+  <para>
+    unit_testing functional_testing ui_testing
+  </para>
+</article>

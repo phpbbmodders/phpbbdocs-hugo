@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Plurale</title>
+  </articleinfo>
+  <sect1 id="short-example">
+    <title>Kurzes Beispiel</title>
+    <para>
+      Die englische Sprache ist bei Pluralen sehr einfach:
+    </para>
+    <blockquote>
+      <para>
+        <emphasis>You have 0 elephants, 1 elephant, or 2+
+        elephants.</emphasis>
+      </para>
+    </blockquote>
+    <para>
+      Es gibt also grundsätzlich 2 verschiedene Formen: eine Singular-
+      und eine Pluralform.
+    </para>
+    <para>
+      Bei manchen anderen Sprachen ist dies jedoch deutlich schwieriger.
+      Nehmen wir die bosnische Sprache als weiteres Beispiel:
+    </para>
+    <blockquote>
+      <para>
+        <emphasis>You have [1/21/31] slon, [2/3/4] slona, [0/5/6]
+        slonova and [7/8/9/11] ...</emphasis>
+      </para>
+    </blockquote>
+    <para>
+      Das Problem beim alten Pluralsystem war, dass man alle Fälle
+      einzeln angeben musste und dafür eine Schleife brauchte.
+    </para>
+    <para>
+      Da wir nicht die ersten Entwickler sind, die mit diesem Problem
+      konfrontiert wurden, war es nicht sonderlich schwer, eine passende
+      Lösung zu finden. Wir haben uns entschieden, das System von
+      <ulink url="https://www.unicode.org/cldr/charts/43/supplemental/language_plural_rules.html">Unicode.org</ulink>
+      zu verwenden, das z. B. auch von Mozilla genutzt wird.
+    </para>
+  </sect1>
+  <sect1 id="plural-rules">
+    <title>Pluralregeln</title>
+    <para>
+      Wir haben also die folgenden 16 Regeln für Plurale definiert. Der
+      erste Punkt ist die Sprachfamilie, danach folgt eine Reihe von
+      Zeilen im folgenden Format: <emphasis role="strong">&lt;key&gt; -
+      &lt;rule&gt;: &lt;example-numbers&gt;</emphasis>
+    </para>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        0 wird als Sonderfall behandelt. Wenn du einen Schlüssel 0 zu
+        deinem array hinzufügst, wird dieser unabhängig von der
+        Pluralregel im Fall von 0 verwendet.
+      </para>
+    </note>
+    <sect2 id="rule-0">
+      <title>Regel #0</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: asiatische (Chinesisch, Japanisch, Koreanisch,
+            Vietnamesisch), Persisch, turksprachig/altaisch (Türkisch),
+            Thailändisch, Laotisch
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - alles: 0, 1, 2, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-1">
+      <title>Regel #1</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: germanische (Dänisch, Niederländisch, Englisch,
+            Färöisch, Friesisch, Deutsch, Norwegisch, Schwedisch),
+            finno-ugrische (Estnisch, Finnisch, Ungarisch),
+            isolierte Sprache (Baskisch), lateinisch/griechisch
+            (Griechisch), semitisch (Hebräisch), romanische (Italienisch,
+            Portugiesisch, Spanisch, Katalanisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - alles andere: 0, 2, 3, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-2">
+      <title>Regel #2</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: romanische (Französisch, Portugiesisch,
+            brasilianisches Portugiesisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 0, 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - alles andere: 2, 3, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-3">
+      <title>Regel #3</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: baltisch (Lettisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 0
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 1, außer 11: 1, 21, ... 101, 121, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 2, 3, ... 10, 11, 12, ... 20, 22, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-4">
+      <title>Regel #4</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: keltisch (Schottisch-Gälisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - ist 1 oder 11: 1, 11
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - ist 2 oder 12: 2, 12
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - andere zwischen 3 und 19: 3, 4, ... 10, 13, ... 18, 19
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - alles andere: 0, 20, 21, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-5">
+      <title>Regel #5</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: romanisch (Rumänisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - ist 0 oder endet auf 01-19, außer 1: 0, 2, 3, ... 19,
+            101, 102, ... 119, 201, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 20, 21, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-6">
+      <title>Regel #6</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: baltisch (Litauisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - endet auf 1, außer 11: 1, 21, 31, ... 101, 121, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 0 oder endet auf 10-20: 0, 10, 11, 12, ... 19,
+            20, 30, 40, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 2, 3, ... 8, 9, 22, 23, ... 29, 32, 33,
+            ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-7">
+      <title>Regel #7</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: slawische (Bosnisch, Kroatisch, Serbisch,
+            Russisch, Ukrainisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - endet auf 1, außer 11: 1, 21, 31, ... 101, 121, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 2-4, außer 12-14: 2, 3, 4, 22, 23, 24, 32,
+            ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20, 25, 26, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-8">
+      <title>Regel #8</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: slawisch (Slowakisch, Tschechisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - 2, 3, 4
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 0, 5, 6, 7, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-9">
+      <title>Regel #9</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: slawisch (Polnisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 2-4, außer 12-14: 2, 3, 4, 22, 23, 24, 32,
+            ... 104, 122, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 0, 5, 6, ... 11, 12, 13, 14, 15, ... 20,
+            21, 25, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-10">
+      <title>Regel #10</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: slawisch (Slowenisch, Sorbisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - endet auf 01: 1, 101, 201, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 02: 2, 102, 202, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - endet auf 03-04: 3, 4, 103, 104, 203, 204, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - alles andere: 0, 5, 6, 7, 8, 9, 10, 11, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-11">
+      <title>Regel #11</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: keltisch (Irisch-Gälisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - 2
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - ist 3-6: 3, 4, 5, 6
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - ist 7-10: 7, 8, 9, 10
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            5 - alles andere: 0, 11, 12, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-12">
+      <title>Regel #12</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: semitisch (Arabisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - 2
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - endet auf 03-10: 3, 4, ... 10, 103, 104, ... 110, 203,
+            204, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - endet auf 11-99: 11, ... 99, 111, 112, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            5 - alles andere: 100, 101, 102, 200, 201, 202, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            6 - 0
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-13">
+      <title>Regel #13</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: semitisch (Maltesisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - 1
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 01-10: 0, 2, 3, ... 9, 10, 101, 102, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - endet auf 11-19: 11, 12, ... 18, 19, 111, 112, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            4 - alles andere: 20, 21, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-14">
+      <title>Regel #14</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: slawisch (Mazedonisch)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - endet auf 1: 1, 11, 21, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - endet auf 2: 2, 12, 22, ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            3 - alles andere: 0, 3, 4, ... 10, 13, 14, ... 20, 23, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="rule-15">
+      <title>Regel #15</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Familien: Isländisch
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            1 - endet auf 1, außer 11: 1, 21, 31, ... 101, 121, 131,
+            ...
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            2 - alles andere: 0, 2, 3, ... 10, 11, 12, ... 20, 22, ...
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="how-to-use-the-rules">
+    <title>Verwendung der Regeln</title>
+    <para>
+      Das Erste, was dein Sprachpaket benötigt, ist eine Definition,
+      welche Regel für dein Paket verwendet werden soll. Dies geschieht
+      in der Sprachdatei <literal>language/xy/common.php</literal> am
+      Anfang des Arrays (Regel #1 ist die Regel für die englische
+      Sprache und wird standardmäßig verwendet, wenn du keine
+      angeben):
+    </para>
+    <programlisting>
+'PLURAL_RULE' =&gt; 1,
+</programlisting>
+    <para>
+      Das folgende Beispiel verwendet Regel
+      <emphasis role="strong">#13</emphasis>:
+    </para>
+    <para>
+      Du hat die folgenden Zeilen:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          1 - 1
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          2 - endet auf 01-10: 2, 3, ... 9, 10, 101, 102, ...
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          3 - endet auf 11-19: 11, 12, ... 18, 19, 111, 112, ...
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          4 - alles andere: 20, 21, ...
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Während die englische Sprache in ihrem Array nur 2 Zeilen hat:
+    </para>
+    <programlisting>
+'EXAMPLE' =&gt; [
+    1 =&gt; '1 example',
+    2 =&gt; '2 or more examples',
+],
+</programlisting>
+    <para>
+      musst du die Nullzeile und 4 Zeilen für die „Plurale“ angeben:
+    </para>
+    <programlisting>
+'EXAMPLE' =&gt; [
+    1 =&gt; '1 example',
+    2 =&gt; '[0 or number ending with 01-10] examples',
+    3 =&gt; '[number ending with 11-19] example',
+    4 =&gt; 'even more examples',
+],
+</programlisting>
+    <para>
+      Falls du 0 gesondert behandeln musst, kannst du einfach den
+      0-Fall hinzufügen:
+    </para>
+    <programlisting>
+'EXAMPLE' =&gt; [
+    0 =&gt; 'No example',
+    1 =&gt; '1 example',
+    2 =&gt; '[zero is not handled here anymore! Only number ending with 01-10] examples',
+    3 =&gt; '[number ending with 11-19] example',
+    4 =&gt; 'even more examples',
+],
+</programlisting>
+    <para>
+      Wenn du eine Zeile vergessen, verwendet das System automatisch
+      die vorherige Zeile. Wenn du also vergessen, die Zeile
+      <emphasis>3</emphasis> hinzuzufügen, wird für 11-19 ebenfalls die
+      Zeile <emphasis>2</emphasis> verwendet. Gibt es keine vorherige
+      Zeile, wird die letzte Zeile des Arrays verwendet.
+    </para>
+    <para>
+      <emphasis role="strong">Stelle sicher, dass deine Fälle in
+      aufsteigender Reihenfolge stehen</emphasis>, da das System sonst
+      unerwartete Ergebnisse liefern kann, wenn Schlüssel fehlen oder
+      nicht in der richtigen Reihenfolge sind.
+    </para>
+  </sect1>
+  <sect1 id="credits">
+    <title>Danksagung</title>
+    <para>
+      Das System basiert auf dem System von
+      <ulink url="https://developer.mozilla.org/en/Localization_and_Plurals">Mozilla</ulink>,
+      das die „Plural Rules and Families“ aus der
+      <ulink url="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html#Plural-forms">GNU-gettext-Dokumentation</ulink>
+      verwendet.
+    </para>
+  </sect1>
+</article>
