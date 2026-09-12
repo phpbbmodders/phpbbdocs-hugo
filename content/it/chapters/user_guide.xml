@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="user_guide">
+	<?dbhtml dir="userguide" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2006</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
+	<title>Guida per l'utente</title>
+	<abstract>
+		<para>Questo capitolo è rivolto agli utenti del forum. Spiega tutte le funzioni rivolte all'utente necessarie per usare phpBB 3.3</para>
+	</abstract>
+	<section id="user_permissions">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>AdamR</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Come i permessi utente influenzano l'esperienza del forum</title>
+		<para>phpBB3 utilizza i permessi su base per-utente o per-gruppo per consentire o vietare agli utenti l'accesso a determinate funzioni o funzionalità offerte dal software. Queste possono includere la possibilità di pubblicare in determinati forum, avere un avatar, o poter comunicare tramite messaggi privati. Tutti i permessi possono essere impostati tramite il Pannello di Controllo Amministrazione.</para>
+		<para>I permessi possono anche essere impostati per consentire a membri designati di svolgere compiti speciali o avere capacità speciali sul forum. I permessi consentono all'amministratore di definire quali funzioni di moderazione, e in quali forum, determinati utenti o gruppi di utenti sono autorizzati a usare. Questo permette a utenti designati di diventare moderatori del forum. L'amministratore può anche dare agli utenti accesso a determinate sezioni del Pannello di Controllo Amministrazione, mantenendo le impostazioni o funzioni importanti riservate e al sicuro da atti malevoli. Ad esempio, un gruppo selezionato di moderatori potrebbe essere autorizzato a modificare l'avatar o la firma di un utente se tale avatar o firma non è consentito secondo le regole di un particolare forum. Senza queste capacità impostate, il moderatore dovrebbe notificare un amministratore per far modificare il profilo dell'utente.</para>
+	</section>
+	<section id="user_registering">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>zeroK</othername>
+				</author>
+				<author>
+					<othername>battye</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Registrarsi su un forum phpBB3</title>
+		<para>Registrare un account su un forum phpBB3 è tipicamente una procedura semplice e diretta.</para>
+		<figure id="user_registering_typical_page">
+			<title>La tipica pagina di registrazione</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/user_guide/typical_registration_page.png"/>
+				</imageobject>
+				<caption>
+					<para>Questo è ciò che dovresti aspettarti di vedere su una tipica pagina di registrazione.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+		<para>Dopo aver cliccato sul link <guilabel>Iscriviti</guilabel>, verranno mostrati i termini e le condizioni della registrazione, che devi accettare per procedere. Alcuni siti web ti chiederanno di indicare se hai meno di tredici anni, per conformarsi al <acronym>COPPA</acronym> (il Children's Online Privacy Protection Act del 1998 degli Stati Uniti; maggiori dettagli si trovano su <ulink url="http://www.coppa.org">http://www.coppa.org</ulink>). Se hai meno di tredici anni, il tuo account rimarrà inattivo finché non verrà approvato da un genitore o tutore. Riceverai un'e-mail in cui sono descritti i prossimi passaggi necessari per l'attivazione del tuo account.</para>
+		<para>Oltre ad accettare i termini e le condizioni, devi compilare alcuni dettagli importanti come scegliere un nome utente, inserire il tuo indirizzo e-mail e la password desiderata. Puoi anche selezionare il tuo fuso orario e la tua lingua.</para>
+		<para>Se nel modulo dove puoi specificare il tuo nome utente, password ecc. vedi un'immagine con alcuni caratteri dall'aspetto strano, allora stai vedendo la cosiddetta <emphasis>Conferma visiva</emphasis>. Molti forum la hanno, altrimenti nota come <acronym>CAPTCHA</acronym>, che è un'immagine con lettere e numeri distorti che devi poi digitare in una casella adiacente. Il motivo di ciò è assicurarsi che tu sia un utente legittimo che si sta registrando (invece di un robot spam che esegue una registrazione automatizzata). Inserisci semplicemente i caratteri che vedi nel campo <guilabel>Codice di conferma</guilabel> e procedi con la registrazione. Se non riesci a capire il codice, aggiorna la pagina per ottenerne uno nuovo.</para>
+		<figure id="user_registering_captcha">
+			<title>L'oggetto di conferma visiva</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/user_guide/visual_confirmation.png"/>
+				</imageobject>
+				<caption>
+					<para>Questo è un esempio di codice di conferma visiva che potresti vedere.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+		<para>Un'altra opzione disponibile è l'attivazione dell'account. In questo caso, l'amministratore può richiedere che tu debba seguire un link inviato via e-mail dopo la registrazione prima che il tuo account venga attivato. In questo caso vedrai un messaggio simile a questo: <blockquote><guilabel> Il tuo account è stato creato. Tuttavia, questo forum richiede l'attivazione dell'account: una chiave di attivazione è stata inviata all'indirizzo e-mail che hai fornito. Controlla la tua e-mail per ulteriori informazioni </guilabel></blockquote> È anche possibile che sia l'amministratore stesso a dover attivare l'account.</para>
+		<para>Alcuni forum avranno campi profilo personalizzati. Se l'amministratore ha scelto di mostrare campi profilo personalizzati nella schermata di registrazione, questi appariranno anch'essi. In alcuni casi, questi campi profilo personalizzati saranno anche campi obbligatori, il che significa che non devono essere lasciati vuoti.</para>
+		<para>Una volta completati tutti i campi nella pagina di registrazione, cliccando sul pulsante <guilabel>Invia</guilabel> completerai il processo. Se desideri svuotare tutti i campi, cliccando sul pulsante <guilabel>Ripristina</guilabel> lo farai per te. Dopo aver cliccato su <guilabel>Invia</guilabel>, ti verrà indicato il passaggio successivo. Nella maggior parte dei casi, ti verrà inviata un'e-mail all'indirizzo specificato con un link per finalizzare la registrazione. Altre opzioni includono anche la possibilità di accedere immediatamente (cioè non ci sono ulteriori azioni per il processo di registrazione), oppure attendere che un amministratore esamini la tua registrazione e la accetti, nel qual caso verrai notificato via e-mail.</para>
+	</section>
+	<section id="user_control_panel">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Heimidal</othername>
+				</author>
+				<author>
+					<othername>iWisdom</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Orientarsi nel Pannello di Controllo Utente</title>
+		<para>Il Pannello di Controllo Utente (<glossterm>UCP</glossterm>) ti permette di modificare le preferenze personali, gestire i messaggi che stai seguendo, inviare e ricevere messaggi privati, e cambiare il modo in cui le informazioni su di te appaiono agli altri utenti. Per visualizzare l'UCP, clicca sul link "Pannello di Controllo Utente" che appare dopo aver effettuato l'accesso.</para>
+		<para>L'UCP è diviso in sei schede: Panoramica, Messaggi privati, Profilo, Preferenze, Amici e Ignorati, e Gruppi. All'interno di ogni scheda ci sono diverse sottopagine, accessibili cliccando sul link desiderato sul lato sinistro dell'interfaccia dell'UCP. Alcune di queste aree potrebbero non essere disponibili a seconda dei permessi impostati per te dall'amministratore.</para>
+		<para>Ogni pagina dell'UCP mostra la tua Lista amici sul lato sinistro. Per inviare un messaggio privato a un amico, clicca sul suo nome utente.</para>
+		<para>La messaggistica privata è trattata più in dettaglio in <xref linkend="user_pm" />.</para>
+		<section id="ucp_overview">
+			<title>Panoramica</title>
+			<para>La Panoramica mostra un'istantanea delle informazioni sulle tue abitudini di scrittura, come la data in cui ti sei iscritto al forum, il tuo argomento più attivo, e quanti messaggi totali hai inviato. Le sottopagine della Panoramica includono Sottoscrizioni, Segnalibri e Bozze.</para>
+
+			<figure id="ucp_overview_index">
+				<title>Panoramica del Pannello di Controllo Utente (Indice)</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/ucp_overview.png" />
+					</imageobject>
+					<caption>
+						<para>La sezione Panoramica dell'<glossterm>UCP</glossterm></para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<section id="ucp_subscriptions">
+				<title>Sottoscrizioni</title>
+				<para>Le sottoscrizioni sono forum o singoli argomenti che hai scelto di seguire per ogni nuovo messaggio. Ogni volta che viene pubblicato un nuovo messaggio in un'area a cui sei sottoscritto, ti verrà inviata un'e-mail per informarti della nuova aggiunta. Per creare una sottoscrizione, visita il forum o l'argomento a cui vorresti sottoscriverti e clicca sul link "Sottoscrivi" situato in fondo alla pagina.</para>
+				<para>Per rimuovere una sottoscrizione, seleziona la casella accanto alla sottoscrizione che desideri rimuovere e clicca sul pulsante "Annulla sottoscrizione".</para>
+			</section>
+			<section id="ucp_bookmarks">
+				<title>Segnalibri</title>
+				<para>I segnalibri, proprio come le sottoscrizioni, sono argomenti che hai scelto di seguire. Tuttavia, ci sono due differenze fondamentali: 1) solo i singoli argomenti possono essere aggiunti ai segnalibri, e 2) non ti verrà inviata un'e-mail per informarti di nuovi messaggi.</para>
+				<para>Per creare un segnalibro, visita l'argomento che vorresti seguire e clicca sul link "Inserisci nei segnalibri" situato in fondo alla pagina.</para>
+				<para>Per rimuovere un segnalibro, seleziona la casella accanto al segnalibro che desideri rimuovere e clicca sul pulsante "Rimuovi i segnalibri selezionati".</para>
+			</section>
+			<section id="ucp_drafts">
+				<title>Bozze</title>
+				<para>Le bozze vengono create quando clicchi sul pulsante "Salva" nella pagina Nuovo argomento o Rispondi. Vengono mostrati il titolo del tuo messaggio, il forum o argomento in cui è stata creata la bozza, e la data in cui l'hai salvata.</para>
+				<para>Per continuare a modificare una bozza per l'invio futuro, clicca sul link "Visualizza/Modifica". Se hai intenzione di terminare e pubblicare il messaggio, clicca su "Carica bozza". Per eliminare una bozza, seleziona la casella accanto alla bozza che desideri rimuovere e clicca su "Cancella selezionati".</para>
+			</section>
+			<section id="ucp_notifications_overview">
+				<title>Notifiche</title>
+				<para>Le notifiche ti avvisano di eventi che si sono verificati sul forum. Appariranno nel menu delle Notifiche in cima allo schermo. Gli eventi includono:</para>
+				<itemizedlist>
+					<listitem><para>È arrivato un nuovo messaggio privato</para></listitem>
+					<listitem><para>È stato creato un nuovo argomento in un forum sottoscritto</para></listitem>
+					<listitem><para>È stato creato un nuovo messaggio in un argomento sottoscritto</para></listitem>
+					<listitem><para>Un nuovo messaggio è in attesa di moderazione</para></listitem>
+					<listitem><para>Un messaggio è stato segnalato</para></listitem>
+					<listitem><para>Il tuo argomento/messaggio è stato approvato/respinto</para></listitem>
+					<listitem><para>Sei stato citato in un messaggio</para></listitem>
+				</itemizedlist>
+				<figure id="notifications_menu">
+					<title>Menu delle notifiche</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/notifications_menu.png" />
+						</imageobject>
+						<caption>
+							<para>Il menu delle <glossterm>notifiche</glossterm></para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
+		</section>
+		<section id="ucp_profile">
+			<title>Profilo</title>
+			<para>Questa sezione ti permette di impostare le informazioni del tuo profilo. Le informazioni del tuo profilo contengono informazioni generali che gli altri utenti del forum potranno vedere. Pensa al tuo profilo come a un segno della tua presenza pubblica. Questa sezione è separata dalle tue preferenze. (Le preferenze sono le impostazioni individuali che imposti e gestisci tu stesso, e che controllano la tua esperienza del forum. Per questo, è separata dalle impostazioni del profilo.)</para>
+			<section id="ucp_profile_info">
+				<title>Impostazioni personali</title>
+				<para>Le impostazioni personali controllano le informazioni mostrate quando un utente visualizza il tuo profilo. </para>
+				<itemizedlist>
+					<listitem><para><guilabel>Numero ICQ</guilabel>: il tuo numero di account associato al sistema <ulink url="http://www.icq.com/">ICQ</ulink>.</para></listitem>
+					<listitem><para><guilabel>AOL Instant Messenger</guilabel>: il tuo nome utente associato al sistema <ulink url="http://aim.com">AOL Instant Messenger</ulink>.</para></listitem>
+					<listitem><para><guilabel>Windows Live Messenger</guilabel>: il tuo indirizzo e-mail associato al servizio <ulink url="http://home.live.com/">Windows Live</ulink>.</para></listitem>
+					<listitem><para><guilabel>Yahoo Messenger</guilabel>: il tuo nome utente associato al servizio <ulink url="http://messenger.yahoo.com/">Yahoo Messenger</ulink>.</para></listitem>
+					<listitem><para><guilabel>Indirizzo Jabber</guilabel>: il tuo nome utente associato al servizio <ulink url="http://www.jabber.org/">Jabber</ulink>.</para></listitem>
+					<listitem><para><guilabel>Facebook</guilabel>: il tuo nome utente/pagina univoco associato al servizio <ulink url="https://www.facebook.com/">Facebook</ulink>.</para></listitem>
+					<listitem><para><guilabel>Twitter</guilabel>: il tuo nome utente associato al servizio <ulink url="https://twitter.com/">Twitter</ulink>.</para></listitem>
+					<listitem><para><guilabel>Skype</guilabel>: il tuo nome utente associato al servizio <ulink url="http://www.skype.com/">Skype</ulink>.</para></listitem>
+					<listitem><para><guilabel>Sito web</guilabel>: l'indirizzo del tuo sito web. Deve essere preceduto dall'appropriato riferimento al protocollo (cioè http://)</para></listitem>
+					<listitem><para><guilabel>Località</guilabel>: la tua posizione geografica. Nota che questa viene generalmente mostrata insieme alle tue informazioni utente in ogni messaggio, quindi si dovrebbe applicare la normale cautela riguardo alla divulgazione di informazioni personali su Internet.</para></listitem>
+					<listitem><para><guilabel>Occupazione</guilabel>: la tua occupazione. Le informazioni inserite appariranno solo nella pagina di visualizzazione del profilo.</para></listitem>
+					<listitem><para><guilabel>Interessi</guilabel>: i tuoi interessi personali. Le informazioni inserite qui appariranno solo nella pagina di visualizzazione del profilo.</para></listitem>
+					<listitem><para><guilabel>Compleanno</guilabel>: il tuo compleanno. Questa informazione è usata per mostrare il tuo nome utente nella sezione Compleanni dell'indice del forum. Se viene specificato l'anno, la tua età verrà mostrata nel tuo profilo.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="ucp_signature">
+				<title>Firma</title>
+				<para>La tua firma appare, a tua scelta, sotto ogni messaggio che scrivi. Le firme possono essere formattate usando il <link linkend="posting_bbcodes">BBCode</link>. L'amministratore del forum può specificare una lunghezza massima per le firme. Puoi verificare questo limite osservando la riga <guilabel>C'è un limite di x caratteri.</guilabel> sopra la casella di modifica della firma, dove x è il limite attualmente impostato.</para>
+			</section>
+			<section id="ucp_avatar">
+				<title>Avatar</title>
+				<para>Il tuo avatar è un'immagine che viene mostrata con ogni messaggio che scrivi. A seconda delle impostazioni del forum, gli avatar possono essere completamente disabilitati, oppure possono apparire in una (o più) di tre forme: "<guilabel>Carica dal tuo computer</guilabel>", "<guilabel>Carica da un URL</guilabel>", e "<guilabel>Collega da un sito esterno</guilabel>".</para>
+				<para>
+					<itemizedlist>
+						<listitem><para><guilabel>Gravatar</guilabel>: se usi il servizio avatar di Gravatar.com, puoi specificare qui il tuo indirizzo e-mail Gravatar per usare la tua immagine Gravatar come avatar.</para></listitem>
+						<listitem><para><guilabel>Carica dal tuo computer</guilabel>: puoi caricare un avatar dal tuo computer per ospitarlo sul server del forum.</para></listitem>
+						<listitem><para><guilabel>Carica da un URL</guilabel>: puoi specificare l'URL di un'immagine esistente. Questo farà sì che l'immagine venga copiata sul server del forum e ospitata su di esso.</para></listitem>
+						<listitem><para><guilabel>Collega da un sito esterno</guilabel>: puoi specificare l'URL di un'immagine esistente. Questo non farà sì che l'immagine venga ospitata sul server del forum, ma verrà invece collegata direttamente alla sua posizione attuale.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Inoltre, un amministratore del forum può scegliere di fornire una galleria di avatar da usare per gli utenti. Queste immagini sono preselezionate dall'amministratore e possono essere usate da qualsiasi membro del forum.</para>
+			</section>
+			<section id="ucp_login_keys">
+				<title>Chiavi di accesso</title>
+				<para>Se scegli di far sì che il forum ti faccia accedere automaticamente quando lo visiti (la casella "Ricordami"), ti viene assegnata una chiave di accesso che il tuo browser userà quando visiti il sito. Finché il tuo browser ha questa chiave, verrai automaticamente autenticato. Quando esci, la chiave viene eliminata solo dal tuo browser e non dal forum.</para>
+				<para>Questa sezione ti permette di visualizzare tutte le chiavi di accesso associate al tuo account, quando sono state create, e da quale indirizzo IP. Puoi anche eliminare le chiavi di accesso da questa pagina.</para>
+				<note><para>Eliminare una chiave di accesso che stai attualmente usando ti disconnetterà dal forum.</para></note>
+			</section>
+			<section id="ucp_external_auth">
+				<title>Account esterni</title>
+				<para>Se l'amministratore del forum ha abilitato l'<link linkend="acp_client_auth">autenticazione OAuth</link>, potrai accedere con il tuo account da provider OAuth come Bitly, Facebook e Google.</para>
+				<para>Clicca sul pulsante <guilabel>Collega</guilabel> per ciascun servizio per collegare i tuoi account al forum. Ti verrà chiesto di effettuare nuovamente l'accesso. Usa le tue credenziali di accesso per il forum. <emphasis role="strong">NON</emphasis> usare ancora il tuo account esterno. Quando accedi, verrai indirizzato alla pagina del tuo account, che mostrerà che è stato generato un ID per il tuo account esterno.</para>
+				<para>Una volta collegato un account, puoi scollegarlo dalla stessa pagina.</para>
+				<para>Dopo aver collegato l'account, ora puoi usarlo per accedere al forum. Basta cliccare sul pulsante del servizio appropriato nella pagina di accesso.</para>
+			</section>
+		</section>
+		<section id="ucp_preferences">
+			<title>Preferenze</title>
+			<para>Le preferenze ti permettono di stabilire vari comportamenti del software phpBB riguardo alla tua interazione con esso.</para>
+			<section id="ucp_global">
+				<title>Generali</title>
+				<para>Le impostazioni generali controllano varie interazioni complessive con il software phpBB.</para>
+				<para>
+					<itemizedlist>
+						<listitem><para><guilabel>Gli utenti possono contattarti via e-mail</guilabel>: se viene selezionato <guilabel>Sì</guilabel>, gli utenti possono inviarti e-mail tramite il pulsante "e-mail" nel tuo profilo.</para></listitem>
+						<listitem><para><guilabel>Gli amministratori possono inviarmi informazioni via e-mail</guilabel>: se viene selezionato <guilabel>Sì</guilabel>, riceverai le e-mail di massa inviate dall'amministratore del forum.</para></listitem>
+						<listitem><para><guilabel>Consenti agli utenti di inviarti messaggi privati</guilabel>: se viene selezionato <guilabel>Sì</guilabel>, gli utenti possono inviarti messaggi privati tramite il forum.</para></listitem>
+						<listitem><para><guilabel>Nascondi il mio stato online</guilabel>: se viene selezionato <guilabel>Sì</guilabel>, il tuo stato online sarà nascosto agli utenti. Nota che amministratori e moderatori potranno comunque vedere il tuo stato online.</para></listitem>
+						<listitem><para><guilabel>Il mio stile del forum</guilabel>: ti permette di specificare quale stile utilizza il forum. Questa impostazione potrebbe non essere disponibile se l'amministratore del forum ha scelto di sovrascrivere gli stili degli utenti.</para></listitem>
+						<listitem><para><guilabel>La mia lingua</guilabel>: ti permette di specificare quale pacchetto lingua utilizza il forum. Nota che questa impostazione si applica solo alle stringhe di lingua del forum; i messaggi verranno visualizzati nella lingua in cui sono stati scritti.</para></listitem>
+						<listitem><para><guilabel>Il mio fuso orario</guilabel>: ti permette di specificare in quale fuso orario dovrebbero apparire gli orari del forum.</para></listitem>
+						<listitem><para><guilabel>Il mio formato data</guilabel>: controlla in quale formato vengono visualizzati gli orari. Puoi selezionare una delle opzioni nel menu a tendina -- gli utenti avanzati possono selezionare "<guilabel>Personalizzato…</guilabel>" e inserire un formato personalizzato (nel formato della <ulink url="http://www.php.net/date">funzione date di php.net</ulink>).</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="ucp_posting">
+				<title>Messaggi</title>
+				<para>Le impostazioni dei messaggi controllano le impostazioni predefinite degli editor di scrittura quando crei un messaggio. Nota che queste opzioni sono controllabili singolarmente durante la scrittura.</para>
+				<para>
+					<itemizedlist>
+						<listitem><para><guilabel>Abilita il BBCode come impostazione predefinita</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, il BBCode è abilitato all'interno dell'editor dei messaggi.</para></listitem>
+						<listitem><para><guilabel>Abilita le emoticon come impostazione predefinita</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, le emoticon verranno visualizzate nei tuoi messaggi.</para></listitem>
+						<listitem><para><guilabel>Aggiungi la mia firma come impostazione predefinita</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, la tua firma verrà aggiunta ai tuoi messaggi.</para></listitem>
+						<listitem><para><guilabel>Avvisami delle risposte come impostazione predefinita</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, riceverai una notifica via e-mail quando viene data una risposta al tuo messaggio.</para></listitem>
+					</itemizedlist>
+
+				</para>
+			</section>
+			<section id="ucp_display">
+				<title>Visualizzazione</title>
+				<para>Le impostazioni di visualizzazione controllano come vengono mostrati i messaggi e gli argomenti nelle varie viste del forum.</para>
+				<para>
+					Le seguenti impostazioni controllano come viene visualizzato il contenuto dei messaggi e dei messaggi privati.
+					<itemizedlist>
+						<listitem><para><guilabel>Visualizza immagini nei messaggi</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, le immagini verranno visualizzate.</para></listitem>
+						<listitem><para><guilabel>Visualizza animazioni Flash</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, le animazioni Flash verranno visualizzate.</para></listitem>
+						<listitem><para><guilabel>Visualizza emoticon come immagini</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, le emoticon verranno visualizzate come immagini invece che come il loro equivalente testuale.</para></listitem>
+						<listitem><para><guilabel>Visualizza firme</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, le firme degli utenti verranno visualizzate.</para></listitem>
+						<listitem><para><guilabel>Visualizza gli avatar</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, gli avatar degli utenti verranno mostrati.</para></listitem>
+						<listitem><para><guilabel>Abilita la censura delle parole</guilabel>: quando viene selezionato <guilabel>Sì</guilabel>, il testo dei messaggi e dei messaggi privati verrà censurato secondo l'<link linkend="acp_posting_censors">elenco di censura delle parole</link> definito dall'amministratore.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Le seguenti impostazioni controllano come vengono visualizzati gli argomenti nella vista del forum.
+					<itemizedlist>
+						<listitem><para><guilabel>Visualizza gli argomenti degli ultimi giorni</guilabel>: questa impostazione limita l'età degli argomenti da visualizzare. Per impostazione predefinita, vengono mostrati tutti gli argomenti.</para></listitem>
+						<listitem><para><guilabel>Ordina gli argomenti per</guilabel>: questa impostazione cambia l'ordine in cui vengono mostrati gli argomenti. Gli argomenti possono essere ordinati per <guilabel>autore</guilabel>, <guilabel>ora del messaggio</guilabel>, <guilabel>numero di risposte</guilabel>, <guilabel>titolo</guilabel>, o <guilabel>numero di visualizzazioni</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Direzione di ordinamento degli argomenti</guilabel>: gli argomenti possono essere visualizzati in ordine <guilabel>crescente</guilabel> o <guilabel>decrescente</guilabel>.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Le seguenti impostazioni controllano come vengono visualizzati i messaggi nella vista dell'argomento.
+					<itemizedlist>
+						<listitem><para><guilabel>Visualizza i messaggi degli ultimi giorni</guilabel>: questa impostazione limita l'età dei messaggi da visualizzare. Per impostazione predefinita, vengono mostrati tutti i messaggi.</para></listitem>
+						<listitem><para><guilabel>Ordina i messaggi per</guilabel>: questa impostazione cambia l'ordine in cui vengono mostrati i messaggi. I messaggi possono essere ordinati per <guilabel>autore</guilabel>, <guilabel>ora del messaggio</guilabel>, <guilabel>numero di risposte</guilabel>, <guilabel>titolo</guilabel>, o <guilabel>numero di visualizzazioni</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Direzione di ordinamento degli argomenti</guilabel>: i messaggi possono essere visualizzati in ordine <guilabel>crescente</guilabel> o <guilabel>decrescente</guilabel>.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="ucp_notifications">
+				<title>Notifiche</title>
+				<para>Le impostazioni delle notifiche controllano quali eventi attiveranno una notifica e come riceverai la notifica.</para>
+				<para>
+					Le seguenti impostazioni controllano gli eventi relativi alla scrittura di messaggi.
+					<itemizedlist>
+						<listitem><para><guilabel>Qualcuno risponde a un argomento che hai aggiunto ai segnalibri</guilabel>: un utente ha pubblicato una risposta a un argomento che hai aggiunto ai segnalibri.</para></listitem>
+						<listitem><para><guilabel>Qualcuno risponde a un argomento a cui sei sottoscritto</guilabel>: un utente ha pubblicato una risposta a un argomento a cui sei sottoscritto.</para></listitem>
+						<listitem><para><guilabel>Qualcuno ti cita in un messaggio</guilabel>: un tuo messaggio è stato citato da un altro utente.</para></listitem>
+						<listitem><para><guilabel>Qualcuno crea un argomento in un forum a cui sei sottoscritto</guilabel>: un utente ha pubblicato un nuovo argomento in un forum a cui sei sottoscritto.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Le seguenti impostazioni controllano gli eventi relativi alla moderazione.
+					<itemizedlist>
+						<listitem><para><guilabel>Un messaggio o argomento necessita di approvazione</guilabel>: un utente ha creato un nuovo messaggio o argomento che richiede approvazione.</para></listitem>
+						<listitem><para><guilabel>Qualcuno segnala un messaggio</guilabel>: un utente ha segnalato un messaggio.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Le seguenti impostazioni controllano vari altri eventi.
+					<itemizedlist>
+						<listitem><para><guilabel>Qualcuno richiede di unirsi a un gruppo che guidi</guilabel>: un utente ha richiesto di unirsi a un gruppo di cui sei un capogruppo.</para></listitem>
+						<listitem><para><guilabel>Qualcuno ti invia un messaggio privato</guilabel>: hai ricevuto un messaggio privato.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+		</section>
+		<section id="ucp_friends_foes">
+			<title>Amici e Ignorati</title>
+			<para>Gli utenti possono essere contrassegnati come <guilabel>Amico</guilabel> o <guilabel>Ignorato</guilabel> per consentire il filtraggio dei loro messaggi. Se uno stile lo supporta, i messaggi degli utenti nella tua lista Ignorati saranno nascosti alla vista, e i messaggi degli utenti nella tua lista Amici saranno evidenziati. Le regole dei messaggi privati possono utilizzare la lista Amici e Ignorati per filtrare i messaggi privati in arrivo.</para>
+		</section>
+		<section id="ucp_attachments">
+			<title>Allegati</title>
+			<para>La sezione allegati dell'UCP mostra un elenco di tutti gli allegati che hai caricato sul forum. Ogni voce contiene un link al messaggio in cui è contenuto l'allegato, la dimensione dell'allegato, il numero di volte in cui è stato scaricato, e l'ora in cui è stato caricato. Attraverso questa pagina, puoi eliminare gli allegati dal forum. I riferimenti in linea a un allegato eliminato rimarranno nel messaggio originale, ma l'allegato non verrà visualizzato in alcun modo, eccetto per il nome del file.</para>
+		</section>
+		<section id="ucp_usergroups">
+			<title>Gruppi utenti</title>
+			<para>L'appartenenza ai gruppi utenti può essere gestita tramite la sezione Gruppi utenti dell'UCP. La pagina elenca i gruppi di cui l'utente è membro, di cui è capogruppo, e tutti gli altri gruppi utenti. I gruppi aperti all'iscrizione hanno un pulsante di opzione che permette all'utente di richiedere l'iscrizione. Gli utenti possono anche rimuoversi dai gruppi di cui fanno parte. Se un utente ha il permesso <guilabel>Può cambiare il gruppo utenti predefinito</guilabel>, può scegliere qui quale gruppo debba essere il suo predefinito. Il gruppo utenti predefinito determina il colore del nome utente mostrato in tutto il forum.</para>
+			<para>Gli utenti designati come capogruppo possono gestire l'appartenenza al gruppo. Da qui è possibile aggiungere o rimuovere utenti, approvare o rifiutare le richieste di iscrizione in sospeso, e cambiare il loro gruppo utenti predefinito.</para>
+		</section>
+	</section>
+	<section id="user_posting">
+	<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>AdamR</othername>
+				</author>
+				<author>
+					<othername>Noxwizard</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Padroneggiare la schermata di scrittura</title>
+		<para>Scrivere messaggi è lo scopo principale dei forum. Ci sono due tipi principali di messaggi che puoi creare: un argomento o una risposta. Selezionando il pulsante <guilabel>Nuovo argomento</guilabel> in un forum verrai portato alla schermata di scrittura. Dopo aver inviato il tuo messaggio, apparirà un nuovo argomento in quel forum, con il tuo messaggio visualizzato per primo. Altri utenti (e anche tu) possono ora rispondere al tuo argomento usando il pulsante <guilabel>Rispondi</guilabel>. Questo ti porterà nuovamente alla schermata di scrittura, permettendoti di inserire il tuo messaggio.</para>
+		<section id="posting_form">
+			<title>Modulo di scrittura</title>
+			<para>Verrai portato al modulo di scrittura quando decidi di pubblicare un nuovo argomento o una risposta, dove puoi inserire il contenuto del tuo messaggio.</para>
+			<figure id="user_posting_form">
+			<title>Modulo di scrittura</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/posting_screen.png" />
+					</imageobject>
+					<caption>
+						<para>La schermata presentata durante la creazione di un nuovo argomento.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<itemizedlist>
+				<listitem><para><guilabel>Icona argomento</guilabel>: l'icona dell'argomento/messaggio è una piccola icona che verrà mostrata a sinistra dell'oggetto del tuo messaggio. Questo aiuta a identificare il tuo messaggio e a farlo risaltare, anche se è del tutto opzionale.</para></listitem>
+				<listitem><para><guilabel>Titolo</guilabel>: se stai creando un nuovo argomento con il tuo messaggio, il titolo è obbligatorio e diventerà il titolo dell'argomento. Se stai rispondendo a un argomento esistente, questo è facoltativo, ma può essere modificato.</para></listitem>
+				<listitem><para>Contenuto del messaggio - pur non essendo etichettata, la grande casella di testo è dove verrà inserito il contenuto effettivo del tuo messaggio. Qui, insieme al tuo testo, puoi usare cose come le <link linkend="posting_smilies">Emoticon</link> o il <link linkend="posting_bbcodes">BBCode</link> se l'amministratore del forum li ha abilitati. Il contenuto inserito come HTML verrà visualizzato come testo semplice; l'input HTML non è supportato.</para></listitem>
+				<listitem><para>Emoticon - le emoticon, o smiley, sono piccole immagini che possono essere inserite nel tuo messaggio per aggiungere enfasi espressiva. Se le emoticon sono abilitate, vedrai il testo "<guilabel>Emoticon attive</guilabel>" a destra della casella Contenuto del messaggio. Altrimenti, vedrai il testo "<guilabel>Emoticon non attive</guilabel>". Vedi <link linkend="posting_smilies">Scrivere con le emoticon</link> per ulteriori dettagli.</para></listitem>
+				<listitem><para>BBCode - il BBCode è un tipo di formattazione che può essere applicata al contenuto del tuo messaggio se il BBCode è stato abilitato dall'amministratore del forum. Se il BBCode è abilitato, vedrai il testo "<guilabel>BBCode attivo</guilabel>" a destra della casella Contenuto del messaggio. Altrimenti, vedrai il testo "<guilabel>BBCode non attivo</guilabel>". Vedi <link linkend="posting_bbcodes">Scrivere con il BBCode</link> per ulteriori dettagli.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="posting_smilies">
+			<title>Emoticon</title>
+			<para>Le emoticon, o smiley, sono piccole immagini che possono essere inserite nel tuo messaggio per aggiungere enfasi espressiva. Per usare le emoticon, alcuni caratteri vengono combinati per ottenere il risultato desiderato. Ad esempio, digitando :) verrà inserito <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/smile.gif"/></imageobject></inlinemediaobject>, ;) inserirà <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/wink.gif"/></imageobject></inlinemediaobject>, ecc. Altre emoticon richiedono il formato :testoqui: per essere visualizzate. Ad esempio, :roll: inserirà un'emoticon con gli occhi che roteano: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/rolleyes.gif"/></imageobject></inlinemediaobject>, e :cry: inserirà un'emoticon che piange: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/cry.gif"/></imageobject></inlinemediaobject>.</para>
+			<para>In molti casi puoi anche selezionare quale emoticon vuoi inserire cliccando sulla sua immagine sul lato destro della casella di testo Contenuto del messaggio. Cliccandoci sopra, i caratteri dell'emoticon appariranno nella posizione attuale del cursore nella casella di testo.</para>
+			<para>Se desideri poter usare questi caratteri nel tuo messaggio senza che appaiano come emoticon, vedi <link linkend="posting_options">Opzioni di scrittura</link>.</para>
+		</section>
+
+		<section id="posting_bbcodes">
+			<title>BBCode</title>
+			<para>Il BBCode è un tipo di formattazione che può essere applicata al contenuto del tuo messaggio, in modo simile all'HTML. A differenza dell'HTML, tuttavia, il BBCode usa parentesi quadre [ e ] invece delle parentesi angolari &lt; e &gt;. A seconda dei permessi impostati dall'amministratore del forum, potresti poter usare solo determinati BBCode o addirittura nessuno.</para>
+			<para>Per istruzioni dettagliate sull'uso del BBCode, puoi cliccare sul link <guilabel>BBCode</guilabel> a destra della casella di testo Contenuto del messaggio. Nota che l'amministratore ha la possibilità di aggiungere BBCode nuovi e personalizzati, quindi altri potrebbero essere disponibili per te che non sono in questo elenco.</para>
+			<para>I BBCode di base e i loro risultati sono i seguenti:</para>
+			<para>[b]Testo in grassetto[/b]: <emphasis role="strong">Testo in grassetto</emphasis></para>
+			<para>[i]Testo in corsivo[/i]: <emphasis>Testo in corsivo</emphasis></para>
+			<para>[u]Testo sottolineato[/u]: <emphasis role="underline">Testo sottolineato</emphasis></para>
+			<para>[quote]Testo citato[/quote]: </para> <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/quoted_text.png"/></imageobject></inlinemediaobject>
+			<para>[quote="Nome da citare"]Testo citato[/quote]: </para> <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/quoted_text_author.png"/></imageobject></inlinemediaobject>
+			<para>[url]https://www.phpbb.com[/url]: <ulink url="https://www.phpbb.com">https://www.phpbb.com</ulink></para>
+			<para>[url=https://www.phpbb.com]Testo del link[/url]: <ulink url="https://www.phpbb.com">Testo del link</ulink></para>
+			<para>[flash=larghezza,altezza]Percorso del flash[/flash] riprodurrà l'animazione flash con le dimensioni specificate.</para>
+			<para>Per istruzioni più dettagliate sull'uso del BBCode e sui molti altri BBCode disponibili, clicca sul link <guilabel>BBCode</guilabel> a destra della casella di testo Contenuto del messaggio.</para>
+		</section>
+
+		<section id="posting_options">
+			<title>Opzioni di scrittura</title>
+			<para>Quando pubblichi un nuovo argomento o una risposta, sono disponibili diverse opzioni di scrittura. Puoi visualizzare queste opzioni selezionando la scheda <guilabel>Opzioni</guilabel> nella sezione sotto il modulo di scrittura. A seconda dei permessi che l'amministratore del forum ti ha assegnato, o a seconda che tu stia pubblicando un argomento o una risposta, queste opzioni saranno diverse.</para>
+			<figure id="user_posting_options">
+			<title>Opzioni di scrittura</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/posting_options.png" />
+					</imageobject>
+					<caption>
+						<para>Le opzioni presentate durante la creazione di una risposta.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>Lo stato predefinito di queste opzioni dipenderà dalle tue impostazioni <link linkend="ucp_posting">Predefinite di scrittura</link> nella pagina <guilabel>Preferenze del forum</guilabel> del Pannello di Controllo Utente.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Disabilita BBCode</guilabel>: se il BBCode è abilitato sul forum e sei autorizzato a usarlo, questa opzione sarà disponibile. Selezionando questa casella, qualsiasi BBCode nel contenuto del tuo messaggio non verrà convertito nel suo relativo risultato. Ad esempio, [b]Testo in grassetto[/b] apparirà nel tuo messaggio esattamente come [b]Testo in grassetto[/b].</para></listitem>
+				<listitem><para><guilabel>Disabilita emoticon</guilabel>: se le emoticon sono abilitate sul forum e sei autorizzato a usarle, questa opzione sarà disponibile. Selezionando questa casella, nessuno dei caratteri delle emoticon verrà convertito nella relativa immagine. Ad esempio, ;) apparirà nel tuo messaggio esattamente come ;).</para></listitem>
+				<listitem><para><guilabel>Non rendere automaticamente cliccabili i collegamenti</guilabel>: quando inserisci un URL direttamente nel contenuto del tuo messaggio (nel formato http://....com o www.etc.com), per impostazione predefinita verrà convertito in una stringa di testo cliccabile. Tuttavia, se questa casella è selezionata durante la scrittura, questi URL rimarranno come una normale stringa di testo.</para></listitem>
+				<listitem><para><guilabel>Aggiungi firma (la firma può essere modificata attraverso il PCU)</guilabel>: se questa casella è selezionata, la firma che hai impostato nel tuo profilo verrà aggiunta al messaggio, a condizione che le firme siano state abilitate dall'amministratore e che tu abbia i permessi adeguati. Per maggiori informazioni sulle firme, vedi <link linkend="ucp_signature">Firme dell'UCP</link>.</para></listitem>
+				<listitem><para><guilabel>Inviami un'e-mail quando viene pubblicata una risposta</guilabel>: se questa casella è selezionata, riceverai una notifica (via e-mail, Jabber, ecc.) ogni volta che un altro utente risponde all'argomento. Questo è chiamato sottoscrivere l'argomento. Per maggiori informazioni, vedi <link linkend="ucp_subscriptions">Sottoscrizioni dell'UCP</link>.</para></listitem>
+				<listitem><para><guilabel>Blocca argomento</guilabel>: a condizione che tu abbia permessi di moderazione in questo forum, selezionando questa casella l'argomento verrà bloccato dopo che la tua risposta è stata pubblicata. A questo punto, nessuno tranne i moderatori o gli amministratori potrà rispondere all'argomento. Per maggiori informazioni, vedi <link linkend="modtools_lock">Bloccare un argomento o un messaggio</link>.</para></listitem>
+			</itemizedlist>
+
+			<section id="posting_special">
+				<title>Tipi di argomento</title>
+				<para>A condizione che tu abbia i permessi giusti, hai la possibilità di selezionare vari tipi di argomento quando pubblichi un nuovo argomento usando <guilabel>Pubblica argomento come</guilabel>. I quattro tipi possibili sono: <guilabel>Normale</guilabel>, <guilabel>Importante</guilabel>, <guilabel>Annuncio</guilabel>, e <guilabel>Globale</guilabel>. Per impostazione predefinita, tutti i nuovi messaggi sono <guilabel>Normali</guilabel>.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Normale</guilabel>: selezionando normale, il tuo nuovo argomento sarà un argomento standard nel forum.</para></listitem>
+					<listitem><para><guilabel>Importante</guilabel>: gli argomenti importanti sono argomenti speciali nel forum. Sono "attaccati" in cima alla prima pagina del forum in cui sono pubblicati, sopra ogni argomento Normale.</para></listitem>
+					<listitem><para><guilabel>Annuncio</guilabel>: gli annunci sono molto simili agli argomenti importanti, in quanto sono "attaccati" in cima al forum. Tuttavia, differiscono dagli argomenti importanti in due modi: 1) sono sopra gli argomenti importanti, e 2) appaiono in cima a <emphasis>ogni</emphasis> pagina del forum, invece che solo nella prima pagina degli argomenti.</para></listitem>
+					<listitem><para><guilabel>Globale</guilabel>: gli annunci globali sono tipi speciali di annunci che appaiono in cima a ogni pagina di ogni forum del sito. Appaiono sopra ogni altro tipo di argomento speciale.</para></listitem>
+				</itemizedlist>
+				<para>Hai anche la possibilità di specificare per quanto tempo gli argomenti speciali (importanti, annunci e annunci globali) mantengono il loro tipo. Ad esempio, viene creato un annuncio e specificato di rimanere "attaccato" per 4 giorni. Trascorsi i 4 giorni, l'annuncio verrà automaticamente trasformato in un argomento Normale.</para>
+			</section>
+		</section>
+
+		<section id="posting_attachments">
+			<title>Allegati</title>
+			<para>Gli allegati permettono agli utenti di caricare file e allegarli al proprio messaggio. La possibilità di allegare e scaricare allegati è determinata rispettivamente dai permessi &quot;Può allegare file&quot; e &quot;Può scaricare file&quot;.</para>
+			<para>Per aggiungere un allegato, trova la sezione <guilabel>Allegati</guilabel> della pagina di scrittura e clicca sul pulsante <guilabel>Aggiungi file</guilabel>. Un commento può essere inserito nella casella di testo <guilabel>Commento file</guilabel>. Cliccando su <guilabel>Aggiungi il file</guilabel> caricherà e allegherà il file al messaggio. Per caricare più file, ripeti il processo. Gli allegati possono anche essere caricati trascinando e rilasciando un file nell'area del messaggio della schermata di scrittura.</para>
+			<para>Per eliminare un allegato, trova l'elenco degli allegati in fondo alla sezione <guilabel>Allegati</guilabel> della pagina di scrittura e clicca sul pulsante <guilabel>Cancella file</guilabel> per l'allegato desiderato.</para>
+			<para>Gli allegati possono essere visualizzati all'interno del testo del messaggio cliccando sul pulsante <guilabel>Inserisci in linea con il testo</guilabel> per l'allegato desiderato. Quando un allegato viene inserito in linea, un testo simile a un BBCode viene inserito nel testo del messaggio in modo che possa essere spostato. Se un allegato non viene inserito in linea, verrà visualizzato alla fine del messaggio.</para>
+			<para>Gli allegati sono controllati da una serie di restrizioni, ossia la dimensione e il tipo di file.</para>
+			<itemizedlist>
+				<listitem><para>Dimensione del file: la dimensione massima per i file caricati è impostata dall'amministratore. Il valore predefinito è 256KiB.</para></listitem>
+				<listitem><para>Tipo di file: i tipi di file consentiti per il caricamento sono limitati in base alla loro estensione. Le estensioni consentite sono impostate dall'amministratore.</para></listitem>
+			</itemizedlist>
+			<para>Per maggiori informazioni sulla modifica delle impostazioni degli allegati, vedi <link linkend="acp_attach_settings">Impostazioni allegati dell'ACP</link>.</para>
+		</section>
+		<section id="posting_polls">
+			<title>Sondaggi</title>
+			<para>I sondaggi permettono agli utenti di usare un argomento per votare su un'idea o una questione. I sondaggi possono essere creati solo nel primo messaggio di un argomento. La possibilità di creare e votare nei sondaggi è determinata dai &quot;Sondaggi&quot; impostati dall'amministratore.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Domanda del sondaggio</guilabel> - questa è l'idea o la questione su cui si vota nel sondaggio. È obbligatoria per avviare un sondaggio.</para></listitem>
+				<listitem><para><guilabel>Opzioni</guilabel> - queste sono le risposte consentite alla domanda del sondaggio. Quando inserisci un'opzione del sondaggio, ognuna dovrebbe essere posizionata su una riga separata della casella di testo. Sono richieste almeno due opzioni.</para></listitem>
+				<listitem><para><guilabel>Opzioni per utente</guilabel> - questo è il numero di opzioni che ogni utente può selezionare quando vota. Quando a un utente è consentito più di un'opzione, una serie di caselle di controllo sostituisce i pulsanti di opzione del sondaggio standard.</para></listitem>
+				<listitem><para><guilabel>Durata sondaggio</guilabel> - questo è il numero di giorni in cui gli utenti possono votare nel sondaggio. Una volta trascorso il tempo, non possono più essere espressi voti e i risultati verranno visualizzati.</para></listitem>
+				<listitem><para><guilabel>Permetti cambio voto</guilabel> - se questa opzione è scelta, gli utenti potranno ricambiare il proprio voto.</para></listitem>
+			</itemizedlist>
+		</section>
+		<section id="posting_drafts">
+			<title>Bozze</title>
+			<para>Quando crei un messaggio, questo può essere salvato o caricato usando la funzione bozze. Se i permessi del forum consentono di salvare le bozze, allora i pulsanti <guilabel>Salva</guilabel> e <guilabel>Carica</guilabel> appariranno nella pagina di scrittura.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Salva</guilabel> - salva un messaggio come bozza. Quando una bozza viene salvata, vengono memorizzati solo il titolo e il messaggio del post. Le icone dell'argomento, gli allegati, ecc. andranno persi.</para></listitem>
+				<listitem><para><guilabel>Carica</guilabel> - carica una bozza salvata. Quando viene cliccato, apparirà un elenco delle bozze disponibili. Clicca sul titolo del messaggio desiderato per caricare la bozza. Qualsiasi informazione presente nel messaggio attuale andrà persa e verrà sostituita con quella della bozza.</para></listitem>
+			</itemizedlist>
+			<para>Una volta usata una bozza, viene rimossa. Per maggiori informazioni sulla gestione delle bozze, vedi <link linkend="ucp_drafts">Bozze dell'UCP</link>.</para>
+			<note>
+				<para>Se non sono disponibili bozze, il pulsante <guilabel>Carica</guilabel> non apparirà.</para>
+			</note>
+		</section>
+	</section>
+	<section id="user_pm">
+		<title>Comunicare con i messaggi privati</title>
+		<para>phpBB 3.3 permette ai suoi utenti di comunicare privatamente usando i messaggi privati. Per visitare la sezione dei messaggi privati, puoi cliccare sul link [X nuovi messaggi] sul lato sinistro sotto l'intestazione del forum, oppure puoi accedervi direttamente tramite il <link linkend="user_control_panel">Pannello di Controllo Utente</link>.</para>
+		<para>A seconda dei metodi di comunicazione consentiti dall'amministratore del forum, ci sono 3 modi per essere avvisati dell'arrivo di un nuovo messaggio privato:</para>
+		<orderedlist>
+			<listitem>
+				<para>Ricevendo un'e-mail o un messaggio Jabber</para>
+			</listitem>
+			<listitem>
+				<para>Apparirà una voce nel menu delle notifiche</para>
+			</listitem>
+			<listitem>
+				<para>Il link <guilabel>Messaggi privati [X]</guilabel> mostrerà il numero di messaggi attualmente non letti</para>
+			</listitem>
+		</orderedlist>
+		<para>Puoi impostare le opzioni a tuo piacimento nella <link linkend="ucp_preferences">sezione Preferenze</link>.</para>
+		<para>Puoi scegliere di non ricevere messaggi privati da altri utenti nelle tue <link linkend="ucp_preferences">Preferenze</link>. Nota che i moderatori e gli amministratori potranno comunque inviarti messaggi privati, anche se li hai disabilitati.</para>
+		<note>
+			<para>Queste funzionalità sono disponibili solo per gli utenti registrati che hanno i permessi corretti.</para>
+		</note>
+		<section id="pm_display">
+			<title>Visualizzazione dei messaggi</title>
+			<para>La cartella Messaggi in arrivo è la cartella predefinita dei messaggi in entrata, che contiene un elenco dei tuoi messaggi privati ricevuti di recente. </para>
+		</section>
+		<section id="pm_new">
+			<title>Comporre un nuovo messaggio</title>
+			<para>La schermata presentata durante la composizione di un messaggio privato è quasi identica alla schermata per la creazione di un nuovo messaggio. La differenza principale è l'aggiunta di un campo indirizzo per aggiungere i destinatari.</para>
+			<figure id="user_private_message_fields">
+			<title>Campi del messaggio privato</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/private_messsage_fields.png" />
+					</imageobject>
+					<caption>
+						<para>Campi per aggiungere destinatari a un messaggio privato.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>I nomi utente dovrebbero essere inseriti nell'area di testo e poi usare <guilabel>Aggiungi</guilabel> oppure <guilabel>Aggiungi [CCN]</guilabel> per aggiungere l'utente all'apposito elenco di destinatari. Se non sei sicuro del nome di un utente, puoi usare il link <guilabel>Trova un membro</guilabel> per cercare l'utente nell'elenco membri. Metti un segno di spunta accanto agli utenti desiderati nell'elenco membri e premi <guilabel>Seleziona contrassegnati</guilabel> per aggiungere l'utente al campo destinatario.</para>
+		</section>
+		<section id="pm_folders">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>dhn</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Cartelle dei messaggi</title>
+			<para>Proprio come nel tuo client e-mail, tutti i <glossterm>messaggi privati</glossterm> sono memorizzati in cartelle. Lavorare con le cartelle è simile a lavorare con i forum in phpBB 3.3. I <guilabel>Messaggi in arrivo</guilabel> sono la tua cartella predefinita dei messaggi in entrata. Tutti i messaggi che ricevi appariranno qui.</para>
+			<para>I <guilabel>Messaggi spediti</guilabel> appariranno nella cartella <guilabel>Messaggi in uscita</guilabel> oppure nella cartella <guilabel>Messaggi spediti</guilabel>. Finché il/i destinatario/i non ha/hanno ancora letto il messaggio, rimarrà nei <guilabel>Messaggi in uscita</guilabel>. Non appena qualcuno legge il messaggio, verrà archiviato nella cartella <guilabel>Messaggi spediti</guilabel>. Se l'amministratore lo consente, puoi modificare i messaggi dopo averli inviati, finché sono nei <guilabel>Messaggi in uscita</guilabel> e i destinatari non li hanno ancora letti.</para>
+			<para>Ogni cartella, inclusi <guilabel>Messaggi spediti</guilabel> e <guilabel>Messaggi in uscita</guilabel>, può contenere una quantità di messaggi definita dal forum. Questa è un'impostazione globale che solo un amministratore del forum può modificare. Un testo informativo mostra il numero attuale di messaggi consentiti e la percentuale attuale di spazio che i tuoi messaggi stanno usando, in cima a ogni cartella. Se non viene mostrata alcuna restrizione, ti sono consentiti messaggi illimitati in ogni cartella.</para>
+			<note>
+				<para>Nota che la quantità totale di messaggi consentiti è un'impostazione per singola cartella. Puoi avere più cartelle che consentono ciascuna 50 messaggi, ad esempio. Se hai 3 cartelle, il tuo limite globale effettivo è di 150 messaggi, ma ogni cartella può contenere solo fino a 50 messaggi al suo interno. Non è possibile unire le cartelle e averne una con più messaggi del limite consentito.</para>
+			</note>
+
+			<section id="pm_folders_custom">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Cartelle personalizzate</title>
+
+				<para>Se l'amministratore lo consente, puoi creare le tue cartelle personalizzate per i <glossterm>messaggi privati</glossterm> in phpBB 3.3. Per verificare se puoi aggiungere cartelle, visita la sezione <guimenuitem>Modifica opzioni</guimenuitem> dell'area <guilabel>messaggi privati</guilabel>. </para>
+				<para>Per aggiungere una nuova cartella, inserisci il nome della cartella nella casella di input <guilabel>Aggiungi cartella</guilabel>. Se la creazione ha avuto successo, la tua nuova cartella apparirà in fondo all'elenco delle cartelle. Puoi quindi usarla come una normale cartella di messaggi e spostarci dei messaggi, oppure impostare un filtro (vedi la sezione su <link linkend="pm_rules">Regole dei messaggi privati</link> per maggiori informazioni sui filtri) per farlo automaticamente per te.</para>
+			</section>
+
+			<section id="pm_folders_moving">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Spostare i messaggi</title>
+
+				<para>Non avrebbe senso avere cartelle personalizzate se non potessi spostare i messaggi tra di esse. Per fare esattamente questo, visita la cartella da cui vuoi spostare via i messaggi. Seleziona i messaggi che vuoi spostare, e usa il menu a tendina <guilabel>Sposta evidenziati</guilabel> per selezionare la cartella di destinazione.</para>
+				<note>
+					<para>Nota che se dopo lo spostamento la cartella di destinazione avesse più messaggi di quanti ne consenta il limite, riceverai un messaggio di errore e lo spostamento verrà annullato.</para>
+				</note>
+			</section>
+
+			<section id="pm_folders_marking">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>dhn</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Contrassegni dei messaggi</title>
+
+				<para>I messaggi all'interno delle cartelle possono avere colori di contrassegno. Fai riferimento alla legenda <guilabel>Colori dei messaggi</guilabel> per vedere cosa significa ciascun colore. Il tipo esatto di colorazione dipende dal tema utilizzato. I messaggi colorati possono avere quattro significati diversi:</para>
+				<variablelist>
+					<varlistentry>
+						<term>Messaggio contrassegnato</term>
+						<listitem>
+							<para>Puoi impostare un messaggio come contrassegnato con l'opzione <guilabel>Contrassegna come importante</guilabel> dal menu a tendina.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Messaggio a cui hai risposto</term>
+						<listitem>
+							<para>Se rispondi a un messaggio, il messaggio verrà contrassegnato come tale. In questo modo, puoi tenere traccia di quali messaggi necessitano ancora della tua attenzione e a quali hai già risposto.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Messaggio da un amico</term>
+						<listitem>
+							<para>Se il mittente di un messaggio è nella tua lista amici (vedi la sezione su <link linkend="ucp_friends_foes">Amici e Ignorati</link> per maggiori informazioni), questo colore evidenzierà il messaggio.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Messaggio da un ignorato</term>
+						<listitem>
+							<para>Se il mittente di un messaggio è uno dei tuoi ignorati, questo colore lo evidenzierà.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+
+				<note>
+					<para>Nota che un messaggio può avere solo un'etichetta, e sarà sempre l'ultima azione che compi. Se contrassegni un messaggio come <guilabel>importante</guilabel> e in seguito gli rispondi, ad esempio, l'etichetta <guilabel>risposto</guilabel> sovrascriverà l'etichetta <guilabel>importante</guilabel>.</para>
+				</note>
+			</section>
+		</section>
+		<section id="pm_rules">
+			<title>Regole dei messaggi</title>
+			<para>I messaggi privati possono essere filtrati creando regole che eseguono azioni sul messaggio in base ai suoi metadati. Quando arriva un messaggio privato, può essere automaticamente ordinato in cartelle specifiche, eliminato, o evidenziato.</para>
+			<note>
+				<para>Le regole dei messaggi privati non possono essere modificate. Se una regola deve essere cambiata, dovrai eliminare la regola attuale e ricrearla.</para>
+			</note>
+			<section id="pm_rule_fields">
+				<title>Campi confrontabili</title>
+				<para>I messaggi possono essere filtrati in base ai seguenti campi:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Titolo</guilabel> - il titolo del messaggio.</para></listitem>
+					<listitem><para><guilabel>Mittente</guilabel> - il nome utente del mittente del messaggio.</para></listitem>
+					<listitem><para><guilabel>Messaggio</guilabel> - il contenuto del messaggio.</para></listitem>
+					<listitem><para><guilabel>Stato del messaggio</guilabel> - se a un messaggio è stato risposto o è stato inoltrato.</para></listitem>
+					<listitem><para><guilabel>Inviato a</guilabel> - se il messaggio è stato inviato direttamente a te o a un gruppo utenti di cui sei membro.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="pm_rule_conditions">
+				<title>Condizioni di corrispondenza</title>
+				<para>Sono disponibili diverse condizioni per filtrare i campi. Non tutte le condizioni elencate di seguito sono disponibili per ogni campo. Segue l'elenco completo delle condizioni disponibili:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Contiene</guilabel> - il campo contiene la stringa fornita.</para></listitem>
+					<listitem><para><guilabel>Non contiene</guilabel> - il campo <emphasis role="strong">non</emphasis> contiene la stringa fornita.</para></listitem>
+					<listitem><para><guilabel>È uguale a</guilabel> - il campo corrisponde esattamente alla stringa fornita.</para></listitem>
+					<listitem><para><guilabel>Non è uguale a</guilabel> - il contenuto del campo <emphasis role="strong">non</emphasis> è uguale alla stringa fornita.</para></listitem>
+					<listitem><para><guilabel>Inizia con</guilabel> - il campo inizia con la stringa fornita.</para></listitem>
+					<listitem><para><guilabel>Finisce con</guilabel> - il campo finisce con la stringa fornita.</para></listitem>
+					<listitem><para><guilabel>È un amico</guilabel> - se il mittente è nella tua lista amici.</para></listitem>
+					<listitem><para><guilabel>È un ignorato</guilabel> - se il mittente è nella tua lista ignorati.</para></listitem>
+					<listitem><para><guilabel>È l'utente</guilabel> - il nome del mittente corrisponde alla stringa fornita.</para></listitem>
+					<listitem><para><guilabel>È nel gruppo utenti</guilabel> - il mittente appartiene al gruppo utenti specificato.</para></listitem>
+					<listitem><para><guilabel>Risposto</guilabel> - se al messaggio è stato risposto.</para></listitem>
+					<listitem><para><guilabel>Inoltrato</guilabel> - se il messaggio è stato inoltrato.</para></listitem>
+					<listitem><para><guilabel>Al mio gruppo utenti predefinito</guilabel> - se il messaggio è stato inviato al tuo gruppo utenti.</para></listitem>
+					<listitem><para><guilabel>A me</guilabel> - se un messaggio è stato inviato direttamente a te.</para></listitem>
+				</itemizedlist>
+				<para>Il seguente elenco mostra quali condizioni sono disponibili per ciascun campo:</para>
+				<variablelist>
+					<varlistentry>
+						<term>Titolo</term>
+						<listitem>
+							<para><guilabel>Contiene</guilabel>, <guilabel>Non contiene</guilabel>, <guilabel>È uguale a</guilabel>, <guilabel>Non è uguale a</guilabel>, <guilabel>Inizia con</guilabel>, <guilabel>Finisce con</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Mittente</term>
+						<listitem>
+							<para><guilabel>Contiene</guilabel>, <guilabel>Non contiene</guilabel>, <guilabel>È uguale a</guilabel>, <guilabel>Non è uguale a</guilabel>, <guilabel>Inizia con</guilabel>, <guilabel>Finisce con</guilabel>, <guilabel>È un amico</guilabel>, <guilabel>È un ignorato</guilabel>, <guilabel>È l'utente</guilabel>, <guilabel>È nel gruppo utenti</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Messaggio</term>
+						<listitem>
+							<para><guilabel>Contiene</guilabel>, <guilabel>Non contiene</guilabel>, <guilabel>È uguale a</guilabel>, <guilabel>Non è uguale a</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Stato del messaggio</term>
+						<listitem>
+							<para><guilabel>Risposto</guilabel>, <guilabel>Inoltrato</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Inviato a</term>
+						<listitem>
+							<para><guilabel>Al mio gruppo utenti predefinito</guilabel>, <guilabel>A me</guilabel></para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</section>
+
+			<section id="pm_rule_actions">
+				<title>Azione della regola</title>
+				<para>Una volta che un messaggio ha soddisfatto la corrispondenza, può essere eseguita un'azione sul messaggio. Le azioni disponibili sono:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Inserisci nella cartella -&gt; X</guilabel> - inserisce il messaggio nella cartella specificata.</para></listitem>
+					<listitem><para><guilabel>Contrassegna come letto</guilabel> - il messaggio viene immediatamente contrassegnato come letto. Le notifiche ti informano comunque di un nuovo messaggio, ma il messaggio sarà già contrassegnato come letto quando visualizzi il tuo elenco di messaggi privati.</para></listitem>
+					<listitem><para><guilabel>Contrassegna messaggio</guilabel> - il messaggio viene contrassegnato come importante ed evidenziato nel tuo elenco di messaggi privati.</para></listitem>
+					<listitem><para><guilabel>Elimina messaggio</guilabel> - il messaggio viene eliminato invece di essere mostrato. Verrà mostrato un messaggio che ti informa che sono stati ricevuti ed eliminati messaggi secondo le tue regole. I messaggi inviati da amministratori e moderatori del forum <emphasis role="strong">non</emphasis> verranno eliminati.</para></listitem>
+				</itemizedlist>
+			</section>
+		</section>
+	</section>
+	<section id="user_search">
+		<title>Ricerca - come trovare quello che stai cercando</title>
+		<para>Man mano che il forum cresce e accumula messaggi, diventa difficile trovare rapidamente contenuti specifici. Per aiutare a trovare i messaggi, phpBB include un'utilità di ricerca. Le ricerche comuni sono offerte sotto forma di link nell'indice (nuovi messaggi, argomenti senza risposta, ecc.), le ricerche per parole chiave possono essere effettuate dall'intestazione, dalla vista del forum e dalla vista dell'argomento (negli stili che lo supportano), e query di ricerca personalizzate possono essere create usando la funzione di Ricerca avanzata.</para>
+
+		<section id="user_search_predefined">
+			<title>Ricerche predefinite</title>
+			<para>phpBB viene fornito con diverse ricerche predefinite per eseguire facilmente determinati tipi di query.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Mostra i tuoi argomenti</guilabel> - restituisce un elenco degli argomenti in cui hai scritto, ordinati in base all'ora dell'ultimo messaggio nell'argomento.</para></listitem>
+				<listitem><para><guilabel>Mostra argomenti senza risposta</guilabel> - restituisce tutti gli argomenti che non contengono risposte.</para></listitem>
+				<listitem><para><guilabel>Mostra messaggi non letti</guilabel> - restituisce un elenco degli argomenti contenenti messaggi che devi ancora leggere.</para></listitem>
+				<listitem><para><guilabel>Mostra nuovi messaggi</guilabel> - restituisce un elenco degli argomenti contenenti messaggi pubblicati dall'ultima volta che hai effettuato l'accesso.</para></listitem>
+				<listitem><para><guilabel>Mostra argomenti attivi</guilabel> - restituisce un elenco degli argomenti in cui si è scritto negli ultimi giorni. Il numero di giorni può essere modificato dopo aver caricato la pagina di ricerca.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="user_search_forums_topics">
+			<title>Ricerca nei forum e negli argomenti</title>
+			<para>Alcuni stili forniscono campi di ricerca nella vista del forum e nella vista dell'argomento. Questi campi ti permettono di effettuare una ricerca per parole chiave all'interno del forum o dell'argomento attuale.</para>
+
+			<figure id="user_search_topic">
+				<title>Ricerca all'interno degli argomenti</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/search_topic.png" />
+					</imageobject>
+					<caption>
+						<para>Campo di ricerca all'interno di un argomento.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+		</section>
+
+		<section id="user_search_advanced">
+			<title>Ricerca avanzata</title>
+			<para>Oltre alle ricerche predefinite fornite da phpBB, è possibile creare le proprie query di ricerca. Le ricerche possono basarsi su parole chiave, autore e selezione dei forum.</para>
+			<section id="user_search_query">
+				<title>La query di ricerca</title>
+				<para>Per effettuare una ricerca nel forum, devi specificare cosa desideri cercare. Puoi specificare parole chiave da cercare, così come un autore dei messaggi. Sono disponibili due opzioni di query per effettuare la ricerca:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Cerca per parola o usa frase esatta</guilabel> - se vengono fornite più parole chiave, <emphasis role="strong">tutte</emphasis> le parole chiave devono essere trovate nel risultato. In alternativa, puoi fornire una query usando identificatori speciali.</para></listitem>
+					<listitem><para><guilabel>Ricerca qualsiasi termine</guilabel> - se vengono fornite più parole chiave, verranno restituiti i risultati contenenti <emphasis role="strong">una qualsiasi</emphasis> delle parole chiave fornite.</para></listitem>
+				</itemizedlist>
+				<section id="user_search_query_keywords">
+					<title>Parole chiave</title>
+					<para>Oltre a fornire parole chiave, possono essere usati identificatori speciali per aggiungere o togliere importanza a determinate parole.</para>
+					<variablelist>
+						<title>Identificatori</title>
+						<varlistentry>
+							<term>+</term>
+							<listitem>
+								<para>Quando posizionato prima di una parola chiave, quella parola chiave deve essere trovata nel testo del risultato.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>-</term>
+							<listitem>
+								<para>Quando posizionato prima di una parola chiave, quella parola chiave non deve essere presente nel testo del risultato.</para>
+								<variablelist>
+									<title>Esempi</title>
+									<varlistentry>
+										<term>+cane -gatto</term>
+										<listitem>
+											<para>Restituisce risultati che contengono la parola "cane", ma non "gatto".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>|</term>
+							<listitem>
+								<para>Questo simbolo può essere usato per separare un elenco di parole chiave, di cui almeno una deve essere trovata nel testo. Le parole possono essere inserite tra parentesi e combinate con un + o un - per indicare che almeno una delle parole deve o non deve apparire in ciascun risultato.</para>
+								<variablelist>
+									<title>Esempi</title>
+									<varlistentry>
+										<term>cane|gatto</term>
+										<listitem>
+											<para>Restituisce risultati che contengono la parola "cane" oppure la parola "gatto".</para>
+										</listitem>
+									</varlistentry>
+									<varlistentry>
+										<term>-(cane|gatto)</term>
+										<listitem>
+											<para>Restituisce risultati che non contengono né la parola "cane" né la parola "gatto".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>*</term>
+							<listitem>
+								<para>Un asterisco in una parola chiave permette corrispondenze parziali della parola chiave.</para>
+								<variablelist>
+									<title>Esempi</title>
+									<varlistentry>
+										<term>gatt*</term>
+										<listitem>
+											<para>Restituisce risultati che iniziano con "gatt", come "gatto" e "gattino".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</section>
+
+				<section id="user_search_query_author">
+					<title>Autore</title>
+					<para>La query di ricerca può essere ulteriormente affinata fornendo l'autore del messaggio. Se viene specificato un autore, verranno restituiti solo i messaggi scritti da quell'autore che soddisfano i requisiti della query. Il campo autore consente l'uso di caratteri jolly (*) per effettuare corrispondenze parziali sul nome dell'autore.</para>
+				</section>
+			</section>
+
+			<section id="user_search_options">
+				<title>Le opzioni di ricerca</title>
+				<para>Le ricerche possono essere ulteriormente limitate a forum specifici o a parti specifiche degli argomenti.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Cerca nei forum</guilabel> - qui puoi selezionare i forum specifici in cui dovrebbe essere eseguita la ricerca. È possibile selezionare più forum tenendo premuto il tasto "control" o "command".</para></listitem>
+					<listitem><para><guilabel>Cerca nei subforum</guilabel> - se questa opzione è selezionata, verranno cercati anche gli eventuali sottoforum dei forum selezionati.</para></listitem>
+					<listitem>
+						<para><guilabel>Cerca</guilabel> - questo ti permette di specificare quale parte dei messaggi dovrebbe essere cercata.</para>
+						<itemizedlist>
+							<listitem><para><guilabel>Titoli dei messaggi e testo del messaggio</guilabel> - verranno cercati sia il titolo del messaggio che il corpo del messaggio.</para></listitem>
+							<listitem><para><guilabel>Solo testo del messaggio</guilabel> - verrà cercato solo il corpo dei messaggi e non il loro titolo.</para></listitem>
+							<listitem><para><guilabel>Solo titoli degli argomenti</guilabel> - verranno cercati solo i titoli degli argomenti.</para></listitem>
+							<listitem><para><guilabel>Solo il primo messaggio degli argomenti</guilabel> - verrà cercato solo il primo messaggio di ogni argomento e nessun altro messaggio nell'argomento.</para></listitem>
+						</itemizedlist>
+					</listitem>
+					<listitem><para><guilabel>Mostra risultati come</guilabel> - questa opzione formatta i risultati di ricerca per mostrare solo il contenuto dei messaggi oppure solo i titoli degli argomenti.</para></listitem>
+					<listitem><para><guilabel>Ordina risultati per</guilabel> - ordina i risultati in base a <guilabel>autore</guilabel>, <guilabel>ora del messaggio</guilabel>, <guilabel>forum</guilabel>, <guilabel>titolo dell'argomento</guilabel> o <guilabel>oggetto del messaggio</guilabel>. I risultati possono essere visualizzati in ordine <guilabel>crescente</guilabel> o <guilabel>decrescente</guilabel>.</para></listitem>
+					<listitem><para><guilabel>Limita risultati ai precedenti</guilabel> - limita i risultati ai messaggi pubblicati in un intervallo di tempo specifico.</para></listitem>
+					<listitem><para><guilabel>Restituisci i primi</guilabel> - formatta i risultati in modo da contenere solo un numero specifico di caratteri dei messaggi corrispondenti.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="user_search_refinement">
+				<title>Ulteriore affinamento</title>
+				<para>Nella pagina dei risultati, è possibile affinare ulteriormente la ricerca fornendo altri termini di ricerca.</para>
+				<figure id="user_search_refinement_image">
+					<title>Affinamento della ricerca</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/search_refinement.png" />
+						</imageobject>
+						<caption>
+							<para>Affinare i risultati di ricerca per includere la parola "gatto".</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
+		</section>
+	</section>
+
+	<section id="user_memberlist">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>pentapenguin</othername>
+				</author>
+				<author>
+					<othername>battye</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>L'elenco membri - più di quanto sembri</title>
+		<para>phpBB3 introduce diversi nuovi modi per cercare gli utenti.</para>
+
+		<figure id="user_memberlist_sorting">
+			<title>Ordinare l'elenco membri</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/user_guide/memberlist_sorting.png" />
+				</imageobject>
+				<caption>
+					<para>Scegliere un'opzione per ordinare l'elenco membri.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+
+		<variablelist>
+			<varlistentry>
+				<term>Ordina per nome utente</term>
+				<listitem>
+					<para>Se vuoi trovare tutti i membri il cui nome utente inizia con una certa lettera, puoi selezionare la lettera dall'elenco di lettere mostrato in cima all'elenco membri. Ad esempio, cliccando su "A" verranno mostrati tutti i nomi utente che iniziano con la lettera A, mentre cliccando su "B" verranno elencati tutti i nomi utente che iniziano con B. Cliccando sul cancelletto (#) verrà mostrato un elenco di nomi utente che non iniziano con nessuna delle ventisei lettere: in altre parole, numeri e altri caratteri.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Ordina per intestazioni di colonna</term>
+				<listitem>
+					<para>Anche ciascuna delle intestazioni di colonna sono link di ordinamento. Ciò significa che puoi cliccare su <guilabel>Nome utente</guilabel>, <guilabel>Livello</guilabel>, <guilabel>Messaggi</guilabel>, <guilabel>Sito web</guilabel>, <guilabel>Località</guilabel>, <guilabel>Iscritto il</guilabel>, o <guilabel>Ultimo accesso</guilabel> per ordinare in base a quel gruppo. Cliccando su questo per la prima volta, gli elenchi verranno ordinati in ordine crescente (il che significa che i nomi utente verrebbero elencati dalla A alla Z e la data di iscrizione dalla più vecchia alla più recente). Se vuoi ordinare l'elenco in ordine decrescente, attendi che la pagina si sia caricata in ordine crescente e clicca una seconda volta sull'intestazione di colonna in base a cui vuoi ordinare.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Ordina per altre opzioni</term>
+				<listitem>
+					<para>Puoi anche ordinare l'elenco membri usando i menu a tendina in fondo alla pagina.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Strumento di ricerca "Trova un membro"</term>
+				<listitem>
+					<para>Puoi restringere i risultati della tua ricerca usando la funzione di ricerca <guilabel>Trova un membro</guilabel>. Questa funzionalità ti permette di trovare membri in base al loro nome utente, numero ICQ, AIM, YIM, indirizzo MSN Messenger/Windows Live Messenger, data di iscrizione, data dell'ultimo accesso, numero di messaggi, indirizzo IP, e appartenenza a gruppi utenti. Tutte le date dovrebbero essere inserite nel formato AAAA-MM-GG (ad esempio 2004-02-28 per rappresentare il 28 febbraio 2004). L'asterisco (*) può essere usato come carattere jolly per corrispondenze parziali, ad esempio inserendo "Ar*" nel campo nome utente per trovare tutti i nomi utente che iniziano con Ar. Premi il pulsante <guilabel>Invia</guilabel> per iniziare la ricerca, oppure il pulsante <guilabel>Ripristina</guilabel> se desideri svuotare tutti i campi e ricominciare la ricerca.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+
+		<note>
+			<para>La disponibilità delle caselle di selezione del metodo di ordinamento varia in base allo stile.</para>
+		</note>
+	</section>
+</chapter>
