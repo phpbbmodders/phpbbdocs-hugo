@@ -51,8 +51,7 @@ identical between registers, the `de_x_sie` audit's findings — the
 genuinely-unconfirmed terms — all apply equally to `de`. Nothing
 further needed re-deriving from scratch.
 
-## What the Sie→Du conversion itself needed checking for (not a
-terminology-matching question)
+## What the Sie→Du conversion itself needed checking for (not a terminology-matching question)
 
 Converting formal to casual register introduced its own class of
 possible errors, unrelated to whether a term matches the real
