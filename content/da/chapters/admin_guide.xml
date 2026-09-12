@@ -143,7 +143,7 @@
 							</tip>
 						</listitem>
 						<listitem>
-							<para><glossterm>BBkode</glossterm> og <glossterm>Smilies</glossterm> er som standard tilladt i private beskeder.</para>
+							<para><glossterm>BBkode</glossterm> og <glossterm>Smileys</glossterm> er som standard tilladt i private beskeder.</para>
 							<tip>
 								<para>Også her kan du lukke for disse muligheder for bestemte brugere eller grupper i <link linkend="acp_permissions">Tilladelser</link>.</para>
 							</tip>
@@ -370,7 +370,7 @@
 				<para>I kategorien <guilabel>Stikonfigurationer</guilabel> kan placeringen af specifikt boardindhold bestemmes. For standardinstallationer, skulle de i forvejen valgte placeringer være dækkende. Følgende fire stier kan indstilles:
 					<itemizedlist>
 						<title>Stikonfigurationer</title>
-						<listitem><para><guilabel>Smiliemappens placering</guilabel>: Den mappe boardet opbevarer smilies i. Sti under din phpBB-rodmappe, f.eks. images/smilies.</para></listitem>
+						<listitem><para><guilabel>Smiley-mappens placering</guilabel>: Den mappe boardet opbevarer smileys i. Sti under din phpBB-rodmappe, f.eks. images/smilies.</para></listitem>
 						<listitem><para><guilabel>Indlægikonmappens placering</guilabel>: Den mappe boardet opbevarer indlægikoner i. Sti under din phpBB-rodmappe, f.eks. images/icons.</para></listitem>
 						<listitem><para><guilabel>Filtypeikonmappens placering</guilabel>: Den mappe boardet opbevarer de filtypeikoner, som anvendes i forbindelse med  vedhæftede filers <link linkend="acp_attach_extension_groups">filtypegrupper</link>. Sti under din phpBB-rodmappe, f.eks. images/upload_icons.</para></listitem>
 						<listitem><para><guilabel>Rangikonmappens placering</guilabel>: Den mappe boardet opbevarer <link linkend="acp_user_ranks">rangikoner</link> i. Sti under din phpBB-rodmappe, f.eks. images/ranks.</para></listitem>
@@ -710,7 +710,7 @@
 		<title>Meddelelser</title>
 		
 		<para>Fora er ingenting hvis ikke der er indhold heri. Indholdet skabes og indsendes af dine brugere, derfor er det vigtigt af indstillinger for hvordan meddelelser kan indsendes er korrekt for dit board. For at ændre disse indstillinger vælges fanebladet <guimenuitem>Meddelelser</guimenuitem>.</para>
-		<para>Den første side i sektionen <guimenuitem>Meddelelser</guimenuitem> er <guilabel>BBkoder</guilabel>. De øvrige sider er delt i to hovedgrupper: <guilabel>Beskeder</guilabel> og <guilabel>Vedhæftede filer</guilabel>. <guimenuitem>Private beskeder</guimenuitem>, <guimenuitem>Emneikoner</guimenuitem>, <guimenuitem>Smilies</guimenuitem> og <guimenuitem>Ordcensur</guimenuitem> er relaterede til meddelelser. <guimenuitem>Vedhæftede filer</guimenuitem>, <guimenuitem>Filtyper</guimenuitem>, <guimenuitem>Filtypegrupper</guimenuitem> og <guimenuitem>Vildfarne vedhæftede filer</guimenuitem> er alle relaterede til vedhæftede filer.</para>
+		<para>Den første side i sektionen <guimenuitem>Meddelelser</guimenuitem> er <guilabel>BBkoder</guilabel>. De øvrige sider er delt i to hovedgrupper: <guilabel>Beskeder</guilabel> og <guilabel>Vedhæftede filer</guilabel>. <guimenuitem>Private beskeder</guimenuitem>, <guimenuitem>Emneikoner</guimenuitem>, <guimenuitem>Smileys</guimenuitem> og <guimenuitem>Ordcensur</guimenuitem> er relaterede til meddelelser. <guimenuitem>Vedhæftede filer</guimenuitem>, <guimenuitem>Filtyper</guimenuitem>, <guimenuitem>Filtypegrupper</guimenuitem> og <guimenuitem>Vildfarne vedhæftede filer</guimenuitem> er alle relaterede til vedhæftede filer.</para>
 	
 		<section id="acp_posting_bbcodes">
 			<sectioninfo>
@@ -773,7 +773,7 @@
 				<title>Generelle valg</title>
 				<listitem><para><guilabel>Tillad samtidig afsending til flere modtagere</guilabel>: I phpBB 3.0.x er det muligt at sende en privat besked til flere modtagere eller grupper. Vælg <guilabel>Ja</guilabel> for tillade dette.</para></listitem>
 				<listitem><para><guilabel>Tillad BBkode i private beskeder</guilabel>: Vælg <guilabel>Ja</guilabel> for at tillade brugen af BBkode.</para></listitem>
-				<listitem><para><guilabel>Tillad smilies i private beskeder</guilabel>: Vælg <guilabel>Ja</guilabel> for at tillade brugen af smilies.</para></listitem>
+				<listitem><para><guilabel>Tillad smileys i private beskeder</guilabel>: Vælg <guilabel>Ja</guilabel> for at tillade brugen af smileys.</para></listitem>
 				<listitem><para><guilabel>Tillad vedhæftede filer i private beskeder</guilabel>: Vælg <guilabel>Ja</guilabel> for at brugere kan vedhæfte filer.</para></listitem>
 				<listitem><para><guilabel>Tillad signatur i private beskeder</guilabel>: Vælg <guilabel>Ja</guilabel> for at <glossterm>signatur</glossterm> kan tilføjes.</para></listitem>
 				<listitem><para><guilabel>Tillad printervenlig visning af private beskeder</guilabel>: Vælg <guilabel>Ja</guilabel> for at tillade printervenlig visning af private beskeder.</para></listitem>
@@ -827,16 +827,16 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Smilies</title>
+			<title>Smileys</title>
 			
-			<para>Smilies er typisk små, nogle gange animerede billeder der bruges til at give udtryk for en følelse eller mening. Du kan tilføje smilies manuelt eller ved at installerede en præfabrikeret smiliespakke. I oversigten <guilabel>Smilies</guilabel> vises de smilies der i øjeblikket er installeret på dit boardform.</para>
+			<para>Smileys er typisk små, nogle gange animerede billeder der bruges til at give udtryk for en følelse eller mening. Du kan tilføje smileys manuelt eller ved at installerede en præfabrikeret smileypakke. I oversigten <guilabel>Smileys</guilabel> vises de smileys der i øjeblikket er installeret på dit boardform.</para>
 		
-			<para>Den første mulighed er at installere en præfabrikeret smiliespakke. Smiliespakker har filextension <filename>.pak</filename>. Upload pakken til mappen <filename>/images/smilies/</filename>. Klik herefter på <guilabel>Installer smiliespakke</guilabel> øverst på siden. Er den uploade pakke korrekt placeret for du nu mulighed for at vælge denne. Installationsprocessen undersøger om smiliespakken indeholder filer der konflikter med de eksisterende smilies. Konstateres konflikter bliver du bedt om at tage stilling til disse, du kan vælge at bibeholde de eksisterende smilies, overskrive de eksisterende med de nye, eller blot slette alle konfliktende smilies. Når disse valg er foretaget klikkes igen på <guilabel>Installer smiliespakke</guilabel>.</para>
+			<para>Den første mulighed er at installere en præfabrikeret smileypakke. Smileypakker har filextension <filename>.pak</filename>. Upload pakken til mappen <filename>/images/smilies/</filename>. Klik herefter på <guilabel>Installer smileypakke</guilabel> øverst på siden. Er den uploade pakke korrekt placeret for du nu mulighed for at vælge denne. Installationsprocessen undersøger om smileypakken indeholder filer der konflikter med de eksisterende smileys. Konstateres konflikter bliver du bedt om at tage stilling til disse, du kan vælge at bibeholde de eksisterende smileys, overskrive de eksisterende med de nye, eller blot slette alle konfliktende smileys. Når disse valg er foretaget klikkes igen på <guilabel>Installer smileypakke</guilabel>.</para>
 			
-			<para>Den anden mulighed er at tilføje smilies manuelt. Smilies uploades også til mappen <filename>/images/smilies/</filename>. Klik på <guilabel>Tilføj mange smilies</guilabel> nederst på siden. Er de nye smilies korrekt uploadet, kan du herefter tilføje smilies enkeltvis og bestemme dens indstillinger. I det følgende gennemgås indstillingsmulighederne. Når du har tilføjet en smiley afsluttes ved at klikke på <guilabel>Udfør</guilabel>.</para>
+			<para>Den anden mulighed er at tilføje smileys manuelt. Smileys uploades også til mappen <filename>/images/smilies/</filename>. Klik på <guilabel>Tilføj mange smileys</guilabel> nederst på siden. Er de nye smileys korrekt uploadet, kan du herefter tilføje smileys enkeltvis og bestemme dens indstillinger. I det følgende gennemgås indstillingsmulighederne. Når du har tilføjet en smiley afsluttes ved at klikke på <guilabel>Udfør</guilabel>.</para>
 		
 			<itemizedlist>
-				<listitem><para><guilabel>Smilies</guilabel>: I denne kolonne vises selve smileyen.</para></listitem>
+				<listitem><para><guilabel>Smileys</guilabel>: I denne kolonne vises selve smileyen.</para></listitem>
 				<listitem><para><guilabel>Smileys placering</guilabel>: Her vises stien til smileyen, relativt i forhold til mappen <filename>/images/smilies/</filename>.</para></listitem>
 				<listitem><para><guilabel>Smileykode</guilabel>: Den tekst som erstattes af smileyen.</para></listitem>
 				<listitem><para><guilabel>Følelse</guilabel>: Smileyens titel.</para></listitem>
@@ -847,7 +847,7 @@
 				<listitem><para><guilabel>Tilføj</guilabel>: Når indstillingerne for din nye smiley er i orden, afmærkes dette felt for at tilføje den.</para></listitem>
 			</itemizedlist>
 			
-			<para>For at ændre indstillinger for allerede installerede smilies klikkes på <guilabel>Ret smilies</guilabel> nederst på siden. Du får  nu vist oversigten <guilabel>Smileykonfiguration</guilabel>. Felternes betydning er beskrevet ovenfor.</para>
+			<para>For at ændre indstillinger for allerede installerede smileys klikkes på <guilabel>Ret smileys</guilabel> nederst på siden. Du får  nu vist oversigten <guilabel>Smileykonfiguration</guilabel>. Felternes betydning er beskrevet ovenfor.</para>
 			
 			<para>På startsiden er det muligt direkte at ændre smileyrækkefølgen ved at benytte pilikonerne for "flyt op" og "flyt ned". Den enkelte smileys indstillinger kan ændres ved at klikke på den grønne "Rediger". For at slette en smiley benyttes den røde "Slet".</para>
 		</section>
