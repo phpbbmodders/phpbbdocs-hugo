@@ -51,6 +51,12 @@ guessed): the German value is from `phpbb-de/phpbb-translation`, the
 English value is from `phpbb/phpbb`'s own `language/en/`, same key,
 same file, in both repos.
 
+**Update:** both were reported to phpBB dev team lead Marc, who
+confirmed both are genuine documentation bugs (09/2026). phpBB 4.0
+work has priority right now, so a docs fix isn't expected soon — these
+remain open, upstream-only issues; nothing to change in this
+translation.
+
 - **Maximale Vorschaubild-Dateigröße** (admin_guide.xml:1067,
   "Maximum thumbnail filesize"): the description talks about a maximum
   that gets exceeded, but the real phpBB setting for this is
@@ -58,12 +64,15 @@ same file, in both repos.
   `'Minimum thumbnail file size'`, German:
   `'Minimale Vorschaubild-Dateigröße'` — a *minimum* filesize
   threshold, not a maximum. Both languages describe the same
-  outdated/incorrect behavior.
+  outdated/incorrect behavior. Marc confirmed: it's a minimum
+  *source*-image size below which phpBB won't bother creating a
+  thumbnail at all — the docs have the direction backwards.
 - **Veraltete Vorlagen neu kompilieren** (admin_guide.xml:598,
   "Recompile stale templates"): the closest real key is
   `RECOMPILE_STYLES`, also in `acp/board.php` — English:
   `'Recompile stale style components'`, German:
   `'Rekompilieren veralteter Style-Komponenten'` — about style
   components, not templates. No key for "templates" specifically
-  exists in either language file; this may describe a renamed feature
-  in both languages.
+  exists in either language file. Marc confirmed: this is a leftover
+  from phpBB 3.0 — 3.1 and later only ever had "Recompile stale style
+  components."

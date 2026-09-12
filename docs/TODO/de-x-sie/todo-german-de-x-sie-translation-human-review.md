@@ -53,10 +53,11 @@ decision, is the fillable
 ## Pre-existing issues shared with the English source
 
 These aren't translation problems — the German is a faithful mirror of
-an English original that has the same issue — but they're worth
-knowing about, possibly for an upstream report. Two of them (the
-thumbnail-filesize setting and "Recompile stale templates") are
-documented in
+an English original that has the same issue. Two of them (the
+thumbnail-filesize setting and "Recompile stale templates") have since
+been confirmed as genuine documentation bugs by phpBB dev team lead
+Marc (09/2026) — a fix isn't expected soon since phpBB 4.0 work has
+priority right now. They're documented in
 [`german-de-x-sie-supplementary-glossary.md`](german-de-x-sie-supplementary-glossary.md)
 alongside the real keys involved. The rest, not being terminology
 questions, are only here:
