@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Validierungsrichtlinie für Sprachpakete</title>
+  </articleinfo>
+  <sect1 id="submission-guidelines">
+    <title>Richtlinien für die Einreichung</title>
+    <sect2 id="description">
+      <title>Beschreibung</title>
+      <para>
+        Die Beschreibung des Beitrags in der
+        <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
+        Database</ulink> sollte zusätzlich zu deiner Landessprache ins
+        Englische übersetzt werden, da manche Administratoren deine
+        Übersetzung eventuell herunterladen möchten, ohne deine Sprache
+        zu sprechen.
+      </para>
+    </sect2>
+    <sect2 id="screenshot">
+      <title>Screenshot</title>
+      <para>
+        Der Screenshot des Beitrags in der
+        <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
+        Database</ulink> sollte ausschließlich die Flagge des Landes
+        zeigen, in dem diese Sprache gesprochen wird. Zum Beispiel die
+        Flagge Frankreichs für die französische Sprache.
+      </para>
+    </sect2>
+    <sect2 id="demo-link">
+      <title>Demo-Link</title>
+      <para>
+        Die Demo-URL in der Customisation Database muss leer bleiben,
+        es sei denn, du möchtest einen Link zu einer internationalen
+        Community angeben
+        (<ulink url="https://www.phpbb.com/support/intl/">offiziell</ulink>
+        gelistet oder nicht), die sich auf die Sprache des Beitrags
+        bezieht. Zum Beispiel ist
+        <ulink url="https://www.phpbb.nl/">https://www.phpbb.nl/</ulink>
+        als Demo-URL für die
+        <ulink url="https://www.phpbb.com/customise/db/translation/dutch_casual_honorifics/">niederländische
+        Sprache</ulink> zulässig.
+      </para>
+    </sect2>
+    <sect2 id="package">
+      <title>Package</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Die eingereichte
+            <literal>&lt;languagename&gt;_&lt;version&gt;.zip</literal>
+            muss einen Ordner
+            <literal>&lt;languagename&gt;_&lt;version&gt;</literal>
+            enthalten. Die oben genannten Dateien sollten in diesem
+            Ordner abgelegt werden.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Der Revisionsname in der
+            <ulink url="https://www.phpbb.com/go/customise/language-packs/3.3">Customisation
+            Database</ulink> sollte entweder leer gelassen werden oder
+            die phpBB-Paketversion und/oder den Namen der Paketversion
+            enthalten (z. B. <literal>3.3.10</literal> / `Bertie's
+            translation for 3.3.10) für ein besseres Verständnis.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="package-validation">
+    <title>Paketvalidierung</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Sprachpakete müssen alle Dateien enthalten, die in den
+          Ordnern für die englische Sprache enthalten sind. Dazu
+          gehören die folgenden Ordner:
+        </para>
+        <blockquote>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>
+                <literal>ext/phpbb/viglink/language/en/</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/en/</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>styles/prosilver/theme/en/</literal>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Sprachpakete müssen 1 zusätzliche Datei enthalten:
+        </para>
+        <blockquote>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>
+                <literal>language/{iso}/LICENSE</literal>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Sprachpakete dürfen 4 weitere zusätzliche Dateien enthalten:
+        </para>
+        <blockquote>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>
+                <literal>language/{iso}/AUTHORS.md</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/{iso}/CHANGELOG.md</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/{iso}/README.md</literal>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <literal>language/{iso}/VERSION.md</literal>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Keine weiteren zusätzlichen Dateien sind zulässig!
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Alle Ordner innerhalb der Sprachverzeichnisse müssen eine
+          Datei <literal>index.htm</literal> enthalten (z. B.
+          <literal>language/en/acp/index.htm</literal>,
+          <literal>language/en/index.htm</literal>,
+          <literal>styles/prosilver/theme/de/index.htm</literal>, eine
+          vollständige Liste findest du in den
+          <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/language/guidelines.html#language-pack-submission-policy">Language
+          Pack Submission Policy</ulink>).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Eine Ausnahme von dieser Regel bilden die Verzeichnisse für
+          die viglink-Übersetzung sowie die Verzeichnisse, die zum
+          phpBB-Paket gehören (z. B. <literal>language/</literal>,
+          <literal>styles/</literal>).
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="file-validation">
+    <title>Dateivalidierung</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Alle Dateien müssen mit <literal>LF</literal>-Zeilenenden
+          (LineFeed / UNIX) gespeichert werden.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Alle <literal>.php</literal>-Dateien müssen eine Prüfung der
+          Konstante <literal>IN_PHPBB</literal> enthalten:
+        </para>
+        <blockquote>
+          <programlisting>
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+</programlisting>
+        </blockquote>
+      </listitem>
+      <listitem>
+        <para>
+          Alle Dateien mit nicht-englischsprachigem Inhalt
+          (<literal>.php</literal>, <literal>.txt</literal>, sowie alle
+          zusätzlichen Dateien aus dem Abschnitt
+          <link linkend="package-validation">Paketvalidierung</link>)
+          müssen als <emphasis>UTF-8 ohne BOM</emphasis> gespeichert
+          werden.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>.php</literal>-Dateien dürfen
+          <emphasis role="strong">keine</emphasis> Ausgabe erzeugen. Es
+          darf keine Zeichen vor <literal>&lt;?php</literal> geben.
+          <literal>.php</literal>-Dateien dürfen
+          <emphasis role="strong">nicht</emphasis> das schließende Tag
+          <literal>?&gt;</literal> enthalten, sondern einfach mit einer
+          neuen Zeile enden
+        </para>
+      </listitem>
+    </itemizedlist>
+    <sect2 id="languageisoiso.txt">
+      <title>language/{iso}/iso.txt</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Die Datei muss genau 3 Zeilen enthalten:
+          </para>
+          <blockquote>
+            <orderedlist spacing="compact">
+              <listitem>
+                <para>
+                  Englischer Sprachname
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  Sprachname in der gesprochenen Sprache
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  Informationen zum Autor (bzw. zur Autorengruppe) (nur
+                  Klartext, keine Links erlaubt)
+                </para>
+              </listitem>
+            </orderedlist>
+          </blockquote>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="index.htm">
+      <title>*/index.htm</title>
+      <para>
+        Die <literal>index.htm</literal>-Dateien in allen Ordnern
+        müssen entweder vollständig leer sein oder den
+        Standard-HTML-Body enthalten:
+      </para>
+      <programlisting language="html">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+&lt;/head&gt;
+
+&lt;body bgcolor=&quot;#FFFFFF&quot; text=&quot;#000000&quot;&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</programlisting>
+    </sect2>
+    <sect2 id="languageisohelp.php">
+      <title>language/{iso}/help/*.php</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Die Datei darf nur 1 Array namens $lang enthalten. Andere
+            Variablen sind nicht zulässig.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Das Array darf nur Arrays mit der folgenden Struktur
+            enthalten:
+          </para>
+          <blockquote>
+            <programlisting>
+[
+    0 =&gt; 'TextA',
+    1 =&gt; 'TextB',
+],
+</programlisting>
+            <itemizedlist spacing="compact">
+              <listitem>
+                <para>
+                  Ist TextA <literal>--</literal>, handelt es sich bei
+                  dem Eintrag um eine Überschrift.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  Sind sowohl TextA als auch TextB
+                  <literal>--</literal>, bewirkt der Eintrag einen
+                  Spaltenwechsel für das zweispaltige Seitenlayout. Eine
+                  Datei <literal>help/*.php</literal> muss genau einen
+                  dieser Einträge enthalten.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </blockquote>
+        </listitem>
+        <listitem>
+          <para>
+            Für TextA und TextB gilt die normale
+            <link linkend="key-validation">Schlüsselvalidierung</link>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="languageisoemail.txt-and-languageisoemailshort.txt">
+      <title>language/{iso}/email/*.txt und
+      language/{iso}/email/short/*.txt</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            E-Mails dürfen die Betreffzeile nur dann enthalten, wenn die
+            englische E-Mail-Vorlage sie ebenfalls enthält:
+          </para>
+          <programlisting>
+Subject: {Translated subject here}
+</programlisting>
+        </listitem>
+        <listitem>
+          <para>
+            E-Mails dürfen <literal>{EMAIL_SIG}</literal> nur enthalten,
+            wenn die englische E-Mail-Vorlage es ebenfalls enthält.
+            Zusätzlich muss <literal>{EMAIL_SIG}</literal> immer in
+            einer eigenen Zeile stehen, muss die letzte Textzeile sein
+            und wird von einer leeren neuen Zeile gefolgt.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            E-Mails sollten alle Variablen verwenden, die in der
+            englischen E-Mail-Vorlage bereitgestellt werden, um dem
+            Benutzer dieselben Informationen zu liefern.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            E-Mails dürfen nur <literal>{U_BOARD}</literal>,
+            <literal>{EMAIL_SIG}</literal> und
+            <literal>{SITENAME}</literal> als zusätzliche Variablen
+            enthalten. Keine anderen Variablen stehen zur Verfügung.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            E-Mails dürfen keine HTML-Inhalte verwenden.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Am Ende der Datei muss eine leere neue Zeile stehen.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="languageiso.php-and-languageisoacp.php">
+      <title>language/{iso}/*.php und language/{iso}/acp/*.php</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Die Datei darf nur 1 Array namens
+            <literal>$lang</literal> enthalten. Andere Variablen sind
+            nicht zulässig.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Sprachdateien müssen alle Schlüssel enthalten, die in der
+            englischen Sprachdatei enthalten sind.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Sprachdateien dürfen nur Schlüssel enthalten, die auch in
+            der englischen Sprachdatei enthalten sind.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Für alle Einträge gilt die
+            <link linkend="key-validation">Schlüsselvalidierung</link>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="key-validation">
+    <title>Schlüsselvalidierung</title>
+    <sect2 id="type">
+      <title>Typ</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Einträge müssen vom gleichen Typ sein wie in der englischen
+            Sprache. Ist der Eintrag vom Typ <literal>string</literal>,
+            muss auch deine Übersetzung vom Typ <literal>string</literal>
+            sein. Ist der englische Eintrag vom Typ
+            <literal>array</literal> (z. B. bei Pluralen), muss auch
+            deine Übersetzung vom Typ <literal>array</literal> sein.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Ist der Eintrag ein Array, muss deine Übersetzung dieselben
+            Schlüssel wie das englische Array enthalten. Ausnahmen
+            bilden Pluralformen.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="string-and-integer-replacements">
+      <title>Platzhalter für Zeichenketten und Ganzzahlen</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Enthält die englische Zeichenkette Platzhalter wie
+            <literal>%s</literal>, <literal>%1$s</literal>,
+            <literal>%d</literal> und <literal>%1$d</literal>, sollte
+            deine Zeichenkette dieselbe Anzahl an Platzhaltern enthalten.
+            Ausnahmen bilden Ganzzahl-Platzhalter in Pluralformen. Dies
+            erlaubt dir, Folgendes zu verwenden:
+          </para>
+          <programlisting>
+No posts
+</programlisting>
+          <para>
+            anstatt:
+          </para>
+          <programlisting>
+0 posts
+</programlisting>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="html">
+      <title>HTML</title>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Zeichenketten sollten nur HTML enthalten, das auch in den
+            englischen Zeichenketten enthalten ist.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Zusätzlich sind <literal>&lt;a href=&quot;&quot;&gt;</literal>,
+            <literal>&lt;strong&gt;</literal>,
+            <literal>&lt;em&gt;</literal>, <literal>&lt;u&gt;</literal>
+            und <literal>&lt;br /&gt;</literal> erlaubt.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;b&gt;</literal> sollte nicht verwendet werden,
+            verwende stattdessen <literal>&lt;strong&gt;</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>&lt;i&gt;</literal> sollte nicht verwendet werden,
+            verwende stattdessen <literal>&lt;em&gt;</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Zeichenketten sollten nur HTML schließen, das sie selbst
+            geöffnet haben, und sollten alles von ihnen geöffnete HTML
+            schließen. Ausnahmen hiervon sind:
+          </para>
+          <blockquote>
+            <itemizedlist>
+              <listitem>
+                <variablelist spacing="compact">
+                  <varlistentry>
+                    <term>
+                      <literal>language/{iso}/install.php</literal>
+                    </term>
+                    <listitem>
+                      <itemizedlist spacing="compact">
+                        <listitem>
+                          <para>
+                            <literal>INSTALL_INTRO_BODY</literal>
+                          </para>
+                        </listitem>
+                        <listitem>
+                          <para>
+                            <literal>SUPPORT_BODY</literal>
+                          </para>
+                        </listitem>
+                        <listitem>
+                          <para>
+                            <literal>UPDATE_INSTALLATION_EXPLAIN</literal>
+                          </para>
+                        </listitem>
+                      </itemizedlist>
+                    </listitem>
+                  </varlistentry>
+                </variablelist>
+              </listitem>
+              <listitem>
+                <variablelist spacing="compact">
+                  <varlistentry>
+                    <term>
+                      <literal>language/{iso}/ucp.php</literal>
+                    </term>
+                    <listitem>
+                      <itemizedlist spacing="compact">
+                        <listitem>
+                          <para>
+                            <literal>TERMS_OF_USE_CONTENT</literal>
+                          </para>
+                        </listitem>
+                        <listitem>
+                          <para>
+                            <literal>PRIVACY_POLICY</literal>
+                          </para>
+                        </listitem>
+                      </itemizedlist>
+                    </listitem>
+                  </varlistentry>
+                </variablelist>
+              </listitem>
+            </itemizedlist>
+          </blockquote>
+          <para>
+            die sich immer innerhalb eines
+            <literal>&lt;p&gt;</literal>-Tags befinden und dieses
+            schließen dürfen, sofern sie es später wieder öffnen.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="arrays">
+      <title>Arrays</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Arrays müssen dieselbe Struktur und dieselben Elemente wie
+            die englische Version aufweisen. Ausnahmen bilden
+            Pluralformen, die je nach Pluralregel mehr oder weniger
+            Schlüssel haben können.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="copyright-license">
+    <title>Copyright &amp; Lizenz</title>
+    <sect2 id="copyright">
+      <title>Copyright</title>
+      <para>
+        Die Übersetzung ist größtenteils deine eigene Arbeit, und du
+        hast das Recht, ein Copyright und Namen daran zu halten. Daher
+        können maximal 3 Links als Autorennennung im Footer eingebunden
+        werden, anpassbar über den Schlüssel
+        <literal>TRANSLATION_INFO</literal> in
+        <literal>common.php</literal>.
+      </para>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Der Translations Manager entscheidet nach eigenem Ermessen,
+          was als Link zur Autorennennung akzeptabel ist.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="license">
+      <title>Lizenz</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Alle Übersetzungen müssen unter der
+            <ulink url="http://www.opensource.org/licenses/gpl-2.0.php">GNU
+            General Public License 2.0</ulink> veröffentlicht werden
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+</article>

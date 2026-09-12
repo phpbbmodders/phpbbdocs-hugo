@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Migrations</title>
+  </articleinfo>
+  <para>
+    Seit phpBB 3.1 werden Datenbankaktualisierungen mithilfe von
+    Migrations durchgeführt.
+  </para>
+  <para>
+    Migrations wurde aufgrund der Schwierigkeiten bei verteilter
+    Entwicklung und der Pflege eines aktuellen Datenbank-Setups über
+    alle Entwickler hinweg entwickelt.
+  </para>
+  <para>
+    RFC-Thema, falls du dich für die Gründe interessierst:
+    <ulink url="http://area51.phpbb.com/phpBB/viewtopic.php?t=41337">http://area51.phpbb.com/phpBB/viewtopic.php?t=41337</ulink>
+  </para>
+  <para>
+    getting_started dependencies schema_changes data_changes tools/index
+  </para>
+  <sect1 id="what-do-migrations-mean-for-me">
+    <title>Was bedeuten Migrations für mich?</title>
+    <sect2 id="as-a-user">
+      <title>Als Benutzer</title>
+      <para>
+        Migrations haben keine Auswirkungen auf die Nutzung von phpBB,
+        sondern nur auf das Schreiben von Code dafür, sodass
+        Administratoren nichts anders machen müssen.
+      </para>
+      <para>
+        Datenbankaktualisierungen zwischen phpBB-Versionen und
+        Erweiterungsaktualisierungen werden sicherer und, falls
+        während einer Datenbankänderung doch einmal etwas schiefgeht,
+        deutlich einfacher zu debuggen und zu korrigieren.
+      </para>
+    </sect2>
+    <sect2 id="as-an-extension-author">
+      <title>Als Erweiterungsautor</title>
+      <para>
+        Funktionalität (ähnlich wie UMIL für phpBB 3.0), die fest in
+        phpBB integriert ist, um Datenbankänderungen zwischen
+        Versionen einfacher zu verwalten, sowie hilfreiche Werkzeuge,
+        die bei Datenbankänderungen unterstützen.
+      </para>
+    </sect2>
+    <sect2 id="as-a-developer">
+      <title>Als Entwickler</title>
+      <para>
+        Einfachere Zusammenarbeit mit anderen, weniger Zeitaufwand für
+        die Verwaltung von Datenbankänderungen zwischen verschiedenen
+        Branches und Pull Requests.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="how-do-i-use-migrations">
+    <title>Wie verwende ich Migrations?</title>
+    <sect2 id="getting-started-with-migrations">
+      <title>Erste Schritte mit Migrations</title>
+      <para>
+        Wie eine grundlegende Migration-Datei erstellt wird
+        <literal>getting_started</literal>
+      </para>
+    </sect2>
+    <sect2 id="migration-helpers">
+      <title>Migration-Hilfsprogramme</title>
+      <para>
+        Wie Migration-Hilfsprogramme verwendet werden, um grundlegende
+        Datenbankänderungen durchzuführen
+        <literal>tools/index</literal>
+      </para>
+    </sect2>
+  </sect1>
+</article>

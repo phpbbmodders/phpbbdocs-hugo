@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Authentifizierung</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Einführung</title>
+    <para>
+      phpBB 3.1 hat integrierte Authentifizierungs-Plugins eingeführt,
+      die du erweitern oder eigene erstellen kannst.
+    </para>
+    <para>
+      Dieses Tutorial erklärt:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <link linkend="authentication-providers">Authentifizierungs-Provider</link>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <link linkend="oauth-providers">OAuth-Provider</link>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="authentication-providers">
+    <title>Authentifizierungs-Provider</title>
+    <para>
+      phpBB 3.1 hat Unterstützung für externe
+      Authentifizierungs-Plugins eingeführt, die anstelle der
+      integrierten Authentifizierungs-Provider verwendet werden können.
+      Derzeit kann jeweils nur ein Provider aktiv sein, und der aktive
+      Provider wird im ACP ausgewählt.
+    </para>
+    <sect2 id="creating-an-authentication-provider">
+      <title>Einen Authentifizierungs-Provider erstellen</title>
+      <para>
+        Authentifizierungs-Provider in phpBB benötigen mindestens zwei
+        Dateien: eine PHP-Klasse und eine YAML-Servicedatei.
+      </para>
+      <sect3 id="the-class-file">
+        <title>Die Klassendatei</title>
+        <para>
+          Die Provider-Klasse muss
+          <literal>\phpbb\auth\provider\provider_interface</literal>
+          implementieren, um eine korrekte Funktionsweise
+          sicherzustellen. Es wird jedoch empfohlen,
+          <literal>\phpbb\auth\provider\base</literal> zu erweitern, um
+          keine unnötigen Methoden implementieren zu müssen und
+          sicherzustellen, dass der Provider durch eine Aktualisierung
+          der Schnittstelle nicht beeinträchtigt wird. Ein Beispiel für
+          eine Authentifizierungs-Provider-Klasse ist unten dargestellt:
+        </para>
+        <programlisting>
+&lt;?php
+
+namespace acme\demo\auth\provider;
+
+/**
+ * Database authentication provider for phpBB3
+ *
+ * This is for authentication via the integrated user table
+ */
+class db2 extends \phpbb\auth\provider\base
+{
+    /** @var \phpbb\db\driver\driver_interface $db */
+    protected $db;
+
+    /**
+     * Database Authentication Constructor
+     *
+     * @param \phpbb\db\driver\driver_interface $db
+     */
+    public function __construct(\phpbb\db\driver\driver_interface $db)
+    {
+        $this-&gt;db = $db;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function login($username, $password)
+    {
+        // Auth plugins get the password untrimmed.
+        // For compatibility we trim() here.
+        $password = trim($password);
+
+        // do not allow empty password
+        if (!$password)
+        {
+            return [
+                'status'    =&gt; LOGIN_ERROR_PASSWORD,
+                'error_msg' =&gt; 'NO_PASSWORD_SUPPLIED',
+                'user_row'  =&gt; ['user_id' =&gt; ANONYMOUS],
+            ];
+        }
+
+        if (!$username)
+        {
+            return [
+                'status'    =&gt; LOGIN_ERROR_USERNAME,
+                'error_msg' =&gt; 'LOGIN_ERROR_USERNAME',
+                'user_row'  =&gt; ['user_id' =&gt; ANONYMOUS],
+            ];
+        }
+
+        $username_clean = utf8_clean_string($username);
+
+        $sql = 'SELECT user_id, username, user_password, user_passchg, user_pass_convert, user_email, user_type, user_login_attempts
+            FROM ' . USERS_TABLE . &quot;
+            WHERE username_clean = '&quot; . $this-&gt;db-&gt;sql_escape($username_clean) . &quot;'&quot;;
+        $result = $this-&gt;db-&gt;sql_query($sql);
+        $row = $this-&gt;db-&gt;sql_fetchrow($result);
+        $this-&gt;db-&gt;sql_freeresult($result);
+
+        // Successful login... set user_login_attempts to zero...
+        return [
+            'status'    =&gt; LOGIN_SUCCESS,
+            'error_msg' =&gt; false,
+            'user_row'  =&gt; $row,
+        ];
+    }
+}
+</programlisting>
+      </sect3>
+      <sect3 id="the-service-file">
+        <title>Die Servicedatei</title>
+        <para>
+          Für eine korrekte
+          <literal>dependency injection &lt;dependency-injection&gt;</literal>
+          muss der Provider zu <literal>services.yml</literal>
+          hinzugefügt werden. Der Name des Service muss der Form
+          <literal>auth.provider.&lt;service name&gt;</literal>
+          entsprechen, damit phpBB ihn registrieren kann. Die Argumente
+          entsprechen denen des Provider-Konstruktors und können leer
+          bleiben, falls keine Argumente erforderlich sind. Der
+          Provider muss mit <literal>{ name: auth.provider }</literal>
+          getaggt werden, damit die Klasse in phpBB verfügbar gemacht
+          wird.
+        </para>
+        <programlisting language="yaml">
+services:
+    auth.provider.db2:
+        class: acme\demo\auth\provider\db2
+        arguments:
+            - '@dbal.conn'
+        tags:
+            - { name: auth.provider }
+</programlisting>
+      </sect3>
+      <sect3 id="the-template-file">
+        <title>Die Template-Datei</title>
+        <para>
+          Wenn du die obigen Schritte befolgen, wird der
+          Authentifizierungs-Provider im ACP sichtbar. Damit ein
+          Administrator dein Plugin konfigurieren kann, müssen jedoch
+          die verfügbaren Felder erstellt werden, um die Konfiguration
+          über das php-auth-provider-Plugin erreichen zu können. Diese
+          Oberfläche wird im HTML-Format in
+          <literal>adm/style/auth_provider_&lt;providername&gt;.html</literal>
+          konfiguriert.
+        </para>
+        <para>
+          Das folgende Beispiel basiert etwa auf bestehenden
+          LDAP-Begriffen, die zur Konfiguration eines HTTPS-Servers
+          verwendet werden:
+        </para>
+        <programlisting language="html">
+&lt;fieldset id=&quot;auth_test_settings&quot;&gt;
+    &lt;legend&gt;{{ TEST }}&lt;/legend&gt;
+    &lt;dl&gt;
+        &lt;dt&gt;&lt;label for=&quot;https_server&quot;&gt;{{ TEST_SERVER ~ lang('COLON') }}&lt;/label&gt;&lt;br /&gt;&lt;span&gt;{{ TEST_SERVER_EXPLAIN }}&lt;/span&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;input type=&quot;text&quot; id=&quot;https_server&quot; size=&quot;40&quot; name=&quot;config[https_server]&quot; value=&quot;{{ AUTH_HTTPS_SERVER }}&quot; /&gt;&lt;/dd&gt;
+    &lt;/dl&gt;
+&lt;/fieldset&gt;
+</programlisting>
+        <para>
+          Dieser Wert kann dann wie folgt aus der Datei
+          <literal>&lt;provider&gt;.php</literal> abgerufen werden:
+        </para>
+        <programlisting>
+$domain = $this-&gt;config['https_server'];
+</programlisting>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="oauth-providers">
+    <title>OAuth-Provider</title>
+    <para>
+      phpBB 3.1 wird mit einem neuen Authentifizierungs-Provider
+      ausgeliefert: OAuth. Dieser Provider basiert auf der Bibliothek
+      <ulink url="https://github.com/Lusitanian/PHPoAuthLib">Lusitanian/PHPoAuthLib</ulink>.
+    </para>
+    <sect2 id="enabling-an-oauth-provider">
+      <title>Einen OAuth-Provider aktivieren</title>
+      <para>
+        Um einen neuen OAuth-Service in phpBB zu aktivieren, musst du
+        lediglich zwei Dateien in deiner Erweiterung erstellen: die
+        Klassendatei, die die Funktionalität definiert, die phpBB
+        benötigt, um die erforderlichen Daten vom Service abzurufen,
+        und die Servicedatei, die es phpBB ermöglicht, die Klasse zu
+        finden. Um herauszufinden, wie du am wahrscheinlichsten
+        Aufrufe an den OAuth-Service vornehmen sollten, wird empfohlen,
+        sich an den enthaltenen OAuth-Services sowie an den von
+        <ulink url="https://github.com/Lusitanian/PHPoAuthLib">Lusitanian/PHPoAuthLib</ulink>
+        bereitgestellten Beispielen zu orientieren.
+      </para>
+      <para>
+        Die folgenden Beispieldateien zeigen das Minimum, das
+        erforderlich ist, um einen OAuth-Service in phpBB zu
+        aktivieren. Es handelt sich um Kopien der
+        bitly-Serviceimplementierung aus dem develop-Branch von phpBB3.
+      </para>
+      <sect3 id="the-class-file-1">
+        <title>Die Klassendatei</title>
+        <programlisting>
+&lt;?php
+/**
+*
+* This file is part of the phpBB Forum Software package.
+*
+* @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+* For full copyright and license information, please see
+* the docs/CREDITS.txt file.
+*
+*/
+
+namespace phpbb\auth\provider\oauth\service;
+
+/**
+* Bitly OAuth service
+*/
+class bitly extends \phpbb\auth\provider\oauth\service\base
+{
+    /**
+    * phpBB config
+    *
+    * @var \phpbb\config\config
+    */
+    protected $config;
+
+    /**
+    * phpBB request
+    *
+    * @var \phpbb\request\request_interface
+    */
+    protected $request;
+
+    /**
+    * Constructor
+    *
+    * @param    \phpbb\config\config               $config
+    * @param    \phpbb\request\request_interface   $request
+    */
+    public function __construct(\phpbb\config\config $config, \phpbb\request\request_interface $request)
+    {
+        $this-&gt;config = $config;
+        $this-&gt;request = $request;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function get_service_credentials()
+    {
+        return [
+            'key'     =&gt; $this-&gt;config['auth_oauth_bitly_key'],
+            'secret'  =&gt; $this-&gt;config['auth_oauth_bitly_secret'],
+        ];
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function perform_auth_login()
+    {
+        if (!($this-&gt;service_provider instanceof \OAuth\OAuth2\Service\Bitly))
+        {
+            throw new \phpbb\auth\provider\oauth\service\exception('AUTH_PROVIDER_OAUTH_ERROR_INVALID_SERVICE_TYPE');
+        }
+
+        // This was a callback request from bitly, get the token
+        $this-&gt;service_provider-&gt;requestAccessToken($this-&gt;request-&gt;variable('code', ''));
+
+        // Send a request with it
+        $result = json_decode($this-&gt;service_provider-&gt;request('user/info'), true);
+
+        // Return the unique identifier returned from bitly
+        return $result['data']['login'];
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function perform_token_auth()
+    {
+        if (!($this-&gt;service_provider instanceof \OAuth\OAuth2\Service\Bitly))
+        {
+            throw new \phpbb\auth\provider\oauth\service\exception('AUTH_PROVIDER_OAUTH_ERROR_INVALID_SERVICE_TYPE');
+        }
+
+        // Send a request with it
+        $result = json_decode($this-&gt;service_provider-&gt;request('user/info'), true);
+
+        // Return the unique identifier returned from bitly
+        return $result['data']['login'];
+    }
+}
+</programlisting>
+      </sect3>
+      <sect3 id="the-service-file-1">
+        <title>Die Servicedatei</title>
+        <para>
+          In der Servicedatei muss der Name des Service der Form
+          <literal>auth.provider.oauth.service.&lt;service name&gt;</literal>
+          entsprechen, damit phpBB ihn korrekt erkennt.
+        </para>
+        <programlisting language="yaml">
+services:
+    auth.provider.oauth.service.bitly:
+        class: phpbb\auth\provider\oauth\service\bitly
+        arguments:
+            - '@config'
+            - '@request'
+        tags:
+            - { name: auth.provider.oauth.service }
+</programlisting>
+      </sect3>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Berechtigungen</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Einführung</title>
+    <para>
+      Das Berechtigungssystem in phpBB wird verwendet, um den Zugriff
+      auf verschiedene Teile der Software zu steuern. Es funktioniert,
+      indem es Administratoren ermöglicht, Benutzergruppen oder
+      einzelnen Nutzern bestimmte Berechtigungen zuzuweisen, die
+      festlegen, welche Aktionen sie ausführen dürfen.
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="create-permissions">Berechtigungen
+            erstellen</link> mit einer Migration.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="define-permissions">Berechtigungen
+            definieren</link> mit Sprachschlüsseln.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="wire-up-permissions">Berechtigungen
+            verdrahten</link> mit Events.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="checking-permissions">Berechtigungen
+            prüfen</link> mit PHP.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="understanding-permissions">Berechtigungen
+            verstehen</link> in phpBB.
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="create-permissions">
+    <title>Berechtigungen erstellen</title>
+    <para>
+      Es gibt vier Berechtigungstypen:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>a_*</literal> Administrator
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>m_*</literal> Moderator
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>u_*</literal> Benutzer
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>f_*</literal> Forum
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Du kannst für jeden dieser Typen neue Berechtigungen erstellen
+      und sie Benutzergruppen oder Berechtigungsrollen zuweisen. du
+      kannst bei Bedarf auch neue Rollen definieren, denen du deine
+      Berechtigungen zuweisen.
+    </para>
+    <para>
+      Berechtigungen müssen zunächst in einer Migration mit dem
+      <literal>../migrations/tools/permission</literal> erstellt
+      werden. Es hilft beim Hinzufügen, Entfernen, Setzen und Aufheben
+      von Berechtigungen sowie beim Hinzufügen oder Entfernen von
+      Berechtigungsrollen. Um beispielsweise eine neue
+      Benutzer-Berechtigung <literal>u_foo_bar</literal> zu erstellen
+      und sie für die Gruppe Registered Users und die Rolle Standard
+      User auf <literal>YES</literal> zu setzen:
+    </para>
+    <programlisting>
+return [
+    ['permission.add', ['u_foo_bar']],
+    ['permission.permission_set', ['REGISTERED', 'u_foo_bar', 'group']],
+    ['permission.permission_set', ['ROLE_USER_STANDARD', 'u_foo_bar']],
+];
+</programlisting>
+  </sect1>
+  <sect1 id="define-permissions">
+    <title>Berechtigungen definieren</title>
+    <para>
+      Berechtigungen müssen über eine entsprechende
+      Sprachschlüssel-Definition verfügen. Alle Sprachschlüssel für
+      Berechtigungen sollten in einer Sprachdatei abgelegt werden, die
+      mit <literal>permissions_</literal> beginnt, und die Schlüssel
+      werden automatisch in das ACP-Sprach-Array geladen. Zum Beispiel
+      die Sprachdatei <literal>permissions_foobar.php</literal>:
+    </para>
+    <programlisting>
+$lang = array_merge($lang, [
+    'ACL_U_FOOBAR' =&gt; 'Can post foobars',
+]);
+</programlisting>
+  </sect1>
+  <sect1 id="wire-up-permissions">
+    <title>Berechtigungen verdrahten</title>
+    <para>
+      Das Verdrahten von Berechtigungen bedeutet einfach, phpBB über
+      deine neuen Berechtigungen zu informieren, indem du sie zum
+      Berechtigungsdaten-Array hinzufügst. Das Array verwendet den
+      Berechtigungsnamen als Schlüssel und einen Array-Wert, der den
+      Sprachschlüssel der Berechtigung sowie die Kategorie definiert,
+      zu der sie gehören soll.
+    </para>
+    <para>
+      Dies geschieht in einem Event-Listener über das Event
+      <literal>core.permissions</literal>, um deine neuen Berechtigungen
+      zum Berechtigungsdaten-Array von phpBB hinzuzufügen:
+    </para>
+    <programlisting>
+$event-&gt;update_subarray('permissions', 'u_foo_bar', ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post']);
+</programlisting>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        Um phpBB 3.2.1 oder frühere Versionen zu unterstützen, kannst du die Methode <literal>update_subarray()</literal> nicht
+        verwenden und musst stattdessen den folgenden älteren Codestil
+        verwenden:
+      </para>
+      <programlisting>
+# Wiring permissions the correct way for phpBB 3.1.0 - 3.2.1
+$permissions = $event['permissions'];
+$permissions['u_foo_bar'] = ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post'];
+$event['permissions'] = $permissions;
+
+# Notice that the above permissions $event variable must first be copied by assigning it to a
+# local variable, then modified, and then copied back. This is because the event variables are
+# overloaded, which is a limitation in PHP. For example, this shortcut will not work:
+$event['permissions']['u_foo_bar'] = ['lang' =&gt; 'ACL_U_FOOBAR', 'cat' =&gt; 'post'];
+</programlisting>
+    </warning>
+  </sect1>
+  <sect1 id="checking-permissions">
+    <title>Berechtigungen prüfen</title>
+    <para>
+      Die Berechtigung eines Nutzers kann durch den Aufruf von
+      <literal>$auth-&gt;acl_get()</literal> geprüft werden:
+    </para>
+    <programlisting>
+// Check a user's permissions
+$auth-&gt;acl_get('u_foo_bar');
+</programlisting>
+    <para>
+      Wenn sie forumsspezifisch (d. h. lokal) ist, übergib ihr
+      die Forum-ID als zweites Argument:
+    </para>
+    <programlisting>
+// Check a user's permission in the forum with ID 3
+$auth-&gt;acl_get('u_foo_bar', 3);
+</programlisting>
+    <para>
+      Für Foren kann der forumsspezifische Aufruf
+      <literal>$auth-&gt;acl_getf()</literal> verwendet werden:
+    </para>
+    <programlisting>
+// Check a forum's permissions
+$auth-&gt;acl_getf('f_your_permission');
+</programlisting>
+    <para>
+      Es ist auch möglich, mit <literal>acl_gets()</literal> mehr als
+      eine Option zu prüfen:
+    </para>
+    <programlisting>
+$auth-&gt;acl_gets('permission1'[, 'permission2', ..., 'permissionNth'], $forumId);
+</programlisting>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Beim Prüfen von Berechtigungen ist es außerdem wichtig, zu
+        beachten, ob die globalen oder die lokalen Berechtigungen
+        geprüft werden sollen. Wird <literal>acl_get</literal> ohne
+        Forum-ID aufgerufen, werden die globalen Berechtigungen
+        verwendet. Wird stattdessen eine Forum-ID übergeben, werden
+        auch die lokalen Berechtigungen geprüft, die dann
+        möglicherweise ein <literal>NO</literal> durch ein
+        <literal>YES</literal> überschreiben können. Nach Prüfung
+        aller Nutzer-, Gruppen-, Forum- und globalen Berechtigungen
+        ist die zurückgegebene Berechtigung immer entweder
+        <literal>YES</literal> oder <literal>NO</literal>;
+        <literal>NEVER</literal> wird nur verwendet, um ein
+        <literal>NO</literal> zu erzwingen.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="understanding-permissions">
+    <title>Berechtigungen verstehen</title>
+    <para>
+      Berechtigungen in phpBB steuern, welche Aktionen Nutzer im Forum
+      ausführen dürfen, etwa das Erstellen eines neuen Themas, das
+      Antworten auf einen Beitrag oder das Bearbeiten des Profils
+      eines Nutzers. Jeder Berechtigung wird ein Wert von
+      <literal>YES</literal>, <literal>NO</literal> oder
+      <literal>NEVER</literal> zugewiesen.
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>YES</literal> bedeutet, dass der Nutzer oder die
+          Gruppe die Aktion ausführen darf.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>NO</literal> bedeutet, dass der Nutzer oder die
+          Gruppe die Aktion nicht ausführen darf, dies aber durch ein
+          <literal>YES</literal> einer Gruppe oder Rolle, der er bzw.
+          sie zugewiesen ist, außer Kraft gesetzt werden kann.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>NEVER</literal> bedeutet, dass der Nutzer oder die
+          Gruppe die Aktion nicht ausführen darf und dies nicht durch
+          ein <literal>YES</literal> einer Gruppe oder Rolle, der er
+          bzw. sie zugewiesen ist, außer Kraft gesetzt werden kann.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Wenn ein Nutzer eine Aktion ausführen möchte, kombiniert phpBB
+      alle Berechtigungen, die dem Nutzer über seine Gruppen, Rollen
+      und direkten Berechtigungszuweisungen zugewiesen sind. Ist eine
+      Berechtigung auf <literal>NEVER</literal> gesetzt, hat dies
+      Vorrang vor allen anderen Berechtigungen und verweigert dem
+      Nutzer den Zugriff auf diese Aktion. Ist eine Berechtigung auf
+      <literal>NO</literal> gesetzt, kann sie durch eine
+      <literal>YES</literal>-Berechtigung einer anderen Gruppe oder
+      Rolle außer Kraft gesetzt werden.
+    </para>
+    <sect2 id="permission-types">
+      <title>Berechtigungstypen</title>
+      <para>
+        Es gibt vier Arten von Berechtigungen in phpBB:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>a_*</literal> Administrator: Diese Berechtigungen
+            gelten für Nutzer, denen Administratorrollen zugewiesen
+            sind.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>f_*</literal> Forum: Diese Berechtigungen gelten
+            für einzelne Foren und können für jede Benutzergruppe oder
+            jeden einzelnen Nutzer festgelegt werden.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>m_*</literal> Moderator: Diese Berechtigungen
+            gelten für Nutzer, denen Moderatorrollen für bestimmte
+            Foren zugewiesen sind.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>u_*</literal> Benutzer: Diese Berechtigungen
+            gelten für einzelne Nutzer und setzen die für ihre
+            Benutzergruppe festgelegten Berechtigungen außer Kraft.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="local-and-global-permissions">
+      <title>Lokale und globale Berechtigungen</title>
+      <para>
+        Berechtigungen können so eingestellt werden, dass sie lokal
+        oder global gelten. Lokale Berechtigungen gelten für ein
+        einzelnes Forum, während globale Berechtigungen für das gesamte
+        Board gelten. Standardmäßig sind Forumsberechtigungen lokal
+        eingestellt. Administrator- und Benutzerberechtigungen sind
+        typischerweise global eingestellt.
+      </para>
+      <para>
+        Berechtigungsoptionen können auch so eingestellt werden, dass
+        sie sowohl lokal als auch global gelten, was typisch für
+        Moderator-Berechtigungen ist. Dies ermöglicht es, manchen
+        Nutzern die Berechtigung für ein einzelnes Forum zu erteilen,
+        während andere die Berechtigung boardweit erhalten können.
+      </para>
+    </sect2>
+    <sect2 id="roles">
+      <title>Rollen</title>
+      <para>
+        Rollen sind eine vordefinierte Menge von
+        Berechtigungsoptionen, die auf Nutzer oder Gruppen angewendet
+        werden können. Wenn die Berechtigungsoptionen einer Rolle
+        geändert werden, werden die Nutzer oder Gruppen, denen diese
+        Rolle zugewiesen ist, automatisch aktualisiert.
+      </para>
+      <para>
+        Die effektive Berechtigung für jede Option wird durch eine
+        Kombination aus der Gruppenzugehörigkeit des Nutzers, den
+        zugewiesenen Rollen und den direkten Berechtigungszuweisungen
+        bestimmt. In manchen Fällen können sich widersprechende
+        Berechtigungen ergeben, was zu unerwarteten Ergebnissen führen
+        kann. Es ist wichtig, die Berechtigungseinstellungen sorgfältig
+        zu prüfen, um sicherzustellen, dass Nutzer die angemessene
+        Zugriffsebene im Forum erhalten.
+      </para>
+    </sect2>
+  </sect1>
+</article>

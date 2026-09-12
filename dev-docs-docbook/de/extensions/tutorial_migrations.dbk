@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Migrationen</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Einführung</title>
+    <para>
+      Dieses Tutorial erklärt:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Migrationen: Datenbankänderungen
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="migrations">
+    <title>Migrationen</title>
+    <para>
+      Migrationen sind ein Mittel, um Datenbankänderungen zu
+      erleichtern, ganz ähnlich wie UMIL in phpBB 3.0 verwendet wurde.
+      Mithilfe von Migrationen können Erweiterungsentwickler das
+      Datenbankschema und die Daten leicht ändern und um neue Elemente
+      erweitern, wie es eine Erweiterung erfordert.
+    </para>
+    <para>
+      Lies die Migrations-Entwicklerdokumentation:
+      <literal>../migrations/getting_started</literal> für eine
+      ausführliche Dokumentation zu Migrationen. Wir fassen die
+      wichtigsten Konzepte von Migrationen hier kurz zusammen.
+    </para>
+    <para>
+      Die
+      <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#migrations">Migrations-Validierungsrichtlinie</ulink>
+      der phpBB Customisation Database.
+    </para>
+    <sect2 id="database-changes">
+      <title>Datenbankänderungen</title>
+      <sect3 id="schema-changes">
+        <title>Schemaänderungen</title>
+        <para>
+          Die Methode <literal>update_schema()</literal> dient dazu,
+          Schemaänderungen zu erleichtern, etwa das Hinzufügen neuer
+          Tabellen, Spalten, Schlüssel und Indizes.
+        </para>
+        <para>
+          Die Methode <literal>revert_schema()</literal> sollte immer
+          eingebunden werden, um alle durch die Methode
+          <literal>update_schema()</literal> eingeführten Änderungen
+          rückgängig zu machen.
+        </para>
+        <para>
+          Wir empfehlen, Schemaänderungen in eine eigene Migration zu
+          packen.
+        </para>
+        <para>
+          Mehr erfahren: <literal>../migrations/schema_changes</literal>.
+        </para>
+      </sect3>
+      <sect3 id="data-changes">
+        <title>Datenänderungen</title>
+        <para>
+          Die Methode <literal>update_data()</literal> dient zum
+          Einfügen, Aktualisieren und Löschen von Felddaten.
+        </para>
+        <para>
+          Die Methode <literal>revert_data()</literal> ist optional und
+          kann verwendet werden, um Datenänderungen rückgängig zu
+          machen. Normalerweise wird die Methode
+          <literal>update_data()</literal> während eines
+          Purge-Schritts automatisch rückgängig gemacht, wodurch alle
+          durch die Migrationswerkzeuge eingeführten Änderungen
+          umgekehrt werden. Die Verwendung der Methode
+          <literal>revert_data()</literal> ist nur nötig, um bei der
+          Deinstallation einer Erweiterung zusätzliche Änderungen
+          vorzunehmen, etwa das Ausführen benutzerdefinierter
+          Funktionen.
+        </para>
+        <para>
+          Wir empfehlen, Datenänderungen in eine eigene Migration zu
+          packen.
+        </para>
+        <para>
+          Mehr erfahren: <literal>../migrations/data_changes</literal>.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="migration-tools">
+      <title>Migrationswerkzeuge</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/config</literal>
+          </term>
+          <listitem>
+            <para>
+              Das config-Werkzeug hilft beim Hinzufügen, Aktualisieren
+              und Entfernen von config-Elementen.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/config_text</literal>
+          </term>
+          <listitem>
+            <para>
+              Das config_text-Werkzeug hilft beim Hinzufügen,
+              Aktualisieren und Entfernen von config_text-Elementen. Die
+              Tabelle config_text wird verwendet, um Optionen mit einem
+              Wert beliebiger Länge in einer TEXT-Spalte zu speichern.
+              Im Gegensatz zu config-Werten werden config_text-Werte
+              weder zwischengespeichert noch vorab geladen.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/module</literal>
+          </term>
+          <listitem>
+            <para>
+              Das module-Werkzeug hilft beim Hinzufügen und Entfernen
+              von ACP-, MCP- und UCP-Modulen.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/permission</literal>
+          </term>
+          <listitem>
+            <para>
+              Das permission-Werkzeug hilft beim Hinzufügen, Entfernen,
+              Setzen und Aufheben von Berechtigungen sowie beim
+              Hinzufügen oder Entfernen von Berechtigungsrollen.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2 id="migration-dependencies">
+      <title>Migrationsabhängigkeiten</title>
+      <sect3 id="depends_on">
+        <title>depends_on()</title>
+        <para>
+          Die Methode <literal>depends_on()</literal> wird verwendet,
+          um die Abhängigkeiten einer Migration festzulegen.
+          Abhängigkeiten teilen dem Migrator mit, in welcher Reihenfolge
+          Migrationen installiert werden müssen.
+        </para>
+        <para>
+          Mehr erfahren: <literal>../migrations/dependencies</literal>.
+        </para>
+      </sect3>
+      <sect3 id="effectively_installed">
+        <title>effectively_installed()</title>
+        <para>
+          Die Methode <literal>effectively_installed()</literal> wird
+          in erster Linie verwendet, um den Übergang von einer früheren
+          Datenbank-Installationsmethode (etwa einer MOD, die UMIL
+          verwendete) zu Migrationen zu erleichtern. Wir empfehlen
+          jedoch, sie durchgehend zu verwenden, um sicherere Migrationen
+          zu gewährleisten.
+        </para>
+        <para>
+          Wenn effectively_installed true zurückgibt, gilt die
+          Migration als bereits installiert, was bedeutet, dass die
+          Migration übersprungen wird. Dies hilft zu verhindern, dass
+          bestehende Änderungen an der Datenbank, die möglicherweise
+          bereits durch eine frühere Migration oder MOD-Installation
+          vorgenommen wurden, erneut geschrieben (oder überschrieben)
+          werden.
+        </para>
+        <para>
+          Im folgenden Code würde die Migration beispielsweise nicht
+          angewendet, wenn der angegebene config-Wert bereits in der
+          Datenbank vorhanden ist:
+        </para>
+        <programlisting>
+public function effectively_installed()
+{
+   return isset($this-&gt;config['acme_demo_goodbye']);
+}
+</programlisting>
+        <warning>
+          <title>Warnung</title>
+          <para>
+            Als allgemeine Regel sollten Migrationen niemals geändert
+            werden, nachdem sie installiert wurden. Das Ändern einer
+            Migration in einer Erweiterung, die bereits installiert
+            wurde, könnte verhindern, dass Datenbankänderungen
+            rückgängig gemacht oder die Deinstallation erfolgreich
+            durchgeführt werden kann. Um nachträgliche Änderungen an
+            der Datenbank vorzunehmen, sollten neue Migrationen
+            erstellt werden, um die zusätzlichen Änderungen oder
+            Aktualisierungen umzusetzen. Die einzigen Ausnahmen von
+            dieser Regel sind Korrekturen von SQL- und Logikfehlern
+            oder Bugs, solange sie die bereits vorgenommenen
+            Datenbankänderungen oder die in der Methode
+            <literal>depends_on()</literal> der Migration aufgeführten
+            Abhängigkeiten nicht verändern.
+          </para>
+        </warning>
+        <para>
+          Sobald du mit der Funktionsweise von Migrationen vertraut
+          bist, fahr mit dem nächsten Abschnitt fort, um zu
+          erfahren, wie du ein ACP-Modul erstellst und installierst,
+          mit dem wir einige Einstellungen für die Acme-Demo-Erweiterung
+          konfigurieren können.
+        </para>
+      </sect3>
+    </sect2>
+  </sect1>
+</article>

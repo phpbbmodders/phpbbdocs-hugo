@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>PhpStorm mit phpBB verwenden</title>
+  </articleinfo>
+  <para>
+    PhpStorm ist eine IDE (Integrated Development Environment) und die
+    bevorzugte Entwicklungsplattform des phpBB-Entwicklungsteams.
+  </para>
+  <para>
+    Diese Anleitung erklärt, wie du PhpStorm für die Entwicklung mit
+    phpBB einrichtest.
+  </para>
+  <sect1 id="create-a-new-project">
+    <title>Ein neues Projekt erstellen</title>
+    <para>
+      Zunächst benötigst du eine Kopie von phpBBs
+      Entwicklungs-Repository von GitHub.
+    </para>
+    <orderedlist numeration="arabic" spacing="compact">
+      <listitem>
+        <para>
+          Besuchen du das <ulink url="https://github.com/phpbb/phpbb">phpBB-Repository</ulink>
+          und forke es in dein GitHub-Konto.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Klonen du deinen neuen phpBB-Fork auf deinen Computer.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Öffnen du PhpStorm
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Wähle „Create New Project from Existing Files“ und
+          folge den Schritten des Assistenten.
+        </para>
+      </listitem>
+    </orderedlist>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Je nach deiner lokalen Umgebung ist in der Regel „Source files
+        are in a local directory, no web server is yet configured“ die
+        beste Wahl. Du kannst den Webserver jederzeit später
+        einrichten.
+      </para>
+    </note>
+    <orderedlist numeration="arabic" spacing="compact" startingnumber="5">
+      <listitem>
+        <para>
+          Wähle den phpBB-Projektordner, den du von GitHub
+          geklont hast, und klicke auf „Project Root“. Klicken
+          du anschließend auf „Finish“.
+        </para>
+      </listitem>
+    </orderedlist>
+  </sect1>
+  <sect1 id="code-style">
+    <title>Code-Stil</title>
+    <para>
+      Die Einrichtung von PhpStorm, damit es den phpBB-Coding-Style-Guide
+      beachtet, stellt sicher, dass du immer Code schreibst, der den
+      Anforderungen von phpBB entspricht. Diese Einstellungen werden in
+      den Settings/Preferences von PhpStorm unter
+      <emphasis role="strong">Editor &gt; Code Style</emphasis>
+      konfiguriert.
+    </para>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Bevor du Einstellungen änderst, empfiehlt es sich, im Bereich
+        der Code-Style-Einstellungen ein phpBB-„Scheme“ zu erstellen.
+        Dieses phpBB-Scheme kann auf jedes phpBB-Projekt angewendet
+        werden, das du in PhpStorm erstellst.
+      </para>
+    </note>
+    <para>
+      Zu deiner Bequemlichkeit haben wir einen XML-Export der folgenden
+      Code-Style-Einstellungen für phpBB bereitgestellt (siehe
+      <link linkend="phpbb-code-style-scheme">phpBB Code Style
+      Scheme</link>). Du kannst diese Einstellungen in dein Projekt
+      importieren, und alle folgenden Stil-Einstellungen werden für
+      du konfiguriert.
+    </para>
+    <sect2 id="php">
+      <title>PHP</title>
+      <sect3 id="tabs-indents">
+        <title>Tabs &amp; Einzüge</title>
+        <para>
+          Es sollten Tabs (keine Leerzeichen) verwendet werden. Alle
+          Tab- und Einzugsgrößen sollten auf 4 Leerzeichen gesetzt
+          werden. Achten du außerdem darauf, dass „Keep indents on
+          empty lines“ NICHT aktiviert ist.
+        </para>
+      </sect3>
+      <sect3 id="spaces">
+        <title>Leerzeichen</title>
+        <para>
+          Es gibt viele Einstellungen für den Umgang mit Leerzeichen,
+          und die Standardwerte sollten größtenteils passen. Die
+          allgemeine Regel lautet, dass einzelne Leerzeichen alle
+          Operatoren und Klammern umgeben sollten (außer bei
+          Funktionsdeklarationen/-aufrufen).
+        </para>
+      </sect3>
+      <sect3 id="wrapping-and-braces">
+        <title>Zeilenumbrüche und geschweifte Klammern</title>
+        <para>
+          Die allgemeine Regel hier lautet, dass geschweifte Klammern
+          immer in einer neuen Zeile stehen.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="css-javascript-html-twig">
+      <title>CSS, JavaScript, HTML, Twig</title>
+      <para>
+        Es sollten Tabs (keine Leerzeichen) verwendet werden. Alle
+        Tab- und Einzugsgrößen sollten auf 4 Leerzeichen gesetzt
+        werden. Achten du außerdem darauf, dass „Keep indents on
+        empty lines“ NICHT aktiviert ist.
+      </para>
+    </sect2>
+    <sect2 id="json-yaml">
+      <title>JSON &amp; YAML</title>
+      <para>
+        Json- und Yaml-Dateien verwenden 4 Leerzeichen statt Tabs,
+        daher sollte das Tab-Zeichen deaktiviert und die Einzugsgröße
+        auf 4 Leerzeichen gesetzt werden.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="inspections">
+    <title>Inspections</title>
+    <para>
+      Eine der leistungsfähigsten Funktionen einer IDE wie PhpStorm ist
+      ihre Fähigkeit, deinen Code zu prüfen und in Echtzeit Fehler und
+      Warnungen anzuzeigen. Eine IDE weiß genau, wie die Codebasis von
+      phpBB funktionieren soll und wie all ihre Klassen und Funktionen
+      miteinander interagieren. Inspections können dir sofort
+      anzeigen, wenn du beispielsweise eine Funktion falsch verwendest,
+      nicht existierende Methoden aufrufen, Argumente vergessen usw.
+    </para>
+    <para>
+      Die Standard-Inspection-Einstellungen sollten gut funktionieren.
+      Dennoch gibt es einige Anpassungen, die wünschenswert sein
+      könnten:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          Wenn PhpStorm nicht mit deinem Datenbankserver verbunden ist,
+          möchtest du eventuell die Warnungen
+          <emphasis role="strong">SQL &gt; SQL Dialect
+          Detection</emphasis> und <emphasis role="strong">SQL &gt; No
+          data sources configured</emphasis> deaktivieren.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          phpBB verwendet vollständig qualifizierte Namespaces, sodass
+          du diese Inspection-Warnung
+          <emphasis role="strong">PHP &gt; Code Style &gt; Unnecessary
+          fully qualified name</emphasis> deaktivieren kannst.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Du kannst zusätzliche JavaScript-Inspections aktivieren.
+          Unter <emphasis role="strong">JavaScript &gt; Code quality
+          tools</emphasis> kannst du JSCS, JSHint, JSlint und/oder
+          ESLint aktivieren. phpBB liefert Konfigurationsdateien für
+          JSHint und JSCS mit. Mit diesen aktivierten Inspections
+          kannst du die von phpBB bereitgestellten
+          Konfigurationsdateien anstelle der Standardeinstellungen von
+          PhpStorm verwenden. Verweisen du dazu PhpStorm unter
+          <emphasis role="strong">Language &amp; Frameworks &gt;
+          JavaScript &gt; Code Quality Tools</emphasis> auf die
+          benutzerdefinierten Konfigurationsdateien. Verweisen du
+          JSHint auf .jshintrc und JSCS auf .jscsrc.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <warning>
+      <title>Warnung</title>
+      <para>
+        JSCS ist nicht in PhpStorm enthalten. Das JSCS-Tool wird über
+        NodeJS ausgeführt. Um JSCS zu verwenden, stelle sicher,
+        dass das NodeJS-Framework auf deinem Computer heruntergeladen
+        und installiert ist. Anschließend kannst du JSCS über den
+        npm-Paketmanager installieren und die JSCS-Optionen in
+        PhpStorm so konfigurieren, dass sie das JSCS-Paket verwenden.
+        Weitere Informationen findest du in der
+        <ulink url="https://www.jetbrains.com/help/phpstorm/10.0/using-javascript-code-quality-tools.html#JSCS">PhpStorm-Dokumentation</ulink>.
+      </para>
+    </warning>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        phpBB verwendet jQuery. Die JavaScript-Inspections müssen über
+        jQuery informiert sein, um falsche Warnungen/Fehler zu
+        vermeiden. Gehen du dazu einfach zu
+        <emphasis role="strong">Languages &amp; Frameworks &gt;
+        JavaScript &gt; Libraries</emphasis> und aktiviere jQuery.
+        Falls jQuery nicht in der Liste steht, kannst du über die
+        Schaltfläche „Download“ eine Kopie von jQuery für PhpStorm
+        herunterladen.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="plugins">
+    <title>Plugins</title>
+    <para>
+      Das Hinzufügen von Plugins zu PhpStorm kann deiner IDE noch mehr
+      Funktionen, Werkzeuge, Inspektoren und Code-Qualitätsanalysen
+      bringen.
+    </para>
+    <sect2 id="editorconfig">
+      <title>EditorConfig</title>
+      <para>
+        phpBB verwendet ein EditorConfig-Profil. Installiere das
+        EditorConfig-Plugin, um davon zu profitieren. Dieses praktische
+        Plugin stellt automatisch sicher, dass deine PHP-, CSS-, JS-,
+        HTML-, YML- und MD-Dateien immer korrekt Tabs oder Leerzeichen
+        verwenden, wie es der jeweilige Dateityp erfordert, entfernt
+        überflüssige Leerzeichen am Zeilenende und stellt sicher, dass
+        alle Dateien am Ende eine neue leere Zeile haben.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="languages-frameworks">
+    <title>Languages &amp; Frameworks</title>
+    <para>
+      PHP-Inspections hängen vom PHP-Sprachlevel ab (z. B. PHP 5.3,
+      5.4, 7.0 usw.). Du solltest das
+      <emphasis role="strong">PHP language level</emphasis> auf die
+      minimale von phpBB unterstützte Version setzen. Dies stellt
+      sicher, dass du nicht versehentlich Code schreibst, der in PHP
+      5.6 gültig, aber mit PHP 5.4 (das phpBB unterstützt)
+      inkompatibel ist. Der <emphasis role="strong">PHP
+      interpreter</emphasis> sollte auf das im Dropdown-Menü verfügbare
+      PHP-Binary gesetzt werden. Wird kein Interpreter gefunden, musst du ihn auf deine ausführbare PHP-Datei auf deinem System verweisen
+      (z. B.: /usr/bin/php).
+    </para>
+  </sect1>
+  <sect1 id="phpunit-testing">
+    <title>PHPUnit-Tests</title>
+    <para>
+      Es ist zwar möglich, PHPUnit-Tests in PhpStorm direkt über das
+      Terminal-Fenster auszuführen, aber PHPUnit-Tests sind auch als
+      Run/Debug-Aktion in PhpStorm integriert. Der Vorteil davon ist,
+      dass Tests leichter pausiert oder abgebrochen werden können.
+      Fehlgeschlagene Tests können erneut ausgeführt werden, ohne die
+      gesamte Testsuite ausführen zu müssen. Am besten ist, dass die
+      Berichterstattung über fehlgeschlagene Tests Hyperlinks zu den
+      fehlerhaften Codestellen enthält, wodurch es viel leichter wird,
+      zu den problematischen Tests und dem phpBB-Code zu springen und
+      sie zu debuggen.
+    </para>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Dies setzt voraus, dass du PHPUnit-Tests bereits konfiguriert
+        haben und diese über die Kommandozeile funktionieren. Lies
+        die Dokumentation unter
+        <literal>../testing/index</literal> für weitere Informationen.
+      </para>
+    </note>
+    <para>
+      Um PHPUnit innerhalb von PhpStorm einzurichten, geh zu:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <emphasis role="strong">Run &gt; Edit
+          Configurations</emphasis>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Klicke auf <emphasis role="strong">+</emphasis>, um eine
+          neue PHPUnit-Konfiguration zu erstellen, und gib ihr
+          einen Namen, z. B. 'phpBB tests'.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Setze <emphasis role="strong">Test Runner</emphasis> auf
+          <emphasis role="strong">Defined in configuration
+          file</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Aktiviere <emphasis role="strong">Use alternative
+          configuration file</emphasis> und verweise auf die Datei
+          <emphasis role="strong">phpunit.xml.dist</emphasis> im
+          Wurzelverzeichnis des phpBB-Projekts.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Setze <emphasis role="strong">Command Line &gt; Custom
+          working directory</emphasis> auf das Wurzelverzeichnis des
+          phpBB-Projekts.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Jetzt kannst du <emphasis role="strong">Run &gt; phpBB
+          tests</emphasis> wählen, und die Unit-Tests sollten innerhalb
+          von PhpStorm laufen.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <title>Hinweis</title>
+      <para>
+        Wenn du Erweiterungen für phpBB schreibst, kannst du auch für
+        jede Erweiterung PHPUnit-Testkonfigurationen einrichten. Ändern
+        du dazu einfach jede Konfiguration so, dass sie die
+        Konfigurationsdatei der Erweiterung anstelle der von phpBB
+        verwendet.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="phpstorm-setting-exports-for-phpbb">
+    <title>PhpStorm-Einstellungs-Exporte für phpBB</title>
+    <para>
+      Im Folgenden findest du den Code-Stil, den wir für dein
+      phpBB-Projekt in PhpStorm empfehlen. Kopiere diesen
+      Codeblock und speichern du ihn als
+      <literal>phpbb.xml</literal>. Gehen du dann in PhpStorm zu
+      <emphasis role="strong">Settings &gt; Editor &gt; Code
+      Style</emphasis>. Klicke auf das Zahnrad-Symbol neben
+      <emphasis role="strong">Scheme</emphasis> und wähle
+      <emphasis role="strong">Import Scheme...</emphasis>, um die
+      Datei <literal>phpbb.xml</literal> zu importieren.
+    </para>
+    <sect2 id="phpbb-code-style-scheme">
+      <title>phpBB Code Style Scheme</title>
+      <programlisting language="xml">
+&lt;code_scheme name=&quot;phpBB&quot; version=&quot;173&quot;&gt;
+  &lt;option name=&quot;OTHER_INDENT_OPTIONS&quot;&gt;
+    &lt;value&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/value&gt;
+  &lt;/option&gt;
+  &lt;CssCodeStyleSettings&gt;
+    &lt;option name=&quot;HEX_COLOR_LOWER_CASE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;HEX_COLOR_LONG_FORMAT&quot; value=&quot;true&quot; /&gt;
+  &lt;/CssCodeStyleSettings&gt;
+  &lt;JSCodeStyleSettings version=&quot;0&quot;&gt;
+    &lt;option name=&quot;SPACE_BEFORE_FUNCTION_LEFT_PARENTH&quot; value=&quot;false&quot; /&gt;
+  &lt;/JSCodeStyleSettings&gt;
+  &lt;PHPCodeStyleSettings&gt;
+    &lt;option name=&quot;ALIGN_KEY_VALUE_PAIRS&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;ALIGN_PHPDOC_PARAM_NAMES&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;ALIGN_PHPDOC_COMMENTS&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;COMMA_AFTER_LAST_ARRAY_ELEMENT&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;PHPDOC_BLANK_LINE_BEFORE_TAGS&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;PHPDOC_WRAP_LONG_LINES&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;LOWER_CASE_BOOLEAN_CONST&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;LOWER_CASE_NULL_CONST&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;PHPDOC_USE_FQCN&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;MULTILINE_CHAINED_CALLS_SEMICOLON_ON_NEW_LINE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;NAMESPACE_BRACE_STYLE&quot; value=&quot;2&quot; /&gt;
+  &lt;/PHPCodeStyleSettings&gt;
+  &lt;XML&gt;
+    &lt;option name=&quot;XML_LEGACY_SETTINGS_IMPORTED&quot; value=&quot;true&quot; /&gt;
+  &lt;/XML&gt;
+  &lt;codeStyleSettings language=&quot;CSS&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;HTML&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;JavaScript&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;PHP&quot;&gt;
+    &lt;option name=&quot;BLANK_LINES_AFTER_PACKAGE&quot; value=&quot;1&quot; /&gt;
+    &lt;option name=&quot;BRACE_STYLE&quot; value=&quot;2&quot; /&gt;
+    &lt;option name=&quot;ELSE_ON_NEW_LINE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;CATCH_ON_NEW_LINE&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;INDENT_BREAK_FROM_CASE&quot; value=&quot;false&quot; /&gt;
+    &lt;option name=&quot;ALIGN_MULTILINE_PARAMETERS&quot; value=&quot;false&quot; /&gt;
+    &lt;option name=&quot;ALIGN_MULTILINE_FOR&quot; value=&quot;false&quot; /&gt;
+    &lt;option name=&quot;ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;SPACE_AFTER_TYPE_CAST&quot; value=&quot;true&quot; /&gt;
+    &lt;option name=&quot;METHOD_CALL_CHAIN_WRAP&quot; value=&quot;5&quot; /&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;Twig&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;USE_TAB_CHARACTER&quot; value=&quot;true&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+  &lt;codeStyleSettings language=&quot;yaml&quot;&gt;
+    &lt;indentOptions&gt;
+      &lt;option name=&quot;INDENT_SIZE&quot; value=&quot;4&quot; /&gt;
+    &lt;/indentOptions&gt;
+  &lt;/codeStyleSettings&gt;
+&lt;/code_scheme&gt;
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Events and Listeners</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Einführung</title>
+    <para>
+      phpBB 3.1 hat in der gesamten Codebasis und den Template-Dateien
+      ein System von Events eingeführt, mit denen Extensions über
+      Listener Funktionen hinzufügen, Code einschleusen und
+      bestehende Funktionalität und Verhaltensweisen verändern
+      können.
+    </para>
+    <para>
+      Dieses Tutorial erklärt, wie Events und Listener verwendet
+      werden:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="template-events-listeners">Template-Events
+            &amp; -Listener</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="php-core-events-listeners">PHP-Core-Events
+            &amp; -Listener</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="template-events-label">
+    <title>Template-Events &amp; -Listener</title>
+    <para>
+      Template-Events ermöglichen es Extensions, Code in
+      Template-Dateien einzuschleusen. Solche Events finden sich an
+      vielen Stellen in der Template-Struktur der phpBB-Styles und
+      bieten damit zahlreiche nützliche Einschleusungspunkte. Ein
+      typisches Template-Event sieht so aus:
+    </para>
+    <programlisting>
+{% EVENT event_name_and_position %}
+</programlisting>
+    <para>
+      Die vollständige Liste der
+      <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html#template-events">Template-Events</ulink>
+      findest du hier.
+    </para>
+    <sect2 id="listening-for-an-event">
+      <title>Auf ein Event lauschen</title>
+      <para>
+        Um ein Template-Event zu <emphasis>abonnieren</emphasis>,
+        müssen wir einen <emphasis>Listener</emphasis> erstellen –
+        eine Template-Datei mit exakt demselben Namen wie der
+        Bezeichner des Template-Events, das wir verwenden möchten –
+        und diese im Unterverzeichnis <literal>event/</literal> des
+        Template-Ordners eines Stils ablegen.
+      </para>
+      <para>
+        Als Beispiel verwenden wir das Event
+        <literal>overall_header_navigation_prepend</literal>, um vor
+        den bestehenden Links in der Navigationsleiste des Boards
+        einen neuen Link hinzuzufügen. Der Listener für dieses Event
+        lautet:
+      </para>
+      <programlisting>
+acme/demo/styles/prosilver/template/event/overall_header_navigation_prepend.html
+</programlisting>
+      <tip>
+        <title>Tipp</title>
+        <para>
+          Wenn ein Template-Listener von allen Stilen verwendet werden
+          soll, sollte er im Stilverzeichnis <literal>all/</literal>
+          abgelegt werden, z. B.
+          <literal>vendor/extname/styles/all/template/event/</literal>.
+          Dies hilft, Code-Duplizierung zu vermeiden, und erleichtert
+          die Verwaltung der Stildateien.
+        </para>
+        <para>
+          Die Verzeichnisse prosilver und subsilver2 sollten für
+          Template-Dateien verwendet werden, die für den jeweiligen
+          Stil individuell angepasst werden müssen. Benötigt ein
+          Drittanbieter-Stil zusätzliche Anpassungen, um die
+          Kompatibilität zu wahren, sollte entsprechend ein eigenes
+          Verzeichnis für diesen Stil mit den betreffenden
+          Template-Dateien angelegt werden.
+        </para>
+        <para>
+          Um ACP-Template-Listener hinzuzufügen, lege diese
+          Dateien in <literal>vendor/extname/adm/style/event/</literal>
+          ab.
+        </para>
+      </tip>
+      <para>
+        Innerhalb des Template-Listeners erstellen wir nun einen Link
+        für die Navigationsleiste. Dieser besteht aus einem einfachen
+        Listenelement mit einem Link und einer Beschreibung:
+      </para>
+      <programlisting language="html">
+&lt;li class=&quot;small-icon icon-faq no-bulletin&quot;&gt;
+    &lt;a href=&quot;{{ U_DEMO_PAGE }}&quot;&gt;
+        {{ lang('DEMO_PAGE') }}
+    &lt;/a&gt;
+&lt;/li&gt;
+</programlisting>
+      <para>
+        Sobald der Template-Listener erstellt wurde, solltest du den
+        neuen Link in der Navigationsleiste des Boards sehen kannst,
+        mit dem Icon des FAQ-Links und dem Text
+        <literal>DEMO_PAGE</literal>. Den Link-Text korrigieren wir
+        im nächsten Abschnitt.
+      </para>
+      <tip>
+        <title>Tipp</title>
+        <para>
+          Wenn der Link nicht erscheint, musst du eventuell den
+          Board-Cache über die Hauptseite der ACP leeren. Du kannst
+          außerdem <literal>DEBUG_MODE</literal> in deiner Datei
+          <literal>config.php</literal> aktivieren, wodurch die
+          Template-Engine bei jedem Rendern einer Seite gezwungen
+          wird, stets nach Template-Listenern zu suchen.
+        </para>
+      </tip>
+      <para>
+        Es ist wichtig zu verstehen, dass es beim Kompilieren der
+        Templates durch phpBB derzeit kein System gibt, um die
+        Priorität festzulegen, in der Template-Listener
+        verschiedener Extensions, die dasselbe Event abonniert haben,
+        kompiliert werden. In seltenen Fällen können manche
+        Extensions dadurch einen Konflikt verursachen; in diesem Fall
+        wird empfohlen, dass die Autoren der Extensions gemeinsam an
+        einer Lösung für ihre widersprüchlichen Template-Listener
+        arbeiten.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="php-core-events-listeners">
+    <title>PHP-Core-Events &amp; -Listener</title>
+    <para>
+      Events ermöglichen es Extensions, Code an vielen Stellen
+      innerhalb des phpBB-Kerncodes auszuführen, ohne diesen Code zu
+      verändern. Auf diese Weise können Extensions einfach
+      Funktionen hinzufügen, Funktionalität entfernen oder das
+      Verhalten anpassen, während Kompatibilität und einfache
+      Aktualisierungsverfahren erhalten bleiben.
+    </para>
+    <sect2 id="terminology">
+      <title>Terminologie</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            Events
+          </term>
+          <listitem>
+            <para>
+              Events werden an verschiedenen Stellen im
+              phpBB-Kerncode ausgelöst. Listener in Extensions
+              abonnieren diese Events. Du kannst Code ausführen,
+              sobald das jeweilige Event eingetreten ist. Ein
+              alternativer Begriff für Events ist
+              „Hook-Stellen“.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Listener
+          </term>
+          <listitem>
+            <para>
+              Listener werden durch Events ausgelöst. Es handelt
+              sich um Methoden, die eingehende Daten verarbeiten und
+              Variablen im Gültigkeitsbereich des Events verändern
+              können. So können sie das Verhalten von phpBB ändern,
+              neue Funktionalität hinzufügen oder, im Kontext von
+              Templates verwendet, die Ausgabe verändern. Mehrere
+              Listener bilden zusammen einen Subscriber. Ein
+              alternativer Begriff für Listener ist „Hooks“.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      <para>
+        Die vollständige Liste der unterstützten
+        <ulink url="https://area51.phpbb.com/docs/dev/3.3.x/extensions/events_list.html#php-events">PHP-Events</ulink>
+        findest du hier.
+      </para>
+    </sect2>
+    <sect2 id="the-event-listener">
+      <title>Der Event-Listener</title>
+      <para>
+        Im vorherigen Abschnitt haben wir einen Template-Listener
+        erstellt, der einen Link für die Acme-Demo-Extension zur
+        Navigationsleiste von phpBB hinzufügt. Wir werden nun
+        PHP-Events verwenden, um eine Sprachdatei zu laden, die den
+        Sprachschlüssel <literal>DEMO_PAGE</literal> enthält, damit
+        unser Navigationsleisten-Link mit dem korrekten Text
+        angezeigt wird.
+      </para>
+      <para>
+        Dazu müssen wir eine PHP-Event-Listener-Klasse (auch
+        Subscriber-Klasse genannt) erstellen. Diese Klasse enthält
+        eine Reihe von Listener-Methoden, von denen jede einzelne
+        PHP-Events im Code von phpBB
+        <emphasis>abonnieren</emphasis> kann. Die Listener-Klasse
+        muss im Unterverzeichnis <literal>event/</literal> des
+        Extension-Verzeichnisses erstellt werden, sonst funktioniert
+        sie nicht. Außerdem muss sie folgende Anforderungen
+        erfüllen:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Den Namensraum-Konventionen für Extension-Klassen
+            folgen: <literal>vendor\extname\event\subscribername.php</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Das Symfony-Interface
+            <literal>Symfony\Component\EventDispatcher\EventSubscriberInterface</literal>
+            implementieren.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Die statische Methode
+            <literal>getSubscribedEvents()</literal> verwenden, um
+            Methoden des Listeners für bestimmte Events zu
+            abonnieren, wobei die Schlüssel die Event-Namen und die
+            Werte die Namen der Listener-Funktionen enthalten.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        In der Acme-Demo-Extension möchten wir unsere Sprachdatei
+        überall laden. Deshalb abonnieren wir eine
+        Listener-Funktion für das Event
+        <literal>core.user_setup</literal> von phpBB:
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\event;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+    /**
+     * Assign functions defined in this class to event listeners in the core
+     *
+     * @return array
+     */
+    static public function getSubscribedEvents()
+    {
+        return [
+            'core.user_setup' =&gt; 'load_language_on_setup',
+        ];
+    }
+
+    /**
+     * Load the Acme Demo language file
+     *     acme/demo/language/en/demo.php
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_language_on_setup($event)
+    {
+        $lang_set_ext = $event['lang_set_ext'];
+        $lang_set_ext[] = [
+            'ext_name' =&gt; 'acme/demo',
+            'lang_set' =&gt; 'demo',
+        ];
+        $event['lang_set_ext'] = $lang_set_ext;
+    }
+}
+</programlisting>
+      <para>
+        Was genau macht die obige Klasse
+        <literal>main_listener.php</literal> also?
+      </para>
+      <para>
+        Die Methode <literal>getSubscribedEvents()</literal>
+        abonniert unsere Listener-Funktion
+        <literal>load_language_on_setup()</literal> für das Event
+        namens <literal>core.user_setup</literal>. Das bedeutet: Wenn
+        dieses Event eintritt, wird unsere Funktion ausgeführt.
+      </para>
+      <tip>
+        <title>Tipp</title>
+        <para>
+          Du kannst einem einzelnen Event mehrere Listener-Funktionen
+          über ein Array zuweisen:
+        </para>
+        <programlisting>
+'core.user_setup' =&gt; [['foo_method'], ['bar_method']]
+</programlisting>
+      </tip>
+      <para>
+        Die Listener-Methode <literal>load_language_on_setup()</literal>
+        fügt lediglich unsere Sprachdatei zum Sprachdaten-Array von
+        phpBB hinzu. Allgemein gesagt ist ein Listener einfach eine
+        öffentliche Funktion in der Subscriber-Klasse, auf die im von
+        <literal>getSubscribedEvents()</literal> zurückgegebenen
+        Array verwiesen wird. Du nimmt ein Argument entgegen,
+        <literal>$event</literal>. Über diesen Parameter kannst du
+        auf die Variablen zugreifen, die dem Event vom Kerncode
+        übergeben werden, und diese verändern. In diesem Fall
+        verändern wir die Variable
+        <literal>lang_set_ext</literal>, indem wir die Sprachdatei
+        von Acme Demo hinzufügen.
+      </para>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Beachte, wie die Event-Variable
+          <literal>lang_set_ext</literal> zunächst kopiert wird,
+          indem sie einer lokalen Variable zugewiesen wird, dann
+          verändert und anschließend zurückkopiert wird. Diese
+          Abkürzung funktioniert nicht:
+          <literal>$event['foo']['bar'] = $baz;</literal> Das liegt
+          daran, dass die Event-Variablen überladen (overloaded)
+          sind, was eine Einschränkung von PHP ist.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="registering-the-listener">
+      <title>Den Listener registrieren</title>
+      <para>
+        Damit phpBB unsere Event-Listener-Klasse automatisch lädt
+        und ausführt, müssen wir dafür eine Service-Definition
+        erstellen. Dies geschieht, indem in der Extension eine Datei
+        <literal>config/services.yml</literal> erstellt wird:
+      </para>
+      <programlisting language="yaml">
+services:
+    acme.demo.listener:
+        class: acme\demo\event\main_listener
+        tags:
+            - { name: event.listener }
+</programlisting>
+      <warning>
+        <title>Warnung</title>
+        <para>
+          YAML-Dateien reagieren empfindlich auf Einrückung. Sie
+          erfordern eine Einrückungsgröße von 4 Leerzeichen pro
+          Ebene, <emphasis role="strong">verwende keine
+          Tabulatoren</emphasis>.
+        </para>
+      </warning>
+      <para>
+        Die erste Zeile teilt phpBB mit, dass eine Liste von Services
+        registriert wird. In der nächsten Zeile geben wir den Namen
+        des Service an, der in diesem Fall für unseren
+        Event-Listener steht.
+      </para>
+      <important>
+        <title>Wichtig</title>
+        <para>
+          Service-Namen müssen mit deinem Vendor- und
+          Extension-Namen als Präfix versehen werden.
+        </para>
+      </important>
+      <para>
+        Das Attribut <literal>class</literal> muss den Namensraum
+        und den Klassennamen des zu registrierenden Service
+        enthalten. Der Namensraum hängt vom Speicherort der Datei
+        innerhalb des Verzeichnisses <literal>ext/</literal> ab. Die
+        Datei <literal>ext/acme/demo/event/main_listener.php</literal>
+        hat somit den Namensraum <literal>acme\demo\event</literal>
+        und den Klassennamen <literal>main_listener</literal>. Der
+        vollständige Klassenname lautet daher
+        <literal>acme\demo\event\main_listener</literal>, und genau
+        diesen müssen wir hier angeben.
+      </para>
+      <para>
+        Das Attribut <literal>tags</literal> teilt phpBB mit, dass es
+        sich bei dem Service um einen Event-Listener handelt.
+      </para>
+      <para>
+        Sobald die YAML-Datei mit den Services erstellt (oder
+        geändert) wurde, muss der Cache von phpBB geleert werden.
+        Nachdem der Cache in der ACP geleert wurde, sollte die
+        Beschreibung des Links in der Navigationsleiste nun
+        <literal>Demo</literal> statt <literal>DEMO_PAGE</literal>
+        anzeigen.
+      </para>
+      <note>
+        <title>Hinweis</title>
+        <para>
+          Die PHP- und Template-Dateien des phpBB-Kerns wurden mit
+          Dutzenden von Event-Stellen versehen. Sollte es jedoch
+          keine Events geben, an denen deine Extension eines
+          benötigt, freut sich das phpBB-Entwicklungsteam über
+          Event-Anfragen im Forum
+          <ulink url="https://area51.phpbb.com/phpBB/viewforum.php?f=111">area51.com
+          Event Requests</ulink>.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="prioritising-event-listeners-optional">
+      <title>Event-Listener priorisieren (optional)</title>
+      <para>
+        Manchmal geraten verschiedene Extensions in Konflikt, wenn
+        sie um die Nutzung derselben PHP-Core-Events konkurrieren.
+        Um solche Probleme zu lösen, möchte der Entwickler einer
+        Extension diese unter Umständen gegenüber anderen
+        priorisieren, sodass seine Extension vor anderen Extensions
+        ausgelöst wird.
+      </para>
+      <para>
+        In solchen Fällen bietet die Methode
+        <literal>getSubscribedEvents()</literal> ein Argument, mit
+        dem eine Priorität für Listener-Methoden festgelegt werden
+        kann. Zum Beispiel:
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup' =&gt; ['foo_method', $priority]
+    ];
+}
+</programlisting>
+      <para>
+        In diesem Beispiel ist <literal>$priority</literal> eine
+        Ganzzahl, deren Standardwert 0 ist. Je höher dieser Wert
+        gesetzt wird, desto größer ist die Bedeutung, und der
+        entsprechende Listener wird dementsprechend früher
+        ausgelöst als andere, die dasselbe Event abonniert haben.
+      </para>
+      <para>
+        Wir haben nun Events und Listener verwendet, um phpBB
+        anzupassen und einen schönen Link in die Navigationsleiste
+        einzufügen. Der Link funktioniert jedoch noch nicht.
+        Fahren du mit dem nächsten Abschnitt fort, um zu lernen,
+        wie du mit Controllern und Routing dafür sorgen, dass unser
+        Navigationsleisten-Link eine eigene, für Benutzer sichtbare
+        Seite öffnet.
+      </para>
+    </sect2>
+  </sect1>
+</article>
