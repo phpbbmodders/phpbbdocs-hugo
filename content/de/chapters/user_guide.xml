@@ -334,14 +334,14 @@
 		<section id="posting_smilies">
 			<title>Smileys</title>
 			<para>Smileys, oder Emoticons, sind kleine Bilder, die in deinen Beitrag eingefügt werden können, um Ausdruck zu betonen. Um Smileys zu verwenden, werden bestimmte Zeichen zusammengefügt, um die gewünschte Ausgabe zu erhalten. Zum Beispiel fügt die Eingabe von :) <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/smile.gif"/></imageobject></inlinemediaobject> ein, ;) fügt <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/wink.gif"/></imageobject></inlinemediaobject> ein, usw. Andere Smileys erfordern das Format :texthier:, um angezeigt zu werden. Zum Beispiel fügt :roll: einen Smiley mit rollenden Augen ein: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/rolleyes.gif"/></imageobject></inlinemediaobject>, und :cry: fügt einen weinenden Smiley ein: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/cry.gif"/></imageobject></inlinemediaobject>.</para>
-			<para>In vielen Fällen kannst du auch auswählen, welchen Smiley du einfügen möchtest, indem du auf sein Bild auf der rechten Seite des Textfelds für den Beitragsinhalt klickst. Beim Klicken erscheinen die Zeichen des Smileys an der aktuellen Position des Cursors im Textfeld.</para>
+			<para>In vielen Fällen kannst du auch auswählen, welchen Smiley du einfügen möchtest, indem du auf sein Bild auf der rechten Seite des Textfelds für den Beitragsinhalt klicken. Beim Klicken erscheinen die Zeichen des Smileys an der aktuellen Position des Cursors im Textfeld.</para>
 			<para>Wenn du diese Zeichen in deinem Beitrag verwenden möchtest, ohne dass sie als Smileys erscheinen, lies bitte <link linkend="posting_options">Beitragsoptionen</link>.</para>
 		</section>
 
 		<section id="posting_bbcodes">
 			<title>BBCodes</title>
 			<para>BBCode ist eine Art der Formatierung, die auf deinen Beitragsinhalt angewendet werden kann, ähnlich wie HTML. Anders als HTML verwendet BBCode jedoch eckige Klammern [ und ] anstelle spitzer Klammern &lt; und &gt;. Je nach den vom Forenadministrator festgelegten Berechtigungen kannst du möglicherweise nur bestimmte BBCodes oder überhaupt keine verwenden.</para>
-			<para>Ausführliche Anweisungen zur Verwendung von BBCode findest du, indem du auf den Link <guilabel>BBCode</guilabel> rechts neben dem Textfeld für den Beitragsinhalt klickst. Bitte beachte, dass der Administrator neue und benutzerdefinierte BBCodes hinzufügen kann, sodass dir möglicherweise weitere zur Verfügung stehen, die nicht in dieser Liste enthalten sind.</para>
+			<para>Ausführliche Anweisungen zur Verwendung von BBCode finden du, indem du auf den Link <guilabel>BBCode</guilabel> rechts neben dem Textfeld für den Beitragsinhalt klicken. Bitte beachte, dass der Administrator neue und benutzerdefinierte BBCodes hinzufügen kann, sodass dir möglicherweise weitere zur Verfügung stehen, die nicht in dieser Liste enthalten sind.</para>
 			<para>Grundlegende BBCodes und ihre Ausgaben sind wie folgt:</para>
 			<para>[b]Fettgedruckter Text[/b]: <emphasis role="strong">Fettgedruckter Text</emphasis></para>
 			<para>[i]Kursiver Text[/i]: <emphasis>Kursiver Text</emphasis></para>
@@ -543,7 +543,7 @@
 					<varlistentry>
 						<term>Nachricht von einem Freund</term>
 						<listitem>
-							<para>Wenn sich der Absender einer Nachricht auf deiner Freundesliste befindet (weitere Informationen findest du im Abschnitt <link linkend="ucp_friends_foes">Freunde &amp; Feinde</link>), wird die Nachricht mit dieser Farbe hervorgehoben.</para>
+							<para>Wenn sich der Absender einer Nachricht auf deiner Freundesliste befindet (weitere Informationen finden du im Abschnitt <link linkend="ucp_friends_foes">Freunde &amp; Feinde</link>), wird die Nachricht mit dieser Farbe hervorgehoben.</para>
 						</listitem>
 					</varlistentry>
 
