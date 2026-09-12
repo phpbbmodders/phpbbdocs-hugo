@@ -1,8 +1,9 @@
 # Next translation priority
 
 Ranks the phpBB language packs not yet done in this project (English,
-Danish, French, and German — formal register only — are already complete;
-see [phpbb-hugo-languages.md](../phpbb-hugo-languages.md)) from highest to
+Danish, French, and German — both formal and casual registers — are
+already complete; see
+[phpbb-hugo-languages.md](../phpbb-hugo-languages.md)) from highest to
 lowest priority for the next translation. Grouped by language rather than
 by raw phpBB code, so an honorific-split pack (e.g. German casual/formal)
 counts as one entry, not two.
@@ -48,13 +49,13 @@ complexity factor.
 
 | Language | Complexity | Notes |
 |---|---|---|
-| Spanish (Formal) | Honorific split (Tú/Usted) | Pick one register |
+| Spanish (Usted, Formal) | Honorific split (Tú/Usted) | Translate this register first; once done, Spanish (Tú) is a low-cost grammatical-register conversion of it, same pattern as German (Du) from German (Sie) — not a fresh translation |
 | Italian | None | Lowest-friction large-community option |
 | Russian | Cyrillic script | Not RTL, no layout risk expected |
 | Portuguese (Formal) | Minor: preAO spelling variant | Distinct from Brazilian Portuguese below |
 | Brazilian Portuguese | None | Large, distinct market from European Portuguese |
 | Polish | None | |
-| Dutch | Honorific split (informal/formal) | Pick one register |
+| Dutch (Formal) | Honorific split (informal/formal) | Translate this register first; once done, Dutch (informal) is a low-cost grammatical-register conversion of it, same pattern as German (Du) from German (Sie) — not a fresh translation |
 
 ## Tier 2 — solid reach, low complexity
 
@@ -90,10 +91,11 @@ parent language exists.
   American English — after nothing else is blocking, but English (British)
   already covers the language; lowest-value duplicate
 - **Second (informal) register of an already-done honorific-split
-  language**: German (Du) — deferred; the formal register (Sie) already
-  covers the core need, so the informal variant is a nice-to-have refinement
-  rather than new coverage. The same deferral pattern will apply to Spanish
-  (Tú) and Dutch (informal) once their own formal/casual variant is done.
+  language, not yet converted**: none currently — German (Du) was
+  completed via the low-cost grammatical-register conversion described
+  in Tier 1, rather than sitting deferred here. Once Spanish (Formal)
+  or Dutch (Formal) is done, the same conversion is a good next step
+  rather than a fresh translation; see the note next to each in Tier 1.
 - **Compounding complexity**: Croatian (honorific split), Serbian (dual
   script, Cyrillic/Latin, same phpBB code — needs the `sr-Latn-RS` handling
   noted in the language reference doc)
