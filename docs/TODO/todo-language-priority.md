@@ -27,9 +27,14 @@ translation-and-audit process, start from
 3. **Added technical complexity**, which pushes a language down a tier even
    with strong reach:
    - An **honorific split** (German, Spanish, Dutch, Croatian) means the
-     phpBB pack itself ships as two variants — same double-effort tradeoff
-     discussed for French, where we picked one register rather than
-     translating twice. Still worth doing, just costs more per language.
+     phpBB pack itself ships as two separate official variants, with real
+     UI strings already translated for both registers — pick one now,
+     with the other a low-cost grammatical conversion later (as done for
+     German). This is a different situation from French, which only has
+     one official phpBB pack (`fr`) — its "vous" register was this
+     project's own translation-style choice, not a pick between two
+     phpBB-provided packs, since phpBB never shipped a French "tu" variant
+     to choose against. Still worth doing, just costs more per language.
    - An **RTL script** (Arabic, Hebrew, Persian, Urdu) is a real unknown:
      this project's CSS/templates have never been exercised in RTL, so the
      first RTL language is partly a layout-verification project, not just a
