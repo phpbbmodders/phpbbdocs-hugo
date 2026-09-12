@@ -5,9 +5,9 @@ This audit cross-references UI terms across all seven end-user chapters
 `quick_start_guide.xml`, `upgrade_guide.xml`, `server_guide.xml`,
 `glossary.xml`) against phpBB's real Danish language pack
 (`scootergrisen/phpbb_da`, `language/da/`). `dev-docs-docbook/da/`
-(55 files) has not yet been checked for the same
-translation-completeness or terminology issues described below — that
-remains an open item.
+(55 files) has also been checked for the same
+translation-completeness issue — see "Dev-docs" below; it is in good
+shape and needed no fixes.
 
 ## Translation-completeness gap found and fixed
 
@@ -119,11 +119,25 @@ for the full breakdown and a place to record the decision.
 
 ## Dev-docs
 
-`dev-docs-docbook/da/` (55 files) has not yet been checked for either
-translation completeness (the character-density check that caught the
-two untranslated end-user chapters) or terminology matching. This is
-an open item — do it the same way the end-user chapters were checked
-here before assuming `dev-docs-docbook/da/` is in good shape.
+`dev-docs-docbook/da/` (55 files) has been checked using the same
+character-density method that caught the two untranslated end-user
+chapters. Three files (`index.dbk`, `extensions/index.dbk`,
+`files/index.dbk`) initially showed zero Danish-specific characters,
+but each turned out to be a genuine, correct translation that simply
+happens to be short and use words without æ/ø/å (e.g. "Filupload",
+"Indhold", "Velkommen til phpBB's udviklingsvejledning...") — confirmed
+by diffing against the English source line by line, not assumed. No
+actual translation gap exists.
+
+None of the 55 files use `<guilabel>`/`<guimenuitem>` tags (same as
+the German and French dev-docs), so there is no terminology-matching
+work to do here — this was purely a translation-completeness check.
+All 55 files validate as well-formed XML. A spot check of a
+lower-density file (`extensions/tutorial_parsing_text.dbk`, 2.74%,
+mostly diluted by code blocks and identifiers) confirmed genuine,
+fluent Danish translation throughout, including the correct "smileys"
+spelling already in use there (no drift found in dev-docs, unlike the
+end-user chapters).
 
 ## How to continue this audit
 
