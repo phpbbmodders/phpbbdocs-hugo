@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="upgrade_guide">
 	<?dbhtml dir="upgradeguide" filename="index.html" ?>
-	<title>Upgrade Guide</title>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2009</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
+	<title>Opgraderingsvejledning</title>
+	<abstract>
+		<para>Vil du opgradere dit phpBB2-forum til version 3.3? Dette kapitel fortæller og viser dig, hvordan det gøres.</para>
+	</abstract>
 	<section id="upgrade2">
 		<sectioninfo>
 			<authorgroup>
@@ -10,13 +20,14 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Upgrading from 2.0 to 3.3</title>
-		<para>In order to allow administrators of phpBB2 boards to use phpBB3 and all of its features. There is a convertor packed with the default installation. The conversion framework is flexible and allows you to convert other bulletin board systems as well. Read more if you need help with converting your board to phpBB3</para>
+		<title>Opgradering fra 2.0 til 3.3</title>
+		<para>For at gøre det muligt for administratorer af phpBB2-boards at bruge phpBB3 og alle dets funktioner, følger der en konverter med standardinstallationen. Konverteringsrammen er fleksibel og gør det muligt også at konvertere andre forumsystemer. Læs videre, hvis du har brug for hjælp til at konvertere dit board til phpBB3</para>
 
-		<para>The process is in the form of a PHP file, similar to the update file found in phpBB 2.0.x. The file will take you through wizard-like screens until your phpBB is running 3.3.x. Basic instructions and troubleshooting for doing this conversion are <ulink url="https://www.phpbb.com/community/docs/INSTALL.html#convert">here</ulink>.</para>
+		<para>Processen foregår via en PHP-fil, ligesom opdateringsfilen fra phpBB 2.0.x. Filen fører dig gennem guide-lignende skærmbilleder, indtil dit phpBB kører på 3.3.x. Grundlæggende vejledning og fejlfinding til denne konvertering findes <ulink url="https://www.phpbb.com/community/docs/INSTALL.html#convert">her</ulink>.</para>
 
-		<para>Warning: Be sure to backup both the database and the files before attempting to upgrade.</para>
+		<para>Advarsel: Sørg for at tage backup af både databasen og filerne, før du forsøger at opgradere.</para>
 	</section>
+
 	<section id="upgrade3">
 		<sectioninfo>
 			<authorgroup>
@@ -25,68 +36,69 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Upgrading from 3.0 to 3.3</title>
+		<title>Opgradering fra 3.0 til 3.3</title>
 		<warning>
-			<para>Upgrading to phpBB 3.3 will render previously installed MODifications and styles unusable.  If you have a custom logo, it will need to be redone after the upgrade.  See <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Knowledge Base: How to Change your Board Logo</ulink>.</para>
+			<para>Opgradering til phpBB 3.3 vil gøre tidligere installerede MODifikationer og stilarter ubrugelige. Har du et brugerdefineret logo, skal det laves om efter opgraderingen. Se <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Videnbase: Sådan ændrer du dit boards logo</ulink>.</para>
 		</warning>
 
-		<para>phpBB 3.3 is not compatible with 3.0 and most of the previous files will need to be removed prior to upgrading.</para>
-		<para>To upgrade, perform the following steps:</para>
+		<para>phpBB 3.3 er ikke kompatibel med 3.0, og de fleste af de tidligere filer skal fjernes før opgraderingen.</para>
+		<para>For at opgradere skal du udføre følgende trin:</para>
 		<orderedlist>
-			<listitem><para>Ensure that your server meets the requirements for running phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
-			<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-			<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-			<listitem><para>Deactivate all styles except for prosilver</para></listitem>
-			<listitem><para>Remove all MOD-related changes from the database. The <ulink url="http://www.phpbb.com/support/stk/">Support Toolkit</ulink>'s Database Cleaner can be used for this.</para></listitem>
-			<listitem><para>Set British English as the only language pack</para></listitem>
-			<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/#install">Full Package</ulink> archive</para></listitem>
-			<listitem><para>Extract the contents of the archive to your computer and open the phpBB3 directory</para></listitem>
-			<listitem><para>Delete the following files from the package:</para>
+			<listitem><para>Sørg for, at din server opfylder kravene for at køre phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
+			<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+			<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+			<listitem><para>Deaktiver alle stilarter undtagen prosilver</para></listitem>
+			<listitem><para>Fjern alle MOD-relaterede ændringer fra databasen. <ulink url="http://www.phpbb.com/support/stk/">Support Toolkit</ulink>'s Database Cleaner kan bruges til dette.</para></listitem>
+			<listitem><para>Sæt britisk engelsk som det eneste sprogmodul</para></listitem>
+			<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/#install">Fuld pakke</ulink></para></listitem>
+			<listitem><para>Udpak indholdet af arkivet på din computer, og åbn phpBB3-mappen</para></listitem>
+			<listitem><para>Slet følgende filer fra pakken:</para>
 				<itemizedlist>
-					<listitem><para>The config.php file</para></listitem>
-					<listitem><para>The files/ directory</para></listitem>
-					<listitem><para>The images/ directory</para></listitem>
-					<listitem><para>The store/ directory</para></listitem>
+					<listitem><para>Filen config.php</para></listitem>
+					<listitem><para>Mappen files/</para></listitem>
+					<listitem><para>Mappen images/</para></listitem>
+					<listitem><para>Mappen store/</para></listitem>
 				</itemizedlist>
 			</listitem>
-			<listitem><para>On your website, delete all files from your board <emphasis role="bold">EXCEPT</emphasis> for:</para>
+			<listitem><para>På din hjemmeside skal du slette alle filer fra dit board <emphasis role="bold">UNDTAGEN</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>The config.php file</para></listitem>
-					<listitem><para>The files/ directory</para></listitem>
-					<listitem><para>The images/ directory</para></listitem>
-					<listitem><para>The store/ directory</para></listitem>
+					<listitem><para>Filen config.php</para></listitem>
+					<listitem><para>Mappen files/</para></listitem>
+					<listitem><para>Mappen images/</para></listitem>
+					<listitem><para>Mappen store/</para></listitem>
 				</itemizedlist>
 			</listitem>
-			<listitem><para>Upload the contents of the phpBB3 directory from your computer to your forum's directory. You may be prompted to overwrite the remaining <emphasis>files</emphasis>. If prompted to merge or overwrite <emphasis>directories</emphasis>, choose to merge them.</para>
+			<listitem><para>Upload indholdet af phpBB3-mappen fra din computer til dit forums mappe. Du bliver muligvis bedt om at overskrive de resterende <emphasis>filer</emphasis>. Bliver du bedt om at flette eller overskrive <emphasis>mapper</emphasis>, så vælg at flette dem.</para>
 			</listitem>
-			<listitem><para>Update the database:</para>
+			<listitem><para>Opdater databasen:</para>
 				<orderedlist>
 					<tip>
-						<para>For large boards, you may wish to update via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						<para>På store boards ønsker du måske at opdatere via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 					</tip>
-					<listitem><para>Using your web browser, visit install/ in your board's root. (e.g. http://www.example.com/yourforum/install)</para></listitem>
-					<listitem><para>Click the Update tab</para></listitem>
-					<listitem><para>Click the Update button</para></listitem>
-					<listitem><para>Select "Update database only" and click Submit</para></listitem>
-					<listitem><para>Wait for the progress bar to reach 100% and for a message indicating that the update has completed</para></listitem>
+					<listitem><para>Gå med din webbrowser til install/ i dit boards rodmappe. (f.eks. http://www.example.com/yourforum/install)</para></listitem>
+					<listitem><para>Klik på fanen Opdater</para></listitem>
+					<listitem><para>Klik på knappen Opdater</para></listitem>
+					<listitem><para>Vælg "Opdater kun databasen" og klik på Indsend</para></listitem>
+					<listitem><para>Vent på, at fremgangslinjen når 100%, og at en besked bekræfter, at opdateringen er gennemført</para></listitem>
 				</orderedlist>
 			</listitem>
-			<listitem><para>Delete the install/ directory</para></listitem>
+			<listitem><para>Slet mappen install/</para></listitem>
 		</orderedlist>
 		<note>
-			<para>Ensure that the root level <emphasis>.htaccess</emphasis> file is included in the upload. Some FTP clients do not show files whose names start with a period and you may need to enable the display of hidden files.</para>
+			<para>Sørg for, at .htaccess-filen på øverste niveau er inkluderet i uploaden. Nogle FTP-klienter viser ikke filer, hvis navne starter med et punktum, og du skal muligvis aktivere visning af skjulte filer.</para>
 		</note>
 		<note>
-			<para>If your board made use of language packs other than British English, you will need to download a version that is compatible with phpBB 3.3 from <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
+			<para>Har dit board brugt andre sprogmoduler end britisk engelsk, skal du downloade en version, der er kompatibel med phpBB 3.3, fra <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
 		</note>
 		<important>
-			<para>When uploading the 3.3 files to your server, do <emphasis role="bold">NOT</emphasis> overwrite your config.php.</para>
+			<para>Når du uploader 3.3-filerne til din server, må du <emphasis role="bold">IKKE</emphasis> overskrive din config.php.</para>
 		</important>
 		<important>
-			<para>When backing up your files, ensure that your FTP client is in binary mode or transfers files without extensions in binary mode.</para>
-			<para>For more information, see: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: Transferring attachment files with Filezilla</ulink></para>
+			<para>Når du tager backup af dine filer, skal du sørge for, at din FTP-klient er i binær tilstand, eller at filer uden filendelse overføres i binær tilstand.</para>
+			<para>For flere oplysninger, se: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Videnbase: Overførsel af vedhæftede filer med Filezilla</ulink></para>
 		</important>
 	</section>
+
 	<section id="upgrade31">
 		<sectioninfo>
 			<authorgroup>
@@ -95,69 +107,70 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Upgrading from 3.1 to 3.3</title>
+		<title>Opgradering fra 3.1 til 3.3</title>
 		<warning>
-			<para>Upgrading to phpBB 3.3 may cause some extensions to no longer work. All styles will need to be updated, even if they give the appearance of working.  If you have a custom logo, it will need to be redone after the upgrade.  See <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Knowledge Base: How to Change your Board Logo</ulink>.</para>
+			<para>Opgradering til phpBB 3.3 kan gøre, at nogle udvidelser holder op med at virke. Alle stilarter skal opdateres, selv hvis de ser ud til at virke. Har du et brugerdefineret logo, skal det laves om efter opgraderingen. Se <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Videnbase: Sådan ændrer du dit boards logo</ulink>.</para>
 		</warning>
 
-		<para>phpBB 3.3 is not completely backwards compatible with 3.1 and custom edits may no longer work. The easiest upgrade method is to remove all existing files prior to upgrading and re-applying custom changes after verifying their correctness.</para>
-		<para>To upgrade, perform the following steps:</para>
+		<para>phpBB 3.3 er ikke fuldt bagudkompatibel med 3.1, og brugerdefinerede rettelser virker muligvis ikke længere. Den nemmeste opgraderingsmetode er at fjerne alle eksisterende filer før opgraderingen og genanvende brugerdefinerede ændringer, efter du har kontrolleret, at de stadig er korrekte.</para>
+		<para>For at opgradere skal du udføre følgende trin:</para>
 		<orderedlist>
-			<listitem><para>Ensure that your server meets the requirements for running phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
-			<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-			<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-			<listitem><para>Deactivate all styles except for prosilver</para></listitem>
-			<listitem><para>Deactivate any extensions which are not compatible with phpBB 3.3. Check with the extension author to find out if an extension is compatible or not.</para></listitem>
-			<listitem><para>Set British English as the only language pack</para></listitem>
-			<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/#install">Full Package</ulink> archive</para></listitem>
-			<listitem><para>Extract the contents of the archive to your computer and open the phpBB3 directory</para></listitem>
-			<listitem><para>Delete the following files from the package:</para>
+			<listitem><para>Sørg for, at din server opfylder kravene for at køre phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
+			<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+			<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+			<listitem><para>Deaktiver alle stilarter undtagen prosilver</para></listitem>
+			<listitem><para>Deaktiver alle udvidelser, der ikke er kompatible med phpBB 3.3. Spørg udvidelsens forfatter, om en udvidelse er kompatibel eller ej.</para></listitem>
+			<listitem><para>Sæt britisk engelsk som det eneste sprogmodul</para></listitem>
+			<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/#install">Fuld pakke</ulink></para></listitem>
+			<listitem><para>Udpak indholdet af arkivet på din computer, og åbn phpBB3-mappen</para></listitem>
+			<listitem><para>Slet følgende filer fra pakken:</para>
 				<itemizedlist>
-					<listitem><para>The config.php file</para></listitem>
-					<listitem><para>The images/ directory</para></listitem>
-					<listitem><para>The files/ directory</para></listitem>
-					<listitem><para>The store/ directory</para></listitem>
+					<listitem><para>Filen config.php</para></listitem>
+					<listitem><para>Mappen images/</para></listitem>
+					<listitem><para>Mappen files/</para></listitem>
+					<listitem><para>Mappen store/</para></listitem>
 				</itemizedlist>
 			</listitem>
-			<listitem><para>On your website, delete all files from your board <emphasis role="bold">EXCEPT</emphasis> for:</para>
+			<listitem><para>På din hjemmeside skal du slette alle filer fra dit board <emphasis role="bold">UNDTAGEN</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>The config.php file</para></listitem>
-					<listitem><para>The ext/ directory</para></listitem>
-					<listitem><para>The images/ directory</para></listitem>
-					<listitem><para>The files/ directory</para></listitem>
-					<listitem><para>The store/ directory</para></listitem>
+					<listitem><para>Filen config.php</para></listitem>
+					<listitem><para>Mappen ext/</para></listitem>
+					<listitem><para>Mappen images/</para></listitem>
+					<listitem><para>Mappen files/</para></listitem>
+					<listitem><para>Mappen store/</para></listitem>
 				</itemizedlist>
 			</listitem>
-			<listitem><para>Upload the contents of the phpBB3 directory from your computer to your forum's directory. You may be prompted to overwrite the remaining <emphasis>files</emphasis>. If prompted to merge or overwrite <emphasis>directories</emphasis>, choose to merge them.</para>
+			<listitem><para>Upload indholdet af phpBB3-mappen fra din computer til dit forums mappe. Du bliver muligvis bedt om at overskrive de resterende <emphasis>filer</emphasis>. Bliver du bedt om at flette eller overskrive <emphasis>mapper</emphasis>, så vælg at flette dem.</para>
 			</listitem>
-			<listitem><para>Update the database:</para>
+			<listitem><para>Opdater databasen:</para>
 				<orderedlist>
 					<tip>
-						<para>For large boards, you may wish to update via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						<para>På store boards ønsker du måske at opdatere via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 					</tip>
-					<listitem><para>Using your web browser, visit install/ in your board's root. (e.g. http://www.example.com/yourforum/install)</para></listitem>
-					<listitem><para>Click the Update tab</para></listitem>
-					<listitem><para>Click the Update button</para></listitem>
-					<listitem><para>Select "Update database only" and click Submit</para></listitem>
-					<listitem><para>Wait for the progress bar to reach 100% and for a message indicating that the update has completed</para></listitem>
+					<listitem><para>Gå med din webbrowser til install/ i dit boards rodmappe. (f.eks. http://www.example.com/yourforum/install)</para></listitem>
+					<listitem><para>Klik på fanen Opdater</para></listitem>
+					<listitem><para>Klik på knappen Opdater</para></listitem>
+					<listitem><para>Vælg "Opdater kun databasen" og klik på Indsend</para></listitem>
+					<listitem><para>Vent på, at fremgangslinjen når 100%, og at en besked bekræfter, at opdateringen er gennemført</para></listitem>
 				</orderedlist>
 			</listitem>
-			<listitem><para>Delete the install/ directory</para></listitem>
+			<listitem><para>Slet mappen install/</para></listitem>
 		</orderedlist>
 		<note>
-			<para>Ensure that the root level <emphasis>.htaccess</emphasis> file is included in the upload. Some FTP clients do not show files whose names start with a period and you may need to enable the display of hidden files.</para>
+			<para>Sørg for, at .htaccess-filen på øverste niveau er inkluderet i uploaden. Nogle FTP-klienter viser ikke filer, hvis navne starter med et punktum, og du skal muligvis aktivere visning af skjulte filer.</para>
 		</note>
 		<note>
-			<para>If your board made use of language packs other than British English, you will need to download a version that is compatible with phpBB 3.3 from <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
+			<para>Har dit board brugt andre sprogmoduler end britisk engelsk, skal du downloade en version, der er kompatibel med phpBB 3.3, fra <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
 		</note>
 		<important>
-			<para>When uploading the 3.3 files to your server, do <emphasis role="bold">NOT</emphasis> overwrite your config.php.</para>
+			<para>Når du uploader 3.3-filerne til din server, må du <emphasis role="bold">IKKE</emphasis> overskrive din config.php.</para>
 		</important>
 		<important>
-			<para>When backing up your files, ensure that your FTP client is in binary mode or transfers files without extensions in binary mode.</para>
-			<para>For more information, see: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: Transferring attachment files with Filezilla</ulink></para>
+			<para>Når du tager backup af dine filer, skal du sørge for, at din FTP-klient er i binær tilstand, eller at filer uden filendelse overføres i binær tilstand.</para>
+			<para>For flere oplysninger, se: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Videnbase: Overførsel af vedhæftede filer med Filezilla</ulink></para>
 		</important>
 	</section>
+
 	<section id="upgrade32">
 		<sectioninfo>
 			<authorgroup>
@@ -166,69 +179,70 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Upgrading from 3.2 to 3.3</title>
+		<title>Opgradering fra 3.2 til 3.3</title>
 		<warning>
-			<para>Upgrading to phpBB 3.3 may cause some styles and extensions to no longer work. If you have a custom logo, it might need to be redone after the upgrade. See <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Knowledge Base: How to Change your Board Logo</ulink>.</para>
+			<para>Opgradering til phpBB 3.3 kan gøre, at nogle stilarter og udvidelser holder op med at virke. Har du et brugerdefineret logo, skal det muligvis laves om efter opgraderingen. Se <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Videnbase: Sådan ændrer du dit boards logo</ulink>.</para>
 		</warning>
 
-		<para>phpBB 3.3 should be backwards compatible with 3.2, however some extensions and custom edits may no longer work. The easiest upgrade method is to remove all existing files prior to upgrading and re-applying custom changes after verifying their correctness.</para>
-		<para>To upgrade, perform the following steps:</para>
+		<para>phpBB 3.3 burde være bagudkompatibel med 3.2, men nogle udvidelser og brugerdefinerede rettelser virker muligvis ikke længere. Den nemmeste opgraderingsmetode er at fjerne alle eksisterende filer før opgraderingen og genanvende brugerdefinerede ændringer, efter du har kontrolleret, at de stadig er korrekte.</para>
+		<para>For at opgradere skal du udføre følgende trin:</para>
 		<orderedlist>
-			<listitem><para>Ensure that your server meets the requirements for running phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
-			<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-			<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-			<listitem><para>Deactivate all styles except for prosilver</para></listitem>
-			<listitem><para>Deactivate any extensions which are not compatible with phpBB 3.3. Check with the extension author to find out if an extension is compatible or not.</para></listitem>
-			<listitem><para>Set British English as the only language pack</para></listitem>
-			<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/#install">Full Package</ulink> archive</para></listitem>
-			<listitem><para>Extract the contents of the archive to your computer and open the phpBB3 directory</para></listitem>
-			<listitem><para>Delete the following files from the package:</para>
+			<listitem><para>Sørg for, at din server opfylder kravene for at køre phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
+			<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+			<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+			<listitem><para>Deaktiver alle stilarter undtagen prosilver</para></listitem>
+			<listitem><para>Deaktiver alle udvidelser, der ikke er kompatible med phpBB 3.3. Spørg udvidelsens forfatter, om en udvidelse er kompatibel eller ej.</para></listitem>
+			<listitem><para>Sæt britisk engelsk som det eneste sprogmodul</para></listitem>
+			<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/#install">Fuld pakke</ulink></para></listitem>
+			<listitem><para>Udpak indholdet af arkivet på din computer, og åbn phpBB3-mappen</para></listitem>
+			<listitem><para>Slet følgende filer fra pakken:</para>
 				<itemizedlist>
-					<listitem><para>The config.php file</para></listitem>
-					<listitem><para>The files/ directory</para></listitem>
-					<listitem><para>The images/ directory</para></listitem>
-					<listitem><para>The store/ directory</para></listitem>
+					<listitem><para>Filen config.php</para></listitem>
+					<listitem><para>Mappen files/</para></listitem>
+					<listitem><para>Mappen images/</para></listitem>
+					<listitem><para>Mappen store/</para></listitem>
 				</itemizedlist>
 			</listitem>
-			<listitem><para>On your website, delete all files from your board <emphasis role="bold">EXCEPT</emphasis> for:</para>
+			<listitem><para>På din hjemmeside skal du slette alle filer fra dit board <emphasis role="bold">UNDTAGEN</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>The config.php file</para></listitem>
-					<listitem><para>The ext/ directory</para></listitem>
-					<listitem><para>The files/ directory</para></listitem>
-					<listitem><para>The images/ directory</para></listitem>
-					<listitem><para>The store/ directory</para></listitem>
+					<listitem><para>Filen config.php</para></listitem>
+					<listitem><para>Mappen ext/</para></listitem>
+					<listitem><para>Mappen files/</para></listitem>
+					<listitem><para>Mappen images/</para></listitem>
+					<listitem><para>Mappen store/</para></listitem>
 				</itemizedlist>
 			</listitem>
-			<listitem><para>Upload the contents of the phpBB3 directory from your computer to your forum's directory. You may be prompted to overwrite the remaining <emphasis>files</emphasis>. If prompted to merge or overwrite <emphasis>directories</emphasis>, choose to merge them.</para>
+			<listitem><para>Upload indholdet af phpBB3-mappen fra din computer til dit forums mappe. Du bliver muligvis bedt om at overskrive de resterende <emphasis>filer</emphasis>. Bliver du bedt om at flette eller overskrive <emphasis>mapper</emphasis>, så vælg at flette dem.</para>
 			</listitem>
-			<listitem><para>Update the database:</para>
+			<listitem><para>Opdater databasen:</para>
 				<orderedlist>
 					<tip>
-						<para>For large boards, you may wish to update via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						<para>På store boards ønsker du måske at opdatere via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 					</tip>
-					<listitem><para>Using your web browser, visit install/ in your board's root. (e.g. http://www.example.com/yourforum/install)</para></listitem>
-					<listitem><para>Click the Update tab</para></listitem>
-					<listitem><para>Click the Update button</para></listitem>
-					<listitem><para>Select "Update database only" and click Submit</para></listitem>
-					<listitem><para>Wait for the progress bar to reach 100% and for a message indicating that the update has completed</para></listitem>
+					<listitem><para>Gå med din webbrowser til install/ i dit boards rodmappe. (f.eks. http://www.example.com/yourforum/install)</para></listitem>
+					<listitem><para>Klik på fanen Opdater</para></listitem>
+					<listitem><para>Klik på knappen Opdater</para></listitem>
+					<listitem><para>Vælg "Opdater kun databasen" og klik på Indsend</para></listitem>
+					<listitem><para>Vent på, at fremgangslinjen når 100%, og at en besked bekræfter, at opdateringen er gennemført</para></listitem>
 				</orderedlist>
 			</listitem>
-			<listitem><para>Delete the install/ directory</para></listitem>
+			<listitem><para>Slet mappen install/</para></listitem>
 		</orderedlist>
 		<note>
-			<para>Ensure that the root level <emphasis>.htaccess</emphasis> file is included in the upload. Some FTP clients do not show files whose names start with a period and you may need to enable the display of hidden files.</para>
+			<para>Sørg for, at .htaccess-filen på øverste niveau er inkluderet i uploaden. Nogle FTP-klienter viser ikke filer, hvis navne starter med et punktum, og du skal muligvis aktivere visning af skjulte filer.</para>
 		</note>
 		<note>
-			<para>If your board made use of language packs other than British English, you will need to download a version that is compatible with phpBB 3.3 from <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
+			<para>Har dit board brugt andre sprogmoduler end britisk engelsk, skal du downloade en version, der er kompatibel med phpBB 3.3, fra <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
 		</note>
 		<important>
-			<para>When uploading the 3.3 files to your server, do <emphasis role="bold">NOT</emphasis> overwrite your config.php.</para>
+			<para>Når du uploader 3.3-filerne til din server, må du <emphasis role="bold">IKKE</emphasis> overskrive din config.php.</para>
 		</important>
 		<important>
-			<para>When backing up your files, ensure that your FTP client is in binary mode or transfers files without extensions in binary mode.</para>
-			<para>For more information, see: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: Transferring attachment files with Filezilla</ulink></para>
+			<para>Når du tager backup af dine filer, skal du sørge for, at din FTP-klient er i binær tilstand, eller at filer uden filendelse overføres i binær tilstand.</para>
+			<para>For flere oplysninger, se: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Videnbase: Overførsel af vedhæftede filer med Filezilla</ulink></para>
 		</important>
 	</section>
+
 	<section id="minor">
 		<sectioninfo>
 			<authorgroup>
@@ -237,27 +251,18 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Minor Updates Within 3.3.x</title>
+		<title>Mindre opdateringer inden for 3.3.x</title>
 		<note>
-			<para>phpBB aims to be backwards compatible within minor releases, but if you are using extensions, language packs, or custom styles, you should check them for updates prior to updating phpBB.</para>
+			<para>phpBB tilstræber at være bagudkompatibel inden for mindre versioner, men bruger du udvidelser, sprogmoduler eller brugerdefinerede stilarter, bør du tjekke dem for opdateringer, før du opdaterer phpBB.</para>
 		</note>
 
-		<para>There are several update paths available depending on the types of edits you have made to your board:</para>
+		<para>Der findes flere opdateringsmetoder afhængigt af, hvilken slags ændringer du har foretaget på dit board:</para>
 		<orderedlist>
-			<listitem><para><xref linkend="update_full" /></para><para>If you have made no modifications to core files, this is the easiest approach.</para></listitem>
-			<listitem><para><xref linkend="update_changed" /></para><para>If you wish to only update the files that have changed between two releases, use this approach.</para></listitem>
-			<listitem><para><xref linkend="update_advanced" /></para><para>If you have made modifications to core files and do not want to manually re-apply them, use this approach.</para></listitem>
-			<listitem><para><xref linkend="update_patch" /></para><para>For those comfortable using the <command>patch</command> utility, patch files are available.</para></listitem>
+			<listitem><para><xref linkend="update_full" /></para><para>Har du ikke foretaget nogen ændringer i kernefilerne, er dette den nemmeste metode.</para></listitem>
+			<listitem><para><xref linkend="update_changed" /></para><para>Ønsker du kun at opdatere de filer, der er ændret mellem to versioner, så brug denne metode.</para></listitem>
+			<listitem><para><xref linkend="update_advanced" /></para><para>Har du foretaget ændringer i kernefilerne og vil du ikke selv genanvende dem manuelt, så brug denne metode.</para></listitem>
+			<listitem><para><xref linkend="update_patch" /></para><para>For dem, der er fortrolige med værktøjet <command>patch</command>, findes der patch-filer.</para></listitem>
 		</orderedlist>
-
-		<important>
-			<para>If you have previously abandoned an update attempt to try a different method, you will need to remove the following files from the server:
-			<itemizedlist>
-				<listitem><para><filename>store/install_config.php</filename></para></listitem>
-				<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
-			</itemizedlist>
-			</para>
-		</important>
 
 
 		<section id="update_full">
@@ -268,59 +273,67 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Full Package</title>
-			<para>This update method will remove most existing files and then put the new ones in place.</para>
+			<title>Fuld pakke</title>
+			<para>Denne opdateringsmetode fjerner de fleste eksisterende filer og sætter derefter de nye på plads.</para>
 			<orderedlist>
-				<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-				<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-				<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/3.3/install">Full Package</ulink> archive</para></listitem>
-				<listitem><para>Extract the contents of the archive to your computer and open the <filename class="directory">phpBB3</filename> directory</para></listitem>
-				<listitem><para>Delete the following files from the package:</para>
+				<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+				<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/3.3/install">Fuld pakke</ulink></para></listitem>
+				<listitem><para>Udpak indholdet af arkivet på din computer, og åbn mappen <filename class="directory">phpBB3</filename></para></listitem>
+				<listitem><para>Slet følgende filer fra pakken:</para>
 					<itemizedlist>
-						<listitem><para>The <filename>config.php</filename> file</para></listitem>
-						<listitem><para>The <filename class="directory">files/</filename> directory</para></listitem>
-						<listitem><para>The <filename class="directory">images/</filename> directory</para></listitem>
-						<listitem><para>The <filename class="directory">store/</filename> directory</para></listitem>
+						<listitem><para>Filen <filename>config.php</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">files/</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">images/</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">store/</filename></para></listitem>
 					</itemizedlist>
 				</listitem>
-				<listitem><para>On your website, delete all files from your board <emphasis role="bold">EXCEPT</emphasis> for:</para>
+				<listitem><para>På din hjemmeside skal du slette alle filer fra dit board <emphasis role="bold">UNDTAGEN</emphasis>:</para>
 					<itemizedlist>
-						<listitem><para>The <filename>config.php</filename> file</para></listitem>
-						<listitem><para>The <filename class="directory">ext/</filename> directory</para></listitem>
-						<listitem><para>The <filename class="directory">files/</filename> directory</para></listitem>
-						<listitem><para>The <filename class="directory">images/</filename> directory</para></listitem>
-						<listitem><para>The <filename class="directory">store/</filename> directory</para></listitem>
-						<listitem><para>The <filename class="directory">styles/</filename> directory</para></listitem>
+						<listitem><para>Filen <filename>config.php</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">ext/</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">files/</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">images/</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">store/</filename></para></listitem>
+						<listitem><para>Mappen <filename class="directory">styles/</filename></para></listitem>
 					</itemizedlist>
 				</listitem>
 				<listitem>
-					<para>Upload the contents of the <filename class="directory">phpBB3</filename> directory from your computer to your forum's directory. You may be prompted to overwrite the remaining <emphasis>files</emphasis>. If prompted to merge or overwrite <emphasis>directories</emphasis>, choose to merge them.</para>
-					<para>The <filename class="directory">docs/</filename> folder is for your personal use and it is not necessary to upload it to your forum.</para>
+					<para>Upload indholdet af mappen <filename class="directory">phpBB3</filename> fra din computer til dit forums mappe. Du bliver muligvis bedt om at overskrive de resterende <emphasis>filer</emphasis>. Bliver du bedt om at flette eller overskrive <emphasis>mapper</emphasis>, så vælg at flette dem.</para>
+					<para>Mappen <filename class="directory">docs/</filename> er til din egen brug, og det er ikke nødvendigt at uploade den til dit forum.</para>
 				</listitem>
-				<listitem><para>Update the database:</para>
+				<listitem><para>Opdater databasen:</para>
 					<orderedlist>
+						<important>
+							<para>Har du tidligere forsøgt at opdatere med en anden metode, skal du fjerne følgende filer fra serveren, før du opdaterer databasen:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
-							<para>For large boards, you may wish to update via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+							<para>På store boards ønsker du måske at opdatere via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
 						<listitem>
-							<para>Using your web browser, visit /install/app.php/update in your board's root (e.g. http://www.example.com/yourforum/install/app.php/update). You will see the following warning message:
-							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> This is expected and not an error.</para>
+							<para>Gå med din webbrowser til /install/app.php/update i dit boards rodmappe (f.eks. http://www.example.com/yourforum/install/app.php/update). Du vil se følgende advarsel:
+							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> Dette er forventet og ikke en fejl.</para>
 						</listitem>
-						<listitem><para>Select "Update database only" and click Submit</para></listitem>
+						<listitem><para>Vælg "Opdater kun databasen" og klik på Indsend</para></listitem>
 						<listitem>
-							<para>Wait for the progress bar to reach 100% and for a message indicating that the update has completed</para>
-							<para>Depending on your previous version this will make a number of database changes. You may receive FAILURES during this procedure. They should not be a cause for concern unless you see an actual ERROR, in which case the script will stop (in this case you should seek help via our forums).</para>
+							<para>Vent på, at fremgangslinjen når 100%, og at en besked bekræfter, at opdateringen er gennemført</para>
+							<para>Afhængigt af din tidligere version foretages der en række databaseændringer. Du kan opleve FAILURES (fejlslag) under denne proces. De bør ikke være en bekymring, medmindre du ser en egentlig ERROR (fejl), i hvilket tilfælde scriptet stopper (i så fald bør du søge hjælp via vores forummer).</para>
 						</listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>Delete the <filename class="directory">install/</filename> directory on the server</para></listitem>
+				<listitem><para>Slet mappen <filename class="directory">install/</filename> på serveren</para></listitem>
 			</orderedlist>
 			<note>
-				<para>Ensure that the root level <emphasis>.htaccess</emphasis> file is included in the upload. Some FTP clients do not show files whose names start with a period and you may need to enable the display of hidden files.</para>
+				<para>Sørg for, at .htaccess-filen på øverste niveau er inkluderet i uploaden. Nogle FTP-klienter viser ikke filer, hvis navne starter med et punktum, og du skal muligvis aktivere visning af skjulte filer.</para>
 			</note>
 			<important>
-				<para>When backing up your files via FTP, ensure that the client is in binary mode. If using Filezilla, ensure that the "transfer files without extensions" setting is set to "binary mode".</para>
-				<para>For more information, see: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: Transferring attachment files with Filezilla</ulink></para>
+				<para>Når du tager backup af dine filer via FTP, skal du sørge for, at klienten er i binær tilstand. Bruger du Filezilla, skal du sørge for, at indstillingen "overfør filer uden filendelse" er sat til "binær tilstand".</para>
+				<para>For flere oplysninger, se: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Videnbase: Overførsel af vedhæftede filer med Filezilla</ulink></para>
 			</important>
 		</section>
 
@@ -332,41 +345,49 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Changed Files</title>
-			<para>This method is meant for those wanting to only replace the files that were changed between a previous version and the latest version.</para>
-			<para>This package contains a number of sub-archives, each contains the files changed from a given release to the latest version. You should select the appropriate archive for your current version, e.g. if you currently have 3.3.0 and are updating to 3.3.1, you should select the phpBB-3.3.0_to_3.3.1.zip/tar.bz2 sub-archive.</para>
+			<title>Ændrede filer</title>
+			<para>Denne metode er beregnet til dem, der kun ønsker at erstatte de filer, som er ændret mellem en tidligere version og den nyeste version.</para>
+			<para>Denne pakke indeholder en række underarkiver, hvor hvert af dem indeholder de filer, der er ændret fra en given version til den nyeste version. Du bør vælge det arkiv, der passer til din nuværende version, f.eks. hvis du har 3.3.0 og opdaterer til 3.3.1, bør du vælge underarkivet phpBB-3.3.0_to_3.3.1.zip/tar.bz2.</para>
 			<orderedlist>
-				<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-				<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-				<listitem><para>Locally, perform for the following steps:</para>
+				<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+				<listitem><para>Udfør følgende trin lokalt:</para>
 					<orderedlist>
-						<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/3.3/changedfiles">Changed Files</ulink> archive</para></listitem>
-						<listitem><para>Extract the <filename class="directory">install/</filename> directory</para></listitem>
-						<listitem><para>Extract the <filename class="directory">vendor/</filename> directory</para></listitem>
-						<listitem><para>Extract the contents of the desired sub-archive for your version</para></listitem>
+						<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/3.3/changedfiles">Ændrede filer</ulink></para></listitem>
+						<listitem><para>Udpak mappen <filename class="directory">install/</filename></para></listitem>
+						<listitem><para>Udpak mappen <filename class="directory">vendor/</filename></para></listitem>
+						<listitem><para>Udpak indholdet af det ønskede underarkiv for din version</para></listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>On your web server, delete the <filename class="directory">vendor/</filename> directory</para></listitem>
-				<listitem><para>Upload the <filename class="directory">install/</filename> directory</para></listitem>
-				<listitem><para>Upload the <filename class="directory">vendor/</filename> directory</para></listitem>
-				<listitem><para>Upload the contents of the selected sub-archive</para></listitem>
-				<listitem><para>Update the database:</para>
+				<listitem><para>Slet mappen <filename class="directory">vendor/</filename> på din webserver</para></listitem>
+				<listitem><para>Upload mappen <filename class="directory">install/</filename></para></listitem>
+				<listitem><para>Upload mappen <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Upload indholdet af det valgte underarkiv</para></listitem>
+				<listitem><para>Opdater databasen:</para>
 					<orderedlist>
+						<important>
+							<para>Har du tidligere forsøgt at opdatere med en anden metode, skal du fjerne følgende filer fra serveren, før du opdaterer databasen:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
-							<para>For large boards, you may wish to update via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+							<para>På store boards ønsker du måske at opdatere via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
 						<listitem>
-							<para>Using your web browser, visit /install/app.php/update in your board's root (e.g. http://www.example.com/yourforum/install/app.php/update). You will see the following warning message:
-							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> This is expected and not an error.</para>
+							<para>Gå med din webbrowser til /install/app.php/update i dit boards rodmappe (f.eks. http://www.example.com/yourforum/install/app.php/update). Du vil se følgende advarsel:
+							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> Dette er forventet og ikke en fejl.</para>
 						</listitem>
-						<listitem><para>Select "Update database only" and click Submit</para></listitem>
+						<listitem><para>Vælg "Opdater kun databasen" og klik på Indsend</para></listitem>
 						<listitem>
-							<para>Wait for the progress bar to reach 100% and for a message indicating that the update has completed</para>
-							<para>Depending on your previous version this will make a number of database changes. You may receive FAILURES during this procedure. They should not be a cause for concern unless you see an actual ERROR, in which case the script will stop (in this case you should seek help via our forums).</para>
+							<para>Vent på, at fremgangslinjen når 100%, og at en besked bekræfter, at opdateringen er gennemført</para>
+							<para>Afhængigt af din tidligere version foretages der en række databaseændringer. Du kan opleve FAILURES (fejlslag) under denne proces. De bør ikke være en bekymring, medmindre du ser en egentlig ERROR (fejl), i hvilket tilfælde scriptet stopper (i så fald bør du søge hjælp via vores forummer).</para>
 						</listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>Delete the <filename class="directory">install/</filename> directory on the server</para></listitem>
+				<listitem><para>Slet mappen <filename class="directory">install/</filename> på serveren</para></listitem>
 			</orderedlist>
 		</section>
 
@@ -378,48 +399,56 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Advanced Update (Expert users)</title>
-			<para>This update method should only be used for installations with modifications to core phpBB files. If you simply use Extensions or custom Styles and have not modified core files, please use the Full Package update.</para>
-			<para>This update was renamed from Automatic Update to Advanced Update to more clearly state that it should only be used by advanced users.</para>
-			<para>This package detects changed files and merges in changes if needed. Since this type of update has a potential to cause issues while upgrading, it is not recommended being used for updates and/or upgrades.</para>
-			<para>A number of advanced update files are available, and you should choose the one that corresponds to the version of the board that you are currently running. For example, if your current version is 3.3.0 and you are updating to 3.3.1, you need the phpBB-3.3.0_to_3.3.1.zip/tar.bz2 file.</para>
+			<title>Avanceret opdatering (til erfarne brugere)</title>
+			<para>Denne opdateringsmetode bør kun bruges til installationer med ændringer i phpBB's kernefiler. Bruger du blot udvidelser eller brugerdefinerede stilarter og har ikke ændret kernefilerne, så brug i stedet opdatering med Fuld pakke.</para>
+			<para>Denne opdatering blev omdøbt fra Automatisk opdatering til Avanceret opdatering for tydeligere at angive, at den kun bør bruges af erfarne brugere.</para>
+			<para>Denne pakke registrerer ændrede filer og fletter ændringerne ind, hvis nødvendigt. Da denne type opdatering kan medføre problemer under opgraderingen, anbefales det ikke til opdateringer og/eller opgraderinger.</para>
+			<para>Der findes flere avancerede opdateringsfiler, og du bør vælge den, der passer til den version af boardet, du kører i øjeblikket. Hvis din nuværende version f.eks. er 3.3.0, og du opdaterer til 3.3.1, skal du bruge filen phpBB-3.3.0_to_3.3.1.zip/tar.bz2.</para>
 			<orderedlist>
-				<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-				<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-				<listitem><para>Locally, perform for the following steps:</para>
+				<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+				<listitem><para>Udfør følgende trin lokalt:</para>
 					<orderedlist>
-						<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/3.3/update">Advanced Update</ulink> archive</para></listitem>
-						<listitem><para>Extract the <filename class="directory">install/</filename> directory</para></listitem>
-						<listitem><para>Extract the <filename class="directory">vendor/</filename> directory</para></listitem>
+						<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/3.3/update">Avanceret opdatering</ulink></para></listitem>
+						<listitem><para>Udpak mappen <filename class="directory">install/</filename></para></listitem>
+						<listitem><para>Udpak mappen <filename class="directory">vendor/</filename></para></listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>On your web server, delete the <filename class="directory">vendor/</filename> directory</para></listitem>
-				<listitem><para>Upload the <filename class="directory">install/</filename> directory</para></listitem>
-				<listitem><para>Upload the <filename class="directory">vendor/</filename> directory</para></listitem>
-				<listitem><para>Run the updater:</para>
+				<listitem><para>Slet mappen <filename class="directory">vendor/</filename> på din webserver</para></listitem>
+				<listitem><para>Upload mappen <filename class="directory">install/</filename></para></listitem>
+				<listitem><para>Upload mappen <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Kør opdateringsprogrammet:</para>
 					<orderedlist>
+						<important>
+							<para>Har du tidligere forsøgt at opdatere med en anden metode, skal du fjerne følgende filer fra serveren, før du opdaterer databasen:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
-							<para>For large boards, you may wish to update the database via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+							<para>På store boards ønsker du måske at opdatere databasen via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
-						<listitem><para>Using your web browser, visit /install in your board's root (e.g. http://www.example.com/yourforum/install).</para></listitem>
-						<listitem><para>Click the Update tab</para></listitem>
-						<listitem><para>Click Update</para></listitem>
-						<listitem><para>Select "Update filesystem and database" and click Submit</para></listitem>
+						<listitem><para>Gå med din webbrowser til /install i dit boards rodmappe (f.eks. http://www.example.com/yourforum/install).</para></listitem>
+						<listitem><para>Klik på fanen Opdater</para></listitem>
+						<listitem><para>Klik på Opdater</para></listitem>
+						<listitem><para>Vælg "Opdater filsystem og database" og klik på Indsend</para></listitem>
 						<listitem>
-							<para>Depending on file ownership, there are several options available to perform this update:
+							<para>Afhængigt af filejerskab er der flere måder at udføre denne opdatering på:
 								<itemizedlist>
-									<listitem><para><emphasis role="bold">Download modified files in an archive:</emphasis> This will generate an archive containing all of the updated files. After downloading it, you upload its contents to the server.</para></listitem>
-									<listitem><para><emphasis role="bold">Update files via FTP (Automatic):</emphasis> You provide FTP credentials and file paths so that the server may FTP the files in place.</para></listitem>
-									<listitem><para><emphasis role="bold">Update files via direct access (Automatic):</emphasis> If the web server has write permissions, the updater can write the changes directly to the files</para></listitem>
+									<listitem><para><emphasis role="bold">Download ændrede filer i et arkiv:</emphasis> Dette genererer et arkiv med alle de opdaterede filer. Efter download uploader du indholdet til serveren.</para></listitem>
+									<listitem><para><emphasis role="bold">Opdater filer via FTP (automatisk):</emphasis> Du angiver FTP-loginoplysninger og filstier, så serveren kan overføre filerne via FTP.</para></listitem>
+									<listitem><para><emphasis role="bold">Opdater filer via direkte adgang (automatisk):</emphasis> Har webserveren skriverettigheder, kan opdateringsprogrammet skrive ændringerne direkte til filerne</para></listitem>
 								</itemizedlist>
 							</para>
-							<para>If there are conflicts, you will be prompted to resolve them.</para>
+							<para>Er der konflikter, bliver du bedt om at løse dem.</para>
 						</listitem>
-						<listitem><para>Click Update Files</para></listitem>
-						<listitem><para>Click "Continue Update Process" to update the database</para></listitem>
+						<listitem><para>Klik på Opdater filer</para></listitem>
+						<listitem><para>Klik på "Fortsæt opdateringsproces" for at opdatere databasen</para></listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>Delete the <filename class="directory">install/</filename> directory on the server</para></listitem>
+				<listitem><para>Slet mappen <filename class="directory">install/</filename> på serveren</para></listitem>
 			</orderedlist>
 		</section>
 
@@ -431,46 +460,54 @@
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Patch Files</title>
-			<para>This method is for advanced users who wish to use a patch/diff style update process. If you don't know what the <command>patch</command> utility is, this method is not for you.</para>
-			<para>A number of patch files are provided and you should choose the one that corresponds to the version of the board that you are currently running. For example, if your current version is 3.3.0 and you are updating to 3.3.1, you need the phpBB-3.3.0_to_3.3.1.patch file.</para>
+			<title>Patch-filer</title>
+			<para>Denne metode er til erfarne brugere, der ønsker at bruge en opdateringsproces i patch-/diff-stil. Ved du ikke, hvad værktøjet <command>patch</command> er, er denne metode ikke noget for dig.</para>
+			<para>Der findes flere patch-filer, og du bør vælge den, der passer til den version af boardet, du kører i øjeblikket. Hvis din nuværende version f.eks. er 3.3.0, og du opdaterer til 3.3.1, skal du bruge filen phpBB-3.3.0_to_3.3.1.patch.</para>
 			<orderedlist>
-				<listitem><para><emphasis role="bold">Make a backup of the original files</emphasis></para></listitem>
-				<listitem><para><emphasis role="bold">Make a backup of the database</emphasis></para></listitem>
-				<listitem><para>Locally, perform for the following steps:</para>
+				<listitem><para><emphasis role="bold">Tag en backup af de originale filer</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Tag en backup af databasen</emphasis></para></listitem>
+				<listitem><para>Udfør følgende trin lokalt:</para>
 					<orderedlist>
-						<listitem><para>Download the phpBB 3.3 <ulink url="https://www.phpbb.com/downloads/3.3/patch">Patch Files</ulink> archive</para></listitem>
-						<listitem><para>Extract the <filename class="directory">install/</filename> directory</para></listitem>
-						<listitem><para>Extract the <filename class="directory">vendor/</filename> directory</para></listitem>
-						<listitem><para>Extract the desired patch file for your version</para></listitem>
+						<listitem><para>Download phpBB 3.3-arkivet <ulink url="https://www.phpbb.com/downloads/3.3/patch">Patch-filer</ulink></para></listitem>
+						<listitem><para>Udpak mappen <filename class="directory">install/</filename></para></listitem>
+						<listitem><para>Udpak mappen <filename class="directory">vendor/</filename></para></listitem>
+						<listitem><para>Udpak den ønskede patch-fil for din version</para></listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>On your web server, delete the <filename class="directory">vendor/</filename> directory</para></listitem>
-				<listitem><para>Upload the <filename class="directory">install/</filename> directory</para></listitem>
-				<listitem><para>Upload the <filename class="directory">vendor/</filename> directory</para></listitem>
-				<listitem><para>Upload the patch file to the parent directory containing the phpBB core files (i.e. index.php, viewforum.php, etc.). With this done you should run the following command:
-					<code>patch -cl -d [PHPBB DIRECTORY] -p1 &lt; [PATCH NAME]</code> (where PHPBB DIRECTORY is the directory name your phpBB Installation resides in, for example phpBB, and where PATCH NAME is the relevant filename of the selected patch file).
-					This should complete quickly, hopefully without any HUNK FAILED comments.</para>
-					<para>If you do get failures, you should look at using the <ulink url="https://area51.phpbb.com/code-changes/">Code Changes</ulink> page to update the files which failed to patch. Alternatively, if you know how, you can examine the .rej files to determine what failed where and make manual adjustments to the relevant source.</para>
+				<listitem><para>Slet mappen <filename class="directory">vendor/</filename> på din webserver</para></listitem>
+				<listitem><para>Upload mappen <filename class="directory">install/</filename></para></listitem>
+				<listitem><para>Upload mappen <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Upload patch-filen til den overordnede mappe, der indeholder phpBB's kernefiler (dvs. index.php, viewforum.php osv.). Kør derefter følgende kommando:
+					<code>patch -cl -d [PHPBB-MAPPE] -p1 &lt; [PATCH-NAVN]</code> (hvor PHPBB-MAPPE er navnet på den mappe, din phpBB-installation ligger i, for eksempel phpBB, og PATCH-NAVN er filnavnet på den valgte patch-fil).
+					Dette bør gennemføres hurtigt, forhåbentlig uden nogen HUNK FAILED-meddelelser.</para>
+					<para>Får du fejlslag, bør du bruge siden <ulink url="https://area51.phpbb.com/code-changes/">Code Changes</ulink> til at opdatere de filer, der fejlede under patch. Alternativt kan du, hvis du ved hvordan, undersøge .rej-filerne for at finde ud af, hvad der fejlede hvor, og foretage manuelle rettelser i den relevante kildekode.</para>
 				</listitem>
-				<listitem><para>Update the database:</para>
+				<listitem><para>Opdater databasen:</para>
 					<orderedlist>
+						<important>
+							<para>Har du tidligere forsøgt at opdatere med en anden metode, skal du fjerne følgende filer fra serveren, før du opdaterer databasen:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
-							<para>For large boards, you may wish to update via the command line instead of using a web browser. From your board's root, execute the following command: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+							<para>På store boards ønsker du måske at opdatere via kommandolinjen i stedet for en webbrowser. Kør følgende kommando fra dit boards rodmappe: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
 						<listitem>
-							<para>Using your web browser, visit /install/app.php/update in your board's root (e.g. http://www.example.com/yourforum/install/app.php/update). You will see the following warning message:
-							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> This is expected and not an error.</para>
+							<para>Gå med din webbrowser til /install/app.php/update i dit boards rodmappe (f.eks. http://www.example.com/yourforum/install/app.php/update). Du vil se følgende advarsel:
+							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> Dette er forventet og ikke en fejl.</para>
 						</listitem>
-						<listitem><para>Select "Update database only" and click Submit</para></listitem>
+						<listitem><para>Vælg "Opdater kun databasen" og klik på Indsend</para></listitem>
 						<listitem>
-							<para>Wait for the progress bar to reach 100% and for a message indicating that the update has completed</para>
-							<para>Depending on your previous version this will make a number of database changes. You may receive FAILURES during this procedure. They should not be a cause for concern unless you see an actual ERROR, in which case the script will stop (in this case you should seek help via our forums).</para>
+							<para>Vent på, at fremgangslinjen når 100%, og at en besked bekræfter, at opdateringen er gennemført</para>
+							<para>Afhængigt af din tidligere version foretages der en række databaseændringer. Du kan opleve FAILURES (fejlslag) under denne proces. De bør ikke være en bekymring, medmindre du ser en egentlig ERROR (fejl), i hvilket tilfælde scriptet stopper (i så fald bør du søge hjælp via vores forummer).</para>
 						</listitem>
 					</orderedlist>
 				</listitem>
-				<listitem><para>Delete the <filename class="directory">install/</filename> directory on the server</para></listitem>
-				<listitem><para>Delete the uploaded patch file from the server</para></listitem>
+				<listitem><para>Slet mappen <filename class="directory">install/</filename> på serveren</para></listitem>
+				<listitem><para>Slet den uploadede patch-fil fra serveren</para></listitem>
 			</orderedlist>
 		</section>
 	</section>
@@ -486,9 +523,9 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Upgrading from any board software to phpBB3</title>
-		<para>In order to allow administrators of phpBB2 boards to use phpBB3 and all of its features. There is a convertor packed with the default installation. The conversion framework is flexible and allows you to convert other bulletin board systems as well. Read more if you need help with converting your board to phpBB3</para>
-		<note><para>The convertor will not harm the database of the board software you are converting from. In case of a problem, your old board software will still be fully operational.</para></note>
+		<title>Opgradering fra en hvilken som helst anden forumsoftware til phpBB3</title>
+		<para>For at gøre det muligt for administratorer af phpBB2-boards at bruge phpBB3 og alle dets funktioner, følger der en konverter med standardinstallationen. Konverteringsrammen er fleksibel og gør det muligt også at konvertere andre forumsystemer. Læs videre, hvis du har brug for hjælp til at konvertere dit board til phpBB3</para>
+		<note><para>Konverteren beskadiger ikke databasen for den forumsoftware, du konverterer fra. Skulle der opstå et problem, vil din gamle forumsoftware stadig fungere fuldt ud.</para></note>
 			<section id="upgrade_general_requirements">
 				<sectioninfo>
 					<authorgroup>
@@ -500,13 +537,13 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Requirements</title>
-				<para>In order for the conversion to be smooth as possible, check and prepare these items. You will need them to perform a succesful conversion.</para>
+				<title>Krav</title>
+				<para>For at konverteringen skal gå så gnidningsfrit som muligt, bør du tjekke og forberede følgende punkter. Du får brug for dem for at gennemføre en vellykket konvertering.</para>
 				<itemizedlist>
-					<listitem><para>An installation of phpBB3 has to be present on your server. See <xref linkend="quick_requirements" /> for more information on how to install phpBB3.</para></listitem>
-					<listitem><para>Prepare the connection details to the database where the old board was stored. If you are unsure, you can find these details in the config file.</para></listitem>
-					<listitem><para>Make sure the old forum is still installed on your server alongside the phpBB3 installations. The files of the old board should be kept as is, some of them will be transferred to phpBB3 (e.g. avatars, attachments, smilies or ranks).</para></listitem>
-					<listitem><para>The files and database need to be on the same server as the phpBB3 installation and the files need to be in the same domain. If you are using subdomains, the files need to be in the same subdomain.</para></listitem>
+					<listitem><para>En installation af phpBB3 skal findes på din server. Se <xref linkend="quick_requirements" /> for flere oplysninger om, hvordan du installerer phpBB3.</para></listitem>
+					<listitem><para>Forbered forbindelsesoplysningerne til den database, hvor det gamle board var gemt. Er du i tvivl, kan du finde disse oplysninger i konfigurationsfilen.</para></listitem>
+					<listitem><para>Sørg for, at det gamle forum stadig er installeret på din server ved siden af phpBB3-installationen. Filerne fra det gamle board bør forblive uændrede, da nogle af dem vil blive overført til phpBB3 (f.eks. avatarer, vedhæftede filer, smileys eller ranks).</para></listitem>
+					<listitem><para>Filerne og databasen skal ligge på samme server som phpBB3-installationen, og filerne skal ligge i samme domæne. Bruger du underdomæner, skal filerne ligge i samme underdomæne.</para></listitem>
 				</itemizedlist>
 			</section>
 			<section id="upgrade_general_preliminary">
@@ -520,12 +557,12 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Preliminary steps</title>
-				<para>phpBB3 needs to be installed. Once phpBB3 is installed, do <emphasis>not</emphasis> delete the <filename class="directory">install</filename> directory if you will be converting immediately. If you will be testing and setting up your phpBB3 board prior to the conversion and converting at a later time, rename the <filename class="directory">install</filename> directory to something like _install. This will allow you to use your phpBB3 board. You will be needing the install directory later for the conversion.</para>
+				<title>Indledende trin</title>
+				<para>phpBB3 skal installeres. Når phpBB3 er installeret, må du <emphasis>ikke</emphasis> slette mappen <filename class="directory">install</filename>, hvis du konverterer med det samme. Skal du teste og sætte dit phpBB3-board op før konverteringen og konvertere på et senere tidspunkt, kan du omdøbe mappen <filename class="directory">install</filename> til f.eks. _install. Det gør det muligt at bruge dit phpBB3-board. Du får brug for install-mappen senere til konverteringen.</para>
 
-				<para>You will need specific convertor files for the board software you are converting from. The phpBB2 specific convertor files are included with the phpBB3 installation files. For other board softwares, you will need to get the convertor files from the appropriate phpBB3 convertor topic. These topics can be found in the <ulink url="https://www.phpbb.com/community/viewforum.php?f=666">[3.3.x] Convertors forum</ulink> on phpBB.com</para>
+				<para>Du skal bruge de specifikke konverterfiler til den forumsoftware, du konverterer fra. De phpBB2-specifikke konverterfiler følger med phpBB3-installationsfilerne. Til anden forumsoftware skal du hente konverterfilerne fra det relevante phpBB3-konverteremne. Disse emner findes i <ulink url="https://www.phpbb.com/community/viewforum.php?f=666">[3.3.x] Convertors forum</ulink> på phpBB.com</para>
 
-				<para>For converting from phpBB2, you only need to point your browser to {phpBB3_root_directory}/install, click the <guilabel>Convert</guilabel> tab and follow the instructions. For other board softwares, you will need to upload the convertor files to the appropriate directories. The convertor files you get will consist of two or three files, convert_xxx.php, functions_xxx.php and, optionally, auth_xxx.php. The xxx will generally be the name of the software you are converting from.</para>
+				<para>Konverterer du fra phpBB2, skal du blot gå med din browser til {phpBB3_root_directory}/install, klikke på fanen <guilabel>Konverter</guilabel> og følge vejledningen. Til anden forumsoftware skal du uploade konverterfilerne til de relevante mapper. De konverterfiler, du får, består af to eller tre filer: convert_xxx.php, functions_xxx.php og eventuelt auth_xxx.php. xxx vil normalt være navnet på den software, du konverterer fra.</para>
 
 			</section>
 
@@ -540,19 +577,19 @@
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Conversion steps</title>
-				<para>After preparing everything, follow these steps to convert your board:</para>
+				<title>Konverteringstrin</title>
+				<para>Når du har forberedt alt, skal du følge disse trin for at konvertere dit board:</para>
 				<orderedlist>
-					<listitem><para>Install phpBB3. The old message board and the phpBB3 board need to be installed on the same server.</para></listitem>
-					<listitem><para>If you are converting from a board other than phpBB2, upload the convertor files which you downloaded from the appropriate topic in the <ulink url="https://www.phpbb.com/community/viewforum.php?f=666">[3.3.x] Convertors forum</ulink>.</para></listitem>
-					<listitem><para>Point your browser to {phpbb_root_directory}/install, click the <guilabel>Convert</guilabel> tab and select the appropriate convertor from the list of available convertors.</para></listitem>
-					<listitem><para>Next you will be asked for database information. The database information you are being asked for, is for the database that holds the tables for the board software you are converting from. You will be presented with an option for <guilabel>Refresh page to continue conversion</guilabel> The default is set to <guilabel>Yes</guilabel>. Normally, you will want to leave it at <guilabel>Yes</guilabel>. The <guilabel>No</guilabel> option is mainly for test purposes.</para></listitem>
-					<listitem><para>After entering the database information and pressing the <guilabel>Begin conversion</guilabel> button, the convertor will verify that you have entered the correct information. If the information is confirmed, you will have another <guilabel>Begin Conversion</guilabel> button.</para></listitem>
-					<listitem><para>After you click the <guilabel>Begin Conversion</guilabel> button, the convertor will check the convertor files.
-If everything is okay, you will be presented with a <guilabel>Continue Conversion</guilabel> button.</para></listitem>
-					<listitem><para>The convertor will now proceed to convert your old board. Pages will be displayed informing you about the progress of the conversion.</para></listitem>
-					<listitem><para>When the convertor is finished, you will see a message that the Search Index has not been converted. You must go into the Administration Control Panel and build the <guilabel>Search Index</guilabel>. In the <acronym>ACP</acronym>, click the <guilabel>Maintenance</guilabel> tab and select <guilabel>Search Index</guilabel> from the submenu. The default search backend index is <guilabel>Fulltext native</guilabel> and will be marked active. This is normally the index that you want to use to create your search index. For more information about search indexing, see <xref linkend="acp_maintenance_search" /></para></listitem>
-					<listitem><para>You should now check your phpBB3 board for proper operation, that permissions are set correctly and forums &amp; posts are displaying correctly. Also make sure files got copied from the old location, for example avatars and smilies and attachments (if you have them.)</para></listitem>
+					<listitem><para>Installer phpBB3. Det gamle forum og phpBB3-boardet skal være installeret på samme server.</para></listitem>
+					<listitem><para>Konverterer du fra en anden software end phpBB2, skal du uploade de konverterfiler, du har hentet fra det relevante emne i <ulink url="https://www.phpbb.com/community/viewforum.php?f=666">[3.3.x] Convertors forum</ulink>.</para></listitem>
+					<listitem><para>Gå med din browser til {phpbb_root_directory}/install, klik på fanen <guilabel>Konverter</guilabel>, og vælg den relevante konverter fra listen over tilgængelige konvertere.</para></listitem>
+					<listitem><para>Herefter bliver du bedt om databaseoplysninger. De databaseoplysninger, du bliver bedt om, er til den database, der indeholder tabellerne for den forumsoftware, du konverterer fra. Du vil se en indstilling for <guilabel>Genindlæs siden for at fortsætte konverteringen</guilabel>. Standardværdien er <guilabel>Ja</guilabel>. Normalt bør du lade den stå på <guilabel>Ja</guilabel>. Indstillingen <guilabel>Nej</guilabel> er mest til testformål.</para></listitem>
+					<listitem><para>Efter du har indtastet databaseoplysningerne og trykket på knappen <guilabel>Begynd konvertering</guilabel>, kontrollerer konverteren, at du har indtastet de korrekte oplysninger. Bekræftes oplysningerne, får du endnu en knap, <guilabel>Begynd konvertering</guilabel>.</para></listitem>
+					<listitem><para>Efter du har klikket på knappen <guilabel>Begynd konvertering</guilabel>, kontrollerer konverteren konverterfilerne.
+Er alt i orden, får du en knap, <guilabel>Fortsæt konvertering</guilabel>.</para></listitem>
+					<listitem><para>Konverteren begynder nu at konvertere dit gamle board. Der vises sider, som informerer dig om konverteringens fremgang.</para></listitem>
+					<listitem><para>Når konverteren er færdig, ser du en besked om, at søgeindekset ikke er blevet konverteret. Du skal gå ind i Administratorkontrolpanelet og opbygge <guilabel>Søgeindeks</guilabel>. I <acronym>ACP</acronym>'et skal du klikke på fanen <guilabel>Vedligehold</guilabel> og vælge <guilabel>Søgeindeks</guilabel> i undermenuen. Det som standard valgte søgemotor-indeks er <guilabel>Fulltext native</guilabel> og vil være markeret som aktivt. Dette er normalt det indeks, du vil bruge til at oprette dit søgeindeks. For flere oplysninger om søgeindeksering, se <xref linkend="acp_maintenance_search" /></para></listitem>
+					<listitem><para>Du bør nu tjekke dit phpBB3-board for korrekt funktion, at rettighederne er sat korrekt, og at forummer og indlæg vises korrekt. Sørg også for, at filer er blevet kopieret fra det gamle sted, for eksempel avatarer, smileys og vedhæftede filer (hvis du har nogen).</para></listitem>
 				</orderedlist>
 			</section>
 

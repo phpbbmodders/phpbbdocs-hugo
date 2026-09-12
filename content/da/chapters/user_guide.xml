@@ -166,7 +166,7 @@
 				<para>
 					<itemizedlist>
 						<listitem><para><guilabel>BBkode aktiveret som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at aktivere BBkode ved skrivning af indlæg.</para></listitem>
-						<listitem><para><guilabel>Smilies aktiveret som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at aktivere smilies ved skrivning af indlæg.</para></listitem>
+						<listitem><para><guilabel>Smileys aktiveret som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at aktivere smileys ved skrivning af indlæg.</para></listitem>
 						<listitem><para><guilabel>Tilføj min signatur som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at få tilføjet signatur i indlæg.</para></listitem>
 						<listitem><para><guilabel>Giv mig besked ved besvarelse</guilabel>: Vælg <guilabel>Ja</guilabel> for at få besked når indlæg besvares.</para></listitem>
 					</itemizedlist>
@@ -208,17 +208,17 @@
 			<itemizedlist>	
 				<listitem><para><guilabel>Emne/Indlægsikon</guilabel>: Er små billeder som kan tilknyttes et indlæg for at indikere indholdet i emnet. Muligheden for at anvende emneikonerne afhænger af de tilladelser administratoren har defineret.</para></listitem>
 				<listitem><para><guilabel>Emne</guilabel>: Hvis du skriver et nyt emne, er angivelse af emne obligatorisk og bliver titlen på emnet. Besvarer du eller skriver indlæg i et eksisterende emne, er feltet udfyldt men kan ændres.</para></listitem>
-				<listitem><para>Indlægsindhold - den store tekstboks umiddelbart herunder bruges til at skrive dit indlæg. Hvis administratoren har tilladt det, kan du udover almindelig tekst, også anvende <emphasis role="strong">smilies og BBkode</emphasis>.</para></listitem>
-				<listitem><para>Smilies - kan benyttes til at signalere følelser. Er brug af smilies tilladt på boardet ses teksten &quot;<guilabel>Smilies er slået TIL</guilabel>&quot; til højre for feltet hvor du skriver din indlægstekst. I modsat fald ses samme sted teksten &quot;<guilabel>Smilies er slået FRA</guilabel>&quot;. Se yderligere information i <link linkend="posting_smilies">Smilies</link>.</para></listitem>
+				<listitem><para>Indlægsindhold - den store tekstboks umiddelbart herunder bruges til at skrive dit indlæg. Hvis administratoren har tilladt det, kan du udover almindelig tekst, også anvende <emphasis role="strong">smileys og BBkode</emphasis>.</para></listitem>
+				<listitem><para>Smileys - kan benyttes til at signalere følelser. Er brug af smileys tilladt på boardet ses teksten &quot;<guilabel>Smileys er slået TIL</guilabel>&quot; til højre for feltet hvor du skriver din indlægstekst. I modsat fald ses samme sted teksten &quot;<guilabel>Smileys er slået FRA</guilabel>&quot;. Se yderligere information i <link linkend="posting_smilies">Smileys</link>.</para></listitem>
 				<listitem><para>BBkode - er en formateringsmetode som kan anvendes i indlæg, hvis det er tilladt af administratoren. Er BBkode tilladt ses teksten &quot;<guilabel>BBkode er slået TIL</guilabel>&quot; til højre for feltet hvor du skriver din indlægstekst. I modsat fald ses samme sted teksten &quot;<guilabel>BBkode er slået FRA</guilabel>&quot;. Se yderligere information i <link linkend="posting_bbcodes">BBkoder</link>.</para></listitem>
 			</itemizedlist>
 		</section>
 		
 		<section id="posting_smilies">
-			<title>Smilies</title>
-			<para>Smilies, er små grafiske ikoner - eller billeder, som kan benyttes til at signalere bestemte følelser. De bruges via en kort tekstkode, f.eks. :) indsætter [vis glad smiley her], ;) indsætter [vis smiley her], etc. Andre smilies kræver formatet :tekst_her: for at blive vist. Som eksempel vil smileykoden :roll: vise en smiley med rullende øjne [vis smiley], og :cry: en grædende smiley [vis smiley].</para>
+			<title>Smileys</title>
+			<para>Smileys, er små grafiske ikoner - eller billeder, som kan benyttes til at signalere bestemte følelser. De bruges via en kort tekstkode, f.eks. :) indsætter [vis glad smiley her], ;) indsætter [vis smiley her], etc. Andre smileys kræver formatet :tekst_her: for at blive vist. Som eksempel vil smileykoden :roll: vise en smiley med rullende øjne [vis smiley], og :cry: en grædende smiley [vis smiley].</para>
 			<para>Normalt har du også mulighed for at vælge den smiley du vil indsætte ved at klikke på den til højre for feltet hvor du skriver din indlægstekst. Når du har valgt smiley'en vises smileykoden i tekstfeltet.</para>
-			<para>Hvis du ønsker at anvende nogle af disse tegnkombinationer i indlægget, men ikke ønsker at de skal vises som smilies, se venligst <link linkend="posting_options">Indlægsindstillinger</link>.</para>
+			<para>Hvis du ønsker at anvende nogle af disse tegnkombinationer i indlægget, men ikke ønsker at de skal vises som smileys, se venligst <link linkend="posting_options">Indlægsindstillinger</link>.</para>
 		</section>
 		
 		<section id="posting_bbcodes">
@@ -245,7 +245,7 @@
 			<para>Når du skriver et indlæg eller et svar, har du adskillige muligheder for at ændre i standardindstillingerne for dette specifikke indlæg. Umiddelbart under feltet hvor du skriver dit svar findes fanen <guilabel>handling</guilabel>, og afhængig af de tilladelser administratoren har tildelt dig har du forskellige muligheder. Valgmulighederne varierer også afhængig af om du skriver et nyt indlæg eller svarer i et eksisterende emne.</para>
 			<itemizedlist>	
 				<listitem><para><guilabel>Anvend ikke BBkode</guilabel>: Er BBkode aktiveret på boardet, og du har tilladelse til bruge den, er denne mulighed tilgængelig. Vinges boksen bliver ingen BBkoder fortolket som sådan. Som eksempel vil kombinationen [b]Fed tekst[/b] blive vist nøjagtig sådan [b]Fed tekst[/b] i indlægget.</para></listitem> 
-				<listitem><para><guilabel>Anvend ikke smilies</guilabel>: Hvis smilies er aktiveret på boardet, og du har tilladelser til at bruge disse, er denne mulighed tilgængelig. Vinges boksen af bliver smiliekode ikke konverteret. Som eksempel vil ;) blive vist i teksten nøjagtig som ;).</para></listitem> 
+				<listitem><para><guilabel>Anvend ikke smileys</guilabel>: Hvis smileys er aktiveret på boardet, og du har tilladelser til at bruge disse, er denne mulighed tilgængelig. Vinges boksen af bliver smileykode ikke konverteret. Som eksempel vil ;) blive vist i teksten nøjagtig som ;).</para></listitem> 
 				<listitem><para><guilabel>Behandel ikke URL'er automatisk</guilabel>: Når du skriver en URL i din indlægstekst (i formatet http://....com eller www.etc.com), bliver den som standard konverteret til et link kan klikkes på. Hvis boksen vinges af bliver URL'er i dette indlæg vist som en helt almindelig tekststreng.</para></listitem> 
 				<listitem><para><guilabel>Tilføj signatur (signaturen kan rettes i brugerkontrolpanelet)</guilabel>: Er boksen vinget af tilføjes den signatur du oprettet under din profil. Det forudsætter at administratoren har tilladt brug af signaturer i indlæg. Læs mere om signaturer i <link linkend="ucp_signature">signaturer i UCP</link>.</para></listitem> 
 				<listitem><para><guilabel>Giv mig besked ved besvarelse</guilabel>: Vinges boksen af modtager du automatisk besked (pr. email, Jabber, etc) hver gang der skrives et svar i emnet. Funktionen kaldes overvågning af emnet. Læs mere i kapitlet <link linkend="ucp_subscriptions">Boardindstillinger i UCP</link>.</para></listitem>
