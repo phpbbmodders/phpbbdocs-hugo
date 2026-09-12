@@ -5,6 +5,7 @@ language's own `README.md` links to its detailed TODOs (terminology
 audit, translation review notes, supplementary glossary, etc.).
 
 - [German (de-x-sie)](de-x-sie/README.md)
+- [German (de)](de/README.md)
 - [French (fr)](fr/README.md)
 
 A language with no outstanding TODOs (currently English and Danish)

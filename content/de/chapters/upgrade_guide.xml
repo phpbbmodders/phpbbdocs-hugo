@@ -95,7 +95,7 @@
 		</important>
 		<important>
 			<para>Stelle beim Sichern deiner Dateien sicher, dass sich dein FTP-Client im Binärmodus befindet oder Dateien ohne Erweiterung im Binärmodus überträgt.</para>
-			<para>Weitere Informationen findest du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
+			<para>Weitere Informationen finden du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
 		</important>
 	</section>
 
@@ -167,7 +167,7 @@
 		</important>
 		<important>
 			<para>Stelle beim Sichern deiner Dateien sicher, dass sich dein FTP-Client im Binärmodus befindet oder Dateien ohne Erweiterung im Binärmodus überträgt.</para>
-			<para>Weitere Informationen findest du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
+			<para>Weitere Informationen finden du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
 		</important>
 	</section>
 
@@ -239,7 +239,7 @@
 		</important>
 		<important>
 			<para>Stelle beim Sichern deiner Dateien sicher, dass sich dein FTP-Client im Binärmodus befindet oder Dateien ohne Erweiterung im Binärmodus überträgt.</para>
-			<para>Weitere Informationen findest du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
+			<para>Weitere Informationen finden du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
 		</important>
 	</section>
 
@@ -253,7 +253,7 @@
 		</sectioninfo>
 		<title>Kleinere Aktualisierungen innerhalb von 3.3.x</title>
 		<note>
-			<para>phpBB strebt Abwärtskompatibilität innerhalb von Nebenversionen an, aber wenn du Erweiterungen, Sprachpakete oder benutzerdefinierte Stile verwendest, solltest du diese vor der Aktualisierung von phpBB auf Updates überprüfen.</para>
+			<para>phpBB strebt Abwärtskompatibilität innerhalb von Nebenversionen an, aber wenn du Erweiterungen, Sprachpakete oder benutzerdefinierte Stile verwenden, solltest du diese vor der Aktualisierung von phpBB auf Updates überprüfen.</para>
 		</note>
 
 		<para>Es stehen mehrere Aktualisierungswege zur Verfügung, abhängig von der Art der Änderungen, die du an deinem Forum vorgenommen hast:</para>
@@ -274,7 +274,7 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Vollständiges Paket</title>
-			<para>Diese Aktualisierungsmethode entfernt die meisten vorhandenen Dateien und setzt anschließend die neuen an ihre Stelle.</para>
+			<para>Diese Aktualisierungsmethode entfernt die meisten vorhandenen Dateien und setzen anschließend die neuen an ihre Stelle.</para>
 			<orderedlist>
 				<listitem><para><emphasis role="bold">Erstelle eine Sicherung der ursprünglichen Dateien</emphasis></para></listitem>
 				<listitem><para><emphasis role="bold">Erstelle eine Sicherung der Datenbank</emphasis></para></listitem>
@@ -347,7 +347,7 @@
 			</sectioninfo>
 			<title>Geänderte Dateien</title>
 			<para>Diese Methode ist für alle gedacht, die nur die zwischen einer vorherigen Version und der neuesten Version geänderten Dateien ersetzen möchten.</para>
-			<para>Dieses Paket enthält eine Reihe von Unterarchiven, von denen jedes die Dateien enthält, die von einer bestimmten Version zur neuesten Version geändert wurden. Du solltest das passende Archiv für deine aktuelle Version auswählen, z. B. solltest du, wenn du derzeit 3.3.0 verwendest und auf 3.3.1 aktualisierst, das Unterarchiv phpBB-3.3.0_to_3.3.1.zip/tar.bz2 auswählen.</para>
+			<para>Dieses Paket enthält eine Reihe von Unterarchiven, von denen jedes die Dateien enthält, die von einer bestimmten Version zur neuesten Version geändert wurden. Du solltest das passende Archiv für deine aktuelle Version auswählen, z. B. solltest du, wenn du derzeit 3.3.0 verwenden und auf 3.3.1 aktualisierst, das Unterarchiv phpBB-3.3.0_to_3.3.1.zip/tar.bz2 auswählen.</para>
 			<orderedlist>
 				<listitem><para><emphasis role="bold">Erstelle eine Sicherung der ursprünglichen Dateien</emphasis></para></listitem>
 				<listitem><para><emphasis role="bold">Erstelle eine Sicherung der Datenbank</emphasis></para></listitem>
