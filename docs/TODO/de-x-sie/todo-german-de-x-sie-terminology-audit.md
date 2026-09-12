@@ -79,10 +79,12 @@ has a specific, checked reason it isn't a translation bug:
 - **Pre-existing content issues shared identically by the English
   source** — e.g. the "Maximum thumbnail filesize" setting's
   description matches a `MIN_THUMB_FILESIZE`-shaped behavior in both
-  languages, and "Recompile stale templates" may describe an
+  languages, and "Recompile stale templates" describes an
   older/renamed feature; these are flagged for awareness, not silently
   patched in German only, since fixing only the translation would fork
-  it from the (equally wrong) English original.
+  it from the (equally wrong) English original. Both were confirmed as
+  genuine documentation bugs by phpBB dev team lead Marc (09/2026); a
+  fix isn't expected soon since phpBB 4.0 work has priority right now.
 - **Genuinely unconfirmed** — a small residual set, across every
   chapter (not just `admin_guide.xml`), where no matching key could be
   found in the fetched reference files at all. These are listed, with
