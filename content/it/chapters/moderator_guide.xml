@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="moderator_guide">
+	<?dbhtml dir="moderatorguide" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2006</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
+	<title>Guida per i moderatori</title>
+	<abstract>
+		<para>Questo capitolo descrive gli strumenti di moderazione del forum di phpBB 3.3.</para>
+	</abstract>
+	<section id="moderator_edit">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>camm15h</othername>
+				</author>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Modificare i messaggi</title>
+		<para>I moderatori con privilegi nei forum pertinenti possono modificare argomenti e messaggi, anche se il forum è bloccato. Di solito puoi vedere chi sono i moderatori sotto la descrizione del forum nella pagina indice. Un utente con privilegi da moderatore può selezionare il pulsante di modifica accanto a ogni messaggio. Da qui in poi, può:</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>Cancellare messaggi</term>
+				<listitem>
+					<para>Questa opzione rimuove il messaggio dall'argomento. Ricorda che una volta cancellato non può essere recuperato.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Cambiare o rimuovere l'icona del messaggio</term>
+				<listitem>
+					<para>Decide se un'icona accompagna il messaggio e, in caso affermativo, quale icona.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Modificare l'oggetto e il corpo del messaggio</term>
+				<listitem>
+					<para>Permette al moderatore di modificare i contenuti del messaggio.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Modificare le opzioni del messaggio - disabilitare BBCode/Smileys, l'analisi degli URL, ecc.</term>
+				<listitem>
+					<para>Determina se determinate funzionalità sono abilitate nel messaggio.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Bloccare l'argomento o il messaggio</term>
+				<listitem>
+					<para>Permette al moderatore di bloccare il messaggio corrente, o l'intero argomento.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Aggiungere, modificare o rimuovere allegati</term>
+				<listitem>
+					<para>Seleziona gli allegati da rimuovere o modificare (se l'opzione è abilitata e sono presenti allegati).</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Modificare le impostazioni del sondaggio</term>
+				<listitem>
+					<para>Modifica le impostazioni correnti del sondaggio (se l'opzione è abilitata ed è presente un sondaggio).</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+
+		<para>Se, per qualsiasi motivo, il moderatore decide che il messaggio non dovrebbe essere modificato, può bloccare il messaggio per impedire all'utente di farlo. All'utente verrà mostrato un avviso quando in futuro tenterà di modificare il messaggio. Se il moderatore desidera indicare il motivo della modifica del messaggio, può inserire una motivazione durante la modifica.</para>
+
+		<!--TODO: screenshot of post and edit reason?-->
+	</section>
+	<section id="moderator_modtools">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>camm15h</othername>
+				</author>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Strumenti di moderazione</title>
+		<para>Sotto gli argomenti, il moderatore dispone di varie opzioni in un menu a tendina che modificano l'argomento in modi diversi. Queste includono la possibilità di bloccare, sbloccare, cancellare, spostare, dividere, unire e copiare l'argomento. Oltre a queste, può anche cambiare il tipo di argomento (Importante/Annuncio/Annuncio globale) e visualizzare i log dell'argomento. Le seguenti sottosezioni descrivono in dettaglio ciascuna azione su un argomento che un moderatore può eseguire.</para>
+
+		<figure id="quick_mod_tools">
+			<title>Strumenti di moderazione rapidi</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata format="PNG" fileref="../images/moderator_guide/quick_mod_tools.png"/>
+				</imageobject>
+				<caption>
+					<para>Gli strumenti di moderazione rapidi. Come puoi vedere, questi strumenti si trovano alla fine di ogni argomento, in fondo alla pagina, prima dell'ultimo messaggio di quella pagina. Cliccando sull'icona del martelletto vedrai tutte le azioni che puoi eseguire.</para>
+				</caption>
+			</mediaobject>
+		</figure>
+
+		<section id="modtools_lock">
+			<title>Bloccare un argomento o un messaggio</title>
+			<para>Questa sezione descrive come un moderatore può bloccare interi argomenti o singoli messaggi. Ci sono vari modi in cui un moderatore può farlo: utilizzando il <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link> mentre visualizza un forum, navigando nel menu di selezione sotto l'argomento in questione, oppure modificando qualsiasi messaggio all'interno di un argomento e spuntando la casella pertinente.</para>
+			<para>Bloccare un intero argomento impedisce a qualsiasi utente di rispondervi, mentre bloccare singoli messaggi nega all'autore del messaggio qualsiasi permesso di modifica per quel messaggio.</para>
+		</section>
+
+		<section id="modtools_delete">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Cancellare un argomento o un messaggio</title>
+			<para>Se abilitato nei permessi del <link linkend="admin_control_panel">Pannello di Controllo Amministrazione</link>, un utente può cancellare i propri messaggi mentre visualizza un argomento o modifica un messaggio precedente. L'utente può cancellare un argomento o un messaggio solo se non ha ancora ricevuto risposte.</para>
+			<para>Per cancellare i messaggi di un altro utente, occorre disporre dell'apposito permesso di moderazione basato sul forum - <guilabel>Può cancellare messaggi</guilabel>. Utilizzando il menu di selezione sotto gli argomenti è possibile una rimozione rapida. Il <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link> permette di cancellare più messaggi separati contemporaneamente.</para>
+			<para>Quando cancelli un argomento o un messaggio, ti verrà chiesto di fornire un motivo per la cancellazione. Questo messaggio comparirà nei log dei moderatori. Inoltre, se disponi del permesso di moderatore <guilabel>Cancellazione reversibile</guilabel>, ti verrà chiesto se desideri cancellare permanentemente l'argomento/messaggio oppure no. Se scegli di non farlo, verrà semplicemente nascosto alla vista, con la possibilità di ripristinarlo.</para>
+			<tip>
+				<para>Tieni presente che se scegli di cancellare permanentemente un argomento o un messaggio, l'operazione non può essere annullata.</para>
+			</tip>
+		</section>
+
+		<section id="modtools_restore">
+			<title>Ripristinare un argomento o un messaggio</title>
+			<para>Se un argomento o un messaggio è stato cancellato, potrebbe essere possibile ripristinarlo. Se un utente ha scelto di non cancellare permanentemente l'argomento o il messaggio, questo verrà elencato con un'icona accanto che indica che è idoneo per il ripristino.</para>
+			<para>Se un utente ha scelto di cancellare permanentemente un messaggio o un argomento, non può essere recuperato.</para>
+		</section>
+
+		<section id="modtools_move">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Spostare un argomento in un altro forum</title>
+			<para>Per spostare un argomento in un altro forum, vai nell'area <guilabel>Strumenti di moderazione rapidi</guilabel> sotto l'argomento e seleziona <guilabel>Sposta argomento</guilabel> dal menu di selezione. Ti verrà quindi mostrato un altro menu di selezione per scegliere la posizione (un altro forum) in cui spostarlo. Se desideri lasciare un <link linkend="modtools_move_shadow">argomento ombra</link>, lascia la casella spuntata. Seleziona il forum desiderato e clicca su <guilabel>Sì</guilabel>.</para>
+
+			<section id="modtools_move_shadow">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>camm15h</othername>
+						</author>
+						<author>
+							<othername>MennoniteHobbit</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Argomenti ombra</title>
+				<para>Gli argomenti ombra possono essere creati quando si sposta un argomento da un forum a un altro. Un argomento ombra è semplicemente un collegamento all'argomento nel forum da cui è stato spostato. Puoi scegliere se lasciare o meno un argomento ombra selezionando o deselezionando la casella nella finestra di dialogo <guilabel>Sposta argomento</guilabel>.</para>
+				<para>Per cancellare un argomento ombra, vai al forum che contiene l'argomento ombra e utilizza il <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link> per selezionare e cancellare l'argomento.</para>
+				<note>
+					<para>Cancellare un argomento ombra <emphasis>non</emphasis> cancellerà l'argomento originale di cui è l'ombra.</para>
+				</note>
+			</section>
+		</section>
+
+		<section id="modtools_copy">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Duplicare un argomento</title>
+			<para>Ai moderatori è inoltre consentito duplicare gli argomenti. Duplicare un argomento crea semplicemente una copia dell'argomento selezionato in un altro forum. Questo può essere fatto utilizzando l'area <guilabel>Strumenti di moderazione rapidi</guilabel> sotto l'argomento che vuoi duplicare, oppure tramite il <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link> mentre visualizzi il forum. Da qui, devi semplicemente selezionare il forum di destinazione in cui vuoi duplicare l'argomento. Clicca su <guilabel>Sì</guilabel> per duplicare l'argomento.</para>
+		</section>
+
+		<section id="modtools_type">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Annunci e argomenti importanti</title>
+			<para>Ci sono vari tipi di argomenti che gli amministratori e i moderatori del forum (se hanno i permessi appropriati) possono assegnare a specifici argomenti. Questi tipi speciali di argomento sono: <guilabel>Annuncio globale</guilabel>, <guilabel>Annuncio</guilabel> e <guilabel>Importante</guilabel>. Il <link linkend="posting_special">tipo di argomento</link> può essere scelto quando si scrive un nuovo argomento o si modifica il primo messaggio di un argomento già pubblicato. Puoi scegliere quale tipo di argomento preferisci selezionando il relativo pulsante di opzione. Quando visualizzi il forum, gli <guilabel>annunci globali</guilabel> e i normali <guilabel>annunci</guilabel> vengono visualizzati sotto un'intestazione separata rispetto agli argomenti <guilabel>importanti</guilabel> e a quelli normali.</para>
+		</section>
+
+		<section id="modtools_split">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Dividere i messaggi da un argomento</title>
+			<para>I moderatori hanno anche la possibilità di dividere i messaggi da un argomento. Questo può essere utile se alcune discussioni hanno generato una nuova idea meritevole di un proprio thread, rendendo quindi necessario dividerla dall'argomento originale. Dividere i messaggi comporta lo spostamento di singoli messaggi da un argomento esistente a un nuovo argomento. Puoi farlo utilizzando l'area <guilabel>Strumenti di moderazione rapidi</guilabel> sotto l'argomento che vuoi dividere, oppure dal <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link> all'interno dell'argomento.</para>
+			<para>Durante la divisione, puoi scegliere un titolo per il nuovo argomento, un forum diverso per il nuovo argomento e anche un'icona diversa. Puoi anche ignorare le impostazioni predefinite del forum per il numero di messaggi da visualizzare per pagina. L'opzione <guilabel>Dividi i messaggi selezionati dall'argomento</guilabel> dividerà tutti i messaggi dal messaggio selezionato fino all'ultimo. L'opzione <guilabel>Dividi il messaggio selezionato dall'argomento</guilabel> dividerà solo i messaggi attualmente selezionati.</para>
+		</section>
+
+		<section id="modtools_mergetopics">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Unire argomenti</title>
+			<para>In phpBB3, ora è possibile unire argomenti tra loro, oltre a dividerli. Questo può essere utile se, ad esempio, due argomenti separati sono correlati e riguardano la stessa discussione. La funzione di unione degli argomenti permette di unire argomenti esistenti tra loro.</para>
+			<para>Per unire argomenti tra loro, inizia individuando il menu di selezione sotto l'argomento in questione, che ti porta al <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link>. Da qui, devi inserire l'ID dell'argomento in cui vuoi spostare i messaggi. Puoi cliccare su <guilabel>Seleziona argomento</guilabel> per vedere un elenco degli argomenti disponibili e specificare quale. Selezionando la sezione <guilabel>Seleziona tutto</guilabel> verranno selezionati tutti i messaggi nell'argomento corrente, permettendo di spostarli nell'argomento esistente. I messaggi uniti nel nuovo argomento manterranno il loro timestamp esistente (cioè non appariranno alla fine dell'argomento in cui vengono uniti, ma verranno ordinati in base al loro timestamp).</para>
+		</section>
+
+		<section id="modtools_mergeposts">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Unire messaggi in un altro argomento</title>
+			<para>Oltre a unire semplicemente gli argomenti tra loro, puoi anche unire messaggi specifici in qualsiasi altro argomento.</para>
+			<para>Per unire messaggi specifici in un altro argomento, inizia individuando il menu di selezione sotto l'argomento e vai al <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link>. Da qui, devi inserire l'ID dell'argomento in cui vuoi spostare i messaggi. Puoi cliccare su <guilabel>Seleziona argomento</guilabel> per vedere un elenco degli argomenti disponibili e specificare quale. Seleziona i messaggi che desideri unire dall'argomento corrente, nell'argomento esistente. I messaggi uniti nel nuovo argomento manterranno il loro timestamp esistente (cioè non appariranno alla fine dell'argomento in cui vengono uniti, ma verranno ordinati in base al loro timestamp).</para>
+		</section>
+	</section>
+
+	<section id="moderator_queue">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>camm15h</othername>
+				</author>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Cos'è la &#x201C;Coda di moderazione&#x201D;?</title>
+		<para>La <guilabel>Coda di moderazione</guilabel> è un'area in cui sono elencati gli argomenti e i messaggi che necessitano di approvazione. Se i permessi di un forum o di un utente sono impostati su <guilabel>coda di moderazione</guilabel> tramite il <link linkend="admin_control_panel">Pannello di Controllo Amministrazione</link>, tutti i messaggi pubblicati in quel forum o da quell'utente dovranno essere approvati da un amministratore o da un moderatore prima di essere mostrati agli altri utenti. Gli argomenti e i messaggi che richiedono approvazione possono essere visualizzati tramite il <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link>.</para>
+		<para>Quando visualizzi un forum, gli argomenti non ancora approvati saranno contrassegnati con un'icona; cliccando su questa icona verrai portato direttamente al Pannello di Controllo Moderatore, dove potrai approvare o respingere l'argomento. Allo stesso modo, quando visualizzi l'argomento stesso, il messaggio che richiede approvazione sarà accompagnato da un messaggio che rimanda anch'esso al messaggio in attesa di approvazione.</para>
+		<para>Se scegli di approvare un argomento o un messaggio, ti verrà data la possibilità di notificare all'utente l'approvazione. Se scegli di respingere un argomento o un messaggio, ti verrà data la possibilità di notificare all'utente il rifiuto e anche di specificare il motivo del rifiuto, inserendo una descrizione.</para>
+		<para>Per ulteriori informazioni sul Pannello di Controllo Moderatore, vedi <xref linkend="moderator_mcp" />.</para>
+	</section>
+
+	<section id="moderator_reported">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>camm15h</othername>
+				</author>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Cosa sono i &#x201C;Messaggi segnalati&#x201D;?</title>
+		<para>A differenza di phpBB2, phpBB3 ora permette agli utenti di segnalare un messaggio, per motivi che l'amministratore del forum può definire all'interno del <link linkend="admin_control_panel">Pannello di Controllo Amministrazione</link>. Se un utente trova un messaggio inappropriato per qualsiasi motivo, può segnalarlo usando il pulsante <guilabel>Segnala il messaggio</guilabel> accanto al messaggio incriminato. Questa segnalazione viene quindi mostrata all'interno del Pannello di Controllo Moderatore, dove l'amministratore o i moderatori possono visualizzarla, chiuderla o cancellarla.</para>
+		<para>Quando visualizzi un forum con segnalazioni di messaggi all'interno degli argomenti, il titolo dell'argomento sarà accompagnato da un'icona con un punto esclamativo rosso. Questo avvisa l'amministratore/i o i moderatori che un messaggio è stato segnalato. Quando visualizzi gli argomenti, i messaggi segnalati sono accompagnati da un punto esclamativo rosso e da un testo. Cliccando su questa icona o su questo testo si viene portati alla sezione Messaggi segnalati del Pannello di Controllo Moderatore.</para>
+		<para>Per ulteriori informazioni sul Pannello di Controllo Moderatore, vedi <xref linkend="moderator_mcp" />.</para>
+	</section>
+
+	<section id="moderator_mcp">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>camm15h</othername>
+				</author>
+				<author>
+					<othername>MennoniteHobbit</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Il Pannello di Controllo Moderatore (MCP)</title>
+		<para>Un'altra novità di phpBB3 è il <guilabel>Pannello di Controllo Moderatore</guilabel>, dove ogni moderatore si sentirà a proprio agio. Come per il Pannello di Controllo Amministrazione, quest'area illustra tutti i compiti di moderazione attualmente da svolgere. Dopo essere andati nell'MCP, il moderatore troverà i messaggi in attesa di approvazione, le segnalazioni di messaggi e le cinque azioni più recenti registrate - eseguite da amministratori, moderatori e utenti.</para>
+		<para>Sul lato sinistro c'è un menu contenente tutte le aree pertinenti all'interno dell'MCP. Questa guida descrive ciascuna singola sezione e che tipo di informazioni contiene:
+			<variablelist>
+				<varlistentry>
+					<term>Principale</term>
+					<listitem>
+						<para>Contiene i messaggi da approvare, i messaggi segnalati e le cinque azioni più recenti registrate.</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Coda di moderazione</term>
+					<listitem>
+						<para>Quest'area elenca tutti gli argomenti o i messaggi in attesa di approvazione. Elenca anche gli argomenti e i messaggi cancellati in modo reversibile.</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Messaggi segnalati</term>
+					<listitem>
+						<para>Un elenco di tutti i messaggi segnalati, aperti o chiusi.</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Note utente</term>
+					<listitem>
+						<para>Questa è un'area in cui gli amministratori o i moderatori possono lasciare commenti su determinati utenti.</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Richiami</term>
+					<listitem>
+						<para>La possibilità di richiamare un utente, visualizzare gli utenti attualmente richiamati e vedere i cinque richiami più recenti.</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Log moderatore</term>
+					<listitem>
+						<para>Questo è un elenco dettagliato delle cinque azioni più recenti eseguite da amministratori, moderatori o utenti, come mostrato nella pagina principale dell'MCP.</para>
+					</listitem>
+				</varlistentry>
+
+				<varlistentry>
+					<term>Ban</term>
+					<listitem>
+						<para>La possibilità di bannare utenti per nome utente, indirizzo IP o indirizzo email.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+
+		<section id="mcp_queue">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Coda di moderazione</title>
+			<para>La coda di moderazione elenca gli argomenti o i messaggi che richiedono un'azione da parte del moderatore. La coda di moderazione è accessibile dal <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link>. Per maggiori informazioni sulla coda di moderazione, vedi <xref linkend="moderator_queue" />.</para>
+		</section>
+
+		<section id="mcp_reported">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>camm15h</othername>
+					</author>
+					<author>
+						<othername>MennoniteHobbit</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Messaggi segnalati</title>
+			<para>I messaggi segnalati sono segnalazioni inviate dagli utenti riguardo a messaggi problematici. Tutte le segnalazioni di messaggi attualmente presenti sono accessibili dal <link linkend="moderator_mcp">Pannello di Controllo Moderatore</link>. Per maggiori informazioni sui messaggi segnalati, vedi <xref linkend="moderator_reported" />.</para>
+		</section>
+
+		<section id="mcp_forum">
+			<title>Moderazione del forum</title>
+			<para>Quando visualizzi un particolare forum, cliccando su <guilabel>Pannello di Controllo Moderatore</guilabel> verrai portato all'area di moderazione del forum. Qui puoi moderare in massa gli argomenti all'interno di quel forum tramite il menu a tendina. Le azioni disponibili sono:
+				<itemizedlist>
+					<listitem><para><guilabel>Cancella</guilabel>: cancella l'argomento/gli argomenti selezionati.</para></listitem>
+					<listitem><para><guilabel>Ripristina</guilabel>: ripristina l'argomento/gli argomenti selezionati cancellati in modo reversibile.</para></listitem>
+					<listitem><para><guilabel>Sposta</guilabel>: sposta l'argomento/gli argomenti selezionati in un altro forum di tua scelta.</para></listitem>
+					<listitem><para><guilabel>Copia</guilabel>: crea un duplicato dell'argomento/degli argomenti selezionati in un altro forum di tua scelta.</para></listitem>
+					<listitem><para><guilabel>Blocca</guilabel>: blocca l'argomento/gli argomenti selezionati.</para></listitem>
+					<listitem><para><guilabel>Sblocca</guilabel>: sblocca l'argomento/gli argomenti selezionati.</para></listitem>
+					<listitem><para><guilabel>Risincronizza</guilabel>: risincronizza l'argomento/gli argomenti selezionati.</para></listitem>
+					<listitem><para><guilabel>Cambia il tipo di argomento</guilabel>: cambia il tipo di argomento in <guilabel>Annuncio globale</guilabel>, <guilabel>Annuncio</guilabel>, <guilabel>Importante</guilabel> oppure <guilabel>Argomento normale</guilabel>.</para></listitem>
+				</itemizedlist>
+			</para>
+
+			<para>Puoi anche moderare in massa i messaggi all'interno degli argomenti. Questo può essere fatto navigando nell'MCP mentre visualizzi il forum e cliccando sull'argomento stesso. Un altro modo per farlo è cliccare sul link MCP mentre visualizzi il particolare argomento che desideri moderare.</para>
+			<para>Quando moderi all'interno di un argomento, puoi: rinominare il titolo dell'argomento, spostare l'argomento in un forum diverso, cambiare l'icona dell'argomento, unire l'argomento con un altro argomento, oppure definire quanti messaggi per pagina verranno visualizzati (questo ha la precedenza sull'impostazione del forum).</para>
+			<para>Dal menu di selezione, puoi anche: bloccare e sbloccare singoli messaggi, cancellare i messaggi selezionati, unire i messaggi selezionati, oppure dividere o dividere a partire dai messaggi selezionati.</para>
+			<para>Il link <guilabel>Dettagli messaggio</guilabel> accanto ai messaggi ti permette anche di modificare altre impostazioni. Oltre a visualizzare l'<glossterm>indirizzo IP</glossterm>, il profilo e le note dell'autore del messaggio, e la possibilità di richiamarlo, hai anche la possibilità di cambiare l'ID utente assegnato al messaggio. Puoi anche bloccare o cancellare il messaggio da questa pagina.</para>
+
+			<note>
+				<para>A seconda dei permessi specifici impostati per il tuo account, alcune delle opzioni e possibilità sopra menzionate potrebbero non essere disponibili per te.</para>
+			</note>
+		</section>
+	</section>
+</chapter>

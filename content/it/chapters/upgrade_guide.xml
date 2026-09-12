@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="upgrade_guide">
+	<?dbhtml dir="upgradeguide" filename="index.html" ?>
+	<chapterinfo>
+		<releaseinfo>$Id$</releaseinfo>
+		<copyright>
+			<year>2009</year>
+			<holder>phpBB Group</holder>
+		</copyright>
+	</chapterinfo>
+	<title>Guida all'aggiornamento</title>
+	<abstract>
+		<para>Vuoi aggiornare il tuo forum phpBB2 alla versione 3.3? Questo capitolo ti spiegherà e mostrerà come farlo.</para>
+	</abstract>
+	<section id="upgrade2">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Techie-Micheal</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Aggiornamento da 2.0 a 3.3</title>
+		<para>Per permettere agli amministratori di forum phpBB2 di usare phpBB3 e tutte le sue funzionalità, un convertitore è incluso nell'installazione predefinita. Il framework di conversione è flessibile e ti permette di convertire anche altri sistemi di forum. Continua a leggere se hai bisogno di aiuto per convertire il tuo forum a phpBB3</para>
+
+		<para>Il processo avviene tramite un file PHP, simile al file di aggiornamento presente in phpBB 2.0.x. Il file ti guiderà attraverso schermate simili a una procedura guidata finché il tuo phpBB non sarà in esecuzione sulla versione 3.3.x. Le istruzioni di base e la risoluzione dei problemi per eseguire questa conversione si trovano <ulink url="https://www.phpbb.com/community/docs/INSTALL.html#convert">qui</ulink>.</para>
+
+		<para>Attenzione: assicurati di fare il backup sia del database che dei file prima di tentare l'aggiornamento.</para>
+	</section>
+
+	<section id="upgrade3">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Noxwizard</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Aggiornamento da 3.0 a 3.3</title>
+		<warning>
+			<para>L'aggiornamento a phpBB 3.3 renderà inutilizzabili le MODifiche e gli stili precedentemente installati. Se hai un logo personalizzato, dovrà essere rifatto dopo l'aggiornamento. Vedi <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Knowledge Base: come cambiare il logo del tuo forum</ulink>.</para>
+		</warning>
+
+		<para>phpBB 3.3 non è compatibile con la versione 3.0 e la maggior parte dei file precedenti dovrà essere rimossa prima di aggiornare.</para>
+		<para>Per aggiornare, esegui i seguenti passaggi:</para>
+		<orderedlist>
+			<listitem><para>Assicurati che il tuo server soddisfi i requisiti per eseguire phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
+			<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+			<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+			<listitem><para>Disattiva tutti gli stili tranne prosilver</para></listitem>
+			<listitem><para>Rimuovi tutte le modifiche relative alle MOD dal database. Il Database Cleaner del <ulink url="http://www.phpbb.com/support/stk/">Support Toolkit</ulink> può essere usato per questo scopo.</para></listitem>
+			<listitem><para>Imposta l'inglese britannico come unico pacchetto lingua</para></listitem>
+			<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/#install">Pacchetto completo</ulink> di phpBB 3.3</para></listitem>
+			<listitem><para>Estrai il contenuto dell'archivio sul tuo computer e apri la cartella phpBB3</para></listitem>
+			<listitem><para>Elimina i seguenti file dal pacchetto:</para>
+				<itemizedlist>
+					<listitem><para>Il file config.php</para></listitem>
+					<listitem><para>La cartella files/</para></listitem>
+					<listitem><para>La cartella images/</para></listitem>
+					<listitem><para>La cartella store/</para></listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem><para>Sul tuo sito web, elimina tutti i file dal tuo forum <emphasis role="bold">TRANNE</emphasis>:</para>
+				<itemizedlist>
+					<listitem><para>Il file config.php</para></listitem>
+					<listitem><para>La cartella files/</para></listitem>
+					<listitem><para>La cartella images/</para></listitem>
+					<listitem><para>La cartella store/</para></listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem><para>Carica il contenuto della cartella phpBB3 dal tuo computer alla cartella del tuo forum. Potrebbe esserti chiesto di sovrascrivere i restanti <emphasis>file</emphasis>. Se ti viene chiesto di unire o sovrascrivere le <emphasis>cartelle</emphasis>, scegli di unirle.</para>
+			</listitem>
+			<listitem><para>Aggiorna il database:</para>
+				<orderedlist>
+					<tip>
+						<para>Per i forum di grandi dimensioni, potresti voler aggiornare tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+					</tip>
+					<listitem><para>Con il tuo browser web, visita install/ nella cartella radice del tuo forum. (ad es. http://www.example.com/yourforum/install)</para></listitem>
+					<listitem><para>Clicca sulla scheda Aggiorna</para></listitem>
+					<listitem><para>Clicca sul pulsante Aggiorna</para></listitem>
+					<listitem><para>Seleziona "Aggiorna solo il database" e clicca su Invia</para></listitem>
+					<listitem><para>Attendi che la barra di avanzamento raggiunga il 100% e che appaia un messaggio che indica che l'aggiornamento è stato completato</para></listitem>
+				</orderedlist>
+			</listitem>
+			<listitem><para>Elimina la cartella install/</para></listitem>
+		</orderedlist>
+		<note>
+			<para>Assicurati che il file <emphasis>.htaccess</emphasis> a livello radice sia incluso nel caricamento. Alcuni client FTP non mostrano i file il cui nome inizia con un punto, e potresti dover abilitare la visualizzazione dei file nascosti.</para>
+		</note>
+		<note>
+			<para>Se il tuo forum utilizzava pacchetti lingua diversi dall'inglese britannico, dovrai scaricare una versione compatibile con phpBB 3.3 da <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
+		</note>
+		<important>
+			<para>Quando carichi i file di phpBB 3.3 sul tuo server, <emphasis role="bold">NON</emphasis> sovrascrivere il tuo config.php.</para>
+		</important>
+		<important>
+			<para>Quando fai il backup dei tuoi file, assicurati che il tuo client FTP sia in modalità binaria o che trasferisca i file senza estensione in modalità binaria.</para>
+			<para>Per maggiori informazioni, vedi: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: trasferire i file allegati con Filezilla</ulink></para>
+		</important>
+	</section>
+
+	<section id="upgrade31">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Noxwizard</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Aggiornamento da 3.1 a 3.3</title>
+		<warning>
+			<para>L'aggiornamento a phpBB 3.3 potrebbe causare il malfunzionamento di alcune estensioni. Tutti gli stili dovranno essere aggiornati, anche se sembrano funzionare. Se hai un logo personalizzato, dovrà essere rifatto dopo l'aggiornamento. Vedi <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Knowledge Base: come cambiare il logo del tuo forum</ulink>.</para>
+		</warning>
+
+		<para>phpBB 3.3 non è completamente retrocompatibile con la versione 3.1 e le modifiche personalizzate potrebbero non funzionare più. Il metodo di aggiornamento più semplice consiste nel rimuovere tutti i file esistenti prima di aggiornare e riapplicare le modifiche personalizzate dopo averne verificato la correttezza.</para>
+		<para>Per aggiornare, esegui i seguenti passaggi:</para>
+		<orderedlist>
+			<listitem><para>Assicurati che il tuo server soddisfi i requisiti per eseguire phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
+			<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+			<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+			<listitem><para>Disattiva tutti gli stili tranne prosilver</para></listitem>
+			<listitem><para>Disattiva tutte le estensioni non compatibili con phpBB 3.3. Verifica con l'autore dell'estensione se un'estensione è compatibile oppure no.</para></listitem>
+			<listitem><para>Imposta l'inglese britannico come unico pacchetto lingua</para></listitem>
+			<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/#install">Pacchetto completo</ulink> di phpBB 3.3</para></listitem>
+			<listitem><para>Estrai il contenuto dell'archivio sul tuo computer e apri la cartella phpBB3</para></listitem>
+			<listitem><para>Elimina i seguenti file dal pacchetto:</para>
+				<itemizedlist>
+					<listitem><para>Il file config.php</para></listitem>
+					<listitem><para>La cartella images/</para></listitem>
+					<listitem><para>La cartella files/</para></listitem>
+					<listitem><para>La cartella store/</para></listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem><para>Sul tuo sito web, elimina tutti i file dal tuo forum <emphasis role="bold">TRANNE</emphasis>:</para>
+				<itemizedlist>
+					<listitem><para>Il file config.php</para></listitem>
+					<listitem><para>La cartella ext/</para></listitem>
+					<listitem><para>La cartella images/</para></listitem>
+					<listitem><para>La cartella files/</para></listitem>
+					<listitem><para>La cartella store/</para></listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem><para>Carica il contenuto della cartella phpBB3 dal tuo computer alla cartella del tuo forum. Potrebbe esserti chiesto di sovrascrivere i restanti <emphasis>file</emphasis>. Se ti viene chiesto di unire o sovrascrivere le <emphasis>cartelle</emphasis>, scegli di unirle.</para>
+			</listitem>
+			<listitem><para>Aggiorna il database:</para>
+				<orderedlist>
+					<tip>
+						<para>Per i forum di grandi dimensioni, potresti voler aggiornare tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+					</tip>
+					<listitem><para>Con il tuo browser web, visita install/ nella cartella radice del tuo forum. (ad es. http://www.example.com/yourforum/install)</para></listitem>
+					<listitem><para>Clicca sulla scheda Aggiorna</para></listitem>
+					<listitem><para>Clicca sul pulsante Aggiorna</para></listitem>
+					<listitem><para>Seleziona "Aggiorna solo il database" e clicca su Invia</para></listitem>
+					<listitem><para>Attendi che la barra di avanzamento raggiunga il 100% e che appaia un messaggio che indica che l'aggiornamento è stato completato</para></listitem>
+				</orderedlist>
+			</listitem>
+			<listitem><para>Elimina la cartella install/</para></listitem>
+		</orderedlist>
+		<note>
+			<para>Assicurati che il file <emphasis>.htaccess</emphasis> a livello radice sia incluso nel caricamento. Alcuni client FTP non mostrano i file il cui nome inizia con un punto, e potresti dover abilitare la visualizzazione dei file nascosti.</para>
+		</note>
+		<note>
+			<para>Se il tuo forum utilizzava pacchetti lingua diversi dall'inglese britannico, dovrai scaricare una versione compatibile con phpBB 3.3 da <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
+		</note>
+		<important>
+			<para>Quando carichi i file di phpBB 3.3 sul tuo server, <emphasis role="bold">NON</emphasis> sovrascrivere il tuo config.php.</para>
+		</important>
+		<important>
+			<para>Quando fai il backup dei tuoi file, assicurati che il tuo client FTP sia in modalità binaria o che trasferisca i file senza estensione in modalità binaria.</para>
+			<para>Per maggiori informazioni, vedi: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: trasferire i file allegati con Filezilla</ulink></para>
+		</important>
+	</section>
+
+	<section id="upgrade32">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Marc</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Aggiornamento da 3.2 a 3.3</title>
+		<warning>
+			<para>L'aggiornamento a phpBB 3.3 potrebbe causare il malfunzionamento di alcuni stili ed estensioni. Se hai un logo personalizzato, potrebbe dover essere rifatto dopo l'aggiornamento. Vedi <ulink url="https://www.phpbb.com/support/docs/en/3.3/kb/article/how-to-change-your-board-logo/">Knowledge Base: come cambiare il logo del tuo forum</ulink>.</para>
+		</warning>
+
+		<para>phpBB 3.3 dovrebbe essere retrocompatibile con la versione 3.2, tuttavia alcune estensioni e modifiche personalizzate potrebbero non funzionare più. Il metodo di aggiornamento più semplice consiste nel rimuovere tutti i file esistenti prima di aggiornare e riapplicare le modifiche personalizzate dopo averne verificato la correttezza.</para>
+		<para>Per aggiornare, esegui i seguenti passaggi:</para>
+		<orderedlist>
+			<listitem><para>Assicurati che il tuo server soddisfi i requisiti per eseguire phpBB 3.3: <xref linkend="quick_requirements" /></para></listitem>
+			<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+			<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+			<listitem><para>Disattiva tutti gli stili tranne prosilver</para></listitem>
+			<listitem><para>Disattiva tutte le estensioni non compatibili con phpBB 3.3. Verifica con l'autore dell'estensione se un'estensione è compatibile oppure no.</para></listitem>
+			<listitem><para>Imposta l'inglese britannico come unico pacchetto lingua</para></listitem>
+			<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/#install">Pacchetto completo</ulink> di phpBB 3.3</para></listitem>
+			<listitem><para>Estrai il contenuto dell'archivio sul tuo computer e apri la cartella phpBB3</para></listitem>
+			<listitem><para>Elimina i seguenti file dal pacchetto:</para>
+				<itemizedlist>
+					<listitem><para>Il file config.php</para></listitem>
+					<listitem><para>La cartella files/</para></listitem>
+					<listitem><para>La cartella images/</para></listitem>
+					<listitem><para>La cartella store/</para></listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem><para>Sul tuo sito web, elimina tutti i file dal tuo forum <emphasis role="bold">TRANNE</emphasis>:</para>
+				<itemizedlist>
+					<listitem><para>Il file config.php</para></listitem>
+					<listitem><para>La cartella ext/</para></listitem>
+					<listitem><para>La cartella files/</para></listitem>
+					<listitem><para>La cartella images/</para></listitem>
+					<listitem><para>La cartella store/</para></listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem><para>Carica il contenuto della cartella phpBB3 dal tuo computer alla cartella del tuo forum. Potrebbe esserti chiesto di sovrascrivere i restanti <emphasis>file</emphasis>. Se ti viene chiesto di unire o sovrascrivere le <emphasis>cartelle</emphasis>, scegli di unirle.</para>
+			</listitem>
+			<listitem><para>Aggiorna il database:</para>
+				<orderedlist>
+					<tip>
+						<para>Per i forum di grandi dimensioni, potresti voler aggiornare tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+					</tip>
+					<listitem><para>Con il tuo browser web, visita install/ nella cartella radice del tuo forum. (ad es. http://www.example.com/yourforum/install)</para></listitem>
+					<listitem><para>Clicca sulla scheda Aggiorna</para></listitem>
+					<listitem><para>Clicca sul pulsante Aggiorna</para></listitem>
+					<listitem><para>Seleziona "Aggiorna solo il database" e clicca su Invia</para></listitem>
+					<listitem><para>Attendi che la barra di avanzamento raggiunga il 100% e che appaia un messaggio che indica che l'aggiornamento è stato completato</para></listitem>
+				</orderedlist>
+			</listitem>
+			<listitem><para>Elimina la cartella install/</para></listitem>
+		</orderedlist>
+		<note>
+			<para>Assicurati che il file <emphasis>.htaccess</emphasis> a livello radice sia incluso nel caricamento. Alcuni client FTP non mostrano i file il cui nome inizia con un punto, e potresti dover abilitare la visualizzazione dei file nascosti.</para>
+		</note>
+		<note>
+			<para>Se il tuo forum utilizzava pacchetti lingua diversi dall'inglese britannico, dovrai scaricare una versione compatibile con phpBB 3.3 da <ulink url="https://www.phpbb.com/languages/">https://www.phpbb.com/languages/</ulink></para>
+		</note>
+		<important>
+			<para>Quando carichi i file di phpBB 3.3 sul tuo server, <emphasis role="bold">NON</emphasis> sovrascrivere il tuo config.php.</para>
+		</important>
+		<important>
+			<para>Quando fai il backup dei tuoi file, assicurati che il tuo client FTP sia in modalità binaria o che trasferisca i file senza estensione in modalità binaria.</para>
+			<para>Per maggiori informazioni, vedi: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: trasferire i file allegati con Filezilla</ulink></para>
+		</important>
+	</section>
+
+	<section id="minor">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Noxwizard</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Aggiornamenti minori all'interno della versione 3.3.x</title>
+		<note>
+			<para>phpBB mira ad essere retrocompatibile all'interno delle versioni minori, ma se stai usando estensioni, pacchetti lingua o stili personalizzati, dovresti verificare se hanno aggiornamenti prima di aggiornare phpBB.</para>
+		</note>
+
+		<para>Ci sono diversi percorsi di aggiornamento disponibili a seconda dei tipi di modifiche apportate al tuo forum:</para>
+		<orderedlist>
+			<listitem><para><xref linkend="update_full" /></para><para>Se non hai apportato modifiche ai file principali, questo è l'approccio più semplice.</para></listitem>
+			<listitem><para><xref linkend="update_changed" /></para><para>Se desideri aggiornare solo i file che sono cambiati tra due versioni, usa questo approccio.</para></listitem>
+			<listitem><para><xref linkend="update_advanced" /></para><para>Se hai apportato modifiche ai file principali e non vuoi riapplicarle manualmente, usa questo approccio.</para></listitem>
+			<listitem><para><xref linkend="update_patch" /></para><para>Per chi ha dimestichezza con l'utility <command>patch</command>, sono disponibili file patch.</para></listitem>
+		</orderedlist>
+
+
+		<section id="update_full">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Noxwizard</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Pacchetto completo</title>
+			<para>Questo metodo di aggiornamento rimuoverà la maggior parte dei file esistenti e poi metterà al loro posto quelli nuovi.</para>
+			<orderedlist>
+				<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+				<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/3.3/install">Pacchetto completo</ulink> di phpBB 3.3</para></listitem>
+				<listitem><para>Estrai il contenuto dell'archivio sul tuo computer e apri la cartella <filename class="directory">phpBB3</filename></para></listitem>
+				<listitem><para>Elimina i seguenti file dal pacchetto:</para>
+					<itemizedlist>
+						<listitem><para>Il file <filename>config.php</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">files/</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">images/</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">store/</filename></para></listitem>
+					</itemizedlist>
+				</listitem>
+				<listitem><para>Sul tuo sito web, elimina tutti i file dal tuo forum <emphasis role="bold">TRANNE</emphasis>:</para>
+					<itemizedlist>
+						<listitem><para>Il file <filename>config.php</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">ext/</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">files/</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">images/</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">store/</filename></para></listitem>
+						<listitem><para>La cartella <filename class="directory">styles/</filename></para></listitem>
+					</itemizedlist>
+				</listitem>
+				<listitem>
+					<para>Carica il contenuto della cartella <filename class="directory">phpBB3</filename> dal tuo computer alla cartella del tuo forum. Potrebbe esserti chiesto di sovrascrivere i restanti <emphasis>file</emphasis>. Se ti viene chiesto di unire o sovrascrivere le <emphasis>cartelle</emphasis>, scegli di unirle.</para>
+					<para>La cartella <filename class="directory">docs/</filename> è per il tuo uso personale e non è necessario caricarla sul tuo forum.</para>
+				</listitem>
+				<listitem><para>Aggiorna il database:</para>
+					<orderedlist>
+						<important>
+							<para>Se hai già tentato di aggiornare con un metodo diverso, dovrai rimuovere i seguenti file dal server prima di aggiornare il database:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
+						<tip>
+							<para>Per i forum di grandi dimensioni, potresti voler aggiornare tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						</tip>
+						<listitem>
+							<para>Con il tuo browser web, visita /install/app.php/update nella cartella radice del tuo forum (ad es. http://www.example.com/yourforum/install/app.php/update). Vedrai il seguente messaggio di avviso:
+							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> Questo è previsto e non è un errore.</para>
+						</listitem>
+						<listitem><para>Seleziona "Aggiorna solo il database" e clicca su Invia</para></listitem>
+						<listitem>
+							<para>Attendi che la barra di avanzamento raggiunga il 100% e che appaia un messaggio che indica che l'aggiornamento è stato completato</para>
+							<para>A seconda della tua versione precedente, questo apporterà una serie di modifiche al database. Potresti ricevere dei FAILURES durante questa procedura. Non dovrebbero essere motivo di preoccupazione a meno che tu non veda un vero e proprio ERROR, nel qual caso lo script si fermerà (in questo caso dovresti cercare aiuto tramite i nostri forum).</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Elimina la cartella <filename class="directory">install/</filename> sul server</para></listitem>
+			</orderedlist>
+			<note>
+				<para>Assicurati che il file <emphasis>.htaccess</emphasis> a livello radice sia incluso nel caricamento. Alcuni client FTP non mostrano i file il cui nome inizia con un punto, e potresti dover abilitare la visualizzazione dei file nascosti.</para>
+			</note>
+			<important>
+				<para>Quando fai il backup dei tuoi file tramite FTP, assicurati che il client sia in modalità binaria. Se usi Filezilla, assicurati che l'impostazione "trasferisci i file senza estensione" sia impostata su "modalità binaria".</para>
+				<para>Per maggiori informazioni, vedi: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Knowledge Base: trasferire i file allegati con Filezilla</ulink></para>
+			</important>
+		</section>
+
+		<section id="update_changed">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Noxwizard</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>File modificati</title>
+			<para>Questo metodo è pensato per chi desidera sostituire solo i file che sono stati modificati tra una versione precedente e l'ultima versione.</para>
+			<para>Questo pacchetto contiene una serie di sotto-archivi, ciascuno dei quali contiene i file modificati da una determinata versione all'ultima versione. Dovresti selezionare l'archivio appropriato per la tua versione attuale, ad esempio se hai attualmente la 3.3.0 e stai aggiornando alla 3.3.1, dovresti selezionare il sotto-archivio phpBB-3.3.0_to_3.3.1.zip/tar.bz2.</para>
+			<orderedlist>
+				<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+				<listitem><para>In locale, esegui i seguenti passaggi:</para>
+					<orderedlist>
+						<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/3.3/changedfiles">File modificati</ulink> di phpBB 3.3</para></listitem>
+						<listitem><para>Estrai la cartella <filename class="directory">install/</filename></para></listitem>
+						<listitem><para>Estrai la cartella <filename class="directory">vendor/</filename></para></listitem>
+						<listitem><para>Estrai il contenuto del sotto-archivio desiderato per la tua versione</para></listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Sul tuo server web, elimina la cartella <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Carica la cartella <filename class="directory">install/</filename></para></listitem>
+				<listitem><para>Carica la cartella <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Carica il contenuto del sotto-archivio selezionato</para></listitem>
+				<listitem><para>Aggiorna il database:</para>
+					<orderedlist>
+						<important>
+							<para>Se hai già tentato di aggiornare con un metodo diverso, dovrai rimuovere i seguenti file dal server prima di aggiornare il database:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
+						<tip>
+							<para>Per i forum di grandi dimensioni, potresti voler aggiornare tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						</tip>
+						<listitem>
+							<para>Con il tuo browser web, visita /install/app.php/update nella cartella radice del tuo forum (ad es. http://www.example.com/yourforum/install/app.php/update). Vedrai il seguente messaggio di avviso:
+							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> Questo è previsto e non è un errore.</para>
+						</listitem>
+						<listitem><para>Seleziona "Aggiorna solo il database" e clicca su Invia</para></listitem>
+						<listitem>
+							<para>Attendi che la barra di avanzamento raggiunga il 100% e che appaia un messaggio che indica che l'aggiornamento è stato completato</para>
+							<para>A seconda della tua versione precedente, questo apporterà una serie di modifiche al database. Potresti ricevere dei FAILURES durante questa procedura. Non dovrebbero essere motivo di preoccupazione a meno che tu non veda un vero e proprio ERROR, nel qual caso lo script si fermerà (in questo caso dovresti cercare aiuto tramite i nostri forum).</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Elimina la cartella <filename class="directory">install/</filename> sul server</para></listitem>
+			</orderedlist>
+		</section>
+
+		<section id="update_advanced">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Noxwizard</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Aggiornamento avanzato (utenti esperti)</title>
+			<para>Questo metodo di aggiornamento dovrebbe essere usato solo per installazioni con modifiche ai file principali di phpBB. Se usi semplicemente estensioni o stili personalizzati e non hai modificato i file principali, usa l'aggiornamento con Pacchetto completo.</para>
+			<para>Questo aggiornamento è stato rinominato da Aggiornamento automatico ad Aggiornamento avanzato per indicare più chiaramente che dovrebbe essere usato solo da utenti avanzati.</para>
+			<para>Questo pacchetto rileva i file modificati e unisce le modifiche se necessario. Poiché questo tipo di aggiornamento ha il potenziale di causare problemi durante l'aggiornamento, non se ne raccomanda l'uso per aggiornamenti minori e/o maggiori.</para>
+			<para>Sono disponibili diversi file di aggiornamento avanzato, e dovresti scegliere quello corrispondente alla versione del forum che stai attualmente usando. Ad esempio, se la tua versione attuale è la 3.3.0 e stai aggiornando alla 3.3.1, ti serve il file phpBB-3.3.0_to_3.3.1.zip/tar.bz2.</para>
+			<orderedlist>
+				<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+				<listitem><para>In locale, esegui i seguenti passaggi:</para>
+					<orderedlist>
+						<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/3.3/update">Aggiornamento avanzato</ulink> di phpBB 3.3</para></listitem>
+						<listitem><para>Estrai la cartella <filename class="directory">install/</filename></para></listitem>
+						<listitem><para>Estrai la cartella <filename class="directory">vendor/</filename></para></listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Sul tuo server web, elimina la cartella <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Carica la cartella <filename class="directory">install/</filename></para></listitem>
+				<listitem><para>Carica la cartella <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Esegui il programma di aggiornamento:</para>
+					<orderedlist>
+						<important>
+							<para>Se hai già tentato di aggiornare con un metodo diverso, dovrai rimuovere i seguenti file dal server prima di aggiornare il database:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
+						<tip>
+							<para>Per i forum di grandi dimensioni, potresti voler aggiornare il database tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						</tip>
+						<listitem><para>Con il tuo browser web, visita /install nella cartella radice del tuo forum (ad es. http://www.example.com/yourforum/install).</para></listitem>
+						<listitem><para>Clicca sulla scheda Aggiorna</para></listitem>
+						<listitem><para>Clicca su Aggiorna</para></listitem>
+						<listitem><para>Seleziona "Aggiorna file system e database" e clicca su Invia</para></listitem>
+						<listitem>
+							<para>A seconda della proprietà dei file, sono disponibili diverse opzioni per eseguire questo aggiornamento:
+								<itemizedlist>
+									<listitem><para><emphasis role="bold">Scarica i file modificati in un archivio:</emphasis> genererà un archivio contenente tutti i file aggiornati. Dopo averlo scaricato, ne carichi il contenuto sul server.</para></listitem>
+									<listitem><para><emphasis role="bold">Aggiorna i file via FTP (automatico):</emphasis> fornisci le credenziali FTP e i percorsi dei file in modo che il server possa trasferire i file via FTP.</para></listitem>
+									<listitem><para><emphasis role="bold">Aggiorna i file tramite accesso diretto (automatico):</emphasis> se il server web ha i permessi di scrittura, il programma di aggiornamento può scrivere le modifiche direttamente sui file</para></listitem>
+								</itemizedlist>
+							</para>
+							<para>In presenza di conflitti, ti verrà chiesto di risolverli.</para>
+						</listitem>
+						<listitem><para>Clicca su Aggiorna file</para></listitem>
+						<listitem><para>Clicca su "Continua il processo di aggiornamento" per aggiornare il database</para></listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Elimina la cartella <filename class="directory">install/</filename> sul server</para></listitem>
+			</orderedlist>
+		</section>
+
+		<section id="update_patch">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Noxwizard</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>File patch</title>
+			<para>Questo metodo è per utenti avanzati che desiderano usare un processo di aggiornamento in stile patch/diff. Se non sai cosa sia l'utility <command>patch</command>, questo metodo non fa per te.</para>
+			<para>Sono forniti diversi file patch, e dovresti scegliere quello corrispondente alla versione del forum che stai attualmente usando. Ad esempio, se la tua versione attuale è la 3.3.0 e stai aggiornando alla 3.3.1, ti serve il file phpBB-3.3.0_to_3.3.1.patch.</para>
+			<orderedlist>
+				<listitem><para><emphasis role="bold">Fai un backup dei file originali</emphasis></para></listitem>
+				<listitem><para><emphasis role="bold">Fai un backup del database</emphasis></para></listitem>
+				<listitem><para>In locale, esegui i seguenti passaggi:</para>
+					<orderedlist>
+						<listitem><para>Scarica l'archivio <ulink url="https://www.phpbb.com/downloads/3.3/patch">File patch</ulink> di phpBB 3.3</para></listitem>
+						<listitem><para>Estrai la cartella <filename class="directory">install/</filename></para></listitem>
+						<listitem><para>Estrai la cartella <filename class="directory">vendor/</filename></para></listitem>
+						<listitem><para>Estrai il file patch desiderato per la tua versione</para></listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Sul tuo server web, elimina la cartella <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Carica la cartella <filename class="directory">install/</filename></para></listitem>
+				<listitem><para>Carica la cartella <filename class="directory">vendor/</filename></para></listitem>
+				<listitem><para>Carica il file patch nella cartella superiore contenente i file principali di phpBB (cioè index.php, viewforum.php, ecc.). Fatto questo, esegui il seguente comando:
+					<code>patch -cl -d [PHPBB DIRECTORY] -p1 &lt; [PATCH NAME]</code> (dove PHPBB DIRECTORY è il nome della cartella in cui risiede la tua installazione di phpBB, ad esempio phpBB, e PATCH NAME è il nome del file patch selezionato).
+					Questo dovrebbe completarsi rapidamente, si spera senza alcun messaggio HUNK FAILED.</para>
+					<para>Se riscontri errori, dovresti usare la pagina <ulink url="https://area51.phpbb.com/code-changes/">Code Changes</ulink> per aggiornare i file per cui la patch è fallita. In alternativa, se sai come fare, puoi esaminare i file .rej per determinare cosa è fallito dove e apportare modifiche manuali al codice sorgente pertinente.</para>
+				</listitem>
+				<listitem><para>Aggiorna il database:</para>
+					<orderedlist>
+						<important>
+							<para>Se hai già tentato di aggiornare con un metodo diverso, dovrai rimuovere i seguenti file dal server prima di aggiornare il database:
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
+						<tip>
+							<para>Per i forum di grandi dimensioni, potresti voler aggiornare tramite riga di comando invece di usare un browser web. Dalla cartella radice del tuo forum, esegui il seguente comando: <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
+						</tip>
+						<listitem>
+							<para>Con il tuo browser web, visita /install/app.php/update nella cartella radice del tuo forum (ad es. http://www.example.com/yourforum/install/app.php/update). Vedrai il seguente messaggio di avviso:
+							<emphasis role="bold">No valid update directory was found, please make sure you uploaded the relevant files.</emphasis> Questo è previsto e non è un errore.</para>
+						</listitem>
+						<listitem><para>Seleziona "Aggiorna solo il database" e clicca su Invia</para></listitem>
+						<listitem>
+							<para>Attendi che la barra di avanzamento raggiunga il 100% e che appaia un messaggio che indica che l'aggiornamento è stato completato</para>
+							<para>A seconda della tua versione precedente, questo apporterà una serie di modifiche al database. Potresti ricevere dei FAILURES durante questa procedura. Non dovrebbero essere motivo di preoccupazione a meno che tu non veda un vero e proprio ERROR, nel qual caso lo script si fermerà (in questo caso dovresti cercare aiuto tramite i nostri forum).</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem><para>Elimina la cartella <filename class="directory">install/</filename> sul server</para></listitem>
+				<listitem><para>Elimina il file patch caricato dal server</para></listitem>
+			</orderedlist>
+		</section>
+	</section>
+
+	<section id="upgrade_general">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Dicky</othername>
+				</author>
+				<author>
+					<othername>ameeck</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Aggiornamento da qualsiasi altro software di forum a phpBB3</title>
+		<para>Per permettere agli amministratori di forum phpBB2 di usare phpBB3 e tutte le sue funzionalità, un convertitore è incluso nell'installazione predefinita. Il framework di conversione è flessibile e ti permette di convertire anche altri sistemi di forum. Continua a leggere se hai bisogno di aiuto per convertire il tuo forum a phpBB3</para>
+		<note><para>Il convertitore non danneggerà il database del software di forum da cui stai convertendo. In caso di problemi, il tuo vecchio software di forum sarà comunque pienamente operativo.</para></note>
+			<section id="upgrade_general_requirements">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Dicky</othername>
+						</author>
+						<author>
+							<othername>ameeck</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Requisiti</title>
+				<para>Per rendere la conversione il più fluida possibile, controlla e prepara questi elementi. Ti serviranno per eseguire una conversione riuscita.</para>
+				<itemizedlist>
+					<listitem><para>Un'installazione di phpBB3 deve essere presente sul tuo server. Vedi <xref linkend="quick_requirements" /> per maggiori informazioni su come installare phpBB3.</para></listitem>
+					<listitem><para>Prepara i dettagli di connessione al database in cui era memorizzato il vecchio forum. Se non sei sicuro, puoi trovare questi dettagli nel file di configurazione.</para></listitem>
+					<listitem><para>Assicurati che il vecchio forum sia ancora installato sul tuo server accanto all'installazione di phpBB3. I file del vecchio forum dovrebbero rimanere invariati, alcuni di essi verranno trasferiti a phpBB3 (ad es. avatar, allegati, smiley o livelli).</para></listitem>
+					<listitem><para>I file e il database devono trovarsi sullo stesso server dell'installazione di phpBB3 e i file devono trovarsi nello stesso dominio. Se stai usando sottodomini, i file devono trovarsi nello stesso sottodominio.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="upgrade_general_preliminary">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Dicky</othername>
+						</author>
+						<author>
+							<othername>ameeck</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Passaggi preliminari</title>
+				<para>phpBB3 deve essere installato. Una volta installato phpBB3, <emphasis>non</emphasis> eliminare la cartella <filename class="directory">install</filename> se effettuerai subito la conversione. Se vuoi testare e configurare il tuo forum phpBB3 prima della conversione e convertirlo in un secondo momento, rinomina la cartella <filename class="directory">install</filename> in qualcosa come _install. Questo ti permetterà di usare il tuo forum phpBB3. Avrai bisogno della cartella install più avanti per la conversione.</para>
+
+				<para>Ti serviranno i file di conversione specifici per il software di forum da cui stai convertendo. I file di conversione specifici per phpBB2 sono inclusi nei file di installazione di phpBB3. Per altri software di forum, dovrai ottenere i file di conversione dall'apposito argomento del convertitore di phpBB3. Questi argomenti si trovano nel <ulink url="https://www.phpbb.com/community/viewforum.php?f=666">forum [3.3.x] Convertors</ulink> su phpBB.com</para>
+
+				<para>Per convertire da phpBB2, ti basta puntare il tuo browser su {phpBB3_root_directory}/install, cliccare sulla scheda <guilabel>Converti</guilabel> e seguire le istruzioni. Per altri software di forum, dovrai caricare i file di conversione nelle cartelle appropriate. I file di conversione che otterrai consisteranno in due o tre file: convert_xxx.php, functions_xxx.php e, facoltativamente, auth_xxx.php. La xxx sarà generalmente il nome del software da cui stai convertendo.</para>
+
+			</section>
+
+			<section id="upgrade_general_conversion">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Dicky</othername>
+						</author>
+						<author>
+							<othername>ameeck</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Passaggi della conversione</title>
+				<para>Dopo aver preparato tutto, segui questi passaggi per convertire il tuo forum:</para>
+				<orderedlist>
+					<listitem><para>Installa phpBB3. Il vecchio forum e il forum phpBB3 devono essere installati sullo stesso server.</para></listitem>
+					<listitem><para>Se stai convertendo da un forum diverso da phpBB2, carica i file di conversione scaricati dall'apposito argomento nel <ulink url="https://www.phpbb.com/community/viewforum.php?f=666">forum [3.3.x] Convertors</ulink>.</para></listitem>
+					<listitem><para>Punta il tuo browser su {phpbb_root_directory}/install, clicca sulla scheda <guilabel>Converti</guilabel> e seleziona il convertitore appropriato dall'elenco dei convertitori disponibili.</para></listitem>
+					<listitem><para>Ti verranno quindi chieste le informazioni sul database. Le informazioni sul database che ti vengono richieste sono relative al database che contiene le tabelle del software di forum da cui stai convertendo. Ti verrà presentata un'opzione per <guilabel>Aggiorna la pagina per continuare la conversione</guilabel>. Il valore predefinito è impostato su <guilabel>Sì</guilabel>. Normalmente, ti conviene lasciarlo su <guilabel>Sì</guilabel>. L'opzione <guilabel>No</guilabel> è principalmente per scopi di test.</para></listitem>
+					<listitem><para>Dopo aver inserito le informazioni sul database e premuto il pulsante <guilabel>Inizia conversione</guilabel>, il convertitore verificherà che tu abbia inserito le informazioni corrette. Se le informazioni vengono confermate, avrai un altro pulsante <guilabel>Inizia conversione</guilabel>.</para></listitem>
+					<listitem><para>Dopo aver cliccato sul pulsante <guilabel>Inizia conversione</guilabel>, il convertitore controllerà i file di conversione.
+Se tutto è a posto, ti verrà presentato un pulsante <guilabel>Continua la conversione</guilabel>.</para></listitem>
+					<listitem><para>Il convertitore procederà ora a convertire il tuo vecchio forum. Verranno visualizzate delle pagine che ti informano sull'andamento della conversione.</para></listitem>
+					<listitem><para>Quando il convertitore ha terminato, vedrai un messaggio che indica che l'Indice di ricerca non è stato convertito. Devi andare nel Pannello di Controllo Amministrazione e creare l'<guilabel>Indice di ricerca</guilabel>. Nell'<acronym>ACP</acronym>, clicca sulla scheda <guilabel>Manutenzione</guilabel> e seleziona <guilabel>Indice di ricerca</guilabel> dal sottomenu. L'indice del motore di ricerca predefinito è <guilabel>Fulltext native</guilabel> e sarà contrassegnato come attivo. Questo è normalmente l'indice che vorrai usare per creare il tuo indice di ricerca. Per maggiori informazioni sull'indicizzazione della ricerca, vedi <xref linkend="acp_maintenance_search" /></para></listitem>
+					<listitem><para>Dovresti ora controllare che il tuo forum phpBB3 funzioni correttamente, che i permessi siano impostati correttamente e che i forum e i messaggi vengano visualizzati correttamente. Assicurati inoltre che i file siano stati copiati dalla vecchia posizione, ad esempio gli avatar, gli smiley e gli allegati (se ne hai).</para></listitem>
+				</orderedlist>
+			</section>
+
+	</section>
+</chapter>
