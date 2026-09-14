@@ -6115,6 +6115,609 @@
               per autore in fulltext_mysql
             </entry>
           </row>
+          <row>
+            <entry>
+              core.search_mysql_by_author_modify_search_key
+            </entry>
+            <entry>
+              phpbb/search/fulltext_mysql.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, firstpost_only,
+              post_visibility, search_key_array, sort_days, sort_key,
+              topic_id, type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la search_key per i risultati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_mysql_by_keyword_modify_search_key
+            </entry>
+            <entry>
+              phpbb/search/fulltext_mysql.php
+            </entry>
+            <entry>
+              author_ary, ex_fid_ary, fields, post_visibility,
+              search_key_array, sort_days, sort_key, terms, topic_id,
+              type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la search_key per i risultati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_mysql_create_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_mysql.php
+            </entry>
+            <entry>
+              sql_queries, stats
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare le query SQL prima che venga creato
+              l'indice di ricerca MySQL
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_mysql_delete_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_mysql.php
+            </entry>
+            <entry>
+              sql_queries, stats
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare le query SQL prima che venga
+              eliminato l'indice di ricerca MySQL
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_mysql_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_mysql.php
+            </entry>
+            <entry>
+              forum_id, message, mode, post_id, poster_id, split_text,
+              split_title, subject, words
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare gli argomenti del metodo e le parole
+              prima che venga aggiornato l'indice di ricerca MySQL
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_mysql_keywords_main_query_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_mysql.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, join_topic,
+              result_count, search_query, sort_by_sql, sort_days,
+              sort_dir, sort_key, sql_match, sql_match_where, sql_sort,
+              sql_sort_join, sql_sort_table, start, topic_id
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la query usata per cercare i messaggi
+              usando fulltext_mysql
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_native_author_count_query_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_native.php
+            </entry>
+            <entry>
+              ex_fid_ary, firstpost_only, select, sort_by_sql,
+              sort_days, sort_dir, sort_key, sql_author, sql_firstpost,
+              sql_fora, sql_sort, sql_sort_join, sql_sort_table,
+              sql_time, start, topic_id, total_results, type
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la query usata per cercare i messaggi
+              per autore in fulltext_native
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_native_by_author_modify_search_key
+            </entry>
+            <entry>
+              phpbb/search/fulltext_native.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, firstpost_only,
+              post_visibility, search_key_array, sort_days, sort_key,
+              topic_id, type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la search_key per i risultati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_native_by_keyword_modify_search_key
+            </entry>
+            <entry>
+              phpbb/search/fulltext_native.php
+            </entry>
+            <entry>
+              author_ary, ex_fid_ary, fields, must_contain_ids,
+              must_exclude_one_ids, must_not_contain_ids,
+              post_visibility, search_key_array, sort_days, sort_key,
+              terms, topic_id, type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la search_key per i risultati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_native_delete_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_native.php
+            </entry>
+            <entry>
+              sql_queries, stats
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare le query SQL prima che venga
+              eliminato l'indice di ricerca nativo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_native_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_native.php
+            </entry>
+            <entry>
+              cur_words, forum_id, message, mode, post_id, poster_id,
+              split_text, split_title, subject, words
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare gli argomenti del metodo e le parole
+              prima che venga aggiornato l'indice di ricerca nativo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_native_keywords_count_query_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_native.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, group_by,
+              left_join_topics, must_contain_ids, must_exclude_one_ids,
+              must_not_contain_ids, search_query, sort_by_sql,
+              sort_days, sort_dir, sort_key, sql_array, sql_match,
+              sql_match_where, sql_sort, sql_sort_join, sql_sort_table,
+              sql_where, start, topic_id, total_results
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la query usata per contare i messaggi
+              usando fulltext_native
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_author_count_query_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, firstpost_only,
+              m_approve_fid_sql, result_count, sort_by_sql, sort_days,
+              sort_dir, sort_key, sql_author, sql_fora, sql_sort,
+              sql_sort_join, sql_sort_table, sql_time, sql_topic_id,
+              start, topic_id
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la query usata per cercare i messaggi
+              per autore in fulltext_postgres
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_by_author_modify_search_key
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, firstpost_only,
+              post_visibility, search_key_array, sort_days, sort_key,
+              topic_id, type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la search_key per i risultati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_by_keyword_modify_search_key
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              author_ary, ex_fid_ary, fields, post_visibility,
+              search_key_array, sort_days, sort_key, terms, topic_id,
+              type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la search_key per i risultati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_create_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              sql_queries, stats
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare le query SQL prima che venga creato
+              l'indice di ricerca Postgres
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_delete_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              sql_queries, stats
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare le query SQL prima che venga creato
+              l'indice di ricerca Postgres
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              forum_id, message, mode, post_id, poster_id, split_text,
+              split_title, subject, words
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare gli argomenti del metodo e le parole
+              prima che venga aggiornato l'indice di ricerca PostgreSQL
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_postgres_keywords_main_query_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_postgres.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, join_topic,
+              result_count, sort_by_sql, sort_days, sort_dir, sort_key,
+              sql_match, sql_match_where, sql_sort, sql_sort_join,
+              sql_sort_table, start, topic_id, tsearch_query
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Permette di cambiare la query usata per cercare i messaggi
+              usando fulltext_postgres
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_results_modify_search_title
+            </entry>
+            <entry>
+              search.php
+            </entry>
+            <entry>
+              author_id, keywords, l_search_title, search_id,
+              show_results, start, total_match_count
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Modifica il titolo e/o carica dati per la pagina dei
+              risultati di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_sphinx_index_before
+            </entry>
+            <entry>
+              phpbb/search/fulltext_sphinx.php
+            </entry>
+            <entry>
+              forum_id, message, mode, post_id, poster_id, subject
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento per modificare gli argomenti del metodo prima che
+              venga aggiornato l'indice di ricerca Sphinx
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_sphinx_keywords_modify_options
+            </entry>
+            <entry>
+              phpbb/search/fulltext_sphinx.php
+            </entry>
+            <entry>
+              author_ary, author_name, ex_fid_ary, fields,
+              post_visibility, sort_days, sort_key, sphinx, terms,
+              topic_id, type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di modificare le opzioni di ricerca Sphinx
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.search_sphinx_modify_config_data
+            </entry>
+            <entry>
+              phpbb/search/fulltext_sphinx.php
+            </entry>
+            <entry>
+              config_data, delete, non_unique
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di aggiungere/cambiare i dati di configurazione
+              Sphinx
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.send_file_to_browser_before
+            </entry>
+            <entry>
+              includes/functions_download.php
+            </entry>
+            <entry>
+              attachment, category, filename, size, upload_dir
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per alterare l'allegato prima che venga inviato al
+              browser.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.session_create_after
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              session_data
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per inviare i nuovi dati di sessione all'estensione.
+              Evento in sola lettura
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.session_gc_after
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per attivare l'estensione su session_gc
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.session_ip_after
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              ip
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Evento per alterare l'indirizzo IP dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.session_kill_after
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              new_session, session_id, user_id
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per inviare le informazioni di terminazione della
+              sessione all'estensione. Evento in sola lettura
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.session_set_custom_ban
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              ban_row, ban_triggered_by, banned, return
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Evento per impostare un tipo di ban personalizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.set_cookie
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              cookiedata, cookietime, disable_cookie, httponly, name
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Evento per modificare o disabilitare l'impostazione dei
+              cookie
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.set_login_key
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              key, key_id, sql, sql_ary, user_id, user_ip
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Evento per regolare il processo delle chiavi di accesso
+              automatico
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.set_post_visibility_after
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              data, forum_id, is_latest, is_starter, post_id, reason,
+              time, topic_id, user_id, visibility
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Esegue azioni dopo tutti i passaggi per cambiare la
+              visibilità del messaggio
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
