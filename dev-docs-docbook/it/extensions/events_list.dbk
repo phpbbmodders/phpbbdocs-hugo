@@ -12577,6 +12577,629 @@
               risposta rapida
             </entry>
           </row>
+          <row>
+            <entry>
+              quickreply_editor_panel_after
+            </entry>
+            <entry>
+              quickreply_editor.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il pannello di risposta rapida (ma
+              all'interno del modulo)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              quickreply_editor_panel_before
+            </entry>
+            <entry>
+              quickreply_editor.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del pannello di risposta rapida
+              (ma all'interno del modulo)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              quickreply_editor_subject_before
+            </entry>
+            <entry>
+              quickreply_editor.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della casella di testo
+              dell'oggetto della risposta rapida
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_form_after
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il modulo di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_form_before
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_recent_search_after
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elenco delle ricerche recenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_recent_search_before
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco delle ricerche recenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_display_options_append
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Inserisce contenuto in fondo all'insieme di campi delle
+              opzioni di visualizzazione della query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_display_options_prepend
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Inserisce contenuto in cima all'insieme di campi delle
+              opzioni di visualizzazione della query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_options_after
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'insieme di campi delle opzioni
+              della query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_options_append
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Inserisce contenuto in fondo all'insieme di campi delle
+              opzioni della query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_options_before
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'insieme di campi delle
+              opzioni della query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_options_prepend
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Inserisce contenuto in cima all'insieme di campi delle
+              opzioni della query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_query_after
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'insieme di campi della query di
+              ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_query_append
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Inserisce contenuto in fondo all'insieme di campi della
+              query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_query_before
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'insieme di campi della query
+              di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_body_search_query_prepend
+            </entry>
+            <entry>
+              search_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Inserisce contenuto in cima all'insieme di campi della
+              query di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_content_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il contenuto del messaggio nei
+              risultati di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_header_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'header dei risultati di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_header_before
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'header dei risultati di
+              ricerca.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_jumpbox_before
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del jumpbox dei risultati di
+              ricerca.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_last_post_author_username_append
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore
+              dell'ultimo messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_last_post_author_username_prepend
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore
+              dell'ultimo messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_post_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge dati dopo i messaggi risultato della ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_post_author_username_append
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_post_author_username_prepend
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_post_before
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge dati prima dei messaggi risultato della ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_post_subject_before
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima dell'oggetto dei messaggi risultato
+              della ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_postprofile_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'autore del messaggio e le
+              statistiche nei risultati di ricerca (modalità
+              visualizzazione messaggi)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_postprofile_before
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima dell'autore del
+              messaggio nei risultati di ricerca (modalità
+              visualizzazione messaggi)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_searchbox_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo il box di ricerca dei
+              risultati di ricerca.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge dati dopo gli argomenti risultato della ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_author_username_append
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore
+              dell'argomento del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_author_username_prepend
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore
+              dell'argomento del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_before
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge dati prima degli argomenti risultato della
+              ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_header_lastpost_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Aggiunge colonna/e di intestazione dopo la colonna
+              lastpost negli argomenti risultato della ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_row_lastpost_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Aggiunge colonna/e di dati dopo la colonna lastpost negli
+              argomenti risultato della ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              search_results_topic_title_after
+            </entry>
+            <entry>
+              search_results.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo il titolo dell'argomento nei risultati
+              di ricerca
+            </entry>
+          </row>
+          <row>
+            <entry>
+              simple_footer_after
+            </entry>
+            <entry>
+              simple_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima degli script del footer
+              semplificato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              simple_footer_body_after
+            </entry>
+            <entry>
+              simple_footer.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima del tag &lt;/body&gt;
+              del footer semplificato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              simple_header_body_before
+            </entry>
+            <entry>
+              simple_header.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto al corpo dell'header semplificato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              simple_header_head_append
+            </entry>
+            <entry>
+              simple_header.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge chiamate asset direttamente prima del tag
+              &lt;/head&gt;
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
