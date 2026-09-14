@@ -9503,6 +9503,600 @@
           </row>
         </thead>
         <tbody>
+          <row>
+            <entry>
+              attachment_file_after
+            </entry>
+            <entry>
+              attachment.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'allegato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              attachment_file_append
+            </entry>
+            <entry>
+              attachment.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge tipi di allegato personalizzati visualizzati in
+              fondo al blocco allegato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              attachment_file_before
+            </entry>
+            <entry>
+              attachment.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'allegato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              attachment_file_prepend
+            </entry>
+            <entry>
+              attachment.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge tipi di allegato personalizzati visualizzati in
+              cima al blocco allegato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              confirm_delete_body_delete_reason_before
+            </entry>
+            <entry>
+              confirm_delete_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge testo personalizzato alla conferma di un
+              messaggio eliminato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_category_header_after
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'header della categoria
+              nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_category_header_before
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'header della categoria
+              nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_category_header_row_append
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la riga di header della categoria
+              nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_category_header_row_prepend
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della riga di header della
+              categoria nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_image_after
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'immagine del forum nell'elenco
+              dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_image_append
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio dell'immagine del forum
+              nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_image_before
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'immagine del forum
+              nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_image_prepend
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine dell'immagine del forum
+              nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_row_after
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elemento dell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_row_append
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio dell'elemento dell'elenco dei
+              forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_row_before
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elemento dell'elenco dei
+              forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_forum_row_prepend
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine dell'elemento dell'elenco dei
+              forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_last_post_title_prepend
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del titolo dell'ultimo messaggio
+              in un forum nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_last_poster_username_append
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'ultimo autore del
+              membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_last_poster_username_prepend
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'ultimo autore del
+              membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_last_row_after
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'ultimissima riga dell'elenco dei
+              forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_subforum_link_append
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine dell'elemento link del
+              sottoforum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_subforum_link_prepend
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio dell'elemento link del
+              sottoforum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_subforums_after
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elenco dei sottoforum (se
+              presenti) per ogni forum nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              forumlist_body_subforums_before
+            </entry>
+            <entry>
+              forumlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco dei sottoforum (se
+              presenti) per ogni forum nell'elenco dei forum.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_birthday_block_before
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge nuovi blocchi statistici prima del blocco
+              compleanni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_block_birthday_append
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto all'elenco dei compleanni nella pagina
+              iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_block_birthday_prepend
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Antepone contenuto all'elenco dei compleanni nella pagina
+              iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_block_online_append
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto all'elenco degli utenti online nella
+              pagina iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_block_online_prepend
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Antepone contenuto all'elenco degli utenti online nella
+              pagina iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_block_stats_append
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto all'elenco delle statistiche nella
+              pagina iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_block_stats_prepend
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Antepone contenuto all'elenco delle statistiche nella
+              pagina iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_forumlist_body_after
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il corpo dell'elenco dei forum
+              nella pagina iniziale
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_markforums_after
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-RC2
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il link segna-come-letto sopra
+              l'elenco dei forum nella pagina iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_markforums_before
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-RC2
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del link segna-come-letto sopra
+              l'elenco dei forum nella pagina iniziale del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_stat_blocks_after
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge nuovi blocchi statistici sotto i blocchi Chi è
+              online e Statistiche del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              index_body_stat_blocks_before
+            </entry>
+            <entry>
+              index_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge nuovi blocchi statistici sopra i blocchi Chi è
+              online e Statistiche del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_ban_fields_after
+            </entry>
+            <entry>
+              mcp_ban.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge campi aggiuntivi al modulo di ban nell'MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_ban_fields_before
+            </entry>
+            <entry>
+              mcp_ban.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge campi aggiuntivi al modulo di ban nell'MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_ban_unban_after
+            </entry>
+            <entry>
+              mcp_ban.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge campi aggiuntivi al modulo di sban nell'MCP
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
