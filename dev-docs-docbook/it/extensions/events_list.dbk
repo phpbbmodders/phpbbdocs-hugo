@@ -10097,6 +10097,624 @@
               Aggiunge campi aggiuntivi al modulo di sban nell'MCP
             </entry>
           </row>
+          <row>
+            <entry>
+              mcp_ban_unban_before
+            </entry>
+            <entry>
+              mcp_ban.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge campi aggiuntivi al modulo di sban nell'MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_actions_after
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo il fieldset delle azioni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_actions_append
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni aggiuntive alla selezione delle azioni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_actions_before
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del fieldset delle azioni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_last_post_author_username_append
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore
+              dell'ultimo messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_last_post_author_username_prepend
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore
+              dell'ultimo messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_topic_author_username_append
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore
+              dell'argomento del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_topic_author_username_prepend
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore
+              dell'argomento del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_topic_title_after
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo il titolo dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_forum_topic_title_before
+            </entry>
+            <entry>
+              mcp_forum.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del titolo dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_front_latest_logs_after
+            </entry>
+            <entry>
+              mcp_front.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elenco degli ultimi log
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_front_latest_logs_before
+            </entry>
+            <entry>
+              mcp_front.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli ultimi log
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_front_latest_reported_before
+            </entry>
+            <entry>
+              mcp_front.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli ultimi
+              messaggi segnalati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_front_latest_reported_pms_before
+            </entry>
+            <entry>
+              mcp_front.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli ultimi messaggi
+              privati segnalati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_front_latest_unapproved_before
+            </entry>
+            <entry>
+              mcp_front.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli ultimi messaggi
+              non approvati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_move_before
+            </entry>
+            <entry>
+              mcp_move.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di spostamento
+              argomento/messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_move_destination_forum_after
+            </entry>
+            <entry>
+              mcp_move.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elemento di selezione della
+              destinazione nel modulo di spostamento argomento/messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_move_destination_forum_before
+            </entry>
+            <entry>
+              mcp_move.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elemento di selezione della
+              destinazione nel modulo di spostamento argomento/messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_post_additional_options
+            </entry>
+            <entry>
+              mcp_post.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'interno dell'elenco delle azioni di
+              moderazione dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_post_report_buttons_top_after
+            </entry>
+            <entry>
+              mcp_post.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i pulsanti di segnalazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_post_report_buttons_top_before
+            </entry>
+            <entry>
+              mcp_post.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei pulsanti di segnalazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_post_text_after
+            </entry>
+            <entry>
+              mcp_post.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il testo del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_post_text_before
+            </entry>
+            <entry>
+              mcp_post.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del testo del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_options_after
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge alcune opzioni (campo, checkbox, ...) dopo il
+              campo oggetto quando si divide un oggetto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_options_before
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge alcune opzioni (campo, checkbox, ...) prima del
+              campo oggetto quando si divide un oggetto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_post_author_full_append
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore del
+              messaggio per i dettagli del messaggio nella moderazione
+              dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_post_author_full_prepend
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore del
+              messaggio per i dettagli del messaggio nella moderazione
+              dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_attachments_after
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Mostra contenuto aggiuntivo dopo gli allegati nella
+              revisione dell'argomento mcp
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_attachments_before
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Mostra contenuto aggiuntivo prima degli allegati nella
+              revisione dell'argomento mcp
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_post_before
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Mostra contenuto aggiuntivo dopo l'inizio di postrow nella
+              revisione dell'argomento mcp
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_post_details_after
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i dettagli del messaggio nella
+              moderazione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_post_details_before
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei dettagli del messaggio nella
+              moderazione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_post_subject_after
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'oggetto del messaggio nella
+              moderazione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_postrow_post_subject_before
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'oggetto del messaggio nella
+              moderazione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_topic_title_after
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo il titolo dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_topic_topic_title_before
+            </entry>
+            <entry>
+              mcp_topic.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del titolo dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_warn_post_add_warning_field_after
+            </entry>
+            <entry>
+              mcp_warn_post.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge contenuto durante l'avviso per un messaggio - dopo
+              il campo di aggiunta avviso.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_warn_post_add_warning_field_before
+            </entry>
+            <entry>
+              mcp_warn_post.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge contenuto durante l'avviso per un messaggio -
+              prima del campo di aggiunta avviso.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_warn_user_add_warning_field_after
+            </entry>
+            <entry>
+              mcp_warn_user.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge contenuto durante l'avviso a un utente - dopo il
+              campo di aggiunta avviso.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              mcp_warn_user_add_warning_field_before
+            </entry>
+            <entry>
+              mcp_warn_user.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge contenuto durante l'avviso a un utente - prima
+              del campo di aggiunta avviso.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_group_desc_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo la descrizione e il tipo del gruppo
+              nella pagina profilo del gruppo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_group_name_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo il nome del gruppo nella pagina profilo
+              del gruppo.
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
