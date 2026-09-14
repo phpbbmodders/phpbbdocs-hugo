@@ -7955,6 +7955,635 @@
               </para>
             </entry>
           </row>
+          <row>
+            <entry>
+              core.ucp_prefs_view_update_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiorna i dati delle opzioni di visualizzazione di
+              modifica UCP all'invio del modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_autologin_keys_sql
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              L'evento permette di cambiare la query SQL per le chiavi
+              di accesso automatico
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_autologin_keys_template_vars
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              sessions, template_vars
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              L'evento permette di cambiare le variabili template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_avatar_sql
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              result
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Attiva eventi al cambio riuscito dell'avatar
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_avatar_upload_validation
+            </entry>
+            <entry>
+              phpbb/avatar/driver/remote.php
+            </entry>
+            <entry>
+              error, height, url, width
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Evento per eseguire una convalida personalizzata del
+              caricamento dell'avatar
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_info_modify_sql_ary
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              cp_data, data, sql_ary
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati del profilo nell'UCP prima di inviarli al
+              database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_modify_profile_info
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              data, submit
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati utente durante la modifica del profilo
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_modify_signature
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              enable_bbcode, enable_smilies, enable_urls, error,
+              preview, signature, submit
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica la firma dell'utente durante la modifica del
+              profilo nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_modify_signature_sql_ary
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica i dati di registrazione dell'utente prima di
+              inviarli al database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_reg_details_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              data, submit
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati di registrazione dell'utente durante la
+              modifica delle impostazioni dell'account nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_reg_details_sql_ary
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              data, sql_ary
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati di registrazione dell'utente prima di
+              inviarli al database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_reg_details_validate
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              data, error, submit
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Convalida i dati utente durante la modifica dei dati di
+              registrazione nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_profile_validate_profile_info
+            </entry>
+            <entry>
+              includes/ucp/ucp_profile.php
+            </entry>
+            <entry>
+              data, error, submit
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Convalida i dati utente durante la modifica del profilo
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_agreement
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              <para>
+                Permette di modificare gli accordi.
+              </para>
+              <para>
+                Per assegnare dati al template, usa
+                $template-&gt;assign_vars()
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_agreement_modify_template_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              lang_row, s_hidden_fields, template_vars, tpl_name
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Permette di modificare gli accordi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_data_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              cp_data, data, error, submit
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Verifica i dati di registrazione UCP dopo che sono stati
+              inviati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_data_before
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              data, submit
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              <para>
+                Aggiunge i dati di registrazione UCP prima che vengano
+                assegnati al template o inviati
+              </para>
+              <para>
+                Per assegnare dati al template, usa
+                $template-&gt;assign_vars()
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_modify_template_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              data, error, s_hidden_fields, template_vars, tpl_name
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica i dati template nella pagina di registrazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_register_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              cp_data, data, message, server_url, user_actkey, user_id,
+              user_row
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo la registrazione
+              dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_requests_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              agreed, change_lang, coppa, submit, user_lang
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              <para>
+                Aggiunge i dati di registrazione UCP prima che vengano
+                assegnati al template o inviati
+              </para>
+              <para>
+                Per assegnare dati al template, usa
+                $template-&gt;assign_vars()
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_user_row_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              cp_data, data, submit, user_row
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              <para>
+                Aggiunge dati in $user_row prima di user_add
+              </para>
+              <para>
+                user_add permette di aggiungere più dati nella tabella
+                degli utenti
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_register_welcome_email_before
+            </entry>
+            <entry>
+              includes/ucp/ucp_register.php
+            </entry>
+            <entry>
+              cp_data, data, message, messenger, server_url,
+              user_actkey, user_id, user_row
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati del messenger prima che venga inviata
+              l'email di benvenuto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_remind_modify_select_sql
+            </entry>
+            <entry>
+              phpbb/ucp/controller/reset_password.php
+            </entry>
+            <entry>
+              email, sql_array, username
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Cambia la query SQL per recuperare i dati utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_remove_zebra
+            </entry>
+            <entry>
+              includes/ucp/ucp_zebra.php
+            </entry>
+            <entry>
+              mode, user_ids
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Rimuove utenti da amici/nemici
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_reset_password_modify_select_sql
+            </entry>
+            <entry>
+              phpbb/ucp/controller/reset_password.php
+            </entry>
+            <entry>
+              reset_token, sql_array, user_id
+            </entry>
+            <entry>
+              3.3.0-b1
+            </entry>
+            <entry>
+              Cambia la query SQL per recuperare i dati utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_restore_permissions
+            </entry>
+            <entry>
+              ucp.php
+            </entry>
+            <entry>
+              message, username
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per eseguire codice dopo il ripristino dei permessi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_switch_permissions
+            </entry>
+            <entry>
+              ucp.php
+            </entry>
+            <entry>
+              message, user_id, user_row
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per eseguire codice dopo il cambio dei permessi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.update_post_info_modify_posts_sql
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              sql_ary, type
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'array SQL per ottenere i dati del
+              messaggio e dell'utente da tutti gli ultimi messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.update_post_info_modify_sql
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              rowset, type, update_sql
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'array update_sql per aggiungere
+              nuovi dati di aggiornamento per gli ultimi messaggi di
+              forum o argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.update_session_after
+            </entry>
+            <entry>
+              phpbb/session.php
+            </entry>
+            <entry>
+              session_data, session_id
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per inviare le informazioni di aggiornamento della
+              sessione all'estensione. Evento in sola lettura
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.update_username
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              new_name, old_name
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiorna un nome utente quando viene modificato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_active_flip_after
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              activated, deactivated, mode, reason, sql_statements,
+              user_id_ary
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo che gli utenti sono stati
+              attivati/disattivati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_active_flip_before
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              activated, deactivated, mode, reason, sql_statements,
+              user_id_ary
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Verifica o modifica i dati degli utenti attivati/
+              disattivati prima di inviarli al database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_add_after
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              cp_data, user_id, user_row
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Evento che restituisce l'id utente, i dettagli utente e il
+              CPF utente del nuovo utente registrato
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
