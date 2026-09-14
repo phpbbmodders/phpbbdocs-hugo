@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Concetti chiave</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      Prima di poter passare a far fare grandi cose alla nostra
+      estensione, dobbiamo trattare alcuni concetti e pratiche chiave
+      usati in phpBB.
+    </para>
+    <para>
+      Questo tutorial spiega:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="dependency-injection">Dependency
+            injection</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="php-files">File PHP</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="template-files">File template</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="language-files">File lingua</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="javascript-and-css-files">File Javascript e
+            CSS</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="dependency-injection">
+    <title>Dependency injection</title>
+    <para>
+      Una grande parte della base di codice di phpBB dalla 3.1 in poi
+      si basa su un meccanismo fondamentale, ovvero la dependency
+      injection. L'obiettivo è non doversi preoccupare di gestire le
+      diverse dipendenze dei componenti che vuoi usare (ad es. il
+      livello database, il sistema di cache o l'oggetto utente
+      corrente). È anche un mezzo per smettere di usare variabili con
+      ambito globale.
+    </para>
+    <para>
+      A partire da phpBB 3.1 questo è stato implementato usando il
+      Symfony DependencyInjection Component. Tutti i servizi forniti
+      da phpBB sono definiti in un file in formato YAML in
+      <literal>/config/services.yml</literal>. Le estensioni possono
+      usare i servizi definiti da phpBB oltre a definire i propri
+      servizi per le proprie classi PHP nel proprio
+      <literal>config/services.yml</literal>.
+    </para>
+    <para>
+      Per fornire un semplice esempio di dependency injection in
+      azione, diamo un'occhiata al metodo costruttore per la classe
+      controller di Acme Demo <literal>main.php</literal>:
+    </para>
+    <programlisting>
+public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+{
+    $this-&gt;config = $config;
+    $this-&gt;helper = $helper;
+    $this-&gt;template = $template;
+    $this-&gt;user = $user;
+}
+</programlisting>
+    <para>
+      Come puoi vedere, richiede gli oggetti (detti anche servizi)
+      <literal>$config</literal>, <literal>$helper</literal>,
+      <literal>$template</literal>, e <literal>$user</literal>. Per
+      far sì che questi servizi vengano risolti automaticamente dalla
+      dependency injection, l'estensione Acme Demo deve definire la
+      propria classe controller come servizio nel proprio
+      <literal>config/services.yml</literal>:
+    </para>
+    <programlisting language="yaml">
+services:
+    acme.demo.controller:
+        class: acme\demo\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+</programlisting>
+    <para>
+      Nota che <literal>acme.demo.controller</literal> è il nome
+      univoco del servizio per la classe. Le estensioni devono
+      anteporre a essi il prefisso del vendor e del nome
+      dell'estensione (in questo caso, <literal>acme.demo</literal>)
+      per prevenire potenziali conflitti con altre estensioni o
+      servizi core.
+    </para>
+    <para>
+      <literal>class</literal> è semplicemente il percorso con
+      namespace verso la classe.
+    </para>
+    <para>
+      <literal>arguments</literal> sono le dipendenze di servizio
+      richieste dalla classe. È importante che l'ordine degli
+      argomenti corrisponda all'ordine dei parametri nella
+      definizione del metodo <literal>__construct()</literal>.
+      Qualsiasi argomento che inizia con i simboli
+      <literal>@</literal> o <literal>%</literal> dovrebbe essere
+      racchiuso tra virgolette singole (questo sarà obbligatorio a
+      partire da phpBB 3.2).
+    </para>
+    <para>
+      La maggior parte dei file PHP in un'estensione dovrebbe usare il
+      modello di dependency injection con definizioni di servizio, in
+      particolare controller ed event listener. Le eccezioni a questo
+      sono tutti i file ACP/MCP/UCP, i file lingua e i file migration
+      (che al momento non usano il service container).
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://symfony.com/doc/2.8/components/dependency_injection.html">Symfony:
+          The DependencyInjection Component</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="php-files">
+    <title>File PHP</title>
+    <para>
+      Come parte del passaggio di phpBB verso un uso diffuso
+      dell'orientamento agli oggetti, si consiglia agli sviluppatori
+      di usare le classi per organizzare i dati dove appropriato. Le
+      estensioni sono incoraggiate a memorizzare le funzioni correlate
+      in classi, e le classi nei propri file.
+    </para>
+    <para>
+      La denominazione delle classi è importante per la coerenza.
+      Tutte le classi dovrebbero avere un namespace e avere una
+      corrispondenza diretta tra classe e percorso; in altre parole
+      il namespace e il nome della classe devono includere la
+      struttura delle cartelle. Ad esempio:
+    </para>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\controller;
+
+class main
+{
+    // do something
+}
+</programlisting>
+    <para>
+      Il codice con namespace sopra sarebbe per un file di classe e
+      una struttura di percorso come
+      <literal>acme/demo/controller/main.php</literal>.
+    </para>
+    <para>
+      Le classi con namespace corretto vengono caricate
+      automaticamente da phpBB, il che significa che non è necessario
+      creare funzioni accessorie affinché siano accessibili ad altre
+      classi.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Le
+        <ulink url="https://area51.phpbb.com/docs/31x/coding-guidelines.html">Coding
+        Guidelines</ulink> di phpBB 3.1 stabiliscono che il tag di
+        chiusura <literal>?&gt;</literal> non è richiesto nei file
+        PHP, e tutti i file dovrebbero contenere una riga vuota extra
+        alla fine.
+      </para>
+    </note>
+    <sect2 id="in_phpbb-security">
+      <title>Sicurezza IN_PHPBB</title>
+      <para>
+        I file PHP che contengono solo classi non sono tenuti a usare
+        il test di sicurezza <literal>IN_PHPBB</literal>. Tuttavia, se
+        i tuoi file PHP contengono codice eseguibile non incapsulato
+        in una struttura di classe, come funzioni esposte,
+        istruzioni <literal>define()</literal>,
+        <literal>include()</literal> o <literal>require()</literal>,
+        o altri elementi, allora il test <literal>IN_PHPBB</literal>
+        è richiesto prima di qualsiasi codice eseguibile:
+      </para>
+      <programlisting>
+&lt;?php
+
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
+include('somefile.php');
+
+function do_something ()
+{
+   // do something
+}
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Le
+            <ulink url="https://area51.phpbb.com/docs/31x/coding-guidelines.html">Coding
+            Guidelines</ulink> di phpBB 3.1.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            La
+            <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#php">PHP
+            Validation Policy</ulink> del phpBB Customisation Database.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="template-files">
+    <title>File template</title>
+    <para>
+      Il templating per le estensioni non è diverso dal templating
+      per phpBB3 in generale. phpBB 3.1 è passato al motore template
+      Twig ma conserva la sintassi di template originale di phpBB.
+      Pertanto, sia la sintassi template di phpBB che quella di Twig
+      sono ammesse in un'estensione. Se non hai familiarità con Twig,
+      puoi usare la sintassi di phpBB.
+    </para>
+    <para>
+      Un'estensione può contenere due tipi di file template: template
+      personalizzati e <literal>template-events-label</literal>. I
+      file template personalizzati di un'estensione dovrebbero avere
+      nomi univoci, preferibilmente con il prefisso del vendor e del
+      nome dell'estensione, per prevenire conflitti con altri file
+      template di estensioni o di phpBB. Oltre ai file template,
+      un'estensione può contenere file di tema (script CSS e
+      immagini), file Javascript e altri asset.
+    </para>
+    <para>
+      I file template in un'estensione dovrebbero essere organizzati
+      in modo simile alla struttura dei file template di phpBB. La
+      cartella <literal>styles/</literal> dovrebbe contenere cartelle
+      per ogni stile per cui hai scritto file template. Ad esempio,
+      prosilver e subsilver2. Qualsiasi stile che eredita da
+      prosilver, erediterà anche dalla cartella prosilver della tua
+      estensione.
+    </para>
+    <para>
+      Una cartella speciale <literal>all/</literal> può essere usata
+      per contenere file template che possono essere usati con
+      qualsiasi e tutti gli stili (un file JS comune, ad esempio).
+    </para>
+    <para>
+      I file template per l'ACP dovrebbero essere memorizzati nella
+      posizione <literal>adm/style/</literal>, in modo simile alla
+      struttura di phpBB.
+    </para>
+    <para>
+      Un esempio di struttura di cartelle per un'estensione con file
+      universali (all) e file specifici per tema:
+    </para>
+    <programlisting>
+styles
+├── all
+│   ├── template
+│   │   └── event
+│   │       └── overall_header_head_append.html
+│   └── theme
+│       ├── css
+│       │   └── acme_demo_main.css
+│       └── images
+│           └── acme_demo_image.png
+├── prosilver
+│   └── template
+│       ├── acme_demo_body.html
+│       └── event
+│           └── overall_header_navigation_append.html
+└── subsilver2
+    └── template
+        ├── acme_demo_body.html
+        └── event
+            └── overall_header_navigation_append.html
+</programlisting>
+    <warning>
+      <title>Attenzione</title>
+      <para>
+        Se viene usato un nome file template standard di phpBB per un
+        template di estensione, allora sostituirà il file template di
+        phpBB. Pertanto è importante tenerne conto quando si
+        nominano i file template. Sostituire i file template non è
+        consigliabile per estensioni rilasciate pubblicamente, poiché
+        potrebbe entrare in conflitto con altre estensioni.
+      </para>
+    </warning>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://twig.symfony.com/">Twig Template
+          Syntax</ulink> su Symfony.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>Tutorial: Template Syntax &lt;tutorial-template-syntax&gt;</literal>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          La
+          <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#templates">Template
+          Validation Policy</ulink> del phpBB Customisation Database.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="language-files">
+    <title>File lingua</title>
+    <para>
+      I file lingua in un'estensione dovrebbero essere organizzati in
+      modo simile alla struttura dei file lingua di phpBB. La cartella
+      <literal>language/</literal> dovrebbe contenere cartelle per
+      ogni lingua per cui hai una traduzione. Nota che la lingua
+      inglese <literal>en</literal> è richiesta per tutte le
+      estensioni poiché è la lingua predefinita in phpBB.
+    </para>
+    <para>
+      Il file lingua dell'estensione Acme Demo ha questo aspetto:
+    </para>
+    <programlisting>
+&lt;?php
+
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
+if (empty($lang) || !is_array($lang))
+{
+    $lang = [];
+}
+
+$lang = array_merge($lang, [
+    'DEMO_PAGE'              =&gt; 'Demo',
+    'DEMO_HELLO'             =&gt; 'Hello %s!',
+    'DEMO_GOODBYE'           =&gt; 'Goodbye %s!',
+    'ACP_DEMO_TITLE'         =&gt; 'Demo Module',
+    'ACP_DEMO'               =&gt; 'Settings',
+    'ACP_DEMO_GOODBYE'       =&gt; 'Should say goodbye?',
+    'ACP_DEMO_SETTING_SAVED' =&gt; 'Settings have been saved successfully!',
+]);
+</programlisting>
+    <para>
+      Caricare i file lingua in un'estensione è abbastanza semplice
+      usando il metodo <literal>add_lang()</literal> dell'oggetto
+      <literal>$language</literal>. Accetta due argomenti, il primo è
+      il nome del file lingua (o un array di nomi di file lingua) e il
+      secondo è il vendor/pacchetto dell'estensione.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        L'oggetto Language è stato introdotto nella 3.2 per fornire
+        una classe dedicata di metodi lingua, estratta dall'oggetto
+        User. Il metodo precedente di usare
+        <literal>add_lang_ext()</literal> dall'oggetto User è stato
+        deprecato nella 3.2, e verrà eventualmente rimosso in futuro.
+      </para>
+    </note>
+    <programlisting>
+// Load a single language file from acme/demo/language/en/common.php
+$language-&gt;add_lang(‘common’, ‘acme/demo’);
+
+// Load multiple language files from
+// acme/demo/language/en/common.php
+// acme/demo/language/en/controller.php
+$language-&gt;add_lang([‘common’, ‘controller’], ‘acme/demo’);
+</programlisting>
+    <para>
+      Per motivi di prestazioni, si preferisce usare il metodo sopra
+      per caricare i file lingua in qualsiasi punto dell'esecuzione
+      del codice della tua estensione in cui sono necessarie le chiavi
+      lingua. Tuttavia, se è assolutamente necessario caricare
+      globalmente le chiavi lingua di un'estensione, in modo che siano
+      sempre disponibili, dovrebbe essere usato l'evento PHP
+      <literal>core.user_setup</literal>.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Ai file lingua può essere dato qualsiasi nome. Tuttavia, i
+        file lingua che iniziano con <literal>permissions_</literal>
+        o <literal>info_acp_</literal> verranno caricati
+        automaticamente all'interno dell'ACP rispettivamente per le
+        chiavi lingua dei permessi e dei moduli ACP, e non devono
+        essere caricati usando le funzioni o gli eventi discussi in
+        precedenza.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="javascript-and-css-files">
+    <title>File Javascript e CSS</title>
+    <para>
+      I file Javascript e CSS possono essere memorizzati ovunque
+      all'interno della tua estensione. Tuttavia, le posizioni più
+      comuni sono all'interno delle cartelle di stile. Aggiungere
+      questi script ai template della tua estensione può essere
+      gestito comodamente usando la sintassi template di phpBB
+      <literal>{% INCLUDECSS %}</literal> e
+      <literal>{% INCLUDEJS %}</literal>.
+    </para>
+    <para>
+      Il formato per questi tag INCLUDE ha la seguente forma:
+    </para>
+    <programlisting>
+{% INCLUDECSS '@vendor_extname/scriptname.css' %}
+
+{% INCLUDEJS '@vendor_extname/scriptname.js' %}
+</programlisting>
+    <para>
+      Il tag INCLUDECSS cercherà nella cartella
+      <emphasis role="strong">theme</emphasis> di stile
+      dell'estensione il file indicato, in base allo stile corrente
+      dell'utente, o nella cartella dello stile all se esiste. Il tag
+      INCLUDECSS genererà automaticamente un tag
+      <literal>&lt;link&gt;</literal> per il file CSS fornito nella
+      sezione <literal>&lt;head&gt;</literal> del documento HTML.
+    </para>
+    <para>
+      Il tag INCLUDEJS cercherà nella cartella
+      <emphasis role="strong">template</emphasis> di stile
+      dell'estensione il file indicato, in base allo stile corrente
+      dell'utente, o nella cartella dello stile all se esiste. Il tag
+      INCLUDEJS genererà automaticamente un tag
+      <literal>&lt;script&gt;</literal> per il file JS fornito nel
+      footer del documento HTML.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        I tag INCLUDECSS e INCLUDEJS possono essere usati in qualsiasi
+        evento template o file template personalizzato.
+      </para>
+    </note>
+    <para>
+      Quando si includono librerie e framework JavaScript/CSS come
+      jQuery-UI o Font Awesome, la potenziale sovrapposizione di
+      risorse tra estensioni può essere mitigata usando un semplice
+      espediente approvato dal phpBB Extensions Team. Usando il tag
+      <literal>{% DEFINE %}</literal> dovresti verificare se lo
+      script che la tua estensione vuole includere è già stato
+      definito, e se non lo è, allora includi il tuo script e
+      definisci lo script. Ad esempio:
+    </para>
+    <programlisting>
+{% if not definition.INCLUDED_JQUERYUIJS %}
+    {% INCLUDEJS '@vendor_extname/jquery-ui.js' %}
+    {% DEFINE INCLUDED_JQUERYUIJS = true %}
+{% endif %}
+</programlisting>
+    <para>
+      Alcuni esempi di definizioni di variabili template da usare con
+      librerie comuni (la prassi comune dovrebbe essere di nominare
+      la definizione della variabile in base al nome del file della
+      libreria, ad es. highslide.js diventa HIGHSLIDEJS):
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          HighSlide JS: <literal>INCLUDED_HIGHSLIDEJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Font Awesome CSS: <literal>INCLUDED_FONTAWESOMECSS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          ColorBox JS: <literal>INCLUDED_COLORBOXJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          ColPick JS: <literal>INCLUDED_COLPICKJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          MoTools JS: <literal>INCLUDED_MOTOOLSJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Dojo JS: <literal>INCLUDED_DOJOJS</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Angular JS: <literal>INCLUDED_ANGULARJS</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      La
+      <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#scripts">JavaScript
+      and CSS Validation Policy</ulink> del phpBB Customisation
+      Database.
+    </para>
+    <para>
+      Ora che abbiamo trattato come funzionano i file PHP, template,
+      lingua e asset in phpBB, siamo pronti per proseguire alle
+      sezioni successive per imparare come costruire la nostra
+      estensione in qualcosa di funzionale.
+    </para>
+  </sect1>
+</article>
