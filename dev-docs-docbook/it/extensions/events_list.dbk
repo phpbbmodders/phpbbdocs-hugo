@@ -10715,6 +10715,629 @@
               del gruppo.
             </entry>
           </row>
+          <row>
+            <entry>
+              memberlist_body_group_name_before
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima del nome del gruppo nella pagina
+              profilo del gruppo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_group_rank_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo il rango del gruppo nella pagina
+              profilo del gruppo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_group_rank_before
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima del rango del gruppo nella pagina
+              profilo del gruppo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_leaders_set_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo l'ultima riga nella modalità elenco
+              membri leader.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_memberlist_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo l'ultima riga nell'elenco membri.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_memberrow_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo l'ultima riga membro nell'elenco membri.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_page_footer_before
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima del footer della pagina.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_page_header_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo l'header della pagina.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_page_title_before
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima del titolo della pagina.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_rank_append
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo il rango nell'elenco membri.
+              Funziona in tutte le modalità di visualizzazione (leader,
+              gruppo ed elenco membri normale).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_rank_prepend
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del rango nell'elenco membri.
+              Funziona in tutte le modalità di visualizzazione (leader,
+              gruppo ed elenco membri normale).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_show_group_after
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo l'ultima riga nella modalità elenco
+              membri gruppo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_username_append
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo ogni nome utente nell'elenco
+              membri. Funziona in tutte le modalità di visualizzazione
+              (leader, gruppo ed elenco membri normale).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_body_username_prepend
+            </entry>
+            <entry>
+              memberlist_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima di ogni nome utente nell'elenco
+              membri. Funziona in tutte le modalità di visualizzazione
+              (leader, gruppo ed elenco membri normale).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_email_before
+            </entry>
+            <entry>
+              memberlist_email.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Permette di aggiungere personalizzazioni prima del modulo
+              memberlist_email.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_search_fields_after
+            </entry>
+            <entry>
+              memberlist_search.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo la colonna dei campi di ricerca.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_search_fields_before
+            </entry>
+            <entry>
+              memberlist_search.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima della colonna dei campi di
+              ricerca.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_search_sorting_options_before
+            </entry>
+            <entry>
+              memberlist_search.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del campo delle opzioni di
+              ordinamento della ricerca.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_team_username_append
+            </entry>
+            <entry>
+              memberlist_team.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente del membro del team
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_team_username_prepend
+            </entry>
+            <entry>
+              memberlist_team.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del nome utente del membro del
+              team
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_contact_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la parte contatti dell'utente di
+              qualsiasi profilo utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_contact_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della parte contatti dell'utente
+              di qualsiasi profilo utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_contact_custom_fields_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i campi personalizzati relativi ai
+              contatti dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_contact_custom_fields_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei campi personalizzati relativi
+              ai contatti dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_content_append
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto personalizzato alla visualizzazione del
+              profilo utente dopo il contenuto principale
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_content_prepend
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto personalizzato alla visualizzazione del
+              profilo utente prima del contenuto principale
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_non_contact_custom_fields_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i campi personalizzati non relativi
+              ai contatti dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_non_contact_custom_fields_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei campi personalizzati non
+              relativi ai contatti dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_rank_avatar_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo il rango nell'elenco membri (con
+              avatar)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_rank_avatar_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del rango nell'elenco membri
+              (con avatar)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_rank_no_avatar_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni dopo il rango nell'elenco membri
+              (senza avatar)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_rank_no_avatar_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni prima del rango nell'elenco membri
+              (senza avatar)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_user_statistics_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge voci dopo la parte statistiche utente di qualsiasi
+              profilo utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_user_statistics_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge voci prima della parte statistiche utente di
+              qualsiasi profilo utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_username_append
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_username_prepend
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_zebra_after
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i link amici/nemici dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              memberlist_view_zebra_before
+            </entry>
+            <entry>
+              memberlist_view.html
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei link amici/nemici dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_logged_out_content
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC1
+            </entry>
+            <entry>
+              Aggiunge testo e HTML al posto del nome utente quando non
+              si è connessi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_profile_list_after
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC2
+            </entry>
+            <entry>
+              Aggiunge link in fondo al menu a tendina del profilo nella
+              barra di navigazione dell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_profile_list_before
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC2
+            </entry>
+            <entry>
+              Aggiunge link in cima al menu a tendina del profilo nella
+              barra di navigazione dell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_quick_links_after
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC2
+            </entry>
+            <entry>
+              Aggiunge link in fondo al menu a tendina dei link rapidi
+              nell'header
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
