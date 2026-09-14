@@ -7330,6 +7330,631 @@
               ucp_login_link venga visualizzato
             </entry>
           </row>
+          <row>
+            <entry>
+              core.ucp_main_front_modify_sql
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              forum_ary, sql_from, sql_select
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Modifica le variabili sql prima che la query venga
+              elaborata
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_front_modify_template_vars
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              folder_alt, folder_img, forum_id, row, topicrow
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge variabili template a una riga di argomenti in
+              primo piano.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_subscribed_forum_modify_template_vars
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              folder_alt, folder_image, forum_id, last_post_time,
+              last_post_url, row, template_vars, unread_forum
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge variabili template a una riga di forum
+              sottoscritto.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_subscribed_forums_modify_query
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              forbidden_forums, sql_array
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica la query usata per recuperare un elenco di forum
+              sottoscritti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_subscribed_post_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Legge e modifica potenzialmente i dati del post usati per
+              rimuovere le sottoscrizioni a forum/argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_topiclist_count_modify_query
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              forbidden_forum_ary, mode, sql_array
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica la query usata per recuperare il conteggio degli
+              argomenti sottoscritti/nei segnalibri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_topiclist_modify_query
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              forbidden_forum_ary, mode, sql_array
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica la query usata per recuperare l'elenco degli
+              argomenti sottoscritti/nei segnalibri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_main_topiclist_topic_modify_template_vars
+            </entry>
+            <entry>
+              includes/ucp/ucp_main.php
+            </entry>
+            <entry>
+              folder_alt, folder_img, forum_id, icons, replies, row,
+              template_vars, topic_id, topic_type, unread_topic,
+              view_topic_url
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge variabili template a una riga di argomento
+              sottoscritto/nei segnalibri.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_modify_friends_sql
+            </entry>
+            <entry>
+              ucp.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima dell'elenco degli
+              amici
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_modify_friends_template_vars
+            </entry>
+            <entry>
+              ucp.php
+            </entry>
+            <entry>
+              row, tpl_ary, which
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Evento per modificare il template prima dell'elenco degli
+              amici
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_notifications_output_notification_types_modify_template_vars
+            </entry>
+            <entry>
+              includes/ucp/ucp_notifications.php
+            </entry>
+            <entry>
+              method_data, subscriptions, tpl_ary, type_data
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive prima che
+              ucp_notifications venga visualizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_notifications_submit_notification_is_set
+            </entry>
+            <entry>
+              includes/ucp/ucp_notifications.php
+            </entry>
+            <entry>
+              is_available, is_set_notify, method_data, subscriptions,
+              type_data
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive prima che
+              ucp_notifications venga inviato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_compose_pm_basic_info_query_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              action, delete, msg_id, post, preview, reply_to_all,
+              submit, to_group_id, to_user_id
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Modifica la riga del messaggio citato durante la scrittura
+              di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_compose_pm_basic_info_query_before
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              action, delete, msg_id, preview, reply_to_all, sql,
+              submit, to_group_id, to_user_id
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Modifica la query sql per ottenere il messaggio per
+              l'utente per scrivere il MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_modify_bbcode_status
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              bbcode_status, flash_status, img_status, smilies_status,
+              url_status
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Evento per sovrascrivere le indicazioni di stato dei
+              BBCode del messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_modify_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              action, delete, msg_id, preview, reply_to_all, submit,
+              to_group_id, to_user_id
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica le variabili predefinite prima di comporre un MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_modify_parse_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              enable_bbcode, enable_sig, enable_smilies, enable_urls,
+              error, message_parser, preview, subject, submit
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Modifica il messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_modify_parse_before
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              enable_bbcode, enable_sig, enable_smilies, enable_urls,
+              error, message_parser, preview, subject, submit
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica il messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_predefined_message
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              message_subject, message_text
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Predefinisce il testo e l'oggetto del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_quotepost_query_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              action, delete, msg_id, post, preview, reply_to_all, sql,
+              submit, to_group_id, to_user_id
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Ottiene il risultato dell'interrogazione per il messaggio
+              da citare nel messaggio del MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_compose_template
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              template_ary
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Modifica le variabili template predefinite
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_view_folder_get_pm_from_sql
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_viewfolder.php
+            </entry>
+            <entry>
+              sql_ary, sql_limit, sql_start
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Modifica l'SQL prima che venga eseguito
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_view_folder_get_pm_from_template
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_viewfolder.php
+            </entry>
+            <entry>
+              base_url, folder, folder_id, pm_count, start,
+              template_vars, user_id
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Modifica le variabili template prima che vengano assegnate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_view_message
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_viewmessage.php
+            </entry>
+            <entry>
+              attachments, cp_row, folder, folder_id, id, message_row,
+              mode, msg_data, msg_id, user_info
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica i dati del MP e del mittente prima che vengano
+              assegnati al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_view_message_before
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_viewmessage.php
+            </entry>
+            <entry>
+              author_id, folder, folder_id, message_row, msg_id
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Modifica i dati del messaggio privato prima che venga
+              preparato per la visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_pm_view_messsage
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_viewmessage.php
+            </entry>
+            <entry>
+              cp_row, folder, folder_id, id, message_row, mode,
+              msg_data, msg_id, user_info
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati del MP e del mittente prima che vengano
+              assegnati al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_modify_common
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, error, mode, s_hidden_fields
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica i dati delle preferenze UCP prima del caricamento
+              della pagina
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_personal_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, error, submit
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Aggiunge i dati delle impostazioni globali di modifica
+                UCP prima che vengano assegnati al template o inviati
+              </para>
+              <para>
+                Per assegnare dati al template, usa
+                $template-&gt;assign_vars()
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_personal_update_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiorna i dati delle impostazioni globali di modifica UCP
+              all'invio del modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_post_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, submit
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Aggiunge i dati dei valori predefiniti di pubblicazione
+                di modifica UCP prima che vengano assegnati al template
+                o inviati
+              </para>
+              <para>
+                Per assegnare dati al template, usa
+                $template-&gt;assign_vars()
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_post_update_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiorna i dati dei valori predefiniti di pubblicazione di
+              modifica UCP all'invio del modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_view_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              <anchor id="options" />options, data, limit_post_days,
+              limit_topic_days, s_limit_post_days, s_limit_topic_days,
+              s_sort_post_dir, s_sort_post_key, s_sort_topic_dir,
+              s_sort_topic_key, sort_by_post_sql, sort_by_post_text,
+              sort_by_topic_sql, sort_by_topic_text, sort_dir_text,
+              submit
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Esegue codice prima che venga visualizzato il modulo di
+              visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_prefs_view_data
+            </entry>
+            <entry>
+              includes/ucp/ucp_prefs.php
+            </entry>
+            <entry>
+              data, submit
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Aggiunge i dati delle opzioni di visualizzazione di
+                modifica UCP prima che vengano assegnati al template o
+                inviati
+              </para>
+              <para>
+                Per assegnare dati al template, usa
+                $template-&gt;assign_vars()
+              </para>
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
