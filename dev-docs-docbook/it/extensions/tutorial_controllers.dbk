@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Controller e rotte</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      phpBB 3.1 ha introdotto i sistemi
+      <ulink url="https://symfony.com/doc/current/components/http_kernel.html">HttpKernel</ulink>,
+      <ulink url="https://symfony.com/doc/current/controller.html">Controller</ulink>
+      e
+      <ulink url="https://symfony.com/doc/current/routing.html">Routing</ulink>
+      di Symfony, che permettono alle estensioni di gestire pagine
+      &quot;rivolte all'utente&quot; personalizzate che gli utenti
+      possono visualizzare e con cui possono interagire.
+    </para>
+    <para>
+      Questo tutorial spiega come creare pagine rivolte all'utente:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="controllers">Controller</link>: File
+            rivolti all'utente
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="routing">Routing</link>: URL verso i file
+            rivolti all'utente
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="controllers">
+    <title>Controller</title>
+    <para>
+      Un controller è una classe con un insieme di funzioni che
+      servono contenuti e gestiscono le interazioni dell'utente, in
+      base a ciò che viene richiesto nell'URL. Ad esempio,
+      un'estensione blog che mostra uno o più articoli del blog.
+    </para>
+    <para>
+      Attualmente la nostra estensione Acme Demo ha un link nella
+      barra di navigazione senza una destinazione. Useremo un
+      controller per creare una pagina che l'utente vedrà, e useremo
+      il routing per gestire l'URL verso il nostro controller.
+    </para>
+    <para>
+      I file controller possono essere posizionati ovunque
+      all'interno della struttura di cartelle di un'estensione,
+      sebbene per mantenere l'ordine sia meglio posizionarli in una
+      cartella separata chiamata <literal>controller/</literal>. Ai
+      file controller può anche essere dato qualsiasi nome. Per
+      l'estensione Acme Demo, useremo
+      <literal>ext\acme\demo\controller\main.php</literal>.
+    </para>
+    <para>
+      Ogni controller dovrebbe contenere almeno due metodi:
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            Un metodo pubblico <literal>__construct()</literal>.
+            Questo è facoltativo se il tuo controller non ha
+            dipendenze.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Un metodo pubblico <literal>handle()</literal>. Questo
+            metodo può avere qualsiasi nome, ma
+            &quot;handle&quot; è comune. Questo metodo deve
+            restituire un oggetto Response di Symfony.
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\controller;
+
+use \Symfony\Component\HttpFoundation\Response;
+
+class main
+{
+    /* @var \phpbb\config\config */
+    protected $config;
+
+    /* @var \phpbb\controller\helper */
+    protected $helper;
+
+    /* @var \phpbb\language\language */
+    protected $language;
+
+    /* @var \phpbb\template\template */
+    protected $template;
+
+    /**
+     * Constructor
+     *
+     * @param \phpbb\config\config      $config
+     * @param \phpbb\controller\helper  $helper
+     * @param \phpbb\language\language  $language
+     * @param \phpbb\template\template  $template
+     */
+    public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\template\template $template)
+    {
+        $this-&gt;config   = $config;
+        $this-&gt;helper   = $helper;
+        $this-&gt;language = $language;
+        $this-&gt;template = $template;
+    }
+
+    /**
+     * Demo controller for route /demo/{name}
+     *
+     * @param string $name
+     * @throws \phpbb\exception\http_exception
+     * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+     */
+    public function handle($name)
+    {
+        if ($name === 'bertie')
+        {
+            throw new \phpbb\exception\http_exception(403, 'NO_AUTH_SPEAKING', [$name]);
+        }
+
+        $l_message = !$this-&gt;config['acme_demo_goodbye'] ? 'DEMO_HELLO' : 'DEMO_GOODBYE';
+        $this-&gt;template-&gt;assign_var('DEMO_MESSAGE', $this-&gt;language-&gt;lang($l_message, $name));
+
+        return $this-&gt;helper-&gt;render('@acme_demo/demo_body.html', $name);
+    }
+}
+</programlisting>
+    <sect2 id="dependencies">
+      <title>Dipendenze</title>
+      <para>
+        Ora diamo un'occhiata al costruttore del controller, prima di
+        guardare il codice effettivo del controller nel metodo
+        <literal>handle()</literal>.
+      </para>
+      <para>
+        Il nostro controller ha diverse dipendenze da oggetti phpBB.
+        Dobbiamo informare phpBB del nostro controller e delle sue
+        dipendenze definendolo come servizio nel nostro file
+        <literal>config/services.yml</literal>, introdotto in
+        <literal>tutorial_events</literal>. Il file
+        <literal>services.yml</literal> completo dovrebbe avere questo
+        aspetto:
+      </para>
+      <programlisting language="yaml">
+services:
+    acme.demo.controller:
+        class: acme\demo\controller\main
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@template'
+    acme.demo.listener:
+        class: acme\demo\event\main_listener
+        tags:
+            - { name: event.listener }
+</programlisting>
+      <caution>
+        <title>Attenzione</title>
+        <para>
+          Ricorda che l'ordine degli argomenti deve corrispondere
+          all'ordine dei parametri nella definizione del metodo
+          costruttore.
+        </para>
+      </caution>
+    </sect2>
+    <sect2 id="request-handling">
+      <title>Gestione delle richieste</title>
+      <para>
+        Il metodo <literal>handle()</literal> è responsabile della
+        gestione della richiesta per visualizzare le pagine. Nota che
+        accetta l'argomento <literal>$name</literal>. Questa è una
+        variabile passata da un parametro URL, come definito nel file
+        di configurazione <link linkend="routing">Routing</link>.
+      </para>
+      <para>
+        Il metodo handle ha una condizione speciale che verifica se
+        l'utente sta cercando di usare <emphasis>bertie</emphasis>.
+        Non vogliamo autorizzare questo, perché le persone non
+        dovrebbero interagire con
+        <ulink url="https://www.phpbb.com/shop/">Bertie</ulink>.
+        Quindi lanciamo un <literal>http_exception</literal> con un
+        codice di errore 403, che mostrerà all'utente un bel
+        messaggio di errore &quot;non autorizzato&quot;.
+      </para>
+      <para>
+        Con un nome valido, il metodo handle creerà un semplice
+        messaggio da mostrare all'utente e lo assegnerà all'array
+        delle variabili template del controller.
+      </para>
+      <para>
+        Poi usiamo l'oggetto Helper
+        <literal>phpbb\controller\helper</literal> per renderizzare
+        la nostra pagina con il metodo <literal>render()</literal>.
+        Accetta come argomenti il nome del file template, il titolo
+        della pagina, e il codice di stato. Il titolo della pagina ha
+        come valore predefinito una stringa vuota e il codice di
+        stato ha come valore predefinito 200. Stiamo usando il
+        <link linkend="controller-template">Template del
+        controller</link> <literal>demo_body.html</literal>.
+      </para>
+      <tip>
+        <title>Suggerimento</title>
+        <para>
+          Quando si chiama un file template da PHP usando
+          <literal>phpbb\controller\helper:render()</literal>, i file
+          template vengono cercati in due posizioni (in questo
+          ordine):
+        </para>
+        <blockquote>
+          <orderedlist numeration="arabic" spacing="compact">
+            <listitem>
+              <para>
+                phpBB/styles/*nome_stile*/template/
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                phpBB/ext/*tutte_le_estensioni_attive*/styles/*nome_stile*/template/
+              </para>
+            </listitem>
+          </orderedlist>
+        </blockquote>
+        <para>
+          Il seguente codice caricherà un template che potrebbe
+          trovarsi in una qualsiasi delle posizioni sopra indicate,
+          cioè in qualsiasi stile di phpBB o estensione attiva:
+        </para>
+        <programlisting>
+$this-&gt;helper-&gt;render('demo_body.html', $name);
+</programlisting>
+        <para>
+          Se hai bisogno di caricare un file template solo dalla tua
+          stessa estensione, raccomandiamo di usare il prefisso
+          <literal>@vendor_extension/</literal>:
+        </para>
+        <programlisting>
+$this-&gt;helper-&gt;render('@acme_demo/demo_body.html', $name);
+</programlisting>
+        <para>
+          Si raccomanda anche di usare sempre nomi univoci per i tuoi
+          template per evitare possibili conflitti con i template di
+          phpBB o di altre estensioni.
+        </para>
+      </tip>
+      <note>
+        <title>Nota</title>
+        <para>
+          Il metodo <literal>phpbb\controller\helper:render()</literal>
+          restituisce per noi un oggetto Response di Symfony. Se
+          scegli di non usare l'oggetto Helper, dovrai restituire
+          manualmente un oggetto Response di Symfony. L'oggetto
+          Response accetta due argomenti:
+        </para>
+        <blockquote>
+          <orderedlist numeration="arabic" spacing="compact">
+            <listitem>
+              <para>
+                Messaggio di risposta - Dovrebbe essere il sorgente
+                completo e renderizzato della pagina che verrà
+                mostrato sullo schermo.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Codice di stato - Il valore predefinito è 200, che è
+                il codice di stato &quot;OK&quot;. Se stai inviando
+                una risposta relativa all'impossibilità di trovare
+                alcune informazioni, useresti lo stato 404
+                (&quot;Not Found&quot;). 403 verrebbe usato se
+                l'utente non ha i permessi appropriati, e 500 per un
+                errore sconosciuto.
+              </para>
+            </listitem>
+          </orderedlist>
+        </blockquote>
+        <programlisting>
+return new \Symfony\Component\HttpFoundation\Response($template_file, 200);
+</programlisting>
+      </note>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          Un controller non dovrebbe mai chiamare
+          <literal>trigger_error()</literal> per generare output.
+          Dovrebbe invece sempre restituire oggetti Response o
+          JsonResponse di Symfony, oppure lanciare un
+          http_exception di phpBB.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="controller-template">
+      <title>Template del controller</title>
+      <para>
+        Ogni controller richiede un file template HTML. L'estensione
+        Acme Demo usa <literal>demo_body.html</literal>, situato
+        nella cartella
+        <literal>styles/prosilver/template/</literal>, con il
+        seguente contenuto, incluso l'header e il footer di phpBB:
+      </para>
+      <programlisting language="html">
+{% include 'overall_header.html' %}
+
+&lt;h2&gt;{{ DEMO_MESSAGE }}&lt;/h2&gt;
+
+{% include 'overall_footer.html' %}
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          Un file template così semplice potrebbe essere memorizzato
+          nella cartella di stile <literal>all/</literal> perché
+          chiaramente non ha alcun markup HTML specifico per lo stile
+          prosilver.
+        </para>
+      </note>
+    </sect2>
+  </sect1>
+  <sect1 id="routing">
+    <title>Routing</title>
+    <para>
+      A questo punto, abbiamo ora un controller che può creare e
+      servire una pagina rivolta all'utente, ma non abbiamo ancora un
+      URL tramite cui accedere alla pagina.
+    </para>
+    <para>
+      Per risolvere questo, ogni controller deve definire una
+      <emphasis>rotta</emphasis> in un file
+      <literal>config/routing.yml</literal> dell'estensione. Questo
+      file è responsabile di associare il nome di accesso di un
+      controller (cioè ciò che viene digitato nell'URL) con il suo
+      servizio (cioè ciò che abbiamo trattato in
+      <link linkend="dependencies">Dipendenze</link>).
+    </para>
+    <para>
+      Ricorda che il nostro controller si aspetta che gli venga
+      passato un parametro URL come variabile
+      <literal>$name</literal>. Pertanto, vogliamo che il nostro URL
+      abbia questo aspetto:
+      <literal>/app.php/demo/&lt;name&gt;</literal>.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Tutti i file controller delle estensioni sono accessibili
+        tramite <literal>app.php</literal>. Tuttavia, i forum possono
+        attivare la funzionalità Enable URL rewriting nell'ACP per
+        nascondere il componente <literal>app.php/</literal>
+        dell'URL.
+      </para>
+    </note>
+    <para>
+      Il nostro file <literal>routing.yml</literal> dovrebbe avere
+      questo aspetto:
+    </para>
+    <programlisting language="yaml">
+acme_demo_route:
+    path: /demo/{name}
+    defaults: { _controller: acme.demo.controller:handle, name: &quot;world&quot; }
+</programlisting>
+    <para>
+      La definizione di routing sopra dice che quando l'utente va
+      all'URL <literal>/app.php/demo/&lt;name&gt;</literal> dovrebbe
+      essere caricato il servizio
+      <literal>acme.demo.controller</literal> e chiamato il metodo
+      <literal>handle</literal>, passando il valore dello
+      &quot;slug&quot; <literal>{name}</literal> all'argomento
+      <literal>$name</literal> (i nomi dello slug e dell'argomento
+      devono corrispondere). Se non viene fornito alcun valore per
+      <literal>{name}</literal> (cioè l'URL è
+      <literal>/app.php/demo</literal>) verrà passato il valore
+      predefinito &quot;world&quot; al metodo
+      <literal>handle</literal>.
+    </para>
+    <para>
+      Come puoi vedere, gli slug offrono un modo potente per
+      interagire con il tuo controller tramite parametri URL. Devi
+      specificare uno slug per ogni parametro richiesto nel tuo
+      metodo. I parametri facoltativi non devono essere forniti nella
+      definizione di Routing, nel qual caso assumeranno il valore
+      predefinito fornito nella definizione del metodo.
+    </para>
+    <para>
+      Puoi anche specificare espressioni regolari per gli slug, per
+      controllare più strettamente il tipo di dati passati al
+      metodo. Ad esempio, se vogliamo assicurarci che
+      <literal>name</literal> sia un intero, aggiungeremmo il
+      seguente codice alla nostra definizione di rotta:
+    </para>
+    <programlisting language="yaml">
+requirements:
+    name: \d+
+</programlisting>
+    <informaltable>
+      <tgroup cols="2">
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Elemento
+            </entry>
+            <entry>
+              Descrizione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              route
+            </entry>
+            <entry>
+              Il nome della rotta è un nome univoco e deve avere il
+              prefisso del vendor e del nome dell'estensione. Usa
+              solo lettere minuscole e trattini bassi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              path
+            </entry>
+            <entry>
+              Il percorso del componente URL, inclusi gli slug
+              racchiusi tra parentesi graffe. Se un percorso non
+              corrisponde a nessuna rotta viene restituito un errore
+              404.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              defaults
+            </entry>
+            <entry>
+              Il nome del servizio del controller e il nome del
+              metodo da chiamare, separati da due punti.
+              Facoltativamente, possono essere definiti valori
+              predefiniti per gli slug.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              requirements
+            </entry>
+            <entry>
+              Usato per far corrispondere una rotta specifica solo in
+              condizioni specifiche.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      Il file <literal>routing.yml</literal> può contenere più
+      definizioni di rotta per più URL, come potrebbe essere
+      richiesto dalle esigenze dell'estensione. Le rotte vengono
+      confrontate nell'ordine della loro dichiarazione nel file
+      <literal>routing.yml</literal>, il che è importante da
+      considerare quando si definiscono le rotte. Ad esempio:
+    </para>
+    <programlisting language="yaml">
+acme_blog_home:
+    path: /blog
+    defaults: { _controller: acme.blog.controller:handle }
+
+acme_blog_entry:
+    path: /blog/{id}
+    defaults: { _controller: acme.blog.controller:handle }
+    requirements:
+        id: \d+
+
+acme_blog_edit:
+    path: /blog/{id}/edit
+    defaults: { _controller: acme.blog.controller:handle }
+    requirements:
+        id: \d+
+</programlisting>
+    <sect2 id="generating-links-to-routes">
+      <title>Generare link verso le rotte</title>
+      <para>
+        Ora che siamo in grado di accedere alla nostra pagina rivolta
+        all'utente da un URL, dobbiamo aggiungere quell'URL al link
+        della barra di navigazione che abbiamo creato in precedenza
+        con il listener template.
+      </para>
+      <para>
+        Ricorda che il nostro listener template ha una variabile
+        <literal>U_DEMO_PAGE</literal>. Ora rivisiteremo il nostro
+        listener di eventi PHP e lo aggiorneremo per generare un URL
+        per la nostra rotta e assegnarlo a
+        <literal>U_DEMO_PAGE</literal>.
+      </para>
+      <para>
+        Per prima cosa, useremo l'evento
+        <literal>core.page_header</literal>. Questo è un evento
+        ideale da usare quando vuoi manipolare il codice quando
+        viene generato l'header di una pagina phpBB. Dobbiamo
+        aggiornare il metodo <literal>getSubscribedEvents()</literal>
+        in <literal>event/main_listener.php</literal> come segue:
+      </para>
+      <programlisting>
+static public function getSubscribedEvents()
+{
+    return [
+        'core.user_setup'  =&gt; 'load_language_on_setup',
+        'core.page_header' =&gt; 'add_page_header_link',
+    ];
+}
+</programlisting>
+      <para>
+        Successivamente aggiungeremo un nuovo metodo al listener di
+        eventi che crea il nostro link e lo assegna alla nostra
+        variabile template:
+      </para>
+      <programlisting>
+/**
+ * Add a page header nav bar link
+ *
+ * @param \phpbb\event\data $event The event object
+ */
+public function add_page_header_link($event)
+{
+    $this-&gt;template-&gt;assign_vars([
+        'U_DEMO_PAGE' =&gt; $this-&gt;helper-&gt;route('acme_demo_route', ['name' =&gt; 'world']),
+    ]);
+}
+</programlisting>
+      <para>
+        In questo nuovo metodo usiamo il metodo
+        <literal>route()</literal> dell'oggetto Controller Helper
+        per creare il link verso il nostro controller. Nota che
+        accetta due argomenti:
+      </para>
+      <blockquote>
+        <orderedlist numeration="arabic" spacing="compact">
+          <listitem>
+            <para>
+              Il nome della rotta, come definito in
+              <literal>routing.yml</literal>. In questo caso,
+              <literal>acme_demo_route</literal>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Un array facoltativo di parametri. In questo caso,
+              stiamo passando il valore <literal>world</literal> al
+              parametro <literal>name</literal> come valore
+              predefinito.
+            </para>
+          </listitem>
+        </orderedlist>
+      </blockquote>
+      <note>
+        <title>Nota</title>
+        <para>
+          L'URL generato avrà questo aspetto
+          <literal>./app.php/demo/world</literal>, che è equivalente
+          a <literal>./app.php/demo?name=world</literal>.
+        </para>
+      </note>
+      <para>
+        Nota che il nostro nuovo metodo
+        <literal>add_page_header_link()</literal> richiede gli
+        oggetti Controller Helper e Template di phpBB. Pertanto,
+        dobbiamo anche aggiungere un nuovo costruttore al nostro
+        listener di eventi per iniettare queste dipendenze. Mettendo
+        tutto insieme, il listener di eventi completo dovrebbe avere
+        questo aspetto:
+      </para>
+      <programlisting>
+namespace acme\demo\event;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class main_listener implements EventSubscriberInterface
+{
+    /* @var \phpbb\controller\helper */
+    protected $helper;
+
+    /* @var \phpbb\template\template */
+    protected $template;
+
+    /**
+     * Constructor
+     *
+     * @param \phpbb\controller\helper $helper
+     * @param \phpbb\template\template $template
+     */
+    public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
+    {
+        $this-&gt;helper   = $helper;
+        $this-&gt;template = $template;
+    }
+
+    /**
+     * Assign functions defined in this class to event listeners in the core
+     *
+     * @return array
+     */
+    static public function getSubscribedEvents()
+    {
+        return [
+            'core.user_setup'  =&gt; 'load_language_on_setup',
+            'core.page_header' =&gt; 'add_page_header_link',
+        ];
+    }
+
+    /**
+     * Load the Acme Demo language file
+     *     acme/demo/language/en/demo.php
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function load_language_on_setup($event)
+    {
+        $lang_set_ext = $event['lang_set_ext'];
+        $lang_set_ext[] = [
+            'ext_name' =&gt; 'acme/demo',
+            'lang_set' =&gt; 'demo',
+        ];
+        $event['lang_set_ext'] = $lang_set_ext;
+    }
+
+    /**
+     * Add a page header nav bar link
+     *
+     * @param \phpbb\event\data $event The event object
+     */
+    public function add_page_header_link($event)
+    {
+        $this-&gt;template-&gt;assign_vars([
+            'U_DEMO_PAGE' =&gt; $this-&gt;helper-&gt;route('acme_demo_route', ['name' =&gt; 'world']),
+        ]);
+    }
+}
+</programlisting>
+      <para>
+        Ricorda di aggiornare anche la definizione di servizio del
+        listener di eventi in <literal>config/services.yml</literal>
+        con le nuove dipendenze:
+      </para>
+      <programlisting language="yaml">
+acme.demo.listener:
+    class: acme\demo\event\main_listener
+    arguments:
+        - '@controller.helper'
+        - '@template'
+    tags:
+        - { name: event.listener }
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          Ricorda di svuotare la cache ogni volta che modifichi
+          qualcosa nei file <literal>*.yml</literal>.
+        </para>
+      </note>
+      <para>
+        Ora il nostro link nella barra di navigazione dovrebbe aprire
+        una nuova pagina rivolta all'utente che dice &quot;Hello
+        world!&quot; Se sostituiamo temporaneamente &quot;world&quot;
+        con un'altra stringa, ad esempio &quot;foo&quot;, la pagina
+        dovrebbe dire &quot;Hello foo!&quot;. E se usiamo
+        &quot;bertie&quot; allora dovrebbe esserci mostrata una
+        pagina di errore 403.
+      </para>
+      <para>
+        Abbiamo completato la nostra pagina controller rivolta
+        all'utente. Prosegui alla sezione successiva per imparare
+        come aggiungere un modulo ACP alla nostra estensione così da
+        poterle dare alcune impostazioni di configurazione.
+      </para>
+    </sect2>
+  </sect1>
+</article>
