@@ -4278,6 +4278,620 @@
               interrogata la cronologia dei messaggi nei messaggi privati
             </entry>
           </row>
+          <row>
+            <entry>
+              core.message_history_modify_template_vars
+            </entry>
+            <entry>
+              includes/functions_privmsgs.php
+            </entry>
+            <entry>
+              row, template_vars
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Modifica le variabili template per visualizzare la
+              cronologia dei messaggi nei messaggi privati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.message_list_actions
+            </entry>
+            <entry>
+              includes/ucp/ucp_pm_compose.php
+            </entry>
+            <entry>
+              add_bcc, add_to, address_list, error, remove_g, remove_u
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per azioni aggiuntive sull'elenco dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.message_parser_check_message
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              allow_bbcode, allow_flash_bbcode, allow_img_bbcode,
+              allow_magic_url, allow_quote_bbcode, allow_smilies,
+              allow_url_bbcode, bbcode_bitfield, bbcode_uid, message,
+              mode, return, update_this_message, warn_msg
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Questo evento può essere usato per controlli/pulizia
+              aggiuntivi del messaggio prima dell'analisi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_attachment_data_on_submit
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              attachment_data
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'allegato all'invio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_attachment_data_on_upload
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              attachment_data
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'allegato al caricamento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_attachment_sql_ary_on_submit
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Modifica l'array sql dell'allegato all'invio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_attachment_sql_ary_on_upload
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Modifica l'array sql dell'allegato al caricamento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_bbcode_init
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              bbcodes, rowset
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Evento per modificare i dati bbcode per l'analisi
+              successiva
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_default_attachments_template_vars
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              allowed_attachments, default_vars
+            </entry>
+            <entry>
+              3.3.6-RC1
+            </entry>
+            <entry>
+              Modifica le variabili template degli allegati predefiniti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_email_headers
+            </entry>
+            <entry>
+              includes/functions_messenger.php
+            </entry>
+            <entry>
+              headers
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per modificare le voci dell'header dell'email
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_format_display_text_after
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              allow_bbcode, allow_magic_url, allow_smilies, text, uid,
+              update_this_message
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Evento per modificare il testo dopo che è stato analizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_format_display_text_before
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              allow_bbcode, allow_magic_url, allow_smilies, text, uid,
+              update_this_message
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per modificare il testo prima che venga analizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_group_name_string
+            </entry>
+            <entry>
+              phpbb/group/helper.php
+            </entry>
+            <entry>
+              custom_profile_url, group_colour, group_id, group_name,
+              group_name_string, mode, name_strings
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Usa questo evento per cambiare l'output del nome del
+              gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_inline_attachments_template_vars
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              attachment_data, attachrow_template_vars
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica le variabili template degli allegati inline
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_mcp_modules_display_option
+            </entry>
+            <entry>
+              mcp.php
+            </entry>
+            <entry>
+              forum_id, id, mode, module, post_id, topic_id, user_id,
+              username
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Questo evento ti permette di impostare l'opzione di
+              visualizzazione per i moduli MCP personalizzati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_memberlist_viewprofile_group_data
+            </entry>
+            <entry>
+              memberlist.php
+            </entry>
+            <entry>
+              group_data, group_sort
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Modifica i dati del gruppo prima che le opzioni vengano
+              create e i dati rimossi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_memberlist_viewprofile_group_sql
+            </entry>
+            <entry>
+              memberlist.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Modifica la query usata per ottenere i dati del gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_module_row
+            </entry>
+            <entry>
+              includes/functions_module.php
+            </entry>
+            <entry>
+              custom_func, lang_func, module_row, row, url_func
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Questo evento permette di modificare i parametri per la
+              costruzione dell'elenco dei moduli
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_notification_message
+            </entry>
+            <entry>
+              includes/functions_messenger.php
+            </entry>
+            <entry>
+              break, message, method, subject
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per modificare il testo del messaggio di notifica
+              dopo l'analisi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_notification_template
+            </entry>
+            <entry>
+              includes/functions_messenger.php
+            </entry>
+            <entry>
+              break, method, subject, template
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per modificare il template prima dell'analisi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_pm_attach_download_auth
+            </entry>
+            <entry>
+              includes/functions_download.php
+            </entry>
+            <entry>
+              allowed, msg_id, user_id
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'autorizzazione al download degli
+              allegati dei MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_posting_auth
+            </entry>
+            <entry>
+              posting.php
+            </entry>
+            <entry>
+              draft_id, error, forum_id, is_authed, load, mode,
+              post_data, post_id, preview, refresh, save, submit,
+              topic_id
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              <para>
+                Questo evento ti permette di eseguire controlli di
+                autorizzazione aggiuntivi e verificare se l'utente ha i
+                permessi richiesti
+              </para>
+              <para>
+                Le estensioni dovrebbero modificare solo le variabili
+                error e is_authed.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_posting_parameters
+            </entry>
+            <entry>
+              posting.php
+            </entry>
+            <entry>
+              cancel, draft_id, error, forum_id, load, mode, post_id,
+              preview, refresh, save, submit, topic_id
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Questo evento ti permette di alterare i parametri sopra,
+                come submit e mode
+              </para>
+              <para>
+                Nota: $refresh deve essere true per mantenere i dati del
+                modulo precedentemente inviati.
+              </para>
+              <para>
+                Nota: La classe template non funzionerà correttamente
+                finché $user-&gt;setup() non viene chiamato, e non è
+                ancora stato chiamato. Le estensioni che richiedono
+                assegnazioni template dovrebbero usare un evento che
+                arriva più avanti in questo file.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_quickmod_actions
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              action, quickmod
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Questo evento ti permette di gestire opzioni quickmod
+              personalizzate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_quickmod_options
+            </entry>
+            <entry>
+              mcp.php
+            </entry>
+            <entry>
+              action, is_valid_action, module
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Questo evento ti permette di aggiungere opzioni quickmod
+              personalizzate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_submit_notification_data
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              data_ary, mode, notification_data, poster_id
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Questo evento ti permette di modificare i dati di notifica
+              all'invio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_submit_post_data
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              data, mode, poll, subject, topic_type, update_message,
+              update_search_index, username
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Modifica i dati per l'invio del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_text_for_display_after
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              bitfield, flags, text, uid
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il testo dopo che è stato
+              analizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_text_for_display_before
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              bitfield, censor_text, flags, text, uid
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il testo prima che venga
+              analizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_text_for_edit_after
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              flags, text
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il testo dopo che è stato
+              decodificato per la modifica
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_text_for_edit_before
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              flags, text, uid
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il testo prima che venga
+              decodificato per la modifica
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_text_for_storage_after
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              bitfield, flags, message_parser, text, uid
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il testo dopo che è stato
+              preparato per la memorizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_text_for_storage_before
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              allow_bbcode, allow_flash_bbcode, allow_img_bbcode,
+              allow_quote_bbcode, allow_smilies, allow_url_bbcode,
+              allow_urls, bitfield, flags, mode, text, uid
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il testo prima che venga
+              preparato per la memorizzazione
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
