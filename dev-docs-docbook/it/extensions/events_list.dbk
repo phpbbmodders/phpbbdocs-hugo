@@ -1825,6 +1825,1233 @@
               messaggi
             </entry>
           </row>
+          <row>
+            <entry>
+              core.display_custom_bbcodes
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Visualizza i bbcode personalizzati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_custom_bbcodes_modify_row
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              custom_tags, row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento per modificare il blocco di dati template di un
+                bbcode personalizzato
+              </para>
+              <para>
+                Questo evento viene attivato una volta per bbcode
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_custom_bbcodes_modify_sql
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              num_predefined_bbcodes, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che i dati del
+              bbcode personalizzato vengano interrogati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_add_template_data
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              catless, forum_row, row, subforums_list, subforums_row
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              <para>
+                Modifica e/o assegna dati template aggiuntivi per il
+                forum dopo che il ciclo forumrow è stato assegnato.
+                Questo può essere usato per creare ulteriori sottocicli
+                forumrow nelle estensioni.
+              </para>
+              <para>
+                Questo evento viene attivato una volta per forum
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_after
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              active_forum_ary, display_moderators, forum_moderators,
+              forum_rows, return_moderators, root_data
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive dopo che l'elenco dei
+              forum è stato generato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_before
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              active_forum_ary, display_moderators, forum_moderators,
+              forum_rows, return_moderators, root_data
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive prima che l'elenco
+              dei forum venga generato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_modify_category_template_vars
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              cat_row, last_catless, root_data, row
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              <para>
+                Modifica il blocco di dati template della 'categoria'
+              </para>
+              <para>
+                Questo evento viene attivato una volta per 'categoria'
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_modify_forum_rows
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              branch_root_id, forum_rows, parent_id, row, subforums
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento per modificare l'insieme di dati delle righe del
+                forum
+              </para>
+              <para>
+                Questo evento viene attivato una volta per forum
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_modify_row
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              branch_root_id, row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento per modificare l'insieme di dati di un forum
+              </para>
+              <para>
+                Questo evento viene attivato una volta per forum
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_modify_sql
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che i dati del
+              forum vengano interrogati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_forums_modify_template_vars
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              forum_row, row, subforums_row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Modifica il blocco di dati template del forum
+              </para>
+              <para>
+                Questo evento viene attivato una volta per forum
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.display_user_activity_modify_actives
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              active_f_row, active_t_row, show_user_activity, userdata
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica l'elenco di forum e argomenti da visualizzare
+              come attivi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.download_file_send_to_browser_before
+            </entry>
+            <entry>
+              download/file.php
+            </entry>
+            <entry>
+              attach_id, attachment, display_cat, download_mode,
+              extensions, mode, thumbnail
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per modificare i dati prima di inviare il file al
+              browser
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.faq_mode_validation
+            </entry>
+            <entry>
+              phpbb/help/controller/help.php
+            </entry>
+            <entry>
+              ext_name, lang_file, mode, page_title, template_file
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Puoi usare questo evento per visualizzare una pagina di
+              aiuto personalizzata
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.feed_base_modify_item_sql
+            </entry>
+            <entry>
+              phpbb/feed/base.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'sql dell'elemento feed
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.feed_modify_feed_row
+            </entry>
+            <entry>
+              phpbb/feed/controller/feed.php
+            </entry>
+            <entry>
+              feed, row
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Evento per modificare la riga del feed
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.functions.redirect
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              disable_cd_check, return, url
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive redirect()
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.garbage_collection
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Scarica alcuni oggetti, per liberare memoria, prima di
+              terminare il nostro compito
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.gen_sort_selects_after
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              def_sd, def_sk, def_st, limit_days, s_limit_days,
+              s_sort_dir, s_sort_key, sort_by_text, sort_days, sort_dir,
+              sort_key, sorts, u_sort_param
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Esegue codice prima che vengano restituiti i sort select
+              generati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_forum_nav
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              forum_data, forum_template_data, microdata_attr, navlinks,
+              navlinks_parents
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare il testo dei navlinks
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_profile_fields_template_data
+            </entry>
+            <entry>
+              phpbb/profilefields/manager.php
+            </entry>
+            <entry>
+              profile_row, tpl_fields, use_contact_fields
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Evento per modificare i dati template dei campi profilo
+              generati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_profile_fields_template_data_before
+            </entry>
+            <entry>
+              phpbb/profilefields/manager.php
+            </entry>
+            <entry>
+              profile_row, tpl_fields, use_contact_fields
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Evento per modificare i dati dei campi profilo generati,
+              prima del ciclo di assegnazione al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_profile_fields_template_headlines
+            </entry>
+            <entry>
+              phpbb/profilefields/manager.php
+            </entry>
+            <entry>
+              profile_cache, restrict_option, tpl_fields
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per modificare i titoli template dei campi profilo
+              generati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_smilies_after
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              base_url, display_link, forum_id, mode
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Questo evento viene chiamato dopo che le emoticon sono
+              state popolate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_smilies_before
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              root_path
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Modifica il percorso radice delle emoticon prima di popolare
+              l'elenco delle emoticon
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_smilies_count_sql_before
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              base_url, forum_id, sql_ary
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Modifica la query SQL che recupera il numero totale di
+              emoticon in modalità finestra
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_smilies_modify_rowset
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              forum_id, mode, smilies
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Modifica le emoticon prima che vengano assegnate al
+              template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.generate_smilies_modify_sql
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              forum_id, mode, sql_ary
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Modifica la query SQL che recupera le emoticon
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_avatar_after
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              alt, avatar_data, html, ignore_config, row
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per modificare il tag HTML &lt;img&gt; dell'avatar
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_forum_list_modify_data
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              rowset
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'elenco dei forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_gravatar_url_after
+            </entry>
+            <entry>
+              phpbb/avatar/driver/gravatar.php
+            </entry>
+            <entry>
+              row, url
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Modifica l'url gravatar
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_group_rank_after
+            </entry>
+            <entry>
+              phpbb/group/helper.php
+            </entry>
+            <entry>
+              group_data, group_rank_data
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Modifica il rango di un gruppo prima della visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_group_rank_before
+            </entry>
+            <entry>
+              phpbb/group/helper.php
+            </entry>
+            <entry>
+              group_data
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Prepara il rango di un gruppo prima della visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_logs_after
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              count_logs, forum_id, keywords, limit, log, log_time,
+              log_type, mode, offset, profile_url, reportee_id_list,
+              sort_by, topic_id, topic_id_list, user_id
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Permette di modificare o eseguire un ulteriore filtro
+              finale sulle voci di log
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_logs_get_additional_data
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              log, reportee_id_list, topic_id_list
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Ottiene alcuni dati aggiuntivi dopo aver ottenuto tutte le
+              voci di log
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_logs_main_query_before
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              count_logs, forum_id, get_logs_sql_ary, keywords, limit,
+              log_time, log_type, mode, offset, profile_url, sort_by,
+              sql_additional, topic_id, user_id
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Modifica la query per ottenere i dati dei log
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_logs_modify_entry_data
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              log_entry_data, row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati della voce prima che venga restituita
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_logs_modify_type
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              count_logs, forum_id, keywords, limit, log_time, log_type,
+              mode, offset, profile_url, sort_by, sql_additional,
+              topic_id, user_id
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Sovrascrive il tipo di log e le limitazioni prima di
+                contare e ottenere i log
+              </para>
+              <para>
+                NOTA: se log_type è false, non verrà restituita alcuna
+                voce.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_unread_topics_modify_sql
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              last_mark, sql_array, sql_extra, sql_sort
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Cambia la query SQL per recuperare i dati degli argomenti
+              non letti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.get_user_rank_after
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              user_data, user_posts, user_rank_data
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Modifica il rango di un utente prima della visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.grab_profile_fields_data
+            </entry>
+            <entry>
+              phpbb/profilefields/manager.php
+            </entry>
+            <entry>
+              field_data, user_ids
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Evento per modificare i dati dei campi profilo recuperati
+              dal database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.group_add_user_after
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              group_id, group_name, pending, user_id_ary, username_ary
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Evento dopo che gli utenti sono stati aggiunti a un gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.group_delete_user_after
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              group_id, group_name, user_id_ary, username_ary
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Evento dopo che gli utenti sono stati rimossi da un gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.group_delete_user_before
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              group_id, group_name, user_id_ary, username_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento prima che gli utenti vengano rimossi da un gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.handle_post_delete_conditions
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              delete_reason, force_delete_allowed,
+              force_softdelete_allowed, forum_id, is_soft, perm_check,
+              post_data, post_id, topic_id
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Questo evento permette di modificare le condizioni per
+              l'eliminazione del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.help_manager_add_block_after
+            </entry>
+            <entry>
+              phpbb/help/manager.php
+            </entry>
+            <entry>
+              block_name, questions, switch_column
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Puoi usare questo evento per aggiungere un blocco dopo
+              quello corrente.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.help_manager_add_block_before
+            </entry>
+            <entry>
+              phpbb/help/manager.php
+            </entry>
+            <entry>
+              block_name, questions, switch_column
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Puoi usare questo evento per aggiungere un blocco prima di
+              quello corrente.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.help_manager_add_question_after
+            </entry>
+            <entry>
+              phpbb/help/manager.php
+            </entry>
+            <entry>
+              answer, question
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Puoi usare questo evento per aggiungere una domanda dopo
+              quella corrente.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.help_manager_add_question_before
+            </entry>
+            <entry>
+              phpbb/help/manager.php
+            </entry>
+            <entry>
+              answer, question
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Puoi usare questo evento per aggiungere una domanda prima
+              di quella corrente.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.index_mark_notification_after
+            </entry>
+            <entry>
+              index.php
+            </entry>
+            <entry>
+              mark_notification, notification
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Puoi usare questo evento per eseguire attività aggiuntive
+              o reindirizzare l'utente altrove.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.index_modify_birthdays_list
+            </entry>
+            <entry>
+              index.php
+            </entry>
+            <entry>
+              birthdays, rows
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'elenco dei compleanni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.index_modify_birthdays_sql
+            </entry>
+            <entry>
+              index.php
+            </entry>
+            <entry>
+              now, sql_ary, time
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL per ottenere i dati dei
+              compleanni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.index_modify_page_title
+            </entry>
+            <entry>
+              index.php
+            </entry>
+            <entry>
+              page_title
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Puoi usare questo evento per modificare il titolo della
+              pagina e caricare dati per l'indice
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.load_drafts_draft_list_result
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              draft_rows, topic_ids, topic_rows
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Bozze trovate e i loro argomenti. Modifica $draft_rows per
+              aggiungere o rimuovere le bozze caricate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.login_box_before
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              admin, err, l_explain, l_success, redirect, s_display
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Questo evento permette a un'estensione di modificare il
+              processo di accesso
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.login_box_failed
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              err, password, result, username
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Questo evento permette a un'estensione di elaborare quando
+              un utente fallisce un tentativo di accesso
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.login_box_modify_template_data
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              admin, autologin, login_box_template_data, redirect,
+              username
+            </entry>
+            <entry>
+              3.2.3-RC2
+            </entry>
+            <entry>
+              Evento per aggiungere/modificare i dati template del box
+              di accesso
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.login_box_redirect
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              admin, redirect, result
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Questo evento permette a un'estensione di modificare il
+              reindirizzamento quando un utente accede con successo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.login_forum_box
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              forum_data, password
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive, carica dati aggiuntivi
+              all'accesso al forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.make_forum_select_modify_forum_list
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              rowset
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'elenco dei forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.make_jumpbox_modify_forum_list
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              rowset
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'elenco dei forum del jumpbox
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.make_jumpbox_modify_tpl_ary
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              row, tpl_ary
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica il jumpbox prima che venga assegnato al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.markread_after
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              forum_id, mode, post_time, topic_id, user_id
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Questo evento viene usato per eseguire azioni subito dopo
+              che forum, argomenti o messaggi sono stati contrassegnati
+              come letti.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.markread_before
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              forum_id, mode, post_time, should_markread, topic_id,
+              user_id
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              <para>
+                Questo evento viene usato per eseguire azioni subito
+                prima di contrassegnare forum, argomenti o messaggi come
+                letti.
+              </para>
+              <para>
+                È anche possibile impedire il contrassegno. Per farlo, il
+                parametro $should_markread dovrebbe essere impostato su
+                FALSE.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_ban_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_ban.php
+            </entry>
+            <entry>
+              ban, ban_exclude, ban_give_reason, ban_length,
+              ban_length_other, ban_reason, mode
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Usa questo evento per eseguire azioni dopo che il ban è
+              stato effettuato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_ban_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_ban.php
+            </entry>
+            <entry>
+              abort_ban, ban, ban_exclude, ban_give_reason, ban_length,
+              ban_length_other, ban_reason, mode
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Usa questo evento per modificare i dettagli del ban prima
+              che venga effettuato
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
