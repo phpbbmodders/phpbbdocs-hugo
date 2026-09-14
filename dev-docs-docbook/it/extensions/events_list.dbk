@@ -15090,7 +15090,449 @@
               torna in cima
             </entry>
           </row>
-<!--INSERT_TEMPLATE_EVENTS_HERE-->
+          <row>
+            <entry>
+              viewtopic_body_postrow_back2top_prepend
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto in fondo al messaggio direttamente
+              prima del link torna in cima
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_content_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il contenuto del messaggio nella
+              visualizzazione dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_content_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.3.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del contenuto del messaggio
+              nella visualizzazione dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_custom_fields_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge dati dopo i campi personalizzati sul profilo
+              utente durante la visualizzazione di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_custom_fields_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge dati prima dei campi personalizzati sul profilo
+              utente durante la visualizzazione di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge dati dopo i messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge dati prima dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_content_footer
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge dati alla fine dei messaggi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_details_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i dettagli del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_details_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei dettagli del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_notices_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge avvisi personalizzati specifici del messaggio in
+              fondo agli avvisi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_post_notices_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge avvisi personalizzati specifici del messaggio in
+              cima agli avvisi.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_rank_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo il rango sul profilo utente durante la
+              visualizzazione di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_rank_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima del rango sul profilo utente durante
+              la visualizzazione di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_signature_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la firma
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_signature_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della firma
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_topic_actions_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge dati prima dei pulsanti delle azioni sul topic
+              (dopo le opzioni di ordinamento dei messaggi)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_buttons_bottom_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti dopo il pulsante Rispondi, in fondo
+              all'elenco dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_buttons_bottom_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti prima del pulsante Rispondi, in fondo
+              all'elenco dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_buttons_top_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti dopo il pulsante Rispondi, in cima
+              all'elenco dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_buttons_top_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti prima del pulsante Rispondi, in cima
+              all'elenco dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_dropdown_bottom_custom
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Crea un menu a tendina personalizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_dropdown_top_custom
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Crea un menu a tendina personalizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_print_head_append
+            </entry>
+            <entry>
+              viewtopic_print.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge chiamate asset direttamente prima del tag
+              &lt;/head&gt; della schermata di stampa del topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_topic_title_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo il link al titolo
+              del topic nella schermata Visualizza topic (fuori dal
+              tag HTML h2)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_topic_title_append
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo il link al titolo
+              del topic nella schermata Visualizza topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_topic_title_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima del link al titolo
+              del topic nella schermata Visualizza topic (fuori dal
+              tag HTML h2)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_topic_title_prepend
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima del link al titolo
+              del topic nella schermata Visualizza topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_topic_tools_after
+            </entry>
+            <entry>
+              viewtopic_topic_tools.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge un nuovo strumento del topic dopo il resto di
+              quelli esistenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_topic_tools_before
+            </entry>
+            <entry>
+              viewtopic_topic_tools.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge un nuovo strumento del topic prima del resto di
+              quelli esistenti
+            </entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
