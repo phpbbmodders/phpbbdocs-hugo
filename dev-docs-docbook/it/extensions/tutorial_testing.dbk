@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Test</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      Questo tutorial spiega:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="unit-tests">Test unitari</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="unit-tests-with-database-interaction">Test
+            unitari con interazione database</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="functional-testing">Test funzionali</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="continuous-integration-with-github-actions">Integrazione
+            continua con Github Actions</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <warning>
+      <title>Attenzione</title>
+      <para>
+        È necessario eseguire i test da un clone Git del repository di
+        phpBB, poiché il framework di test non è incluso nei pacchetti
+        di download.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="unit-tests">
+    <title>Test unitari</title>
+    <para>
+      Poiché i test unitari sono spiegati più in dettaglio nella
+      sezione <literal>../testing/unit_testing</literal> della
+      documentazione generale sui test e non richiedono modifiche per
+      le estensioni, qui aggiungiamo solo un rapido esempio.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Se non hai ancora eseguito i test di phpBB, si raccomanda di
+        fare una pausa qui e provare a eseguirli prima. Questo aiuta
+        ad assicurarsi di aver configurato tutto correttamente, prima
+        di scrivere i test per l'estensione.
+      </para>
+      <para>
+        Maggiori dettagli sono spiegati nella sezione
+        <literal>../testing/unit_testing</literal>.
+      </para>
+    </note>
+    <programlisting>
+&lt;?php
+// ext/acme/demo/tests/controller/main_test.php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+namespace acme\demo\tests\controller;
+
+class main_test extends \phpbb_test_case
+{
+    /** @var \acme\demo\controller\main */
+    protected $controller;
+
+    protected $config;
+    protected $helper;
+    protected $language;
+    protected $template;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this-&gt;config = $this-&gt;getMockBuilder('\phpbb\config\config')
+            -&gt;disableOriginalConstructor()
+            -&gt;getMock();
+        $this-&gt;helper = $this-&gt;getMockBuilder('\phpbb\controller\helper')
+            -&gt;disableOriginalConstructor()
+            -&gt;getMock();
+        $this-&gt;template = $this-&gt;getMockBuilder('\phpbb\template\template')
+            -&gt;disableOriginalConstructor()
+            -&gt;getMock();
+        $this-&gt;language = $this-&gt;getMockBuilder('\phpbb\language\language')
+            -&gt;disableOriginalConstructor()
+            -&gt;getMock();
+
+        $this-&gt;controller = new \acme\demo\controller\main(
+            $this-&gt;config,
+            $this-&gt;helper,
+            $this-&gt;template,
+            $this-&gt;language
+        );
+    }
+
+    public function test_handle_bertie()
+    {
+        $this-&gt;helper-&gt;expects($this-&gt;once())
+            -&gt;method('message')
+            -&gt;with('NO_AUTH_SPEAKING', ['bertie'], 'NO_AUTH_OPERATION', 403)
+            -&gt;willReturn($this-&gt;getMock('Symfony\Component\HttpFoundation\Response'));
+
+        $this-&gt;helper-&gt;expects($this-&gt;never())
+            -&gt;method('render');
+
+        $response = $this-&gt;controller-&gt;handle('bertie');
+        $this-&gt;assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+    }
+
+    public function handle_data()
+    {
+        return [
+            ['foo', true, 'DEMO_GOODBYE'],
+            ['bar', false, 'DEMO_HELLO'],
+        ];
+    }
+
+    /**
+     * @dataProvider handle_data
+     */
+    public function test_handle($name, $config, $expected_language)
+    {
+        $language_return = $expected_language . '#' .  $name;
+
+        $this-&gt;config-&gt;expects($this-&gt;once())
+            -&gt;method('offsetExists')
+            -&gt;with('acme_demo_goodbye')
+            -&gt;willReturn(true);
+        $this-&gt;config-&gt;expects($this-&gt;once())
+            -&gt;method('offsetGet')
+            -&gt;with('acme_demo_goodbye')
+            -&gt;willReturn($config);
+
+        $this-&gt;language-&gt;expects($this-&gt;once())
+            -&gt;method('lang')
+            -&gt;with($expected_language, $name)
+            -&gt;willReturn($language_return);
+
+        $this-&gt;template-&gt;expects($this-&gt;once())
+            -&gt;method('assign_var')
+            -&gt;with('DEMO_MESSAGE', $language_return);
+
+        $this-&gt;helper-&gt;expects($this-&gt;once())
+            -&gt;method('render')
+            -&gt;with('demo_body.html',test_handle_bertie() $name, 200, false)
+            -&gt;willReturn($this-&gt;getMock('Symfony\Component\HttpFoundation\Response'));
+
+        $response = $this-&gt;controller-&gt;handle($name);
+        $this-&gt;assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+    }
+}
+</programlisting>
+    <sect2 id="using-mocks">
+      <title>Usare i mock</title>
+      <para>
+        Nel metodo <literal>setUp()</literal> creiamo il nostro
+        oggetto controller. Tuttavia, non usiamo le classi phpBB
+        reali che vengono usate dal controller quando apre la pagina.
+        Invece vengono iniettati
+        <ulink url="https://phpunit.readthedocs.io/en/7.5/test-doubles.html">mock
+        phpunit</ulink>.
+      </para>
+      <para>
+        Questi mock ci permettono di verificare quante volte un
+        metodo viene chiamato, quali sono gli argomenti e ci
+        permettono di specificare il valore di ritorno. Questo ci
+        aiuta a verificare che il codice del <emphasis role="strong">nostro</emphasis>
+        controller si comporti come previsto. Questi mock aiutano
+        anche a prevenire falsi errori nei casi in cui l'uso delle
+        classi phpBB reali potrebbe comportarsi in modo inaspettato.
+      </para>
+    </sect2>
+    <sect2 id="testing-a-method">
+      <title>Testare un metodo</title>
+      <para>
+        Nel nostro controller abbiamo aggiunto una gestione speciale
+        quando il nome fornito è <literal>bertie</literal>. Quindi il
+        nostro primo test è se il metodo
+        <literal>phpbb\controller\helper::message()</literal> viene
+        chiamato <emphasis role="strong">una volta</emphasis> con il
+        messaggio di errore <literal>NO_AUTH_SPEAKING</literal>.
+        Vogliamo anche assicurarci che il metodo
+        <literal>phpbb\controller\helper::render()</literal> non
+        venga chiamato in questo caso.
+      </para>
+      <para>
+        Poi chiamiamo il metodo <literal>handle()</literal> del
+        controller. Se i metodi vengono invocati correttamente il
+        test avrà successo.
+      </para>
+      <programlisting>
+public function test_handle_bertie()
+{
+    $this-&gt;helper-&gt;expects($this-&gt;once())
+        -&gt;method('message')
+        -&gt;with('NO_AUTH_SPEAKING', ['bertie'], 'NO_AUTH_OPERATION', 403)
+        -&gt;willReturn($this-&gt;getMock('Symfony\Component\HttpFoundation\Response'));
+
+    $this-&gt;helper-&gt;expects($this-&gt;never())
+        -&gt;method('render');
+
+    $response = $this-&gt;controller-&gt;handle('bertie');
+    $this-&gt;assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+}
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          Assicurati che il nome del tuo metodo di test inizi con
+          <literal>test</literal>. Altrimenti il test non verrà
+          eseguito da phpunit.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="data-providers">
+      <title>Data provider</title>
+      <para>
+        Nella maggior parte dei casi vorremo fornire alcuni dati di
+        test ai nostri metodi di test unitario. Un data provider è un
+        metodo che restituisce un array di array contenenti variabili
+        di input e variabili di output attese. L'array interno
+        contiene gli argomenti per il metodo <literal>test</literal>.
+      </para>
+      <programlisting>
+public function handle_data()
+{
+    return [
+        ['foo', true, 'DEMO_GOODBYE'],
+        ['bar', false, 'DEMO_HELLO'],
+    ];
+}
+</programlisting>
+      <para>
+        Questo data provider contiene due array di dati di test,
+        quindi il nostro test verrà chiamato due volte, una con gli
+        argomenti:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            'foo'
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            true
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            'DEMO_GOODBYE'
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        e una seconda volta con:
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            'bar'
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            false
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            'DEMO_HELLO'
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Nel test diciamo quindi al mock
+        <literal>phpbb\config\config</literal> di aspettarsi di
+        essere chiamato una sola volta, e di restituire il valore
+        specificato (che viene passato come argomento) per la
+        variabile config <literal>acme_demo_goodbye</literal>.
+      </para>
+      <programlisting>
+/**
+ * @dataProvider handle_data
+ */
+public function test_handle($name, $config, $expected_language)
+{
+    // ...
+
+    $this-&gt;config-&gt;expects($this-&gt;once())
+        -&gt;method('offsetGet')
+        -&gt;with('acme_demo_goodbye')
+        -&gt;willReturn($config);
+</programlisting>
+      <para>
+        Se diamo una breve occhiata di nuovo al nostro controller,
+        vediamo che il valore della config influenza la chiamata a
+        <literal>\phpbb\language\language::lang()</literal>:
+      </para>
+      <programlisting>
+$l_message = empty($this-&gt;config['acme_demo_goodbye']) ? 'DEMO_HELLO' : 'DEMO_GOODBYE';
+$this-&gt;template-&gt;assign_var('DEMO_MESSAGE', $this-&gt;language-&gt;lang($l_message, $name));
+</programlisting>
+      <para>
+        Questo è ciò che verifichiamo con il terzo argomento
+        <literal>$expected_language</literal> del nostro metodo di
+        test:
+      </para>
+      <programlisting>
+$this-&gt;language-&gt;expects($this-&gt;once())
+    -&gt;method('lang')
+    -&gt;with($expected_language, $name)
+    -&gt;willReturn($language_return);
+</programlisting>
+      <para>
+        Per maggiori informazioni su Mock e phpunit, dai un'occhiata
+        alla
+        <ulink url="https://phpunit.readthedocs.io/en/7.5/test-doubles.html">documentazione
+        di phpunit</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="phpunit-configuration-file">
+      <title>File di configurazione phpunit</title>
+      <para>
+        Prima di poter eseguire i test dobbiamo creare il file di
+        configurazione per phpunit. Non preoccuparti se non lo
+        capisci, non dovresti aver bisogno di modificare nulla in
+        quel file. Il file dovrebbe essere memorizzato come
+        <literal>ext/acme/demo/phpunit.xml.dist</literal>:
+      </para>
+      <programlisting language="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;phpunit backupGlobals=&quot;true&quot;
+         backupStaticAttributes=&quot;true&quot;
+         colors=&quot;true&quot;
+         convertErrorsToExceptions=&quot;true&quot;
+         convertNoticesToExceptions=&quot;true&quot;
+         convertWarningsToExceptions=&quot;true&quot;
+         processIsolation=&quot;false&quot;
+         stopOnFailure=&quot;false&quot;
+         verbose=&quot;true&quot;
+         bootstrap=&quot;../../../../tests/bootstrap.php&quot;
+&gt;
+    &lt;testsuites&gt;
+        &lt;testsuite name=&quot;Extension Test Suite&quot;&gt;
+            &lt;directory suffix=&quot;_test.php&quot;&gt;./tests&lt;/directory&gt;
+            &lt;exclude&gt;./tests/functional&lt;/exclude&gt;
+        &lt;/testsuite&gt;
+        &lt;testsuite name=&quot;Extension Functional Tests&quot;&gt;
+            &lt;directory suffix=&quot;_test.php&quot;&gt;./tests/functional/&lt;/directory&gt;
+        &lt;/testsuite&gt;
+    &lt;/testsuites&gt;
+
+    &lt;filter&gt;
+        &lt;whitelist processUncoveredFilesFromWhitelist=&quot;true&quot;&gt;
+            &lt;directory suffix=&quot;.php&quot;&gt;./&lt;/directory&gt;
+            &lt;exclude&gt;
+                &lt;directory suffix=&quot;.php&quot;&gt;./language/&lt;/directory&gt;
+                &lt;directory suffix=&quot;.php&quot;&gt;./migrations/&lt;/directory&gt;
+                &lt;directory suffix=&quot;.php&quot;&gt;./tests/&lt;/directory&gt;
+            &lt;/exclude&gt;
+        &lt;/whitelist&gt;
+    &lt;/filter&gt;
+&lt;/phpunit&gt;
+</programlisting>
+      <para>
+        Ora possiamo finalmente eseguire la suite di test eseguendo il
+        seguente comando:
+      </para>
+      <programlisting language="bash">
+$ ./phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
+</programlisting>
+      <para>
+        Risultati:
+      </para>
+      <programlisting language="bash">
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.33 with Xdebug 2.7.2
+Configuration: /home/user/phpBB/phpBB/ext/acme/demo/phpunit.xml.dist
+
+...             3 / 3 (100%)
+
+Time: 101 ms, Memory: 9.00Mb
+
+OK (3 tests, 12 assertions)
+</programlisting>
+      <para>
+        Per eseguire solo i test di un file, basta aggiungere il
+        percorso relativo alla chiamata:
+      </para>
+      <programlisting language="bash">
+$ ./phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist phpBB/ext/acme/demo/tests/controller/main_test.php
+</programlisting>
+      <para>
+        Risultati:
+      </para>
+      <programlisting language="bash">
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.33 with Xdebug 2.7.2
+Configuration: /home/user/phpBB/phpBB/ext/acme/demo/phpunit.xml.dist
+
+...             3 / 3 (100%)
+
+Time: 92 ms, Memory: 9.00Mb
+
+OK (3 tests, 12 assertions)
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="unit-tests-with-database-interaction">
+    <title>Test unitari con interazione database</title>
+    <para>
+      Quando testi le tue tabelle e colonne, non puoi usare il
+      database normale che i test unitari di phpBB configurano per
+      impostazione predefinita.
+    </para>
+    <sect2 id="migration-with-database-changes">
+      <title>Migration con modifiche al database</title>
+      <para>
+        La nostra estensione ha un file migration
+        <literal>ext/acme/demo/migrations/add_database_changes.php</literal>,
+        che contiene alcune modifiche al database, così possiamo
+        testarle:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/acme/demo/migrations/add_database_changes.php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+namespace acme\demo\migrations;
+
+use phpbb\db\migration\migration;
+
+class add_database_changes extends migration
+{
+    public function effectively_installed()
+    {
+        return $this-&gt;db_tools-&gt;sql_column_exists($this-&gt;table_prefix . 'users', 'user_acme');
+    }
+
+    static public function depends_on()
+    {
+        return ['\acme\demo\migrations\add_module'];
+    }
+
+    public function update_schema()
+    {
+        return [
+            'add_tables'        =&gt; [
+                $this-&gt;table_prefix . 'acme_demo'   =&gt; [
+                    'COLUMNS'       =&gt; [
+                        'acme_id'           =&gt; ['UINT', null, 'auto_increment'],
+                        'acme_name'         =&gt; ['VCHAR:255', ''],
+                    ],
+                    'PRIMARY_KEY'   =&gt; 'acme_id',
+                ],
+            ],
+            'add_columns'   =&gt; [
+                $this-&gt;table_prefix . 'users'           =&gt; [
+                    'user_acme'             =&gt; ['UINT', 0],
+                ],
+            ],
+        ];
+    }
+
+    public function revert_schema()
+    {
+        return [
+            'drop_columns'  =&gt; [
+                $this-&gt;table_prefix . 'users'           =&gt; [
+                    'user_acme',
+                ],
+            ],
+            'drop_tables'       =&gt; [
+                $this-&gt;table_prefix . 'acme_demo',
+            ],
+        ];
+    }
+}
+</programlisting>
+    </sect2>
+    <sect2 id="testing-database-changes">
+      <title>Testare le modifiche al database</title>
+      <para>
+        Se aggiungiamo un nuovo test che verifica l'esistenza della
+        tabella, vedremo che il test fallisce:
+      </para>
+      <programlisting>
+&lt;?php
+// ext/acme/demo/tests/migrations/database/add_database_changes.php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+namespace acme\demo\tests\migrations;
+
+class add_database_changes_test extends \phpbb_database_test_case
+{
+    /** @var \phpbb\db\tools */
+    protected $db_tools;
+
+    /** @var string */
+    protected $table_prefix;
+
+    public function getDataSet()
+    {
+        return $this-&gt;createXMLDataSet(dirname(__FILE__) . '/fixtures/add_database_changes.xml');
+    }
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        global $table_prefix;
+
+        $this-&gt;table_prefix = $table_prefix;
+        $db = $this-&gt;new_dbal();
+        $this-&gt;db_tools = new \phpbb\db\tools($db);
+    }
+
+    public function test_user_acme_column()
+    {
+        $this-&gt;assertTrue($this-&gt;db_tools-&gt;sql_column_exists(USERS_TABLE, 'user_acme'), 'Asserting that column &quot;user_acme&quot; exists');
+    }
+
+    public function test_acme_demo_table()
+    {
+        $this-&gt;assertTrue($this-&gt;db_tools-&gt;sql_table_exists($this-&gt;table_prefix . 'acme_demo'), 'Asserting that column &quot;' . $this-&gt;table_prefix . 'acme_demo&quot; does not exist');
+    }
+}
+</programlisting>
+      <para>
+        Prima di poter eseguire il test del database, dobbiamo creare
+        il file fixture che abbiamo specificato nel metodo
+        <literal>getDataSet()</literal>. Questo file può essere usato
+        per creare voci nel database prima che venga eseguito ogni
+        test. Ne faremo uso più avanti. Per ora vogliamo solo
+        verificare se le nostre tabelle sono state create, quindi
+        specifichiamo una tabella config vuota
+        <literal>ext/acme/demo/tests/migrations/database/fixtures/add_database_changes.xml</literal>:
+      </para>
+      <programlisting language="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;dataset&gt;
+    &lt;table name=&quot;phpbb_config&quot;&gt;
+        &lt;column&gt;config_name&lt;/column&gt;
+        &lt;column&gt;config_value&lt;/column&gt;
+        &lt;column&gt;is_dynamic&lt;/column&gt;
+    &lt;/table&gt;
+&lt;/dataset&gt;
+</programlisting>
+    </sect2>
+    <sect2 id="execution">
+      <title>Esecuzione</title>
+      <para>
+        Quando ora eseguiamo di nuovo i test falliranno:
+      </para>
+      <programlisting language="bash">
+$ ./phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.33 with Xdebug 2.7.2
+Configuration: /home/user/phpBB/phpBB/ext/acme/demo/phpunit.xml.dist
+
+...FF             5 / 5 (100%)
+
+Time: 5.27 seconds, Memory: 10.75Mb
+
+There were 2 failures:
+
+1) acme\demo\tests\migrations\add_database_changes_test::test_user_acme_column
+Asserting that column &quot;user_acme&quot; exists
+Failed asserting that false is true.
+
+/home/user/phpBB/phpBB/ext/acme/demo/tests/migrations/add_database_changes_test.php:42
+
+2) acme\demo\tests\migrations\add_database_changes_test::test_acme_demo_table
+Asserting that column &quot;phpbb_acme_demo&quot; does not exist
+Failed asserting that false is true.
+
+/home/user/phpBB/phpBB/ext/acme/demo/tests/migrations/add_database_changes_test.php:47
+
+FAILURES!
+Tests: 5, Assertions: 14, Failures: 2.
+</programlisting>
+      <para>
+        Per far sì che le nostre modifiche al database vengano
+        eseguite nei test unitari, dobbiamo dire a phpBB che questo
+        test richiede che l'estensione sia configurata. Possiamo
+        farlo sovrascrivendo il metodo
+        <literal>\phpbb_database_test_case::setup_extensions()</literal>
+        del test e restituendo un array con il nome dell'estensione:
+      </para>
+      <programlisting>
+class add_database_changes_test extends \phpbb_database_test_case
+{
+    static protected function setup_extensions()
+    {
+        return ['acme/demo'];
+    }
+
+...
+</programlisting>
+      <para>
+        e ora il test ha successo:
+      </para>
+      <programlisting language="bash">
+$ ./phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.33 with Xdebug 2.7.2
+Configuration: /home/user/phpBB/phpBB/ext/acme/demo/phpunit.xml.dist
+
+.....             5 / 5 (100%)
+
+Time: 5.45 seconds, Memory: 13.75Mb
+
+OK (5 tests, 14 assertions)
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          Come puoi vedere, il tempo di esecuzione del test è passato
+          da poche centinaia di millisecondi a pochi secondi. Questo
+          perché i test del database configurano il database e lo
+          popolano, il che richiede tempo.
+        </para>
+        <para>
+          Pertanto si raccomanda di usare i test del database solo
+          quando hai davvero bisogno del database. È meglio dividere
+          il tuo file di test in un test-database e uno senza
+          database, per mantenere breve il tempo di esecuzione.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="using-fixtures">
+      <title>Usare le fixture</title>
+      <para>
+        Ora facciamo uso del file fixture per popolare il database per
+        il nostro test. Sostituiamo quindi il contenuto del file
+        <literal>ext/acme/demo/tests/migrations/database/fixtures/add_database_changes.xml</literal>
+        con il seguente contenuto:
+      </para>
+      <programlisting language="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;dataset&gt;
+    &lt;table name=&quot;phpbb_acme_demo&quot;&gt;
+        &lt;column&gt;acme_id&lt;/column&gt;
+        &lt;column&gt;acme_name&lt;/column&gt;
+        &lt;row&gt;
+            &lt;value&gt;1&lt;/value&gt;
+            &lt;value&gt;one&lt;/value&gt;
+        &lt;/row&gt;
+        &lt;row&gt;
+            &lt;value&gt;2&lt;/value&gt;
+            &lt;value&gt;two&lt;/value&gt;
+        &lt;/row&gt;
+    &lt;/table&gt;
+&lt;/dataset&gt;
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          Puoi omettere colonne dalle tabelle, se non vuoi
+          specificare valori per esse.
+        </para>
+      </note>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          Le colonne del database specificate come colonne
+          <literal>TEXT_UNI</literal> devono essere specificate,
+          altrimenti il tuo test fallirà su alcuni database.
+        </para>
+      </warning>
+      <para>
+        Dopo aver aggiunto il contenuto al database aggiungiamo un
+        nuovo test alla fine del file, che interroga la nostra
+        tabella nel file
+        <literal>ext/acme/demo/tests/migrations/database/add_database_changes.php</literal>
+        e verifica se i valori sono davvero nel database:
+      </para>
+      <programlisting>
+...
+
+    public function data_acme_demo_content()
+    {
+        return [
+            [1, 'one'],
+            [2, 'two'],
+        ];
+    }
+
+    /**
+     * @dataProvider data_acme_demo_content
+     *
+     * @param int $acme_id
+     * @param string $expected
+     */
+    public function test_acme_demo_content($acme_id, $expected)
+    {
+        /** @var \phpbb\db\driver\driver_interface $db */
+        $db = $this-&gt;new_dbal();
+
+        $sql = 'SELECT acme_name
+            FROM ' . $this-&gt;table_prefix . 'acme_demo
+            WHERE acme_id = ' . (int) $acme_id;
+        $result = $db-&gt;sql_query($sql);
+        $value = $db-&gt;sql_fetchfield('acme_name');
+        $db-&gt;sql_freeresult($result);
+
+        $this-&gt;assertEquals($expected, $value);
+    }
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="functional-testing">
+    <title>Test funzionali</title>
+    <para>
+      I test funzionali simulano la chiamata di un URL e ti permettono
+      poi di filtrare l'output e verificare se determinati elementi
+      hanno un contenuto specifico.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Ancora una volta si raccomanda di eseguire prima i test
+        funzionali di phpBB, prima di scrivere i test per
+        l'estensione.
+      </para>
+      <para>
+        Maggiori dettagli sono spiegati nella sezione
+        <literal>../testing/functional_testing</literal>.
+      </para>
+    </note>
+    <para>
+      Ancora una volta, come con le modifiche al database, dobbiamo
+      dire a phpBB che il test dipende dall'estensione, quindi phpBB
+      si occuperà di abilitare l'estensione prima dell'esecuzione del
+      test. Il nostro piccolo test apre la rotta che abbiamo aggiunto
+      e poi verifica il messaggio corretto, come il test unitario che
+      abbiamo scritto in <link linkend="unit-tests">test
+      unitari</link> all'inizio:
+    </para>
+    <programlisting>
+&lt;?php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+namespace acme\demo\tests\functional;
+
+/**
+ * @group functional
+ */
+class demo_test extends \phpbb_functional_test_case
+{
+    static protected function setup_extensions()
+    {
+        return ['acme/demo'];
+    }
+
+    public function test_demo_world()
+    {
+        $this-&gt;add_lang_ext('acme/demo', 'demo');
+
+        $crawler = self::request('GET', 'app.php/demo/world');
+        $this-&gt;assertStringContainsString($this-&gt;lang('DEMO_HELLO', 'world'), $crawler-&gt;filter('h2')-&gt;text());
+    }
+
+    public function test_demo_bertie()
+    {
+        $this-&gt;add_lang_ext('acme/demo', 'demo');
+
+        $crawler = self::request('GET', 'app.php/demo/bertie');
+        $this-&gt;assertStringContainsString($this-&gt;lang('NO_AUTH_SPEAKING', 'bertie'), $crawler-&gt;filter('#message p')-&gt;text());
+    }
+}
+</programlisting>
+    <para>
+      Eseguendo questo test, tuttavia, fallirà:
+    </para>
+    <programlisting language="bash">
+$ ./phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.33 with Xdebug 2.7.2
+Configuration: /home/user/phpBB/phpBB/ext/acme/demo/phpunit.xml.dist
+
+........F             9 / 9 (100%)
+
+Time: 22.37 seconds, Memory: 17.25Mb
+
+There was 1 failure:
+
+1) acme\demo\tests\functional\demo_test::test_demo_bertie
+HTTP status code does not match
+Failed asserting that 403 matches expected 200.
+
+/home/user/phpBB/tests/test_framework/phpbb_functional_test_case.php:900
+/home/user/phpBB/tests/test_framework/phpbb_functional_test_case.php:859
+/home/user/phpBB/tests/test_framework/phpbb_functional_test_case.php:138
+/home/user/phpBB/phpBB/ext/acme/demo/tests/functional/demo_test.php:38
+
+FAILURES!
+Tests: 9, Assertions: 49, Failures: 1.
+</programlisting>
+    <para>
+      Il motivo è che la suite di test confronta la risposta per il
+      formato corretto (HTML valido, senza errori di debug) e un
+      codice di stato di successo <literal>200</literal>.
+    </para>
+    <para>
+      Dobbiamo quindi modificare il test bertie, perché restituiamo
+      uno stato <literal>403</literal> nel controller, se qualcuno
+      prova a parlare con bertie:
+    </para>
+    <programlisting>
+public function test_demo_bertie()
+{
+    $this-&gt;add_lang_ext('acme/demo', 'demo');
+
+    $crawler = self::request('GET', 'app.php/demo/bertie', [], false);
+    self::assert_response_html(403);
+    $this-&gt;assertStringContainsString($this-&gt;lang('NO_AUTH_SPEAKING', 'bertie'), $crawler-&gt;filter('#message p')-&gt;text());
+}
+</programlisting>
+    <para>
+      Ora i test avranno successo correttamente:
+    </para>
+    <programlisting language="bash">
+$ ./phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
+PHPUnit 7.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.33 with Xdebug 2.7.2
+Configuration: /home/user/phpBB/phpBB/ext/acme/demo/phpunit.xml.dist
+
+.........             9 / 9 (100%)
+
+Time: 22.11 seconds, Memory: 17.00Mb
+
+OK (9 tests, 52 assertions)
+</programlisting>
+    <note>
+      <title>Nota</title>
+      <para>
+        I test funzionali sono <emphasis role="strong">lenti</emphasis>.
+        A seconda del tuo server, potrebbe volerci fino a 2 secondi
+        per visualizzazione di pagina. Anche phpBB viene installato
+        tramite visualizzazioni di pagina, il che richiede altri 20-100
+        secondi, a seconda di varie configurazioni, per i primi test
+        funzionali. I test funzionali successivi
+        <emphasis role="strong">non reinstallano</emphasis> il forum,
+        quindi non hanno il lungo tempo di configurazione.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="continuous-integration-with-github-actions">
+    <title>Integrazione continua con Github Actions</title>
+    <para>
+      Come passaggio finale in questo tutorial, vogliamo spiegare come
+      configurare i test automatizzati della tua estensione usando
+      Github Actions. Per fare ciò, la tua estensione deve prima
+      essere configurata come repository di progetto su
+      <ulink url="https://github.com">GitHub</ulink> (gratuito per i
+      repository open source pubblici).
+    </para>
+    <para>
+      Se hai bisogno di aiuto per configurare git e creare il tuo
+      progetto GitHub, dai un'occhiata alla
+      <ulink url="https://help.github.com/">sezione Guida</ulink> su
+      Github, in particolare i seguenti due argomenti di aiuto:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <ulink url="https://help.github.com/articles/set-up-git">Set
+          Up Git</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <ulink url="https://help.github.com/articles/create-a-repo">Create
+          A Repo</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <note>
+      <title>Nota</title>
+      <para>
+        Si raccomanda di usare la radice dell'estensione
+        (<literal>ext/acme/demo</literal>) come radice per il
+        repository Git. Altrimenti gli script che phpBB fornisce per
+        la facile esecuzione dei test su Travis CI non funzioneranno
+        correttamente.
+      </para>
+      <para>
+        Guarda uno dei repository di estensioni ufficiali di phpBB
+        come esempio:
+        <ulink url="https://github.com/phpbb-extensions/boardrules">Board
+        Rules</ulink>.
+      </para>
+    </note>
+    <sect2 id="create-your-github-action-workflow-file">
+      <title>Crea il tuo file Workflow Github Action</title>
+      <para>
+        Dal tuo repository su GitHub.com, fai clic su
+        <emphasis role="strong">Add File</emphasis> e seleziona
+        <emphasis role="strong">Create new file</emphasis> e nomina il
+        file <literal>.github/workflows/tests.yml</literal>.
+      </para>
+      <para>
+        Copia quanto segue nel file <literal>tests.yml</literal>:
+      </para>
+      <programlisting language="yaml">
+name: Tests
+
+on:
+  push:           # Run tests when commits are pushed to these branches in your repo,
+    branches:     # ... or remove this branches section to run tests on all your branches
+      - main      # Main production branch
+      - master    # Legacy or alternative main branch
+      - dev/*     # Any feature branches under &quot;dev/&quot;, e.g., dev/new-feature
+
+  pull_request:   # Run tests when pull requests are made on these branches in your repo,
+    branches:     # ... or remove this branches section to run tests on all your branches
+      - main
+      - master
+      - dev/*
+
+jobs:
+  call-tests:
+    name: Extension tests
+    uses: phpbb-extensions/test-framework/.github/workflows/tests.yml@3.3.x
+    with:
+      EXTNAME: acme/demo   # Your extension vendor/package name (required)
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          Devi cambiare la variabile <literal>EXTNAME</literal> con il
+          nome della tua estensione (come l'hai definito nel tuo file
+          composer.json) nella sezione <literal>with</literal> in
+          fondo a questo file.
+        </para>
+      </note>
+      <para>
+        Per salvare ed eseguire il tuo workflow, scorri fino in fondo
+        alla pagina e seleziona
+        <emphasis role="strong">Create a new branch for this commit
+        and start a pull request</emphasis>. Poi, per creare una pull
+        request, fai clic su <emphasis role="strong">Propose new
+        file</emphasis>. Dopo aver unito questa pull request, tutti i
+        commit e le pull request futuri sul tuo branch master
+        attiveranno questo workflow CI e i tuoi test unitari, del
+        database e funzionali verranno eseguiti.
+      </para>
+    </sect2>
+    <sect2 id="customising-your-test-workflow">
+      <title>Personalizzare il tuo workflow di test</title>
+      <para>
+        Fai riferimento al
+        <ulink url="https://github.com/phpbb-extensions/test-framework">phpBB
+        Extension Test Framework - Read Me</ulink> per un elenco
+        completo di opzioni di configurazione ed esempi.
+      </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <ulink url="https://github.com/phpbb-extensions/test-framework#configuration-options">Configuration
+            Options</ulink>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="https://github.com/phpbb-extensions/test-framework#configuration-examples">Configuration
+            Examples</ulink>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="final-thoughts-on-extension-testing">
+      <title>Considerazioni finali sui test delle estensioni</title>
+      <para>
+        Test ben scritti aiutano a prevenire regressioni (rompere
+        altre parti del tuo codice) avvisandoti di eventuali problemi
+        risultanti da modifiche al tuo codice mentre correggi bug,
+        aggiungi nuove funzionalità e apporti altre modifiche al
+        codice della tua estensione.
+      </para>
+      <para>
+        Se i tuoi test falliscono dopo aver fatto il commit delle
+        modifiche, riceverai un'e-mail di notifica da GitHub. I log
+        delle tue Github Actions possono essere un po' scoraggianti
+        all'inizio, ma una volta che ti abitui a leggerli possono
+        aiutarti a individuare bug e regressioni impreviste nel tuo
+        codice che devono essere corretti.
+      </para>
+      <para>
+        Github Actions fornisce anche i badge di Build Status.
+        Forniscono il codice in formato markdown così puoi aggiungere
+        il badge al README del tuo repository in modo che i visitatori
+        possano vedere lo stato di build della tua estensione. Ad
+        esempio (basta cambiare
+        <literal>your-org/your-repo</literal> con il tuo repository):
+      </para>
+      <programlisting language="markdown">
+[![Tests](https://github.com/your-org/your-repo/actions/workflows/tests.yml/badge.svg)](https://github.com/your-org/your-repo/actions/workflows/tests.yml)
+</programlisting>
+    </sect2>
+  </sect1>
+</article>
