@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Migrations</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      Questo tutorial spiega:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Migrations: Modifiche al database
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+  </sect1>
+  <sect1 id="migrations">
+    <title>Migrations</title>
+    <para>
+      Le Migrations sono un mezzo per facilitare le modifiche al
+      database, in modo simile a come UMIL veniva usato in phpBB 3.0.
+      Attraverso le Migrations, gli sviluppatori di estensioni possono
+      modificare facilmente e aggiungere nuovo schema e dati al
+      database come richiesto da un'estensione.
+    </para>
+    <para>
+      Leggi la documentazione per sviluppatori
+      <literal>../migrations/getting_started</literal> Migrations per
+      una documentazione approfondita sulle migrations. Qui
+      riassumeremo brevemente i concetti chiave delle migrations.
+    </para>
+    <para>
+      La
+      <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/#migrations">Migrations
+      Validation Policy</ulink> del phpBB Customisation Database.
+    </para>
+    <sect2 id="database-changes">
+      <title>Modifiche al database</title>
+      <sect3 id="schema-changes">
+        <title>Modifiche allo schema</title>
+        <para>
+          Il metodo <literal>update_schema()</literal> serve a
+          facilitare le modifiche allo schema, come l'aggiunta di
+          nuove tabelle, colonne, chiavi e indici.
+        </para>
+        <para>
+          Il metodo <literal>revert_schema()</literal> dovrebbe
+          sempre essere incluso per annullare qualsiasi modifica
+          introdotta dal metodo <literal>update_schema()</literal>.
+        </para>
+        <para>
+          Raccomandiamo di inserire le modifiche allo schema in una
+          propria migration.
+        </para>
+        <para>
+          Scopri di più: <literal>../migrations/schema_changes</literal>.
+        </para>
+      </sect3>
+      <sect3 id="data-changes">
+        <title>Modifiche ai dati</title>
+        <para>
+          Il metodo <literal>update_data()</literal> serve per
+          inserire, aggiornare ed eliminare i dati dei campi.
+        </para>
+        <para>
+          Il metodo <literal>revert_data()</literal> è facoltativo e
+          può essere usato per annullare le modifiche ai dati.
+          Normalmente, il metodo <literal>update_data()</literal>
+          viene annullato automaticamente durante un passaggio di
+          purge, ripristinando qualsiasi modifica introdotta dagli
+          strumenti di migration. Usare il metodo
+          <literal>revert_data()</literal> è necessario solo per
+          eseguire modifiche aggiuntive durante la disinstallazione di
+          un'estensione, come l'esecuzione di funzioni personalizzate.
+        </para>
+        <para>
+          Raccomandiamo di inserire le modifiche ai dati in una
+          propria migration.
+        </para>
+        <para>
+          Scopri di più: <literal>../migrations/data_changes</literal>.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="migration-tools">
+      <title>Strumenti di migration</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/config</literal>
+          </term>
+          <listitem>
+            <para>
+              Lo strumento config aiuta ad aggiungere, aggiornare e
+              rimuovere voci di configurazione.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/config_text</literal>
+          </term>
+          <listitem>
+            <para>
+              Lo strumento config_text aiuta ad aggiungere, aggiornare
+              e rimuovere voci config_text. La tabella config_text
+              viene usata per memorizzare opzioni con un valore di
+              lunghezza arbitraria in una colonna TEXT. A differenza
+              dei valori config, i config_text non vengono messi in
+              cache né precaricati.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/module</literal>
+          </term>
+          <listitem>
+            <para>
+              Lo strumento module aiuta ad aggiungere e rimuovere
+              moduli ACP, MCP e UCP.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <literal>../migrations/tools/permission</literal>
+          </term>
+          <listitem>
+            <para>
+              Lo strumento permission aiuta ad aggiungere, rimuovere,
+              impostare e disattivare permessi, e ad aggiungere o
+              rimuovere ruoli permesso.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2 id="migration-dependencies">
+      <title>Dipendenze delle migration</title>
+      <sect3 id="depends_on">
+        <title>depends_on()</title>
+        <para>
+          Il metodo <literal>depends_on()</literal> viene usato per
+          definire le dipendenze di una migration. Le dipendenze
+          indicano al migrator in quale ordine le migration devono
+          essere installate.
+        </para>
+        <para>
+          Scopri di più: <literal>../migrations/dependencies</literal>.
+        </para>
+      </sect3>
+      <sect3 id="effectively_installed">
+        <title>effectively_installed()</title>
+        <para>
+          Il metodo <literal>effectively_installed()</literal> viene
+          usato principalmente per aiutare la transizione da un
+          precedente metodo di installazione del database (come una
+          MOD che usava UMIL) alle migrations. Tuttavia, raccomandiamo
+          di usarlo sempre per garantire migrations più sicure.
+        </para>
+        <para>
+          Quando effectively_installed restituisce true, la migration
+          viene considerata già installata, il che significa che la
+          migration verrà saltata. Questo aiuta a prevenire la
+          riscrittura (o sovrascrittura) di modifiche esistenti al
+          database che potrebbero già essere state applicate da una
+          precedente migration o installazione MOD.
+        </para>
+        <para>
+          Ad esempio, nel seguente codice la migration non verrebbe
+          applicata se il valore di configurazione specificato esiste
+          già nel database:
+        </para>
+        <programlisting>
+public function effectively_installed()
+{
+   return isset($this-&gt;config['acme_demo_goodbye']);
+}
+</programlisting>
+        <warning>
+          <title>Attenzione</title>
+          <para>
+            Come regola generale, le migrations non dovrebbero mai
+            essere modificate una volta installate. Modificare una
+            migration in un'estensione già installata potrebbe
+            impedirle di annullare le modifiche al database o di
+            disinstallarsi correttamente. Per apportare modifiche
+            successive al database, dovrebbero essere create nuove
+            migrations per implementare le modifiche o gli
+            aggiornamenti aggiuntivi. Le uniche eccezioni a questa
+            regola sono la correzione di errori SQL e logici o bug,
+            purché non alterino le modifiche al database già
+            effettuate o le dipendenze elencate nel metodo
+            <literal>depends_on()</literal> della migration.
+          </para>
+        </warning>
+        <para>
+          Una volta che hai familiarità con il funzionamento delle
+          Migrations, prosegui alla sezione successiva per imparare
+          come creare e installare un modulo ACP che ci permetterà di
+          configurare alcune impostazioni per l'estensione Acme Demo.
+        </para>
+      </sect3>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Analizzare il testo</title>
+  </articleinfo>
+  <sect1 id="database-fields">
+    <title>Campi del database</title>
+    <para>
+      phpBB usa i seguenti campi del database dove sono ammessi i
+      BBCode (descrizione del forum, regole del forum, contenuto dei
+      messaggi, ...):
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <emphasis role="strong">foo</emphasis> - Il testo stesso
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_bbcode_uid</emphasis> - un
+          identificatore univoco generato casualmente per contrassegnare
+          i BBCode e usato per un'analisi più rapida
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_bbcode_bitfield</emphasis> - un
+          <ulink url="https://en.wikipedia.org/wiki/Bit_field">campo
+          di bit</ulink> contenente l'informazione su quale bbcode è
+          usato nel testo, in modo che solo quelli rilevanti debbano
+          essere caricati dal database. <emphasis role="strong">NOTA:
+          non più usato nei messaggi generati in phpBB 3.2+</emphasis>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <emphasis role="strong">foo_options</emphasis> - un campo di
+          bit contenente l'informazione se bbcode, smilies e magic
+          url sono abilitati (OPTION_FLAG_BBCODE, OPTION_FLAG_SMILIES
+          e OPTION_FLAG_LINKS). A volte lo troverai separato in
+          enable_bbcode, enable_smilies e enable_magic_url
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      I nomi delle colonne variano, sostituisci
+      <literal>foo</literal> con il rispettivo nome della colonna (ad
+      es. <literal>text</literal>, <literal>text_bbcode_uid</literal>,
+      ...).
+    </para>
+  </sect1>
+  <sect1 id="parsing-text-with-bbcodes-smilies">
+    <title>Analizzare il testo con BBCode ed emoticon</title>
+    <sect2 id="inserting-text-into-db">
+      <title>Inserire il testo nel DB</title>
+      <programlisting>
+$text = $this-&gt;request-&gt;variable('text', '', true);
+$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+$allow_bbcode = $allow_urls = $allow_smilies = true;
+generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+
+$sql_ary = array(
+    'text'              =&gt; $text,
+    'bbcode_uid'        =&gt; $uid,
+    'bbcode_bitfield'   =&gt; $bitfield,
+    'bbcode_options'    =&gt; $options,
+);
+
+$sql = 'INSERT INTO ' . YOUR_TABLE . ' ' . $this-&gt;db-&gt;sql_build_array('INSERT', $sql_ary);
+$this-&gt;db-&gt;sql_query($sql);
+</programlisting>
+      <para>
+        Il metodo sopra usa il campo del database bbcode options, che
+        è usato in molti punti al posto di enable_smiles,
+        enable_bbcode e enable_magic_url. Ecco come inserirlo nel
+        database usando le tabelle enable_smilies, enable_bbcode e
+        enable_magic_url.
+      </para>
+      <programlisting>
+$text = $this-&gt;request-&gt;variable('text', '', true);
+$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+$allow_bbcode = $allow_urls = $allow_smilies = true;
+generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+
+$sql_ary = array(
+    'text'              =&gt; $text,
+    'bbcode_uid'        =&gt; $uid,
+    'bbcode_bitfield'   =&gt; $bitfield,
+    'enable_bbcode'     =&gt; $allow_bbcode,
+    'enable_magic_url'  =&gt; $allow_urls,
+    'enable_smilies'    =&gt; $allow_smilies,
+);
+
+$sql = 'INSERT INTO ' . YOUR_TABLE . ' ' . $this-&gt;db-&gt;sql_build_array('INSERT', $sql_ary);
+$this-&gt;db-&gt;sql_query($sql);
+</programlisting>
+    </sect2>
+    <sect2 id="displaying-text-from-db">
+      <title>Visualizzare il testo dal DB</title>
+      <para>
+        Questo esempio usa il campo bbcode_options, usato nell'analisi
+        delle descrizioni di forum e gruppi:
+      </para>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_bitfield, bbcode_options
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query($sql);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'TEXT'  =&gt; $text,
+]);
+</programlisting>
+      <para>
+        Il prossimo usa i flag enable_bbcode, enable_smilies e
+        enable_magic_url, che possono essere usati al posto del
+        metodo sopra e sono usati nell'analisi dei messaggi:
+      </para>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_bitfield, enable_bbcode, enable_smilies, enable_magic_url
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query($sql);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$row['bbcode_options'] = (($row['enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
+    (($row['enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
+    (($row['enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
+$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'TEXT'  =&gt; $text,
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="generating-text-for-editing">
+      <title>Generare il testo per la modifica</title>
+      <programlisting>
+$sql = 'SELECT text, bbcode_uid, bbcode_options
+    FROM ' . YOUR_TABLE;
+$result = $this-&gt;db-&gt;sql_query_limit($sql, 1);
+$row = $this-&gt;db-&gt;sql_fetchrow($result);
+$this-&gt;db-&gt;sql_freeresult($result);
+
+$post_data = generate_text_for_edit($row['text'], $row['bbcode_uid'], $row['bbcode_options']);
+
+$this-&gt;template-&gt;assign_vars([
+    'POST_TEXT'         =&gt; $post_data['text'],
+    'S_ALLOW_BBCODES'   =&gt; $post_data['allow_bbcode'],
+    'S_ALLOW_SMILIES'   =&gt; $post_data['allow_smilies'],
+    'S_ALLOW_URLS'      =&gt; $post_data['allow_urls'],
+]);
+</programlisting>
+    </sect2>
+    <sect2 id="database-fields-for-bbcode">
+      <title>Campi del database per i BBCode</title>
+      <para>
+        Sono attese le seguenti definizioni di colonna per i BBCode:
+      </para>
+      <programlisting>
+&quot;text&quot;: [
+    &quot;MTEXT_UNI&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_uid&quot;: [
+    &quot;VCHAR:8&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_bitfield&quot;: [
+    &quot;VCHAR:255&quot;,
+    &quot;&quot; // Default empty string
+],
+&quot;bbcode_options&quot;: [
+    &quot;UINT:11&quot;,
+    7 // Default all enabled
+],
+</programlisting>
+    </sect2>
+  </sect1>
+</article>
