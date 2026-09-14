@@ -16785,7 +16785,472 @@
               selezione forum
             </entry>
           </row>
-<!--INSERT_ACP_TEMPLATE_EVENTS_HERE-->
+          <row>
+            <entry>
+              acp_prune_forums_prepend
+            </entry>
+            <entry>
+              acp_prune_forums.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'etichetta del modulo di
+              selezione forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_prune_forums_settings_append
+            </entry>
+            <entry>
+              acp_prune_forums.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le impostazioni di eliminazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_prune_users_find_username_append
+            </entry>
+            <entry>
+              acp_prune_users.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il link di ricerca nome utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_prune_users_find_username_prepend
+            </entry>
+            <entry>
+              acp_prune_users.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del link di ricerca nome utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ranks_edit_after
+            </entry>
+            <entry>
+              acp_ranks.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i dettagli del grado durante la
+              modifica di un grado nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ranks_edit_before
+            </entry>
+            <entry>
+              acp_ranks.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei dettagli del grado durante
+              la modifica di un grado nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ranks_list_column_after
+            </entry>
+            <entry>
+              acp_ranks.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della prima colonna nell'elenco
+              dei gradi nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ranks_list_column_before
+            </entry>
+            <entry>
+              acp_ranks.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'ultima colonna (ma prima della
+              colonna azioni) nell'elenco dei gradi nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ranks_list_header_after
+            </entry>
+            <entry>
+              acp_ranks.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della prima colonna di
+              intestazione nell'elenco dei gradi nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ranks_list_header_before
+            </entry>
+            <entry>
+              acp_ranks.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'ultima colonna di intestazione
+              (ma prima della colonna azioni) nell'elenco dei gradi
+              nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_simple_footer_after
+            </entry>
+            <entry>
+              simple_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto sotto il piè di pagina semplice
+              nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_simple_footer_body_after
+            </entry>
+            <entry>
+              simple_footer.html
+            </entry>
+            <entry>
+              3.3.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del tag &lt;/body&gt; ma dopo la
+              variabile $SCRIPTS, cioè dopo che gli script js sono
+              stati caricati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_simple_header_body_before
+            </entry>
+            <entry>
+              simple_header.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto al corpo dell'intestazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_simple_header_head_append
+            </entry>
+            <entry>
+              simple_header.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge asset all'interno dei tag &lt;head&gt;
+              nell'intestazione semplice dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_simple_header_stylesheets_after
+            </entry>
+            <entry>
+              simple_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge asset dopo i fogli di stile all'interno dei tag
+              &lt;head&gt; nell'intestazione semplice dell'ACP. Notare
+              che INCLUDECSS non funziona con questo evento.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_styles_list_before
+            </entry>
+            <entry>
+              acp_styles.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli stili
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_mode_add
+            </entry>
+            <entry>
+              acp_users.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge modalità extra alla pagina utenti dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_overview_options_append
+            </entry>
+            <entry>
+              acp_users_overview.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni e impostazioni alla pagina di
+              panoramica utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_append
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in
+              fondo alle impostazioni preferenze utenti dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_personal_append
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in
+              fondo alle impostazioni preferenze personali utenti
+              dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_personal_prepend
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in cima
+              alle impostazioni preferenze personali utenti dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_post_append
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in
+              fondo alle impostazioni preferenze pubblicazione utenti
+              dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_post_prepend
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in cima
+              alle impostazioni preferenze pubblicazione utenti
+              dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_prepend
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in cima
+              alle impostazioni preferenze utenti dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_view_append
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in
+              fondo alle impostazioni preferenze di visualizzazione
+              utenti dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_prefs_view_prepend
+            </entry>
+            <entry>
+              acp_users_prefs.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge un riquadro (fieldset) di opzioni utente in cima
+              alle impostazioni preferenze di visualizzazione utenti
+              dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_profile_after
+            </entry>
+            <entry>
+              acp_users_profile.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i dettagli del profilo ma prima
+              dei campi profilo personalizzati durante la modifica di
+              un utente nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_profile_before
+            </entry>
+            <entry>
+              acp_users_profile.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei dettagli del profilo durante
+              la modifica di un utente nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_profile_custom_after
+            </entry>
+            <entry>
+              acp_users_profile.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i campi profilo personalizzati
+              durante la modifica di un utente nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_select_group_after
+            </entry>
+            <entry>
+              acp_users.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il modulo di selezione gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_users_select_group_before
+            </entry>
+            <entry>
+              acp_users.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di selezione gruppo
+            </entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
