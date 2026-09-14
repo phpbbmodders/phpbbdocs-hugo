@@ -3052,6 +3052,624 @@
               che venga effettuato
             </entry>
           </row>
+          <row>
+            <entry>
+              core.mcp_ban_confirm
+            </entry>
+            <entry>
+              includes/mcp/mcp_ban.php
+            </entry>
+            <entry>
+              hidden_fields
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Usa questo evento per passare dati dal modulo di ban alla
+              schermata di conferma
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_ban_main
+            </entry>
+            <entry>
+              includes/mcp/mcp_ban.php
+            </entry>
+            <entry>
+              bansubmit, mode, unbansubmit
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Usa questo evento per eseguire azioni quando un ban viene
+              emesso o revocato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_change_poster_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_post.php
+            </entry>
+            <entry>
+              post_info, userdata
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Questo evento ti permette di eseguire attività aggiuntive
+              dopo aver cambiato l'autore di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_change_topic_type_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              forum_id, new_topic_type, topic_ids
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo aver cambiato il tipo di
+              argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_change_topic_type_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              forum_id, new_topic_type, topic_ids
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima di cambiare il tipo degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_delete_topic_modify_hidden_fields
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              forum_id, l_confirm, only_shadow, only_softdeleted,
+              s_hidden_fields, topic_ids
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Questo evento ti permette di modificare i campi nascosti
+              del modulo quando si eliminano argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_delete_topic_modify_permissions
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              action, check_permission, forum_id, is_soft,
+              soft_delete_reason, topic_ids
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Questo evento ti permette di modificare i permessi
+              verificati dell'utente corrente quando si elimina un
+              argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_forum_merge_topics_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_forum.php
+            </entry>
+            <entry>
+              all_topic_data, to_topic_id
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo l'unione degli argomenti.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_forum_topic_data_modify_sql
+            </entry>
+            <entry>
+              includes/mcp/mcp_forum.php
+            </entry>
+            <entry>
+              forum_id, sql_ary, topic_list
+            </entry>
+            <entry>
+              3.3.4-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che i dati
+              dell'argomento MCP forum vengano interrogati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_forum_view_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_forum.php
+            </entry>
+            <entry>
+              action, forum_info, post_id_list, source_topic_ids, start,
+              to_topic_id, topic_id_list
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Ottiene alcuni dati per eseguire altre azioni.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_queue_unapproved_total_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_list, sql_ary
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Permette di modificare la query per ottenere il numero di
+              messaggi non approvati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_reports_count_query_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_list, sql
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Modifica la query sql per contare il numero di messaggi
+              segnalati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_reports_listing_query_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_list, sql_ary
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica la query sql per ottenere gli ultimi messaggi
+              segnalati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_view_modify_posts_data_sql
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_list, forum_names, post_list, sql, total
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Modifica la query SQL dei dati dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_view_modify_reported_post_row
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_list, mode, reported_post_row, row
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Modifica il blocco template dei messaggi segnalati per la
+              pagina iniziale dell'MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_view_modify_unapproved_post_row
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_names, mode, row, unapproved_post_row
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Modifica il blocco template dei messaggi non approvati per
+              la pagina iniziale dell'MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_front_view_queue_postid_list_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_front.php
+            </entry>
+            <entry>
+              forum_list, forum_names, post_list, total
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica l'elenco dei messaggi e il totale secondo
+              necessità
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_get_post_data_after
+            </entry>
+            <entry>
+              includes/functions_mcp.php
+            </entry>
+            <entry>
+              acl_list, post_ids, read_tracking, rowset
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Questo evento ti permette di modificare i dati dei
+              messaggi visualizzati nell'MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_global_f_read_auth_after
+            </entry>
+            <entry>
+              mcp.php
+            </entry>
+            <entry>
+              action, forum_id, mode, module, quickmod, topic_id
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Permette di applicare permessi aggiuntivi all'accesso
+              all'MCP oltre a f_read
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_lock_unlock_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              action, data, ids
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo aver bloccato/sbloccato
+              messaggi/argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_main_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              action, mode, quickmod
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive prima che venga
+              eseguita un'azione MCP.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_main_fork_sql_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              new_post_id, new_topic_id, row, to_forum_id
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni dopo che l'argomento derivato (fork) è stato
+              creato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_main_modify_fork_post_sql
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              counter, new_topic_id, row, sql_ary, to_forum_id
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Modifica l'array sql del messaggio derivato prima che
+              venga inserito nel database.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_main_modify_fork_sql
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              sql_ary, topic_row
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Esegue azioni prima che l'argomento derivato (fork) venga
+              creato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_main_modify_shadow_sql
+            </entry>
+            <entry>
+              includes/mcp/mcp_main.php
+            </entry>
+            <entry>
+              row, shadow
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Esegue azioni prima che venga creato l'argomento shadow.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_modify_permissions
+            </entry>
+            <entry>
+              mcp.php
+            </entry>
+            <entry>
+              allow_user, forum_id, quickmod, topic_id,
+              user_quickmod_actions
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Permette la modifica dei permessi per accedere al file mcp
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_post_additional_options
+            </entry>
+            <entry>
+              includes/mcp/mcp_post.php
+            </entry>
+            <entry>
+              action, post_info
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Questo evento ti permette di gestire opzioni di
+              moderazione dei messaggi personalizzate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_post_template_data
+            </entry>
+            <entry>
+              includes/mcp/mcp_post.php
+            </entry>
+            <entry>
+              attachments, mcp_post_template_data, post_info,
+              s_additional_opts
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere/modificare i dati template dei
+              messaggi MCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_queue_approve_details_template
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              message, post_data, post_id, post_info, post_url,
+              topic_id, topic_info, topic_url
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica il template del messaggio in attesa di
+              approvazione prima che venga renderizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_queue_get_posts_for_posts_query_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              forum_list, limit_time_sql, sort_order_sql, sql, topic_id,
+              visibility_const
+            </entry>
+            <entry>
+              3.2.3-RC2
+            </entry>
+            <entry>
+              Modifica la query sql per ottenere informazioni su tutti i
+              messaggi in coda
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_queue_get_posts_for_topics_query_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              forum_list, limit_time_sql, sort_order_sql, sql, topic_id,
+              visibility_const
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica la query sql per ottenere informazioni su tutti
+              gli argomenti nell'elenco dei forum forniti.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_queue_get_posts_modify_post_row
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              forum_names, post_row, row
+            </entry>
+            <entry>
+              3.2.3-RC2
+            </entry>
+            <entry>
+              Modifica la query sql per ottenere informazioni su tutti
+              gli argomenti nell'elenco dei forum forniti.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_queue_get_posts_query_before
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              forum_list, limit_time_sql, sort_order_sql, sql, topic_id,
+              visibility_const
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica la query sql per ottenere i messaggi in coda da
+              accettare
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.mcp_report_template_data
+            </entry>
+            <entry>
+              includes/mcp/mcp_reports.php
+            </entry>
+            <entry>
+              forum_id, post_id, post_info, report, report_id,
+              report_template, topic_id
+            </entry>
+            <entry>
+              3.2.5-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere/modificare i dati template dei
+              dettagli della segnalazione MCP.
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
