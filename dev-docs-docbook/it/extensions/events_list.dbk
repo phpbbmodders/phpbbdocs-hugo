@@ -11953,6 +11953,630 @@
               dell'allegato
             </entry>
           </row>
+          <row>
+            <entry>
+              posting_attach_body_attach_row_controls_prepend
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima degli elementi di controllo
+              dell'allegato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_attach_row_prepend
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto in cima alla riga dell'allegato
+              nell'elenco dei file
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_file_list_after
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elenco degli allegati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_file_list_before
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli allegati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_add_panel_tab
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un pannello personalizzato all'editor dei
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_bbcode_status_after
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo lo stato dei bbcode
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_buttons_after
+            </entry>
+            <entry>
+              posting_buttons.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i pulsanti BBCode per la
+              pubblicazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_buttons_before
+            </entry>
+            <entry>
+              posting_buttons.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei pulsanti BBCode per la
+              pubblicazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_buttons_custom_tags_before
+            </entry>
+            <entry>
+              posting_buttons.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'interno dei pulsanti BBCode per la
+              pubblicazione e prima dei BBCode personalizzati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_message_after
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.0-a2
+            </entry>
+            <entry>
+              Aggiunge un campo (ad es. textbox) alla schermata di
+              pubblicazione dopo il messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_message_before
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.0-a2
+            </entry>
+            <entry>
+              Aggiunge un campo (ad es. textbox) alla schermata di
+              pubblicazione prima del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_options_prepend
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni di pubblicazione nella schermata di
+              pubblicazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_smilies_after
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le emoticon
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_smilies_before
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle emoticon
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_subject_after
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.0-a2
+            </entry>
+            <entry>
+              Aggiunge un campo (ad es. textbox) alla schermata di
+              pubblicazione dopo l'oggetto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_subject_append
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge un campo, testo, ecc. alla pubblicazione dopo la
+              casella di testo dell'oggetto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_subject_before
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.0-a2
+            </entry>
+            <entry>
+              Aggiunge un campo (ad es. textbox) alla schermata di
+              pubblicazione prima dell'oggetto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_subject_prepend
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge un campo, testo, ecc. alla pubblicazione prima
+              della casella di testo dell'oggetto
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_submit_buttons
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge pulsanti personalizzati nell'editor dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_topic_icons_after
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge dati personalizzati dopo il ciclo delle icone
+              dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_topic_icons_append
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge dati personalizzati in fondo all'icona
+              dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_topic_icons_before
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge dati personalizzati prima del ciclo delle icone
+              dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_editor_topic_icons_prepend
+            </entry>
+            <entry>
+              posting_editor.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge dati personalizzati in cima all'icona
+              dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_layout_include_panel_body
+            </entry>
+            <entry>
+              posting_layout.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge l'inclusione del corpo del template del pannello
+              personalizzato nell'editor dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_pm_header_find_username_after
+            </entry>
+            <entry>
+              posting_pm_header.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il link di ricerca nome utente
+              durante la composizione di un MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_pm_header_find_username_before
+            </entry>
+            <entry>
+              posting_pm_header.html
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del link di ricerca nome utente
+              durante la composizione di un MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_pm_layout_include_pm_header_after
+            </entry>
+            <entry>
+              posting_pm_layout.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'inclusione di
+              posting_pm_header.html
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_pm_layout_include_pm_header_before
+            </entry>
+            <entry>
+              posting_pm_layout.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'inclusione di
+              posting_pm_header.html
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_poll_body_options_after
+            </entry>
+            <entry>
+              posting_poll_body.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le opzioni del sondaggio durante
+              la creazione di un sondaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_preview_content_after
+            </entry>
+            <entry>
+              posting_preview.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'anteprima del contenuto del
+              messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_preview_poll_after
+            </entry>
+            <entry>
+              posting_preview.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il blocco di anteprima del
+              sondaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_review_row_post_author_username_append
+            </entry>
+            <entry>
+              posting_review.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_review_row_post_author_username_prepend
+            </entry>
+            <entry>
+              posting_review.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_review_row_content_after
+            </entry>
+            <entry>
+              posting_topic_review.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il contenuto del messaggio nella
+              revisione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_review_row_post_author_username_append
+            </entry>
+            <entry>
+              posting_topic_review.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_review_row_post_author_username_prepend
+            </entry>
+            <entry>
+              posting_topic_review.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_review_row_post_details_after
+            </entry>
+            <entry>
+              posting_topic_review.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i dettagli del messaggio nella
+              revisione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_review_row_post_details_before
+            </entry>
+            <entry>
+              posting_topic_review.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei dettagli del messaggio nella
+              revisione dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_title_after
+            </entry>
+            <entry>
+              posting_layout.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Permette di aggiungere alcune informazioni dopo il titolo
+              dell'argomento nel modulo di pubblicazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_topic_title_before
+            </entry>
+            <entry>
+              posting_layout.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Permette di aggiungere alcune informazioni a sinistra del
+              titolo dell'argomento nel modulo di pubblicazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              quickreply_editor_message_after
+            </entry>
+            <entry>
+              quickreply_editor.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la casella di testo della risposta
+              rapida
+            </entry>
+          </row>
+          <row>
+            <entry>
+              quickreply_editor_message_before
+            </entry>
+            <entry>
+              quickreply_editor.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della casella di testo della
+              risposta rapida
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
