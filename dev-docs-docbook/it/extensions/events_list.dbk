@@ -8584,6 +8584,895 @@
               CPF utente del nuovo utente registrato
             </entry>
           </row>
+          <row>
+            <entry>
+              core.user_add_modify_data
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              cp_data, notifications_data, sql_ary, user_row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per modificare i valori da inserire
+              quando viene aggiunto un utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_add_modify_notifications_data
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              cp_data, notifications_data, sql_ary, user_row
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modifica i dati delle notifiche da inserire nel database
+              quando viene aggiunto un utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_format_date_override
+            </entry>
+            <entry>
+              phpbb/user.php
+            </entry>
+            <entry>
+              format_date_override, function_arguments, utc
+            </entry>
+            <entry>
+              3.2.1-RC1
+            </entry>
+            <entry>
+              <para>
+                Esegue codice e/o sovrascrive format_date()
+              </para>
+              <para>
+                Per sovrascrivere il valore generato dalla funzione
+                format_date(), imposta $format_date_override al nuovo
+                valore di ritorno
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_set_default_group
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              group_attributes, group_id, sql_ary, update_listing,
+              user_id_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento quando il gruppo predefinito viene impostato per un
+              array di utenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_set_group_attributes
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              action, group_attributes, group_id, group_name,
+              user_id_ary, username_ary
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive sull'impostazione
+              degli attributi del gruppo utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_setup
+            </entry>
+            <entry>
+              phpbb/user.php
+            </entry>
+            <entry>
+              lang_set, lang_set_ext, style_id, user_data,
+              user_date_format, user_lang_name, user_timezone
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento per caricare file lingua e modificare i dati
+                utente su ogni pagina
+              </para>
+              <para>
+                Nota: per caricare un file lingua con questo evento, vedi
+                la descrizione della variabile lang_set_ext.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_setup_after
+            </entry>
+            <entry>
+              phpbb/user.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Esegue codice alla fine della configurazione dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.user_unban
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              mode, user_ids_ary
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Usa questo evento per eseguire azioni dopo che è stato
+              effettuato lo sban
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.validate_bbcode_by_extension
+            </entry>
+            <entry>
+              includes/message_parser.php
+            </entry>
+            <entry>
+              params_array, return
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Evento per convalidare il bbcode con i metodi di convalida
+              personalizzati forniti dalle estensioni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.validate_config_variable
+            </entry>
+            <entry>
+              includes/functions_acp.php
+            </entry>
+            <entry>
+              cfg_array, config_definition, config_name, error
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Convalida un valore di configurazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_generate_page_after
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_data
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Questo evento serve per eseguire azioni aggiuntive sulla
+              pagina viewforum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_get_announcement_topic_ids_data
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_data, forum_id, g_forum_ary, sql_anounce_array,
+              sql_ary
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che vengano
+              recuperati i dati degli id degli argomenti annuncio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_get_shadowtopic_data
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              sql_array
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che vengano
+              recuperati i dati dell'argomento shadow
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_get_topic_data
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_data, forum_id, sort_days, sort_dir, sort_key,
+              sql_array, topics_count
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento per modificare la query SQL prima che vengano
+                recuperati i dati dell'argomento
+              </para>
+              <para>
+                Può anche essere usato per sovrascrivere le variabili
+                template sopra assegnate
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_get_topic_ids_data
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_data, sql_approved, sql_ary, sql_limit,
+              sql_limit_time, sql_sort_order, sql_start, sql_where,
+              store_reverse
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che vengano
+              recuperati i dati degli id degli argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_page_title
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_data, forum_id, page_title, start
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Puoi usare questo evento per modificare il titolo della
+              pagina viewforum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_sort_data_sql
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_id, sort_days, sort_dir, sort_key, sql_array, start
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Modifica la query SQL dei dati di ordinamento per ottenere
+              campi aggiuntivi se necessario
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_sort_direction
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              direction
+            </entry>
+            <entry>
+              3.2.5-RC1
+            </entry>
+            <entry>
+              Modifica l'ordinamento degli argomenti se necessario
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_topic_list_sql
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_data, forum_id, sql_array, topic_list
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima di ottenere
+              argomenti/messaggi in evidenza
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_topic_ordering
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              sort_by_sql, sort_by_text
+            </entry>
+            <entry>
+              3.2.5-RC1
+            </entry>
+            <entry>
+              Modifica l'ordinamento degli argomenti se necessario
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_topicrow
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              row, s_type_switch, s_type_switch_test, topic_row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati dell'argomento prima che vengano assegnati
+              al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_modify_topics_data
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              forum_id, rowset, topic_list, total_topic_count
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Modifica i dati degli argomenti prima di visualizzare la
+              pagina viewforum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewforum_topic_row_after
+            </entry>
+            <entry>
+              viewforum.php
+            </entry>
+            <entry>
+              row, rowset, s_type_switch, topic_id, topic_list,
+              topic_row
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Evento dopo che i dati dell'argomento sono stati assegnati
+              al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewonline_modify_forum_data_sql
+            </entry>
+            <entry>
+              viewonline.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Modifica la query SQL dei dati del forum per ottenere
+              campi aggiuntivi se necessario
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewonline_modify_sql
+            </entry>
+            <entry>
+              viewonline.php
+            </entry>
+            <entry>
+              forum_data, guest_counter, show_guests, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica la query SQL per ottenere i dati utente per
+              visualizzare l'elenco viewonline
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewonline_modify_user_row
+            </entry>
+            <entry>
+              viewonline.php
+            </entry>
+            <entry>
+              forum_data, on_page, row, template_row
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Modifica i dati template di viewonline prima che vengano
+              visualizzati nell'elenco
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewonline_overwrite_location
+            </entry>
+            <entry>
+              viewonline.php
+            </entry>
+            <entry>
+              forum_data, location, location_url, on_page, row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Sovrascrive il nome e l'URL della posizione, che vengono
+              visualizzati nell'elenco
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_add_quickmod_option_before
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              allow_change_type, forum_id, post_id, quickmod_array,
+              topic_data, topic_id, topic_tracking_info, viewtopic_url
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Evento per modificare i dati in quickmod_array prima che
+              vengano inviati alla funzione phpbb_add_quickmod_option.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_assign_template_vars_before
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              base_url, forum_id, post_id, quickmod_array, start,
+              topic_data, topic_id, topic_tracking_info, total_posts,
+              viewtopic_url
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Evento per modificare i dati prima che vengano assegnate
+              le variabili template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_before_f_read_check
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              forum_id, overrides_f_read_check,
+              overrides_forum_password_check, post_id, topic_data,
+              topic_id, topic_tracking_info
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Evento per applicare permessi extra e sovrascrivere il
+              permesso f_read originale di phpBB e il controllo della
+              password del forum sull'accesso a viewtopic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_cache_guest_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              poster_id, row, user_cache_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati dell'utente ospite visualizzati con i
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_cache_user_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              poster_id, row, user_cache_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati degli utenti visualizzati con i loro
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_gen_sort_selects_before
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              join_user_sql, limit_days, s_limit_days, s_sort_dir,
+              s_sort_key, sort_by_sql, sort_by_text, sort_days,
+              sort_dir, sort_key, u_sort_param
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere nuove opzioni di ordinamento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_get_post_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              forum_id, post_list, sort_days, sort_dir, sort_key,
+              sql_ary, start, topic_data, topic_id
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL prima che vengano
+              recuperati i dati del messaggio e dell'autore
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_highlight_modify
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              highlight, highlight_match, start, topic_data,
+              total_posts, viewtopic_url
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'evidenziazione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_forum_id
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              forum_id, topic_data
+            </entry>
+            <entry>
+              3.2.5-RC1
+            </entry>
+            <entry>
+              Modifica l'ID del forum per gestire la corretta
+              visualizzazione di viewtopic se necessario
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_page_title
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              forum_id, page_title, post_list, start, topic_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Puoi usare questo evento per modificare il titolo della
+              pagina viewtopic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_poll_ajax_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              data, forum_id, poll_info, topic_data, valid_user_votes,
+              vote_counts
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per manipolare i dati del sondaggio inviati dalla
+              risposta AJAX
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_poll_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              cur_voted_id, forum_id, poll_info, s_can_vote,
+              s_display_results, topic_data, topic_id, viewtopic_url,
+              vote_counts, voted_id
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Evento per manipolare i dati del sondaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_poll_template_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              cur_voted_id, poll_end, poll_info, poll_most,
+              poll_options_template_data, poll_template_data,
+              poll_total, topic_data, viewtopic_url, vote_counts,
+              voted_id
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere/modificare i dati template del
+              sondaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_post_action_conditions
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              force_delete_allowed, force_edit_allowed,
+              force_softdelete_allowed, row, s_cannot_delete,
+              s_cannot_delete_lastpost, s_cannot_delete_locked,
+              s_cannot_delete_time, s_cannot_edit, s_cannot_edit_locked,
+              s_cannot_edit_time, topic_data
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Questo evento ti permette di modificare le condizioni per
+              i controlli &quot;can edit post&quot; e &quot;can delete
+              post&quot;
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_post_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              attachments, can_receive_pm_list, display_notice,
+              forum_id, has_approved_attachments,
+              permanently_banned_users, post_list, rowset, sort_days,
+              sort_dir, sort_key, start, topic_data, topic_id,
+              user_cache
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Evento per modificare i dati dei messaggi, dell'autore e
+              degli allegati prima di assegnare i messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_post_list_sql
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              forum_id, sort_days, sort_key, sql, sql_limit, sql_start
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL che ottiene post_list
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_post_row
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              attachments, cp_row, current_row_number, end,
+              post_edit_list, post_row, poster_id, row, start,
+              topic_data, total_posts, user_cache, user_poster_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica il blocco template dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_modify_quick_reply_template_vars
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              topic_data, tpl_ary
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Evento dopo che è stata configurata la risposta rapida
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_post_row_after
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              attachments, cp_row, current_row_number, end, post_row,
+              row, start, topic_data, total_posts, user_poster_data
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Evento dopo che i dati del messaggio sono stati assegnati
+              al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.viewtopic_post_rowset_data
+            </entry>
+            <entry>
+              viewtopic.php
+            </entry>
+            <entry>
+              row, rowset_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica il rowset dei messaggi contenente i dati da
+              visualizzare con i messaggi
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
