@@ -13822,6 +13822,621 @@
               durante la visualizzazione di un messaggio privato
             </entry>
           </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_contact_fields_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-b1
+            </entry>
+            <entry>
+              Aggiunge dati prima dei campi contatto sul profilo utente
+              durante la visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_custom_fields_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge dati dopo i campi personalizzati sul profilo
+              utente durante la visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_custom_fields_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge dati prima dei campi personalizzati sul profilo
+              utente durante la visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_options_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito prima delle opzioni di
+              visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_post_buttons_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge un pulsante di pubblicazione ai messaggi privati
+              (accanto a modifica, quote ecc.), alla fine dell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_post_buttons_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge un pulsante di pubblicazione ai messaggi privati
+              (accanto a modifica, quote ecc.), all'inizio dell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_post_buttons_list_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un elenco personalizzato di pulsanti di
+              pubblicazione ai messaggi privati (accanto a modifica,
+              quote ecc.), dopo l'elenco originale.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_post_buttons_list_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un elenco personalizzato di pulsanti di
+              pubblicazione ai messaggi privati (accanto a modifica,
+              quote ecc.), prima dell'elenco originale.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_print_head_append
+            </entry>
+            <entry>
+              ucp_pm_viewmessage_print.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge chiamate asset direttamente prima del tag
+              &lt;/head&gt; della schermata di stampa dei MP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_rank_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati dopo il rango sul profilo utente durante la
+              visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_rank_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima del rango sul profilo utente durante la
+              visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_personal_append
+            </entry>
+            <entry>
+              ucp_prefs_personal.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni utente in fondo al blocco Edit Global
+              Settings
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_personal_prepend
+            </entry>
+            <entry>
+              ucp_prefs_personal.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni utente in cima al blocco Edit Global
+              Settings
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_post_append
+            </entry>
+            <entry>
+              ucp_prefs_post.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni utente in fondo al blocco Edit Posting
+              Defaults
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_post_prepend
+            </entry>
+            <entry>
+              ucp_prefs_post.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni utente in cima al blocco Edit Posting
+              Defaults
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_view_radio_buttons_append
+            </entry>
+            <entry>
+              ucp_prefs_view.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni in fondo al blocco dei pulsanti radio
+              della schermata Edit Display Options
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_view_radio_buttons_prepend
+            </entry>
+            <entry>
+              ucp_prefs_view.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni in cima al blocco dei pulsanti radio
+              della schermata Edit Display Options
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_view_select_menu_append
+            </entry>
+            <entry>
+              ucp_prefs_view.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni in fondo al blocco degli elenchi a
+              tendina della schermata Edit Display Options
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_prefs_view_select_menu_prepend
+            </entry>
+            <entry>
+              ucp_prefs_view.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni in cima al blocco degli elenchi a tendina
+              della schermata Edit Display Options
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_tbody_key_after
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge una colonna della tabella dopo la prima colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_tbody_key_before
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge una colonna della tabella prima della prima
+              colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_tbody_mark_after
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge una colonna della tabella dopo l'ultima colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_tbody_mark_before
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge una colonna della tabella prima dell'ultima
+              colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_thead_key_after
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dell'header della tabella dopo la prima
+              colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_thead_key_before
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dell'header della tabella prima della
+              prima colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_thead_mark_after
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dell'header della tabella dopo l'ultima
+              colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_autologin_keys_thead_mark_before
+            </entry>
+            <entry>
+              ucp_profile_autologin_keys.html
+            </entry>
+            <entry>
+              3.3.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dell'header della tabella prima
+              dell'ultima colonna.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_profile_info_after
+            </entry>
+            <entry>
+              ucp_profile_profile_info.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina profilo - dopo
+              i campi profilo personalizzati.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_profile_info_before
+            </entry>
+            <entry>
+              ucp_profile_profile_info.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina profilo - prima
+              del campo jabber.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_profile_info_birthday_label_append
+            </entry>
+            <entry>
+              ucp_profile_profile_info.html
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Aggiunge altro testo all'etichetta del compleanno, come un
+              asterisco obbligatorio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_register_details_after
+            </entry>
+            <entry>
+              ucp_profile_reg_details.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina profilo - dopo
+              il campo di conferma password.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_register_details_before
+            </entry>
+            <entry>
+              ucp_profile_reg_details.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina profilo - prima
+              del primo campo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_profile_signature_posting_editor_options_prepend
+            </entry>
+            <entry>
+              ucp_profile_signature.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni all'editor di pubblicazione della firma -
+              prima della prima opzione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_register_buttons_before
+            </entry>
+            <entry>
+              ucp_register.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei pulsanti nel modulo di
+              registrazione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_register_credentials_after
+            </entry>
+            <entry>
+              ucp_register.html
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina di
+              registrazione - dopo il campo password.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_register_credentials_before
+            </entry>
+            <entry>
+              ucp_register.html
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina di
+              registrazione - prima del primo campo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_register_options_before
+            </entry>
+            <entry>
+              ucp_register.html
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina di
+              registrazione - prima del selettore lingua.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_register_profile_fields_after
+            </entry>
+            <entry>
+              ucp_register.html
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina di
+              registrazione - dopo l'ultimo campo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_register_profile_fields_before
+            </entry>
+            <entry>
+              ucp_register.html
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Aggiunge opzioni nel fieldset della pagina di
+              registrazione - prima dei campi profilo.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_last_post_author_username_append
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore
+              dell'ultimo messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_last_post_author_username_prepend
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore
+              dell'ultimo messaggio del membro
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
