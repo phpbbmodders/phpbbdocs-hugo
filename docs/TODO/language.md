@@ -8,6 +8,7 @@ audit, translation review notes, supplementary glossary, etc.).
 - [German (de)](de/README.md)
 - [French (fr)](fr/README.md)
 - [Danish (da)](da/README.md)
+- [Italian (it)](it/README.md)
 
 A language with no outstanding TODOs (currently English) has no entry
 here — only languages with an active `docs/TODO/<code>/` directory are
