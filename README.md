@@ -69,13 +69,14 @@ For every page that exists in `source_lang`'s content but has no counterpart at 
 ./phpbbdocs_hugo_devdocs.sh fr
 ./phpbbdocs_hugo_devdocs.sh de_x_sie
 ./phpbbdocs_hugo_devdocs.sh de
+./phpbbdocs_hugo_devdocs.sh it
 ./fill_translation_fallbacks.sh en da fr de_x_sie de it
 ./phpbbdocs_hugo.sh all                    # rebuild once more so the fallback pages are in the built site
 ```
 
 **Just want the latest end-user docs content?** `./pull_upstream_docs.sh && ./phpbbdocs_hugo.sh all` — the sync pulls current upstream chapters/images into `content/en/`, then the build picks them up. Follow with `./fill_translation_fallbacks.sh en da fr de_x_sie de it && ./phpbbdocs_hugo.sh all` if the sync introduced pages a translation doesn't have yet.
 
-**Just want the latest developer docs?** `./phpbbdocs_hugo_devdocs.sh en` — pulls upstream, converts to DocBook, and builds in one step (and `./phpbbdocs_hugo_devdocs.sh da` / `./phpbbdocs_hugo_devdocs.sh fr` / `./phpbbdocs_hugo_devdocs.sh de_x_sie` / `./phpbbdocs_hugo_devdocs.sh de` too, if those translated DocBook sources are still current — translating is a separate, manual step, so a fresh English pull doesn't automatically update the translated pages; `it` has no translated developer docs yet, so it has nothing to run here). Follow with `./fill_translation_fallbacks.sh en da fr de_x_sie de it` if it added anything a translation doesn't have yet.
+**Just want the latest developer docs?** `./phpbbdocs_hugo_devdocs.sh en` — pulls upstream, converts to DocBook, and builds in one step (and `./phpbbdocs_hugo_devdocs.sh da` / `./phpbbdocs_hugo_devdocs.sh fr` / `./phpbbdocs_hugo_devdocs.sh de_x_sie` / `./phpbbdocs_hugo_devdocs.sh de` / `./phpbbdocs_hugo_devdocs.sh it` too, if those translated DocBook sources are still current — translating is a separate, manual step, so a fresh English pull doesn't automatically update the translated pages). Follow with `./fill_translation_fallbacks.sh en da fr de_x_sie de it` if it added anything a translation doesn't have yet.
 
 ## Adding another language to the developer docs
 
@@ -83,7 +84,7 @@ For the full process — this section's mechanical steps, plus the
 terminology audit and TODO writeup that followed for German — see
 [`docs/translation-process-prompt.md`](docs/translation-process-prompt.md).
 
-`convert_dev_docs_to_docbook.sh` only ever produces English (`dev-docs-docbook/en/`) — it pulls straight from upstream, which has no other language for the developer docs. `dev-docs-docbook/da/`, `dev-docs-docbook/fr/`, `dev-docs-docbook/de_x_sie/`, and `dev-docs-docbook/de/` were each produced by translating the English DocBook source directly (prose translated; code samples, file paths, `<literal>` technical identifiers, and `<ulink>` URLs left untouched; XML structure and `id` attributes preserved exactly), then verified for well-formedness and structural completeness (row/entry counts compared 1:1 against the English source) before building. `dev-docs-docbook/it/` doesn't exist yet — Italian currently only covers the end-user chapters (`content/it/`); its developer docs render as English-fallback pages until translated.
+`convert_dev_docs_to_docbook.sh` only ever produces English (`dev-docs-docbook/en/`) — it pulls straight from upstream, which has no other language for the developer docs. `dev-docs-docbook/da/`, `dev-docs-docbook/fr/`, `dev-docs-docbook/de_x_sie/`, `dev-docs-docbook/de/`, and `dev-docs-docbook/it/` were each produced by translating the English DocBook source directly (prose translated; code samples, file paths, `<literal>` technical identifiers, and `<ulink>` URLs left untouched; XML structure and `id` attributes preserved exactly), then verified for well-formedness and structural completeness (row/entry counts compared 1:1 against the English source) before building.
 
 To add a language `<lang>`:
 1. Translate every file in `dev-docs-docbook/en/` into `dev-docs-docbook/<lang>/`, mirroring the exact subdirectory structure and filenames, following the same translate-prose/preserve-code rules above.
@@ -94,7 +95,7 @@ Every page gets a `translationKey` (`development-<chapter>-<slug>`, stable acros
 
 ## `index.dbk` isn't built into the site
 
-`dev-docs-docbook/en/index.dbk` (and its Danish and French translations) — the developer docs' own master table-of-contents page, converted from `development/index.rst` — sits at the root of each language's source tree rather than inside a chapter subdirectory. `phpbbdocs_hugo_devdocs.sh` only walks chapter subdirectories, so this file stays inert plaintext alongside the source tree rather than content the build picks up, even though it's been pulled and translated. The auto-generated `/development/` landing page (listing every chapter) stands in for it.
+`dev-docs-docbook/en/index.dbk` (and its Danish, French, and Italian translations) — the developer docs' own master table-of-contents page, converted from `development/index.rst` — sits at the root of each language's source tree rather than inside a chapter subdirectory. `phpbbdocs_hugo_devdocs.sh` only walks chapter subdirectories, so this file stays inert plaintext alongside the source tree rather than content the build picks up, even though it's been pulled and translated. The auto-generated `/development/` landing page (listing every chapter) stands in for it.
 
 ## TODO
 
