@@ -9,10 +9,10 @@ by raw phpBB code, so an honorific-split pack (e.g. German casual/formal)
 counts as one entry, not two.
 
 Italian is no longer in this ranking — its translation has started
-(`content/it/`, all seven end-user chapters done; `dev-docs-docbook/it/`
-and the terminology audit are still open, tracked directly against the
-content rather than in a `docs/TODO/it/` directory until that audit
-begins).
+(`content/it/`, all seven end-user chapters done; `dev-docs-docbook/it/`,
+all 55 developer-docs files, also done). Only the terminology audit is
+still open, tracked directly against the content rather than in a
+`docs/TODO/it/` directory until that audit begins.
 
 Whichever variant is picked for any of these, name its `content/` and
 `dev-docs-docbook/` directories after phpBB's own ISO Code for that exact

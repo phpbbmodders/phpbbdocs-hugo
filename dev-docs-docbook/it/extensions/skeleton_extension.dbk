@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>phpBB Skeleton Extension</title>
+  </articleinfo>
+  <para>
+    La Skeleton Extension è uno strumento per gli sviluppatori di
+    estensioni. Il suo scopo è dare il via ai tuoi progetti di
+    sviluppo di estensioni.
+  </para>
+  <para>
+    Cos'è uno skeleton? È un'estensione boiler-plate funzionante.
+    Quando vuoi iniziare lo sviluppo di un'estensione, creare uno
+    skeleton genererà la maggior parte dei file iniziali di cui
+    avresti bisogno, così non devi farlo tu.
+  </para>
+  <para>
+    Questo significa che puoi passare direttamente a scrivere codice
+    per la tua estensione, evitando il compito noioso di creare tu
+    stesso i file, i metodi e i docblock iniziali.
+  </para>
+  <para>
+    Se non hai mai scritto un'estensione prima, uno skeleton offre un
+    modo ideale per iniziare con la tua prima. Anche gli sviluppatori
+    esperti lo adoreranno, non dovendo più copiare e incollare codice
+    dalle loro estensioni esistenti per iniziarne di nuove.
+  </para>
+  <para>
+    Tutto il codice generato dalla Skeleton Extension è pienamente
+    documentato e rappresenta le migliori pratiche del phpBB Extension
+    Team per la scrittura di codice per estensioni.
+  </para>
+  <para>
+    Assicurati di consultare e familiarizzare con le
+    <ulink url="https://www.phpbb.com/extensions/rules-and-policies/validation-policy/">politiche
+    di convalida delle estensioni</ulink> e le
+    <ulink url="https://area51.phpbb.com/docs/dev/master/development/index.html">linee
+    guida di scrittura del codice</ulink> di phpBB.
+  </para>
+  <sect1 id="how-to-install">
+    <title>Come installare</title>
+    <para>
+      La Skeleton Extension di phpBB è come qualsiasi altra estensione
+      e viene installata su un forum phpBB esattamente come le altre.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        La Skeleton Extension è pensata per essere installata su un
+        forum phpBB usato per lo sviluppo offline/locale di
+        estensioni. Non è necessariamente pensata per essere
+        installata su siti web live/di produzione.
+      </para>
+    </note>
+    <sect2 id="installation">
+      <title>Installazione</title>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <ulink url="https://www.phpbb.com/customise/db/official_tool/ext_skeleton/">Scarica
+            l'ultima release</ulink>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Estrai e installala nella cartella <literal>ext/</literal>
+            del tuo phpBB, ad es.
+            <literal>phpBB/ext/phpbb/skeleton</literal>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            In phpBB, vai su &quot;ACP&quot; &gt;
+            &quot;Personalizza&quot; &gt; &quot;Estensioni&quot; e
+            abilita &quot;phpBB Skeleton Extension&quot;.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+  <sect1 id="create-an-extension">
+    <title>Creare un'estensione</title>
+    <important>
+      <title>Importante</title>
+      <para>
+        La Skeleton Extension genera classi e metodi funzionanti,
+        pensati per rendere lo skeleton nominalmente funzionale e,
+        cosa più importante, istruttivo.
+      </para>
+      <para>
+        Questa documentazione presupporrà che stiamo creando
+        l'estensione Acme Demo, con la struttura di denominazione
+        vendor/pacchetto: <literal>acme/demo</literal>. La maggior
+        parte dei nomi di file, funzioni, classi, tabelle e variabili
+        verrà popolata con i nomi di vendor e pacchetto specificati.
+      </para>
+      <para>
+        Lo skeleton generato è solo un punto di partenza! Dovresti
+        sempre rivedere il codice skeleton che generi e aggiornare,
+        modificare o rimuovere qualsiasi codice di cui non hai
+        bisogno mentre inizi a sviluppare la tua estensione.
+      </para>
+    </important>
+    <sect2 id="phpbb-web-interface">
+      <title>Interfaccia web di phpBB</title>
+      <para>
+        Il modo più semplice per usare la Skeleton Extension è dalla
+        sua interfaccia utente (UI) basata sul web.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/skeleton-web-ui.png" width="500px" />
+          </imageobject>
+          <textobject>
+            <phrase>image</phrase>
+          </textobject>
+        </inlinemediaobject>
+      </para>
+      <para>
+        Per creare un'estensione tramite l'interfaccia web, apri il
+        forum phpBB in cui hai installato questa estensione e visita
+        il link &quot;Create skeleton extension&quot; nella barra di
+        navigazione del forum.
+      </para>
+      <para>
+        Ti verrà presentato un modulo dove puoi inserire informazioni
+        sull'estensione che vuoi creare. Completa il modulo e
+        inviarlo.
+      </para>
+      <para>
+        Un file ZIP impacchettato inizierà a scaricarsi nel tuo
+        browser. Inoltre, una copia si trova in
+        <literal>phpBB/store/tmp-ext/</literal>.
+      </para>
+      <para>
+        Estrai la tua estensione skeleton e inizia a scrivere il tuo
+        codice.
+      </para>
+    </sect2>
+    <sect2 id="command-line-interface">
+      <title>Interfaccia a riga di comando</title>
+      <para>
+        La Skeleton Extension può anche accogliere gli utenti che
+        preferiscono lavorare da un'interfaccia a riga di comando
+        (CLI).
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject>
+            <imagedata fileref="images/skeleton-cli.png" width="500px" />
+          </imageobject>
+          <textobject>
+            <phrase>image</phrase>
+          </textobject>
+        </inlinemediaobject>
+      </para>
+      <para>
+        Per creare un'estensione tramite la CLI, devi aprire una
+        console sul tuo server e usare <literal>cd</literal> per
+        raggiungere la cartella radice del forum phpBB in cui hai
+        installato questa estensione:
+      </para>
+      <programlisting>
+$ cd ./path/to/phpBB
+</programlisting>
+      <para>
+        Per creare un'estensione, esegui:
+      </para>
+      <programlisting>
+$ ./bin/phpbbcli.php extension:create
+</programlisting>
+      <para>
+        Ti verrà chiesto di inserire informazioni sull'estensione che
+        vuoi creare.
+      </para>
+      <para>
+        La tua estensione verrà salvata in
+        <literal>phpBB/store/tmp-ext/</literal>.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="documentation">
+    <title>Documentazione</title>
+    <para>
+      La seguente documentazione descrive come usare la Skeleton
+      Extension per configurare e generare uno skeleton adatto alle
+      tue esigenze, così puoi passare direttamente a scrivere il tuo
+      codice.
+    </para>
+    <sect2 id="extension-packaging">
+      <title>Impacchettamento dell'estensione</title>
+      <para>
+        Le estensioni vengono impacchettate in una struttura di
+        cartelle come segue: <literal>nomevendor/nomeestensione</literal>.
+        Ad esempio, l'estensione Acme Demo usa una struttura di
+        impacchettamento che ha questo aspetto:
+        <literal>acme/demo</literal>.
+      </para>
+      <sect3 id="vendor-name">
+        <title>Nome vendor</title>
+        <para>
+          Il nome del vendor può essere il tuo nome utente o qualsiasi
+          altro nome tu scelga per associare le tue estensioni. Le
+          convenzioni di denominazione valide devono iniziare con una
+          lettera e contenere solo lettere e numeri. Nel caso
+          dell'estensione Acme Demo, questo sarebbe
+          <literal>acme</literal>.
+          <emphasis role="strong">Questo campo è obbligatorio.</emphasis>
+        </para>
+      </sect3>
+      <sect3 id="package-name">
+        <title>Nome pacchetto</title>
+        <para>
+          Il nome del pacchetto è il nome dell'estensione. Le
+          convenzioni di denominazione valide devono iniziare con una
+          lettera e contenere solo lettere e numeri. Nel caso
+          dell'estensione Acme Demo, questo sarebbe
+          <literal>demo</literal>.
+          <emphasis role="strong">Questo campo è obbligatorio.</emphasis>
+        </para>
+      </sect3>
+      <sect3 id="display-name">
+        <title>Nome visualizzato</title>
+        <para>
+          Questo è il nome (o titolo) della tua estensione in inglese
+          semplice. Questo è ciò che l'utente vedrà quando la tua
+          estensione apparirà nell'Extension Manager dell'ACP di
+          phpBB. Nel caso dell'estensione Acme Demo, questo sarebbe
+          <literal>Acme Demo</literal>.
+          <emphasis role="strong">Questo campo è obbligatorio.</emphasis>
+        </para>
+      </sect3>
+      <sect3 id="description">
+        <title>Descrizione</title>
+        <para>
+          Una breve descrizione della tua estensione. Questa sarà
+          visibile agli utenti nella pagina dei dettagli della tua
+          estensione nell'Extension Manager dell'ACP di phpBB.
+        </para>
+      </sect3>
+      <sect3 id="version">
+        <title>Versione</title>
+        <para>
+          La versione della tua estensione. Le linee guida di
+          scrittura del codice di phpBB richiedono un formato di
+          versionamento semantico <literal>x.y.z</literal>, con
+          suffissi pre-release facoltativi <literal>-dev</literal>,
+          <literal>-alpha</literal>, <literal>-beta</literal> e
+          <literal>-RC</literal>. Se lasciato vuoto, la Skeleton
+          Extension userà per impostazione predefinita
+          <literal>1.0.0-dev</literal>.
+        </para>
+      </sect3>
+      <sect3 id="date-of-the-extension">
+        <title>Data dell'estensione</title>
+        <para>
+          Data di rilascio dell'estensione. Le date devono essere nel
+          formato <literal>YYYY-MM-DD</literal>. Se lasciato vuoto, la
+          Skeleton Extension userà per impostazione predefinita la
+          data corrente.
+        </para>
+      </sect3>
+      <sect3 id="homepage-of-the-extension">
+        <title>Homepage dell'estensione</title>
+        <para>
+          Un link facoltativo alla homepage della tua estensione. Può
+          essere, ad esempio, il repository GitHub di un'estensione o
+          qualsiasi altro sito relativo alla tua estensione.
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="authors">
+      <title>Autori</title>
+      <para>
+        Qui puoi indicare il nome dell'autore/degli autori della tua
+        estensione. Usa il pulsante
+        <literal>Add author</literal> per aggiungere ulteriori
+        autori.
+      </para>
+      <sect3 id="author-name">
+        <title>Nome dell'autore</title>
+        <para>
+          Il nome di un autore dell'estensione. Non deve essere vuoto.
+        </para>
+      </sect3>
+      <sect3 id="author-email">
+        <title>E-mail dell'autore</title>
+        <para>
+          L'indirizzo e-mail di un autore dell'estensione.
+          (Facoltativo)
+        </para>
+      </sect3>
+      <sect3 id="author-homepage">
+        <title>Homepage dell'autore</title>
+        <para>
+          L'URL della homepage di un autore dell'estensione.
+          (Facoltativo)
+        </para>
+      </sect3>
+      <sect3 id="author-role">
+        <title>Ruolo dell'autore</title>
+        <para>
+          Il ruolo di un autore dell'estensione. Ad esempio, lead
+          developer, collaboratore, traduttore, ecc. (Facoltativo)
+        </para>
+      </sect3>
+    </sect2>
+    <sect2 id="requirements">
+      <title>Requisiti</title>
+      <para>
+        I requisiti sono dove definisci le versioni minime (e
+        massime) di PHP e phpBB di cui la tua estensione ha bisogno
+        per funzionare.
+      </para>
+      <sect3 id="minimum-phpbb-requirement-of-the-extension">
+        <title>Requisito minimo di phpBB dell'estensione</title>
+        <para>
+          Tipicamente questo dovrebbe essere impostato sulla versione
+          di phpBB in cui stai sviluppando e testando la tua
+          estensione.
+        </para>
+        <para>
+          La versione dovrebbe essere definita usando i
+          <ulink url="https://getcomposer.org/doc/articles/versions.md">vincoli
+          di versione di Composer</ulink>.
+        </para>
+        <para>
+          Ad esempio, per richiedere phpBB 3.1.4 o superiore, usa
+          <literal>&gt;=3.1.4</literal>.
+        </para>
+      </sect3>
+      <sect3 id="maximum-phpbb-requirement-of-the-extension">
+        <title>Requisito massimo di phpBB dell'estensione</title>
+        <para>
+          Per mitigare le rotture di compatibilità, è comune
+          impostare la versione massima sulla prossima versione di
+          release maggiore di phpBB.
+        </para>
+        <para>
+          Ad esempio, se la tua estensione viene sviluppata per phpBB
+          3.1.x, puoi impostare il requisito massimo su phpBB 3.2.x
+          usando <literal>&lt;3.2.0@dev</literal>.
+        </para>
+        <note>
+          <title>Nota</title>
+          <para>
+            Attualmente, phpBB non impone automaticamente i requisiti
+            minimo e massimo. Tuttavia, inizierà a imporli in una
+            futura release. Nel frattempo, è possibile usare il
+            metodo <literal>is_enableable()</literal> nella classe
+            <literal>ext.php</literal> per
+            <ulink url="https://github.com/phpbb-extensions/boardrules/blob/master/ext.php#L29-L43">imporre
+            i requisiti minimo e massimo</ulink>.
+          </para>
+        </note>
+      </sect3>
+      <sect3 id="php-requirement-of-the-extension">
+        <title>Requisito PHP dell'estensione</title>
+        <para>
+          Poiché la tua estensione opererà all'interno di phpBB,
+          spesso è sicuro presumere che la tua estensione condividerà
+          lo stesso requisito minimo di PHP di phpBB. Quindi, per
+          impostazione predefinita, questo campo userà
+          <literal>&gt;=5.3.3</literal> a meno che tu non inserisca
+          una versione alternativa.
+        </para>
+        <note>
+          <title>Nota</title>
+          <para>
+            Puoi trovare i requisiti PHP di phpBB guardando il suo
+            file composer.json.
+          </para>
+        </note>
+      </sect3>
+    </sect2>
+    <sect2 id="components">
+      <title>Componenti</title>
+      <para>
+        La Skeleton Extension predefinita genera un file di licenza e
+        composer.json. La sezione Componenti ti permette di scegliere
+        tra una varietà di componenti tipici di cui un'estensione
+        potrebbe aver bisogno, come un modulo ACP, migrations,
+        eventi, e task come cron, CLI e notifiche. I file generati
+        per questi componenti sono esempi semplici ma pienamente
+        funzionanti basati sull'estensione Acme Demo. Sono pensati
+        per darti un punto di partenza coerente e pronto per il
+        codice di phpBB, così puoi concentrarti di più sulla
+        scrittura del tuo codice e meno sulla struttura e
+        organizzazione dei file.
+      </para>
+    </sect2>
+    <sect2 id="php-event-listeners">
+      <title>Listener di eventi PHP</title>
+      <para>
+        I listener di eventi PHP lavorano con gli eventi core per
+        iniettare codice in phpBB. Gli eventi core sono come hook, e
+        si trovano in tutta la base di codice di phpBB in punti
+        chiave. Danno alla tua estensione accesso alle variabili di
+        phpBB e ti permettono di usarle e modificarle o di iniettare
+        codice PHP aggiuntivo durante l'esecuzione di phpBB.
+      </para>
+      <para>
+        La Skeleton Extension genererà un file PHP di esempio per un
+        listener di eventi e il necessario file YAML dei servizi:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config                 # The config dir contains all service config files
+│   │   ├── services.yml       # A config YAML file
+│   │   └── ...
+│   ├── event                  # The event dir contains all PHP event listeners
+│   │   ├── main_listener.php  # A sample PHP event listener
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="style-event-listeners">
+      <title>Listener di eventi di stile</title>
+      <para>
+        I listener di stile usano gli eventi template per iniettare
+        HTML, JS e CSS nei file di stile di phpBB. I listener di
+        stile devono trovarsi in una cartella chiamata
+        <literal>event</literal> per essere riconosciuti come evento
+        template. Tutti i file al di fuori della cartella
+        <literal>event</literal> sono considerati file di stile
+        standard.
+      </para>
+      <para>
+        La cartella <literal>all/</literal> contiene file di stile
+        che possono essere usati da qualsiasi/tutti gli stili.
+      </para>
+      <para>
+        La cartella <literal>prosilver/</literal> contiene file di
+        stile specifici per prosilver (e qualsiasi stile che eredita
+        da prosilver).
+      </para>
+      <para>
+        La cartella <literal>subsilver2/</literal> contiene file di
+        stile specifici per subsilver2 (e qualsiasi stile che eredita
+        da subsilver2).
+      </para>
+      <para>
+        La Skeleton Extension genererà un file HTML di esempio per un
+        listener di eventi template per prosilver:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── styles                         # The styles dir
+│   │   ├── prosilver                  # Dir containing prosilver style files
+│   │   │   ├── template               # Dir containing HTML template files
+│   │   │   │   ├── event              # Dir containing template event files
+│   │   │   │   │   ├── overall_header_navigation_prepend.html  # A template event
+│   │   │   │   │   └── ...
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="administration-control-panel-acp">
+      <title>Pannello di Controllo Amministrazione (ACP)</title>
+      <para>
+        Aggiunge un modulo ACP funzionante per un'estensione alla
+        scheda Estensioni dell'ACP.
+      </para>
+      <para>
+        La Skeleton Extension genererà tutti i file necessari per un
+        modulo ACP funzionante inclusa la sua migration e i file
+        lingua, stile e PHP:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── acp                          # Dir containing ACP module PHP files
+│   │   ├── main_info.php            # Module information
+│   │   ├── main_module.php          # Module execution logic
+│   │   └── ...
+│   ├── adm                          # Dir containing ACP module HTML templates
+│   │   ├── style                    # ACP templates are loaded from the style dir
+│   │   │   ├── acp_demo_body.html   # Sample ACP HTML template file
+│   │   │   └── ...
+│   │   └── ...
+│   ├── controller                   # Dir containing controller files
+│   │   ├── acp_controller.php       # A sample ACP controller class
+│   │   └── ...
+│   ├── language                     # Dir containing language files
+│   │   ├── en                       # English language files (required)
+│   │   │   ├── common.php           # A language file used by the extension
+│   │   │   ├── info_acp_demo.php    # An auto-loaded lang file for ACP modules
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations                   # Dir containing migration files
+│   │   ├── install_acp_module.php   # A migration installing the ACP module
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          L'ACP non fa ancora parte del sistema di dependency
+          injection basato su container di phpBB, quindi non utilizza
+          un file YAML dei servizi.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="moderator-control-panel-mcp">
+      <title>Pannello di Controllo Moderazione (MCP)</title>
+      <para>
+        Aggiunge un modulo MCP funzionante per un'estensione all'MCP.
+      </para>
+      <para>
+        La Skeleton Extension genererà tutti i file necessari per un
+        modulo MCP funzionante inclusa la sua migration e i file
+        lingua, stile e PHP:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── controller                      # Dir containing controller files
+│   │   ├── mcp_controller.php          # A sample MCP controller class
+│   │   └── ...
+│   ├── language                        # Dir containing language files
+│   │   ├── en                          # English language files (required)
+│   │   │   ├── info_mcp_demo.php       # An auto-loaded lang file for MCP modules
+│   │   │   └── ...
+│   │   └── ...
+│   ├── mcp                             # Dir containing MCP module PHP files
+│   │   ├── main_info.php               # Module information
+│   │   ├── main_module.php             # Module execution logic
+│   │   └── ...
+│   ├── migrations                      # Dir containing migration files
+│   │   ├── install_mcp_module.php      # A migration installing the MCP module
+│   │   └── ...
+│   ├── styles                          # The styles dir
+│   │   ├── prosilver                   # Dir containing prosilver style files
+│   │   │   ├── template                # Dir containing HTML template files
+│   │   │   │   ├── mcp_demo_body.html  # Sample MCP HTML template file
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          L'MCP non fa ancora parte del sistema di dependency
+          injection basato su container di phpBB, quindi non utilizza
+          un file YAML dei servizi.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="user-control-panel-ucp">
+      <title>Pannello di Controllo Utente (UCP)</title>
+      <para>
+        Aggiunge un modulo UCP funzionante per un'estensione all'UCP.
+      </para>
+      <para>
+        La Skeleton Extension genererà tutti i file necessari per un
+        modulo UCP funzionante inclusa la sua migration e i file
+        lingua, stile e PHP:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── controller                      # Dir containing controller files
+│   │   ├── ucp_controller.php          # A sample UCP controller class
+│   │   └── ...
+│   ├── language                        # Dir containing language files
+│   │   ├── en                          # English language files (required)
+│   │   │   ├── info_ucp_demo.php       # An auto-loaded lang file for UCP modules
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations                      # Dir containing migration files
+│   │   ├── install_ucp_module.php      # A migration installing the UCP module
+│   │   ├── install_sample_schema.php   # Contains changes used in the new module
+│   │   └── ...
+│   ├── styles                          # The styles dir
+│   │   ├── prosilver                   # Dir containing prosilver style files
+│   │   │   ├── template                # Dir containing HTML template files
+│   │   │   │   ├── ucp_demo_body.html  # Sample UCP HTML template file
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   ├── ucp                             # Dir containing UCP module PHP files
+│   │   ├── main_info.php               # Module information
+│   │   ├── main_module.php             # Module execution logic
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <note>
+        <title>Nota</title>
+        <para>
+          L'UCP non fa ancora parte del sistema di dependency
+          injection basato su container di phpBB, quindi non utilizza
+          un file YAML dei servizi.
+        </para>
+      </note>
+    </sect2>
+    <sect2 id="database-migration">
+      <title>Migration del database</title>
+      <para>
+        I file migration vengono usati per apportare modifiche al
+        database. Questo include l'aggiunta di dati alle tabelle e
+        modifiche allo schema (che sono modifiche alle tabelle e
+        colonne del database).
+      </para>
+      <para>
+        La Skeleton Extension genererà tutti i suoi file migration di
+        esempio:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── migrations                      # Dir containing migration files
+│   │   ├── install_acp_module.php      # A migration installing the ACP module
+│   │   ├── install_mcp_module.php      # A migration installing the MCP module
+│   │   ├── install_ucp_module.php      # A migration installing the UCP module
+│   │   ├── install_sample_schema.php   # Sample schema changes to the database
+│   │   ├── install_sample_data.php     # Sample data changes to the database
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="service">
+      <title>Servizio</title>
+      <para>
+        Il componente Servizio è una classe PHP che fa qualcosa dietro
+        le quinte. È una classe accessibile da controller, listener
+        di eventi, o moduli del pannello di controllo.
+      </para>
+      <para>
+        La Skeleton Extension genererà una classe di esempio che
+        semplicemente restituisce l'oggetto utente corrente. Mostra
+        come usare la dependency injection per servizi e parametri,
+        pertanto include file YAML di esempio per config e parametri:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config              # The config dir contains all service config files
+│   │   ├── parameters.yml  # A parameter YAML file
+│   │   ├── services.yml    # A config YAML file
+│   │   └── ...
+│   ├── service.php         # A sample PHP file that contains a class/object
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="controller-front-page">
+      <title>Controller (pagina frontale)</title>
+      <para>
+        I controller vengono tipicamente usati per file/classi rivolti
+        all'utente. Eseguono il codice che produce una pagina nuova e
+        completa con cui l'utente interagirà. Esempi di pagine rivolte
+        all'utente che un'estensione potrebbe usare includono una
+        pagina di notizie, un blog, una FAQ, ecc.
+      </para>
+      <para>
+        La Skeleton Extension genera una pagina rivolta all'utente
+        che mostra un messaggio &quot;Hello world&quot;. Incluso con
+        questo componente ci sono il file template HTML per la
+        pagina, i listener di eventi PHP e template (per dimostrare
+        l'aggiunta di un link alla nuova pagina nella barra di
+        navigazione), il file lingua, e i file YAML di config e
+        routing:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config              # The config dir contains all service config files
+│   │   ├── routing.yml     # A routing YAML file
+│   │   ├── services.yml    # A config YAML file
+│   │   └── ...
+│   ├── controller               # Dir containing controller files
+│   │   ├── main_controller.php  # A sample controller class
+│   │   └── ...
+│   ├── event                  # The event dir contains all PHP event listeners
+│   │   ├── main_listener.php  # A sample PHP event listener
+│   │   └── ...
+│   ├── language               # Dir containing language files
+│   │   ├── en                 # English language files (required)
+│   │   │   ├── common.php     # A language file used by the extension
+│   │   │   └── ...
+│   │   └── ...
+│   ├── styles                      # The styles dir
+│   │   ├── prosilver               # Dir containing prosilver style files
+│   │   │   ├── template            # Dir containing HTML template files
+│   │   │   │   ├── demo_body.html  # An HTML template used by the controller
+│   │   │   │   ├── event           # Dir containing template event files
+│   │   │   │   │   ├── overall_header_navigation_prepend.html  # A template event
+│   │   │   │   │   └── ...
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="extension-base-ext.php">
+      <title>Base dell'estensione (ext.php)</title>
+      <para>
+        Il file facoltativo <literal>ext.php</literal> può essere
+        usato per eseguire codice prima o durante le operazioni di
+        installazione e rimozione dell'estensione. Questo è più utile
+        se la tua estensione ha bisogno di eseguire codice quando
+        viene abilitata, disabilitata, o eliminata (purge). Le
+        estensioni lo hanno anche usato per verificare se phpBB
+        soddisfa i requisiti dell'estensione prima di procedere con
+        l'installazione, per definire costanti di classe, e altro
+        ancora.
+      </para>
+      <para>
+        La Skeleton Extension genererà una classe
+        <literal>ext.php</literal> di esempio. Questa classe è vuota
+        per impostazione predefinita ma può essere popolata con
+        metodi quando usata con altri componenti (come
+        Notifications):
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── ext.php  # A sub class. The class and file name can not be changed.
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="console-command">
+      <title>Comando console</title>
+      <para>
+        Le estensioni possono aggiungere i propri comandi
+        all'interfaccia a riga di comando (CLI) di phpBB. Questo è
+        utile per estensioni che possono fornire comandi terminale
+        aggiuntivi per eseguire determinate azioni.
+      </para>
+      <para>
+        La Skeleton Extension genererà un semplice comando CLI,
+        inclusi i necessari file lingua e config:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── console            # Dir containing CLI related classes
+│   │   ├── command        # Dir containing CLI command classes
+│   │   │   ├── sample.php # A sample CLI command class
+│   │   │   └── ...
+│   │   └── ...
+│   ├── language           # Dir containing language files
+│   │   ├── en             # English language files (required)
+│   │   │   ├── cli.php    # A language file used by the extension
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="cron-task">
+      <title>Cron task</title>
+      <para>
+        Un cron task permette a un'estensione di pianificare ed
+        eseguire azioni a intervalli di tempo specifici.
+      </para>
+      <para>
+        La Skeleton Extension genererà un semplice cron task, inclusi
+        i necessari file migration e config:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── cron               # Dir containing cron related classes
+│   │   ├── task           # Dir containing cron task classes
+│   │   │   ├── sample.php # A sample cron task class
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations            # Dir containing migration files
+│   │   ├── install_cron.php  # A migration installing cron related data
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="notifications">
+      <title>Notifiche</title>
+      <para>
+        Le notifiche permettono a un'estensione di notificare agli
+        utenti attività specifiche attraverso il sistema di notifiche
+        di phpBB.
+      </para>
+      <para>
+        La Skeleton Extension genererà una notifica di esempio,
+        inclusi i necessari file lingua e config. Inoltre genererà un
+        file <literal>ext.php</literal> con azioni importanti che
+        devono essere eseguite durante i passaggi di abilitazione,
+        disabilitazione ed eliminazione (purge) di un'estensione:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── ext.php                   # Contains enable, disable and purge steps
+│   ├── language                  # Dir containing language files
+│   │   ├── en                    # English language files (required)
+│   │   │   ├── common.php        # A language file used by the extension
+│   │   │   ├── info_ucp_demo.php # A UCP language file used by the notification
+│   │   │   └── ...
+│   │   └── ...
+│   ├── notification       # Dir containing notification related classes
+│   │   ├── type           # Dir containing notification types
+│   │   │   ├── sample.php # A sample notification type class
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="permissions">
+      <title>Permessi</title>
+      <para>
+        I permessi possono essere usati per concedere a utenti,
+        gruppi e ruoli l'accesso a funzionalità specifiche
+        dell'estensione.
+      </para>
+      <para>
+        La Skeleton Extension genererà un file migration che mostra
+        l'installazione di permessi a livello amministratore,
+        moderatore e utente e li assegna ad alcuni ruoli e gruppi di
+        utenti. Inoltre, viene creato il necessario file lingua dei
+        permessi così come un evento PHP che mostra come i permessi
+        vengono assegnati alle rispettive chiavi lingua e categorie
+        di permesso:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── config             # The config dir contains all service config files
+│   │   ├── services.yml   # A config YAML file
+│   │   └── ...
+│   ├── event                  # The event dir contains all PHP event listeners
+│   │   ├── main_listener.php  # A sample PHP event listener
+│   │   └── ...
+│   ├── language                      # Dir containing language files
+│   │   ├── en                        # English language files (required)
+│   │   │   ├── permissions_demo.php  # A language file specifically for permissions
+│   │   │   └── ...
+│   │   └── ...
+│   ├── migrations                    # Dir containing migration files
+│   │   ├── install_sample_data.php   # Sample data changes to the database
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="tests-phpunit">
+      <title>Test (PHPUnit)</title>
+      <para>
+        I test unitari possono testare un'estensione per verificare
+        che porzioni specifiche del suo codice sorgente funzionino
+        correttamente. Questo aiuta a garantire l'integrità di base
+        del codice e previene regressioni mentre un'estensione viene
+        sviluppata e debuggata.
+      </para>
+      <para>
+        La Skeleton Extension genererà alcuni test unitari e
+        funzionali di esempio di base:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── phpunit.xml.dist          # A PHPUnit configuration file (do not edit)
+│   ├── tests                     # Dir containing test scripts
+│   │   ├── controller            # Example dir containing controller tests
+│   │   │   ├── main_test.php     # A simple unit test (tests a controller class)
+│   │   │   └── ...
+│   │   ├── dbal                  # Example dir containing dbal tests
+│   │   │   ├── fixtures          # Dir containing database test fixtures
+│   │   │   │   ├── config.xml    # A database test fixture of the config table
+│   │   │   │   └── ...
+│   │   │   ├── simple_test.php   # A simple test (tests a database interaction)
+│   │   │   └── ...
+│   │   ├── functional            # Dir containing functional tests
+│   │   │   ├── view_test.php     # A simple functional test
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+    </sect2>
+    <sect2 id="github-actions-ci-configuration">
+      <title>Configurazione CI GitHub Actions</title>
+      <para>
+        GitHub Actions fornisce una piattaforma per eseguire
+        automaticamente i tuoi test PHPUnit a ogni commit e pull
+        request nel tuo repository.
+      </para>
+      <para>
+        La Skeleton Extension può generare due tipi di script
+        workflow in base alle tue esigenze:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <emphasis role="strong">Workflow GitHub Actions
+            (predefinito):</emphasis>
+          </term>
+          <listitem>
+            <para>
+              Genera un workflow semplificato e riutilizzabile
+              contenente alcune variabili regolabili. Puoi facilmente
+              abilitare o disabilitare i tipi di test che vuoi
+              eseguire. Questo workflow è mantenuto da phpBB ed è
+              progettato per testare la tua estensione contro tutte
+              le stesse versioni PHP e database supportati da phpBB.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <emphasis role="strong">Workflow personalizzato GitHub
+            Actions (facoltativo):</emphasis>
+          </term>
+          <listitem>
+            <para>
+              Genera un workflow completamente modificabile e
+              autonomo per il tuo repository. Questa opzione ti dà
+              pieno controllo su job e passaggi, rendendola ideale se
+              intendi personalizzare o estendere il processo di
+              test.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      <programlisting>
+vendor
+├── package
+│   ├── .github            # A hidden directory to contain GitHub related files
+│   │   ├── workflows      # A directory to contain any GitHub workflows
+│   |   |   ├── tests.yml  # The test configuration script in YAML format
+│   │   │   └── ...
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          La cartella <literal>.github</literal> è una cartella
+          nascosta. Puoi visualizzarla e accedervi usando un editor
+          di testo o un IDE in grado di mostrare le cartelle
+          nascoste.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="build-script-phing">
+      <title>Script di build (phing)</title>
+      <para>
+        Uno script di build phing viene generato per la tua estensione
+        e può essere usato per generare pacchetti di build per
+        semplificare il processo di release o distribuzione.
+      </para>
+      <para>
+        Ad esempio, quando sei pronto per rilasciare una versione
+        della tua estensione, eseguire lo script di build
+        impacchetterà la tua estensione nel formato vendor/pacchetto
+        appropriato e genererà un file ZIP pronto per essere inviato
+        al Customisation Database di phpBB. Può anche ripulire i file
+        non destinati alla distribuzione come i test unitari e i file
+        Git nascosti.
+      </para>
+      <para>
+        Per eseguire lo script di build, usa i seguenti comandi
+        console:
+      </para>
+      <programlisting language="bash">
+# Navigate to the root of your extension
+$ cd ./path/to/phpBB/vendor/package
+
+# If you don't already have phing installed, get from composer:
+$ php ./path/to/composer.phar install
+
+# Run phing:
+$ ./vendor/bin/phing
+</programlisting>
+      <para>
+        Dopo che phing ha completato con successo il suo processo,
+        una cartella <literal>build</literal> verrà aggiunta al tuo
+        repository:
+      </para>
+      <programlisting>
+vendor
+├── package
+│   ├── build.xml     # A phing build configuration file
+│   ├── build         # Dir used by the build process
+│   │   ├── checkout  # A zipped archive of your current Git repository
+│   │   ├── package   # The packaged extension, as built by phing
+│   │   ├── upload    # The packaged extension, zipped for distribution
+│   │   └── ...
+│   └── ...
+└── ...
+</programlisting>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          Non fare mai il commit della cartella build su Git o sul
+          tuo repository. Dovresti aggiungere
+          <literal>build/</literal> al tuo
+          <literal>.gitignore</literal> per assicurarti che Git
+          ignori questa cartella.
+        </para>
+      </warning>
+    </sect2>
+  </sect1>
+</article>

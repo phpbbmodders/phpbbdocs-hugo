@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Functional Testing</title>
+  </articleinfo>
+  <para>
+    I test funzionali testano il software nel modo in cui lo farebbe un
+    utente. Simulano un utente che naviga nel sito web, ma eseguono
+    questi passaggi in modo automatizzato. phpBB ti permette di
+    scrivere test di questo tipo. Questo documento ti spiega come.
+  </para>
+  <sect1 id="running-functional-tests">
+    <title>Esecuzione dei Functional Test</title>
+    <para>
+      Le informazioni su come eseguire i test sono disponibili nel
+      repository GitHub all'indirizzo
+      <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md">https://github.com/phpbb/phpbb/blob/3.2.x/tests/RUNNING_TESTS.md</ulink>.
+      Puoi cambiare branch per consultare le istruzioni relative a una
+      versione specifica di phpBB.
+    </para>
+  </sect1>
+  <sect1 id="writing-functional-tests">
+    <title>Scrittura dei Functional Test</title>
+    <para>
+      Il tuo test case dovrà ereditare dalla classe
+      <literal>phpbb_functional_test_case</literal>. Potrai effettuare
+      richieste verso un'installazione phpBB appena creata. Assicurati
+      inoltre di mettere il file nella cartella
+      <literal>tests/functional/</literal> e di aggiungere il blocco di
+      commento <literal>@group functional</literal> sopra la classe,
+      in modo che i test vengano eseguiti correttamente.
+    </para>
+    <programlisting>
+&lt;?php
+// tests/functional/my_test.php
+
+/**
+ * @group functional
+ */
+class phpbb_functional_my_test extends phpbb_functional_test_case
+{
+    public function bootstrap()
+    {
+        // setup code
+    }
+
+    public function test_index()
+    {
+        // test code
+    }
+}
+</programlisting>
+    <para>
+      C'è un metodo <literal>bootstrap()</literal> in cui puoi inserire
+      codice eseguito prima del test. Qui puoi impostare alcuni oggetti,
+      dopo l'installazione, necessari per il tuo test. Poi puoi
+      definire i tuoi test, proprio come faresti normalmente,
+      anteponendo <literal>test_</literal> ai nomi dei metodi. In
+      questo caso testeremo l'indice.
+    </para>
+    <sect2 id="goutte-and-assertions">
+      <title>Goutte e asserzioni</title>
+      <para>
+        Il framework di functional testing è costruito usando
+        <ulink url="https://github.com/fabpot/Goutte">Goutte</ulink>,
+        che effettua richieste HTTP e ci permette di interagire con la
+        pagina. Il "client" di Goutte è disponibile nei tuoi test
+        tramite <literal>$this-&gt;request($method, $path)</literal>.
+        In alternativa, puoi accedervi anche direttamente tramite
+        <literal>$this-&gt;client</literal>.
+      </para>
+      <para>
+        Quando chiami <literal>request()</literal>, otterrai un
+        crawler, che ti permette di recuperare parti della pagina
+        usando i selettori CSS. Ecco un esempio:
+      </para>
+      <programlisting>
+&lt;?php
+// tests/functional/my_test.php
+
+/**
+ * @group functional
+ */
+class phpbb_functional_my_test extends phpbb_functional_test_case
+{
+    public function test_index()
+    {
+        $crawler = $this-&gt;request('GET', 'index.php');
+        $this-&gt;assertGreaterThan(0, $crawler-&gt;filter('.topiclist')-&gt;count());
+    }
+}
+</programlisting>
+      <para>
+        Eseguiamo una richiesta GET verso <literal>index.php</literal>,
+        poi applichiamo un filtro CSS, interrogando la classe
+        .topiclist. Poi ci assicuriamo che la nostra query abbia
+        trovato qualcosa.
+      </para>
+      <para>
+        Se la pagina indice del forum fosse rotta, il nostro test lo
+        rileverebbe, permettendoci di individuare il problema e
+        risolverlo. Più cose testi, più problemi riuscirai a individuare
+        precocemente.
+      </para>
+      <para>
+        Per maggiori informazioni su cosa puoi fare con Goutte,
+        consulta il
+        <ulink url="https://github.com/fabpot/Goutte">progetto
+        GitHub</ulink>, il
+        <ulink url="http://www.phparch.com/2010/04/four-new-php-5-3-components-and-goutte-a-simple-web-scraper/">tutorial
+        su Goutte di Ryan Weaver</ulink> e la
+        <ulink url="http://symfony.com/doc/2.0/book/testing.html#the-test-client">documentazione
+        sui test di Symfony</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="authentication">
+      <title>Autenticazione</title>
+      <para>
+        Molti test funzionali richiederanno che l'utente sia
+        autenticato. Per farlo, puoi usare il metodo
+        <literal>login()</literal> ereditato dalla classe
+        <literal>phpbb_functional_test_case</literal>. Questo metodo
+        assegnerà il SID dell'utente alla proprietà ereditata della
+        classe <literal>$this-&gt;sid</literal>. Dovrai aggiungerlo agli
+        URL su cui navigherà l'utente autenticato, per mantenere la
+        sessione. Per esempi di utilizzo, consulta il test di logout in
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/functional/auth_test.php">tests/functional/auth_test.php</ulink>.
+      </para>
+    </sect2>
+    <sect2 id="localisation">
+      <title>Localizzazione</title>
+      <para>
+        Nei test, come in phpBB stesso, non usare testo di lingua
+        hard-coded a meno che non sia assolutamente necessario. Usa
+        invece i metodi <literal>$this-&gt;add_lang()</literal> e
+        <literal>$this-&gt;lang()</literal>. Entrambi si comportano in
+        modo molto simile alle loro controparti nella classe
+        <literal>\phpbb\user</literal>. Nota che
+        <literal>language/en/common.php</literal> viene caricato
+        automaticamente dal framework di test.
+      </para>
+      <programlisting>
+public function test_example()
+{
+    // include the file at ./phpBB/language/en/ucp.php
+    $this-&gt;add_lang('ucp');
+
+    // we can also include multiple ones:
+    $this-&gt;add_lang(['memberlist', 'mcp']);
+
+    // Let's use a language key
+    $this-&gt;assertEquals('Login', $this-&gt;lang('LOGIN'));
+
+    // And let's use a language key formatted for use with sprintf
+    $this-&gt;assertEquals('Logout [ user ]', $this-&gt;lang('LOGOUT_USER', 'user'));
+}
+</programlisting>
+      <para>
+        Per altri esempi di utilizzo, consulta
+        <ulink url="https://github.com/phpbb/phpbb/blob/3.2.x/tests/functional/lang_test.php">tests/functional/lang_test.php</ulink>.
+      </para>
+    </sect2>
+  </sect1>
+</article>

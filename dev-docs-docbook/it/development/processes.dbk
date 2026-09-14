@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Processi di Sviluppo</title>
+  </articleinfo>
+  <sect1 id="new-features">
+    <title>Nuove funzionalità</title>
+    <para>
+      Questo documento descrive il processo in vigore per proporre
+      nuove funzionalità che possono essere aggiunte a phpBB. phpBB usa
+      questo sistema per garantire che una determinata funzionalità
+      venga aggiunta come proposto e per assicurarsi che le richieste
+      di funzionalità vengano gestite in modo trasparente, basandosi
+      sul contributo della community.
+    </para>
+    <para>
+      Quando si propongono funzionalità o modifiche a phpBB, ci sono
+      due possibili strade da percorrere:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">Idee</emphasis>
+            </term>
+            <listitem>
+              <para>
+                Idee generalmente più informali dal punto di vista
+                dell'utente. Di solito brevi descrizioni senza troppi
+                dettagli tecnici.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              <emphasis role="strong">Richieste di funzionalità</emphasis>
+            </term>
+            <listitem>
+              <para>
+                Proposta più tecnica per nuove funzionalità. Dovrebbe
+                approfondire il contesto tecnico e le modalità per
+                implementare questa nuova funzionalità. Base per
+                ulteriori discussioni con il team di sviluppo.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Alla fine, entrambe seguiranno lo stesso processo generale:
+    </para>
+    <para>
+      <inlinemediaobject>
+        <imageobject>
+          <imagedata fileref="images/new_feature_process.svg" />
+        </imageobject>
+        <textobject>
+          <phrase>image</phrase>
+        </textobject>
+      </inlinemediaobject>
+    </para>
+    <sect2 id="ideas">
+      <title>Idee</title>
+      <para>
+        Le idee sono generalmente idee più informali che descrivono la
+        richiesta di una nuova funzionalità dal punto di vista
+        dell'utente. Sono pensate per raccogliere rapidamente nuove
+        idee basate sull'uso quotidiano di phpBB.
+      </para>
+      <para>
+        Le idee informali dovrebbero essere proposte su
+        <ulink url="https://www.phpbb.com/community/ideas">phpBB
+        Ideas</ulink>. Lì è possibile sia raccogliere il feedback che
+        il supporto di altri utenti.
+      </para>
+      <para>
+        Le discussioni tecniche più dettagliate dovrebbero però avere
+        luogo in una <emphasis>Richiesta di funzionalità</emphasis>.
+      </para>
+    </sect2>
+    <sect2 id="feature-requests">
+      <title>Richieste di funzionalità</title>
+      <para>
+        A differenza delle <emphasis>Idee</emphasis> sopra menzionate,
+        una <emphasis>Richiesta di funzionalità</emphasis> dovrebbe
+        essere focalizzata maggiormente sulla soluzione tecnica per la
+        funzionalità proposta. Potrebbe basarsi su un'
+        <emphasis>Idea</emphasis> ma ciò non è obbligatorio.
+      </para>
+      <para>
+        Le nuove richieste di funzionalità possono essere avviate
+        creando un ticket nel
+        <ulink url="https://tracker.phpbb.com/">phpBB Tracker</ulink>
+        oppure creando un nuovo argomento di discussione sui
+        <ulink url="https://area51.phpbb.com/phpBB/">Forum
+        Area51</ulink>.
+      </para>
+      <para>
+        Cerca di descrivere i dettagli tecnici della funzionalità
+        proposta, come verrà usata, e le raccomandazioni per una
+        possibile implementazione. Includi le tue aspettative
+        sull'entità delle modifiche necessarie e cerca di discutere la
+        complessità della proposta.
+      </para>
+      <para>
+        I membri della community potranno partecipare alla
+        discussione, dare il loro feedback, e aiutare a preparare un
+        piano su come implementare al meglio la funzionalità in
+        passaggi piccoli e facili da seguire.
+      </para>
+    </sect2>
+    <sect2 id="feature-acceptance">
+      <title>Accettazione della funzionalità</title>
+      <para>
+        Dopo che una funzionalità è stata accettata dal
+        <emphasis>Team di Sviluppo phpBB</emphasis>, dovrebbe esserci
+        almeno un ticket nel
+        <ulink url="https://tracker.phpbb.com/">phpBB Tracker</ulink>.
+        Una nuova funzionalità dovrebbe essere suddivisa in passaggi
+        intermedi più piccoli per facilitare l'implementazione e la
+        revisione delle modifiche proposte. È anche possibile usare
+        gli <emphasis>Epic</emphasis> nel tracker per una migliore
+        visione d'insieme dei passaggi necessari.
+      </para>
+      <para>
+        Ogni passaggio di una funzionalità può quindi essere
+        revisionato e integrato separatamente. Di conseguenza, le
+        revisioni del codice saranno più facili, più rapide, e
+        dovrebbero anche portare a un codice e a funzionalità
+        complessivamente migliori.
+      </para>
+    </sect2>
+    <sect2 id="implementation-review">
+      <title>Implementazione e revisione</title>
+      <para>
+        L'implementazione di una funzionalità o dei suoi passaggi
+        intermedi solitamente segue l'accettazione da parte del
+        <emphasis>Team di Sviluppo phpBB</emphasis>. Tutto il codice
+        deve seguire le nostre
+        <ulink url="coding_guidelines.html">Linee Guida per la
+        Scrittura del Codice</ulink>. L'implementazione stessa può
+        essere effettuata dal richiedente, da un membro del
+        <emphasis>Team di Sviluppo phpBB</emphasis>, o da qualsiasi
+        altro sviluppatore. L'accettazione di una funzionalità da
+        parte del <emphasis>Team di Sviluppo phpBB</emphasis> non
+        significa che la sua implementazione sia obbligatoria o che
+        debba essere implementata dal <emphasis>Team di Sviluppo
+        phpBB</emphasis> stesso.
+      </para>
+      <para>
+        Quando si usano librerie esterne, assicurati che siano
+        compatibili con la nostra licenza. Se non sei sicuro se un
+        determinato tipo di licenza sia accettabile, chiedi al
+        <emphasis>Team di Sviluppo phpBB</emphasis>. Le librerie PHP
+        <emphasis role="strong">DEVONO</emphasis> essere installate
+        con composer e dovrebbero generalmente essere considerate ben
+        mantenute.
+      </para>
+      <para>
+        Una volta che il codice è pronto per essere revisionato, deve
+        essere creata una pull request nel nostro
+        <ulink url="https://github.com/phpbb/phpbb/pulls">repository
+        GitHub</ulink>. Le versioni di destinazione dovrebbero essere
+        scelte in base a <link linkend="target-versions">Versioni di
+        Destinazione</link>.
+      </para>
+    </sect2>
+    <sect2 id="finalisation-feature-merge">
+      <title>Finalizzazione / Merge della funzionalità</title>
+      <para>
+        Dopo che il codice è stato revisionato dal <emphasis>Team di
+        Sviluppo phpBB</emphasis>, viene tipicamente approvato e unito
+        (merge). Nel caso ci siano problemi con il codice, questi
+        dovrebbero essere risolti come parte della revisione del
+        codice. Può però anche avere senso creare ticket di
+        follow-up per occuparsi di lavoro aggiuntivo o modifiche alla
+        funzionalità proposta.
+      </para>
+      <para>
+        Una volta che una pull request è stata unita, il tipico lavoro
+        di follow-up dovrebbe essere aggiungere documentazione per la
+        nuova funzionalità, creare post sul blog come forma di
+        pre-annuncio, oppure iniziare a lavorare sul passaggio
+        intermedio successivo.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="target-versions">
+    <title>Versioni di destinazione</title>
+    <para>
+      La versione di destinazione appropriata per una determinata
+      modifica o funzionalità dipende solitamente dai seguenti
+      attributi:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          Tipo: correzione di bug, modifica comportamentale, o nuova
+          funzionalità
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Dimensione e complessità
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Retrocompatibilità (BC)
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      In base a questi fattori e allo schema di versionamento
+      semantico, dovrebbero applicarsi queste regole generali:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist spacing="compact">
+          <varlistentry>
+            <term>
+              Release di versione <emphasis role="strong">PATCH</emphasis>:
+            </term>
+            <listitem>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Correzioni di bug senza rotture della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Correzioni di sicurezza incl. rotture della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Modifiche comportamentali minori senza rotture
+                    della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Nuove funzionalità minori senza rotture della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Aggiornamenti a librerie di terze parti senza
+                    rotture della BC
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              Release di versione <emphasis role="strong">MINOR</emphasis>:
+            </term>
+            <listitem>
+              <para>
+                Come in <emphasis role="strong">PATCH</emphasis> con
+                l'aggiunta di:
+              </para>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Correzioni di bug incl. rotture della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Modifiche comportamentali maggiori senza rotture
+                    della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Nuove funzionalità maggiori senza rotture della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Aggiornamenti a librerie di terze parti senza
+                    rotture della BC <emphasis>significative</emphasis>
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              Release di versione <emphasis role="strong">MAJOR</emphasis>:
+            </term>
+            <listitem>
+              <para>
+                Come in <emphasis role="strong">PATCH</emphasis> e
+                <emphasis role="strong">MINOR</emphasis> con
+                l'aggiunta di:
+              </para>
+              <itemizedlist spacing="compact">
+                <listitem>
+                  <para>
+                    Modifiche comportamentali maggiori incl. rotture
+                    della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Nuove funzionalità maggiori incl. rotture della BC
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Aggiornamenti a librerie di terze parti incl.
+                    rotture della BC <emphasis>significative</emphasis>,
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+</article>

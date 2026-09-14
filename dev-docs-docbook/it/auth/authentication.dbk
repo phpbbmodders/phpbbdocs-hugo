@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Auth API</title>
+  </articleinfo>
+  <para>
+    Questa è una spiegazione di come usare l'API auth/acl di phpBB.
+  </para>
+  <sect1 id="introduction">
+    <title>1. Introduzione</title>
+    <sect2 id="what-is-it">
+      <title>Cos'è?</title>
+      <para>
+        La classe <literal>auth</literal> contiene i metodi relativi
+        all'autorizzazione degli utenti ad accedere a varie funzioni del
+        forum, ad es. pubblicare, visualizzare, rispondere, accedere (e
+        uscire), ecc. Se devi verificare se un utente può svolgere
+        un'azione o gestire l'accesso/disconnessione degli utenti,
+        questa classe è necessaria.
+      </para>
+    </sect2>
+    <sect2 id="initialisation">
+      <title>Inizializzazione</title>
+      <para>
+        Per usare uno qualsiasi dei metodi contenuti nella classe
+        <literal>auth</literal>, deve prima essere istanziata. Il modo
+        migliore per farlo è farlo presto nell'esecuzione dello script,
+        nel modo seguente:
+      </para>
+      <programlisting>
+$auth = new phpbb\auth\auth();
+</programlisting>
+      <para>
+        Una volta creata un'istanza della classe, sei libero di chiamare
+        i vari metodi che contiene. Nota: se vuoi usare i metodi di
+        <literal>auth_admin</literal>, dovrai istanziarla separatamente
+        nello stesso modo.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="methods">
+    <title>2. Metodi</title>
+    <para>
+      Di seguito sono elencati i metodi che puoi usare.
+    </para>
+    <sect2 id="i.-acl">
+      <title>2.i. acl</title>
+      <para>
+        Il metodo <literal>acl</literal> è la routine di
+        inizializzazione per tutte le funzioni ACL. Deve essere chiamato
+        prima di qualsiasi metodo ACL. Accetta un parametro: un array
+        associativo contenente le informazioni sull'utente.
+      </para>
+      <programlisting>
+$auth-&gt;acl($userdata);
+</programlisting>
+      <para>
+        Dove <literal>$userdata</literal> include almeno:
+        <literal>user_id</literal>, <literal>user_permissions</literal>
+        e <literal>user_type</literal>.
+      </para>
+    </sect2>
+    <sect2 id="ii.-acl_get">
+      <title>2.ii. acl_get</title>
+      <para>
+        Questo metodo determina se un utente può eseguire un'azione,
+        globalmente o in un forum specifico.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_get('option'[, forum]);
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>option</literal>: ad es. 'f_list', 'm_edit',
+            'a_adduser', ecc. Usa <literal>!option</literal> per
+            negare.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>forum</literal> (opzionale): intero
+            <literal>forum_id</literal>.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Restituisce un numero intero positivo se consentito, zero se
+        negato.
+      </para>
+    </sect2>
+    <sect2 id="iii.-acl_gets">
+      <title>2.iii. acl_gets</title>
+      <para>
+        Questo metodo controlla più permessi contemporaneamente.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_gets('option1'[, 'option2', ..., forum]);
+</programlisting>
+      <para>
+        Restituisce un numero intero positivo se
+        <emphasis>uno qualsiasi</emphasis> dei permessi è concesso.
+      </para>
+    </sect2>
+    <sect2 id="iv.-acl_getf">
+      <title>2.iv. acl_getf</title>
+      <para>
+        Questo metodo verifica in quali forum un utente ha un
+        determinato permesso.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_getf('option'[, clean]);
+</programlisting>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <literal>option</literal>: stringa del permesso (è
+            consentita la negazione con <literal>!</literal>)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>clean</literal>: booleano. Se true, vengono
+            restituiti solo i forum in cui il permesso è concesso.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Restituisce un array associativo:
+      </para>
+      <programlisting>
+array(forum_id1 =&gt; array(option =&gt; integer), forum_id2 =&gt; ...)
+</programlisting>
+    </sect2>
+    <sect2 id="v.-acl_getf_global">
+      <title>2.v. acl_getf_global</title>
+      <para>
+        Verifica se un utente ha un permesso globalmente o in almeno un
+        forum.
+      </para>
+      <programlisting>
+$result = $auth-&gt;acl_getf_global('option');
+</programlisting>
+      <para>
+        Restituisce un numero intero positivo o zero.
+      </para>
+    </sect2>
+    <sect2 id="vi.-acl_cache">
+      <title>2.vi. acl_cache</title>
+      <para>
+        <emphasis role="strong">Metodo privato.</emphasis> Chiamato
+        automaticamente quando necessario. Genera i dati di
+        user_permissions.
+      </para>
+    </sect2>
+    <sect2 id="vii.-acl_clear_prefetch">
+      <title>2.vii. acl_clear_prefetch</title>
+      <para>
+        Svuota la colonna <literal>user_permissions</literal> nella
+        tabella degli utenti.
+      </para>
+      <programlisting>
+$user_id = 2;
+$auth-&gt;acl_clear_prefetch($user_id);
+</programlisting>
+      <para>
+        Usa <literal>$user_id = 0</literal> per svuotare la cache per
+        tutti gli utenti. Restituisce null.
+      </para>
+    </sect2>
+    <sect2 id="viii.-acl_get_list">
+      <title>2.viii. acl_get_list</title>
+      <para>
+        Restituisce un array che descrive quali utenti hanno quali
+        permessi in quali forum.
+      </para>
+      <programlisting>
+$user_id = array(2, 53);
+$permissions = array('f_list', 'f_read');
+$forum_id = array(1, 2, 3);
+$result = $auth-&gt;acl_get_list($user_id, $permissions, $forum_id);
+</programlisting>
+      <para>
+        Tipi dei parametri: - <literal>$user_id</literal>:
+        <literal>false</literal>, int, oppure array di int -
+        <literal>$permissions</literal>: <literal>false</literal>,
+        string, oppure array di string - <literal>$forum_id</literal>:
+        <literal>false</literal>, int, oppure array di int
+      </para>
+    </sect2>
+    <sect2 id="ix.-miscellaneous">
+      <title>2.ix. Varie</title>
+      <para>
+        Metodi aggiuntivi per recuperare dati di permesso grezzi:
+      </para>
+      <programlisting>
+function acl_group_raw_data($group_id = false, $opts = false, $forum_id = false)
+function acl_user_raw_data($user_id = false, $opts = false, $forum_id = false)
+function acl_raw_data_single_user($user_id)
+function acl_raw_data($user_id = false, $opts = false, $forum_id = false)
+function acl_role_data($user_type, $role_type, $ug_id = false, $forum_id = false)
+</programlisting>
+      <para>
+        Usa <literal>acl_raw_data</literal> per query generiche; gli
+        altri sono ottimizzati per dati specifici.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="admin-related-functions">
+    <title>3. Funzioni relative all'amministrazione</title>
+    <para>
+      Metodi aggiuntivi sono disponibili nella classe
+      <literal>auth_admin</literal> per gestire permessi, opzioni e
+      cache degli utenti. Si trova in:
+    </para>
+    <programlisting>
+includes/acp/auth.php
+</programlisting>
+    <para>
+      Istanziala separatamente:
+    </para>
+    <programlisting>
+$auth_admin = new auth_admin();
+</programlisting>
+    <para>
+      Questo dà accesso sia ai metodi di <literal>auth_admin</literal>
+      che a quelli di <literal>auth</literal>.
+    </para>
+  </sect1>
+</article>

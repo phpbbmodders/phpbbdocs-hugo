@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Usare il Sistema Lingua</title>
+  </articleinfo>
+  <para>
+    phpBB usa un sistema lingua per garantire una facile
+    localizzazione. Tutte le stringhe presentate all'utente vengono
+    prima cercate in un dizionario interno. Pertanto è anche un
+    requisito che le estensioni usino tale sistema per tutto l'output
+    presentato all'utente. Questo capitolo ti mostrerà come usare il
+    sistema lingua e come aggiungere le tue voci personalizzate.
+  </para>
+  <para>
+    Ci riferiamo generalmente al nome della parola nel dizionario come
+    <emphasis role="strong">chiave lingua</emphasis> o
+    <emphasis role="strong">variabile lingua</emphasis>, e al valore
+    restituito come <emphasis role="strong">valore lingua</emphasis>
+    o <emphasis role="strong">stringa lingua</emphasis>. Insieme
+    costituiscono una <emphasis role="strong">voce lingua</emphasis>.
+    Le voci lingua sono raccolte in file lingua.
+  </para>
+  <note>
+    <title>Nota</title>
+    <para>
+      Per convenzione, la chiave lingua dovrebbe essere sempre tutta
+      in maiuscolo, usando trattini bassi per separare le parole.
+    </para>
+  </note>
+  <sect1 id="using-the-language-system-in-php">
+    <title>Usare il sistema lingua in php</title>
+    <para>
+      L'oggetto che contiene il dizionario lingua per l'utente
+      corrente è l'oggetto <literal>$language</literal> (classe
+      <literal>phpbb\language\language</literal>). Per ottenere la
+      traduzione di una voce lingua all'interno del codice php,
+      chiama il metodo
+      <literal>phpbb\language\language::lang()</literal>:
+    </para>
+    <programlisting>
+$language-&gt;lang('LANG_KEY');
+</programlisting>
+    <para>
+      Puoi anche inserire valori all'interno della stringa tradotta.
+      Usa <literal>%s</literal> come segnaposto per le stringhe nella
+      stringa lingua e <literal>%d</literal> per gli interi:
+    </para>
+    <programlisting>
+// Language string: &quot;My translation has a %s&quot;
+echo $language-&gt;lang('LANG_KEY', 'parameter');
+// Output: &quot;My translation has a parameter&quot;
+
+// Language string: &quot;My translation has %d parameter&quot;
+echo $language-&gt;lang('LANG_KEY', 1);
+// Output: &quot;My translation has 1 parameter&quot;
+</programlisting>
+    <warning>
+      <title>Attenzione</title>
+      <para>
+        Quando usi <literal>%d</literal> per i plurali, assicurati di
+        permettere ai traduttori di usare i plurali in base alla loro
+        lingua. Per maggiori informazioni vedi:
+        <literal>plurals</literal>
+      </para>
+    </warning>
+    <note>
+      <title>Nota</title>
+      <para>
+        Molte funzioni in phpBB traducono automaticamente i loro
+        argomenti; passare la chiave lingua come argomento è
+        solitamente sufficiente.
+      </para>
+    </note>
+    <para>
+      Il dizionario non viene caricato in memoria tutto in una volta,
+      ma è suddiviso in diversi file, che devono essere caricati
+      manualmente quando necessario. I file sono memorizzati
+      all'interno della cartella lingua, denominata in base al suo
+      <ulink url="https://area51.phpbb.com/docs/master/coding-guidelines.html#translation">tag
+      lingua</ulink>, dove viene usata una sottocartella per ogni
+      lingua installata. I file lingua predefiniti si trovano nella
+      radice di quella sottocartella, mentre i file lingua dell'ACP
+      vanno nella sottocartella <literal>/acp</literal>; i template
+      e-mail sono posizionati nella sottocartella
+      <literal>/email</literal>.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        I file per le estensioni dovrebbero essere posizionati nella
+        cartella <literal>/language</literal> dell'estensione.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="loading-language-files">
+    <title>Caricare i file lingua</title>
+    <sect2 id="loading-from-phpbb-core">
+      <title>Caricare dal core di phpBB</title>
+      <para>
+        File lingua aggiuntivi possono essere caricati durante
+        l'impostazione dell'utente tramite la chiamata al metodo
+        <literal>phpbb\user::setup()</literal> in cima a ogni file
+        accessibile. Per fare ciò, passa il nome con la sottocartella
+        ma senza estensione come argomento di setup.
+      </para>
+      <programlisting>
+$user-&gt;setup('search');
+// or
+$user-&gt;setup(['ucp', 'search']);
+</programlisting>
+      <para>
+        Poiché <literal>phpbb\user::setup()</literal> deve essere
+        chiamato una sola volta,
+        <literal>phpbb\language\language::add_lang()</literal> deve
+        essere usato per caricare file lingua aggiuntivi, dopo che
+        <literal>phpbb\user::setup()</literal> è già stato chiamato.
+      </para>
+      <programlisting>
+$language-&gt;add_lang('search');
+// or
+$language-&gt;add_lang(['ucp', 'search']);
+</programlisting>
+    </sect2>
+    <sect2 id="loading-from-an-extension">
+      <title>Caricare da un'estensione</title>
+      <para>
+        Per caricare un file da un'estensione devi usare
+        <literal>phpbb\language\language::add_lang()</literal>, che
+        prende l'array dei file lingua come primo argomento e il nome
+        vendor + estensione come secondo argomento.
+      </para>
+      <programlisting>
+$language-&gt;add_lang('demo', 'acme/demo');
+// or
+$language-&gt;add_lang(['demo', 'demo2'], 'acme/demo');
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-language-system-in-template-files">
+    <title>Usare il sistema lingua nei file template</title>
+    <para>
+      Le voci lingua nella
+      <literal>Template Syntax &lt;tutorial-template-syntax&gt;</literal>
+      sono un importante miglioramento a partire da phpBB 3.0. Non è
+      più necessario assegnarle manualmente nel file PHP; le voci
+      lingua dei file lingua caricati possono essere usate
+      automaticamente.
+    </para>
+    <para>
+      Per usare la voce lingua con la chiave <literal>MY_KEY</literal>
+      in un file template, scrivi semplicemente
+      <literal>{L_MY_KEY}</literal> nel template (sintassi phpBB) o
+      <literal>{{ lang('MY_KEY') }}</literal> (nuova sintassi twig).
+    </para>
+    <sect2 id="javascript">
+      <title>Javascript</title>
+      <para>
+        Se la voce lingua verrà usata all'interno di JavaScript, deve
+        essere correttamente sottoposta a escape. Questo è facile da
+        ottenere usando <literal>{LA_MY_KEY}</literal> nel template
+        (sintassi phpBB) o
+        <literal>{{ lang('MY_KEY')|e('js') }}</literal> (nuova
+        sintassi twig).
+      </para>
+      <note>
+        <title>Nota</title>
+        <para>
+          Quando usi voci lingua nel contesto JavaScript con la nuova
+          sintassi twig, sono possibili i seguenti metodi:
+        </para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|escape('js') }}</literal>
+              Il filtro di escape nativo di Twig per il contesto
+              JavaScript.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|e('js') }}</literal> Versione
+              abbreviata per chiamare <literal>escape</literal>
+              usando <literal>e</literal>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|escape('addslashes') }}</literal>
+              Il filtro di escape legacy addslashes di phpBB.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <literal>{{ lang('MY_KEY')|e('addslashes') }}</literal>
+              Versione abbreviata per chiamare <literal>escape</literal>
+              usando <literal>e</literal>.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </note>
+    </sect2>
+  </sect1>
+  <sect1 id="add-new-entries">
+    <title>Aggiungere nuove voci</title>
+    <para>
+      I nuovi file lingua dovrebbero sempre essere posizionati in
+      file propri nella cartella delle estensioni.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Quando definisci voci di log e nomi di moduli, assicurati di
+        caricare il file lingua, nel momento in cui le voci vengono
+        usate.
+      </para>
+    </note>
+    <note>
+      <title>Nota</title>
+      <para>
+        Quando scrivi o modifichi un file lingua, assicurati di
+        salvarlo usando la codifica utf-8
+        <emphasis role="strong">senza BOM</emphasis>
+        (<ulink url="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte
+        Order Mark</ulink>). Altrimenti il forum non funzionerà
+        correttamente. Alcuni editor chiamano questa modalità
+        &quot;utf8 cookie&quot;.
+      </para>
+    </note>
+    <programlisting>
+&lt;?php
+// language/en/sample.php
+/**
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
+
+/**
+ * DO NOT CHANGE
+ */
+if (empty($lang) || !is_array($lang))
+{
+    $lang = [];
+}
+
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+
+$lang = array_merge($lang, [
+    'MY_LANGUAGE_KEY'         =&gt; 'A language entry',
+    'MY_OTHER_LANGUAGE_KEY'   =&gt; 'Another language entry',
+    'MY_TRICKY_LANGUAGE_KEY'  =&gt; 'This is a %slink%s',
+]);
+</programlisting>
+  </sect1>
+</article>

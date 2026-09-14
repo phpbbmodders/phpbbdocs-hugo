@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Le classi files</title>
+  </articleinfo>
+  <para>
+    phpBB 3.2 introduce due nuove classi per il caricamento dei file:
+    filespec e upload. Sono state ristrutturate e si basano sulle
+    precedenti classi filespec e fileupload. Inoltre, è disponibile
+    anche una classe factory che può essere usata per un accesso
+    semplice alle classi files.
+  </para>
+  <warning>
+    <title>Attenzione</title>
+    <para>
+      Il file precedentemente usato <literal>functions_upload.php</literal>
+      non esiste più. Le nuove classi aggiunte dovrebbero invece essere
+      passate alle tue classi, controller, ecc. usando l'infrastruttura
+      del container.
+    </para>
+  </warning>
+  <sect1 id="overview-of-available-classes">
+    <title>Panoramica delle classi disponibili</title>
+    <sect2 id="factory">
+      <title>factory</title>
+      <para>
+        <literal>\phpbb\files\factory</literal>
+      </para>
+      <para>
+        Fornisce un accesso più semplice alle classi files, ad esempio
+        all'interno delle classi files stesse.
+      </para>
+    </sect2>
+    <sect2 id="filespec">
+      <title>filespec</title>
+      <para>
+        <literal>\phpbb\files\filespec</literal>
+      </para>
+      <para>
+        Responsabile di contenere tutte le informazioni rilevanti sul
+        file, oltre a eseguire operazioni specifiche sul file.
+      </para>
+    </sect2>
+    <sect2 id="upload">
+      <title>upload</title>
+      <para>
+        <literal>\phpbb\files\upload</literal>
+      </para>
+      <para>
+        Usata per i caricamenti effettivi dei file. Viene anche usata
+        per verificare la validità dei file e per spostarli.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="using-the-container-to-retrieve-the-classes">
+    <title>Usare il container per recuperare le classi</title>
+    <para>
+      Le classi files possono essere recuperate facilmente usando il
+      container:
+    </para>
+    <programlisting>
+$factory = $phpbb_container-&gt;get('files.factory');
+$upload = $phpbb_container-&gt;get('files.upload');
+$filespec = $phpbb_container-&gt;get('files.filespec');
+</programlisting>
+    <para>
+      Le classi filespec e upload sono definite con lo scope prototype.
+      Questo fa sì che il container restituisca una nuova istanza di
+      queste classi ogni volta che si chiama il metodo get().
+    </para>
+    <warning>
+      <title>Attenzione</title>
+      <para>
+        Se a una classe al di fuori dello scope prototype viene passata
+        un'istanza della classe upload o filespec, quella classe userà
+        sempre la stessa istanza. Di conseguenza, si consiglia di usare
+        la factory per recuperare una nuova istanza della classe (o
+        delle classi) richiesta durante l'esecuzione.
+      </para>
+    </warning>
+  </sect1>
+  <sect1 id="using-the-factory-to-retrieve-the-classes">
+    <title>Usare la factory per recuperare le classi</title>
+    <para>
+      La classe factory può essere usata per recuperare le classi files
+      senza dover usare direttamente il container. Può essere passata
+      come servizio a una classe:
+    </para>
+    <programlisting language="yaml">
+myclass:
+    class: some\namespace\myclass
+    arguments:
+        - '@files.factory'
+</programlisting>
+    <para>
+      Naturalmente, la classe può anche essere istanziata manualmente:
+    </para>
+    <programlisting>
+$files_factory = new phpbb\files\factory($phpbb_container);
+</programlisting>
+    <para>
+      Una volta disponibile la factory, l'altra classe può essere
+      recuperata usando il metodo <literal>get()</literal>:
+    </para>
+    <programlisting>
+$filespec = $files_factory-&gt;get('files.filespec');
+</programlisting>
+  </sect1>
+</article>

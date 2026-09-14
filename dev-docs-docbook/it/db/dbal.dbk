@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Database Abstraction Layer</title>
+  </articleinfo>
+  <para>
+    phpBB usa un
+    <emphasis role="strong">D</emphasis>ata<emphasis role="strong">B</emphasis>ase
+    <emphasis role="strong">A</emphasis>bstraction
+    <emphasis role="strong">L</emphasis>ayer per accedere al database
+    invece di chiamare direttamente, ad es., le funzioni
+    <ulink url="http://php.net/manual/en/function.mysql-query.php">mysql_query</ulink>.
+    Di solito si accede al
+    <literal>DBAL (Database Abstraction Layer)</literal> tramite la
+    variabile globale <literal>$db</literal>. Questa variabile viene
+    inclusa da <literal>common.php</literal> tramite
+    <literal>includes/compatibility_globals.php</literal>:
+  </para>
+  <programlisting>
+/** @var \phpbb\db\driver\driver_interface $db */
+$db = $phpbb_container-&gt;get('dbal.conn');
+</programlisting>
+  <para>
+    Alcune funzioni del database si trovano nel driver di base, altre
+    nei driver specifici per ciascun database. Ogni funzione qui sotto
+    indicherà se è definita nel driver di base o in ciascun driver
+    specifico. In tutta questa pagina, negli esempi verrà usato il
+    driver database specifico per <emphasis>MySQLi</emphasis>. <br/>
+    Tutti i driver si trovano nel namespace
+    <literal>\\phpbb\\db\\driver</literal>. <br/> Il driver di base si
+    trova in <literal>\\phpbb\\db\\driver\\driver.php</literal> <br/>
+    Il driver specifico si trova in
+    <literal>\\phpbb\\db\\driver\\mysqli.php</literal>
+  </para>
+  <sect1 id="connecting-and-disconnecting">
+    <title>Connessione e disconnessione</title>
+    <para>
+      Usa questi metodi solo se non puoi includere
+      <literal>common.php</literal> (per connettersi) oppure eseguire
+      <literal>garbage_collection()</literal> (per disconnettersi;
+      puoi anche usare altre funzioni che eseguono questa funzione, ad
+      esempio <literal>page_footer()</literal>).
+    </para>
+    <sect2 id="sql_connect">
+      <title>sql_connect</title>
+      <para>
+        Si connette al database. Definita nei driver specifici.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+// We're using bertie and bertiezilla as our example user credentials.
+// You need to fill in your own ;D
+$db = new \phpbb\db\driver\mysqli();
+$db-&gt;sql_connect('localhost', 'bertie', 'bertiezilla', 'phpbb', '', false, false);
+</programlisting>
+      <para>
+        Esempio usando <literal>config.php</literal>:
+      </para>
+      <programlisting>
+// Extract the config.php file's data
+$phpbb_config_php_file = new \phpbb\config_php_file($phpbb_root_path, $phpEx);
+extract($phpbb_config_php_file-&gt;get_all());
+
+$db = new $dbms();
+$db-&gt;sql_connect($dbhost, $dbuser, $dbpasswd, $dbname, $dbport, false, false);
+
+// We do not need this any longer, unset for safety purposes
+unset($dbpasswd);
+</programlisting>
+      <sect3 id="parameters">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Host
+                </entry>
+                <entry>
+                  L'host del database. <br/> Quando usi config.php,
+                  dovresti usare invece $dbhost.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Utente database
+                </entry>
+                <entry>
+                  L'utente database con cui connettersi al database.
+                  <br/> Quando usi config.php, dovresti usare invece
+                  $dbuser.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Password database
+                </entry>
+                <entry>
+                  La password dell'utente per connettersi al database.
+                  <br/> Quando usi config.php, dovresti usare invece
+                  $dbpasswd.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Nome database
+                </entry>
+                <entry>
+                  Il database in cui si trovano le tabelle di phpBB.
+                  <br/> Quando usi config.php, dovresti usare invece
+                  $dbname.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Porta database (opzionale)
+                </entry>
+                <entry>
+                  La porta del server database. <br/> Lascia vuoto/false
+                  per usare la porta predefinita. <br/> Quando usi
+                  config.php, dovresti usare invece $dbport.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Persistenza (opzionale)
+                </entry>
+                <entry>
+                  Persistenza della connessione al database; il valore
+                  predefinito è false.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Nuovo collegamento (opzionale)
+                </entry>
+                <entry>
+                  Usa una nuova connessione al database per questa
+                  istanza del DBAL. <br/> Il valore predefinito è
+                  false.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_close">
+      <title>sql_close</title>
+      <para>
+        Si disconnette dal database. Definita nel driver di base
+        (<literal>_sql_close</literal> è definita nei driver
+        specifici).
+      </para>
+      <para>
+        Esempio: <literal>$db-&gt;sql_close();</literal>
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="preparing-sql-queries">
+    <title>Preparazione delle query SQL</title>
+    <sect2 id="sql_build_query">
+      <title>sql_build_query</title>
+      <para>
+        Costruisce un'istruzione SQL completa a partire da un array.
+        Questa funzione dovrebbe essere usata se devi fare un JOIN su
+        più di una tabella, per garantire che l'istruzione risultante
+        funzioni su tutti i database supportati. Definita nel driver di
+        base.
+      </para>
+      <para>
+        Tipi di query possibili: SELECT, SELECT_DISTINCT. <br/> Le
+        chiavi obbligatorie sono SELECT e FROM. <br/> Le chiavi
+        opzionali sono LEFT_JOIN, WHERE, GROUP_BY e ORDER_BY.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+// Array with data for the full SQL statement
+$sql_array = [
+    'SELECT'    =&gt; 'f.*, ft.mark_time',
+
+    'FROM'      =&gt; [
+        FORUMS_WATCH_TABLE  =&gt; 'fw',
+        FORUMS_TABLE        =&gt; 'f',
+    ],
+
+    'LEFT_JOIN' =&gt; [
+        [
+            'FROM'  =&gt; [FORUMS_TRACK_TABLE =&gt; 'ft'],
+            'ON'    =&gt; 'ft.forum_id = f.forum_id
+                AND ft.user_id = ' . (int) $user-&gt;data['user_id'],
+        ],
+    ],
+
+    'WHERE'     =&gt; 'f.forum_id = fw.forum_id
+        AND fw.user_id = ' . (int) $user-&gt;data['user_id'],
+
+    'ORDER_BY'  =&gt; 'f.left_id',
+];
+
+// Build the SQL statement
+$sql = $db-&gt;sql_build_query('SELECT', $sql_array);
+
+// Now run the query...
+$result = $db-&gt;sql_query($sql);
+</programlisting>
+      <sect3 id="parameters-1">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Tipo di query
+                </entry>
+                <entry>
+                  Tipo di query da creare (SELECT, SELECT_DISTINCT)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Array associativo
+                </entry>
+                <entry>
+                  Un array associativo con gli elementi da aggiungere
+                  alla query. <br/> SELECT e FROM sono obbligatori.
+                  <br/> LEFT_JOIN, WHERE, GROUP_BY e ORDER_BY sono
+                  opzionali.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_build_array">
+      <title>sql_build_array</title>
+      <para>
+        Costruisce parte di un'istruzione SQL a partire da un array.
+        Tipi di query possibili: INSERT, INSERT_SELECT, UPDATE, SELECT.
+        Definita nel driver di base.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+// Array with the data to build
+$data = [
+    'username'  =&gt; 'Bertie',
+    'email'     =&gt; 'bertie@example.com',
+];
+
+// First executing a SELECT query.
+// Note: By using the SELECT type, it always uses AND in the conditions.
+$sql = 'SELECT user_password
+    FROM ' . USERS_TABLE . '
+    WHERE ' . $db-&gt;sql_build_array('SELECT', $data);
+$result = $db-&gt;sql_query($sql);
+
+// And executing an UPDATE query: (Using the same data as for SELECT)
+$sql = 'UPDATE ' . USERS_TABLE . '
+    SET ' . $db-&gt;sql_build_array('UPDATE', $data) . '
+    WHERE user_id = ' . (int) $user_id;
+$db-&gt;sql_query($sql);
+
+// And lastly, executing an INSERT query
+$sql = 'INSERT INTO ' . USERS_TABLE . ' ' . $db-&gt;sql_build_array('INSERT', $data);
+$db-&gt;sql_query($sql);
+</programlisting>
+      <sect3 id="parameters-2">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Tipo di query
+                </entry>
+                <entry>
+                  Tipo di query da creare (UPDATE, INSERT,
+                  INSERT_SELECT o SELECT)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Array associativo (opzionale)
+                </entry>
+                <entry>
+                  Un array associativo con gli elementi da aggiungere
+                  alla query. <br/> La chiave dell'array è il nome del
+                  campo, il valore dell'array è il valore di quel
+                  campo. <br/> Se lasciato vuoto, verrà restituito
+                  ''false''.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_in_set">
+      <title>sql_in_set</title>
+      <para>
+        Costruisce una stringa di confronto SQL IN, NOT IN, = e &lt;&gt;.
+        Definita nel driver di base.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql_in = [2, 58, 62];
+
+$sql = 'SELECT *
+    FROM ' . USERS_TABLE . '
+    WHERE ' . $db-&gt;sql_in_set('user_id', $sql_in);
+</programlisting>
+      <sect3 id="parameters-3">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Colonna
+                </entry>
+                <entry>
+                  Nome della colonna SQL da confrontare
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Array
+                </entry>
+                <entry>
+                  Array di valori consentiti (IN) o non consentiti
+                  (NOT IN)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Nega (opzionale)
+                </entry>
+                <entry>
+                  true per NOT IN (), false per IN () (predefinito)
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Consenti insieme vuoto (opzionale)
+                </entry>
+                <entry>
+                  Se true, consente a $array di essere vuoto; in tal
+                  caso, questa funzione restituirà 1=1 oppure 1=0. Il
+                  valore predefinito è false.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_escape">
+      <title>sql_escape</title>
+      <para>
+        Esegue l'escape di una stringa in una query SQL.
+        <literal>sql_escape</literal> è diversa per ogni driver DBAL,
+        ed è scritta appositamente per quel driver, per garantire che
+        tutti i caratteri che necessitano di escape vengano gestiti
+        correttamente. Definita nei driver specifici.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE post_id = ' . (int) $integer . &quot;
+        AND post_text = '&quot; . $db-&gt;sql_escape($string) . &quot;'&quot;;
+</programlisting>
+      <sect3 id="parameters-4">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Stringa
+                </entry>
+                <entry>
+                  La stringa di cui eseguire l'escape.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_like_expression">
+      <title>sql_like_expression</title>
+      <para>
+        Regola correttamente le istruzioni LIKE per i caratteri
+        speciali. Dovrebbe essere usata per garantire che l'istruzione
+        risultante funzioni su tutti i database. Definita nel driver di
+        base (<literal>_sql_like_expression</literal> è definita nei
+        driver specifici).
+      </para>
+      <para>
+        <literal>sql_not_like_expression</literal> è identica a
+        <literal>sql_like_expression</literal>, con la differenza che
+        costruisce un'istruzione NOT LIKE.
+      </para>
+      <sect3 id="parameters-5">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Espressione
+                </entry>
+                <entry>
+                  L'espressione da usare. Ogni carattere jolly viene
+                  sottoposto a escape, tranne $db-&gt;get_any_char() e
+                  $db-&gt;get_one_char()
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+      <sect3 id="get_one_char">
+        <title>get_one_char</title>
+        <para>
+          Carattere jolly per far corrispondere esattamente un
+          (<literal>_</literal>) carattere all'interno di espressioni
+          LIKE.
+        </para>
+      </sect3>
+      <sect3 id="get_any_char">
+        <title>get_any_char</title>
+        <para>
+          Carattere jolly per far corrispondere qualsiasi
+          (<literal>%</literal>) carattere all'interno di espressioni
+          LIKE
+        </para>
+        <para>
+          Esempio:
+        </para>
+        <programlisting>
+$username = 'Bert';
+
+// Lets try to find &quot;Bertie&quot;
+$sql = 'SELECT username, user_id, user_colour
+    FROM ' . USERS_TABLE . '
+    WHERE username_clean ' . $db-&gt;sql_like_expression(utf8_clean_string($username) . $db-&gt;get_any_char());
+$result = $db-&gt;sql_query($sql);
+</programlisting>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_lower_text">
+      <title>sql_lower_text</title>
+      <para>
+        Per eseguire LOWER su una colonna di testo del database, in
+        modo che restituisca stringhe di testo in minuscolo. Definita
+        nel driver di base.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$keyword = 'Bertie';
+$keyword = strtolower($keyword);
+
+$like = $db-&gt;sql_like_expression($db-&gt;get_any_char() . $keyword . $db-&gt;get_any_char());
+
+$sql = 'SELECT *
+    FROM ' . LOGS_TABLE . '
+    WHERE ' . $db-&gt;sql_lower_text('log_data') . ' ' . $like;
+$result = $db-&gt;sql_query_limit($sql, 10);
+</programlisting>
+      <sect3 id="parameters-6">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Nome colonna
+                </entry>
+                <entry>
+                  Il nome della colonna per cui eseguire LOWER sul
+                  valore.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="running-sql-queries">
+    <title>Esecuzione delle query SQL</title>
+    <sect2 id="sql_query">
+      <title>sql_query</title>
+      <para>
+        Per selezionare dati di base dal database, la funzione
+        <literal>sql_query()</literal> è sufficiente. Se vuoi usare
+        qualsiasi variabile nella tua query, dovresti usare (se non è
+        un numero intero) <literal>$db-&gt;sql_escape()</literal> per
+        essere sicuro che i dati siano sicuri. Definita nei driver
+        specifici.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$integer = 0;
+$string = &quot;This is ' some string&quot;;
+
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE post_id = ' . (int) $integer . &quot;
+        AND post_text = '&quot; . $db-&gt;sql_escape($string) . &quot;'&quot;;
+$result = $db-&gt;sql_query($sql);
+</programlisting>
+      <sect3 id="parameters-7">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Query
+                </entry>
+                <entry>
+                  Contiene la query SQL da eseguire
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Cache (opzionale)
+                </entry>
+                <entry>
+                  0 per evitare la cache, oppure il tempo in secondi per
+                  cui il risultato dovrà essere mantenuto nella cache.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_query_limit">
+      <title>sql_query_limit</title>
+      <para>
+        Ottiene/modifica/elimina solo un numero selezionato di righe.
+        Definita nel driver di base (<literal>_sql_query_limit</literal>
+        è definita nei driver specifici).
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$start = 25;
+
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE topic_id = 1045';
+$result = $db-&gt;sql_query_limit($sql, $config['topics_per_page'], $start);
+</programlisting>
+      <sect3 id="parameters-8">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Query
+                </entry>
+                <entry>
+                  Contiene la query SQL da eseguire.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Totale
+                </entry>
+                <entry>
+                  Numero di righe da selezionare,
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Offset (opzionale)
+                </entry>
+                <entry>
+                  Numero di righe da saltare prima di iniziare a
+                  selezionare le righe.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Cache (opzionale)
+                </entry>
+                <entry>
+                  0 per evitare la cache, oppure il tempo in secondi per
+                  cui il risultato dovrà essere mantenuto nella cache.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_multi_insert">
+      <title>sql_multi_insert</title>
+      <para>
+        Costruisce ed esegue più di un'istruzione INSERT. Definita nel
+        driver di base.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+// Users which will be added to group
+$users = [11, 57, 87, 98, 154, 211];
+$sql_ary = [];
+
+foreach ($users as $user_id)
+{
+    $sql_ary[] = [
+        'user_id'   =&gt; (int) $user_id,
+        'group_id'  =&gt; 154,
+        'group_leader'  =&gt; 0,
+        'user_pending'  =&gt; 0,
+    ];
+}
+
+$db-&gt;sql_multi_insert(USER_GROUP_TABLE, $sql_ary);
+</programlisting>
+      <sect3 id="parameters-9">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Nome tabella
+                </entry>
+                <entry>
+                  Nome della tabella su cui eseguire le istruzioni.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Dati
+                </entry>
+                <entry>
+                  Array multidimensionale contenente i dati delle
+                  istruzioni.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="methods-useful-after-running-insert-and-update-queries">
+    <title>Metodi utili dopo l'esecuzione di query INSERT e
+    UPDATE</title>
+    <para>
+      Tutti i metodi in questa parte dell'articolo sono definiti nei
+      driver specifici.
+    </para>
+    <sect2 id="sql_affectedrows">
+      <title>sql_affectedrows</title>
+      <para>
+        Ottiene il numero di righe interessate dall'ultima query
+        INSERT, UPDATE, REPLACE o DELETE.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql = 'DELETE FROM ' . TOPICS_TRACK_TABLE . &quot;
+    WHERE user_id = {$user-&gt;data['user_id']}&quot;;
+$db-&gt;sql_query($sql);
+
+$affected_rows = $db-&gt;sql_affectedrows();
+</programlisting>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          Fai attenzione quando usi
+          <literal>sql_affectedrows()</literal> per determinare il
+          numero di righe interessate dalla tua query, specialmente con
+          le query <emphasis role="strong">SELECT</emphasis>. Il
+          comportamento di questa funzione può variare a seconda del
+          driver database usato e se la query è stata memorizzata nella
+          cache.
+        </para>
+        <para>
+          Non affidarti esclusivamente a
+          <literal>sql_affectedrows()</literal> per confermare il
+          numero di righe interessate. Valuta approcci alternativi come
+          controllare il numero di righe restituite da
+          <link linkend="sql_fetchrow">sql_fetchrow</link> o
+          <link linkend="sql_fetchrowset">sql_fetchrowset</link>.
+        </para>
+      </warning>
+    </sect2>
+    <sect2 id="sql_nextid">
+      <title>sql_nextid</title>
+      <para>
+        Recupera l'ID generato per una colonna AUTO_INCREMENT dalla
+        precedente query INSERT.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql = 'INSERT INTO ' . USERS_TABLE . ' ' . $db-&gt;sql_build_array('INSERT', $user_ary);
+$db-&gt;sql_query($sql);
+
+$user_id = $db-&gt;sql_nextid();
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="methods-useful-after-running-select-queries">
+    <title>Metodi utili dopo l'esecuzione di query SELECT</title>
+    <sect2 id="sql_fetchfield">
+      <title>sql_fetchfield</title>
+      <para>
+        Recupera un campo. Definita nel driver di base.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql = 'SELECT COUNT(post_id) AS num_posts
+    FROM ' . POSTS_TABLE . &quot;
+    WHERE topic_id = $topic_id
+        AND post_time &gt;= $min_post_time
+        &quot; . (($auth-&gt;acl_get('m_approve', $forum_id)) ? '' : 'AND post_approved = 1');
+$result = $db-&gt;sql_query($sql);
+
+$total_posts = (int) $db-&gt;sql_fetchfield('num_posts');
+</programlisting>
+      <sect3 id="parameters-10">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Campo
+                </entry>
+                <entry>
+                  Nome del campo da recuperare.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Numero riga (opzionale)
+                </entry>
+                <entry>
+                  Se false, viene usata la riga attuale, altrimenti
+                  punta alla riga (a partire da zero).
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Risultato (opzionale)
+                </entry>
+                <entry>
+                  Il risultato da valutare. <br/> Questo risultato
+                  proviene da una chiamata al metodo sql_query. <br/>
+                  Se lasciato vuoto, verrà usato l'ultimo risultato.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_fetchrowset">
+      <title>sql_fetchrowset</title>
+      <para>
+        Restituisce un array con il risultato dell'uso del metodo
+        <literal>sql_fetchrow</literal> su ogni riga. Definita nel
+        driver di base.
+      </para>
+      <sect3 id="parameters-11">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Risultato (opzionale)
+                </entry>
+                <entry>
+                  Il risultato da valutare. <br/> Questo risultato
+                  proviene da una chiamata al metodo sql_query. <br/>
+                  Se lasciato vuoto, verrà usato l'ultimo risultato.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_fetchrow">
+      <title>sql_fetchrow</title>
+      <para>
+        Recupera la riga attuale. Definita nei driver specifici.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql = 'SELECT *
+    FROM ' . TOPICS_TABLE . '
+    WHERE topic_id = 1045';
+$result = $db-&gt;sql_query($sql);
+
+$topic_data = $db-&gt;sql_fetchrow($result);
+</programlisting>
+      <para>
+        Esempio con un ciclo while:
+      </para>
+      <programlisting>
+$sql = 'SELECT config_name, config_value
+    FROM ' . CONFIG_TABLE;
+$result = $db-&gt;sql_query($sql);
+
+while ($row = $db-&gt;sql_fetchrow($result))
+{
+    $config[$row['config_name']] = $row['config_value'];
+}
+</programlisting>
+      <sect3 id="parameters-12">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Risultato (opzionale)
+                </entry>
+                <entry>
+                  Il risultato da valutare. <br/> Il risultato proviene
+                  da una chiamata al metodo sql_query. <br/> Se
+                  lasciato vuoto, verrà usato l'ultimo risultato.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_rowseek">
+      <title>sql_rowseek</title>
+      <para>
+        Si posiziona sul numero di riga indicato. Il numero di riga
+        parte da zero. Definita nei driver specifici.
+      </para>
+      <sect3 id="parameters-13">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Numero riga
+                </entry>
+                <entry>
+                  Il numero della riga da trovare (a partire da zero).
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  Risultato
+                </entry>
+                <entry>
+                  Il risultato da valutare. <br/> Questo risultato
+                  proviene da una chiamata al metodo sql_query. <br/>
+                  Se lasciato vuoto, verrà usato l'ultimo risultato.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="sql_freeresult">
+      <title>sql_freeresult</title>
+      <para>
+        Svuota il risultato di una query SELECT. Definita nei driver
+        specifici.
+      </para>
+      <para>
+        Esempio:
+      </para>
+      <programlisting>
+$sql = 'SELECT *
+    FROM ' . POSTS_TABLE . '
+    WHERE post_id = ' . (int) $integer . &quot;
+        AND post_text = '&quot; . $db-&gt;sql_escape($string) . &quot;'&quot;;
+$result = $db-&gt;sql_query($sql);
+
+// Fetch the data
+$post_data = $db-&gt;sql_fetchrow($result);
+
+// We don't need to do anything with our query anymore, so lets set it free
+$db-&gt;sql_freeresult($result);
+</programlisting>
+      <sect3 id="parameters-14">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Utilizzo
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  Risultato (opzionale)
+                </entry>
+                <entry>
+                  Il risultato da valutare. <br/> Questo risultato
+                  proviene da una chiamata al metodo sql_query. <br/>
+                  Se lasciato vuoto, verrà usato l'ultimo risultato.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+</article>

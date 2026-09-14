@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Module Tool</title>
+  </articleinfo>
+  <para>
+    Lo strumento module ti permette di aggiungere o rimuovere moduli
+    nell'ucp, mcp o acp.
+  </para>
+  <sect1 id="add-module">
+    <title>Aggiungere un modulo</title>
+    <para>
+      Aggiunge un nuovo modulo
+    </para>
+    <programlisting>
+['module.add', [ mixed $class [, mixed $parent [, array $data [, mixed $include_path ]]] ]]
+</programlisting>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec align="left" />
+        <colspec align="left" />
+        <colspec align="left" />
+        <thead>
+          <row>
+            <entry>
+              Parametro
+            </entry>
+            <entry>
+              Obbligatorio/predefinito
+            </entry>
+            <entry>
+              Utilizzo
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              class
+            </entry>
+            <entry>
+              Obbligatorio
+            </entry>
+            <entry>
+              La classe del modulo: acp, mcp o ucp
+            </entry>
+          </row>
+          <row>
+            <entry>
+              parent
+            </entry>
+            <entry>
+              predefinito 0
+            </entry>
+            <entry>
+              Il module_id o module_langname del genitore (0 per
+              nessun genitore)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              data
+            </entry>
+            <entry>
+              predefinito []
+            </entry>
+            <entry>
+              Un array con i dati del nuovo modulo. Può essere
+              impostato in due modi diversi. (vedi sotto)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              include_path
+            </entry>
+            <entry>
+              predefinito false
+            </entry>
+            <entry>
+              Specifica opzionalmente un percorso di inclusione
+              personalizzato (funziona solo usando il metodo automatico
+              di aggiunta modulo)
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <sect2 id="manually-specifying-module-info">
+      <title>Specificare manualmente le informazioni del modulo</title>
+      <para>
+        Il modo &quot;manuale&quot; per inserire una categoria o un
+        modulo alla volta. Verrà unito all'array base mostrato poco
+        sotto, ma richiede come minimo l'invio di
+        <literal>module_langname</literal>, e, se vuoi creare un
+        modulo (invece di una semplice categoria), devi inviare anche
+        <literal>module_basename</literal> e
+        <literal>module_mode</literal>.
+      </para>
+      <programlisting>
+$data = [
+    'module_enabled'    =&gt; 1,
+    'module_display'    =&gt; 1,
+    'module_basename'   =&gt; '',
+    'module_class'      =&gt; $class,
+    'parent_id'         =&gt; (int) $parent,
+    'module_langname'   =&gt; '',
+    'module_mode'       =&gt; '',
+    'module_auth'       =&gt; '',
+];
+</programlisting>
+    </sect2>
+    <sect2 id="automatically-determining-module-info">
+      <title>Determinare automaticamente le informazioni del modulo</title>
+      <para>
+        Il modo &quot;automatico&quot;. Per inserire più moduli alla
+        volta in base alle specifiche nel file
+        <literal>_info</literal> del modulo (o dei moduli). Perché
+        funzioni, i moduli devono essere impostati correttamente nel
+        file <literal>_info</literal>. Segue un esempio (questo
+        inserirebbe le modalità settings, log e flag dal file
+        <literal>includes/acp/info/acp_asacp.php</literal>):
+      </para>
+      <programlisting>
+$data = [
+    'module_basename'   =&gt; 'acp_asacp',
+    'modes'             =&gt; ['settings', 'log', 'flag'],
+];
+</programlisting>
+      <para>
+        Facoltativamente puoi omettere 'modes' e verranno inseriti
+        tutti i moduli presenti in quel file info.
+      </para>
+    </sect2>
+    <sect2 id="example">
+      <title>Esempio</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        // Add a new category named ACP_CAT_TEST_MOD to ACP_CAT_DOT_MODS
+        ['module.add', [
+            'acp',
+            'ACP_CAT_DOT_MODS',
+            'ACP_CAT_TEST_MOD'
+       ]],
+
+        // Add the settings and features modes from the acp_board module to the ACP_CAT_TEST_MOD category using the &quot;automatic&quot; method.
+        ['module.add', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'       =&gt; 'acp_board',
+                'modes'                 =&gt; ['settings', 'features'],
+            ],
+        ]],
+
+        // Add the avatar mode from acp_board to the ACP_CAT_TEST_MOD category using the &quot;manual&quot; method.
+        ['module.add', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'   =&gt; 'acp_board',
+                'module_langname'   =&gt; 'ACP_AVATAR_SETTINGS',
+                'module_mode'       =&gt; 'avatar',
+                'module_auth'       =&gt; 'acl_a_board &amp;&amp; ext_vendor/name',
+            ],
+        ]],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+  <sect1 id="remove-module">
+    <title>Rimuovere un modulo</title>
+    <programlisting>
+['module.remove', [ mixed $class [, mixed $parent [, array $data [, mixed $include_path ]]] ]]
+</programlisting>
+    <sect2 id="parameters">
+      <title>Parametri</title>
+      <informaltable>
+        <tgroup cols="3">
+          <colspec align="left" />
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Parametro
+              </entry>
+              <entry>
+                Obbligatorio/predefinito
+              </entry>
+              <entry>
+                Utilizzo
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                class
+              </entry>
+              <entry>
+                Obbligatorio
+              </entry>
+              <entry>
+                La classe del modulo: acp, mcp o ucp
+              </entry>
+            </row>
+            <row>
+              <entry>
+                parent
+              </entry>
+              <entry>
+                predefinito 0
+              </entry>
+              <entry>
+                Il module_id o module_langname del genitore (0 per
+                nessun genitore)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                module
+              </entry>
+              <entry>
+                predefinito ''
+              </entry>
+              <entry>
+                Il module_id o module_langname del modulo da rimuovere
+                (maggiori informazioni sotto)
+              </entry>
+            </row>
+            <row>
+              <entry>
+                include_path
+              </entry>
+              <entry>
+                predefinito false
+              </entry>
+              <entry>
+                Specifica opzionalmente un percorso di inclusione
+                personalizzato (funziona solo usando il metodo
+                automatico di aggiunta modulo)
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="manually-specifying-module-info-1">
+      <title>Specificare manualmente le informazioni del modulo</title>
+      <para>
+        Il modo &quot;manuale&quot;. Quando rimuovi il modulo usando il
+        metodo manuale, puoi specificare una stringa (module_langname)
+        o un intero (module_id)
+      </para>
+    </sect2>
+    <sect2 id="automatically-determining-module-info-1">
+      <title>Determinare automaticamente le informazioni del modulo</title>
+      <para>
+        Il modo &quot;automatico&quot;. Quando rimuovi il modulo usando
+        il metodo automatico, puoi usare le stesse informazioni
+        inviate tramite l'array $data usato con il metodo automatico
+        della funzione module_add. Come per il metodo automatico di
+        aggiunta, questo troverà automaticamente i moduli elencati in
+        base al module_basename e alle modalità specificate nel file
+        <anchor id="info" />info.
+      </para>
+    </sect2>
+    <sect2 id="example-1">
+      <title>Esempio</title>
+      <programlisting>
+public function update_data()
+{
+    return [
+        // Remove the avatar mode from acp_board to the ACP_CAT_TEST_MOD category using the &quot;manual&quot; method.
+        ['module.remove', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'   =&gt; 'acp_board',
+                'module_langname'   =&gt; 'ACP_AVATAR_SETTINGS',
+                'module_mode'       =&gt; 'avatar',
+                'module_auth'       =&gt; 'acl_a_board &amp;&amp; ext_vendor/name',
+            ],
+        ]],
+
+        // Remove the settings and features modes from the acp_board module to the ACP_CAT_TEST_MOD category using the &quot;automatic&quot; method.
+        ['module.remove', [
+            'acp',
+            'ACP_CAT_TEST_MOD',
+            [
+                'module_basename'       =&gt; 'acp_board',
+                'modes'                 =&gt; ['settings', 'features'],
+            ],
+        ]],
+
+        // Remove a new category named ACP_CAT_TEST_MOD to ACP_CAT_DOT_MODS
+        ['module.remove', [
+            'acp',
+            'ACP_CAT_DOT_MODS',
+            'ACP_CAT_TEST_MOD'
+        ]],
+    ];
+}
+</programlisting>
+    </sect2>
+  </sect1>
+</article>

@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Request</title>
+  </articleinfo>
+  <para>
+    Indice
+  </para>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      La classe request contiene tutti i dati della richiesta e
+      fornisce un'interfaccia chiara per interagire con essi,
+      impedendo l'accesso diretto a <literal>$_GET</literal>,
+      <literal>$_POST</literal>, <literal>$_REQUEST</literal>, ecc. La
+      classe request dovrebbe essere completamente retrocompatibile e
+      permettere la completa rimozione di qualsiasi accesso alle super
+      global.
+    </para>
+    <sect2 id="information">
+      <title>Informazioni</title>
+      <variablelist spacing="compact">
+        <varlistentry>
+          <term>
+            Classe
+          </term>
+          <listitem>
+            <para>
+              <literal>\\phpbb\\request\\request</literal>
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Interfaccia
+          </term>
+          <listitem>
+            <para>
+              <literal>\\phpbb\\request\\request_interface</literal>
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            Dichiarazione
+          </term>
+          <listitem>
+            <para>
+              <literal>- '@request'</literal>
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2 id="super-globals">
+      <title>Super global</title>
+      <para>
+        Con questa classe request in uso, l'utilizzo delle
+        <ulink url="https://www.php.net/manual/en/language.variables.superglobals.php">super
+        global</ulink> non dovrebbe più essere necessario e, quando
+        possibile, andrebbe evitato. Ciò significa che non dovrebbe
+        esserci bisogno di usare nessuna delle variabili
+        <literal>$_GET</literal>, <literal>$_POST</literal>,
+        <literal>$_REQUEST</literal>, <literal>$_COOKIE</literal>,
+        <literal>$_FILES</literal> e <literal>$_SERVER</literal>.
+      </para>
+      <para>
+        La classe request fornisce un ulteriore livello di sicurezza
+        per la gestione dei dati della richiesta e dell'input
+        dell'utente, sanificando correttamente l'input e convertendo
+        le variabili nei tipi previsti, come stringhe, interi e array
+        (multidimensionali).
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="functions">
+    <title>Funzioni</title>
+    <para>
+      Di seguito troverai alcune delle funzioni più comunemente usate
+      della classe request. Ogni funzione avrà esempi di codice
+      corrispondenti e una tabella che spiega i parametri della
+      funzione.
+    </para>
+    <sect2 id="is_ajax">
+      <title>is_ajax</title>
+      <para>
+        Verifica se la richiesta attuale è una richiesta AJAX, cioè se
+        la richiesta è effettuata come XMLHttpRequest. Può essere
+        utile per restituire risposte diverse.
+      </para>
+      <programlisting>
+if ($request-&gt;is_set_post('submit'))
+{
+    $message = $language-&gt;lang('CONFIG_UPDATED');
+
+    if ($request-&gt;is_ajax())
+    {
+        // Send a JSON response for an AJAX request
+        $json_response = new \phpbb\json_response();
+
+        return $json_response-&gt;send([
+            'MESSAGE_TITLE'  =&gt; $language-&gt;lang('INFORMATION');
+            'MESSAGE_TEXT'   =&gt; $message,
+        ]);
+    }
+
+    // Include a back link for a non-AJAX request
+    $u_back = $helper-&gt;route('my_route');
+    $message .= '&lt;br&gt;&lt;br&gt;' . $language-&gt;lang('RETURN_PAGE', '&lt;a href=&quot;' . $u_back . '&quot;&gt;', '&lt;/a&gt;');
+
+    return $helper-&gt;message($message);
+}
+</programlisting>
+    </sect2>
+    <sect2 id="is_secure">
+      <title>is_secure</title>
+      <para>
+        Verifica se la richiesta attuale avviene tramite un protocollo
+        sicuro: HTTPS. Utile quando devi creare un prefisso di
+        protocollo per un URL o quando effettui chiamate API.
+      </para>
+      <programlisting>
+$url = ($request-&gt;is_secure() ? 'https://' : 'http://') . $server_name;
+
+$recaptcha_server = $request-&gt;is_secure() ? $recaptcha_server_secure : $recaptcha_server;
+</programlisting>
+    </sect2>
+    <sect2 id="is_set">
+      <title>is_set</title>
+      <para>
+        Verifica se una determinata variabile è impostata in uno degli
+        array super global. Facoltativamente puoi specificare una
+        super global specifica in cui la variabile dovrebbe essere
+        impostata. Se non viene specificata alcuna super global, verrà
+        usata per impostazione predefinita la super global
+        <literal>REQUEST</literal>, che contiene
+        <literal>GET</literal>, <literal>POST</literal> e
+        <literal>COOKIE</literal>.
+      </para>
+      <programlisting>
+$print = $request-&gt;variable('print');
+$start = $request-&gt;variable('start', \phpbb\request\request_interface::GET);
+$submit = $request-&gt;variable('submit', \phpbb\request\request_interface::POST);
+$session = $request-&gt;variable('user_sid', \phpbb\request\request_interface::COOKIE);
+</programlisting>
+      <sect3 id="parameters">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome della variabile da verificare
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  La super global in cui cercare la variabile. <br/>
+                  Può essere una qualsiasi tra
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Il valore predefinito è
+                  <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="is_set_post">
+      <title>is_set_post</title>
+      <para>
+        Verifica se una determinata variabile è stata inviata tramite
+        una richiesta <literal>POST</literal>. Per assicurarti che una
+        richiesta sia stata inviata usando <literal>POST</literal>,
+        dovresti chiamare questa funzione su almeno una variabile.
+        Questa è una scorciatoia per
+        <literal>$request-&gt;variable('variable', \phpbb\request\request_interface::POST);</literal>.
+      </para>
+      <programlisting>
+$submit = $request-&gt;is_set_post('submit');
+$preview = $request-&gt;is_set_post('preview');
+
+if ($submit || $preview)
+{
+   // The form was submitted with a POST request
+}
+</programlisting>
+      <sect3 id="parameters-1">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome della variabile da verificare
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="variable">
+      <title>variable</title>
+      <para>
+        Questa è la funzione centrale per gestire qualsiasi input.
+        Tutte le variabili nelle richieste <literal>GET</literal> o
+        <literal>POST</literal> dovrebbero essere recuperate tramite
+        questa funzione per massimizzare la sicurezza.
+      </para>
+      <para>
+        Il nome della variabile dovrebbe essere il valore
+        dell'attributo name dell'input HTML da recuperare. Quindi per
+        <literal>&lt;input name=&quot;subject&quot; type=&quot;text&quot;&gt;</literal>
+        il nome della variabile è <literal>subject</literal>.
+      </para>
+      <para>
+        Il valore predefinito dovrebbe essere esattamente dello stesso
+        tipo dell'input previsto. Questo è necessario, poiché le
+        variabili recuperate vengono convertite esattamente allo
+        stesso tipo. Se nella richiesta non è disponibile alcuna
+        variabile, verrà restituito il valore predefinito fornito.
+      </para>
+      <para>
+        Quando il valore richiesto è una stringa o un array contenente
+        stringhe, il parametro <literal>multibyte</literal> dovrebbe
+        essere impostato su <literal>true</literal>. O meglio, ogni
+        volta che il valore richiesto potrebbe contenere caratteri
+        UTF-8. Questo significa che non dovrai far passare il valore
+        restituito attraverso <literal>utf8_normalize_nfc</literal>.
+        Se impostato su <literal>false</literal>, farà sì che tutti i
+        byte al di fuori dell'intervallo ASCII
+        <emphasis>(0-127)</emphasis> vengano sostituiti con punti
+        interrogativi.
+      </para>
+      <programlisting>
+$int = $request-&gt;variable('integer', 0);
+$array1 = $request-&gt;variable('array1', [0]);
+$array2 = $request-&gt;variable('array2', [0 =&gt; ''], true);
+$string = $request-&gt;variable('string', '', true);
+
+// Make sure to type cast the defaults when necessary
+$limit = $request-&gt;variable('topics_per_page', (int) $config['topics_per_page']);
+$subject = $request-&gt;variable('subject', $row['post_subject'], true);
+</programlisting>
+      <para>
+        È anche possibile specificare da quale super global dovrebbe
+        essere recuperata la variabile. Questo può aiutare a garantire
+        che venga restituita la variabile corretta, o che il modulo
+        sia stato inviato nel modo previsto.
+      </para>
+      <programlisting>
+$start = $request-&gt;variable('start', 0, false, \phpbb\request\request_interface::GET);
+$confirm = $request-&gt;variable('confirm', '', true, \phpbb\request\request_interface::POST);
+$cookie_data['u'] = $request-&gt;variable($config['cookie_name'] . '_u', 0, false, \phpbb\request\request_interface::COOKIE);
+</programlisting>
+      <para>
+        Se il valore predefinito è un array, è possibile annidarlo
+        quanto necessario. Non ci sono limitazioni per la profondità
+        di annidamento.
+      </para>
+      <programlisting>
+$forum_ids = $request-&gt;variable('forum_ids', [0]);
+$user_notes = $request-&gt;variable('user_notes', [0 =&gt; ['']], true);
+
+// [forum_id =&gt; [user_id =&gt; [notes]]]
+$user_notes_per_forum = $request-&gt;variable('user_notes_per_forum', [0 =&gt; [0 =&gt; ['']]], true);
+</programlisting>
+      <para>
+        Un'ulteriore possibilità è la sintassi a percorso. Questo ti
+        permette di accedere a un singolo valore in una posizione
+        profonda (input annidato), mantenendo comunque i tipi
+        corretti. Può essere ottenuto passando un array come nome
+        della variabile. Ogni valore in questo array rappresenta una
+        chiave per l'array della richiesta. Il livello di annidamento
+        aumenta con ogni valore fornito.
+      </para>
+      <programlisting>
+/**
+ * HTML:
+ * &lt;textarea name=&quot;user_notes_per_forum[10][2][]&quot;&gt;An initial note&lt;/textarea&gt;
+ * &lt;textarea name=&quot;user_notes_per_forum[10][2][]&quot;&gt;A secondary note&lt;/textarea&gt;
+ *
+ * REQUEST:
+ * 'user_notes_per_forum' = [10 =&gt; [2 =&gt; ['An initial note', 'A secondary note']]]
+ */
+
+$note = $request-&gt;variable(['user_notes_per_forum', 10, 2, 1], '', true);
+
+/**
+ * This will return the secondary note,
+ * for the forum identifier of 10
+ * and the user identifier of 2.
+ * Please note that the last array is 0-based.
+ */
+</programlisting>
+      <sect3 id="parameters-2">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome della variabile da recuperare
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">default</emphasis>
+                </entry>
+                <entry>
+                  Il valore predefinito con il tipo di variabile
+                  corretto
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">multibyte</emphasis>
+                </entry>
+                <entry>
+                  Se la variabile può contenere o meno caratteri UTF-8
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  La super global in cui cercare la variabile. <br/>
+                  Può essere una qualsiasi tra
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Il valore predefinito è
+                  <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="file">
+      <title>file</title>
+      <para>
+        Questa funzione è una scorciatoia per recuperare le variabili
+        <literal>FILES</literal>. Restituisce le informazioni del file
+        caricato, oppure un array vuoto se la variabile non esiste in
+        <literal>$_FILES</literal>. È una scorciatoia per
+        <literal>$request-&gt;variable('variable', ['name' =&gt; 'none'], true, \phpbb\request\request_interface::FILES)</literal>
+      </para>
+      <para>
+        Il nome della variabile dovrebbe essere il valore
+        dell'attributo name dell'input HTML da recuperare. Quindi per
+        <literal>&lt;input name=&quot;attachment&quot; type=&quot;file&quot;&gt;</literal>
+        il nome della variabile è <literal>attachment</literal>.
+      </para>
+      <programlisting>
+$upload_file = $request-&gt;file('avatar_upload_file');
+
+if (!empty($upload_file['name']))
+{
+    $file = $upload-&gt;handle_upload('files.types.form', 'avatar_upload_file');
+}
+</programlisting>
+      <sect3 id="parameters-3">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome dell'attributo name dell'input HTML di tipo
+                  file
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="header">
+      <title>header</title>
+      <para>
+        Questa funzione è una scorciatoia per recuperare il valore
+        delle intestazioni HTTP del client.
+      </para>
+      <programlisting>
+// Basic client information
+$browser     = $request-&gt;header('User-Agent');
+$referer     = $request-&gt;header('Referer');
+$forwarded_for   = $request-&gt;header('X-Forwarded-For');
+
+// Client's accepted language
+if ($request-&gt;header('Accept-Language'))
+{
+    $accept_languages = explode(',', $request-&gt;header('Accept-Language'));
+
+    // ...
+}
+</programlisting>
+      <sect3 id="parameters-4">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome dell'intestazione da recuperare
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">default</emphasis>
+                </entry>
+                <entry>
+                  Il valore predefinito con il tipo di variabile
+                  corretto <br/> Il valore predefinito è una stringa
+                  vuota: <literal>''</literal>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="server">
+      <title>server</title>
+      <para>
+        Questa funzione è una scorciatoia per recuperare le variabili
+        <literal>SERVER</literal>. Fornisce anche un fallback a
+        <literal>getenv()</literal>, poiché alcune configurazioni CGI
+        potrebbero averne bisogno.
+      </para>
+      <programlisting>
+$script_name = htmlspecialchars_decode($request-&gt;server('REQUEST_URI'));
+$script_name = ($pos = strpos($script_name, '?')) !== false ? substr($script_name, 0, $pos) : $script_name;
+
+$server_name = htmlspecialchars_decode($request-&gt;header('Host', $request-&gt;server('SERVER_NAME')));
+$server_name = (string) strtolower($server_name);
+
+$server_port = $request-&gt;server('SERVER_PORT', 0);
+</programlisting>
+      <sect3 id="parameters-5">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome della variabile da recuperare
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">default</emphasis>
+                </entry>
+                <entry>
+                  Il valore predefinito con il tipo di variabile
+                  corretto <br/> Il valore predefinito è una stringa
+                  vuota: <literal>''</literal>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="overwrite">
+      <title>overwrite</title>
+      <para>
+        Questa funzione permette di sovrascrivere o impostare un
+        valore in uno degli array super global. Le modifiche eseguite
+        direttamente sulle super global
+        <emphasis role="strong">non</emphasis> avranno alcun effetto
+        sui risultati degli altri metodi forniti dalla classe request.
+        <br/> Questo significa che cambiare una variabile super global
+        in questo modo
+        <literal>$_POST['variable'] = 'changed';</literal>, <br/> non
+        cambierà il valore restituito da
+        <literal>$request-&gt;variable('variable', '', true);</literal>.
+      </para>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          L'uso di questa funzione dovrebbe essere evitato, se
+          possibile! <br/> Consumerà il doppio della quantità di
+          memoria del valore.
+        </para>
+      </warning>
+      <programlisting>
+// Reset start parameter if we jumped from the quickmod dropdown
+if ($request-&gt;variable('start', 0))
+{
+    $request-&gt;overwrite('start', 0);
+}
+</programlisting>
+      <programlisting>
+if ($error)
+{
+    $request-&gt;overwrite('confirm', null, \phpbb\request\request_interface::POST);
+    $request-&gt;overwrite('confirm_key', null, \phpbb\request\request_interface::POST);
+}
+</programlisting>
+      <sect3 id="parameters-6">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">variable</emphasis>
+                </entry>
+                <entry>
+                  Il nome della variabile da sovrascrivere
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">value</emphasis>
+                </entry>
+                <entry>
+                  Il valore a cui impostare la variabile. <br/>
+                  Impostarlo a <literal>null</literal> eliminerà la
+                  variabile.
+                </entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  La super global in cui la variabile dovrebbe essere
+                  modificata. <br/> Può essere una qualsiasi tra
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Il valore predefinito è
+                  <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="variable_names">
+      <title>variable_names</title>
+      <para>
+        Questa funzione restituisce tutti i nomi delle variabili per
+        una specifica super global. Facoltativamente puoi specificare
+        una super global specifica in cui la variabile dovrebbe essere
+        impostata. Se non viene specificata alcuna super global, verrà
+        usata per impostazione predefinita la super global
+        <literal>REQUEST</literal>, che contiene
+        <literal>GET</literal>, <literal>POST</literal> e
+        <literal>COOKIE</literal>. Restituirà quindi tutti i nomi
+        <emphasis>(chiavi)</emphasis> esistenti per quella super
+        global.
+      </para>
+      <programlisting>
+// Converts query string (GET) parameters in request into hidden fields.
+$hidden = '';
+$names = $request-&gt;variable_names(\phpbb\request\request_interface::GET);
+
+foreach ($names as $name)
+{
+    // Sessions are dealt with elsewhere, omit sid always
+    if ($name == 'sid')
+    {
+        continue;
+    }
+
+    $value = $request-&gt;variable($name, '', true);
+    $get_value = $request-&gt;variable($name, '', true, \phpbb\request\request_interface::GET);
+
+    if ($value === $get_value)
+    {
+        $escaped_name = phpbb_quoteattr($name);
+        $escaped_value = phpbb_quoteattr($value);
+
+        $hidden .= &quot;&lt;input type='hidden' name=$escaped_name value=$escaped_value /&gt;&quot;;
+    }
+}
+
+return $hidden;
+</programlisting>
+      <sect3 id="parameters-7">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  La super global da cui ottenere i nomi delle
+                  variabili. <br/> Può essere una qualsiasi tra
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Il valore predefinito è
+                  <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+    <sect2 id="get_super_global">
+      <title>get_super_global</title>
+      <para>
+        Questa funzione restituisce l'array originale della super
+        global richiesta. Facoltativamente puoi specificare una super
+        global specifica in cui la variabile dovrebbe essere
+        impostata. Se non viene specificata alcuna super global, verrà
+        usata per impostazione predefinita la super global
+        <literal>REQUEST</literal>, che contiene
+        <literal>GET</literal>, <literal>POST</literal> e
+        <literal>COOKIE</literal>. Restituirà quindi l'array
+        originale con tutte le variabili di quella super global.
+      </para>
+      <programlisting>
+// Any post data could be necessary for auth (un)linking
+$link_data = $request-&gt;get_super_global(\phpbb\request\request_interface::POST);
+
+// The current user_id is also necessary
+$link_data['user_id'] = $user-&gt;data['user_id'];
+
+// Tell the provider that the method is auth_link not login_link
+$link_data['link_method'] = 'auth_link';
+
+if (!empty($link_data['link']))
+{
+    $auth_provider-&gt;link_account($link_data);
+}
+else
+{
+    $auth_provider-&gt;unlink_account($link_data);
+}
+</programlisting>
+      <sect3 id="parameters-8">
+        <title>Parametri</title>
+        <informaltable>
+          <tgroup cols="2">
+            <colspec align="left" />
+            <colspec align="left" />
+            <thead>
+              <row>
+                <entry>
+                  Parametro
+                </entry>
+                <entry>
+                  Descrizione
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis role="strong">super_global</emphasis>
+                </entry>
+                <entry>
+                  La super global da cui ottenere l'array originale.
+                  <br/> Può essere una qualsiasi tra
+                  <literal>GET|POST|REQUEST|COOKIE|SERVER|FILES</literal>.
+                  <br/> Il valore predefinito è
+                  <literal>REQUEST</literal>.
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="request_var">
+    <title>request_var</title>
+    <para>
+      Deprecata
+    </para>
+    <para>
+      Questa funzione è deprecata a partire da phpBB
+      <literal>3.1.0</literal>
+    </para>
+    <para>
+      La funzione <literal>request_var</literal> era usata ai tempi di
+      phpBB <literal>2.x</literal> e <literal>3.0</literal>, ma è
+      <emphasis role="strong">deprecata</emphasis> da allora. Ciò
+      significa che questa funzione non dovrebbe più essere usata. Usa
+      invece la funzione <link linkend="variable">variable</link>
+      della classe request di phpBB, che offre più opzioni e
+      possibilità.
+    </para>
+  </sect1>
+</article>

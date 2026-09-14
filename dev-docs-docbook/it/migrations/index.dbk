@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Migrations</title>
+  </articleinfo>
+  <para>
+    A partire da phpBB 3.1, l'aggiornamento del database viene eseguito
+    tramite le Migrations.
+  </para>
+  <para>
+    Le Migrations sono state create a causa delle difficoltà dello
+    sviluppo distribuito e del mantenimento di una configurazione del
+    database aggiornata tra tutti gli sviluppatori.
+  </para>
+  <para>
+    Argomento RFC se sei interessato alle motivazioni:
+    <ulink url="http://area51.phpbb.com/phpBB/viewtopic.php?t=41337">http://area51.phpbb.com/phpBB/viewtopic.php?t=41337</ulink>
+  </para>
+  <para>
+    getting_started dependencies schema_changes data_changes tools/index
+  </para>
+  <sect1 id="what-do-migrations-mean-for-me">
+    <title>Cosa significano le Migrations per me?</title>
+    <sect2 id="as-a-user">
+      <title>Come utente</title>
+      <para>
+        Le Migrations non influiscono sull'uso di phpBB, ma solo sulla
+        scrittura del codice per esso, quindi gli amministratori non
+        devono fare nulla di diverso.
+      </para>
+      <para>
+        Gli aggiornamenti del database tra le versioni di phpBB e gli
+        aggiornamenti delle estensioni saranno più sicuri e, nel raro
+        caso in cui accada qualcosa durante le modifiche al database,
+        molto più facili da correggere e diagnosticare.
+      </para>
+    </sect2>
+    <sect2 id="as-an-extension-author">
+      <title>Come autore di un'estensione</title>
+      <para>
+        Una funzionalità (simile a UMIL per phpBB 3.0) integrata in
+        phpBB per una gestione più semplice delle modifiche al database
+        tra le versioni, con strumenti utili per facilitare tali
+        modifiche.
+      </para>
+    </sect2>
+    <sect2 id="as-a-developer">
+      <title>Come sviluppatore</title>
+      <para>
+        Collaborazione più semplice con gli altri, meno tempo speso a
+        gestire le modifiche al database tra diversi branch e pull
+        request.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="how-do-i-use-migrations">
+    <title>Come si usano le Migrations?</title>
+    <sect2 id="getting-started-with-migrations">
+      <title>Iniziare con le Migrations</title>
+      <para>
+        Come creare un file di Migration di base
+        <literal>getting_started</literal>
+      </para>
+    </sect2>
+    <sect2 id="migration-helpers">
+      <title>Helper per le Migrations</title>
+      <para>
+        Come usare gli helper delle Migrations per eseguire modifiche
+        di base al database
+        <literal>tools/index</literal>
+      </para>
+    </sect2>
+  </sect1>
+</article>
