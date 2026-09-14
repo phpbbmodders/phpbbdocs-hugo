@@ -4892,6 +4892,623 @@
               preparato per la memorizzazione
             </entry>
           </row>
+          <row>
+            <entry>
+              core.modify_uploaded_file
+            </entry>
+            <entry>
+              phpbb/attachment/upload.php
+            </entry>
+            <entry>
+              filedata, is_image
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Evento per modificare il file caricato prima di inviarlo
+              al messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_user_rank
+            </entry>
+            <entry>
+              includes/functions_display.php
+            </entry>
+            <entry>
+              user_data, user_posts
+            </entry>
+            <entry>
+              3.1.0-RC4
+            </entry>
+            <entry>
+              Prepara il rango di un utente prima della visualizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.modify_username_string
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              <anchor id="profile_cache" />profile_cache,
+              custom_profile_url, guest_username, mode, user_id,
+              username, username_colour, username_string
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per cambiare l'output di
+              get_username_string()
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.module_auth
+            </entry>
+            <entry>
+              includes/functions_module.php
+            </entry>
+            <entry>
+              forum_id, module_auth, valid_tokens
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Modifica i token per la verifica dell'autorizzazione del
+              modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.move_posts_after
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              auto_sync, forum_ids, forum_row, post_ids, topic_id,
+              topic_ids
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo lo spostamento dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.move_posts_before
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              auto_sync, forum_ids, forum_row, post_ids, topic_id,
+              topic_ids
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dello spostamento dei
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.move_posts_sync_after
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              auto_sync, forum_ids, forum_row, post_ids, topic_id,
+              topic_ids
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo la sincronizzazione dello
+              spostamento dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.move_topics_after
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              forum_id, forum_ids, topic_ids
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo lo spostamento degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.move_topics_before
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              forum_id, topic_ids
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dello spostamento degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.move_topics_before_query
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              auto_sync, forum_id, forum_ids, table_ary, topic_ids
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dello spostamento degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.notification_manager_add_notifications
+            </entry>
+            <entry>
+              phpbb/notification/manager.php
+            </entry>
+            <entry>
+              data, notification_type_name, notify_users, options
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Permette di filtrare l'array notify_users per una notifica
+              che sta per essere inviata. Qui, $notify_users è già
+              filtrato per f_read e l'elenco degli ignorati incluso nella
+              variabile options
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.notification_manager_add_notifications_before
+            </entry>
+            <entry>
+              phpbb/notification/manager.php
+            </entry>
+            <entry>
+              add_notifications_override, data, notification_type_name,
+              notified_users, options
+            </entry>
+            <entry>
+              3.3.6-RC1
+            </entry>
+            <entry>
+              Ottiene i dati della notifica prima che
+              find_users_for_notification() venga eseguito
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.notification_manager_add_notifications_for_users_modify_data
+            </entry>
+            <entry>
+              phpbb/notification/manager.php
+            </entry>
+            <entry>
+              data, notification_type_name, notify_users
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Permette di filtrare l'array $notify_users in base a
+              $notification_type_name per una notifica che sta per
+              essere inviata. Qui, $notify_users è già filtrato dagli
+              utenti già notificati.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.notification_message_email
+            </entry>
+            <entry>
+              includes/functions_messenger.php
+            </entry>
+            <entry>
+              addresses, break, msg, subject
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per inviare il messaggio tramite trasporto esterno
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.notification_message_process
+            </entry>
+            <entry>
+              includes/functions_messenger.php
+            </entry>
+            <entry>
+              addresses, break, msg, subject
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per inviare il messaggio tramite trasporto esterno
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.oauth_login_after_check_if_provider_id_has_match
+            </entry>
+            <entry>
+              phpbb/auth/provider/oauth/oauth.php
+            </entry>
+            <entry>
+              data, redirect_data, row, service
+            </entry>
+            <entry>
+              3.2.3-RC1
+            </entry>
+            <entry>
+              Evento attivato prima di verificare se il provider è già
+              associato a un account
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.obtain_users_online_string_before_modify
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              item, item_id, online_users, rowset, user_online_link
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'elenco degli utenti online
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.obtain_users_online_string_modify
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              item, item_id, l_online_users, online_userlist,
+              online_users, rowset, user_online_link
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'elenco degli utenti online
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.obtain_users_online_string_sql
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              item, item_id, online_users, sql_ary
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica la query SQL per ottenere i dati degli utenti
+              online
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.page_footer
+            </entry>
+            <entry>
+              includes/functions.php phpbb/controller/helper.php
+            </entry>
+            <entry>
+              page_footer_override, run_cron
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive page_footer()
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.page_footer_after
+            </entry>
+            <entry>
+              includes/functions.php phpbb/controller/helper.php
+            </entry>
+            <entry>
+              display_template, exit_handler
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Esegue codice e/o modifica l'output prima di visualizzare
+              il template.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.page_header
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              display_online_list, item, item_id, page_header_override,
+              page_title
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive page_header()
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.page_header_after
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              display_online_list, http_headers, item, item_id,
+              page_title
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive le variabili template
+              <anchor id="common" />common_ dopo che sono state
+              assegnate.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.pagination_generate_page_link
+            </entry>
+            <entry>
+              phpbb/pagination.php
+            </entry>
+            <entry>
+              base_url, generate_page_link_override, on_page, per_page,
+              start_name
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              <para>
+                Esegue codice e/o sovrascrive generate_page_link()
+              </para>
+              <para>
+                Per sovrascrivere il valore generato dalla funzione
+                generate_page_link(), imposta
+                $generate_page_link_override al nuovo valore URL
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.parse_attachments_modify_template_data
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              attachment, block_array, display_cat, download_link,
+              extensions, forum_id, preview, update_count
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              <para>
+                Usa questo evento per modificare i dati template
+                dell'allegato.
+              </para>
+              <para>
+                Questo evento viene attivato una volta per allegato.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.permissions
+            </entry>
+            <entry>
+              phpbb/permissions.php
+            </entry>
+            <entry>
+              categories, permissions, types
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Permette di specificare categorie, tipi e permessi
+              aggiuntivi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_content_visibility_get_forums_visibility_before
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              approve_forums, forum_ids,
+              get_forums_visibility_sql_overwrite, mode, table_alias,
+              where_sql
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Permette di cambiare il risultato della chiamata a
+              get_forums_visibility_sql
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_content_visibility_get_global_visibility_before
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              approve_forums, exclude_forum_ids, mode, table_alias,
+              visibility_sql_overwrite, where_sqls
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Permette di cambiare il risultato della chiamata a
+              get_global_visibility_sql
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_content_visibility_get_visibility_sql_before
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              forum_id, get_visibility_sql_overwrite, mode, table_alias,
+              where_sql
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Permette di cambiare il risultato della chiamata a
+              get_visibility_sql
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_content_visibility_is_visible
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              data, forum_id, is_visible, mode
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Permette di cambiare il risultato della chiamata a
+              is_visible
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_generate_debug_output
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              debug_info
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica le informazioni dell'output di debug
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_log_get_topic_auth_sql_after
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              forum_auth, row
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Permette di modificare la query SQL dopo che i dati
+              dell'argomento sono stati recuperati (all'interno del
+              ciclo).
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.phpbb_log_get_topic_auth_sql_before
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              sql_ary, topic_ids
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Permette di modificare la query SQL prima che i dati
+              dell'argomento vengano recuperati.
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
