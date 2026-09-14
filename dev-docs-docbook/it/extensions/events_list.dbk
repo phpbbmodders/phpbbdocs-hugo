@@ -1,0 +1,1893 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Elenco degli eventi</title>
+  </articleinfo>
+  <sect1 id="php-events">
+    <title>Eventi PHP</title>
+    <informaltable>
+      <tgroup cols="5">
+        <colspec colwidth="8*" align="left" />
+        <colspec colwidth="6*" align="left" />
+        <colspec colwidth="37*" align="left" />
+        <colspec colwidth="2*" align="left" />
+        <colspec colwidth="44*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Identificatore
+            </entry>
+            <entry>
+              Posizione
+            </entry>
+            <entry>
+              Argomenti
+            </entry>
+            <entry>
+              Aggiunto nella release
+            </entry>
+            <entry>
+              Spiegazione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              core.acl_clear_prefetch_after
+            </entry>
+            <entry>
+              phpbb/auth/auth.php
+            </entry>
+            <entry>
+              user_id
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento attivato dopo che la cache delle impostazioni dei
+              permessi di uno o più utenti è stata svuotata
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_attachments_config_edit_add
+            </entry>
+            <entry>
+              includes/acp/acp_attachments.php
+            </entry>
+            <entry>
+              display_vars, mode, submit
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere e/o modificare le configurazioni di
+              acp_attachement
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_ban_after
+            </entry>
+            <entry>
+              includes/acp/acp_ban.php
+            </entry>
+            <entry>
+              ban, ban_exclude, ban_give_reason, ban_length,
+              ban_length_other, ban_reason, mode
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Usa questo evento per eseguire azioni dopo che il ban è
+              stato effettuato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_ban_before
+            </entry>
+            <entry>
+              includes/acp/acp_ban.php
+            </entry>
+            <entry>
+              abort_ban, ban, ban_exclude, ban_give_reason, ban_length,
+              ban_length_other, ban_reason, mode
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Usa questo evento per modificare i dettagli del ban prima
+              che venga effettuato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_bbcodes_delete_after
+            </entry>
+            <entry>
+              includes/acp/acp_bbcodes.php
+            </entry>
+            <entry>
+              action, bbcode_id, bbcode_tag
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento dopo che un BBCode è stato eliminato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_bbcodes_display_bbcodes
+            </entry>
+            <entry>
+              includes/acp/acp_bbcodes.php
+            </entry>
+            <entry>
+              bbcodes_array, row, u_action
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Modifica la visualizzazione dei bbcode personalizzati nel
+              modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_bbcodes_display_form
+            </entry>
+            <entry>
+              includes/acp/acp_bbcodes.php
+            </entry>
+            <entry>
+              action, sql_ary, template_data, u_action
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Modifica i dati template dei bbcode personalizzati prima di
+              visualizzare il modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_bbcodes_edit_add
+            </entry>
+            <entry>
+              includes/acp/acp_bbcodes.php
+            </entry>
+            <entry>
+              action, bbcode_id, bbcode_tokens, tpl_ary
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Modifica i dati template dei bbcode personalizzati prima di
+              visualizzare il modulo di aggiunta/modifica
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_bbcodes_modify_create
+            </entry>
+            <entry>
+              includes/acp/acp_bbcodes.php
+            </entry>
+            <entry>
+              action, bbcode_helpline, bbcode_id, bbcode_match,
+              bbcode_tpl, display_on_posting, hidden_fields, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Modifica i dati del bbcode personalizzato prima dell'azione
+              modify/create
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_bbcodes_modify_create_after
+            </entry>
+            <entry>
+              includes/acp/acp_bbcodes.php
+            </entry>
+            <entry>
+              action, bbcode_id, sql_ary
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento dopo che un BBCode è stato aggiunto o aggiornato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_board_config_edit_add
+            </entry>
+            <entry>
+              includes/acp/acp_board.php
+            </entry>
+            <entry>
+              display_vars, mode, submit
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Evento per aggiungere e/o modificare le configurazioni di
+              acp_board
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_board_config_emoji_enabled
+            </entry>
+            <entry>
+              includes/acp/acp_board.php
+            </entry>
+            <entry>
+              config_name_ary
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Evento per gestire l'array delle configurazioni con emoji
+              abilitate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_email_display
+            </entry>
+            <entry>
+              includes/acp/acp_email.php
+            </entry>
+            <entry>
+              exclude, template_data, usernames
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati template dell'email personalizzata prima di
+              visualizzare il modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_email_modify_sql
+            </entry>
+            <entry>
+              includes/acp/acp_email.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Modifica la query sql per cambiare l'elenco degli utenti a
+              cui viene inviata l'email
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_email_send_before
+            </entry>
+            <entry>
+              includes/acp/acp_email.php
+            </entry>
+            <entry>
+              email_template, generate_log_entry, group_id, priority,
+              subject, template_data, use_queue, usernames
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Modifica i dati template dell'email prima che le email
+              vengano inviate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_extensions_run_action_after
+            </entry>
+            <entry>
+              includes/acp/acp_extensions.php
+            </entry>
+            <entry>
+              action, ext_name, safe_time_limit, start_time, tpl_name,
+              u_action
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento da eseguire dopo che un'azione specifica su
+              un'estensione è stata completata
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_extensions_run_action_before
+            </entry>
+            <entry>
+              includes/acp/acp_extensions.php
+            </entry>
+            <entry>
+              action, ext_name, safe_time_limit, start_time, tpl_name,
+              u_action
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per eseguire un'azione specifica su un'estensione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_help_phpbb_submit_before
+            </entry>
+            <entry>
+              includes/acp/acp_help_phpbb.php
+            </entry>
+            <entry>
+              submit
+            </entry>
+            <entry>
+              3.2.0-RC2
+            </entry>
+            <entry>
+              Evento per modificare la pagina ACP help phpBB e/o
+              ascoltare l'invio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_language_after_delete
+            </entry>
+            <entry>
+              includes/acp/acp_language.php
+            </entry>
+            <entry>
+              delete_message, lang_iso
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Esegue codice dopo l'eliminazione di una lingua
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_logs_info_modify_modes
+            </entry>
+            <entry>
+              includes/acp/info/acp_logs.php
+            </entry>
+            <entry>
+              modes
+            </entry>
+            <entry>
+              3.2.1-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere o modificare le modalità del modulo
+              ACP log
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_main_notice
+            </entry>
+            <entry>
+              includes/acp/acp_main.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Avviso amministratore
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_display_form
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              action, errors, forum_data, forum_id, parents_list, row,
+              template_data, update
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati template del forum prima di visualizzare il
+              modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_initialise_data
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              action, forum_data, forum_id, parents_list, row, update
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Inizializza i dati prima di visualizzare il modulo di
+              aggiunta/modifica
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_modify_forum_list
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              rowset
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Modifica i dati dell'elenco dei forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_move_children
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              errors, from_id, to_id
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento quando spostiamo tutti i figli di un forum in un
+                altro
+              </para>
+              <para>
+                Questo evento può essere attivato quando un forum viene
+                eliminato
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_move_content
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              errors, from_id, sync, to_id
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento quando spostiamo il contenuto da un forum a un altro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_move_content_after
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              from_id, sync, to_id
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Evento quando il contenuto è stato spostato da un forum a
+              un altro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_move_content_sql_before
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              table_ary
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dello spostamento del
+              contenuto del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_request_data
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              action, forum_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Richiede i dati del forum e opera su di essi (analizza i
+              testi, ecc.)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_update_data_after
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              errors, forum_data, forum_data_sql, is_new_forum
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento dopo che un forum è stato aggiornato o creato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_update_data_before
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              forum_data, forum_data_sql
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Rimuove i valori non validi da forum_data_sql che non
+              dovrebbero essere aggiornati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_forums_validate_data
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              errors, forum_data
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Convalida i dati del forum prima di creare/aggiornare il
+              forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_group_display_form
+            </entry>
+            <entry>
+              includes/acp/acp_groups.php
+            </entry>
+            <entry>
+              action, error, group_desc_data, group_id, group_name,
+              group_rank, group_row, group_type, rank_options, update
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Modifica i dati template del gruppo prima di visualizzare
+              il modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_group_initialise_data
+            </entry>
+            <entry>
+              includes/acp/acp_groups.php
+            </entry>
+            <entry>
+              action, allow_desc_bbcode, allow_desc_smilies,
+              allow_desc_urls, error, group_desc, group_id, group_name,
+              group_row, group_type, submit_ary, test_variables
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Inizializza i dati prima di visualizzare il modulo di
+              aggiunta/modifica
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_manage_group_request_data
+            </entry>
+            <entry>
+              includes/acp/acp_groups.php
+            </entry>
+            <entry>
+              action, allow_desc_bbcode, allow_desc_smilies,
+              allow_desc_urls, error, group_desc, group_id, group_name,
+              group_row, group_type, submit_ary, validation_checks
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Richiede i dati del gruppo e opera su di essi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_profile_action
+            </entry>
+            <entry>
+              includes/acp/acp_profile.php
+            </entry>
+            <entry>
+              action, page_title, tpl_name, u_action
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Evento per gestire le azioni sulla pagina dei campi profilo
+              dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_profile_create_edit_after
+            </entry>
+            <entry>
+              includes/acp/acp_profile.php
+            </entry>
+            <entry>
+              action, field_data, field_type, options, s_hidden_fields,
+              save, step, submit
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere variabili template per i nuovi campi
+              della tabella dei campi profilo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_profile_create_edit_init
+            </entry>
+            <entry>
+              includes/acp/acp_profile.php
+            </entry>
+            <entry>
+              action, exclude, field_row, field_type, save, step,
+              submit, visibility_ary
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per aggiungere l'inizializzazione per i nuovi campi
+              della tabella dei campi profilo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_profile_create_edit_save_before
+            </entry>
+            <entry>
+              includes/acp/acp_profile.php
+            </entry>
+            <entry>
+              action, field_data, field_type, profile_fields
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Evento per modificare i dati di configurazione del campo
+              profilo prima di salvarli nel database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_profile_modify_profile_row
+            </entry>
+            <entry>
+              includes/acp/acp_profile.php
+            </entry>
+            <entry>
+              field_block, profile_field, row
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Evento per modificare i dati del campo profilo prima che
+              vengano assegnati al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_ranks_edit_modify_tpl_ary
+            </entry>
+            <entry>
+              includes/acp/acp_ranks.php
+            </entry>
+            <entry>
+              ranks, tpl_ary
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica l'array di output template per la modifica/aggiunta
+              dei ranghi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_ranks_list_modify_rank_row
+            </entry>
+            <entry>
+              includes/acp/acp_ranks.php
+            </entry>
+            <entry>
+              rank_row, row
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica l'array di output template per ogni rango elencato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_ranks_save_modify_sql_ary
+            </entry>
+            <entry>
+              includes/acp/acp_ranks.php
+            </entry>
+            <entry>
+              rank_id, sql_ary
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Modifica l'array SQL durante il salvataggio di un rango
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_styles_action_before
+            </entry>
+            <entry>
+              includes/acp/acp_styles.php
+            </entry>
+            <entry>
+              action, id, mode
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue codice prima dell'esecuzione dell'azione degli stili
+              ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_avatar_sql
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              result, user_row
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati delle preferenze utente prima di assegnarli
+              al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_display_overview
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              quick_tool_ary, user_row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge opzioni di strumento rapido aggiuntive e sovrascrive
+              i dati utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_mode_add
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              error, mode, u_action, user_id, user_row
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Modalità aggiuntive fornite dalle estensioni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_modify_profile
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              data, submit, user_id, user_row
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati utente durante la modifica del profilo
+              nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_modify_signature_sql_ary
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              sql_ary, user_row
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Modifica la firma dell'utente prima che venga memorizzata
+              nel DB
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_overview_before
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              action, error, mode, submit, user_row
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Esegue codice all'inizio della panoramica utenti dell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_overview_modify_data
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              data, sql_ary, user_row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Modifica i dati utente prima di aggiornarli
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_overview_run_quicktool
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              action, u_action, user_id, user_row
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Esegue codice quicktool personalizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_prefs_modify_data
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              data, user_row
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Modifica i dati delle preferenze utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_prefs_modify_sql
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              data, error, sql_ary, user_row
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Modifica la query SQL prima che le preferenze utente
+              vengano aggiornate
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_prefs_modify_template_data
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              data, user_prefs_data, user_row
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Modifica i dati delle preferenze utente prima di assegnarli
+              al template
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_profile_modify_sql_ary
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              cp_data, data, sql_ary, user_id, user_row
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Modifica i dati del profilo nell'ACP prima di inviarli al
+              database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.acp_users_profile_validate
+            </entry>
+            <entry>
+              includes/acp/acp_users.php
+            </entry>
+            <entry>
+              data, error, user_id, user_row
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Convalida i dati del profilo nell'ACP prima di inviarli al
+              database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.add_form_key
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              form_name, now, s_fields, template_variable_suffix, token,
+              token_sid
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive alla creazione del token del
+              modulo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.add_log
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              additional_data, log_ip, log_operation, log_time, mode,
+              sql_ary, user_id
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Permette di modificare i dati di log prima di aggiungerli
+                al database
+              </para>
+              <para>
+                NOTA: se sql_ary non contiene un valore log_type, la voce
+                non verrà memorizzata nel database. Quindi assicurati di
+                impostarlo, se necessario.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.adm_page_footer
+            </entry>
+            <entry>
+              includes/functions_acp.php
+            </entry>
+            <entry>
+              adm_page_footer_override, copyright_html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive adm_page_footer()
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.adm_page_header
+            </entry>
+            <entry>
+              includes/functions_acp.php
+            </entry>
+            <entry>
+              adm_page_header_override, page_title
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive adm_page_header()
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.adm_page_header_after
+            </entry>
+            <entry>
+              includes/functions_acp.php
+            </entry>
+            <entry>
+              http_headers, page_title
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Esegue codice e/o sovrascrive le variabili template
+              <anchor id="common" />common_ dopo che sono state assegnate.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.append_sid
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              append_sid_overwrite, is_amp, is_route, params,
+              session_id, url
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Questo evento può integrare o sovrascrivere la funzione
+                append_sid()
+              </para>
+              <para>
+                Per sovrascrivere questa funzione, l'evento deve
+                impostare $append_sid_overwrite al nuovo valore URL, che
+                verrà restituito dopo l'evento
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.approve_posts_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              action, notify_poster, num_topics, post_info, redirect,
+              success_msg, topic_info
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive durante l'approvazione dei
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.approve_topics_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              action, first_post_ids, notify_poster, redirect,
+              success_msg, topic_info
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive durante l'approvazione degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.auth_login_session_create_before
+            </entry>
+            <entry>
+              phpbb/auth/auth.php
+            </entry>
+            <entry>
+              admin, autologin, login, username
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Evento attivato dopo la verifica di nome utente e password
+              validi, e prima dell'effettiva creazione della sessione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.auth_oauth_link_after
+            </entry>
+            <entry>
+              phpbb/auth/provider/oauth/oauth.php
+            </entry>
+            <entry>
+              data
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento attivato dopo che l'utente collega l'account.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.auth_oauth_login_after
+            </entry>
+            <entry>
+              phpbb/auth/provider/oauth/oauth.php
+            </entry>
+            <entry>
+              row
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento attivato dopo che l'utente ha effettuato l'accesso
+              con successo tramite OAuth.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.avatar_driver_upload_delete_before
+            </entry>
+            <entry>
+              phpbb/avatar/driver/upload.php
+            </entry>
+            <entry>
+              destination, error, prefix, row
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Prima di eliminare un avatar esistente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.avatar_driver_upload_move_file_before
+            </entry>
+            <entry>
+              phpbb/avatar/driver/upload.php
+            </entry>
+            <entry>
+              destination, error, file, filedata, prefix, row
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Prima di spostare il nuovo file in posizione (e
+              eventualmente sovrascrivere l'avatar esistente con
+              l'avatar appena caricato)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.avatar_manager_avatar_delete_after
+            </entry>
+            <entry>
+              phpbb/avatar/manager.php
+            </entry>
+            <entry>
+              avatar_data, prefix, table, user
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento attivato dopo che l'avatar dell'utente è stato
+              eliminato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.bbcode_cache_init_end
+            </entry>
+            <entry>
+              includes/bbcode.php
+            </entry>
+            <entry>
+              bbcode_bitfield, bbcode_cache, bbcode_uid
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Usa questo evento per modificare bbcode_cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.bbcode_second_pass_by_extension
+            </entry>
+            <entry>
+              includes/bbcode.php
+            </entry>
+            <entry>
+              params_array, return
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Evento per eseguire il secondo passaggio bbcode con i
+              metodi di convalida personalizzati forniti dalle estensioni
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.build_config_template
+            </entry>
+            <entry>
+              includes/functions_acp.php
+            </entry>
+            <entry>
+              key, name, new, tpl, tpl_type, vars
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Sovrascrive il codice html mostrato per il valore config
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.common
+            </entry>
+            <entry>
+              common.php
+            </entry>
+            <entry>
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              <para>
+                Evento principale attivato su ogni pagina
+              </para>
+              <para>
+                Puoi usare questo evento per caricare file di funzioni e
+                inizializzare oggetti
+              </para>
+              <para>
+                NOTA: A questo punto la sessione globale ($user) e i
+                permessi ($auth) NON esistono ancora. Se hai bisogno di
+                usare l'oggetto user (ad es. per includere file lingua) o
+                hai bisogno di verificare i permessi, usa invece
+                l'evento core.user_setup!
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.confirm_box_ajax_before
+            </entry>
+            <entry>
+              includes/functions.php
+            </entry>
+            <entry>
+              data, hidden, s_hidden_fields, u_action
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Questo evento permette a un'estensione di modificare
+              l'output ajax della confirm box.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.controller_helper_render_response
+            </entry>
+            <entry>
+              phpbb/controller/helper.php
+            </entry>
+            <entry>
+              response
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Modifica la risposta prima dell'output
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.decode_message_after
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              bbcode_uid, message_text
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il messaggio dopo che è
+              stato decodificato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.decode_message_before
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              bbcode_uid, message_text
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Usa questo evento per modificare il messaggio prima che
+              venga decodificato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_attachments_before
+            </entry>
+            <entry>
+              phpbb/attachment/delete.php
+            </entry>
+            <entry>
+              ids, message_ids, mode, physical, post_ids, resync,
+              sql_id, topic_ids
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dell'eliminazione degli
+              allegati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_attachments_collect_data_before
+            </entry>
+            <entry>
+              phpbb/attachment/delete.php
+            </entry>
+            <entry>
+              ids, mode, resync, sql_id
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima di raccogliere i dati per
+              l'eliminazione degli allegati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_attachments_from_database_after
+            </entry>
+            <entry>
+              phpbb/attachment/delete.php
+            </entry>
+            <entry>
+              ids, message_ids, mode, num_deleted, physical, post_ids,
+              resync, sql_id, topic_ids
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo l'eliminazione degli allegati
+              dal database
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_attachments_from_filesystem_after
+            </entry>
+            <entry>
+              phpbb/attachment/delete.php
+            </entry>
+            <entry>
+              files_removed, ids, message_ids, mode, num_deleted,
+              physical, post_ids, resync, space_removed, sql_id,
+              topic_ids
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo l'eliminazione degli allegati
+              dal filesystem
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_forum_content_before_query
+            </entry>
+            <entry>
+              includes/acp/acp_forums.php
+            </entry>
+            <entry>
+              forum_id, post_counts, table_ary, topic_ids
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dell'eliminazione del
+              contenuto del forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_group_after
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              group_id, group_name
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento dopo l'eliminazione di un gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_log
+            </entry>
+            <entry>
+              phpbb/log/log.php
+            </entry>
+            <entry>
+              conditions, log_type, mode
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              <para>
+                Permette di modificare i dati di log prima di eliminarli
+                dal database
+              </para>
+              <para>
+                NOTA: se sql_ary non contiene un valore log_type, la voce
+                non verrà eliminata dal database. Quindi assicurati di
+                impostarlo, se necessario.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_pm_before
+            </entry>
+            <entry>
+              includes/functions_privmsgs.php
+            </entry>
+            <entry>
+              folder_id, msg_ids, user_id
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Ottiene tutte le informazioni per i MP prima che vengano
+              eliminati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_post_after
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              data, forum_id, is_soft, next_post_id, post_id, post_mode,
+              softdelete_reason, topic_id
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Questo evento viene usato per eseguire azioni subito dopo
+              che un messaggio o argomento è stato eliminato.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_posts_after
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              delete_notifications_types, forum_ids, post_ids,
+              poster_ids, topic_ids, where_ids, where_type
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo l'eliminazione dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_posts_before
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              auto_sync, call_delete_topics, delete_notifications_types,
+              post_count_sync, posted_sync, where_ids, where_type
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dell'eliminazione dei
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_posts_in_transaction
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              delete_notifications_types, forum_ids, post_ids,
+              poster_ids, topic_ids, where_ids, where_type
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive durante l'eliminazione dei
+              messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_posts_in_transaction_before
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              delete_notifications_types, forum_ids, post_ids,
+              poster_ids, table_ary, topic_ids, where_ids, where_type
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive durante l'eliminazione dei
+              messaggi prima di eseguire le query
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_topics_after_query
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              topic_ids
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive dopo l'eliminazione degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_topics_before_query
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              table_ary, topic_ids
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive prima dell'eliminazione degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_user_after
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              mode, retain_username, user_ids, user_rows
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento dopo che l'azione di eliminazione degli utenti è
+              stata eseguita
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.delete_user_before
+            </entry>
+            <entry>
+              includes/functions_user.php
+            </entry>
+            <entry>
+              mode, retain_username, user_ids, user_rows
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Evento prima dell'esecuzione dell'azione di eliminazione
+              degli utenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.disapprove_posts_after
+            </entry>
+            <entry>
+              includes/mcp/mcp_queue.php
+            </entry>
+            <entry>
+              disapprove_reason, disapprove_reason_lang,
+              is_disapproving, lang_reasons, notify_poster,
+              num_disapproved_posts, num_disapproved_topics,
+              post_disapprove_list, post_info, redirect, success_msg,
+              topic_information, topic_posts_unapproved
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Esegue azioni aggiuntive durante la disapprovazione dei
+              messaggi
+            </entry>
+          </row>
+<!--INSERT_PHP_EVENTS_HERE-->
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="template-events">
+    <title>Eventi template</title>
+    <informaltable>
+      <tgroup cols="4">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="22*" align="left" />
+        <colspec colwidth="7*" align="left" />
+        <colspec colwidth="49*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Identificatore
+            </entry>
+            <entry>
+              Posizione in Prosilver (se applicabile)
+            </entry>
+            <entry>
+              Aggiunto nella release
+            </entry>
+            <entry>
+              Spiegazione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+<!--INSERT_TEMPLATE_EVENTS_HERE-->
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="acp-template-events">
+    <title>Eventi template ACP</title>
+    <informaltable>
+      <tgroup cols="4">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="11*" align="left" />
+        <colspec colwidth="7*" align="left" />
+        <colspec colwidth="59*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Identificatore
+            </entry>
+            <entry>
+              Posizione
+            </entry>
+            <entry>
+              Aggiunto nella release
+            </entry>
+            <entry>
+              Spiegazione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+<!--INSERT_ACP_TEMPLATE_EVENTS_HERE-->
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+</article>
