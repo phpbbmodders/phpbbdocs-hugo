@@ -13200,6 +13200,628 @@
               &lt;/head&gt;
             </entry>
           </row>
+          <row>
+            <entry>
+              simple_header_stylesheets_after
+            </entry>
+            <entry>
+              simple_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge chiamate asset dopo i fogli di stile all'interno
+              del tag &lt;/head&gt;. Nota che INCLUDECSS non funzionerà
+              con questo evento.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              topiclist_row_append
+            </entry>
+            <entry>
+              search_results.html, viewforum_body.html, mcp_forum.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto nelle righe degli argomenti (all'interno
+              degli elementi contenenti i titoli degli argomenti)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              topiclist_row_prepend
+            </entry>
+            <entry>
+              search_results.html, viewforum_body.html, mcp_forum.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto nelle righe degli argomenti (all'interno
+              degli elementi contenenti i titoli degli argomenti)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              topiclist_row_topic_by_author_after
+            </entry>
+            <entry>
+              search_results.html, viewforum_body.html, mcp_forum.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto nelle righe degli argomenti (dopo la
+              riga &quot;by topic author&quot;)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              topiclist_row_topic_by_author_before
+            </entry>
+            <entry>
+              search_results.html, viewforum_body.html, mcp_forum.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto nelle righe degli argomenti (prima della
+              riga &quot;by topic author&quot;)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              topiclist_row_topic_title_after
+            </entry>
+            <entry>
+              search_results.html, viewforum_body.html, mcp_forum.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto nelle righe degli argomenti (dopo gli
+              elementi contenenti i titoli degli argomenti)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_agreement_terms_after
+            </entry>
+            <entry>
+              ucp_agreement.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il testo dei termini dell'accordo
+              alla registrazione dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_agreement_terms_before
+            </entry>
+            <entry>
+              ucp_agreement.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del testo dei termini dell'accordo
+              alla registrazione dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_footer_content_after
+            </entry>
+            <entry>
+              ucp_footer.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi dopo il contenuto dei
+              pannelli scheda nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_friend_list_after
+            </entry>
+            <entry>
+              ucp_zebra_friends.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi dopo l'elenco degli amici
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_friend_list_before
+            </entry>
+            <entry>
+              ucp_zebra_friends.html
+            </entry>
+            <entry>
+              3.1.0-a4
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi prima dell'elenco degli amici
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_group_settings_after
+            </entry>
+            <entry>
+              ucp_groups_manage.html
+            </entry>
+            <entry>
+              3.3.13-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le opzioni per gestire un gruppo
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_group_settings_before
+            </entry>
+            <entry>
+              ucp_groups_manage.html
+            </entry>
+            <entry>
+              3.3.13-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle opzioni per gestire un
+              gruppo nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_header_content_before
+            </entry>
+            <entry>
+              ucp_header.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi prima del contenuto dei
+              pannelli scheda nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_header_friends_offline_username_full_append
+            </entry>
+            <entry>
+              ucp_header.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente degli amici offline
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_header_friends_offline_username_full_prepend
+            </entry>
+            <entry>
+              ucp_header.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente degli amici offline
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_header_friends_online_username_full_append
+            </entry>
+            <entry>
+              ucp_header.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente degli amici online
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_header_friends_online_username_full_prepend
+            </entry>
+            <entry>
+              ucp_header.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente degli amici online
+              nell'UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_main_bookmarks_topic_title_after
+            </entry>
+            <entry>
+              ucp_main_bookmarks.html
+            </entry>
+            <entry>
+              3.3.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo il titolo dell'argomento
+              visualizzando i segnalibri UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_main_front_user_activity_after
+            </entry>
+            <entry>
+              ucp_main_front.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo le informazioni di attività
+              utente visualizzando la pagina iniziale UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_main_front_user_activity_append
+            </entry>
+            <entry>
+              ucp_main_front.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le ultime informazioni di attività
+              utente visualizzando la pagina iniziale UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_main_front_user_activity_before
+            </entry>
+            <entry>
+              ucp_main_front.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito prima delle informazioni di
+              attività utente visualizzando la pagina iniziale UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_main_front_user_activity_prepend
+            </entry>
+            <entry>
+              ucp_main_front.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle prime informazioni di
+              attività utente visualizzando la pagina iniziale UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_main_subscribed_topic_title_after
+            </entry>
+            <entry>
+              ucp_main_subscribed.html
+            </entry>
+            <entry>
+              3.3.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo il titolo dell'argomento
+              visualizzando gli argomenti sottoscritti UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_notifications_content_after
+            </entry>
+            <entry>
+              ucp_notifications.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi dopo il contenuto della
+              scheda opzioni notifiche UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_notifications_content_before
+            </entry>
+            <entry>
+              ucp_notifications.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi prima del contenuto della
+              scheda opzioni notifiche UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_notifications_form_after
+            </entry>
+            <entry>
+              ucp_notifications.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi dopo il modulo HTML nella
+              scheda opzioni notifiche UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_notifications_form_before
+            </entry>
+            <entry>
+              ucp_notifications.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge elementi facoltativi prima del modulo HTML nella
+              scheda opzioni notifiche UCP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_post_buttons_after
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un pulsante di pubblicazione ai messaggi privati
+              nella revisione della cronologia (accanto a quote ecc.),
+              alla fine dell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_post_buttons_before
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un pulsante di pubblicazione ai messaggi privati
+              nella revisione della cronologia (accanto a quote ecc.),
+              all'inizio dell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_post_buttons_list_after
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un elenco personalizzato di pulsanti di
+              pubblicazione ai messaggi privati nella revisione della
+              cronologia (accanto a quote ecc.), dopo l'elenco
+              originale.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_post_buttons_list_before
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un elenco personalizzato di pulsanti di
+              pubblicazione ai messaggi privati nella revisione della
+              cronologia (accanto a quote ecc.), prima dell'elenco
+              originale.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_review_after
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la revisione della cronologia dei
+              messaggi privati.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_review_before
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della revisione della cronologia
+              dei messaggi privati.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_row_message_author_username_append
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_history_row_message_author_username_prepend
+            </entry>
+            <entry>
+              ucp_pm_history.html
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore del
+              messaggio del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_author_full_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo l'autore del messaggio
+              durante la visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_author_full_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.3.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto subito prima dell'autore del messaggio
+              durante la visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_avatar_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo l'avatar durante la
+              visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_avatar_before
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto subito prima dell'avatar durante la
+              visualizzazione di un messaggio privato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ucp_pm_viewmessage_contact_fields_after
+            </entry>
+            <entry>
+              ucp_pm_viewmessage.html
+            </entry>
+            <entry>
+              3.1.0-b1
+            </entry>
+            <entry>
+              Aggiunge dati dopo i campi contatto sul profilo utente
+              durante la visualizzazione di un messaggio privato
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
