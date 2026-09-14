@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>La classe filespec</title>
+  </articleinfo>
+  <para>
+    La nuova classe files <literal>filespec</literal> sostituisce la
+    precedente classe <literal>filespec</literal>.
+  </para>
+  <sect1 id="passing-settings-to-filespec-class">
+    <title>Passare le impostazioni alla classe filespec</title>
+    <para>
+      Nelle versioni di phpBB precedenti alla 3.2, <literal>$upload_ary</literal>
+      e <literal>$upload_namespace</literal> venivano passati alla
+      classe <literal>filespec</literal> tramite il costruttore. Poiché
+      ora vengono recuperati tramite l'infrastruttura del container,
+      questo non è più possibile. La nuova classe
+      <literal>filespec</literal> include invece 2 metodi per impostare
+      facilmente i dati necessari:
+    </para>
+    <itemizedlist spacing="compact">
+      <listitem>
+        <para>
+          <literal>set_upload_ary($upload_ary)</literal>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <literal>set_upload_namespace($namespace)</literal>
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Ciascuno di questi metodi restituisce l'istanza attuale della
+      classe <literal>filespec</literal>, permettendo chiamate
+      concatenate:
+    </para>
+    <programlisting>
+$filespec-&gt;set_upload_ary($upload_ary)
+    -&gt;set_upload_namespace($namespace);
+</programlisting>
+  </sect1>
+  <sect1 id="retrieving-property-values">
+    <title>Recuperare i valori delle proprietà</title>
+    <para>
+      I valori delle proprietà di <literal>filespec</literal> possono
+      essere recuperati facilmente con il metodo <literal>get()</literal>.
+      Basta passare il nome della proprietà da recuperare e verrà
+      restituito il suo valore.
+    </para>
+    <programlisting>
+$filename = $filespec-&gt;get('filename');
+</programlisting>
+    <note>
+      <title>Nota</title>
+      <para>
+        <literal>get()</literal> restituirà false se la proprietà
+        specificata non esiste, oppure se la classe non è stata
+        inizializzata correttamente.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="clean-file-name">
+    <title>Pulizia del nome del file</title>
+    <para>
+      <literal>filespec</literal> supporta diversi modi di pulire il
+      nome del file a seconda della modalità specificata con il metodo
+      <literal>clean_filename()</literal>. Le modalità possibili sono:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              avatar
+            </term>
+            <listitem>
+              <para>
+                Costruisce il nome in base al prefisso e all'ID
+                specificati
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              real
+            </term>
+            <listitem>
+              <para>
+                Crea un nome in minuscolo e rimuove alcuni caratteri
+                potenzialmente problematici
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              unique
+            </term>
+            <listitem>
+              <para>
+                Crea un nome file univoco senza estensione
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+      <listitem>
+        <variablelist>
+          <varlistentry>
+            <term>
+              unique_ext
+            </term>
+            <listitem>
+              <para>
+                Crea un nome file univoco con estensione
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="move-file-to-location">
+    <title>Spostare il file in una posizione</title>
+    <para>
+      È possibile spostare il file caricato in una posizione specificata
+      con il metodo <literal>move_file()</literal>.
+    </para>
+    <programlisting>
+move_file($destination, $overwrite = false, $skip_image_check = false, $chmod = false)
+</programlisting>
+    <para>
+      <literal>$destination</literal>: percorso in cui spostare il file
+    </para>
+    <para>
+      <literal>$overwrite</literal>: se i file esistenti debbano essere
+      sovrascritti
+    </para>
+    <para>
+      <literal>$skip_image_check</literal>: se saltare il controllo di
+      validità dell'immagine
+    </para>
+    <para>
+      <literal>$chmod</literal>: maschera dei permessi da impostare per
+      il file con <literal>chmod()</literal>
+    </para>
+  </sect1>
+</article>
