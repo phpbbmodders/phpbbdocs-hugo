@@ -15562,6 +15562,603 @@
           </row>
         </thead>
         <tbody>
+          <row>
+            <entry>
+              acp_ban_cell_append
+            </entry>
+            <entry>
+              acp_ban.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine dell'area della cella dei ban
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ban_cell_prepend
+            </entry>
+            <entry>
+              acp_ban.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio dell'area della cella dei
+              ban
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_bbcodes_actions_append
+            </entry>
+            <entry>
+              acp_bbcodes.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge azioni alla pagina BBCode, dopo i pulsanti
+              modifica/elimina
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_bbcodes_actions_prepend
+            </entry>
+            <entry>
+              acp_bbcodes.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge azioni alla pagina BBCode, prima dei pulsanti
+              modifica/elimina
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_bbcodes_edit_fieldsets_after
+            </entry>
+            <entry>
+              acp_bbcodes.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge impostazioni al modulo di aggiunta/modifica
+              BBCode
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_email_find_username_append
+            </entry>
+            <entry>
+              acp_email.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine del link di ricerca nome
+              utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_email_find_username_prepend
+            </entry>
+            <entry>
+              acp_email.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio del link di ricerca nome
+              utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_email_group_options_append
+            </entry>
+            <entry>
+              acp_email.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine del menu a tendina delle
+              opzioni gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_email_group_options_prepend
+            </entry>
+            <entry>
+              acp_email.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio del menu a tendina delle
+              opzioni gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_email_options_after
+            </entry>
+            <entry>
+              acp_email.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni al modulo di invio email di massa
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ext_details_end
+            </entry>
+            <entry>
+              acp_ext_details.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni più dettagliate sull'estensione
+              dopo le informazioni disponibili.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ext_details_notice
+            </entry>
+            <entry>
+              acp_ext_details.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge avvisi di dettaglio dell'estensione dopo le
+              informazioni di controllo versione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ext_list_disabled_name_after
+            </entry>
+            <entry>
+              acp_ext_list.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il nome delle estensioni
+              disabilitate nell'elenco
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ext_list_disabled_title_after
+            </entry>
+            <entry>
+              acp_ext_list.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge testo dopo il titolo della sezione delle
+              estensioni disabilitate.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ext_list_enabled_name_after
+            </entry>
+            <entry>
+              acp_ext_list.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il nome delle estensioni abilitate
+              nell'elenco
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_ext_list_enabled_title_after
+            </entry>
+            <entry>
+              acp_ext_list.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge testo dopo il titolo della sezione delle
+              estensioni abilitate.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_custom_settings
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge un proprio riquadro (fieldset) per le
+              impostazioni dell'estensione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_main_settings_append
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum alla fine della sezione
+              delle impostazioni principali
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_main_settings_prepend
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum prima della sezione delle
+              impostazioni principali
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_normal_settings_append
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum alla fine della sezione
+              delle impostazioni normali
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_normal_settings_prepend
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum prima della sezione delle
+              impostazioni normali
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_prune_settings_append
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum alla fine della sezione
+              delle impostazioni di eliminazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_prune_settings_prepend
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum prima della sezione delle
+              impostazioni di eliminazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_quick_select_button_append
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il pulsante di invio della
+              selezione rapida forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_quick_select_button_prepend
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del pulsante di invio della
+              selezione rapida forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_rules_settings_append
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum alla fine della sezione
+              delle impostazioni delle regole
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_forums_rules_settings_prepend
+            </entry>
+            <entry>
+              acp_forums.html
+            </entry>
+            <entry>
+              3.1.2-RC1
+            </entry>
+            <entry>
+              Aggiunge impostazioni ai forum prima della sezione delle
+              impostazioni delle regole
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_group_options_after
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge opzioni aggiuntive alle impostazioni del gruppo
+              (dopo GROUP_RECEIVE_PM)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_group_options_before
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge opzioni aggiuntive alle impostazioni del gruppo
+              (prima di GROUP_FOUNDER_MANAGE)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_group_types_append
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni aggiuntive di tipo gruppo alle
+              impostazioni del gruppo (in fondo all'elenco)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_group_types_prepend
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.2.9-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni aggiuntive di tipo gruppo alle
+              impostazioni del gruppo (in cima all'elenco)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_add_user_options_after
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.3.13-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le opzioni per aggiungere un
+              utente al gruppo nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_add_user_options_before
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.3.13-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle opzioni per aggiungere un
+              utente al gruppo nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_add_user_usernames_before
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.3.13-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'opzione dei nomi utente per
+              aggiungere un utente al gruppo nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_find_username_append
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine del link di ricerca nome
+              utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_find_username_prepend
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio del link di ricerca nome
+              utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_manage_after
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la tabella di gestione dei gruppi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_manage_before
+            </entry>
+            <entry>
+              acp_groups.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della tabella di gestione dei
+              gruppi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_position_legend_add_button_after
+            </entry>
+            <entry>
+              acp_groups_position.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il pulsante di invio per
+              aggiungere il gruppo alla legenda
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_position_legend_add_button_before
+            </entry>
+            <entry>
+              acp_groups_position.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del pulsante di invio per
+              aggiungere il gruppo alla legenda
+            </entry>
+          </row>
 <!--INSERT_ACP_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
