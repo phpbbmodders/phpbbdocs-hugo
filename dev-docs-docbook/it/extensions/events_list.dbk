@@ -14437,6 +14437,659 @@
               dell'ultimo messaggio del membro
             </entry>
           </row>
+          <row>
+            <entry>
+              viewforum_body_online_list_before
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli utenti connessi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topic_author_username_append
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente dell'autore del
+              topic del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topic_author_username_prepend
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente dell'autore del
+              topic del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topic_row_after
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elemento della lista dei topic.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topic_row_append
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio dell'elemento della lista
+              dei topic.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topic_row_before
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elemento della lista dei
+              topic.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topic_row_prepend
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine dell'elemento della lista
+              dei topic.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_body_topicrow_row_before
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco dei topic.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_buttons_bottom_after
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti dopo il pulsante Nuovo topic, in fondo
+              all'elenco dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_buttons_bottom_before
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti prima del pulsante Nuovo topic, in
+              fondo all'elenco dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_buttons_top_after
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti dopo il pulsante Nuovo topic, in cima
+              all'elenco dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_buttons_top_before
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.0-RC5
+            </entry>
+            <entry>
+              Aggiunge pulsanti prima del pulsante Nuovo topic, in cima
+              all'elenco dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_forum_name_append
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo il link al nome del
+              forum nella schermata Visualizza forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_forum_name_prepend
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima del link al nome
+              del forum nella schermata Visualizza forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_forum_title_after
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo il titolo del forum
+              nella schermata Visualizza forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewforum_forum_title_before
+            </entry>
+            <entry>
+              viewforum_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima del titolo del
+              forum nella schermata Visualizza forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewonline_body_username_append
+            </entry>
+            <entry>
+              viewonline_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Aggiunge informazioni al nome utente del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewonline_body_username_prepend
+            </entry>
+            <entry>
+              viewonline_body.html
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Antepone informazioni al nome utente del membro
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_avatar_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto subito dopo l'avatar durante la
+              visualizzazione dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_avatar_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto subito prima dell'avatar durante la
+              visualizzazione dei topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_contact_fields_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge dati dopo i campi contatto sul profilo utente
+              durante la visualizzazione di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_contact_fields_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge dati prima dei campi contatto sul profilo utente
+              durante la visualizzazione di un messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_contact_icon_append
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo le icone dei campi
+              contatto nei miniprofili utente dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_contact_icon_prepend
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima delle icone dei
+              campi contatto nei miniprofili utente dei messaggi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_footer_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto in fondo alla schermata Visualizza
+              topic sotto i messaggi e la risposta rapida, subito prima
+              della jumpbox in Prosilver.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_online_list_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.3.12-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'elenco degli utenti connessi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_online_list_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'elenco degli utenti connessi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_pagination_top_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la paginazione in cima
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_poll_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il pannello del sondaggio.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_poll_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del pannello del sondaggio.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_poll_option_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'opzione del sondaggio
+              nell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_poll_option_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'opzione del sondaggio
+              nell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_poll_question_append
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo la domanda del
+              sondaggio nella schermata Visualizza topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_poll_question_prepend
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima della domanda del
+              sondaggio nella schermata Visualizza topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_author_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente dopo l'autore del
+              messaggio nella schermata Visualizza topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_author_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto direttamente prima dell'autore del
+              messaggio nella schermata Visualizza topic
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_buttons_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge un pulsante di pubblicazione ai messaggi
+              (accanto a modifica, quote ecc.), alla fine dell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_buttons_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge un pulsante di pubblicazione ai messaggi
+              (accanto a modifica, quote ecc.), all'inizio dell'elenco.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_buttons_list_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge un elenco personalizzato di pulsanti di
+              pubblicazione ai messaggi (accanto a modifica, quote
+              ecc.), dopo l'elenco originale.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_buttons_list_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.5-RC1
+            </entry>
+            <entry>
+              Aggiunge un elenco personalizzato di pulsanti di
+              pubblicazione ai messaggi (accanto a modifica, quote
+              ecc.), prima dell'elenco originale.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_post_subject_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge dati prima dell'icona e dell'oggetto del
+              messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_back2top_after
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto in fondo al messaggio dopo il link
+              torna in cima
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_back2top_append
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto in fondo al messaggio direttamente
+              dopo il link torna in cima
+            </entry>
+          </row>
+          <row>
+            <entry>
+              viewtopic_body_postrow_back2top_before
+            </entry>
+            <entry>
+              viewtopic_body.html
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto in fondo al messaggio prima del link
+              torna in cima
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
