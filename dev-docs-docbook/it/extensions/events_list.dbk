@@ -6718,6 +6718,618 @@
               visibilità del messaggio
             </entry>
           </row>
+          <row>
+            <entry>
+              core.set_post_visibility_before_sql
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              data, forum_id, is_latest, is_starter, post_id, reason,
+              time, topic_id, user_id, visibility
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Esegue azioni subito prima della query per cambiare la
+              visibilità del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.set_topic_visibility_after
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              data, force_update_all, forum_id, reason, time, topic_id,
+              user_id, visibility
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Esegue azioni dopo tutti i passaggi per cambiare la
+              visibilità dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.set_topic_visibility_before_sql
+            </entry>
+            <entry>
+              phpbb/content_visibility.php
+            </entry>
+            <entry>
+              data, force_update_all, forum_id, reason, time, topic_id,
+              user_id, visibility
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Esegue azioni subito prima della query per cambiare la
+              visibilità dell'argomento
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.smiley_text_root_path
+            </entry>
+            <entry>
+              includes/functions_content.php
+            </entry>
+            <entry>
+              root_path
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Evento per sovrascrivere il root_path per le emoticon
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.submit_pm_after
+            </entry>
+            <entry>
+              includes/functions_privmsgs.php
+            </entry>
+            <entry>
+              data, mode, pm_data, subject
+            </entry>
+            <entry>
+              3.1.0-b5
+            </entry>
+            <entry>
+              Ottiene l'ID del messaggio MP dopo l'invio al DB
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.submit_pm_before
+            </entry>
+            <entry>
+              includes/functions_privmsgs.php
+            </entry>
+            <entry>
+              data, mode, subject
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Ottiene tutte le parti del MP da inviare al DB.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.submit_post_end
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              data, mode, poll, post_visibility, subject, topic_type,
+              update_message, update_search_index, url, username
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              <para>
+                Questo evento viene usato per eseguire azioni subito
+                dopo che un messaggio o argomento è stato inviato.
+                Quando viene pubblicato un nuovo argomento, l'ID
+                dell'argomento è disponibile nell'array $data.
+              </para>
+              <para>
+                L'unica azione che può essere eseguita alterando i dati
+                resi disponibili a questo evento è modificare l'URL di
+                ritorno ($url).
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.submit_post_modify_sql_data
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              data, poll, post_mode, sql_data, subject, topic_type,
+              username
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Modifica i dati della query sql per l'invio del messaggio
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.sync_forum_last_post_info_sql
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              sql_ary
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'array SQL per ottenere i dati del
+              messaggio e dell'utente dagli ultimi messaggi di tutti i
+              forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.sync_modify_forum_data
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              fieldnames, forum_data, post_info
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'array SQL per ottenere i dati del
+              messaggio e dell'utente dagli ultimi messaggi di tutti i
+              forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.sync_modify_topic_data
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              row, topic_data, topic_id
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare topic_data durante la sincronizzazione
+              degli argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.sync_topic_last_post_info_sql
+            </entry>
+            <entry>
+              includes/functions_admin.php
+            </entry>
+            <entry>
+              custom_fieldnames, sql_ary
+            </entry>
+            <entry>
+              3.3.5-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'array SQL per ottenere i dati del
+              messaggio e dell'utente dagli ultimi messaggi di tutti gli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_configure_after
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/factory.php
+            </entry>
+            <entry>
+              configurator
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Modifica il configuratore s9eTextFormatter dopo che sono
+              state impostate le impostazioni predefinite
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_configure_before
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/factory.php
+            </entry>
+            <entry>
+              configurator
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Modifica il configuratore s9eTextFormatter prima che
+              vengano impostate le impostazioni predefinite
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_configure_finalize
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/factory.php
+            </entry>
+            <entry>
+              objects
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Accede agli oggetti restituiti da finalize() prima che
+              vengano salvati in cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_get_errors
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/parser.php
+            </entry>
+            <entry>
+              entries, errors, parser
+            </entry>
+            <entry>
+              3.3.1-RC1
+            </entry>
+            <entry>
+              Modifica i messaggi di errore generati dal logger di
+              s9eTextFormatter
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_parse_after
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/parser.php
+            </entry>
+            <entry>
+              parser, xml
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Modifica un testo analizzato nella sua forma XML
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_parse_before
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/parser.php
+            </entry>
+            <entry>
+              parser, text
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Modifica un testo prima che venga analizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_parser_setup
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/parser.php
+            </entry>
+            <entry>
+              parser
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              <para>
+                Configura il servizio parser
+              </para>
+              <para>
+                Può essere usato per: - attivare/disattivare funzionalità
+                o BBCode - registrare variabili o parser personalizzati
+                nel parser s9eTextFormatter - configurare le impostazioni
+                di runtime del parser s9eTextFormatter
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_render_after
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/renderer.php
+            </entry>
+            <entry>
+              html, renderer
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Modifica un testo renderizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_render_before
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/renderer.php
+            </entry>
+            <entry>
+              renderer, xml
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Modifica un testo analizzato prima che venga renderizzato
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.text_formatter_s9e_renderer_setup
+            </entry>
+            <entry>
+              phpbb/textformatter/s9e/renderer.php
+            </entry>
+            <entry>
+              renderer
+            </entry>
+            <entry>
+              3.2.0-a1
+            </entry>
+            <entry>
+              Configura il servizio renderer
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.thumbnail_create_before
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              destination, mimetype, new_height, new_width, source,
+              thumbnail_created
+            </entry>
+            <entry>
+              3.2.4
+            </entry>
+            <entry>
+              Evento di creazione miniatura per sostituire la creazione
+              di miniature GD con, ad esempio, ImageMagick
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.topic_review_modify_post_list
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              attachments, cur_post_id, forum_id, mode, post_list,
+              rowset, show_quote_button, topic_id
+            </entry>
+            <entry>
+              3.1.9-RC1
+            </entry>
+            <entry>
+              Evento per modificare l'elenco dei messaggi per le
+              revisioni degli argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.topic_review_modify_row
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              cur_post_id, current_row_number, forum_id, mode, post_row,
+              row, topic_id
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Evento per modificare il blocco di dati template per le
+              revisioni degli argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.topic_review_modify_sql_ary
+            </entry>
+            <entry>
+              includes/functions_posting.php
+            </entry>
+            <entry>
+              cur_post_id, forum_id, mode, post_list, show_quote_button,
+              sql_ary, topic_id
+            </entry>
+            <entry>
+              3.2.8-RC1
+            </entry>
+            <entry>
+              Evento per modificare la query SQL per le revisioni degli
+              argomenti
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.twig_environment_render_template_after
+            </entry>
+            <entry>
+              phpbb/template/twig/environment.php
+            </entry>
+            <entry>
+              context, name, output
+            </entry>
+            <entry>
+              3.2.1-RC1
+            </entry>
+            <entry>
+              Permette di cambiare il flusso di output del template dopo
+              la renderizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.twig_environment_render_template_before
+            </entry>
+            <entry>
+              phpbb/template/twig/environment.php
+            </entry>
+            <entry>
+              context, name
+            </entry>
+            <entry>
+              3.2.1-RC1
+            </entry>
+            <entry>
+              Permette di cambiare il flusso di output del template
+              prima della renderizzazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_activate_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_activate.php
+            </entry>
+            <entry>
+              message, user_row
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Questo evento può essere usato per modificare i dati dopo
+              l'attivazione dell'account utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_add_zebra
+            </entry>
+            <entry>
+              includes/ucp/ucp_zebra.php
+            </entry>
+            <entry>
+              mode, sql_ary
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge utenti agli amici/nemici
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_delete_cookies
+            </entry>
+            <entry>
+              ucp.php
+            </entry>
+            <entry>
+              cookie_name, retain_cookie
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Evento per salvare cookie personalizzati dall'eliminazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_display_module_before
+            </entry>
+            <entry>
+              ucp.php
+            </entry>
+            <entry>
+              id, mode, module
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Usa questo evento per abilitare e disabilitare moduli UCP
+              aggiuntivi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              core.ucp_login_link_template_after
+            </entry>
+            <entry>
+              includes/ucp/ucp_login_link.php
+            </entry>
+            <entry>
+              auth_provider, data, login_error, login_link_error,
+              login_username, tpl_ary
+            </entry>
+            <entry>
+              3.2.4-RC1
+            </entry>
+            <entry>
+              Evento per eseguire azioni aggiuntive prima che
+              ucp_login_link venga visualizzato
+            </entry>
+          </row>
 <!--INSERT_PHP_EVENTS_HERE-->
         </tbody>
       </tgroup>
