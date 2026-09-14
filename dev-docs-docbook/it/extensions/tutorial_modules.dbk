@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Tutorial: Moduli</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      In phpBB puoi creare i tuoi moduli per i Pannelli di Controllo
+      Utente, Moderatore e Amministrazione. Questo approccio modulare
+      ha molti vantaggi rispetto alla creazione di pagine di
+      impostazioni da zero:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Puoi gestire i moduli nell'ACP.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Non devi gestire direttamente l'autorizzazione.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Ottieni un albero di navigazione integrato nel sistema.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            I template dei moduli contengono già funzionalità come
+            paginazione, breadcrumb e messaggi di conferma.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <para>
+      Questo tutorial spiega:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="creating-control-panel-modules">Creare
+            moduli del pannello di controllo</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="installing-control-panel-modules">Installare
+            moduli del pannello di controllo</link>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <note>
+      <title>Nota</title>
+      <para>
+        Questo tutorial descrive come creare un modulo ACP. Per
+        creare moduli MCP o UCP, di solito devi solo sostituire tutte
+        le occorrenze di &quot;acp&quot; con &quot;mcp&quot; o
+        &quot;ucp&quot;.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="creating-control-panel-modules">
+    <title>Creare moduli del pannello di controllo</title>
+    <para>
+      Un modulo richiede tre file:
+    </para>
+    <blockquote>
+      <orderedlist numeration="arabic" spacing="compact">
+        <listitem>
+          <para>
+            <link linkend="module-info">Info del modulo</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="module-class">Classe del modulo</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="module-template">Template del modulo</link>
+          </para>
+        </listitem>
+      </orderedlist>
+    </blockquote>
+    <sect2 id="module-info">
+      <title>Info del modulo</title>
+      <para>
+        La classe info del modulo contiene semplicemente un metodo che
+        restituisce un array di informazioni che descrivono il
+        modulo. Informazioni come il nome del modulo, le modalità
+        disponibili e i permessi richiesti.
+      </para>
+      <para>
+        Questo file deve sempre terminare in
+        <literal>*_info.php</literal> e dovrebbe essere memorizzato
+        nella cartella <literal>acp/</literal> dell'estensione. Per
+        questo tutorial, useremo
+        <literal>ext/acme/demo/acp/main_info.php</literal>:
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\acp;
+
+class main_info
+{
+    public function module()
+    {
+        return [
+            'filename'  =&gt; '\acme\demo\acp\main_module',
+            'title'     =&gt; 'ACP_DEMO_TITLE',
+            'modes'    =&gt; [
+                'settings'  =&gt; [
+                    'title' =&gt; 'ACP_DEMO',
+                    'auth'  =&gt; 'ext_acme/demo &amp;&amp; acl_a_board',
+                    'cat'   =&gt; ['ACP_DEMO_TITLE'],
+                ],
+            ],
+        ];
+    }
+}
+</programlisting>
+      <para>
+        La classe <literal>main_info</literal> ha un solo metodo,
+        <literal>module()</literal>, che restituisce un array con le
+        seguenti informazioni:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Chiave
+              </entry>
+              <entry>
+                Contenuto
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>filename</literal>
+              </entry>
+              <entry>
+                Percorso completo con namespace verso la
+                <link linkend="module-class">Classe del modulo</link>,
+                che inizia con una barra iniziale.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>title</literal>
+              </entry>
+              <entry>
+                Chiave lingua per il titolo del modulo che viene
+                mostrato nella sezione di gestione dei moduli dell'ACP.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>modes</literal>
+              </entry>
+              <entry>
+                Contiene un array delle modalità per il modulo. Vedi
+                la tabella successiva per maggiori dettagli.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+        Nota che abbiamo definito una modalità chiamata
+        <literal>settings</literal> con le seguenti informazioni:
+      </para>
+      <informaltable>
+        <tgroup cols="2">
+          <colspec align="left" />
+          <colspec align="left" />
+          <thead>
+            <row>
+              <entry>
+                Chiave
+              </entry>
+              <entry>
+                Contenuto
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <literal>title</literal>
+              </entry>
+              <entry>
+                Chiave lingua del titolo della modalità che viene
+                mostrato nella sezione di gestione dei moduli dell'ACP.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>auth</literal>
+              </entry>
+              <entry>
+                Una chiave di autorizzazione usata per controllare
+                l'accesso alla modalità. Il vendor/nome
+                dell'estensione <literal>acme/demo</literal> è
+                richiesto per assicurarsi che l'estensione sia
+                abilitata. Facoltativamente specifichiamo anche che
+                l'utente deve avere, in questo caso, il permesso
+                <literal>a_board</literal>.
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <literal>cat</literal>
+              </entry>
+              <entry>
+                Fa riferimento alla categoria genitore a cui
+                appartiene la modalità. Dovrebbe tipicamente contenere
+                la chiave lingua della categoria genitore.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="module-class">
+      <title>Classe del modulo</title>
+      <para>
+        La classe del modulo contiene il codice effettivo del modulo.
+        Anche questo file sarà memorizzato nella cartella
+        <literal>acp/</literal> dell'estensione. Per questo tutorial,
+        useremo <literal>ext/acme/demo/acp/main_module.php</literal>:
+      </para>
+      <programlisting>
+&lt;?php
+
+namespace acme\demo\acp;
+
+class main_module
+{
+    public $u_action;
+    public $tpl_name;
+    public $page_title;
+
+    public function main($id, $mode)
+    {
+        global $language, $template, $request, $config;
+
+        $this-&gt;tpl_name = 'acp_demo_body';
+        $this-&gt;page_title = $language-&gt;lang('ACP_DEMO_TITLE');
+
+        add_form_key('acme_demo_settings');
+
+        if ($request-&gt;is_set_post('submit'))
+        {
+            if (!check_form_key('acme_demo_settings'))
+            {
+                 trigger_error('FORM_INVALID');
+            }
+
+            $config-&gt;set('acme_demo_goodbye', $request-&gt;variable('acme_demo_goodbye', 0));
+            trigger_error($language-&gt;lang('ACP_DEMO_SETTING_SAVED') . adm_back_link($this-&gt;u_action));
+        }
+
+        $template-&gt;assign_vars([
+            'ACME_DEMO_GOODBYE' =&gt; $config['acme_demo_goodbye'],
+            'U_ACTION'          =&gt; $this-&gt;u_action,
+        ]);
+    }
+}
+</programlisting>
+      <para>
+        Il modulo stesso deve contenere un metodo
+        <literal>main($id, $mode)</literal>, che prende come argomenti
+        l'<literal>id</literal> del modulo nel database e la
+        <literal>mode</literal> chiamata.
+      </para>
+      <para>
+        Nel codice del metodo <literal>main</literal>, per prima cosa
+        impostiamo il nome del file
+        <link linkend="module-template">Template del modulo</link>
+        usato per renderizzare il modulo, e al titolo della pagina
+        viene assegnata una chiave lingua.
+      </para>
+      <para id="form key">
+        Per rafforzare il modulo contro le vulnerabilità di
+        sicurezza, usiamo un controllo della chiave del modulo per
+        verificare che il modulo inviato sia valido. Questo si fa
+        chiamando <literal>add_form_key('acme_demo_settings')</literal>
+        quando viene visualizzato il modulo e poi verificando in
+        seguito la chiave del modulo quando viene inviato:
+      </para>
+      <programlisting>
+if (!check_form_key('acme_demo_settings'))
+{
+    trigger_error('FORM_INVALID');
+}
+</programlisting>
+      <warning>
+        <title>Attenzione</title>
+        <para>
+          La chiave del modulo dovrebbe essere unica per ogni modulo.
+          La chiave può essere qualsiasi valore stringa, ma le
+          estensioni dovrebbero includere il proprio vendor e nome
+          dell'estensione.
+        </para>
+      </warning>
+      <para>
+        Se la chiave del modulo è valida, impostiamo il valore di
+        configurazione al valore inviato e mostriamo un messaggio di
+        successo all'utente:
+      </para>
+      <programlisting>
+$config-&gt;set('acme_demo_goodbye', $request-&gt;variable('acme_demo_goodbye', 0));
+trigger_error($language-&gt;lang('ACP_DEMO_SETTING_SAVED') . adm_back_link($this-&gt;u_action));
+</programlisting>
+      <para>
+        Alla fine del metodo assegniamo due variabili template. La
+        prima contiene il valore attuale del valore di configurazione.
+        La seconda contiene la proprietà di classe
+        <literal>u_action</literal>, che contiene l'URL dell'azione
+        del modulo corrente.
+      </para>
+    </sect2>
+    <sect2 id="module-template">
+      <title>Template del modulo</title>
+      <para>
+        Il nostro modulo ACP ora ha bisogno del file template che gli
+        abbiamo assegnato nella
+        <link linkend="module-class">Classe del modulo</link>.
+        Useremo
+        <literal>ext/acme/demo/adm/style/acp_demo_body.html</literal>.
+      </para>
+      <note>
+        <title>Nota</title>
+        <para>
+          L'ACP si differenzia dall'MCP e dall'UCP in quanto ha uno
+          stile proprio. L'MCP e l'UCP usano lo stile principale del
+          forum, cioè prosilver. Pertanto, i file template dell'ACP
+          devono essere memorizzati in
+          <literal>./adm/style/</literal> mentre i file template
+          dell'MCP e dell'UCP sono memorizzati in
+          <literal>./styles/prosilver/template/</literal>.
+        </para>
+      </note>
+      <programlisting>
+{% INCLUDE 'overall_header.html' %}
+
+&lt;h1&gt;{{ lang('SETTINGS') }}&lt;/h1&gt;
+
+&lt;form id=&quot;acp_board&quot; method=&quot;post&quot; action=&quot;{{ U_ACTION }}&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label for=&quot;acme_demo_goodbye&quot;&gt;{{ lang('ACP_DEMO_GOODBYE') }}&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input type=&quot;radio&quot; class=&quot;radio&quot; name=&quot;acme_demo_goodbye&quot; value=&quot;1&quot; {% if ACME_DEMO_GOODBYE %}checked=&quot;checked&quot; {% endif %}/&gt; {{ lang('YES') }} &amp;nbsp;
+                &lt;input type=&quot;radio&quot; class=&quot;radio&quot; name=&quot;acme_demo_goodbye&quot; value=&quot;0&quot; {% if not ACME_DEMO_GOODBYE %}checked=&quot;checked&quot; {% endif %}/&gt; {{ lang('NO') }}&lt;/dd&gt;
+        &lt;/dl&gt;
+
+        &lt;p class=&quot;submit-buttons&quot;&gt;
+            &lt;input class=&quot;button1&quot; type=&quot;submit&quot; id=&quot;submit&quot; name=&quot;submit&quot; value=&quot;{{ lang('SUBMIT') }}&quot; /&gt;&amp;nbsp;
+            &lt;input class=&quot;button2&quot; type=&quot;reset&quot; id=&quot;reset&quot; name=&quot;reset&quot; value=&quot;{{ lang('RESET') }}&quot; /&gt;
+        &lt;/p&gt;
+
+        {{ S_FORM_TOKEN }}
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+
+{% INCLUDE 'overall_footer.html' %}
+</programlisting>
+      <para>
+        Questo template genera un modulo con una singola opzione per
+        attivare/disattivare l'impostazione
+        <emphasis>acme_demo_goodbye</emphasis> tramite due pulsanti di
+        opzione, e due pulsanti di input per inviare o azzerare il
+        modulo. Nota che la variabile template
+        <literal>{{ S_FORM_TOKEN }}</literal> è richiesta come parte
+        del controllo di sicurezza della
+        <link linkend="form key">chiave del modulo</link>.
+      </para>
+      <sect3 id="module-language-keys">
+        <title>Chiavi lingua del modulo</title>
+        <para>
+          Tra la classe del nostro modulo e i file template, abbiamo
+          aggiunto alcune nuove chiavi lingua. Possiamo aggiungerle al
+          nostro array lingua in
+          <literal>acme/demo/language/en/demo.php</literal>:
+        </para>
+        <programlisting>
+'ACP_DEMO_TITLE'         =&gt; 'Demo Module',
+'ACP_DEMO'               =&gt; 'Settings',
+'ACP_DEMO_GOODBYE'       =&gt; 'Should say goodbye?',
+'ACP_DEMO_SETTING_SAVED' =&gt; 'Settings have been saved successfully!',
+</programlisting>
+        <note>
+          <title>Nota</title>
+          <para>
+            Ricorda che carichiamo il nostro file lingua globalmente
+            in tutto phpBB tramite l'evento
+            <literal>core.user_setup</literal> nel nostro listener di
+            eventi. Poiché non raccomandiamo di farlo sempre, un
+            metodo alternativo per caricare automaticamente un file
+            lingua nell'ACP è anteporre al nome del file
+            <literal>info_acp_*.php</literal> per le chiavi lingua dei
+            moduli o <literal>permissions_*.php</literal> per le
+            chiavi lingua dei permessi.
+          </para>
+        </note>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="installing-control-panel-modules">
+    <title>Installare moduli del pannello di controllo</title>
+    <para>
+      Il modulo è ora completo, ma non apparirà ancora nell'ACP. Per
+      installare il modulo nel database quando l'estensione viene
+      abilitata, abbiamo bisogno di una Migration.
+    </para>
+    <para>
+      I file di migration devono essere memorizzati nella cartella
+      <literal>migrations/</literal> dell'estensione. Per Acme Demo,
+      abbiamo bisogno di una migration che installi i seguenti dati:
+    </para>
+    <blockquote>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>
+            Un valore di configurazione chiamato
+            <literal>acme_demo_goodbye</literal> che può essere
+            impostato dall'amministratore.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            I dati del modulo ACP.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </blockquote>
+    <programlisting>
+&lt;?php
+
+namespace acme\demo\migrations;
+
+class add_module extends \phpbb\db\migration\migration
+{
+    /**
+     * If our config variable already exists in the db
+     * skip this migration.
+     */
+    public function effectively_installed()
+    {
+        return isset($this-&gt;config['acme_demo_goodbye']);
+    }
+
+    /**
+     * This migration depends on phpBB's v314 migration
+     * already being installed.
+     */
+    static public function depends_on()
+    {
+        return ['\phpbb\db\migration\data\v31x\v314'];
+    }
+
+    public function update_data()
+    {
+        return [
+
+            // Add the config variable we want to be able to set
+            ['config.add', ['acme_demo_goodbye', 0]],
+
+            // Add a parent module (ACP_DEMO_TITLE) to the Extensions tab (ACP_CAT_DOT_MODS)
+            ['module.add', [
+                'acp',
+                'ACP_CAT_DOT_MODS',
+                'ACP_DEMO_TITLE'
+            ]],
+
+            // Add our main_module to the parent module (ACP_DEMO_TITLE)
+            ['module.add', [
+                'acp',
+                'ACP_DEMO_TITLE',
+                [
+                    'module_basename'   =&gt; '\acme\demo\acp\main_module',
+                    'modes'             =&gt; ['settings'],
+                ],
+            ]],
+        ];
+    }
+}
+</programlisting>
+    <para>
+      Per saperne di più sulle migrations, consulta la documentazione
+      <literal>../migrations/index</literal>.
+    </para>
+    <para>
+      A questo punto abbiamo completato l'estensione Acme Demo! C'è
+      però molto altro che le estensioni possono fare, oltre a quanto
+      abbiamo imparato da Acme Demo. Prosegui alle sezioni successive
+      per imparare a fare di più con le estensioni.
+    </para>
+  </sect1>
+</article>
