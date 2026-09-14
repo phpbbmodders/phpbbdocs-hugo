@@ -50,3 +50,21 @@ disableKinds = ["taxonomy", "term"]
     weight = 4
     [languages.de_x_sie.params]
       tagline = "Dokumentation für phpBB-Administratoren und -Benutzer"
+
+  [languages.de]
+    label = "Deutsch (Du)"
+    locale = "de-DE"
+    contentDir = "content/de"
+    title = "phpBB 3.3 Dokumentation"
+    weight = 5
+    [languages.de.params]
+      tagline = "Dokumentation für phpBB-Administratoren und -Benutzer"
+
+  [languages.it]
+    label = "Italiano"
+    locale = "it-IT"
+    contentDir = "content/it"
+    title = "Documentazione phpBB 3.3"
+    weight = 6
+    [languages.it.params]
+      tagline = "Documentazione per amministratori e utenti di phpBB"
