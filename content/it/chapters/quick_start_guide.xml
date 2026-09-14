@@ -126,27 +126,27 @@
 			<para>L'elenco dei requisiti è la prima pagina che vedrai dopo aver avviato l'installazione se ti manca qualche estensione PHP necessaria o se un'impostazione del server è configurata in modo errato. phpBB 3.3 verifica automaticamente se tutto ciò di cui ha bisogno per funzionare correttamente è installato sul tuo server. Per continuare l'installazione, dovrai avere <acronym>PHP</acronym> installato (il numero di versione minimo è mostrato nella pagina dei requisiti) e almeno un database disponibile. È anche importante che tutte le cartelle mostrate siano disponibili e abbiano i permessi corretti impostati. Consulta la descrizione di ciascuna sezione per scoprire se sono opzionali o necessarie per il funzionamento di phpBB 3.3. Se tutto è in ordine, puoi continuare l'installazione cliccando sul pulsante <guilabel>Avvia installazione</guilabel>.</para>
 		</section>
 		<section id="quick_installation_admin">
-			<title>Dati dell'amministratore</title>
+			<title>Dettagli Amministratore</title>
 			<para>Ora devi creare il tuo utente amministratore. Questo utente avrà accesso amministrativo completo e sarà il primo utente del tuo forum.</para>
 		</section>
 		<section id="quick_installation_database">
-			<title>Impostazioni del database</title>
+			<title>Impostazioni Database</title>
 			<para>Ora devi decidere quale database utilizzare. Consulta la <link linkend="quick_requirements">sezione Requisiti</link> per sapere quali database sono supportati. Se non conosci le impostazioni del tuo database, contatta il tuo provider di hosting e chiedigliele. Non potrai continuare senza di esse. Ti servono:</para>
 			<itemizedlist>
 				<listitem>
-					<para>Il <guilabel>Tipo di database</guilabel> - il database che utilizzerai (ad es. MySQL, SQL server, Oracle)</para>
+					<para>Il <guilabel>Tipo database</guilabel> - il database che utilizzerai (ad es. MySQL, SQL server, Oracle)</para>
 				</listitem>
 				<listitem>
-					<para>Il <guilabel>Nome host o DSN del server database</guilabel> - l'indirizzo del server database.</para>
+					<para>Il <guilabel>Hostname server del database o DSN</guilabel> - l'indirizzo del server database.</para>
 				</listitem>
 				<listitem>
-					<para>La <guilabel>Porta del server database</guilabel> - la porta del server database (nella maggior parte dei casi non è necessaria).</para>
+					<para>La <guilabel>Porta server del database</guilabel> - la porta del server database (nella maggior parte dei casi non è necessaria).</para>
 				</listitem>
 				<listitem>
-					<para>Il <guilabel>Nome del database</guilabel> - il nome del database sul server.</para>
+					<para>Il <guilabel>Nome database</guilabel> - il nome del database sul server.</para>
 				</listitem>
 				<listitem>
-					<para>Il <guilabel>Nome utente del database</guilabel> e la <guilabel>Password del database</guilabel> - i dati di accesso per accedere al database.</para>
+					<para>Il <guilabel>Nome utente database</guilabel> e la <guilabel>Password database</guilabel> - i dati di accesso per accedere al database.</para>
 				</listitem>
 			</itemizedlist>
 			<tip>
@@ -154,7 +154,7 @@
 				<para>Utenti SQLite: inserisci il percorso completo (assoluto) del tuo file di database nel campo DSN e lascia vuoti i campi nome utente e password. Per motivi di sicurezza, assicurati che il file di database non sia memorizzato in una posizione accessibile dal web.</para>
 			</tip>
 			<figure id="img_quick_installation_database">
-				<title>Impostazioni del database</title>
+				<title>Impostazioni Database</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata fileref="../images/quick_start_guide/installation_database.png" format="PNG" />
@@ -175,7 +175,7 @@
 		<section id="quick_installation_config">
 			<title>File di configurazione</title>
 			<para>In questo passaggio, phpBB tenterà automaticamente di scrivere il file di configurazione. Il forum ha bisogno della configurazione per funzionare correttamente. Contiene tutte le impostazioni del database, quindi senza di esso phpBB non sarà in grado di accedere al database.</para>
-			<para>Di solito, la scrittura automatica del file di configurazione funziona correttamente. Ma in alcuni casi può fallire, ad esempio a causa di permessi dei file errati. In questo caso, devi caricare il file manualmente. phpBB ti chiede di <guilabel>scaricare</guilabel> il file config.php e ti dice cosa farne. Leggi attentamente le istruzioni. Dopo aver caricato il file, clicca su <guilabel>Fatto</guilabel> per passare all'ultimo passaggio. Se <guilabel>Fatto</guilabel> ti riporta alla stessa pagina di prima, senza restituire un messaggio di successo, non hai caricato il file correttamente.</para>
+			<para>Di solito, la scrittura automatica del file di configurazione funziona correttamente. Ma in alcuni casi può fallire, ad esempio a causa di permessi dei file errati. In questo caso, devi caricare il file manualmente. phpBB ti chiede di <guilabel>scaricare</guilabel> il file config.php e ti dice cosa farne. Leggi attentamente le istruzioni. Dopo aver caricato il file, clicca su <guilabel>Eseguito</guilabel> per passare all'ultimo passaggio. Se <guilabel>Eseguito</guilabel> ti riporta alla stessa pagina di prima, senza restituire un messaggio di successo, non hai caricato il file correttamente.</para>
 		</section>
 		<section id="quick_installation_advanced">
 			<title>Impostazioni avanzate</title>
@@ -194,13 +194,13 @@
 			<para>Quando visiti l'ACP per la prima volta dopo aver installato phpBB, ti verrà presentata una schermata che offre alcuni modi per assistere l'organizzazione phpBB.</para>
 			<itemizedlist>
 				<listitem>
-					<para><guilabel>Invia informazioni statistiche</guilabel> - Ci invia informazioni sul tuo server, come la versione di PHP, il tipo di database selezionato, alcune impostazioni PHP, ecc. Tutte le informazioni sensibili sono state rimosse. Cliccando sul link <guilabel>Mostra dettagli</guilabel> viene mostrato esattamente quali informazioni verranno inviate. Queste informazioni ci aiutano a prendere decisioni di progettazione per le future versioni di phpBB.</para>
+					<para><guilabel>Invia statistiche</guilabel> - Ci invia informazioni sul tuo server, come la versione di PHP, il tipo di database selezionato, alcune impostazioni PHP, ecc. Tutte le informazioni sensibili sono state rimosse. Cliccando sul link <guilabel>Mostra i dettagli</guilabel> viene mostrato esattamente quali informazioni verranno inviate. Queste informazioni ci aiutano a prendere decisioni di progettazione per le future versioni di phpBB.</para>
 				</listitem>
 				<listitem>
-					<para><guilabel>VigLink</guilabel> - Questa opzione aggiunge codici di referral ad alcuni link pubblicati sul tuo forum dai tuoi utenti. Quando vengono compiute determinate azioni su questi link (come l'acquisto di un articolo da un link Amazon pubblicato), VigLink riceve una commissione, di cui una parte viene donata al progetto phpBB. Questi fondi verranno utilizzati per far progredire lo sviluppo di phpBB. Puoi anche scegliere di usare il tuo account VigLink cliccando su <guilabel>Converti account</guilabel> sotto <guilabel>Impostazioni VigLink</guilabel> nella sezione <guilabel>Configurazione del forum</guilabel> del Pannello di Controllo Amministrazione.</para>
+					<para><guilabel>VigLink</guilabel> - Questa opzione aggiunge codici di referral ad alcuni link pubblicati sul tuo forum dai tuoi utenti. Quando vengono compiute determinate azioni su questi link (come l'acquisto di un articolo da un link Amazon pubblicato), VigLink riceve una commissione, di cui una parte viene donata al progetto phpBB. Questi fondi verranno utilizzati per far progredire lo sviluppo di phpBB. Puoi anche scegliere di usare il tuo account VigLink cliccando su <guilabel>Converti account</guilabel> sotto <guilabel>Impostazioni VigLink</guilabel> nella sezione <guilabel>Configurazione</guilabel> del Pannello di Controllo Amministrazione.</para>
 				</listitem>
 			</itemizedlist>
-			<para>Entrambe queste azioni sono opzionali e <emphasis role="strong">non</emphasis> saranno abilitate senza il tuo consenso esplicito. Uscire da questa pagina senza premere <guilabel>Invia</guilabel> disattiverà le opzioni. Se desideri abilitare o disabilitare queste opzioni in un secondo momento, puoi farlo tramite la pagina <guilabel>Aiuta a sostenere phpBB</guilabel> del <guilabel>Pannello di Controllo Amministrazione</guilabel>, sotto <guilabel>Configurazione del server</guilabel>.</para>
+			<para>Entrambe queste azioni sono opzionali e <emphasis role="strong">non</emphasis> saranno abilitate senza il tuo consenso esplicito. Uscire da questa pagina senza premere <guilabel>Invia</guilabel> disattiverà le opzioni. Se desideri abilitare o disabilitare queste opzioni in un secondo momento, puoi farlo tramite la pagina <guilabel>Aiuta supportando phpBB</guilabel> del <guilabel>Pannello di Controllo Amministrazione</guilabel>, sotto <guilabel>Configurazione del server</guilabel>.</para>
 		</section>
 	</section>
 	<section id="quick_settings">
@@ -215,10 +215,10 @@
 		<para>In questa sezione imparerai come modificare alcune delle impostazioni di base del tuo nuovo forum.</para>
 		<para>Subito dopo l'installazione verrai reindirizzato al cosiddetto "Pannello di Controllo Amministrazione" (<acronym>ACP</acronym>). Puoi anche accedere a questo pannello cliccando sul link <guilabel>[Pannello di Controllo Amministrazione]</guilabel> in fondo al tuo forum. In questa interfaccia puoi modificare qualsiasi cosa riguardo il tuo forum.</para>
 		<section id="quick_settings_boardsettings">
-			<title>Impostazioni del forum</title>
-			<para>La prima sezione dell'<acronym>ACP</acronym> che probabilmente vorrai visitare subito dopo l'installazione è "Impostazioni del forum". Qui puoi prima di tutto cambiare il nome (<guilabel>Nome del sito</guilabel>) e la descrizione (<guilabel>Descrizione del sito</guilabel>) del tuo forum.</para>
+			<title>Impostazioni</title>
+			<para>La prima sezione dell'<acronym>ACP</acronym> che probabilmente vorrai visitare subito dopo l'installazione è "Impostazioni". Qui puoi prima di tutto cambiare il nome (<guilabel>Nome Board</guilabel>) e la descrizione (<guilabel>Descrizione Board</guilabel>) del tuo forum.</para>
 			<figure id="img_quick_settings_sitename">
-				<title>Impostazioni del forum</title>
+				<title>Impostazioni</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata fileref="../images/quick_start_guide/settings_sitename.png" format="PNG" />
@@ -234,10 +234,10 @@
 		</section>
 		<!--/board_settings-->
 		<section id="quick_settings_boardfeatures">
-			<title>Funzionalità del forum</title>
+			<title>Caratteristiche</title>
 			<para>Se vuoi abilitare o disabilitare alcune delle funzionalità di base del tuo forum, questo è il posto giusto. Qui puoi consentire o vietare, ad esempio, il cambio del nome utente (<guilabel>Abilita il cambio nome utente</guilabel>) o la creazione di allegati (<guilabel>Abilita gli allegati</guilabel>). Puoi persino disabilitare completamente il <acronym>BBCode</acronym> (<guilabel>Abilita i BBCode</guilabel>).</para>
 			<figure id="img_quick_settings_features">
-				<title>Funzionalità del forum</title>
+				<title>Caratteristiche</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata fileref="../images/quick_start_guide/settings_features.png" format="PNG" />
@@ -248,7 +248,7 @@
 				</mediaobject>
 			</figure>
 			<para>Se disabilitare completamente il BBCode ti sembra un po' troppo drastico, ma non vuoi che i tuoi utenti abusino del campo firma con tonnellate di immagini? Imposta semplicemente <guilabel>Abilita l'uso del tag BBCode IMG nelle firme degli utenti</guilabel> su "No". Se vuoi essere un po' più specifico su cosa vuoi consentire e vietare nelle firme degli utenti, dai un'occhiata al modulo "Impostazioni della firma".</para>
-			<para>Il modulo "Funzionalità del forum" ti offre un ottimo modo per controllare le funzionalità in modo tutto-o-niente. Se vuoi entrare nei dettagli di ogni funzionalità, per ognuna esiste anche un modulo separato che ti permette di specificare tutto, dal numero massimo di caratteri consentiti in un messaggio (<guilabel>Numero massimo di caratteri per messaggio</guilabel> in "Impostazioni dei messaggi") a quanto può essere grande l'avatar di un utente (<guilabel>Dimensioni massime avatar</guilabel> in "Impostazioni avatar").</para>
+			<para>Il modulo "Caratteristiche" ti offre un ottimo modo per controllare le funzionalità in modo tutto-o-niente. Se vuoi entrare nei dettagli di ogni funzionalità, per ognuna esiste anche un modulo separato che ti permette di specificare tutto, dal numero massimo di caratteri consentiti in un messaggio (<guilabel>Numero massimo di caratteri per messaggio</guilabel> in "Impostazioni dei messaggi") a quanto può essere grande l'avatar di un utente (<guilabel>Dimensioni massime avatar</guilabel> in "Impostazioni avatar").</para>
 			<important>
 				<para>Se disabiliti delle funzionalità, queste non saranno più disponibili nemmeno per gli utenti che normalmente le avrebbero in base ai rispettivi permessi. Per dettagli sul sistema dei permessi, leggi <xref linkend="quick_permissions" /> oppure la <link linkend="acp_permissions">guida approfondita nella Guida per l'amministratore</link>.</para>
 			</important>
@@ -301,7 +301,7 @@
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Impostare i permessi</title>
+		<title>Imposta permessi</title>
 		<para>Dopo aver creato il tuo primo forum, devi decidere chi vi ha accesso e cosa i tuoi utenti possono fare e cosa no. È a questo che servono i Permessi. Puoi, ad esempio, impedire agli ospiti di pubblicare o assegnare poteri di moderazione. Quasi ogni aspetto dell'interazione degli utenti con phpBB 3.3 Proteus può essere regolato con i permessi.</para>
 
 		<section id="quick_permissions_types">
@@ -352,8 +352,8 @@
 				</mediaobject>
 			</figure>
 			<para>La pagina <guilabel>Permessi forum</guilabel> mostra due colonne, una per selezionare gli utenti e una per i gruppi (vedi <xref linkend="img_quick_permissions_select" />). Gli elenchi in alto in entrambe le colonne, etichettati <guilabel>Gestione utenti</guilabel> e <guilabel>Gestione gruppi</guilabel>, mostrano utenti e gruppi che hanno già permessi impostati su almeno uno dei forum selezionati. Puoi selezionarli e modificare i loro permessi con il pulsante <guilabel>Modifica permessi</guilabel>, oppure usare <guilabel>Rimuovi permessi</guilabel> per rimuoverli, il che comporta che non abbiano più permessi impostati, e quindi non possano vedere il forum o avervi alcun accesso (a meno che non vi abbiano accesso tramite un altro gruppo). Le caselle in basso ti permettono di aggiungere nuovi utenti o gruppi, che al momento non hanno permessi impostati su almeno uno dei forum selezionati.</para>
-			<para>Per aggiungere permessi per i gruppi, seleziona uno o più gruppi nell'elenco <guilabel>Aggiungi gruppi</guilabel> (funziona in modo simile per gli utenti, ma se vuoi aggiungere nuovi utenti, devi digitarli manualmente nella casella di testo <guilabel>Aggiungi utenti</guilabel> oppure usare la funzione <guilabel>Trova un membro</guilabel>). <guilabel>Aggiungi permessi</guilabel> ti porterà all'interfaccia dei permessi. Ogni forum che hai selezionato è elencato, con i gruppi o gli utenti per cui modificare i permessi sotto di esso. </para>
-			<para>Ci sono due modi per assegnare i permessi: puoi impostarli manualmente oppure usare i <guilabel>Ruoli permesso</guilabel> predefiniti per un approccio più semplice ma meno potente. Puoi passare da un approccio all'altro in qualsiasi momento. Puoi saltare l'introduzione ai permessi manuali e <link linkend="quick_permissions_roles">andare direttamente alla sezione sui "Ruoli permesso"</link>, se sei impaziente di far funzionare tutto il più rapidamente possibile. Ma ricorda che i ruoli permesso offrono solo una piccola parte di ciò che il sistema dei permessi ha da offrire, e crediamo che per essere un buon amministratore Proteus, tu debba comprendere appieno i permessi. </para>
+			<para>Per aggiungere permessi per i gruppi, seleziona uno o più gruppi nell'elenco <guilabel>Aggiungi gruppi</guilabel> (funziona in modo simile per gli utenti, ma se vuoi aggiungere nuovi utenti, devi digitarli manualmente nella casella di testo <guilabel>Aggiungi utenti</guilabel> oppure usare la funzione <guilabel>Trova utente</guilabel>). <guilabel>Aggiungi permessi</guilabel> ti porterà all'interfaccia dei permessi. Ogni forum che hai selezionato è elencato, con i gruppi o gli utenti per cui modificare i permessi sotto di esso. </para>
+			<para>Ci sono due modi per assegnare i permessi: puoi impostarli manualmente oppure usare i <guilabel>Ruolo permessi</guilabel> predefiniti per un approccio più semplice ma meno potente. Puoi passare da un approccio all'altro in qualsiasi momento. Puoi saltare l'introduzione ai permessi manuali e <link linkend="quick_permissions_roles">andare direttamente alla sezione sui "Ruolo permessi"</link>, se sei impaziente di far funzionare tutto il più rapidamente possibile. Ma ricorda che i ruoli permesso offrono solo una piccola parte di ciò che il sistema dei permessi ha da offrire, e crediamo che per essere un buon amministratore Proteus, tu debba comprendere appieno i permessi. </para>
 			<para>I due modi differiscono solo nel modo in cui li imposti. Condividono entrambi la stessa interfaccia.</para>
 		</section>
 		<section id="quick_permissions_manual">
@@ -384,10 +384,10 @@
 			</figure>
 		</section>
 		<section id="quick_permissions_roles">
-			<title>Ruoli permesso</title>
+			<title>Ruolo permessi</title>
 			<para>phpBB 3.3 Proteus viene distribuito con un certo numero di ruoli permesso predefiniti, che ti offrono un'ampia varietà di opzioni per impostare i permessi. Invece di dover spuntare manualmente ogni pulsante di opzione, puoi selezionare un ruolo predefinito nel menu a tendina <guilabel>Ruolo</guilabel>. Ogni ruolo ha una descrizione dettagliata, che apparirà passando il mouse sopra di esso. Invia le tue modifiche con <guilabel>Applica i permessi</guilabel> o <guilabel>Applica tutti i permessi</guilabel> quando ne sei soddisfatto. Questo imposterà i permessi e avrai finito.</para>
 			<figure id="img_quick_permissions_roles">
-				<title>Ruoli permesso</title>
+				<title>Ruolo permessi</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata format="PNG" fileref="../images/quick_start_guide/permissions_roles.png" />
@@ -409,7 +409,7 @@
 			</sectioninfo>
 			<title>Assegnare moderatori ai forum</title>
 			<para>Un caso d'uso piuttosto comune per i permessi e i ruoli è la moderazione dei forum. phpBB3 rende davvero semplice assegnare agli utenti il ruolo di moderatori dei forum.</para>
-			<para>Come avrai già intuito, la moderazione di forum specifici è un'impostazione locale, quindi puoi trovare <guilabel>Moderatori del forum</guilabel> nella sezione <guilabel>Permessi forum</guilabel>. Prima di tutto, dovrai selezionare il forum (o i forum) a cui vuoi assegnare i nuovi moderatori. Questo modulo è diviso in due sezioni. Nella prima, puoi selezionare più forum (seleziona più elementi tenendo premuto il tasto CTRL sulla tastiera, o cmd su MacOS X), dove le impostazioni del moderatore che imposterai nel modulo seguente si applicheranno solo a questi specifici forum. La seconda area ti permette di selezionare un solo forum, ma le tue modifiche si applicheranno non solo a questo forum ma anche a tutti i suoi sottoforum.</para>
+			<para>Come avrai già intuito, la moderazione di forum specifici è un'impostazione locale, quindi puoi trovare <guilabel>Permessi moderatori</guilabel> nella sezione <guilabel>Permessi forum</guilabel>. Prima di tutto, dovrai selezionare il forum (o i forum) a cui vuoi assegnare i nuovi moderatori. Questo modulo è diviso in due sezioni. Nella prima, puoi selezionare più forum (seleziona più elementi tenendo premuto il tasto CTRL sulla tastiera, o cmd su MacOS X), dove le impostazioni del moderatore che imposterai nel modulo seguente si applicheranno solo a questi specifici forum. La seconda area ti permette di selezionare un solo forum, ma le tue modifiche si applicheranno non solo a questo forum ma anche a tutti i suoi sottoforum.</para>
 			<para>Dopo aver selezionato i forum e cliccato su <guilabel>Invia</guilabel>, ti verrà presentato un modulo che dovresti già conoscere da una delle sezioni precedenti di questa guida: <xref linkend="img_quick_permissions_select"/>. Qui puoi selezionare gli utenti o i gruppi che dovrebbero ricevere una qualche capacità di moderazione sui forum selezionati. Quindi vai pure: seleziona alcuni utenti e/o gruppi e premi il pulsante <guilabel>Imposta permessi</guilabel>.</para>
 			<para>Nel modulo successivo puoi scegliere quali permessi da moderatore dovrebbero ricevere gli utenti/gruppi selezionati. Prima di tutto, ci sono alcuni ruoli predefiniti tra cui puoi scegliere:</para>
 			<variablelist>
@@ -468,7 +468,7 @@
 				<listitem><para>Amministratori</para></listitem>
 				<listitem><para>Moderatori globali</para></listitem>
 			</orderedlist>
-			<para>In "Permessi utenti" e "Permessi gruppi" puoi consentire e vietare funzionalità come allegati, firme e avatar per utenti e gruppi utenti specifici. Nota che alcune di queste impostazioni contano solo se la relativa funzionalità è abilitata nelle "Funzionalità del forum" (vedi <xref linkend="quick_settings_boardfeatures"/> per i dettagli).</para>
+			<para>In "Permessi utenti" e "Permessi gruppi" puoi consentire e vietare funzionalità come allegati, firme e avatar per utenti e gruppi utenti specifici. Nota che alcune di queste impostazioni contano solo se la relativa funzionalità è abilitata nelle "Caratteristiche" (vedi <xref linkend="quick_settings_boardfeatures"/> per i dettagli).</para>
 			<para>Sotto "Amministratori" puoi assegnare a utenti o gruppi privilegi da amministratore, come la possibilità di gestire i forum o cambiare i permessi degli utenti. Per i dettagli su queste impostazioni, leggi la <xref linkend="acp_permissions"/>.</para>
 			<para>Il modulo "Moderatori globali" ti offre le stesse impostazioni del modulo specifico per forum (descritto in <xref linkend="quick_permissions_moderators"/>), ma si applica a tutti i forum del tuo forum.</para>
 		</section>
