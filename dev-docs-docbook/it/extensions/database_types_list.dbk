@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN"
+                  "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd">
+<article>
+  <articleinfo>
+    <title>Elenco dei tipi di database</title>
+  </articleinfo>
+  <sect1 id="introduction">
+    <title>Introduzione</title>
+    <para>
+      Lo scopo della Mappa dei tipi di database è semplificare il
+      processo di creazione delle installazioni per più sistemi di
+      database. Invece di scrivere istruzioni di installazione
+      specifiche per ogni singolo sistema di database, puoi creare un
+      unico insieme di istruzioni e usare la Mappa dei tipi di
+      database per modificare qualsiasi sistema di database supportato
+      con un solo comando. Questo rende più facile ed efficiente
+      lavorare con più sistemi di database, poiché non è necessario
+      scrivere e mantenere istruzioni separate per ciascuno.
+    </para>
+    <note>
+      <title>Nota</title>
+      <para>
+        Con alcuni comandi puoi inserire lo
+        <ulink url="https://www.tutorialspoint.com/what-is-the-benefit-of-zerofill-in-mysql">Zerofill</ulink>,
+        ad esempio <literal>INT:11</literal>, se il campo è numerico.
+        Con alcuni puoi inserire la lunghezza del campo, ad esempio
+        <literal>VARCHAR:255</literal>, che creerà una colonna
+        varchar(255) in MySQL. In tutti i campi che supportano questo,
+        avranno due punti seguiti da <literal>%d</literal>, il che
+        significa che qualsiasi numero può riempire lo spazio di
+        <literal>%d</literal>.
+      </para>
+    </note>
+  </sect1>
+  <sect1 id="numeric">
+    <title>Numerico</title>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="60*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Comando
+            </entry>
+            <entry>
+              Equivalente MySQL
+            </entry>
+            <entry>
+              Intervallo di memorizzazione (su MySQL)
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              TINT:%d
+            </entry>
+            <entry>
+              tinyint(%d)
+            </entry>
+            <entry>
+              da -128 a 127
+            </entry>
+          </row>
+          <row>
+            <entry>
+              INT:%d
+            </entry>
+            <entry>
+              int(%d)
+            </entry>
+            <entry>
+              da -2.147.483.648 a 2.147.483.648
+            </entry>
+          </row>
+          <row>
+            <entry>
+              BINT
+            </entry>
+            <entry>
+              bigint(20)
+            </entry>
+            <entry>
+              da -9.223.372.036.854.775.808 a 9.223.372.036.854.775.808
+            </entry>
+          </row>
+          <row>
+            <entry>
+              USINT
+            </entry>
+            <entry>
+              smallint(4) UNSIGNED
+            </entry>
+            <entry>
+              da 0 a 65.535
+            </entry>
+          </row>
+          <row>
+            <entry>
+              UINT
+            </entry>
+            <entry>
+              mediumint(8) UNSIGNED
+            </entry>
+            <entry>
+              da 0 a 16.777.215
+            </entry>
+          </row>
+          <row>
+            <entry>
+              UINT:%d
+            </entry>
+            <entry>
+              int(%d) UNSIGNED
+            </entry>
+            <entry>
+              da 0 a 4.294.967.295
+            </entry>
+          </row>
+          <row>
+            <entry>
+              ULINT
+            </entry>
+            <entry>
+              int(10) UNSIGNED
+            </entry>
+            <entry>
+              da 0 a 4.294.967.295
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="decimal">
+    <title>Decimale</title>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="60*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Comando
+            </entry>
+            <entry>
+              Equivalente MySQL
+            </entry>
+            <entry>
+              Intervallo di memorizzazione (su MySQL)
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              DECIMAL
+            </entry>
+            <entry>
+              decimal(5,2)
+            </entry>
+            <entry>
+              da -999,99 a 999,99
+            </entry>
+          </row>
+          <row>
+            <entry>
+              DECIMAL:%d
+            </entry>
+            <entry>
+              decimal(%d, 2)
+            </entry>
+            <entry>
+              da -(%d - 2 cifre a sinistra della virgola),99 a (%d - 2
+              cifre a sinistra della virgola),99
+            </entry>
+          </row>
+          <row>
+            <entry>
+              PDECIMAL
+            </entry>
+            <entry>
+              decimal(6,3)
+            </entry>
+            <entry>
+              da -999,999 a 999,999
+            </entry>
+          </row>
+          <row>
+            <entry>
+              PDECIMAL:%d
+            </entry>
+            <entry>
+              decimal(%d,3)
+            </entry>
+            <entry>
+              da -(%d - 3 cifre a sinistra della virgola),999 a (%d - 3
+              cifre a sinistra della virgola),999
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="text">
+    <title>Testo</title>
+    <para>
+      Questi dovrebbero essere usati solo per caratteri ASCII. Se
+      intendi usarlo per qualcosa come il testo dei messaggi, leggi
+      la sezione Testo Unicode
+    </para>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="60*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Comando
+            </entry>
+            <entry>
+              Equivalente MySQL
+            </entry>
+            <entry>
+              Spiegazione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              VCHAR
+            </entry>
+            <entry>
+              varchar(255)
+            </entry>
+            <entry>
+              testo per memorizzare 255 caratteri (campo di input
+              normale con un massimo di 255 caratteri)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              VCHAR:%d
+            </entry>
+            <entry>
+              varchar(%d)
+            </entry>
+            <entry>
+              testo per memorizzare %d caratteri (campo di input
+              normale con un massimo di %d caratteri)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              CHAR:%d
+            </entry>
+            <entry>
+              char(%d)
+            </entry>
+            <entry>
+              testo per memorizzare fino a 30 caratteri (campo di
+              input normale con un massimo di 30 caratteri)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              XSTEXT
+            </entry>
+            <entry>
+              text
+            </entry>
+            <entry>
+              testo per memorizzare 100 caratteri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              STEXT
+            </entry>
+            <entry>
+              text
+            </entry>
+            <entry>
+              testo per memorizzare 255 caratteri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              TEXT
+            </entry>
+            <entry>
+              text
+            </entry>
+            <entry>
+              testo per memorizzare 3000 caratteri
+            </entry>
+          </row>
+          <row>
+            <entry>
+              MTEXT
+            </entry>
+            <entry>
+              mediumtext
+            </entry>
+            <entry>
+              (testo dei messaggi, testo lungo)
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="unicode-text">
+    <title>Testo Unicode</title>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="60*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Comando
+            </entry>
+            <entry>
+              Equivalente MySQL
+            </entry>
+            <entry>
+              Spiegazione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              VCHAR_UNI
+            </entry>
+            <entry>
+              varchar(255)
+            </entry>
+            <entry>
+              testo per memorizzare 255 caratteri (campo di input
+              normale con un massimo di 255 caratteri a singolo byte)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              VCHAR_UNI:%d
+            </entry>
+            <entry>
+              varchar(%d)
+            </entry>
+            <entry>
+              testo per memorizzare %d caratteri (campo di input
+              normale con un massimo di %d caratteri a singolo byte)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              XSTEXT_UNI
+            </entry>
+            <entry>
+              varchar(100)
+            </entry>
+            <entry>
+              testo per memorizzare 100 caratteri (ad esempio
+              topic_title)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              STEXT_UNI
+            </entry>
+            <entry>
+              varchar(255)
+            </entry>
+            <entry>
+              testo per memorizzare 255 caratteri (campo di input
+              normale con un massimo di 255 caratteri a singolo byte)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              TEXT_UNI
+            </entry>
+            <entry>
+              text
+            </entry>
+            <entry>
+              testo per memorizzare 3000 caratteri (testo breve,
+              descrizioni, commenti, ecc.)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              MTEXT_UNI
+            </entry>
+            <entry>
+              mediumtext
+            </entry>
+            <entry>
+              (testo dei messaggi, testo lungo)
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+  <sect1 id="miscellaneous">
+    <title>Vari</title>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="20*" align="left" />
+        <colspec colwidth="60*" align="left" />
+        <thead>
+          <row>
+            <entry>
+              Comando
+            </entry>
+            <entry>
+              Equivalente MySQL
+            </entry>
+            <entry>
+              Spiegazione
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              BOOL
+            </entry>
+            <entry>
+              tinyint(1) UNSIGNED
+            </entry>
+            <entry>
+              Memorizzazione di valori booleani (true/false)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              TIMESTAMP
+            </entry>
+            <entry>
+              int(11) UNSIGNED
+            </entry>
+            <entry>
+              Per memorizzare timestamp UNIX
+            </entry>
+          </row>
+          <row>
+            <entry>
+              VCHAR_CI
+            </entry>
+            <entry>
+              varchar(255)
+            </entry>
+            <entry>
+              varchar_ci per postgresql, altri VCHAR
+            </entry>
+          </row>
+          <row>
+            <entry>
+              VARBINARY
+            </entry>
+            <entry>
+              varbinary(255)
+            </entry>
+            <entry>
+              Memorizzazione binaria
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </sect1>
+</article>
