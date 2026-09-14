@@ -11338,6 +11338,621 @@
               nell'header
             </entry>
           </row>
+          <row>
+            <entry>
+              navbar_header_quick_links_before
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC2
+            </entry>
+            <entry>
+              Aggiunge link in cima al menu a tendina dei link rapidi
+              nell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_user_profile_append
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Aggiunge link a destra dell'area a tendina dell'utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_user_profile_prepend
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.8-RC1
+            </entry>
+            <entry>
+              Aggiunge link a sinistra dell'area di notifica
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_username_append
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC1
+            </entry>
+            <entry>
+              Aggiunge testo e HTML dopo il nome utente mostrato nella
+              barra di navigazione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              navbar_header_username_prepend
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC1
+            </entry>
+            <entry>
+              Aggiunge testo e HTML prima del nome utente mostrato nella
+              barra di navigazione.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              notification_dropdown_footer_after
+            </entry>
+            <entry>
+              notification_dropdown.html
+            </entry>
+            <entry>
+              3.3.12
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il footer dell'elenco delle
+              notifiche.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              notification_dropdown_footer_before
+            </entry>
+            <entry>
+              notification_dropdown.html
+            </entry>
+            <entry>
+              3.3.12
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del footer dell'elenco delle
+              notifiche.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_after
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine del file, direttamente prima
+              del tag &lt;/body&gt;
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_body_after
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.3-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del tag &lt;/body&gt; ma dopo la
+              variabile $SCRIPTS, cioè dopo che gli script js sono stati
+              caricati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_breadcrumb_append
+            </entry>
+            <entry>
+              navbar_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge link all'elenco dei breadcrumb nel footer
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_breadcrumb_prepend
+            </entry>
+            <entry>
+              navbar_footer.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge link all'elenco dei breadcrumb nel footer (dopo
+              site-home, ma prima di board-index)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_content_after
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge contenuto su tutte le pagine dopo il contenuto
+              principale, prima del footer
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_copyright_append
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la riga del copyright (nessuna
+              nuova riga per impostazione predefinita), prima del link
+              ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_copyright_prepend
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della riga del copyright
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_page_body_after
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il page-body, ma prima del footer
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_teamlink_after
+            </entry>
+            <entry>
+              navbar_footer.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il link del team nel footer
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_teamlink_before
+            </entry>
+            <entry>
+              navbar_footer.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del link del team nel footer
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_timezone_after
+            </entry>
+            <entry>
+              navbar_footer.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto alla barra di navigazione nel footer
+              della pagina, dopo &quot;Timezone&quot;
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_footer_timezone_before
+            </entry>
+            <entry>
+              navbar_footer.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto alla barra di navigazione nel footer
+              della pagina, prima di &quot;Timezone&quot;
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_body_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto al corpo dell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_breadcrumb_append
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge link all'elenco dei breadcrumb nell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_breadcrumb_prepend
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge link all'elenco dei breadcrumb nell'header (dopo
+              site-home, ma prima di board-index)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_breadcrumbs_after
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i breadcrumb (fuori dal contenitore
+              dei breadcrumb)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_breadcrumbs_before
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei breadcrumb (fuori dal
+              contenitore dei breadcrumb)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_content_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-a3
+            </entry>
+            <entry>
+              Aggiunge contenuto su tutte le pagine prima del contenuto
+              principale, dopo l'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_feeds
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge feed personalizzati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_head_append
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge chiamate asset direttamente prima del tag
+              &lt;/head&gt;
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_headerbar_after
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto alla fine della headerbar
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_headerbar_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto all'inizio della headerbar
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_navbar_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della barra di navigazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_navigation_append
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge link dopo i link di navigazione nell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_navigation_prepend
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge link prima dei link di navigazione nell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_navlink_append
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo ogni singolo navlink (breadcrumb)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_navlink_prepend
+            </entry>
+            <entry>
+              navbar_header.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto prima di ogni singolo navlink
+              (breadcrumb)
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_page_body_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-b3
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il page-header, ma prima del
+              page-body
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_searchbox_after
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il box di ricerca nell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_searchbox_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.4-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del box di ricerca nell'header
+            </entry>
+          </row>
+          <row>
+            <entry>
+              overall_header_stylesheets_after
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge chiamate asset dopo i fogli di stile all'interno
+              del tag &lt;/head&gt;. Nota che INCLUDECSS non funzionerà
+              con questo evento.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_attach_row_after
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo la riga dell'allegato nell'elenco
+              dei file
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_attach_row_append
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto in fondo alla riga dell'allegato
+              nell'elenco dei file
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_attach_row_before
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.6-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima della riga dell'allegato
+              nell'elenco dei file
+            </entry>
+          </row>
+          <row>
+            <entry>
+              posting_attach_body_attach_row_controls_append
+            </entry>
+            <entry>
+              posting_attach_body.html
+            </entry>
+            <entry>
+              3.2.2-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo gli elementi di controllo
+              dell'allegato
+            </entry>
+          </row>
 <!--INSERT_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
