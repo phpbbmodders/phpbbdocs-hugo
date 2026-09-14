@@ -16159,6 +16159,632 @@
               aggiungere il gruppo alla legenda
             </entry>
           </row>
+          <row>
+            <entry>
+              acp_groups_position_teampage_add_button_after
+            </entry>
+            <entry>
+              acp_groups_position.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il pulsante di invio per
+              aggiungere il gruppo alla pagina dello staff
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_groups_position_teampage_add_button_before
+            </entry>
+            <entry>
+              acp_groups_position.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del pulsante di invio per
+              aggiungere il gruppo alla pagina dello staff
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_help_phpbb_stats_after
+            </entry>
+            <entry>
+              acp_help_phpbb.html
+            </entry>
+            <entry>
+              3.2.0-RC2
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il riquadro di invio statistiche
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_help_phpbb_stats_before
+            </entry>
+            <entry>
+              acp_help_phpbb.html
+            </entry>
+            <entry>
+              3.2.0-RC2
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del riquadro di invio statistiche
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_logs_quick_select_forum_button_append
+            </entry>
+            <entry>
+              acp_logs.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il pulsante di invio del modulo
+              di selezione rapida forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_logs_quick_select_forum_button_prepend
+            </entry>
+            <entry>
+              acp_logs.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del pulsante di invio del modulo
+              di selezione rapida forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_main_actions_append
+            </entry>
+            <entry>
+              acp_main.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge azioni alla pagina principale dell'ACP sotto
+              l'azione di svuotamento cache
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_main_notice_after
+            </entry>
+            <entry>
+              acp_main.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge avvisi o altri blocchi nell'ACP sotto gli altri
+              avvisi di configurazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_overall_footer_after
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge contenuto sotto il piè di pagina nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_overall_footer_body_after
+            </entry>
+            <entry>
+              overall_footer.html
+            </entry>
+            <entry>
+              3.3.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del tag &lt;/body&gt; ma dopo la
+              variabile $SCRIPTS, cioè dopo che gli script js sono
+              stati caricati
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_overall_header_body_before
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-b2
+            </entry>
+            <entry>
+              Aggiunge contenuto al corpo dell'intestazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_overall_header_head_append
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-a1
+            </entry>
+            <entry>
+              Aggiunge asset all'interno dei tag &lt;head&gt; nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_overall_header_stylesheets_after
+            </entry>
+            <entry>
+              overall_header.html
+            </entry>
+            <entry>
+              3.1.0-RC3
+            </entry>
+            <entry>
+              Aggiunge asset dopo i fogli di stile all'interno dei tag
+              &lt;head&gt; nell'ACP. Notare che INCLUDECSS non funziona
+              con questo evento.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permission_forum_copy_dest_forum_append
+            </entry>
+            <entry>
+              permission_forum_copy.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il modulo di selezione del forum
+              di destinazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permission_forum_copy_dest_forum_prepend
+            </entry>
+            <entry>
+              permission_forum_copy.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di selezione del
+              forum di destinazione
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permission_forum_copy_src_forum_append
+            </entry>
+            <entry>
+              permission_forum_copy.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il modulo di selezione del forum
+              di origine
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permission_forum_copy_src_forum_prepend
+            </entry>
+            <entry>
+              permission_forum_copy.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di selezione del
+              forum di origine
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_add_group_options_append
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il modulo di selezione multipla
+              dei gruppi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_add_group_options_prepend
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di selezione multipla
+              dei gruppi
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_find_username_append
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il link di ricerca nome utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_find_username_prepend
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del link di ricerca nome utente
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_forum_append
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'etichetta del modulo di
+              selezione forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_forum_prepend
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'etichetta del modulo di
+              selezione forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_group_after
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo il modulo di selezione gruppo
+              nella vista usergroup
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_group_append
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'etichetta del modulo di
+              selezione gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_group_before
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima del modulo di selezione gruppo
+              nella vista usergroup
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_group_prepend
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'etichetta del modulo di
+              selezione gruppo
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_multiple_forum_append
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'etichetta del modulo di
+              selezione multipla forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_permissions_select_multiple_forum_prepend
+            </entry>
+            <entry>
+              acp_permissions.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dell'etichetta del modulo di
+              selezione multipla forum
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_posting_buttons_after
+            </entry>
+            <entry>
+              acp_posting_buttons.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo i pulsanti di pubblicazione
+              BBCode nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_posting_buttons_before
+            </entry>
+            <entry>
+              acp_posting_buttons.html
+            </entry>
+            <entry>
+              3.1.0-b4
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei pulsanti di pubblicazione
+              BBCode nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_posting_buttons_custom_tags_before
+            </entry>
+            <entry>
+              acp_posting_buttons.html
+            </entry>
+            <entry>
+              3.1.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima dei BBCode personalizzati
+              nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_basic_options_after
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le opzioni base del campo profilo
+              personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_basic_options_before
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle opzioni base del campo
+              profilo personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_contact_after
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'opzione specifica di contatto
+              del campo profilo personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_contact_before
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.1.6-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni extra alla configurazione del campo
+              profilo personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_contact_last
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni specifiche di contatto ai campi profilo
+              personalizzati nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_options_before
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle opzioni del campo profilo
+              personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_step_one_lang_after
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.1.11-RC1
+            </entry>
+            <entry>
+              Aggiunge opzioni extra specifiche di lingua alla
+              configurazione del primo passaggio del campo profilo
+              personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_visibility_options_after
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo le opzioni di visibilità del
+              campo profilo personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_profile_visibility_options_before
+            </entry>
+            <entry>
+              acp_profile.html
+            </entry>
+            <entry>
+              3.2.10-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto prima delle opzioni di visibilità del
+              campo profilo personalizzato nell'ACP
+            </entry>
+          </row>
+          <row>
+            <entry>
+              acp_prune_forums_append
+            </entry>
+            <entry>
+              acp_prune_forums.html
+            </entry>
+            <entry>
+              3.1.7-RC1
+            </entry>
+            <entry>
+              Aggiunge contenuto dopo l'etichetta del modulo di
+              selezione forum
+            </entry>
+          </row>
 <!--INSERT_ACP_TEMPLATE_EVENTS_HERE-->
         </tbody>
       </tgroup>
