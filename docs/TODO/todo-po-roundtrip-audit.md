@@ -22,6 +22,10 @@ du"), fixed in both phpbbdocs-hugo#31 and phpbbdocs-languages#2. That was one
 chapter out of the 35 chapter × language combinations this project has PO
 catalogs for — the rest haven't been swept this way.
 
+See also `docs/gettext-workflow-checklist.md` for the broader standing
+checklist this audit is one part of (also covers authorship-metadata
+preservation and attribution, not just the content diff below).
+
 ## Method
 
 For each `<lang>`/`<chapter>` pair:
