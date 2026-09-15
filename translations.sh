@@ -298,8 +298,20 @@ cmd_build() {
 		local mo
 		mo="$(mktemp --suffix=.mo)"
 		msgfmt -o "$mo" "$po"
-		itstool -m "$mo" -l "$lang" -o "$target_dir/$chapter.xml" "$src"
+		local recon
+		recon="$(mktemp --suffix=.xml)"
+		itstool -m "$mo" -l "$lang" -o "$recon" "$src"
 		rm -f "$mo"
+		# itstool's PO/gettext pipeline only carries translatable prose:
+		# it always reproduces the English source's <chapterinfo>/
+		# <abstract> and per-section <sectioninfo> authorship metadata
+		# verbatim, which would reintroduce blocks translated chapters
+		# deliberately drop and overwrite translator attribution
+		# (e.g. <othername>Claude</othername>) with the English
+		# original's authors. Fix that up before replacing the target,
+		# preserving whatever attribution the current file already has.
+		python3 "$script_dir/translations/preserve_authorship_metadata.py" "$recon" "$target_dir/$chapter.xml"
+		mv "$recon" "$target_dir/$chapter.xml"
 		echo "  $chapter.xml"
 	done
 
