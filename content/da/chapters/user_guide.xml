@@ -6,148 +6,152 @@
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Hvordan brugertilladelser påvirker oplevelsen af boardet</title>
-		<para>phpBB3 anvender tilladelser, defineret pr. bruger eller brugergruppe, til at bestemme hvilke af softwarens funktioner og muligheder der skal gives mulighed for at benytte. Det kan inkludere hvilke fora der kan indsendes indlæg i, mulighed for at benytte avatar eller at sende private beskeder. Alle tilladelser indstilles via administratorkontrolpanelet.</para>
-		<para>Tilladelser giver også mulighed for at udpege brugere til at udføre specielle opgaver eller at have bestemte roller på boardet. Administratoren kan ved hjælp af tilladelsesystemet bestemme hvilke redigeringsmuligheder udvalgte brugere eller brugergrupper skal have og i hvilke fora de skal kunne anvende dem. Det giver også mulighed for at udpege redaktører på boardet. Administratoren kan også give brugere adgang til bestemte sektioner i administratorkontrolpanelet, og dermed stadig have restriktioner og sikkerhed på vigtige indstillinger. For eksempel kan en gruppe af redaktører have lov til at ændre brugernes avatar eller signatur i administratorkontrolpanelet. Uden disse beføjelser vil en redaktør skulle involvere en administrator at ændre i en brugers profil.</para>
+		<title>Hvordan brugertilladelser påvirker din oplevelse af forummet</title>
+		<para>phpBB3 bruger tilladelser pr. bruger eller pr. brugergruppe til at give eller nægte brugere adgang til bestemte funktioner, som softwaren tilbyder. Dette kan omfatte muligheden for at skrive indlæg i bestemte fora, have en avatar, eller kunne kommunikere via private beskeder. Alle tilladelser kan indstilles via administratorkontrolpanelet.</para>
+		<para>Tilladelser giver også mulighed for at udpege bestemte medlemmer til at udføre særlige opgaver eller have særlige beføjelser på boardet. Tilladelser gør det muligt for administratoren at bestemme hvilke redaktørfunktioner, og i hvilke fora, bestemte brugere eller brugergrupper må benytte. Dette gør det muligt at udpege brugere til at blive redaktører på boardet. Administratoren kan også give brugere adgang til bestemte dele af administratorkontrolpanelet, så vigtige indstillinger og funktioner forbliver begrænsede og sikre mod misbrug. En udvalgt gruppe af redaktører kunne for eksempel få tilladelse til at ændre en brugers avatar eller signatur, hvis avataren eller signaturen ikke overholder et bestemt forums regler. Uden disse beføjelser ville redaktøren være nødt til at underrette en administrator for at få brugerens profil ændret.</para>
 	</section>
 	<section id="user_registering">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Tilmelding på et phpBB3 board</title>
-		<para>Proceduren ved tilmelding er normalt helt enkel og meget simpel.</para>
+		<title>Tilmelding på et phpBB3-board</title>
+		<para>Tilmelding på et phpBB3-board er som regel en enkel og ligetil procedure.</para>
 		<figure id="user_registering_typical_page">
-			<title>Tilmelding</title>
+			<title>En typisk tilmeldingsside</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata format="PNG" fileref="../images/user_guide/typical_registration_page.png"/>
 				</imageobject>
 				<caption>
-					<para>Sådan vises en typisk tilmeldingside.</para>
+					<para>Dette er hvad du typisk kan forvente at se på en tilmeldingsside.</para>
 				</caption>
 			</mediaobject>
 		</figure>
-		<para>Linket <guilabel>Tilmeld</guilabel> øverst på siden leder dig til boardets regler. Hvis du accepterer disse fortsætter tilmeldingsproceduren. Hvis du ikke accepterer betingelserne er det ikke muligt at tilmelde sig. I nogle tilfælde kan du blive bedt om at vælge om du er over eller under en bestemt alder. Hvis det er tilfældet, er det fordi administratoren har valgt at følge den amerikanske lov <acronym>COPPA</acronym>. Personer under 13 år skal have en forældre eller værges godkendelse for at tilmelde sig offentlige boards. Der fremsendes en email med yderligere instrukser.</para>
-		<para>Næste trin er udfyldelse af personlig information hvor du selv vælger brugernavn, emailadresse, kodeord, sprog og tidzone.</para>
-		<para>Nederst på samme side vil du normalt se sektionen <emphasis>Bekræftelse på tilmelding</emphasis>. Mange boards anvender denne bekræftelse, kaldet <acronym>CAPTCHA</acronym>, for bedst muligt at blokere for tilmeldinger fra spambotter. Bekræftelsen vil oftest bestå i at svare på et spørgsmål eller aflæse en kode.</para>
+		<para>Efter du har klikket på linket <guilabel>Tilmeld</guilabel>, vises tilmeldingsbetingelserne, som du skal acceptere for at fortsætte. Nogle websites vil bede dig angive om du er under 13 år, for at overholde <acronym>COPPA</acronym> (den amerikanske lov Children's Online Privacy Protection Act af 1998; læs mere på <ulink url="http://www.coppa.org">http://www.coppa.org</ulink>). Er du under 13 år, forbliver din konto inaktiv indtil den er godkendt af en forælder eller værge. Du modtager en e-mail, der beskriver de næste trin for at aktivere din konto.</para>
+		<para>Ud over at acceptere betingelserne, skal du udfylde nogle vigtige oplysninger såsom brugernavn, e-mailadresse og ønsket adgangskode. Du kan også vælge tidszone og sprog.</para>
+		<para>Ser du i formularen, hvor du angiver brugernavn, adgangskode osv., en grafik med nogle mærkelige tegn, ser du den såkaldte <emphasis>visuelle bekræftelse</emphasis>. Mange boards har denne funktion, også kaldet <acronym>CAPTCHA</acronym>, som er et billede med forvrængede bogstaver og tal, som du skal indtaste i et felt ved siden af. Formålet er at sikre, at du er en rigtig bruger, der tilmelder dig (i modsætning til en spamrobot, der udfører en automatisk tilmelding). Indtast blot de tegn du ser i feltet <guilabel>Bekræftelseskode</guilabel> og fortsæt tilmeldingen. Kan du ikke tyde koden, kan du genindlæse siden for at få en ny kode.</para>
 		<figure id="user_registering_captcha">
-			<title>Visuel bekræftelse</title>
+			<title>Den visuelle bekræftelse</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata format="PNG" fileref="../images/user_guide/visual_confirmation.png"/>
 				</imageobject>
 				<caption>
-					<para>Et eksempel på visuel bekræftelse.</para>
+					<para>Dette er et eksempel på en visuel bekræftelseskode, du kan komme til at se.</para>
 				</caption>
 			</mediaobject>
 		</figure>
-		<para>Administratoren kan have valgt at din nye konto skal aktiveres. Enten skal du selv skal aktivere kontoen via en aktiveringsnøgle som du modtager med email. Er det tilfældet vil du se denne meddelelse:<blockquote><guilabel> Din konto er oprettet. Du skal selv aktivere kontoen med en aktiveringsnøgle. Nøglen er netop afsendt til den emailadresse, du angav ved tilmeldingen. Læs venligst denne email for yderligere information.</guilabel></blockquote> Alternativt er det administrator der skal aktivere din konto.</para>
-		<para>Nogle boards anvender ekstra profilfelter i tilmeldingsformularen. Administrator kan have valgt at disse skal udfyldes for at gennemføre tilmeldingen.</para>
-		<para>Når alle felter i tilmeldingsformularen er udfyldt, klikkes på <guilabel>Udfør</guilabel> for at gennemføre tilmeldingen. Ønsker du at slette alle angivne data i felterne klikkes på <guilabel>Nulstil</guilabel>. Når du klikker på <guilabel>Udfør</guilabel> bliver du adviseret om næste trin. I de fleste tilfælde får du tilsendt en email til den adresse du angav i tilmeldingsformularen. Alternativt kan du også få mulighed for at logge ind med det samme eller at afvente administrator gennemgår din tilmelding og accepterer denne. I sidstnævnte tilfælde modtager du en email når din tilmelding er accepteret.</para>
+		<para>En anden mulighed er kontoaktivering. Her kan administratoren gøre det til et krav, at du skal følge et link tilsendt via e-mail efter tilmelding, før din konto aktiveres. I så fald ser du en besked svarende til denne: <blockquote><guilabel>Din konto er nu oprettet. Dette forum kræver dog aktivering af kontoen. En aktiveringsnøgle er sendt til den e-mailadresse du har angivet. Tjek venligst din e-mail for yderligere information</guilabel></blockquote> Det er også muligt, at administratoren selv skal aktivere kontoen.</para>
+		<para>Nogle boards har brugerdefinerede profilfelter. Har administratoren valgt at vise disse på tilmeldingssiden, vises de også her. I nogle tilfælde er disse felter påkrævede, hvilket betyder at de ikke må stå tomme.</para>
+		<para>Når du har udfyldt alle felterne på tilmeldingssiden, fuldføres processen ved at klikke på knappen <guilabel>Send</guilabel>. Ønsker du at rydde alle felter, kan du klikke på knappen <guilabel>Nulstil</guilabel>. Efter du har klikket på <guilabel>Send</guilabel>, informeres du om det næste trin. I de fleste tilfælde sendes en e-mail til den angivne adresse med et link til at fuldføre tilmeldingen. Andre muligheder er at kunne logge ind med det samme (dvs. ingen yderligere trin i tilmeldingsprocessen), eller at vente indtil en administrator har gennemgået og godkendt din tilmelding, hvorefter du underrettes via e-mail.</para>
 	</section>
 	<section id="user_control_panel">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Brugerkontrolpanelet</title>
-		<para>Brugerkontrolpanelet (<glossterm>UCP</glossterm>) giver mulighed for bl. a. at ændre personlige indstillinger, administrere overvågninger og bogmærker, sende og læse private beskeder. For at få adgang til UCP klikkes på linket &quot;Brugerkontrolpanel&quot; som ses øverst på siden når du er logget ind.</para>
-		<para>UCP er opdelt i seks faner: Oversigt, Profil, Boardindstillinger, Private beskeder, Brugergrupper og Venner og ignorerede brugere. Hver fane indeholder yderligere underpunkter i venstre side af skærmbilledet. Afhængig af de tilladelser du er tildelt af administrator, kan du have færre tilgængelige underpunkter.</para>
-		<para>Alle siderne i UCP viser også listen over dine venner. Du kan til enhver tid sende en privat besked til dem blot ved at klkke på brugernavnet.</para>
+		<title>Bliv fortrolig med brugerkontrolpanelet</title>
+		<para>Brugerkontrolpanelet (<glossterm>UCP</glossterm>) giver dig mulighed for at ændre personlige indstillinger, administrere emner du overvåger, sende og modtage private beskeder, samt ændre hvordan oplysninger om dig vises for andre brugere. For at se UCP'en, klik på linket "Brugerkontrolpanel", som fremgår efter du er logget ind.</para>
+		<para>UCP'en er opdelt i seks faneblade: Oversigt, Private beskeder, Profil, Boardindstillinger, Venner og ignorerede brugere, samt Grupper. Under hvert faneblad findes adskillige undersider, som tilgås ved at klikke på det ønskede link i venstre side af UCP-grænsefladen. Nogle af disse områder er muligvis ikke tilgængelige, afhængigt af de tilladelser administratoren har tildelt dig.</para>
+		<para>Hver side i UCP'en viser din venneliste i venstre side. For at sende en privat besked til en ven, klik på dennes brugernavn.</para>
+		<para>Private beskeder gennemgås mere detaljeret i <xref linkend="user_pm" />.</para>
 		<section id="ucp_overview">
 			<title>Oversigt</title>
-			<para>Forsiden viser en status over din aktivitet og historik på boardet, med mulighed for se dine overvågninger, bogmærker og gemte kladder.</para>
-				
+			<para>Oversigten viser et øjebliksbillede af information om dine indlægsvaner, såsom den dato du tilmeldte dig forummet, dit mest aktive emne, samt det samlede antal indlæg du har skrevet. Underliggende sider til Oversigt omfatter Overvågninger, Bogmærker og Kladder.</para>
+
 			<figure id="ucp_overview_index">
-				<title>Brugerkontrolpanel oversigt</title>
+				<title>Oversigt i brugerkontrolpanelet (indeks)</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata format="PNG" fileref="../images/user_guide/ucp_overview.png" />
 					</imageobject>
 					<caption>
-						<para><glossterm>UCP</glossterm> forside</para>
+						<para>Sektionen Oversigt i <glossterm>UCP</glossterm></para>
 					</caption>
 				</mediaobject>
 			</figure>
-			
+
 			<section id="ucp_subscriptions">
-				<title>Overvågning</title>
-				<para>Du kan vælge at overvåge udvalgte fora og emner, og hvorved du modtager besked når der indsendes nye emner eller indlæg i disse. En overvågning oprettes via forummet eller emnet ved at klikke på linket &quot;Overvåg forum/emne&quot; nederst på siden.</para>
-				<para>Man kan fjerne en overvågning fra UCP, ved at vælge overvågningen og herefter klikke på knappen <guilabel>Stop overvågning af valgte</guilabel> nederst.</para>
+				<title>Overvågninger</title>
+				<para>Overvågninger er fora eller enkelte emner, du har valgt at overvåge for nye indlæg. Når der skrives et nyt indlæg i et område du overvåger, sendes der en e-mail, der informerer dig om det nye indlæg. For at oprette en overvågning, besøg forummet eller emnet du ønsker at overvåge, og klik på linket "Overvåg" nederst på siden.</para>
+				<para>For at fjerne en overvågning, sæt et mærke i boksen ved siden af den overvågning du ønsker at fjerne, og klik på knappen "Fjern overvågning".</para>
 			</section>
 			<section id="ucp_bookmarks">
 				<title>Bogmærker</title>
-				<para>Et bogmærke er næsten identisk med overvågning, med to undtagelser: 1) kun emner kan bogmærkes, 2) man modtager ikke besked når der indsendes indlæg i emnet.</para>
-				<para>Man bogmærker et emne ved at klikke på linket &quot;Bogmærk emne&quot; nederst på siden hvor man læser emnet.</para>
-				<para>Man kan fjerne et bogmærke fra UCP ved at vælge bogmærket og herefter klikke på knappen <guilabel>Fjern valgte bogmærker</guilabel>.</para>
+				<para>Bogmærker er, ligesom overvågninger, emner du har valgt at følge. Der er dog to vigtige forskelle: 1) kun enkelte emner kan bogmærkes, og 2) der sendes ikke en e-mail for at informere dig om nye indlæg.</para>
+				<para>For at oprette et bogmærke, besøg det emne du ønsker at følge, og klik på linket "Bogmærk emne" nederst på siden.</para>
+				<para>For at fjerne et bogmærke, sæt et mærke i boksen ved siden af det bogmærke du ønsker at fjerne, og klik på knappen "Fjern markerede bogmærker".</para>
 			</section>
 			<section id="ucp_drafts">
 				<title>Kladder</title>
-				<para>Du kan gemme en kladde når du skriver nye emner eller indlæg ved at klikke på knappen <guilabel>Gem kladde</guilabel>. I oversigten over gemte kladder vises titlen på dit indlæg, det forum eller emne du skrev kladden til og datoen du gemte den.</para>
-				<para>For at fortsætte redigeringen af kladden klikkes på linket &quot;Indlæs kladde&quot;. Når du har færdiggjort redigeringen og vil indsende indlægget, klikker du på <guilabel>Udfør</guilabel>. For at slette en kladde vinges boksen til højre for kladden af og der klikkes på <guilabel>Slet valgte</guilabel>.</para>
+				<para>Kladder oprettes, når du klikker på knappen "Gem" på siden for at skrive et nyt indlæg eller svar. Der vises titlen på dit indlæg, forummet eller emnet kladden blev oprettet i, samt datoen du gemte den.</para>
+				<para>For at fortsætte redigeringen af en kladde til senere indsendelse, klik på linket "Vis/Rediger". Vil du fuldføre og indsende beskeden, klik på "Indlæs kladde". For at slette en kladde, sæt et mærke i boksen ved siden af den kladde du vil fjerne, og klik på "Slet markerede".</para>
 			</section>
 			<section id="ucp_notifications_overview">
 				<title>Notifikationer</title>
-				<para>Notifikationer gør dig opmærksom på begivenheder der er sket på boardet. De vises i notifikationsmenuen øverst på siden. Begivenheder kan bl.a. være:</para>
+				<para>Notifikationer gør dig opmærksom på begivenheder, der er sket på boardet. De vises i notifikationsmenuen øverst på skærmen. Begivenheder omfatter:</para>
 				<itemizedlist>
-					<listitem><para>Der er modtaget en ny privat besked</para></listitem>
-					<listitem><para>Der er oprettet et nyt emne i et forum du overvåger</para></listitem>
-					<listitem><para>Der er indsendt et nyt indlæg i et emne du overvåger</para></listitem>
+					<listitem><para>En ny privat besked er ankommet</para></listitem>
+					<listitem><para>Et nyt emne er oprettet i et forum du overvåger</para></listitem>
+					<listitem><para>Et nyt indlæg er skrevet i et emne du overvåger</para></listitem>
 					<listitem><para>Et nyt indlæg afventer godkendelse</para></listitem>
 					<listitem><para>Et indlæg er blevet rapporteret</para></listitem>
 					<listitem><para>Dit emne/indlæg er blevet godkendt/afvist</para></listitem>
-					<listitem><para>Der er citeret fra et af dine indlæg</para></listitem>
+					<listitem><para>Du er blevet citeret i et indlæg</para></listitem>
 				</itemizedlist>
 				<figure id="notifications_menu">
-					<title>Notifikationsmenu</title>
+					<title>Notifikationsmenuen</title>
 					<mediaobject>
 						<imageobject>
 							<imagedata format="PNG" fileref="../images/user_guide/notifications_menu.png" />
 						</imageobject>
 						<caption>
-							<para>Menuen med <glossterm>Notification</glossterm>er</para>
+							<para>Menuen for <glossterm>notifikationer</glossterm></para>
 						</caption>
 					</mediaobject>
 				</figure>
 			</section>
 		</section>
 		<section id="ucp_profile">
-			<title>Profilindstillinger</title>
-			<para>I denne fane kan du indstille og ændre dine personlige profilinformationer. Disse informationer kan ses af andre tilmeldte brugere på boardet, og er derfor med til at tegne eller præsentere dig offentligt. (Denne information er adskilt fra dine personlige indstillinger som bestemmer hvordan du vil have boardet præsenteret. Derfor denne adskillelse).</para>
+			<title>Profil</title>
+			<para>Denne fane giver dig mulighed for at indstille dine profiloplysninger. Din profil indeholder generelle oplysninger, som andre brugere på boardet kan se. Betragt din profil som et udtryk for din offentlige tilstedeværelse. Denne fane er adskilt fra dine boardindstillinger. (Boardindstillinger er de individuelle indstillinger, du selv sætter og administrerer, og som styrer din oplevelse af forummet. Derfor er den holdt adskilt fra din profil.)</para>
 			<section id="ucp_profile_info">
-				<title>Profil</title>
-				<para>Indstillingerne vises for tilmeldte brugere når der klikkes på din profil.</para>
+				<title>Personlige indstillinger</title>
+				<para>Personlige indstillinger bestemmer de oplysninger, der vises, når en bruger ser din profil.</para>
 				<itemizedlist>
-					<listitem><para><guilabel>ICQ-nummer</guilabel>: Dit kontonummer hos <ulink url="http://www.icq.com/">ICQ</ulink> system.</para></listitem>
-					<listitem><para><guilabel>AOL Instant Messenger</guilabel>: Dit skærmnavn tilknyttet <ulink url="http://aim.com">AOL Instant Messenger</ulink>.</para></listitem>
-					<listitem><para><guilabel>MSN Messenger</guilabel>: Din emailadresse tilknyttet <ulink url="http://home.live.com/">MSN Messenger (Windows Live)</ulink> servicen.</para></listitem>
+					<listitem><para><guilabel>ICQ-nummer</guilabel>: Dit kontonummer hos <ulink url="http://www.icq.com/">ICQ</ulink>.</para></listitem>
+					<listitem><para><guilabel>AOL Instant Messenger</guilabel>: Dit skærmnavn hos <ulink url="http://aim.com">AOL Instant Messenger</ulink>.</para></listitem>
+					<listitem><para><guilabel>Windows Live Messenger</guilabel>: Din e-mailadresse tilknyttet <ulink url="http://home.live.com/">Windows Live</ulink>-tjenesten.</para></listitem>
 					<listitem><para><guilabel>Yahoo Messenger</guilabel>: Dit brugernavn hos <ulink url="http://messenger.yahoo.com/">Yahoo Messenger</ulink>.</para></listitem>
-					<listitem><para><guilabel>Jabberadresse</guilabel>: Dit brugernavn hos <ulink url="http://www.jabber.org/">Jabber</ulink> service eller andre jabberservices.</para></listitem>
-					<listitem><para><guilabel>Hjemmeside</guilabel>: Din hjemmesideadresse. Angives med den rette protokol, f.eks http://minhjemmeside.dk.</para></listitem>
-					<listitem><para><guilabel>Geografisk sted</guilabel>: Hvor du normalt befinder dig. Bemærk at denne information vises i din profil i hvert indlæg du har indsendt. Da gæster ofte også kan læse indlæg, bør du muligvis ikke være alt for detaljeret her.</para></listitem>
-					<listitem><para><guilabel>Beskæftigelse</guilabel>: Kan kun ses af tilmeldte brugere, når der klikkes på din profil.</para></listitem>
-					<listitem><para><guilabel>Interesser</guilabel>: Dine personlige interessser. Kan også kun læses af tilmeldte bruger, når der klikkes på din profil.</para></listitem>
-					<listitem><para><guilabel>Fødselsdag</guilabel>: Din fødselsdag kan vises på boardindekset. Angives kun dag og måned vises din alder ikke, kun at du har fødselsdag. Angiver du fødselsår, vises din alder desuden i din profil.</para></listitem>
+					<listitem><para><guilabel>Jabber-adresse</guilabel>: Dit brugernavn hos <ulink url="http://www.jabber.org/">Jabber</ulink>-tjenesten.</para></listitem>
+					<listitem><para><guilabel>Facebook</guilabel>: Dit unikke brugernavn/sidenavn hos <ulink url="https://www.facebook.com/">Facebook</ulink>.</para></listitem>
+					<listitem><para><guilabel>Twitter</guilabel>: Dit brugernavn hos <ulink url="https://twitter.com/">Twitter</ulink>.</para></listitem>
+					<listitem><para><guilabel>Skype</guilabel>: Dit brugernavn hos <ulink url="http://www.skype.com/">Skype</ulink>.</para></listitem>
+					<listitem><para><guilabel>Hjemmeside</guilabel>: Din hjemmesideadresse. Skal angives med det rette protokolpræfiks (f.eks. http://).</para></listitem>
+					<listitem><para><guilabel>Sted</guilabel>: Din fysiske placering. Bemærk at dette som regel vises sammen med dine brugeroplysninger ved hvert indlæg, så sædvanlig forsigtighed ved offentliggørelse af personlige oplysninger på internettet bør iagttages.</para></listitem>
+					<listitem><para><guilabel>Beskæftigelse</guilabel>: Din beskæftigelse. Denne oplysning vises kun på profilsiden.</para></listitem>
+					<listitem><para><guilabel>Interesser</guilabel>: Dine personlige interesser. Denne oplysning vises kun på profilsiden.</para></listitem>
+					<listitem><para><guilabel>Fødselsdag</guilabel>: Din fødselsdag. Denne oplysning bruges til at vise dit brugernavn i fødselsdagssektionen på forumindekset. Angives årstallet, vises også din alder i din profil.</para></listitem>
 				</itemizedlist>
 			</section>
 			<section id="ucp_signature">
 				<title>Signatur</title>
-				<para>Du kan vælge at din signatur automatisk tilføjes nederst i alle indlæg du skriver. Signaturer kan formateres ved anvendelse af <link linkend="posting_bbcodes">BBkode</link>. Boardadministratoren kan have sat begrænsninger for signaturers længde. Er der begrænsning vil denne vises med teksten <guilabel>...ikke må være længere end x tegn.</guilabel> over feltet hvor signaturen skrives, hvor x er grænsen.</para>
+				<para>Din signatur vises, hvis du ønsker det, under hvert indlæg du skriver. Signaturer kan formateres med <link linkend="posting_bbcodes">BBkode</link>. Boardadministratoren kan have angivet en maksimal længde for signaturer. Du kan se denne grænse ved linjen <guilabel>Der er en grænse på x tegn.</guilabel> over tekstfeltet, hvor x er den aktuelt fastsatte grænse.</para>
 			</section>
 			<section id="ucp_avatar">
 				<title>Avatar</title>
-				<para>Din avatar er et lille billede som vises i din profil ved hvert indlæg du skriver. Afhængig af boardets indstillinger kan brugen af avatars være slået fra. Din avatar tilknyttes din profil på en eller flere måder: &quot;<guilabel>Upload fra din maskine</guilabel>&quot;, &quot;<guilabel>Upload fra ekstern URL</guilabel>&quot; og &quot;<guilabel>Link til ekstern placering</guilabel>&quot;.</para>
+				<para>Din avatar er et billede, der vises ved hvert indlæg du skriver. Afhængigt af boardets indstillinger kan avatarer være helt deaktiveret, eller kan optræde på en (eller flere) af tre måder: "<guilabel>Upload fra din maskine</guilabel>", "<guilabel>Upload fra ekstern URL</guilabel>" og "<guilabel>Link til ekstern placering</guilabel>".</para>
 				<para>
 					<itemizedlist>
 						<listitem><para><guilabel>Gravatar</guilabel>: Bruger du Gravatar.com's avatartjeneste, kan du angive din Gravatar-e-mailadresse her for at bruge dit Gravatar-billede som din avatar.</para></listitem>
@@ -156,7 +160,7 @@
 						<listitem><para><guilabel>Link til ekstern placering</guilabel>: Du kan angive URL til et eksisterende billede. Det gemmes ikke på boardets server, der linkes blot til dette.</para></listitem>
 					</itemizedlist>
 				</para>
-				<para>Yderligere kan boardadministrator have givet mulighed for at vælge i et avatargalleri. Disse billeder er tilgængelige for alle tilmeldte brugere på boardet.</para>
+				<para>Yderligere kan boardadministratoren have valgt at tilbyde et avatargalleri til brugerne. Disse billeder er udvalgt af administratoren og kan bruges af alle boardets medlemmer.</para>
 			</section>
 			<section id="ucp_login_keys">
 				<title>Login-nøgler</title>
@@ -174,90 +178,88 @@
 		</section>
 		<section id="ucp_preferences">
 			<title>Boardindstillinger</title>
-			<para>Indstillinger som giver dig mulighed for at tilpasse hvordan boardet skal udføre bestemte funktioner for dig.</para>
+			<para>Boardindstillinger giver dig mulighed for at bestemme forskellige aspekter af phpBB-softwarens opførsel i forhold til din interaktion med den.</para>
 			<section id="ucp_global">
-				<title>Globalt</title>
-				<para>Globale indstillinger bestemmer hvordan de overordnede funktioner udføres for dig.</para>
+				<title>Generelt</title>
+				<para>Generelle indstillinger bestemmer forskellige overordnede interaktioner med phpBB-softwaren.</para>
 				<para>
 					<itemizedlist>
-						<listitem><para><guilabel>Brugere kan kontakte mig pr. email</guilabel>: Vælges <guilabel>Ja</guilabel> kan andre brugere sende email til dig via &quot;email&quot; knappen i din profil.</para></listitem>
-						<listitem><para><guilabel>Jeg ønsker at modtage masse-emails afsendt fra administratorer</guilabel>: Vælges <guilabel>Ja</guilabel> modtager du masse-email afsendt af boardadministrator.</para></listitem>
-						<listitem><para><guilabel>Brugere må sende mig private beskeder</guilabel>: Vælges <guilabel>Ja</guilabel> kan andre brugere sende dig private beskeder via boardet.</para></listitem>
-						<listitem><para><guilabel>Skjul min onlinestatus</guilabel>: Vælges <guilabel>Ja</guilabel> skjules din onlinestatus for andre brugere. Administratorer og redaktører vil stadig kunne se din onlinestatus.</para></listitem>
-						<listitem><para><guilabel>Jeg ønsker at få information om nye private beskeder</guilabel>: Vælges <guilabel>Ja</guilabel> afsendes en email fra boardet med information om at du har modtaget en ny privat besked.</para></listitem>
-						<listitem><para><guilabel>Popupvindue ved nye private beskeder</guilabel>: Vælges <guilabel>Ja</guilabel> mødes du af et popupvindue ved log ind.</para></listitem>
-						<listitem><para><guilabel>Mit sprog</guilabel>: I dropdownmenuen vises de sprog der er installeret på boardet, du kan vælge hvilket af disse du ønsker at anvende på boardet. Bemærk at indlæg skrevet på et andet sprog stadig bliver vist på dette.</para></listitem>
-						<listitem><para><guilabel>Min tidszone</guilabel>: Du indstiller her den tidszone du befinder dig i.</para></listitem>
-						<listitem><para><guilabel>Sommertid/DST er slået til</guilabel>: Vælges <guilabel>Ja</guilabel> vises tider en time tidligere end den valgte tidszone. Bemærk at denne indstilling skal ændres manuelt hved hvert skift fra sommer- til vintertid og omvendt.</para></listitem>
-						<listitem><para><guilabel>Mit datoformat</guilabel>: Bestemmer hvordan dato og tid vises. Du kan vælge mellem de tilgængelige standardformater i dropdownmenuen. Ønsker du et andet format end de tilgængelige, vælges &quot;<guilabel>Valgfri...</guilabel>&quot; og du definerer selv formatet. Syntaksen er identisk med PHP <ulink url="http://www.php.net/date">date</ulink>-funktionen.</para></listitem>
+						<listitem><para><guilabel>Brugere kan kontakte mig via e-mail</guilabel>: Vælges <guilabel>Ja</guilabel>, kan brugere sende dig en e-mail via knappen "e-mail" i din profil.</para></listitem>
+						<listitem><para><guilabel>Administratorer kan sende mig information via e-mail</guilabel>: Vælges <guilabel>Ja</guilabel>, modtager du masse-e-mails udsendt af boardadministratoren.</para></listitem>
+						<listitem><para><guilabel>Tillad brugere at sende dig private beskeder</guilabel>: Vælges <guilabel>Ja</guilabel>, kan brugere sende dig private beskeder via boardet.</para></listitem>
+						<listitem><para><guilabel>Skjul min onlinestatus</guilabel>: Vælges <guilabel>Ja</guilabel>, skjules din onlinestatus for andre brugere. Bemærk at administratorer og redaktører stadig kan se din onlinestatus.</para></listitem>
+						<listitem><para><guilabel>Min typografi</guilabel>: Giver dig mulighed for at angive hvilken typografi boardet skal anvende. Denne indstilling er muligvis ikke tilgængelig, hvis boardadministratoren har valgt at tilsidesætte brugernes typografivalg.</para></listitem>
+						<listitem><para><guilabel>Mit sprog</guilabel>: Giver dig mulighed for at angive hvilken sprogpakke boardet skal anvende. Bemærk at denne indstilling kun gælder boardets tekststrenge; indlæg vises på det sprog de er skrevet i.</para></listitem>
+						<listitem><para><guilabel>Min tidszone</guilabel>: Giver dig mulighed for at angive hvilken tidszone tidspunkter på boardet skal vises i.</para></listitem>
+						<listitem><para><guilabel>Mit datoformat</guilabel>: Bestemmer hvordan tidspunkter vises. Du kan vælge en af mulighederne i dropdownmenuen -- øvede brugere kan vælge "<guilabel>Brugerdefineret</guilabel>" og angive et eget format (i formatet fra <ulink url="http://www.php.net/date">PHP's date-funktion</ulink>).</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
 			<section id="ucp_posting">
-				<title>Skriveindstillinger</title>
-				<para>Disse indstillinger bestemmer standardvalg når du skriver nye indlæg. Bemærk at disse kan ændres individuelt når et indlæg skrives.</para>
+				<title>Indlæg</title>
+				<para>Disse indstillinger bestemmer standardindstillingerne for indlægsredigeringen, når du skriver et indlæg. Bemærk at disse muligheder også kan indstilles individuelt, mens du skriver.</para>
 				<para>
 					<itemizedlist>
-						<listitem><para><guilabel>BBkode aktiveret som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at aktivere BBkode ved skrivning af indlæg.</para></listitem>
-						<listitem><para><guilabel>Smileys aktiveret som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at aktivere smileys ved skrivning af indlæg.</para></listitem>
-						<listitem><para><guilabel>Tilføj min signatur som standard</guilabel>: Vælg <guilabel>Ja</guilabel> for at få tilføjet signatur i indlæg.</para></listitem>
-						<listitem><para><guilabel>Giv mig besked ved besvarelse</guilabel>: Vælg <guilabel>Ja</guilabel> for at få besked når indlæg besvares.</para></listitem>
+						<listitem><para><guilabel>Aktivér BBkode som standard</guilabel>: Vælges <guilabel>Ja</guilabel>, er BBkode aktiveret i indlægseditoren.</para></listitem>
+						<listitem><para><guilabel>Aktivér smileys som standard</guilabel>: Vælges <guilabel>Ja</guilabel>, vises smileys i dine indlæg.</para></listitem>
+						<listitem><para><guilabel>Tilføj min signatur som standard</guilabel>: Vælges <guilabel>Ja</guilabel>, tilføjes din signatur til dine indlæg.</para></listitem>
+						<listitem><para><guilabel>Giv mig besked ved besvarelse som standard</guilabel>: Vælges <guilabel>Ja</guilabel>, får du besked via e-mail, når der svares på dit indlæg.</para></listitem>
 					</itemizedlist>
-					
+
 				</para>
 			</section>
 			<section id="ucp_display">
 				<title>Visning</title>
-				<para>Visningsindstillingerne bestemmer hvordan indlæg og emner vises i boardets forskellige visninger.</para>
+				<para>Visningsindstillinger bestemmer hvordan indlæg og emner vises i boardets forskellige visninger.</para>
 				<para>
 					Følgende indstillinger bestemmer hvordan indholdet af indlæg og private beskeder vises.
 					<itemizedlist>
 						<listitem><para><guilabel>Vis billeder i indlæg</guilabel>: Vælges <guilabel>Ja</guilabel>, vises billeder.</para></listitem>
 						<listitem><para><guilabel>Vis Flash-animationer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises Flash-animationer.</para></listitem>
-						<listitem><para><guilabel>Vis smileys som billeder</guilabel>: Vælges <guilabel>Ja</guilabel>, vises smileys som billeder i stedet for deres tekstudgave.</para></listitem>
-						<listitem><para><guilabel>Vis signaturer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugernes signaturer.</para></listitem>
-						<listitem><para><guilabel>Vis avatarer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugernes avatarer.</para></listitem>
-						<listitem><para><guilabel>Aktivér ordcensur</guilabel>: Vælges <guilabel>Ja</guilabel>, censureres teksten i indlæg og private beskeder i henhold til den <link linkend="acp_posting_censors">liste over censurerede ord</link> administratoren har defineret.</para></listitem>
+						<listitem><para><guilabel>Vis smileys som billeder</guilabel>: Vælges <guilabel>Ja</guilabel>, vises smileys som billeder i stedet for deres tekstform.</para></listitem>
+						<listitem><para><guilabel>Vis signaturer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugeres signaturer.</para></listitem>
+						<listitem><para><guilabel>Vis avatarer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugeres avatarer.</para></listitem>
+						<listitem><para><guilabel>Aktivér ordcensur</guilabel>: Vælges <guilabel>Ja</guilabel>, censureres teksten i indlæg og private beskeder ifølge <link linkend="acp_posting_censors">ordcensurlisten</link> defineret af administratoren.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Følgende indstillinger bestemmer hvordan emner vises i forumvisningen.
 					<itemizedlist>
-						<listitem><para><guilabel>Vis emner fra de seneste dage</guilabel>: Denne indstilling begrænser hvor gamle emner der skal vises. Som standard vises alle emner.</para></listitem>
-						<listitem><para><guilabel>Sortér emner efter</guilabel>: Denne indstilling ændrer rækkefølgen emnerne vises i. Emner kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>overskrift</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Vis emner fra tidligere dage</guilabel>: Denne indstilling begrænser alderen på de emner, der skal vises. Som standard vises alle emner.</para></listitem>
+						<listitem><para><guilabel>Sortér emner efter</guilabel>: Denne indstilling ændrer rækkefølgen emnerne vises i. Emner kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>indlægstidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>emne</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
 						<listitem><para><guilabel>Sorteringsretning for emner</guilabel>: Emner kan vises i enten <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Følgende indstillinger bestemmer hvordan indlæg vises i emnevisningen.
 					<itemizedlist>
-						<listitem><para><guilabel>Vis indlæg fra de seneste dage</guilabel>: Denne indstilling begrænser hvor gamle indlæg der skal vises. Som standard vises alle indlæg.</para></listitem>
-						<listitem><para><guilabel>Sortér indlæg efter</guilabel>: Denne indstilling ændrer rækkefølgen indlæggene vises i. Indlæg kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>overskrift</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Vis indlæg fra tidligere dage</guilabel>: Denne indstilling begrænser alderen på de indlæg, der skal vises. Som standard vises alle indlæg.</para></listitem>
+						<listitem><para><guilabel>Sortér indlæg efter</guilabel>: Denne indstilling ændrer rækkefølgen indlæggene vises i. Indlæg kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>indlægstidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>emne</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
 						<listitem><para><guilabel>Sorteringsretning for emner</guilabel>: Indlæg kan vises i enten <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
 					</itemizedlist>
 				</para>
 			</section>
 			<section id="ucp_notifications">
 				<title>Notifikationer</title>
-				<para>Notifikationsindstillingerne bestemmer hvilke begivenheder der udløser en notifikation, og hvordan du modtager den.</para>
+				<para>Notifikationsindstillinger bestemmer hvilke begivenheder der udløser en notifikation, og hvordan du modtager den.</para>
 				<para>
-					Følgende indstillinger bestemmer begivenheder relateret til at skrive indlæg.
+					Følgende indstillinger bestemmer begivenheder relateret til indlæg.
 					<itemizedlist>
-						<listitem><para><guilabel>Nogen svarer på et emne du har bogmærket</guilabel>: En bruger har svaret i et emne du har bogmærket.</para></listitem>
-						<listitem><para><guilabel>Nogen svarer på et emne du overvåger</guilabel>: En bruger har svaret i et emne du overvåger.</para></listitem>
+						<listitem><para><guilabel>Nogen svarer på et emne du har bogmærket</guilabel>: En bruger har skrevet et svar i et emne du har bogmærket.</para></listitem>
+						<listitem><para><guilabel>Nogen svarer på et emne du overvåger</guilabel>: En bruger har skrevet et svar i et emne du overvåger.</para></listitem>
 						<listitem><para><guilabel>Nogen citerer dig i et indlæg</guilabel>: Et af dine indlæg er blevet citeret af en anden bruger.</para></listitem>
 						<listitem><para><guilabel>Nogen opretter et emne i et forum du overvåger</guilabel>: En bruger har oprettet et nyt emne i et forum du overvåger.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>
-					Følgende indstillinger bestemmer begivenheder relateret til moderering.
+					Følgende indstillinger bestemmer begivenheder relateret til moderation.
 					<itemizedlist>
-						<listitem><para><guilabel>Et indlæg eller emne afventer godkendelse</guilabel>: En bruger har skrevet et nyt indlæg eller emne, der afventer godkendelse.</para></listitem>
+						<listitem><para><guilabel>Et indlæg eller emne afventer godkendelse</guilabel>: En bruger har skrevet et nyt indlæg eller emne, der kræver godkendelse.</para></listitem>
 						<listitem><para><guilabel>Nogen rapporterer et indlæg</guilabel>: En bruger har rapporteret et indlæg.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>
 					Følgende indstillinger bestemmer diverse andre begivenheder.
 					<itemizedlist>
-						<listitem><para><guilabel>Nogen anmoder om at blive medlem af en gruppe du leder</guilabel>: En bruger har anmodet om medlemskab af en brugergruppe du er leder af.</para></listitem>
+						<listitem><para><guilabel>Nogen anmoder om at blive medlem af en gruppe du leder</guilabel>: En bruger har anmodet om medlemskab af en brugergruppe, du er leder af.</para></listitem>
 						<listitem><para><guilabel>Nogen sender dig en privat besked</guilabel>: Du har modtaget en privat besked.</para></listitem>
 					</itemizedlist>
 				</para>
@@ -265,151 +267,175 @@
 		</section>
 		<section id="ucp_friends_foes">
 			<title>Venner og ignorerede brugere</title>
-			<para>Brugere kan markeres som <guilabel>Ven</guilabel> eller <guilabel>Ignoreret bruger</guilabel>, så det bliver muligt at filtrere deres beskeder. Understøtter stilarten det, skjules indlæg fra brugere på din liste over ignorerede brugere, mens indlæg fra brugere på din venneliste fremhæves. Regler for private beskeder kan gøre brug af venne- og ignorérlisten til at filtrere indkomne private beskeder.</para>
+			<para>Brugere kan markeres som <guilabel>Ven</guilabel> eller <guilabel>Ignoreret bruger</guilabel> for at filtrere deres beskeder. Understøtter typografien det, skjules indlæg fra brugere på din liste over ignorerede brugere, mens indlæg fra brugere på din venneliste fremhæves. Regler for private beskeder kan gøre brug af venne- og ignorerlisten til at filtrere indkommende beskeder.</para>
 		</section>
 		<section id="ucp_attachments">
 			<title>Vedhæftede filer</title>
-			<para>Sektionen for vedhæftede filer i UCP viser en liste over alle filer du har vedhæftet på boardet. Hver linje indeholder et link til det indlæg filen er vedhæftet, filens størrelse, antallet af gange den er downloadet, samt tidspunktet den blev uploadet. Fra denne side kan du slette vedhæftede filer fra boardet. Referencer til en slettet vedhæftet fil vil stadig fremgå af det oprindelige indlæg, men selve filen vil ikke længere kunne vises, ud over filnavnet.</para>
+			<para>Sektionen for vedhæftede filer i UCP viser en liste over alle vedhæftede filer, du har uploadet til boardet. Hver post indeholder et link til den besked, den vedhæftede fil hører til, filens størrelse, antallet af gange den er downloadet, samt tidspunktet for upload. Fra denne side kan du slette vedhæftede filer fra boardet. Referencer til en slettet fil i indlægget forbliver, men filen vises herefter kun som filnavn, uden andet indhold.</para>
 		</section>
 		<section id="ucp_usergroups">
 			<title>Brugergrupper</title>
-			<para>Medlemskab af brugergrupper administreres via sektionen Brugergrupper i UCP. Siden viser de grupper brugeren er medlem af, leder af, samt alle øvrige brugergrupper. Grupper der er åbne for medlemskab har en radioknap, der giver brugeren mulighed for at anmode om medlemskab. Brugere kan også selv melde sig ud af grupper de er medlem af. Har brugeren tilladelsen <guilabel>Kan ændre standardgruppe</guilabel>, kan denne her vælge hvilken gruppe der skal være standardgruppe. Standardgruppen bestemmer den brugernavnsfarve der vises for brugeren overalt på boardet.</para>
-			<para>Brugere der er udpeget som gruppeleder kan administrere gruppens medlemskab. Her kan brugere tilføjes, fjernes, afventende anmodninger om medlemskab godkendes eller afvises, og brugerens standardgruppe ændres.</para>
+			<para>Medlemskab af brugergrupper administreres via sektionen Brugergrupper i UCP. Siden viser de grupper, brugeren er medlem af, leder for, samt alle øvrige brugergrupper. Grupper, der er åbne for medlemskab, har en radioknap, så brugeren kan anmode om medlemskab. Brugere kan også fjerne sig selv fra grupper, de er medlem af. Har brugeren tilladelsen <guilabel>Kan ændre standardbrugergruppe</guilabel>, kan brugeren her vælge hvilken gruppe der skal være dennes standardgruppe. Standardbrugergruppen bestemmer farven på brugerens brugernavn, som vises overalt på boardet.</para>
+			<para>Brugere udpeget som gruppeleder kan administrere gruppens medlemskab. Her kan brugere tilføjes, fjernes, ventende medlemskabsanmodninger godkendes eller afvises, samt medlemmers standardbrugergruppe ændres.</para>
 		</section>
 	</section>
 	<section id="user_posting">
 	<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Skrivning af indlæg</title>
-		<para>Indsendelse af indlæg er et af de primære formål ved bulletin boards. Der findes to overordnede typer indlæg: et emne eller et svar. Ved at vælge knappen <guilabel>Nyt emne</guilabel> i et forum bliver du ledt til et skærmbillede hvor indlæg kan skrives. Ved at klikke på udfør nederst indsendes indlægget som et nyt emne i forummet. Andre kan nu deltage i debatten ved at klikke på knappen <guilabel>Skriv indlæg</guilabel>. Også her bliver man ledt til det skærmbillede hvor indlæg skrives.</para>
+		<title>Mestring af indlægsskærmbilledet</title>
+		<para>At skrive indlæg er selve formålet med et forum. Der er to hovedtyper af indlæg, du kan skrive: et emne eller et svar. Klikker du på knappen <guilabel>Nyt emne</guilabel> i et forum, føres du til indlægsskærmbilledet. Efter du har indsendt dit indlæg, vises et nyt emne i forummet med dit indlæg som det første. Andre brugere (og du selv) kan nu svare på dit emne ved at bruge knappen <guilabel>Besvar</guilabel>. Dette fører dig igen til indlægsskærmbilledet, hvor du kan skrive dit indlæg.</para>
 		<section id="posting_form">
 			<title>Skriv indlæg</title>
 			<para>Når du vil skrive et indlæg, entet et helt nyt eller som svar i et eksisterende emne, bliver du præsenteret for et skærmbillede hvor alle elementerne i indlæggets udseende og indhold er tilgængelige.</para>
-			<itemizedlist>	
-				<listitem><para><guilabel>Emne/Indlægsikon</guilabel>: Er små billeder som kan tilknyttes et indlæg for at indikere indholdet i emnet. Muligheden for at anvende emneikonerne afhænger af de tilladelser administratoren har defineret.</para></listitem>
-				<listitem><para><guilabel>Emne</guilabel>: Hvis du skriver et nyt emne, er angivelse af emne obligatorisk og bliver titlen på emnet. Besvarer du eller skriver indlæg i et eksisterende emne, er feltet udfyldt men kan ændres.</para></listitem>
-				<listitem><para>Indlægsindhold - den store tekstboks umiddelbart herunder bruges til at skrive dit indlæg. Hvis administratoren har tilladt det, kan du udover almindelig tekst, også anvende <emphasis role="strong">smileys og BBkode</emphasis>.</para></listitem>
-				<listitem><para>Smileys - kan benyttes til at signalere følelser. Er brug af smileys tilladt på boardet ses teksten &quot;<guilabel>Smileys er slået TIL</guilabel>&quot; til højre for feltet hvor du skriver din indlægstekst. I modsat fald ses samme sted teksten &quot;<guilabel>Smileys er slået FRA</guilabel>&quot;. Se yderligere information i <link linkend="posting_smilies">Smileys</link>.</para></listitem>
-				<listitem><para>BBkode - er en formateringsmetode som kan anvendes i indlæg, hvis det er tilladt af administratoren. Er BBkode tilladt ses teksten &quot;<guilabel>BBkode er slået TIL</guilabel>&quot; til højre for feltet hvor du skriver din indlægstekst. I modsat fald ses samme sted teksten &quot;<guilabel>BBkode er slået FRA</guilabel>&quot;. Se yderligere information i <link linkend="posting_bbcodes">BBkoder</link>.</para></listitem>
+			<figure id="user_posting_form">
+			<title>Skriv indlæg</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/posting_screen.png" />
+					</imageobject>
+					<caption>
+						<para>Skærmbilledet der vises, når du opretter et nyt emne.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<itemizedlist>
+				<listitem><para><guilabel>Emne/Indlægsikon</guilabel>: Emne-/indlægsikonet er et lille billede, der vises til venstre for dit emne. Det hjælper med at identificere dit indlæg og få det til at skille sig ud, men er helt valgfrit.</para></listitem>
+				<listitem><para><guilabel>Emne</guilabel>: Skriver du et nyt emne, er angivelse af emne obligatorisk og bliver titlen på emnet. Svarer du på et eksisterende emne, er feltet valgfrit, men kan ændres.</para></listitem>
+				<listitem><para>Indlægsindhold - Selvom det ikke er mærket, er den store tekstboks hvor selve dit indlæg skrives. Her kan du, ud over almindelig tekst, bruge ting som <link linkend="posting_smilies">smileys</link> eller <link linkend="posting_bbcodes">BBkode</link>, hvis boardadministratoren har aktiveret dem. Indhold indtastet som HTML vises som almindelig tekst, HTML-input understøttes ikke.</para></listitem>
+				<listitem><para>Smileys - Smileys, eller emotikoner, er små billeder som kan indsættes i dit indlæg for at tilføje følelsesmæssigt udtryk. Er smileys aktiveret, ser du teksten "<guilabel>Smileys er TIL</guilabel>" til højre for feltet Indlægsindhold. Ellers ser du teksten "<guilabel>Smileys er FRA</guilabel>." Se <link linkend="posting_smilies">Smileys</link> for flere detaljer.</para></listitem>
+				<listitem><para>BBkode - BBkode er en formateringsmetode, der kan anvendes i dit indlæg, hvis BBkode er aktiveret af boardadministratoren. Er BBkode aktiveret, ser du teksten "<guilabel>BBkode er TIL</guilabel>" til højre for feltet Indlægsindhold. Ellers ser du teksten "<guilabel>BBkode er FRA</guilabel>." Se <link linkend="posting_bbcodes">BBkoder</link> for flere detaljer.</para></listitem>
 			</itemizedlist>
 		</section>
-		
+
 		<section id="posting_smilies">
 			<title>Smileys</title>
-			<para>Smileys, er små grafiske ikoner - eller billeder, som kan benyttes til at signalere bestemte følelser. De bruges via en kort tekstkode, f.eks. :) indsætter [vis glad smiley her], ;) indsætter [vis smiley her], etc. Andre smileys kræver formatet :tekst_her: for at blive vist. Som eksempel vil smileykoden :roll: vise en smiley med rullende øjne [vis smiley], og :cry: en grædende smiley [vis smiley].</para>
-			<para>Normalt har du også mulighed for at vælge den smiley du vil indsætte ved at klikke på den til højre for feltet hvor du skriver din indlægstekst. Når du har valgt smiley'en vises smileykoden i tekstfeltet.</para>
-			<para>Hvis du ønsker at anvende nogle af disse tegnkombinationer i indlægget, men ikke ønsker at de skal vises som smileys, se venligst <link linkend="posting_options">Indlægsindstillinger</link>.</para>
+			<para>Smileys, eller emotikoner, er små billeder som kan indsættes i dit indlæg for at tilføje følelsesmæssigt udtryk. For at bruge smileys sammensættes bestemte tegn for at opnå det ønskede resultat. Skriver du f.eks. :) indsættes <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/smile.gif"/></imageobject></inlinemediaobject>, ;) indsætter <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/wink.gif"/></imageobject></inlinemediaobject>, osv. Andre smileys kræver formatet :tekst_her: for at blive vist. F.eks. indsætter :roll: en smiley med rullende øjne: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/rolleyes.gif"/></imageobject></inlinemediaobject>, og :cry: en grædende smiley: <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/smilies/cry.gif"/></imageobject></inlinemediaobject>.</para>
+			<para>I mange tilfælde kan du også vælge den ønskede smiley ved at klikke på dens billede i højre side af feltet Indlægsindhold. Ved klik indsættes smileyens tegnkode på markørens aktuelle placering i tekstfeltet.</para>
+			<para>Ønsker du at bruge disse tegnkombinationer i dit indlæg, uden at de vises som smileys, se venligst <link linkend="posting_options">Indlægsindstillinger</link>.</para>
 		</section>
-		
+
 		<section id="posting_bbcodes">
 			<title>BBkoder</title>
-			<para>BBkode er en speciel implementering af HTML. Hvorvidt du aktuelt har muligheden for at anvende BBkode i dine indlæg, er defineret af administratoren. Du kan selv fravælge denne mulighed pr. emne når du skriver et indlæg. BBkode skrives på samme måde som HTML, hvor teksten omsluttes af en start- og en slutkode, koderne er omsluttet af hakparenteser [ og ] i stedet for &lt; og &gt;.</para>
-			<para>En mere detaljeret vejledning i brugen af BBkode kan findes ved at klikke på linket <guilabel>BBkode</guilabel> til højre for teksfeltet hvor du skriver indlægget. Bemærk også at administrator har mulighed for at tilføje yderligere tilpassede BBkoder, så der kan være flere end nedennævnte tilgængelige.</para>
-			<para>Standard BBkoder og måden de vises på:</para>
-			<para>[b]Fed tekst[/b]:</para>
+			<para>BBkode er en formateringsmetode, der kan anvendes på dit indlægsindhold, meget lig HTML. I modsætning til HTML bruger BBkode dog hakparenteser [ og ] i stedet for vinkelparenteser &lt; og &gt;. Afhængigt af de tilladelser boardadministratoren har fastsat, kan du muligvis kun bruge bestemte BBkoder, eller slet ingen.</para>
+			<para>For detaljeret vejledning i brugen af BBkode, kan du klikke på linket <guilabel>BBkode</guilabel> til højre for feltet Indlægsindhold. Bemærk at administratoren har mulighed for at tilføje nye og brugerdefinerede BBkoder, så flere kan være tilgængelige for dig end dem på denne liste.</para>
+			<para>Grundlæggende BBkoder og deres output er som følger:</para>
+			<para>[b]Fed tekst[/b]: <emphasis role="strong">Fed tekst</emphasis></para>
 			<para>[i]Kursiv tekst[/i]: <emphasis>Kursiv tekst</emphasis></para>
-			<para>[u]Understreget tekst[/u]:</para>
-			<para>[quote]Citeret tekst[/quote]:</para>
-			<para>[quote="Navn på den der citeres"]Citat[/quote]: <!-- [insert screenshot of cited quoted text] --></para>
-			<para>[url]http://www.phpbb.com[/url]: <ulink url="http://www.phpbb.com">http://www.phpbb.com</ulink></para>
-			<para>[url=http://www.phpbb.com]Tekst indeholdende link[/url]: <ulink url="http://www.phpbb.com">Tekst indeholdende link</ulink></para> 
-			<para>[flash=bredde,højde]Sti til flash[/flash] afspiller flash med de anførte dimensioner.</para>
-			<para>Som nævnt kan findes en mere detaljeret vejledning i brugen af BBkode ved at klikke på linket <guilabel>BBkode</guilabel> til højre for teksfeltet hvor du skriver indlægget.</para>
+			<para>[u]Understreget tekst[/u]: <emphasis role="underline">Understreget tekst</emphasis></para>
+			<para>[quote]Citeret tekst[/quote]: </para> <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/quoted_text.png"/></imageobject></inlinemediaobject>
+			<para>[quote="Navn på den der citeres"]Citeret tekst[/quote]: </para> <inlinemediaobject><imageobject><imagedata fileref="../images/user_guide/quoted_text_author.png"/></imageobject></inlinemediaobject>
+			<para>[url]https://www.phpbb.com[/url]: <ulink url="https://www.phpbb.com">https://www.phpbb.com</ulink></para>
+			<para>[url=https://www.phpbb.com]Tekst indeholdende link[/url]: <ulink url="https://www.phpbb.com">Tekst indeholdende link</ulink></para>
+			<para>[flash=bredde,højde]Sti til flash[/flash] afspiller flashanimationen med de angivne dimensioner.</para>
+			<para>For mere detaljeret vejledning i brugen af BBkode og de mange andre tilgængelige BBkoder, klik venligst på linket <guilabel>BBkode</guilabel> til højre for feltet Indlægsindhold.</para>
 		</section>
-		
+
 		<section id="posting_options">
 			<title>Indlægsindstillinger</title>
-			<para>Når du skriver et indlæg eller et svar, har du adskillige muligheder for at ændre i standardindstillingerne for dette specifikke indlæg. Umiddelbart under feltet hvor du skriver dit svar findes fanen <guilabel>handling</guilabel>, og afhængig af de tilladelser administratoren har tildelt dig har du forskellige muligheder. Valgmulighederne varierer også afhængig af om du skriver et nyt indlæg eller svarer i et eksisterende emne.</para>
-			<itemizedlist>	
-				<listitem><para><guilabel>Anvend ikke BBkode</guilabel>: Er BBkode aktiveret på boardet, og du har tilladelse til bruge den, er denne mulighed tilgængelig. Vinges boksen bliver ingen BBkoder fortolket som sådan. Som eksempel vil kombinationen [b]Fed tekst[/b] blive vist nøjagtig sådan [b]Fed tekst[/b] i indlægget.</para></listitem> 
-				<listitem><para><guilabel>Anvend ikke smileys</guilabel>: Hvis smileys er aktiveret på boardet, og du har tilladelser til at bruge disse, er denne mulighed tilgængelig. Vinges boksen af bliver smileykode ikke konverteret. Som eksempel vil ;) blive vist i teksten nøjagtig som ;).</para></listitem> 
-				<listitem><para><guilabel>Behandel ikke URL'er automatisk</guilabel>: Når du skriver en URL i din indlægstekst (i formatet http://....com eller www.etc.com), bliver den som standard konverteret til et link kan klikkes på. Hvis boksen vinges af bliver URL'er i dette indlæg vist som en helt almindelig tekststreng.</para></listitem> 
-				<listitem><para><guilabel>Tilføj signatur (signaturen kan rettes i brugerkontrolpanelet)</guilabel>: Er boksen vinget af tilføjes den signatur du oprettet under din profil. Det forudsætter at administratoren har tilladt brug af signaturer i indlæg. Læs mere om signaturer i <link linkend="ucp_signature">signaturer i UCP</link>.</para></listitem> 
-				<listitem><para><guilabel>Giv mig besked ved besvarelse</guilabel>: Vinges boksen af modtager du automatisk besked (pr. email, Jabber, etc) hver gang der skrives et svar i emnet. Funktionen kaldes overvågning af emnet. Læs mere i kapitlet <link linkend="ucp_subscriptions">Boardindstillinger i UCP</link>.</para></listitem>
-				<listitem><para><guilabel>Lås emne</guilabel>: Har du redaktørtilladelser i forummet, vil afkrydsning i denne boks medføre at emnet låses når du indsender svar på indlægget. Herefter vil kun redaktører og administratorer kunne indsende indlæg i emnet. Læs mere information i <link linkend="modtools_lock">Lås emne eller indlæg</link>.</para></listitem>
+			<para>Når du skriver et nyt emne eller svar, har du adskillige indlægsindstillinger til rådighed. Du kan se disse indstillinger ved at vælge fanen <guilabel>Indstillinger</guilabel> i sektionen under indlægsformularen. Afhængigt af de tilladelser boardadministratoren har tildelt dig, eller om du skriver et emne eller et svar, vil disse indstillinger variere.</para>
+			<figure id="user_posting_options">
+			<title>Indlægsindstillinger</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/posting_options.png" />
+					</imageobject>
+					<caption>
+						<para>Indstillingerne der vises når du skriver et svar.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>Standardindstillingen for disse muligheder afhænger af dine indstillinger under <link linkend="ucp_posting">Standardindstillinger for indlæg</link> på siden <guilabel>Boardindstillinger</guilabel> i Brugerkontrolpanelet.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Anvend ikke BBkode</guilabel>: Er BBkode aktiveret på boardet, og du har tilladelse til bruge den, er denne mulighed tilgængelig. Vinges boksen af konverteres ingen BBkoder i dit indlægsindhold til deres tilhørende output. F.eks. vil kombinationen [b]Fed tekst[/b] blive vist nøjagtig sådan [b]Fed tekst[/b] i dit indlæg.</para></listitem>
+				<listitem><para><guilabel>Anvend ikke smileys</guilabel>: Er smileys aktiveret på boardet, og du har tilladelse til at bruge dem, er denne mulighed tilgængelig. Vinges boksen af konverteres ingen af smileyens tegn til deres tilhørende billede. F.eks. vil ;) blive vist i dit indlæg nøjagtig som ;).</para></listitem>
+				<listitem><para><guilabel>Behandl ikke URL'er automatisk</guilabel>: Indtaster du en URL direkte i dit indlægsindhold (i formatet http://....com eller www.etc.com), konverteres den som standard til en klikbar tekststreng. Er boksen vinget af ved indsendelse, forbliver disse URL'er som en helt almindelig tekststreng.</para></listitem>
+				<listitem><para><guilabel>Tilføj signatur (signaturen kan rettes i brugerkontrolpanelet)</guilabel>: Er boksen vinget af, tilføjes den signatur du har angivet i din profil til indlægget, forudsat at signaturer er aktiveret af administratoren, og du har de rette tilladelser. Læs mere om signaturer i <link linkend="ucp_signature">signaturer i UCP</link>.</para></listitem>
+				<listitem><para><guilabel>Giv mig besked ved besvarelse</guilabel>: Er boksen vinget af, modtager du en notifikation (via e-mail, Jabber osv.) hver gang en anden bruger svarer på emnet. Dette kaldes at overvåge emnet. Læs mere i <link linkend="ucp_subscriptions">Overvågninger i UCP</link>.</para></listitem>
+				<listitem><para><guilabel>Lås emne</guilabel>: Har du redaktørtilladelser i dette forum, medfører afkrydsning i denne boks, at emnet låses, når dit svar er indsendt. Herefter kan kun redaktører og administratorer svare i emnet. Læs mere i <link linkend="modtools_lock">Lås et emne eller indlæg</link>.</para></listitem>
 			</itemizedlist>
-			
+
 			<section id="posting_special">
 				<title>Emnetyper</title>
-				<para>Har du de rette tilladelser, har du mulighed for at vælge hvilken type dit nye emne skal vises som. Når du skriver et nyt emne kan denne mulighed benyttes med valgmuligheden <guilabel>Skriv emne som</guilabel> i indstillingsfanen umiddelbart under feltet hvor teksten skrives. Der er fire emnetyper: <guilabel>Normal</guilabel>, <guilabel>Opslag</guilabel>, <guilabel>Bekendtgørelse</guilabel> og <guilabel>Global</guilabel>. Standardindstillingen er <guilabel>Normal</guilabel>.</para>
-				<itemizedlist>				
-					<listitem><para><guilabel>Normal</guilabel>: Emnet indsendes som et standardemne i forummet.</para></listitem>
-					<listitem><para><guilabel>Opslag</guilabel>: Vises i øverst på forummets første side, før alle normale emner.</para></listitem>
-					<listitem><para><guilabel>Bekendtgørelse</guilabel>: Som opslag, i det de også er &quot;låst&quot; øverst i det forum de er indsendt. Der er imidlertid to forskelle: De vises over opslag, og vises øverst på <emphasis>alle</emphasis> sider i forummet, ikke kun på den første side.</para></listitem>
-					<listitem><para><guilabel>Global</guilabel>: Eller globale bekendtgørelser, er helt særlige bekendtgørelser som vises øverst på alle sider og i alle fora på boardet. De vises over alle andre typer emner.</para></listitem>
+				<para>Har du de rette tilladelser, har du mulighed for at vælge hvilken type dit nye emne skal have med <guilabel>Skriv emne som</guilabel>. De fire mulige typer er: <guilabel>Normal</guilabel>, <guilabel>Opslag</guilabel>, <guilabel>Bekendtgørelse</guilabel> og <guilabel>Global</guilabel>. Som standard er alle nye indlæg <guilabel>Normal</guilabel>.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Normal</guilabel>: Vælger du normal, bliver dit nye emne et standardemne i forummet.</para></listitem>
+					<listitem><para><guilabel>Opslag</guilabel>: Opslag er særlige emner i forummet. De "fastgøres" øverst på forummets første side, over alle normale emner.</para></listitem>
+					<listitem><para><guilabel>Bekendtgørelse</guilabel>: Bekendtgørelser ligner opslag, i det de også "fastgøres" øverst i forummet. De adskiller sig dog fra opslag på to måder: 1) de vises over opslag, og 2) de vises øverst på <emphasis>alle</emphasis> sider i forummet, ikke kun den første side med emner.</para></listitem>
+					<listitem><para><guilabel>Global</guilabel>: Globale, eller globale bekendtgørelser, er en særlig type bekendtgørelse, som vises øverst på alle sider i alle fora på boardet. De vises over alle andre typer af særlige emner.</para></listitem>
 				</itemizedlist>
-				<para>Der er også mulighed for at bestemme hvor længe et emne skal vises som denne type (opslag, bekendtgørelse og global) emne. Hvis man definerer varigheden for eksempelvis et opslag til at vare fire dage, vil emnet efter udløb af perioden automatisk blive ændret til et normalt emne.</para>
+				<para>Du har også mulighed for at angive hvor længe det særlige emne (opslag, bekendtgørelse eller global bekendtgørelse) skal beholde sin type. Oprettes en bekendtgørelse f.eks. med en varighed på 4 dage, ændres emnet automatisk til et normalt emne, når de 4 dage er gået.</para>
 			</section>
 		</section>
-		
+
 		<section id="posting_attachments">
 			<title>Vedhæfte filer</title>
-			<para>Muligheden for at uploade filer og vedhæfte disse i indlæg bestemmes af tilladelsen &quot;Kan vedhæfte filer&quot;. Muligheden for at downloade vedhæfte filer bestemmes af tilladelsen &quot;Kan downloade filer&quot;. Begge indstillinger bestemmes af boardadministrator.</para>
-			<para>For at vedhæfte en fil benyttes fanen <guilabel>Upload af vedhæftede filer</guilabel> umiddelbart under feltet hvor indlæg skrives, herefter klikkes på <guilabel>Gennemse</guilabel> for at finde filen på din PC. Der kan yderligere tilføjes en kommentar til filen i feltet <guilabel>Filkommentar</guilabel>. Klik på <guilabel>Tilføj filen</guilabel> for at uploade og vedhæfte filen til indlægget. Gentag processen for at tilføje flere filer.</para>
-			<para>For at slette en vedhæftet fil, vælger du først at redigere dit indlæg, umiddelbart under feltet med indlægsteksten se nu sektionen <guilabel>Vedhæftede filer</guilabel>, klik på <guilabel>Slet fil</guilabel> under den fil der skal slettes.</para>
-			<para>Hvis intet vælges vises vedhæftede filer altid efter indlægsteksten, men ved at benytte <guilabel>Placer inline</guilabel> knappen, kan filen vises i selve indlægsteksten. Filen placeres nu på rette sted med en kode [attachment=0]filnavn[/attachment], og hele den kode kan flyttes rundt i indlægsteksten, til den ønskede placering er fundet.</para>
-			<para>Vedhæftede filer er underlagt nogle begrænsninger hvad angår antal vedhæftede pr. indlæg, filstørrelse og type.</para>
- 			<itemizedlist>
-				<listitem><para>Filstørrelse: Den maksimale størrelse for uploadede filer bestemmes af administrator. Standard er 256 KiB.</para></listitem>
-				<listitem><para>Filtype: Bestemmes på baggrund af filendelser. Administrator har defineret hvilke filtyper der må vedhæftes i indlæg.</para></listitem>
+			<para>Vedhæftede filer giver brugere mulighed for at uploade filer og vedhæfte dem til deres indlæg. Muligheden for at vedhæfte og downloade vedhæftede filer bestemmes af henholdsvis tilladelserne "Kan vedhæfte filer" og "Kan downloade filer".</para>
+			<para>For at tilføje en vedhæftet fil, find sektionen <guilabel>Vedhæftede filer</guilabel> på indlægssiden og klik på knappen <guilabel>Tilføj filer</guilabel>. En kommentar kan angives i tekstfeltet <guilabel>Filkommentar</guilabel>. Klik på <guilabel>Tilføj filen</guilabel> for at uploade og vedhæfte filen til indlægget. Gentag processen for at uploade flere filer. Vedhæftede filer kan også uploades ved at trække og slippe en fil på indlægsfeltet.</para>
+			<para>For at slette en vedhæftet fil, find listen over vedhæftede filer nederst i sektionen <guilabel>Vedhæftede filer</guilabel> på indlægssiden og klik på knappen <guilabel>Slet fil</guilabel> for den ønskede fil.</para>
+			<para>Vedhæftede filer kan vises inde i indlægsteksten ved at klikke på knappen <guilabel>Placér i teksten</guilabel> for den ønskede fil. Placeres en vedhæftet fil i teksten, indsættes en BBkode-lignende tekst i indlægget, så den kan flyttes. Placeres en vedhæftet fil ikke i teksten, vises den i stedet for enden af indlægget.</para>
+			<para>Vedhæftede filer er underlagt et sæt restriktioner, nemlig filstørrelse og filtype.</para>
+			<itemizedlist>
+				<listitem><para>Filstørrelse: Den maksimale størrelse for uploadede filer bestemmes af administratoren. Standardværdien er 256KiB.</para></listitem>
+				<listitem><para>Filtype: De typer af filer, der må uploades, er begrænset af deres filendelse. De tilladte filendelser bestemmes af administratoren.</para></listitem>
 			</itemizedlist>
-			<para>Læs mere information om ændring af indstillinger for vedhæftede filer i  kapitlet <link linkend="acp_attach_settings">ACP Vedhæftede filer</link>.</para>
+			<para>For mere information om ændring af indstillinger for vedhæftede filer, se <link linkend="acp_attach_settings">ACP-indstillinger for vedhæftede filer</link>.</para>
 		</section>
 		<section id="posting_polls">
 			<title>Afstemning</title>
-			<para>Oprettelse af afstemninger giver brugere mulighed for at anvende et emne til at få andre brugere til at give deres holdning til kende om en ide eller lignende. Afstemninger kan kun oprettes i det første indlæg i et emne. Brugeres mulighed for at oprette afstemninger og afgive stemme er bestemt af administrator.</para>
-			<para>For at oprette en afstemning benyttes fanen <guilabel>Oprettelse af afstemning</guilabel> umiddelbart under feltet hvor indlæg skrives.</para>
+			<para>Afstemninger giver brugere mulighed for at bruge et emne til at stemme om en idé eller et emne. Afstemninger kan kun oprettes i det første indlæg i et emne. Muligheden for at oprette og stemme i afstemninger bestemmes af tilladelsen "Afstemninger" fastsat af administratoren.</para>
 			<itemizedlist>
- 				<listitem><para><guilabel>Afstemningsspørgsmål</guilabel>: Det overordnede spørgsmål for afstemningen angives her.</para></listitem>
-				<listitem><para><guilabel>Afstemningsmuligheder</guilabel>: Her angives de svar brugere kan vælge imellem. Hver svarmulighed angives på en separat linie og der skal angives mindst to.</para></listitem>
-				<listitem><para><guilabel>Afstemningsmuligheder pr. bruger</guilabel>: Antal valgmuligheder i afstemningen. Kan bruger vælge mere end et svar erstattes radioknapper af en række afmærkningsbokse.</para></listitem>
-				<listitem><para><guilabel>Kør afstemning i</guilabel>: Det antal dage afstemningen er åben. Når tiden er overskredet kan brugere ikke længere afgive stemme og kun resultatet vises.</para></listitem>
-				<listitem><para><guilabel>Tillad ændring af afgivne stemmer</guilabel>: Afmærkes denne kan brugere ændre afgiven stemme, så længe afstemningen er åben.</para></listitem>
+				<listitem><para><guilabel>Afstemningsspørgsmål</guilabel> - Dette er den idé eller det spørgsmål, der stemmes om i afstemningen. Dette er påkrævet for at starte en afstemning.</para></listitem>
+				<listitem><para><guilabel>Afstemningsmuligheder</guilabel> - Dette er de tilladte svar på afstemningsspørgsmålet. Ved angivelse af en svarmulighed, skal hver placeres på en separat linje i tekstfeltet. Mindst to svarmuligheder er påkrævede.</para></listitem>
+				<listitem><para><guilabel>Afstemningsmuligheder pr. bruger</guilabel> - Dette er antallet af muligheder, hver bruger kan vælge ved afstemning. Kan en bruger vælge mere end én mulighed, erstattes den almindelige afstemnings radioknapper af en række afmærkningsbokse.</para></listitem>
+				<listitem><para><guilabel>Kør afstemning i</guilabel> - Dette er antallet af dage, hvor brugere kan stemme i afstemningen. Når tiden er udløbet, kan der ikke længere afgives stemmer, og resultaterne vises.</para></listitem>
+				<listitem><para><guilabel>Tillad ændring af afgivne stemmer</guilabel> - Vælges dette, kan brugere ændre deres afgivne stemme.</para></listitem>
 			</itemizedlist>
 		</section>
 		<section id="posting_drafts">
 			<title>Kladde</title>
-			<para>Når der oprettes et indlæg kan det gemmes og genindlæses senere. Hvis boardet tillader dette, vises knapperne <guilabel>Gem kladde</guilabel> og <guilabel>Indlæs kladde</guilabel> umiddelbart under feltet hvor indlægstekst skrives.</para>
- 			<itemizedlist>
- 				<listitem><para><guilabel>Gem kladde</guilabel> - Indlægget gemmes som en kladde. Kun emnetitel og indlægstekst gemmes. Emneikoner og vedhæftede filer mistes.</para></listitem>
-				<listitem><para><guilabel>Indlæs kladde</guilabel> - Genindlæser en gemt kladde. Når denne vælges, vises en liste af tilgængelige kladder, vælg den rette ved at klikke på dens titel. Allerede skrevet indlægstekst erstattes med kladdens fulde tekst.</para></listitem>
+			<para>Når du opretter et indlæg, kan det gemmes eller indlæses med kladdefunktionen. Tillader boardets tilladelser at kladder gemmes, vises knapperne <guilabel>Gem</guilabel> og <guilabel>Indlæs</guilabel> på indlægssiden.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Gem</guilabel> - Gemmer et indlæg som en kladde. Når en kladde gemmes, gemmes kun indlæggets emne og besked. Emneikoner, vedhæftede filer osv. mistes.</para></listitem>
+				<listitem><para><guilabel>Indlæs</guilabel> - Indlæser en gemt kladde. Klikkes der her, vises en liste over tilgængelige kladder. Klik på titlen på det ønskede indlæg for at indlæse kladden. Eventuelle oplysninger i det aktuelle indlæg mistes og erstattes med kladdens indhold.</para></listitem>
 			</itemizedlist>
-			<para>Når en kladde er anvendt slettes den. Læs mere om brug af kladder i <link linkend="ucp_drafts">UCP Kladder</link>.</para>
+			<para>Når en kladde er brugt, fjernes den. For mere information om administration af kladder, se <link linkend="ucp_drafts">Kladder i UCP</link>.</para>
 			<note>
-				<para>Er ingen kladder gemt, vises knappen <guilabel>Indlæs kladde</guilabel> ikke.</para>
- 			</note>
+				<para>Er der ingen tilgængelige kladder, vises knappen <guilabel>Indlæs</guilabel> ikke.</para>
+			</note>
 		</section>
 	</section>
 	<section id="user_pm">
-		<title>Kommunikation med private beskeder</title>
-		<para>phpBB 3.0 giver brugerne mulighed for at kommunikere privat med beskedsystemet. Man kan gå direkte til beskedsystemet ved at klikke på linket [X nye beskeder] på boardindekset i venstre side næsten øverst, eller direkte via <link linkend="user_control_panel">brugerkontrolpanelet</link>.</para>
-		<para>Der er tre metoder til at få besked om nye private beskeder:</para>
+		<title>Kommunikér med private beskeder</title>
+		<para>phpBB 3.3 giver sine brugere mulighed for at kommunikere privat ved hjælp af private beskeder. For at besøge sektionen for private beskeder, kan du enten klikke på linket [X nye beskeder] i venstre side under forumheaderen, eller tilgå den direkte via <link linkend="user_control_panel">Brugerkontrolpanelet</link>.</para>
+		<para>Afhængigt af de kommunikationsmetoder boardadministratoren tillader, kan du blive gjort opmærksom på en ny privat besked på 3 måder:</para>
 		<orderedlist>
 			<listitem>
-				<para>Du modtager en e-mail, og/eller en Jabberbesked hvis administratoren sat boardet op til at kommunikere med en Jabberserver</para>
+				<para>Ved at modtage en e-mail eller Jabber-besked</para>
 			</listitem>
 			<listitem>
-				<para>Du bliver mødt med et popupvindue når du besøger boardet</para>
+				<para>Et opslag vises i notifikationsmenuen</para>
 			</listitem>
 			<listitem>
-				<para>Linket [X nye beskeder] viser altid antallet af ulæste beskeder i din indbakke</para>
+				<para>Linket <guilabel>Private beskeder [X]</guilabel> viser antallet af aktuelt ulæste beskeder</para>
 			</listitem>
 		</orderedlist>
-		<para>Du kan under fanen <link linkend="ucp_preferences">boardindstillinger</link> vælge hvilke metoder du foretrækker. Bemærk at du i nogle browsere skal tillade popupvinduer fra boardet, for at få glæde at denne metode.</para>
-		<para>Du kan fravælge at modtage private beskeder fra andre brugere i <link linkend="ucp_preferences">boardindstillinger</link>. Administratorer og redaktører vil stadig kunne sende dig private beskeder selvom du har fravalgt at modtage beskeder fra andre brugere.</para>
-		<para>Muligheden for at anvende private beskeder forudsætter at du er tilmeldt boardet og har de rette tilladelser.</para>
+		<para>Du kan indstille disse muligheder efter eget ønske under <link linkend="ucp_preferences">Boardindstillinger</link>.</para>
+		<para>Du kan vælge ikke at modtage private beskeder fra andre brugere under dine <link linkend="ucp_preferences">Boardindstillinger</link>. Bemærk at redaktører og administratorer stadig kan sende dig private beskeder, selv hvis du har deaktiveret dem.</para>
+		<note>
+			<para>Disse funktioner er kun tilgængelige for tilmeldte brugere med de rette tilladelser.</para>
+		</note>
 		<section id="pm_display">
-			<title>Vis beskeder</title>
-			<para>Indbakken er standardmodtagemappen for indkommende beskeder og indeholder alle beskeder afsendt til dig. </para>
+			<title>Visning af beskeder</title>
+			<para>Indbakken er standardmodtagemappen og indeholder en liste over dine senest modtagne private beskeder.</para>
 		</section>
 		<section id="pm_new">
 			<title>Skriv en besked</title>
-			<para>Skærmbilledet der vises når du skriver en privat besked er næsten identisk med skærmbilledet til at skrive et nyt indlæg. Den væsentligste forskel er tilføjelsen af et adressefelt til at angive modtagere.</para>
+			<para>Skærmbilledet der vises, når du skriver en privat besked, er næsten identisk med skærmbilledet for at skrive et nyt indlæg. Den primære forskel er tilføjelsen af et adressefelt til modtagere.</para>
 			<figure id="user_private_message_fields">
 			<title>Felter til private beskeder</title>
 				<mediaobject>
@@ -417,101 +443,101 @@
 						<imagedata format="PNG" fileref="../images/user_guide/private_messsage_fields.png" />
 					</imageobject>
 					<caption>
-						<para>Felter til at tilføje modtagere af en privat besked.</para>
+						<para>Felter til at tilføje modtagere til en privat besked.</para>
 					</caption>
 				</mediaobject>
 			</figure>
-			<para>Brugernavne indtastes i tekstfeltet, hvorefter enten <guilabel>Tilføj</guilabel> eller <guilabel>Tilføj [BCC]</guilabel> bruges til at tilføje brugeren til den ønskede modtagerliste. Er du i tvivl om en brugers navn, kan du bruge linket <guilabel>Find et medlem</guilabel> til at søge efter brugeren i medlemslisten. Sæt kryds ud for den eller de ønskede brugere i medlemslisten, og klik på <guilabel>Vælg markerede</guilabel> for at tilføje brugeren til modtagerfeltet.</para>
+			<para>Brugernavne indtastes i tekstfeltet, hvorefter enten <guilabel>Tilføj</guilabel> eller <guilabel>Tilføj [BCC]</guilabel> bruges til at tilføje brugeren til den relevante modtagerliste. Er du usikker på en brugers navn, kan du bruge linket <guilabel>Find et medlem</guilabel> til at søge medlemslisten. Sæt et mærke ved den/de ønskede bruger(e) i medlemslisten, og klik på <guilabel>Vælg markerede</guilabel> for at tilføje brugeren til modtagerfeltet.</para>
 		</section>
 		<section id="pm_folders">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Beskedmapper</title>
-			<para>Nøjagtig som i din email klient gemmes alle <glossterm>private beskeder</glossterm> i mapper. Du kan arbejde med mapperne på samme måde som med fora i phpBB 3.0. <guilabel>Indbakke</guilabel> er din standardmappe til modtagede beskeder. Alle beskeder afsendt til dig vil kunne ses her.</para>
-			<para>De beskeder du har afsendt vil enten kunne ses i <guilabel>Udbakke</guilabel> eller i <guilabel>Sendte beskeder</guilabel>. Indtil modtageren har læst beskeden forbliver den i <guilabel>Udbakke</guilabel>. Når modtageren har læst den arkiveres beskeden i mappen <guilabel>Sendte beskeder</guilabel>. Hvis administratoren har tilladt det, kan du redigere dine beskeder så længe de befinder sig ulæste i <guilabel>Udbakke</guilabel>.</para>
-			<para>Hver mappe, inklusive <guilabel>Sendte beskeder</guilabel> og <guilabel>Udbakke</guilabel> kan indeholde det antal beskeder som er defineret for boardet. Det er en overordnet grænse som kun kan ændres af en boardadministrator. Øverst i alle mapper vises en status over hvor meget af den tilladte plads der er forbrugt, både i procent og antal beskeder. Vises ingen status er der ikke defineret en øvre grænse for antal beskeder.</para>
+			<para>Ligesom i din e-mailklient gemmes alle <glossterm>private beskeder</glossterm> i mapper. At arbejde med mapper minder om at arbejde med fora i phpBB 3.3. <guilabel>Indbakken</guilabel> er din standardmodtagemappe. Alle beskeder du modtager, vises her.</para>
+			<para><guilabel>Sendte beskeder</guilabel> vises enten i mappen <guilabel>Udbakke</guilabel> eller <guilabel>Sendte beskeder</guilabel>. Så længe modtageren/modtagerne endnu ikke har læst beskeden, forbliver den i <guilabel>Udbakken</guilabel>. Så snart nogen læser beskeden, arkiveres den til mappen <guilabel>Sendte beskeder</guilabel>. Tillader administratoren det, kan du redigere beskeder, efter de er sendt, så længe de er i <guilabel>Udbakken</guilabel>, og modtagerne endnu ikke har læst dem.</para>
+			<para>Hver mappe, inklusive <guilabel>Sendte beskeder</guilabel> og <guilabel>Udbakke</guilabel>, kan indeholde et af boardet fastsat antal beskeder. Dette er en global indstilling, som kun en boardadministrator kan ændre. En infotekst viser det aktuelle antal tilladte beskeder samt den nuværende procentdel af pladsen dine beskeder bruger, øverst i hver mappe. Vises der ingen begrænsning, har du ubegrænset plads i den pågældende mappe.</para>
 			<note>
-				<para>Bemærk at det tilladte antal beskeder er en grænse pr. mappe. Du kan altså have flere mapper hvor der i hver kan opbevares beskeder op til grænsen. Har du f.eks. 3 mapper og grænsen er sat til 50 beskeder pr. mappe, kan du reelt gemme 150 beskeder. Det er ikke muligt at sammenlægge mapper og det er heller ikke muligt at oprette en mappe med en anden grænse for tilladte beskeder.</para>
+				<para>Bemærk at det tilladte antal beskeder er en indstilling pr. mappe. Du kan have flere mapper, som hver tillader 50 beskeder. Har du 3 mapper, er din reelle globale grænse 150 beskeder, men hver mappe kan kun indeholde op til 50 beskeder i sig selv. Det er ikke muligt at sammenlægge mapper og få én med flere beskeder end grænsen tillader.</para>
 			</note>
-			
+
 			<section id="pm_folders_custom">
 				<sectioninfo>
 					<authorgroup>
 						<author>
-							<othername>jask</othername>
+							<othername>Claude</othername>
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Tilpassede mapper</title>
-				
-				<para>Hvis administratoren har tilladt det, kan du oprette dine egne tilpassede mapper til opbevaring af <glossterm>private beskeder</glossterm>. Du kan kontrollere om du har mulighed for at oprette mapper under fanen <guilabel>private beskeder</guilabel> og under punktet <guimenuitem>Regler, mapper &amp; indstillinger</guimenuitem>.</para>
-				<para>For at oprette en ny mappe skrives navnet på den i feltet <guilabel>Tilføj mappe</guilabel>. Når mappen er oprettet vises den straks i mappeoversigten til venstre og under afsnittet tilføj mappe, hvor du nu kan omdøbe og slette den. Du kan bruge mappen som en almindelig mappe til beskeder og manuelt flytte beskeder hertil, eller bruge beskedfiltrering til automatisk at foretage flytningen (se kapitlet <link linkend="pm_filters">Meddelelsefiltre</link> for mere information om disse filtre).</para>
+				<title>Brugerdefinerede mapper</title>
+
+				<para>Tillader administratoren det, kan du oprette dine egne brugerdefinerede mapper til <glossterm>private beskeder</glossterm> i phpBB 3.3. For at tjekke om du kan tilføje mapper, besøg sektionen <guimenuitem>Redigeringsmuligheder</guimenuitem> under <guilabel>private beskeder</guilabel>.</para>
+				<para>For at oprette en ny mappe skrives navnet på den i feltet <guilabel>Tilføj mappe</guilabel>. Lykkedes oprettelsen, vises din nye mappe nederst på mappelisten. Du kan herefter bruge den som en almindelig beskedmappe og flytte beskeder til den, eller oprette et filter (se afsnittet om <link linkend="pm_rules">Regler for private beskeder</link> for mere information om filtre), der automatisk gør det for dig.</para>
 			</section>
-			
+
 			<section id="pm_folders_moving">
 				<sectioninfo>
 					<authorgroup>
 						<author>
-							<othername>jask</othername>
+							<othername>Claude</othername>
 						</author>
 					</authorgroup>
 				</sectioninfo>
 				<title>Flytning af beskeder</title>
-				
-				<para>Det ville ikke give mening at oprette sine egne mapper, hvis man ikke kunne flytte beskeder imellem disse. For at flytte beskeder fra en mappe til en anden skal den eller de beskeder der ønskes flyttes først markeres og i dropdownmenuen forneden vælges den mappe hvortil beskeden skal flyttes med <guilabel>Flyt valgte til xxx</guilabel>.</para>
+
+				<para>Det ville ikke give mening at have brugerdefinerede mapper, hvis du ikke kunne flytte beskeder mellem dem. For netop at gøre dette, besøg den mappe du vil flytte beskederne fra. Vælg de beskeder du vil flytte, og brug dropdownmenuen <guilabel>Flyt markerede</guilabel> til at vælge destinationsmappen.</para>
 				<note>
-					<para>Bemærk venligst at er modtagemappen herefter fyldt over det tilladte antal beskeder, modtager du en fejlmeddelelse og flytningen annulleres.</para>
+					<para>Bemærk venligst at er destinationsmappen herefter fyldt over det tilladte antal beskeder, modtager du en fejlbesked, og flytningen annulleres.</para>
 				</note>
 			</section>
-			
+
 			<section id="pm_folders_marking">
 				<sectioninfo>
 					<authorgroup>
 						<author>
-							<othername>jask</othername>
+							<othername>Claude</othername>
 						</author>
 					</authorgroup>
 				</sectioninfo>
-				<title>Farvemarkering af private beskeder</title>
-				
-				<para>Beskeder i de forskellige mapper kan være farvemarkerede. Farvelægningen kan variere afhængig af den anvendte typografi. Se venligst farvenes betydning i <guilabel>Farveforklaring</guilabel> som kan ses i mapper der indeholder beskeder.  Der anvendes fire forskellige farvemarkeringer med disse betydninger:</para>
+				<title>Beskedmarkeringer</title>
+
+				<para>Beskeder i mapper kan have farvemarkeringer. Se venligst forklaringen <guilabel>Beskedfarver</guilabel> for at se hvad hver farve betyder. Den præcise farve afhænger af det anvendte tema. Farvede beskeder kan have fire forskellige betydninger:</para>
 				<variablelist>
 					<varlistentry>
-						<term>Vigtig</term>
+						<term>Markeret besked</term>
 						<listitem>
-							<para>Du kan vælge at markere en besked som &quot;Vigtig&quot; med <guilabel>Marker/afmarker som vigtig</guilabel> muligheden i dropdownmenuen.</para>
+							<para>Du kan markere en besked som vigtig med muligheden <guilabel>Markér som vigtig</guilabel> i dropdownmenuen.</para>
 						</listitem>
 					</varlistentry>
-					
+
 					<varlistentry>
-						<term>Besvaret</term>
+						<term>Besvaret besked</term>
 						<listitem>
-							<para>Når du besvarer en besked, bliver den automatisk markeret som sådan. På denne måde har du kontrol over hvilke beskeder der skal behandles og hvilke der allerede er besvaret.</para>
+							<para>Svarer du på en besked, markeres den som dette. På denne måde kan du holde styr på hvilke beskeder der stadig kræver din opmærksomhed, og hvilke du allerede har besvaret.</para>
 						</listitem>
 					</varlistentry>
-					
+
 					<varlistentry>
-						<term>Fra ven</term>
+						<term>Besked fra en ven</term>
 						<listitem>
-							<para>Er afsenderen på din venneliste (se kapitlet <link linkend="ucp_friends_foes">Venner &amp; Ignorede brugere</link> for mere information), farvemarkeres beskeden automatisk herefter.</para>
+							<para>Er afsenderen på din venneliste (se afsnittet om <link linkend="ucp_friends_foes">Venner og ignorerede brugere</link> for mere information), fremhæves beskeden med denne farve.</para>
 						</listitem>
 					</varlistentry>
-					
+
 					<varlistentry>
-						<term>Fra ignoreret bruger</term>
+						<term>Besked fra en ignoreret bruger</term>
 						<listitem>
-							<para>Er afsenderen en bruger du har valgt at ignorere, farvemarkeres beskeden automatisk herefter.</para>
+							<para>Er afsenderen en af dine ignorerede brugere, fremhæves beskeden med denne farve.</para>
 						</listitem>
 					</varlistentry>
 				</variablelist>
-				
+
 				<note>
-					<para>Bemærk venligst at en besked kun kan have en farvemarkering, og det er altid den sidst valgte. Markerer du en besked som <guilabel>Vigtig</guilabel> og efterfølgende besvarer denne, vil markeringen <guilabel>Besvaret</guilabel> overskrive din <guilabel>Vigtig</guilabel> markering.</para>
+					<para>Bemærk venligst at en besked kun kan have én mærkning, og det vil altid være den seneste handling du har foretaget. Markerer du f.eks. en besked som <guilabel>vigtig</guilabel> og besvarer den efterfølgende, vil mærkningen <guilabel>besvaret</guilabel> overskrive mærkningen <guilabel>vigtig</guilabel>.</para>
 				</note>
 			</section>
 		</section>
@@ -604,24 +630,24 @@
 		</section>
 	</section>
 	<section id="user_search">
-		<title>Søgning - finder det du leder efter</title>
-		<para>Efterhånden som boardet vokser og der ophobes flere indlæg, bliver det sværere hurtigt at finde bestemt indhold. Som hjælp til at finde indlæg indeholder phpBB et søgeværktøj. De mest almindelige søgninger er tilgængelige som links på forsiden (nye indlæg, ubesvarede indlæg osv.), søgning efter nøgleord kan udføres fra headeren, forumvisningen og emnevisningen (i de stilarter der understøtter det), og du kan lave dine egne søgeforespørgsler med den avancerede søgefunktion.</para>
+		<title>Søgning - find det du leder efter</title>
+		<para>Efterhånden som boardet vokser og akkumulerer indlæg, bliver det svært hurtigt at finde specifikt indhold. For at hjælpe med at finde indlæg indeholder phpBB et søgeværktøj. Almindelige søgninger tilbydes som links på indekset (nye indlæg, ubesvarede indlæg osv.), søgning på nøgleord kan udføres fra headeren, forumvisningen og emnevisningen (i understøttede typografier), og brugerdefinerede søgeforespørgsler kan oprettes med den avancerede søgefunktion.</para>
 
 		<section id="user_search_predefined">
 			<title>Foruddefinerede søgninger</title>
-			<para>phpBB leveres med flere foruddefinerede søgninger, så du nemt kan udføre bestemte typer forespørgsler.</para>
+			<para>phpBB leveres med flere foruddefinerede søgninger, så du nemt kan udføre visse typer forespørgsler.</para>
 			<itemizedlist>
-				<listitem><para><guilabel>Dine indlæg</guilabel> - Viser en liste over emner du har skrevet i, sorteret efter tidspunktet for det seneste indlæg i emnet.</para></listitem>
-				<listitem><para><guilabel>Ubesvarede emner</guilabel> - Viser alle emner der ikke indeholder nogen svar.</para></listitem>
-				<listitem><para><guilabel>Ulæste indlæg</guilabel> - Viser en liste over emner der indeholder indlæg du endnu ikke har læst.</para></listitem>
-				<listitem><para><guilabel>Nye indlæg</guilabel> - Viser en liste over emner der indeholder indlæg skrevet siden du sidst var logget ind.</para></listitem>
-				<listitem><para><guilabel>Aktive emner</guilabel> - Viser en liste over emner der er skrevet i inden for de seneste dage. Antallet af dage kan ændres efter søgesiden er indlæst.</para></listitem>
+				<listitem><para><guilabel>Se dine indlæg</guilabel> - Viser en liste over emner, du har skrevet indlæg i, sorteret efter tidspunktet for det seneste indlæg i emnet.</para></listitem>
+				<listitem><para><guilabel>Se ubesvarede emner</guilabel> - Viser alle emner, der ikke har nogen svar.</para></listitem>
+				<listitem><para><guilabel>Se ulæste indlæg</guilabel> - Viser en liste over emner med indlæg, du endnu ikke har læst.</para></listitem>
+				<listitem><para><guilabel>Se nye indlæg</guilabel> - Viser en liste over emner med indlæg, der er skrevet siden du sidst loggede ind.</para></listitem>
+				<listitem><para><guilabel>Aktive emner</guilabel> - Viser en liste over emner, der har fået indlæg i løbet af de seneste dage. Antallet af dage kan ændres efter søgesiden er indlæst.</para></listitem>
 			</itemizedlist>
 		</section>
 
 		<section id="user_search_forums_topics">
 			<title>Søgning i fora og emner</title>
-			<para>Nogle stilarter har søgefelter i forumvisningen og emnevisningen. Med disse felter kan du søge efter nøgleord inden for det aktuelle forum eller emne.</para>
+			<para>Nogle stilarter har søgefelter i forumvisningen og emnevisningen. Disse felter giver dig mulighed for at udføre en søgning på nøgleord i forummet eller det aktuelle emne.</para>
 
 			<figure id="user_search_topic">
 				<title>Søgning i emner</title>
@@ -638,29 +664,29 @@
 
 		<section id="user_search_advanced">
 			<title>Avanceret søgning</title>
-			<para>Ud over de foruddefinerede søgninger phpBB tilbyder, kan du også lave dine egne søgeforespørgsler. Søgninger kan baseres på nøgleord, forfatter og valg af forum.</para>
+			<para>Ud over de foruddefinerede søgninger phpBB tilbyder, er det muligt at oprette dine egne søgeforespørgsler. Søgninger kan baseres på nøgleord, forfatter og forumvalg.</para>
 			<section id="user_search_query">
 				<title>Søgeforespørgslen</title>
-				<para>For at søge på boardet skal du angive hvad du vil søge efter. Du kan angive nøgleord at søge efter samt en forfatter til indlægget. Der findes to muligheder for hvordan søgningen udføres:</para>
+				<para>For at søge på boardet skal du angive hvad du ønsker at søge efter. Du kan angive nøgleord at søge efter samt en forfatter af indlæg. Der findes to muligheder for hvordan søgningen udføres:</para>
 				<itemizedlist>
-					<listitem><para><guilabel>Søg efter alle ord eller brug forespørgslen som indtastet</guilabel> - Hvis der angives flere nøgleord, skal <emphasis role="strong">alle</emphasis> nøgleord findes i resultatet. Alternativt kan du angive en forespørgsel ved hjælp af særlige identifikatorer.</para></listitem>
-					<listitem><para><guilabel>Søg efter et hvilket som helst ord</guilabel> - Hvis der angives flere nøgleord, vises resultater der indeholder <emphasis role="strong">mindst et</emphasis> af de angivne nøgleord.</para></listitem>
+					<listitem><para><guilabel>Søg efter alle ord eller brug forespørgslen som indtastet</guilabel> - Angives flere nøgleord, skal <emphasis role="strong">alle</emphasis> nøgleordene findes i resultatet. Alternativt kan du angive en forespørgsel med særlige identifikatorer.</para></listitem>
+					<listitem><para><guilabel>Søg efter et hvilket som helst ord</guilabel> - Angives flere nøgleord, returneres resultater der indeholder <emphasis role="strong">et hvilket som helst</emphasis> af de angivne nøgleord.</para></listitem>
 				</itemizedlist>
 				<section id="user_search_query_keywords">
 					<title>Nøgleord</title>
-					<para>Ud over at angive nøgleord kan du bruge særlige identifikatorer til at tillægge bestemte ord større eller mindre betydning.</para>
+					<para>Ud over at angive nøgleord, kan særlige identifikatorer bruges til at tilføje eller mindske vigtigheden af bestemte ord.</para>
 					<variablelist>
 						<title>Identifikatorer</title>
 						<varlistentry>
 							<term>+</term>
 							<listitem>
-								<para>Når dette placeres foran et nøgleord, skal ordet findes i resultatteksten.</para>
+								<para>Placeret foran et nøgleord, skal dette nøgleord findes i resultatteksten.</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
 							<term>-</term>
 							<listitem>
-								<para>Når dette placeres foran et nøgleord, må ordet ikke forekomme i resultatteksten.</para>
+								<para>Placeret foran et nøgleord, må dette nøgleord ikke forekomme i resultatteksten.</para>
 								<variablelist>
 									<title>Eksempler</title>
 									<varlistentry>
@@ -675,7 +701,7 @@
 						<varlistentry>
 							<term>|</term>
 							<listitem>
-								<para>Dette tegn kan bruges til at adskille en liste af nøgleord, hvoraf mindst et af ordene skal findes i teksten. Ord kan placeres i parentes og kombineres med et + eller - for at angive at mindst et af ordene skal eller ikke må forekomme i hvert resultat.</para>
+								<para>Dette tegn kan bruges til at adskille en liste af nøgleord, hvoraf mindst ét af nøgleordene skal findes i teksten. Ord kan placeres i parenteser og kombineres med et + eller - for at angive, at mindst ét af ordene skal eller ikke må forekomme i hvert resultat.</para>
 								<variablelist>
 									<title>Eksempler</title>
 									<varlistentry>
@@ -696,7 +722,7 @@
 						<varlistentry>
 							<term>*</term>
 							<listitem>
-								<para>En stjerne i et nøgleord gør det muligt at finde delvise ordmatch.</para>
+								<para>En stjerne i et nøgleord giver mulighed for delvise nøgleordsmatch.</para>
 								<variablelist>
 									<title>Eksempler</title>
 									<varlistentry>
@@ -713,34 +739,34 @@
 
 				<section id="user_search_query_author">
 					<title>Forfatter</title>
-					<para>Søgeforespørgslen kan indsnævres yderligere ved at angive forfatteren til indlægget. Hvis der angives en forfatter, vises kun indlæg skrevet af denne forfatter, der også opfylder de øvrige søgekrav. Forfatterfeltet understøtter jokertegn (*) til delvis søgning på brugernavnet.</para>
+					<para>Søgeforespørgslen kan indsnævres yderligere ved at angive forfatteren af indlægget. Angives en forfatter, returneres kun indlæg skrevet af denne forfatter, som opfylder forespørgslens krav. Feltet Forfatter tillader brug af jokertegn (*) til delvise match på forfatterens navn.</para>
 				</section>
 			</section>
 
 			<section id="user_search_options">
-				<title>Søgemuligheder</title>
-				<para>Søgninger kan indsnævres yderligere til bestemte fora eller bestemte dele af emnerne.</para>
+				<title>Søgemulighederne</title>
+				<para>Søgninger kan yderligere begrænses til bestemte fora eller bestemte dele af emnerne.</para>
 				<itemizedlist>
-					<listitem><para><guilabel>Søg i fora</guilabel> - Her kan du vælge de specifikke fora søgningen skal udføres i. Flere fora kan vælges ved at holde "Ctrl"- eller "Cmd"-tasten nede.</para></listitem>
-					<listitem><para><guilabel>Søg i underfora</guilabel> - Hvis denne mulighed vælges, vil eventuelle underfora til de valgte fora også blive gennemsøgt.</para></listitem>
+					<listitem><para><guilabel>Søg i fora</guilabel> - Her kan du vælge specifikke fora, søgningen skal udføres i. Flere fora kan vælges ved at holde "Ctrl"- eller "Cmd"-tasten nede.</para></listitem>
+					<listitem><para><guilabel>Søg i underfora</guilabel> - Er denne mulighed valgt, gennemsøges også eventuelle underfora til de valgte fora.</para></listitem>
 					<listitem>
 						<para><guilabel>Søg i</guilabel> - Her kan du angive hvilken del af indlæggene der skal gennemsøges.</para>
 						<itemizedlist>
-							<listitem><para><guilabel>Indlæggets overskrift og beskedfelt</guilabel> - Både overskriften og selve indlægget gennemsøges.</para></listitem>
-							<listitem><para><guilabel>Søg kun i beskedfeltet</guilabel> - Kun selve indlægget gennemsøges, ikke overskriften.</para></listitem>
-							<listitem><para><guilabel>Emnets overskrift</guilabel> - Kun emnets overskrift gennemsøges.</para></listitem>
-							<listitem><para><guilabel>Kun første indlæg i emnet</guilabel> - Kun det første indlæg i hvert emne gennemsøges, ikke de øvrige indlæg i emnet.</para></listitem>
+							<listitem><para><guilabel>Indlæggets overskrift og beskedfelt</guilabel> - Både emnet og selve indlægget gennemsøges.</para></listitem>
+							<listitem><para><guilabel>Søg kun i beskedfeltet</guilabel> - Kun selve indlæggets indhold gennemsøges, ikke dets emne.</para></listitem>
+							<listitem><para><guilabel>Søg kun i emnetitler</guilabel> - Kun emnetitler gennemsøges.</para></listitem>
+							<listitem><para><guilabel>Kun emnets første indlæg</guilabel> - Kun det første indlæg i hvert emne gennemsøges, ikke øvrige indlæg i emnet.</para></listitem>
 						</itemizedlist>
 					</listitem>
-					<listitem><para><guilabel>Vis resultater som</guilabel> - Denne mulighed formaterer søgeresultaterne, så de enten kun viser indlæggenes indhold eller kun emnernes overskrifter.</para></listitem>
-					<listitem><para><guilabel>Sorter efter</guilabel> - Sorterer resultaterne efter enten <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>forum</guilabel>, <guilabel>emnets overskrift</guilabel> eller <guilabel>indlæggets overskrift</guilabel>. Resultaterne kan vises i <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
-					<listitem><para><guilabel>Afgræns resultater til forrige</guilabel> - Begrænser resultaterne til indlæg skrevet inden for en bestemt tidsperiode.</para></listitem>
-					<listitem><para><guilabel>Vis første</guilabel> - Formaterer resultaterne, så kun et bestemt antal tegn af de matchende indlæg vises.</para></listitem>
+					<listitem><para><guilabel>Vis resultater som</guilabel> - Denne indstilling formaterer søgeresultaterne til kun at vise enten indlæggenes indhold eller blot emnetitler.</para></listitem>
+					<listitem><para><guilabel>Sortér resultater efter</guilabel> - Sorterer resultaterne efter enten <guilabel>forfatter</guilabel>, <guilabel>indlægstidspunkt</guilabel>, <guilabel>forum</guilabel>, <guilabel>emnetitel</guilabel> eller <guilabel>emne</guilabel>. Resultaterne kan vises i <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					<listitem><para><guilabel>Begræns resultater til foregående</guilabel> - Begrænser resultaterne til indlæg skrevet i en bestemt periode.</para></listitem>
+					<listitem><para><guilabel>Vis første</guilabel> - Formaterer resultaterne til kun at indeholde et bestemt antal tegn af de matchende indlæg.</para></listitem>
 				</itemizedlist>
 			</section>
 			<section id="user_search_refinement">
 				<title>Yderligere indsnævring</title>
-				<para>På resultatsiden er det muligt at indsnævre din søgning yderligere ved at angive flere søgeord.</para>
+				<para>På resultatsiden er det muligt yderligere at indsnævre din søgning ved at angive flere søgeord.</para>
 				<figure id="user_search_refinement_image">
 					<title>Indsnævring af søgning</title>
 					<mediaobject>
@@ -755,62 +781,62 @@
 			</section>
 		</section>
 	</section>
-	
+
 	<section id="user_memberlist">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Listen tilmeldte brugere - indeholder mere end øjet ser</title>
-		<para>I phpBB3 introduceres flere nye metoder til at søge efter brugere.</para>
-		
+		<title>Medlemslisten - indeholder mere end øjet ser</title>
+		<para>phpBB3 introducerer flere nye metoder til at søge efter brugere.</para>
+
 		<figure id="user_memberlist_sorting">
-			<title>Sortering af brugere</title>
+			<title>Sortering af medlemslisten</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata format="PNG" fileref="../images/user_guide/memberlist_sorting.png" />
 				</imageobject>
 				<caption>
-					<para>Vælg hvordan listen skal sorteres.</para>
+					<para>Valg af mulighed for at sortere medlemslisten.</para>
 				</caption>
 			</mediaobject>
 		</figure>
-		
+
 		<variablelist>
 			<varlistentry>
-				<term>Sortering efter brugernavn</term>
+				<term>Sortér efter brugernavn</term>
 				<listitem>
-					<para>Du kan i dropdownmenuen vælge at sortere listen efter brugernavn. Du kan også vælge at få vist alle brugernavne startende med et bestemt bogstav, ved at klikke på det pågældende bogstav lidt længere nede under overskriften &quot;Tilmeldte brugere&quot;.</para>
+					<para>Ønsker du at finde alle medlemmer, hvis brugernavne begynder med et bestemt bogstav, kan du vælge bogstavet fra listen af bogstaver øverst på medlemslisten. Klikker du f.eks. på "A", vises alle brugernavne der begynder med bogstavet A, mens et klik på "B" viser alle brugernavne der begynder med B. Klikkes på nummertegnet (#), vises en liste over brugernavne, der ikke begynder med et af de 26 bogstaver: med andre ord, tal og andre tegn.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Sortering efter kolonneoverskrifter</term>
+				<term>Sortér efter kolonneoverskrifter</term>
 				<listitem>
-					<para>For at sortere listen stigende, klikkes på den kolonneoverskrift du vil sortere efter: <guilabel>Brugernavn</guilabel>, <guilabel>Tilmeldt</guilabel>, <guilabel>Indlæg</guilabel>, <guilabel>Tilmeldt</guilabel>, <guilabel>Senest aktiv</guilabel>, etc. Klikker du en gang mere på samme kolonneoverskrift sorteres listen faldende.</para>
+					<para>Hver af kolonneoverskrifterne er også sorteringslinks. Det betyder, at du kan klikke på <guilabel>Brugernavn</guilabel>, <guilabel>Rang</guilabel>, <guilabel>Indlæg</guilabel>, <guilabel>Hjemmeside</guilabel>, <guilabel>Sted</guilabel>, <guilabel>Tilmeldt</guilabel> eller <guilabel>Senest aktiv</guilabel> for at sortere efter denne gruppe. Klikkes der her for første gang, sorteres listen i stigende rækkefølge (hvilket betyder at brugernavne vises A til Å, og tilmeldingsdato vises fra tidligst til senest). Ønsker du at sortere listen i faldende rækkefølge, vent til siden er indlæst i stigende rækkefølge, og klik på den ønskede kolonneoverskrift endnu en gang.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Andre sorteringsmetoder</term>
+				<term>Sortér efter andre muligheder</term>
 				<listitem>
-					<para>Listen kan sorteres efter de muligheder der er tilgængelige i dropdownmenuen.</para>
+					<para>Du kan også sortere medlemslisten ved hjælp af dropdownmenuerne nederst på siden.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Søgefunktionen - find en tilmeldt bruger</term>
+				<term>Søgeværktøjet "Find et medlem"</term>
 				<listitem>
-					<para>Med <guilabel>Find en tilmeldt bruger</guilabel> kan du søge efter specifikke brugere. Du behøver ikke at udfylde alle felterne. Søgningen kan udføres efter brugernavn, ICQ nummer, AIM, YIM, MSN Messenger/Windows Live Messenger adresser, tilmeldt dato, senest aktiv dato, antal indlæg, IP-addresse og gruppemedlemskab. Alle datoer skal angive i formatet YYYY-MM-DD (eksempelvis skal d. 28. februar 2008 angives som 2008-02-28). Brug * som ubekendt for ukendte tegn. Ved at søge efter &quot;Mi*&quot; i brugernavn, findes alle brugernavne startende med Mi. Klik på <guilabel>Udfør</guilabel> før at begynde søgningen, eller på <guilabel>Nulstil</guilabel> hvis du vil slette alle udfyldte felter og starte forfra.</para>
+					<para>Du kan indsnævre dine søgeresultater med søgefunktionen <guilabel>Find et medlem</guilabel>. Denne funktion giver dig mulighed for at finde medlemmer ud fra brugernavn, ICQ-nummer, AIM, YIM, MSN Messenger-/Windows Live Messenger-adresse, tilmeldingsdato, senest aktiv-dato, antal indlæg, IP-adresse samt brugergruppemedlemskab(er). Alle datoer skal indtastes i formatet YYYY-MM-DD (f.eks. 2004-02-28 for at repræsentere 28. februar 2004). Stjernen (*) kan bruges som jokertegn for delvise match, f.eks. ved at indtaste "Ar*" i brugernavnfeltet for at finde alle brugernavne der begynder med Ar. Tryk på knappen <guilabel>Send</guilabel> for at starte søgningen, eller knappen <guilabel>Nulstil</guilabel> hvis du ønsker at rydde alle felter og starte søgningen forfra.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
-		
+
 		<note>
-			<para>Ikke alle typografier tilbyder at vælge sorteringsmetode i en dropdownmenu.</para>
+			<para>Tilgængeligheden af sorteringsmulighederne varierer efter typografi.</para>
 		</note>
 	</section>
 </chapter>
