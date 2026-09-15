@@ -16,7 +16,11 @@ plans live under `docs/TODO/`; this file stays a concise summary.
   chapter/language combinations swept and clean as of 2026-09-15; kept as
   the reference method for re-auditing after future catalog/hand-file
   changes, not an open item.
-- [Sphinx dev-docs pipeline: Phase 0 spike](TODO/todo-sphinx-devdocs-spike.md)
-  — proved the proposed Sphinx-native gettext pipeline end to end on one
-  real file; recommends proceeding, with a concrete list of what a full
-  transform still needs before real rollout.
+- [Sphinx dev-docs pipeline: spike results](TODO/todo-sphinx-devdocs-spike.md)
+  — Phase 0 proved the proposed Sphinx-native gettext pipeline end to end
+  on one real file; Phase 1 widened element coverage across two more
+  files and found three real bugs (silent content loss from unescaped
+  angle brackets, a blockquote/code-fence formatting bug, toctree links
+  with no real target). Recommends proceeding; each remaining item
+  (a real transform, `translations.sh` support, content migration) is
+  its own fresh scoping decision.
