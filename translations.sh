@@ -29,6 +29,14 @@ cd "$script_dir"
 python3() { command python3 "$@"; }
 lib="$script_dir/translations/lib.py"
 
+# Use our vendored, patched itstool (translations/vendor/itstool-patched)
+# instead of the system itstool. It fixes an upstream itstool 2.0.6 merge
+# (-m) bug where translated content for certain placeholder-nested
+# paragraphs is silently dropped in favor of the original-language text;
+# see that file's header and docs/phpbb-gettext-translation-poc-results.md
+# for details. Not yet reported upstream.
+itstool() { "$script_dir/translations/vendor/itstool-patched" "$@"; }
+
 chapters=(admin_guide user_guide moderator_guide quick_start_guide upgrade_guide server_guide glossary)
 
 languages_repo() {

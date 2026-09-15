@@ -398,7 +398,7 @@ left standing is the csv-table parse-error issue below, which is a
 can render a table whose data never reached the XML in the first
 place.
 
-## Follow-up 3 — itstool reconstruction can silently fall back to English for specific paragraphs, even with a correct PO catalog
+## Follow-up 3 — itstool reconstruction bug: found, root-caused, and fixed
 
 Discovered while migrating the Danish (`da`) translation's existing
 hand-authored `content/da/chapters/*.xml` into PO catalogs via
@@ -407,33 +407,66 @@ result by reconstructing (`msgfmt` → `itstool -m`) and diffing every
 `<para>` against the authoritative hand-translated file.
 
 **What happened:** `admin_guide.xml`'s `acp_posting_bbcodes` section —
-one `<title>` plus six `<para>` elements, all beginning with or
-containing `<glossterm>BBCode(s)</glossterm>` — reconstructs as raw,
+six `<para>` elements, each containing inline markup
+(`<glossterm>`/`<guilabel>`/`<code>`) — reconstructed as raw,
 untranslated English, even though the compiled `.mo` file demonstrably
-contains the correct Danish `msgstr` for the exact `msgid` text
+contained the correct Danish `msgstr` for the exact `msgid` text
 (verified directly against the `.mo` with `polib`, bypassing itstool
-entirely). Everywhere else in the same 924-entry catalog, including
-other `<glossterm>`-wrapped paragraphs elsewhere in the same file
-(IP address, Attachments, etc.), reconstruction is correct.
+entirely).
 
-**What this isn't:** not a bad translation, not a bad alignment, not a
-duplicate-msgid collision (`msgfmt --check` passes clean), and not
-something specific to this project's XML — the six paragraphs have
-the same tab-indented structure as every surrounding, correctly-
-reconstructing paragraph. It looks like `itstool -m`'s own re-parse of
-the live English source (a separate pass from the `-o` extraction that
-built the POT) is, in this one isolated spot, computing a different
-extraction key than the one stored in the compiled catalog — narrow
-enough that no root cause was found within the time this deserved.
+**Root cause (upstream itstool 2.0.6 bug, not a PO catalog or alignment
+problem):** this section has loose trailing text as a direct child of
+`<section>` (not wrapped in its own `<para>`), which makes itstool
+extract the *whole section* as one combined message with placeholder
+tokens (`<_:para-N/>`, `<_:figure-N/>`, etc.) standing in for its child
+elements. During merge, itstool's `scan_node()` (inside
+`get_translated()`) walks these placeholders and, for each one that
+itself has child elements, recursively calls `merge_translations()` to
+translate it. For a placeholder that is *also* its own independently-
+registered message (e.g. a `<para>` with inline markup — `has_child_
+elements()` only checks for the presence of any child element, inline
+or block, so an inline `<guilabel>`/`<code>` is enough to route it down
+this path), that recursive call replaces the placeholder node itself
+via `node.replaceNode(newnode)`. `merge_translations()` returned
+nothing, so `scan_node()` had no way to know this had happened, and
+went on to copy the original, now-detached, still-untranslated
+placeholder variable instead of the replacement — silently discarding
+the correct translation. Container placeholders without their own
+direct message (e.g. `<figure>`, whose title/caption get mutated in
+place rather than the `<figure>` node itself being replaced) don't hit
+this path, which is why only these six specific paragraphs were
+affected.
 
-**Practical impact:** none on the live site today. Hugo builds from
-the hand-maintained `content/<lang>/chapters/*.xml` files directly;
-`translations.sh build <lang>` (PO → reconstructed XML) is a
-maintainer tool for a *future* gettext-driven workflow, not the
-current pipeline. Running it today would silently regress exactly
-these six paragraphs back to English — a real trap for whoever
-eventually flips that switch, worth knowing about in advance rather
-than discovering via a diff nobody thought to run.
+**The fix:** `translations/vendor/itstool-patched` is a vendored copy
+of itstool 2.0.6 with a two-line-equivalent patch — `merge_translations()`
+now returns the node that ends up occupying its tree position (original
+or replacement), and `scan_node()`'s placeholder handling uses that
+return value instead of re-copying the original placeholder reference.
+`translations.sh` now calls this vendored copy for every `itstool`
+invocation (extract, check, build) instead of the system-installed one.
+See that file's header comment for the full explanation and the exact
+diff against unpatched itstool 2.0.6. Not yet reported upstream to
+https://gitlab.gnome.org/GNOME/itstool.
+
+**Verified:** with the patch applied, reconstructing every chapter that
+has a PO catalog (`admin_guide`, `user_guide`, `moderator_guide`,
+`quick_start_guide`) and diffing every `<para>` against the
+authoritative hand-translated file shows **zero** real content
+mismatches (`glossary.xml`'s deliberate non-English alphabetical term
+ordering makes a positional para diff meaningless for that one file,
+so it wasn't compared this way).
+
+**Remaining, separate limitation (unrelated to the bug above):**
+`translations.sh build <lang>` reconstructs `content/<lang>/chapters/
+*.xml` directly from the English source's structure, so it reintroduces
+the `<chapterinfo>`/`<abstract>` blocks and original (pre-Claude)
+`<sectioninfo>` translator `<othername>` entries that this project's
+hand-maintained Danish files deliberately drop/override. That's a
+structural convention gap in the PO-based workflow itself, not an
+itstool bug, and
+is why `translations.sh build` still isn't wired into the live Hugo
+build — running it against `content/da/chapters/` was tested as part of
+verifying this fix and reverted (`git checkout --`) rather than kept.
 
 **How this was caught:** title-only diffing (`<title>` tags) is not
 enough — it missed this entirely, since only `<para>` content is
