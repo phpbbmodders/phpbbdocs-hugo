@@ -6,349 +6,350 @@
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
 		<title>Redigering af indlæg</title>
-		<para>Redaktører med tilladelser i relevante fora kan redigere i emner og indlæg, også selvom forummet er låst. Normalt kan man se redaktører i forumbeskrivelserne på boardindekset. En bruger med redaktørstatus har adgang til knappen <guilabel>Rediger</guilabel> i alle indlæg. Herudover kan redaktører:</para>
-	
+		<para>Redaktører med tilladelser i de relevante fora kan redigere emner og indlæg, selv hvis forummet er låst. Du kan som regel se hvem redaktørerne er under forumbeskrivelsen på indekssiden. En bruger med redaktørrettigheder kan vælge redigeringsknappen ved siden af hvert indlæg. Ud over dette kan de:</para>
+
 		<variablelist>
 			<varlistentry>
 				<term>Slette indlæg</term>
 				<listitem>
-					<para>Slette indlæg i emnet. Husk at slettede indlæg ikke kan gendannes.</para>
+					<para>Denne mulighed fjerner indlægget fra emnet. Husk at det ikke kan gendannes, når det er slettet.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Ændre eller fjerne emne- og indlægikoner</term>
+				<term>Ændre eller fjerne indlægsikonet</term>
 				<listitem>
-					<para>Bestemme om et valgt ikon er i overenstemmelse med indlægget.</para>
+					<para>Bestemmer om et ikon ledsager indlægget, og i så fald hvilket.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Ændre emnetitel og indlægstekst</term>
+				<term>Ændre emnet og selve beskeden</term>
 				<listitem>
-					<para>En redaktør har mulighed for at ændre indholdet af et indlæg.</para>
+					<para>Giver redaktøren mulighed for at ændre indholdet af indlægget.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Ændre indlægsmuligheder - deaktivere BBkode/Smileys og behandling af URL'er osv.</term>
+				<term>Ændre indlægsmuligheder - deaktivere fortolkning af BBkode/smileys, URL'er osv.</term>
 				<listitem>
-					<para>Bestemme hvilke muligheder der skal være aktiveret i indlægget.</para>
+					<para>Bestemmer om bestemte funktioner er aktiveret i indlægget.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
 				<term>Låse emnet eller indlægget</term>
 				<listitem>
-					<para>En redaktør kan låse indlægget eller hele emnet.</para>
+					<para>Giver redaktøren mulighed for at låse det aktuelle indlæg, eller hele emnet.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
-				<term>Tilføje, ændre og fjerne vedhæftede filer</term>
+				<term>Tilføje, ændre eller fjerne vedhæftede filer</term>
 				<listitem>
-					<para>Hvis muligheden for at vedhæfte filer er aktiveret kan redaktøren vælge at fjerne eller ændre disse.</para>
+					<para>Vælg vedhæftede filer, der skal fjernes eller redigeres (hvis muligheden er aktiveret, og der er vedhæftede filer til stede).</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
 				<term>Ændre afstemningsindstillinger</term>
 				<listitem>
-					<para>Er muligheden for at oprette afstemninger tilstede på boardet kan redaktøren ændre indstillinger i en oprettet afstemning.</para>
+					<para>Ændre de aktuelle afstemningsindstillinger (hvis muligheden er aktiveret, og der er en afstemning til stede).</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
-		
-		<para>Er der grund til at et indlæg ikke skal kunne redigeres, kan det låses for at forhindre indlægsforfatteren i dette. Ved fremtidige forsøg på at redigere indlægget adviseres brugeren. Ønsker redaktøren at begrunde årsagen til den foretagede ændring, er der mulighed for at tilføje en bemærkning til det redigerede indlæg.</para>
-		
+
+		<para>Beslutter redaktøren i et givent tilfælde, at indlægget ikke bør kunne redigeres, kan de låse indlægget for at forhindre brugeren i dette. Brugeren vil blive vist en besked, hvis de fremover forsøger at redigere indlægget. Ønsker redaktøren at angive hvorfor indlægget blev redigeret, kan de indtaste en årsag, når de redigerer indlægget.</para>
+
 		<!--TODO: screenshot of post and edit reason?-->
 	</section>
 	<section id="moderator_modtools">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
 		<title>Redaktørværktøjer</title>
-		<para>I alle emner har redaktører en række værktøjer til rådighed nederst i emnet. Det ønskede vælges fra dropdownmenuen. De tilgængelige værktøjer herfra er: låse, låse op, slette, flytte, dele, sammenlæg og kopier emne. Desuden kan emnetype ændres herfra (opslag, bekendtgørelse og global) og emnets log hentes. Herunder beskrives redaktørmulighederne mere detaljeret.</para>
-		
+		<para>Under emner har redaktøren adskillige muligheder i en dropdownboks, som ændrer emnet på forskellige måder. Disse omfatter muligheden for at låse, låse op, slette, flytte, opdele, sammenlægge og kopiere emnet. Ud over dette kan de også ændre emnetypen (opslag/bekendtgørelse/global), samt se emnets logs. Følgende underafsnit beskriver hver handling på et emne, som en redaktør kan udføre.</para>
+
 		<figure id="quick_mod_tools">
-			<title>Redigeringsværktøjer</title>
+			<title>Hurtige redaktørværktøjer</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata format="PNG" fileref="../images/moderator_guide/quick_mod_tools.png"/>
 				</imageobject>
 				<caption>
-					<para>Redigeringsværktøjerne er tilgængelige via dropdownmenuen placeret under det sidste indlæg på hver side i emnet. Fold valgmulighederne ud ved at klikke på pilen til højre i feltet.</para>
+					<para>De hurtige redaktørværktøjer. Som du kan se, er disse værktøjer placeret for enden af hvert emne nederst på siden, før det sidste indlæg på den side. Klikker du på hammerikonet, vises alle de handlinger, du kan udføre.</para>
 				</caption>
 			</mediaobject>
 		</figure>
-		
+
 		<section id="modtools_lock">
 			<title>Lås et emne eller indlæg</title>
-			<para>Der er flere måder at udføre denne handling på. Fra forumoversigten kan man vælge at bruge <link linkend="moderator_mcp">Redaktørkontrolpanel</link> øverst, herefter markere det emne der skal låses og vælge denne handling nederst. Når man som redaktør læser i selve emnet, er der desuden mulighed for at låse emnet fra redigeringsværktøjerne nederst på hver side, uden at skulle i redaktørkontrolpanelet. Et enkelt indlæg kan låses ved at redigere indlægget og vælge låse det nederst under indstillinger.</para>
-			<para>Låses et emne kan ingen skrive indlæg i det. Låsning af inviduelle indlæg forhindrer at disse kan redigeres af forfatteren.</para>
+			<para>Dette beskriver, hvordan en redaktør kan låse hele emner eller individuelle indlæg. Der er flere måder, en redaktør kan gøre dette på, enten ved at bruge <link linkend="moderator_mcp">redaktørkontrolpanelet</link> når et forum ses, ved at navigere til udvælgelsesmenuen under det pågældende emne, eller ved at redigere et indlæg i emnet og markere det relevante afkrydsningsfelt.</para>
+			<para>Låses et helt emne, sikres det at ingen brugere kan svare på det, mens låsning af individuelle indlæg fratager indlæggets forfatter enhver redigeringstilladelse for det pågældende indlæg.</para>
 		</section>
-		
+
 		<section id="modtools_delete">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Slet et emne eller indlæg</title>
-			<para>Hvis det er tilladt i <link linkend="admin_control_panel">administratorkontrolpanelets</link> tilladelsesystem kan brugerne slette egne indlæg, enten når et emne læses eller når indlægget redigeres. Emner og indlæg kan kun slettes af brugere hvis der endnu ikke er svaret på disse.</para>
-			<para>For kunne slette andre brugeres indlæg, skal man have de rette forumbaserede tilladelser - <guilabel>Kan slette indlæg</guilabel>. Ved at bruge redaktørværktøjerne nederst i emnet kan et indlæg hurtigt fjernes. I <link linkend="moderator_mcp">redaktørkontrolpanelet</link> kan flere indlæg udvælges og slettes.</para>
-			<para>Når du sletter et emne eller indlæg, bliver du bedt om at angive en årsag til sletningen. Denne besked vil fremgå af redaktørloggen. Hvis du derudover har redaktørtilladelsen <guilabel>Blød sletning</guilabel>, bliver du spurgt om du ønsker at slette emnet/indlægget permanent eller ej. Hvis du vælger nej, vil det blot blive skjult fra visning, med mulighed for at gendanne det.</para>
+			<para>Er det aktiveret i tilladelserne i <link linkend="admin_control_panel">administratorkontrolpanelet</link>, kan en bruger slette egne indlæg, enten når et emne læses, eller når et tidligere indlæg redigeres. Brugeren kan kun slette et emne eller indlæg, hvis der endnu ikke er svaret på det.</para>
+			<para>For at slette andre brugeres indlæg, skal man have den relevante forumbaserede redaktørtilladelse - <guilabel>Kan slette indlæg</guilabel>. Brug af udvælgelsesmenuen under emner giver mulighed for hurtig fjernelse. <link linkend="moderator_mcp">Redaktørkontrolpanelet</link> giver mulighed for at slette flere separate indlæg på én gang.</para>
+			<para>Når du sletter et emne eller indlæg, bliver du bedt om at angive en årsag til sletningen. Denne besked vil fremgå af redaktørloggen. Har du derudover redaktørtilladelsen <guilabel>Blød sletning</guilabel>, bliver du spurgt om du ønsker at slette emnet/indlægget permanent eller ej. Vælger du nej, bliver det blot skjult fra visning, med mulighed for at gendanne det.</para>
 			<tip>
-				<para>Bemærk venligst at hvis du vælger at slette et emne eller indlæg permanent, kan dette ikke fortrydes.</para>
+				<para>Bemærk venligst at vælger du at slette et emne eller indlæg permanent, kan dette ikke fortrydes.</para>
 			</tip>
 		</section>
 
 		<section id="modtools_restore">
 			<title>Gendannelse af et emne eller indlæg</title>
-			<para>Hvis et emne eller indlæg er blevet slettet, kan det være muligt at gendanne det. Hvis en bruger valgte ikke at slette emnet eller indlægget permanent, vil det være markeret med et ikon, der angiver at det kan gendannes.</para>
-			<para>Hvis en bruger har valgt at slette et indlæg eller emne permanent, kan det ikke gendannes.</para>
+			<para>Er et emne eller indlæg blevet slettet, kan det være muligt at gendanne det. Valgte en bruger ikke at slette emnet eller indlægget permanent, vil det være markeret med et ikon ved siden af, der angiver at det kan gendannes.</para>
+			<para>Har en bruger valgt at slette et indlæg eller emne permanent, kan det ikke gendannes.</para>
 		</section>
 
 		<section id="modtools_move">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Flyt et emne til andet forum</title>
-			<para>For at flytte et emne til et andet forum, benyttes <guilabel>Redaktørværktøjer</guilabel> underst i emnet og vælg værktøjet <guilabel>Flyt emne</guilabel> i dropdownmenuen. Ønsker du at efterlade et <link linkend="modtools_move_shadow">Skyggeemne</link> i det oprindelige forum, skal boksen herfor være afmærket. Herefter vælger du det forum emnet skal flyttes til, og klik på <guilabel>Ja</guilabel>.</para>
-		
+			<title>Flyt et emne til et andet forum</title>
+			<para>For at flytte et emne til et andet forum, naviger til området <guilabel>Hurtige redaktørværktøjer</guilabel> under emnet, og vælg <guilabel>Flyt emne</guilabel> fra udvælgelsesmenuen. Du mødes derefter af endnu en udvælgelsesmenu med en placering (et andet forum) at flytte det til. Ønsker du at efterlade et <link linkend="modtools_move_shadow">skyggeemne</link>, lad boksen forblive markeret. Vælg det ønskede forum, og klik på <guilabel>Ja</guilabel>.</para>
+
 			<section id="modtools_move_shadow">
 				<sectioninfo>
 					<authorgroup>
 						<author>
-							<othername>jask</othername>
+							<othername>Claude</othername>
 						</author>
 					</authorgroup>
 				</sectioninfo>
 				<title>Skyggeemner</title>
-				<para>Når et emne flyttes til et andet forum er det muligt at efterlade et skyggeemne i det oprindelige forum. Et skyggeemne er blot et link til emnets nye placering. Du kan selv vælge om der skal efterlades et skyggeemne i checkboksen som første valg når du har valgt <guilabel>Flyt emne</guilabel> i redaktørværktøjerne.</para>
-				<para>For at slette et skyggeemne manøvreres til det forum det er placeret i, og herefter vælges <link linkend="moderator_mcp">Redaktørkontrolpanel</link> næsten øverst. I kontrolpanelet finder du linket &quot;Slet skyggeemne&quot; lige over emnet.</para>
+				<para>Skyggeemner kan oprettes, når et emne flyttes fra ét forum til et andet. Et skyggeemne er blot et link til emnet i det forum, det er flyttet fra. Du kan vælge om du vil efterlade et skyggeemne, ved at markere eller fjerne markeringen i afkrydsningsfeltet i dialogboksen <guilabel>Flyt emne</guilabel>.</para>
+				<para>For at slette et skyggeemne, naviger til det forum der indeholder skyggeemnet, og brug <link linkend="moderator_mcp">redaktørkontrolpanelet</link> til at vælge og slette emnet.</para>
 				<note>
-					<para>Når skyggeemnet slettes bliver det originale emne <emphasis>ikke</emphasis> slettet.</para>
+					<para>Sletning af et skyggeemne vil <emphasis>ikke</emphasis> slette det oprindelige emne, det er en skygge af.</para>
 				</note>
 			</section>
 		</section>
-		
+
 		<section id="modtools_copy">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Kopiering af et emne</title>
-			<para>Redaktører kan kopiere emner og hermed oprette en kopi af et emne i et andet forum. I det emne der skal kopieres, vælges nederst i <guilabel>Kopier emne</guilabel> i redaktørværktøjerne. Fra forumindekset kan vælges <link linkend="moderator_mcp">Redaktørkontrolpanel</link>, her markeres det emne der skal kopieres og herefter destinationsforummet kopien skal placeres i. Klik på  <guilabel>Ja</guilabel> for at oprette kopien.</para>
+			<para>Redaktører har også mulighed for at kopiere emner. Kopiering af et emne opretter blot en kopi af det valgte emne i et andet forum. Dette kan gøres ved at bruge området <guilabel>Hurtige redaktørværktøjer</guilabel> under det emne, du vil kopiere, eller via <link linkend="moderator_mcp">redaktørkontrolpanelet</link>, når forummet ses. Herfra vælger du blot det destinationsforum, du vil kopiere emnet til. Klik på <guilabel>Ja</guilabel> for at kopiere emnet.</para>
 		</section>
-		
+
 		<section id="modtools_type">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Bekendtgørelser og opslag</title>
-			<para>Med de rette tilladelser kan redaktører ændre emnetyper. Disse specielle emnetyper er: <guilabel>Globale bekendtgørelser</guilabel>, <guilabel>Bekendtgørelser</guilabel> og <guilabel>Opslag</guilabel>. <link linkend="posting_special">Emnetype</link> kan vælges under tekstfeltet når et indlæg skrives eller ved at redigere det første indlæg i et eksisterende emne. <guilabel>Globale bekendtgørelser</guilabel> og almindelige <guilabel>bekendgørelser</guilabel> vises i en særskilt ramme på forumindekset i forhold til <guilabel>opslag</guilabel> og almindelige emner.</para>
+			<para>Der findes forskellige typer af emner, som forumadministratorer og redaktører (hvis de har de rette tilladelser) kan tildele til specifikke emner. Disse særlige emnetyper er: <guilabel>Globale bekendtgørelser</guilabel>, <guilabel>Bekendtgørelser</guilabel> og <guilabel>Opslag</guilabel>. <link linkend="posting_special">Emnetypen</link> kan vælges, når du skriver et nyt emne, eller redigerer det første indlæg i et allerede oprettet emne. Du kan vælge den ønskede emnetype ved at markere den relevante radioknap. Når forummet ses, vises <guilabel>globale bekendtgørelser</guilabel> og almindelige <guilabel>bekendtgørelser</guilabel> under en separat overskrift end <guilabel>opslag</guilabel> og normale emner.</para>
 		</section>
-		
+
 		<section id="modtools_split">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Dele indlæg fra et emne</title>
-			<para>Redaktørerne har mulighed for at dele indlæg fra et emne. Det kan være nyttigt hvis for eksempel en diskussion fostrer en ny ide som fortjener sit eget emne og et antal indlæg derfor bør flyttes fra det oprindelige emne. Deling af indlæg medfører flytning af individuelle indlæg fra et eksisterende emne til et nyt. Det kan gøres ved at benytte <guilabel>Redaktørværktøjer</guilabel> under emnet, eller fra <link linkend="moderator_mcp">Redaktørkontrolpanelet</link>.</para>
-			<para>Når deling udføres kan du vælge titlen for det nye emne, et andet forum til emnet og også et emneikon. Opdeling kan foretages på to måder. Du kan vælge et indlæg og foretage opdelingen herfra og til sidste indlæg i emnet, vælg nederst muligheden <guilabel>Del fra valgte indlæg og fremefter</guilabel>. Du kan også udvælge flere indlæg til opdeling, og herefter vælge <guilabel>Del valgte indlæg</guilabel> nederst.</para>
+			<title>Deling af indlæg fra et emne</title>
+			<para>Redaktører har også mulighed for at dele indlæg fra et emne. Dette kan være nyttigt, hvis en bestemt diskussion har givet anledning til en ny idé, der fortjener sin egen tråd, og derfor skal deles fra det oprindelige emne. Deling af indlæg indebærer at flytte individuelle indlæg fra et eksisterende emne til et nyt emne. Du kan gøre dette ved at bruge området <guilabel>Hurtige redaktørværktøjer</guilabel> under det emne, du vil dele, eller fra <link linkend="moderator_mcp">redaktørkontrolpanelet</link> inde i emnet.</para>
+			<para>Når du deler, kan du vælge en titel til det nye emne, et andet forum til det nye emne, samt et andet ikon. Du kan også tilsidesætte boardets standardindstilling for antallet af indlæg, der skal vises pr. side. Muligheden <guilabel>Del fra det valgte indlæg</guilabel> deler alle indlæg fra det markerede indlæg og frem til det sidste. Muligheden <guilabel>Del de valgte indlæg</guilabel> deler kun de aktuelt valgte indlæg.</para>
 		</section>
-		
+
 		<section id="modtools_mergetopics">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Sammenlæg emner</title>
-			<para>I phpBB3 er det også muligt at sammenlægge emner. Hvilket er nyttigt hvis der for eksempel drøftes relaterede problemstillinger i to separate emner på boardet.</para>
-			<para>For at sammenlægge emner vælges nederst i redigeringsværktøjerne, under det emne der skal lægges sammen med et andet, sammenlæg emner. Du bliver nu ledt til <link linkend="moderator_mcp">Redaktørkontrolpanelet</link>, herfra kan du vælge det emne du vil sammenlægge med. Klik på linket <guilabel>Vælg til sammenlægning</guilabel> i det modtagende emne. Flyttede emner bevarer eksisterende tidstempel, og vil derfor blive sorteret efter alder sammen med de eksisterende indlæg i emnet.</para>
+			<para>I phpBB3 er det nu muligt at sammenlægge emner, ud over at kunne dele dem. Dette kan være nyttigt, hvis f.eks. to separate emner er relaterede og omhandler den samme diskussion. Funktionen til sammenlægning af emner giver mulighed for at sammenlægge eksisterende emner med hinanden.</para>
+			<para>For at sammenlægge emner, begynd med at finde udvælgelsesmenuen under det pågældende emne, som bringer dig til <link linkend="moderator_mcp">redaktørkontrolpanelet</link>. Herfra skal du indtaste emne-ID'et på det emne, du vil flytte indlæggene til. Du kan klikke på <guilabel>Vælg emne</guilabel> for at se en liste over de tilgængelige emner og angive hvilket. Markerer du sektionen <guilabel>Markér alle</guilabel>, vælges alle indlæg i det aktuelle emne, og de kan flyttes til det eksisterende emne. Indlæg sammenlagt i det nye emne beholder deres oprindelige tidsstempel (dvs. de vises ikke for enden af det emne, de sammenlægges med, men sorteres efter deres tidsstempel).</para>
 		</section>
-		
+
 		<section id="modtools_mergeposts">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Sammenlæg eller flyt indlæg til et andet emne</title>
-			<para>Som alternativ til at sammenlægge hele emner, kan du også flytte individuelle indlæg til et andet emne.</para>
-			<para>For at sammenlægge specifikke indlæg med et andet emne vælges sammenlæg indlæg i redigeringsværkstøjerne forneden, som leder til <link linkend="moderator_mcp">Redaktørkontrolpanelet</link>. Her startes med at angive det modtagende emnes ID eller du finder det med linket <guilabel>Find emne</guilabel>. Herefter vælges det eller de indlæg der skal flyttes hertil. Indlæg der sammenlægges med et nyt emne bevarer det oprindelig tidstempel, og sorteres efter dette i forhold til de allerede indsendte indlæg i emnet.</para>
+			<para>I stedet for blot at sammenlægge hele emner, kan du også sammenlægge specifikke indlæg med et hvilket som helst andet emne.</para>
+			<para>For at sammenlægge specifikke indlæg med et andet emne, begynd med at finde udvælgelsesmenuen under emnet, og gå til <link linkend="moderator_mcp">redaktørkontrolpanelet</link>. Herfra skal du indtaste emne-ID'et på det emne, du vil flytte indlæggene til. Du kan klikke på <guilabel>Vælg emne</guilabel> for at se en liste over de tilgængelige emner og angive hvilket. Vælg de indlæg, du ønsker at sammenlægge fra det aktuelle emne, med det eksisterende emne. Indlæg sammenlagt i det nye emne beholder deres oprindelige tidsstempel (dvs. de vises ikke for enden af det emne, de sammenlægges med, men sorteres efter deres tidsstempel).</para>
 		</section>
 	</section>
-	
+
 	<section id="moderator_queue">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Hvad indeholder godkendelsekøen?</title>
-		<para>Hvis tilladelser for fora eller brugere er indstillet (i <link linkend="admin_control_panel">Administratorkontrolpanelet</link>) til at nye indlæg skal godkendes, skal denne godkendelse foretages af en administrator eller en redaktør før indlæggene kan ses af andre brugere. Emner og indlæg der afventer godkendelse kan ses i <guilabel>godkendelsekøen</guilabel> som findes i <link linkend="moderator_mcp">Redaktørkontrolpanelet</link>.</para>
-		<para>På forumindekset er endnu ikke godkendte emner mærket med et ikon. Klik på dette ikon og du kommer direkte til redaktørkontrolpanelet og får nu mulighed for at godkende eller afvise emnet. Individuelle indlæg der afventer godkendelse er ledsaget af en meddelelse herom, når emnet gennemses. Meddelelsen linker samtidig til skærmbilledet hvor det kan godkendes eller afvises.</para>
-		<para>Når du godkender et emne eller et indlæg får du mulighed for at vælge om brugeren skal have besked om godkendelsen. På samme måde får du også mulighed for at informere brugeren ved en afvisning, og samtidig begrunde denne.</para>
-		<para>Mere information om redaktørkontrolpanelet findes her <xref linkend="moderator_mcp" />.</para>
+		<title>Hvad indeholder "godkendelseskøen"?</title>
+		<para><guilabel>Godkendelseskøen</guilabel> er et område, hvor emner og indlæg, der skal godkendes, vises. Er et forums eller en brugers tilladelser sat til <guilabel>redaktørkø</guilabel> via <link linkend="admin_control_panel">administratorkontrolpanelet</link>, skal alle indlæg skrevet i det forum, eller af denne bruger, godkendes af en administrator eller redaktør, før de vises for andre brugere. Emner og indlæg der kræver godkendelse kan ses via <link linkend="moderator_mcp">redaktørkontrolpanelet</link>.</para>
+		<para>Når du ser et forum, markeres emner der endnu ikke er godkendt med et ikon; klikker du på dette ikon, føres du direkte til redaktørkontrolpanelet, hvor du kan godkende eller afvise emnet. Ligeledes vil indlægget, der kræver godkendelse, når selve emnet ses, ledsages af en besked, der også linker til det ventende indlæg.</para>
+		<para>Vælger du at godkende et emne eller indlæg, får du mulighed for at underrette brugeren om godkendelsen. Vælger du at afvise et emne eller indlæg, får du mulighed for at underrette brugeren om afvisningen samt angive hvorfor du har afvist indlægget, og indtaste en beskrivelse.</para>
+		<para>For mere information om redaktørkontrolpanelet, se <xref linkend="moderator_mcp" />.</para>
 	</section>
-	
+
 	<section id="moderator_reported">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
-		<title>Hvad er rapporterede indlæg?</title>
-		<para>Brugere kan rapportere indlæg som findes upassende og begrunde rapporteringen. Et indlæg rapporteres ved at klikke på ikonet for at <guilabel>Rapporter dette indlæg</guilabel>, i standardtypografien prosilver er ikonet en trekant på spidsen med et udråbstegn i. I  <link linkend="admin_control_panel">Administratorkontrolpanelet</link> er udfærdiget et antal standardbegrundelser som kan bruges, med mulighed for at uddybe rapporten. Alle rapporter kan ses i redaktørkontrolpanelet under fanen rapporterede indlæg, hvor administrator eller redaktør kan se, lukke eller slette rapporten.</para>
-		<para>På forumindekset vises emner indeholdende rapporteringer med en anden baggrundsfarve og med rapporteringikonet efter emnetitlen. Herved ser administrator og redaktør at indlæg er rapporteret. I emnet vises det rapporterede indlæg også med en anden baggrundsfarve, og med et link til rapporten i redaktørkontrolpanelet.</para>
-		<para>Mere information om redaktørkontrolpanelet findes her <xref linkend="moderator_mcp" />.</para>
+		<title>Hvad er "rapporterede indlæg"?</title>
+		<para>I modsætning til phpBB2 tillader phpBB3 nu brugere at rapportere et indlæg, af årsager boardadministratoren selv kan definere i <link linkend="admin_control_panel">administratorkontrolpanelet</link>. Finder en bruger et indlæg upassende af en eller anden grund, kan de rapportere det med knappen <guilabel>Rapportér indlæg</guilabel> ved siden af det pågældende indlæg. Denne rapport vises derefter i redaktørkontrolpanelet, hvor administratoren eller redaktørerne kan se, lukke eller slette rapporten.</para>
+		<para>Ses et forum med indlægsrapporteringer i emner, ledsages emnetitlen af et rødt udråbstegnsikon. Dette gør administratoren/administratorerne eller redaktørerne opmærksomme på, at et indlæg er blevet rapporteret. Ses emner, ledsages rapporterede indlæg af et rødt udråbstegn og tekst. Klikkes der på dette ikon eller denne tekst, føres de til sektionen for rapporterede indlæg i redaktørkontrolpanelet.</para>
+		<para>For mere information om redaktørkontrolpanelet, se <xref linkend="moderator_mcp" />.</para>
 	</section>
-	
+
 	<section id="moderator_mcp">
 		<sectioninfo>
 			<authorgroup>
 				<author>
-					<othername>jask</othername>
+					<othername>Claude</othername>
 				</author>
 			</authorgroup>
 		</sectioninfo>
 		<title>Redaktørkontrolpanelet (MCP)</title>
-		<para>I forhold til phpBB2 er <guilabel>Redaktørkontrolpanelet</guilabel> nyt, her er alle redigeringsværktøjer samlet. Dette afsnit gennemgår grundtrækkene i en redaktørs opgaver. Ved indgangen til MCP ser redaktøren en oversigt over indlæg afventende godkendelse, rapporterede indlæg og de seneste fem loggede handlinger.</para>
-		<para>Redaktørkontrolpanelet er opdelt i syv sektioner, hvert område organiseret i en fane. De syv faner indeholder:
+		<para>En anden ny funktion i phpBB3 er <guilabel>Redaktørkontrolpanelet</guilabel>, hvor enhver redaktør vil føle sig hjemme. Ligesom administratorkontrolpanelet beskriver dette område de aktuelle redaktøropgaver, der skal udføres. Efter navigation til MCP'en mødes redaktøren af eventuelle indlæg der venter på godkendelse, eventuelle indlægsrapporteringer samt de fem seneste loggede handlinger - udført af administratorer, redaktører og brugere.</para>
+		<para>I venstre side findes en menu med alle de relevante områder inden for MCP'en. Denne vejledning beskriver hvert enkelt afsnit, og hvilken slags information de hver især indeholder:
 			<variablelist>
 				<varlistentry>
 					<term>Oversigt</term>
 					<listitem>
-						<para>Indeholder oversigt over indlæg i godkendelsekøen, rapporterede indlæg og de seneste 5 loggede handlinger udført af redaktører.</para>
+						<para>Indeholder forhåndsgodkendte indlæg, rapporterede indlæg samt de fem seneste loggede handlinger.</para>
 					</listitem>
 				</varlistentry>
-				
+
 				<varlistentry>
-					<term>Godkendelsekø</term>
+					<term>Godkendelseskø</term>
 					<listitem>
-						<para>Indeholder komplet liste over emner og indlæg, der afventer en godkendelse.</para>
+						<para>Dette område viser alle emner eller indlæg, der venter på godkendelse. Det viser også emner og indlæg, der er blødt slettet.</para>
 					</listitem>
 				</varlistentry>
-				
+
 				<varlistentry>
 					<term>Rapporterede indlæg</term>
 					<listitem>
-						<para>Indeholder alle åbne og lukkede rapporter.</para>
+						<para>En liste over alle åbne eller lukkede rapporterede indlæg.</para>
 					</listitem>
 				</varlistentry>
-				
+
 				<varlistentry>
 					<term>Brugernotater</term>
 					<listitem>
-						<para>Anvendes af administrator eller redaktør til at gemme bemærkninger om brugere.</para>
+						<para>Dette er et område, hvor administratorer eller redaktører kan efterlade feedback om bestemte brugere.</para>
 					</listitem>
 				</varlistentry>
-				
+
 				<varlistentry>
 					<term>Advarsler</term>
 					<listitem>
-						<para>Anvendes til at udstede advarsler, se brugere med flest advarsler, de nyeste advarsler og en liste over samtlige advarsler.</para>
+						<para>Muligheden for at advare en bruger, se aktuelle brugere med advarsler samt se de fem seneste advarsler.</para>
 					</listitem>
 				</varlistentry>
-				
+
 				<varlistentry>
-					<term>Redaktørlog</term>
+					<term>Redaktørlogs</term>
 					<listitem>
-						<para>En komplet liste over loggede handlinger udført af redaktører på boardet.</para>
+						<para>Dette er en dybdegående liste over de fem seneste handlinger udført af administratorer, redaktører eller brugere, som vist på MCP'ens hovedside.</para>
 					</listitem>
 				</varlistentry>
-				
+
 				<varlistentry>
 					<term>Udelukkelse</term>
 					<listitem>
-						<para>Udelukkelse af brugere fra boardet kan udføres på baggrund af brugernavn, IP-adresse eller emailadresse.</para>
+						<para>Muligheden for at udelukke brugere efter brugernavn, IP-adresse eller e-mailadresse.</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
 		</para>
-		
+
 		<section id="mcp_queue">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
-			<title>Godkendelsekø</title>
-			<para>Køen indeholder en liste over henholdsvis emner og indlæg som afventer godkendelse fra redaktør. Godkendelsekøen kan ses i <link linkend="moderator_mcp">Redaktørkontrolpanelet</link>. Mere information om godkendelsekøen findes her <xref linkend="moderator_queue" />.</para>
+			<title>Godkendelseskø</title>
+			<para>Godkendelseskøen viser emner eller indlæg, der kræver redaktørhandling. Godkendelseskøen er tilgængelig fra <link linkend="moderator_mcp">redaktørkontrolpanelet</link>. For mere information om godkendelseskøen, se <xref linkend="moderator_queue" />.</para>
 		</section>
-		
+
 		<section id="mcp_reported">
 			<sectioninfo>
 				<authorgroup>
 					<author>
-						<othername>jask</othername>
+						<othername>Claude</othername>
 					</author>
 				</authorgroup>
 			</sectioninfo>
 			<title>Rapporterede indlæg</title>
-			<para>Brugere har mulighed for at rapportere indlæg som ikke er i overenstemmelse med boardreglerne eller på anden måde er upassende. Alle rapporterede indlæg kan ses fra <link linkend="moderator_mcp">Redaktørkontrolpanelet</link>. Mere information om rapporterede indlæg findes her <xref linkend="moderator_reported" />.</para>
+			<para>Rapporterede indlæg er rapporter indsendt af brugere om problematiske indlæg. Alle aktuelt rapporterede indlæg er tilgængelige fra <link linkend="moderator_mcp">redaktørkontrolpanelet</link>. For mere information om rapporterede indlæg, se <xref linkend="moderator_reported" />.</para>
 		</section>
-		
+
 		<section id="mcp_forum">
 			<title>Forumredigering</title>
-			<para>Hvis man fra forumindekset klikker på linket til <guilabel>Redaktørkontrolpanel</guilabel> vises forumredigeringsiden. Her kan redigeres flere emner samtidig ved hjælp af dropdownmenuen nederst. Disse værktøjer er til rådighed i menuen:
+			<para>Ses et bestemt forum, føres du til forummets redigeringsområde ved at klikke på <guilabel>Redaktørkontrolpanel</guilabel>. Her kan du masseredigere emner i det pågældende forum via dropdownboksen. De tilgængelige handlinger er:
 				<itemizedlist>
 					<listitem><para><guilabel>Slet</guilabel>: Sletter de valgte emner.</para></listitem>
-					<listitem><para><guilabel>Flyt</guilabel>: Flytter de valgte emner til at andet forum, som efterfølgende vælges.</para></listitem>
-					<listitem><para><guilabel>Kopier</guilabel>: Opretter kopier af de valgte emner i et andet forum.</para></listitem>
+					<listitem><para><guilabel>Gendan</guilabel>: Gendanner de valgte, blødt slettede emner.</para></listitem>
+					<listitem><para><guilabel>Flyt</guilabel>: Flytter de valgte emner til et andet forum efter eget valg.</para></listitem>
+					<listitem><para><guilabel>Kopier</guilabel>: Opretter en kopi af de valgte emner i et andet forum efter eget valg.</para></listitem>
 					<listitem><para><guilabel>Lås</guilabel>: Låser de valgte emner.</para></listitem>
 					<listitem><para><guilabel>Lås op</guilabel>: Låser de valgte emner op.</para></listitem>
 					<listitem><para><guilabel>Resynkroniser</guilabel>: Resynkroniserer de valgte emner.</para></listitem>
-					<listitem><para><guilabel>Ændre emnetype</guilabel>: De valgte emner kan ændres til: <guilabel>Global bekendtgørelse</guilabel>, <guilabel>bekendtgørelse</guilabel>, <guilabel>opslag</guilabel> eller <guilabel>standardemne</guilabel>.</para></listitem>
+					<listitem><para><guilabel>Ændre emnetype</guilabel>: Ændrer emnetypen til enten <guilabel>Global bekendtgørelse</guilabel>, <guilabel>Bekendtgørelse</guilabel>, <guilabel>Opslag</guilabel> eller <guilabel>Almindeligt emne</guilabel>.</para></listitem>
 				</itemizedlist>
 			</para>
-			
-			<para>På samme måde kan flere indlæg  i et emne redigeres samtidig. Man kan nå emneredigeringsiden enten ved at klikke på emnet fra forumredigeringsiden, eller blot klikke på linket til redaktørkontrolpanelet, når man læser i emnet.</para>
-			<para>Når der redigeres i et emne er der mulighed for: ændre emnetitel, flytte emne til et andet forum, ændre emneikon, sammenlægge emnet med et andet og bestemme hvor mange indlæg der skal vises pr. side (tilsidesætter standardindstillingen for boardet).</para>
-			<para>Under emneredigering er der to ekstra faneblade til rådighed i MCP: Sammenlæg emner og Opdel emne, som giver mulighed for henholdsvis at sammenlægge to emner og opdele et emne i to eller flere separate emner.</para>
-			<para>Linket <guilabel>Indlægsinformation</guilabel> til højre for emnetitlen giver mulighed for yderligere redigering. Indlægsforfatter kan ændres, selve indlægget kan redigeres, låses og slettes. Desuden vises den <glossterm>IP-adresse</glossterm> indlægget er skrevet fra.</para>
-		
+
+			<para>Du kan også masseredigere indlæg inde i emner. Dette kan gøres ved at navigere gennem MCP'en, mens forummet ses, og klikke på selve emnet. En anden måde at gøre dette på er ved at klikke på MCP-linket, mens du ser det pågældende emne, du vil redigere.</para>
+			<para>Når du redigerer inde i et emne, kan du: omdøbe emnetitlen, flytte emnet til et andet forum, ændre emneikonet, sammenlægge emnet med et andet emne, eller angive hvor mange indlæg pr. side der skal vises (dette tilsidesætter boardindstillingen).</para>
+			<para>Fra udvælgelsesmenuen kan du desuden: låse og låse individuelle indlæg op, slette det/de valgte indlæg, sammenlægge det/de valgte indlæg, eller dele eller dele fra det/de valgte indlæg.</para>
+			<para>Linket <guilabel>Indlægsdetaljer</guilabel> ved siden af indlæg giver dig også mulighed for at ændre andre indstillinger. Ud over at se afsenderens <glossterm>IP-adresse</glossterm>, profil og notater, samt muligheden for at advare afsenderen, har du også mulighed for at ændre den afsender-ID, der er tildelt indlægget. Du kan også låse eller slette indlægget fra denne side.</para>
+
 			<note>
-				<para>Det er ikke sikkert at du som redaktør har adgang til alle ovennævnte muligheder for redigering. Det afhænger af den tilladelserolle administrator har tilknyttet din brugerkonto.</para>
+				<para>Afhængigt af de specifikke tilladelser angivet for din brugerkonto, er nogle af de ovennævnte muligheder og funktioner muligvis ikke tilgængelige for dig.</para>
 			</note>
 		</section>
 	</section>
