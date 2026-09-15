@@ -245,6 +245,7 @@ cmd_check() {
 	local lang_dir="$repo/$lang"
 	local ok=1
 	local catalogs_found=0
+	local missing_chapters=()
 
 	echo "$lang Translation Validation"
 	echo "=============================="
@@ -252,7 +253,10 @@ cmd_check() {
 
 	for chapter in "${chapters[@]}"; do
 		local po="$lang_dir/documentation/$chapter.po"
-		[ -f "$po" ] || continue
+		if [ ! -f "$po" ]; then
+			missing_chapters+=("$chapter")
+			continue
+		fi
 		catalogs_found=$((catalogs_found + 1))
 		if ! msgfmt --check -o /dev/null "$po" 2>/tmp/translations_check_err; then
 			echo "✗ $chapter.po: PO syntax invalid"
@@ -260,11 +264,15 @@ cmd_check() {
 			ok=0
 		fi
 	done
+	local complete=1
+	if [ "${#missing_chapters[@]}" -gt 0 ]; then
+		complete=0
+		echo "✗ missing catalog(s): ${missing_chapters[*]}"
+	fi
 	if [ "$catalogs_found" -eq 0 ]; then
 		echo "✗ no PO catalogs found under $lang_dir/documentation/ -- nothing was validated"
-		ok=0
 	elif [ "$ok" -eq 1 ]; then
-		echo "✓ PO syntax valid ($catalogs_found catalog(s))"
+		echo "✓ PO syntax valid ($catalogs_found/${#chapters[@]} catalog(s) present)"
 	fi
 
 	local recon_dir
@@ -289,15 +297,21 @@ cmd_check() {
 		fi
 	done
 	if [ "$catalogs_found" -gt 0 ] && [ "$recon_ok" -eq 1 ]; then
-		echo "✓ DocBook reconstruction successful"
+		echo "✓ DocBook reconstruction successful ($catalogs_found/${#chapters[@]} catalog(s) present)"
 		echo "✓ DocBook XML valid"
 	fi
 	rm -rf "$recon_dir"
 
 	echo ""
 	cmd_status "$lang"
+	echo ""
+	if [ "$complete" -eq 1 ] && [ "$catalogs_found" -gt 0 ] && [ "$ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]; then
+		echo "Result: COMPLETE -- all ${#chapters[@]} expected catalogs present and valid."
+	else
+		echo "Result: INCOMPLETE -- do not treat this as full-language validation."
+	fi
 
-	[ "$catalogs_found" -gt 0 ] && [ "$ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]
+	[ "$complete" -eq 1 ] && [ "$catalogs_found" -gt 0 ] && [ "$ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]
 }
 
 cmd_audit() {
@@ -354,8 +368,12 @@ cmd_audit() {
 		echo "No chapters were actually checked (no PO catalog + hand file pair found for" \
 			"any chapter) -- this is not the same as clean, nothing was compared."
 		overall_ok=0
+	elif [ "$overall_ok" -eq 1 ] && [ "$checked" -eq "${#chapters[@]}" ]; then
+		echo "Result: COMPLETE -- all ${#chapters[@]} chapters round-trip clean."
 	elif [ "$overall_ok" -eq 1 ]; then
-		echo "All $checked chapter(s) round-trip clean."
+		echo "Result: PARTIAL -- $checked/${#chapters[@]} chapters checked and clean, the rest" \
+			"were skipped (no PO catalog or no hand file yet). Do not treat this as a" \
+			"complete audit for this language."
 	else
 		echo "Some chapters have real mismatches -- see docs/gettext-workflow-checklist.md"
 		echo "for what to do next (check which side is correct, fix both to agree)."
