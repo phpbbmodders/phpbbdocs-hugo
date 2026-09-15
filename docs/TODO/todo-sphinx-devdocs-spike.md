@@ -1,6 +1,6 @@
-# Sphinx dev-docs pipeline: spike results (Phase 0 and 1)
+# Sphinx dev-docs pipeline: spike results and real converter (Phases 0-2)
 
-## Status: spikes successful — mechanical path proven, element coverage widened
+## Status: real converter implemented (Phase 2), not yet committed; production integration not started
 
 `docs/phpbb-gettext-translation-plan.md` proposes a Sphinx-native gettext
 pipeline for developer docs (`dev-docs-docbook/`), as a replacement for
@@ -124,6 +124,42 @@ Spike files kept as scratch, not committed — same reasoning as Phase 0:
 proving element coverage and finding real problems, not delivering a
 general-purpose tool yet.
 
+## Phase 2: the real converter (implemented, not yet committed)
+
+The three Phase 1 problems, plus the internal cross-reference URL gap
+Phase 0/1 both flagged as unattempted, are now implemented as a real
+tool, not scratch — files exist in the working tree but have not been
+committed yet:
+
+- `xsl/proteus_sphinx_hugo.xsl` — the transform, covering the full
+  element vocabulary both spikes proved.
+- `translations/sphinx_to_hugo.py` — the CLI entry point (`--source-root`,
+  an RST path, a `.po` catalog, `--language`, `--output`; every Sphinx
+  build intermediate lives under a temp directory, never in the source
+  tree or repo working directory).
+- `tests/sphinx_devdocs/` — a real, assert-based test suite (fixtures:
+  the 3 real files both spikes used — `development/git.rst`,
+  `testing/unit_testing.rst`, `extensions/database_types_list.rst` —
+  plus a shared `index.rst` and a `testing/index.rst` stub so cross-file
+  `:doc:` resolution is tested against a real target, not a mock) that
+  runs the actual pipeline end to end, including a real `hugo build` of
+  the converted output, and checks specific rendered HTML — not just
+  "did it exit 0". Run it directly:
+  `python3 tests/sphinx_devdocs/test_sphinx_to_hugo.py`.
+
+Internal-link resolution (the one gap Phase 0/1 explicitly left
+unattempted) now works: a `:doc:`/`:ref:` role's Sphinx-relative
+`refuri` is resolved against the current file's own directory into a
+target docname, checked against every known RST file under
+`--source-root`, and emitted as a Hugo `{{< relref >}}` shortcode — an
+unresolvable target gets a loud inline diagnostic and an `xsl:message`
+warning instead of a silent or broken link.
+
+Still explicitly out of scope, unchanged from the "Recommended next
+step" below: `translations.sh` `development`-family CLI support,
+migrating existing hand-translated dev-docs content, running the
+converter against the full 55-file corpus, and CI.
+
 ## Still open, unrelated to whether the pipeline works
 
 These don't block the Sphinx-native decision above, but remain real,
@@ -164,14 +200,10 @@ separate problems for whenever full rollout is scoped:
 
 ## Recommended next step
 
-With Phase 0 and 1 both successful, the remaining big-ticket items are
-genuinely separate, larger commitments, not more of the same
+With the real converter now implemented (Phase 2), the remaining
+big-ticket items are genuinely separate, larger commitments, not more
 walking-skeleton work:
 
-- **Build a real, committed transform** (not scratch) covering the full
-  element vocabulary proven across Phases 0-1, with the three Phase 1
-  problems actually fixed (HTML-escaping, blockquote-continuation,
-  toctree-link skipping) rather than just documented.
 - **`translations.sh` `development`-family support** — real architecture
   work (source-revision tracking against a separate upstream checkout,
   not this repo's own git history).
@@ -179,5 +211,9 @@ walking-skeleton work:
   problem, not an audit; `de`/`de_x_sie` are already at 50 files vs.
   `en`/`da`/`fr`/`it`'s 55, so drift needs reconciling before any
   migration tooling can assume 1:1 file correspondence.
+- **Running the converter against the full 55-file corpus** — the
+  fixture suite proves the transform on a representative sample, not
+  every element/directive combination the real corpus uses; expect to
+  find and fix a few more cases the fixtures didn't happen to cover.
 
 Each is a fresh scoping decision, not a continuation of this spike.

@@ -20,6 +20,13 @@
 # excluded it.
 /build/
 
+# Python bytecode cache from running translations/*.py or
+# tests/sphinx_devdocs/test_sphinx_to_hugo.py — same reasoning as
+# /build/ above: was only excluded by a personal global gitignore, not
+# this project's own.
+__pycache__/
+*.pyc
+
 # convert_dev_docs_to_docbook.sh — pinned pandoc binary cache, and the
 # generated English DocBook conversion output. dev-docs-docbook/<lang>/
 # for any OTHER language (e.g. dev-docs-docbook/da/, dev-docs-docbook/fr/)
