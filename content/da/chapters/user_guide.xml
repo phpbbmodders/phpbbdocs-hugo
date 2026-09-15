@@ -65,7 +65,6 @@
 		<para>Brugerkontrolpanelet (<glossterm>UCP</glossterm>) giver mulighed for bl. a. at ændre personlige indstillinger, administrere overvågninger og bogmærker, sende og læse private beskeder. For at få adgang til UCP klikkes på linket &quot;Brugerkontrolpanel&quot; som ses øverst på siden når du er logget ind.</para>
 		<para>UCP er opdelt i seks faner: Oversigt, Profil, Boardindstillinger, Private beskeder, Brugergrupper og Venner og ignorerede brugere. Hver fane indeholder yderligere underpunkter i venstre side af skærmbilledet. Afhængig af de tilladelser du er tildelt af administrator, kan du have færre tilgængelige underpunkter.</para>
 		<para>Alle siderne i UCP viser også listen over dine venner. Du kan til enhver tid sende en privat besked til dem blot ved at klkke på brugernavnet.</para>
-		<para><!-- TODO: Note that Private messaging will be discussed in its own section --></para>
 		<section id="ucp_overview">
 			<title>Oversigt</title>
 			<para>Forsiden viser en status over din aktivitet og historik på boardet, med mulighed for se dine overvågninger, bogmærker og gemte kladder.</para>
@@ -250,13 +249,18 @@
 				</para>
 			</section>
 		</section>
+		<section id="ucp_friends_foes">
+			<title>Venner og ignorerede brugere</title>
+			<para>Brugere kan markeres som <guilabel>Ven</guilabel> eller <guilabel>Ignoreret bruger</guilabel>, så det bliver muligt at filtrere deres beskeder. Understøtter stilarten det, skjules indlæg fra brugere på din liste over ignorerede brugere, mens indlæg fra brugere på din venneliste fremhæves. Regler for private beskeder kan gøre brug af venne- og ignorérlisten til at filtrere indkomne private beskeder.</para>
+		</section>
+		<section id="ucp_attachments">
+			<title>Vedhæftede filer</title>
+			<para>Sektionen for vedhæftede filer i UCP viser en liste over alle filer du har vedhæftet på boardet. Hver linje indeholder et link til det indlæg filen er vedhæftet, filens størrelse, antallet af gange den er downloadet, samt tidspunktet den blev uploadet. Fra denne side kan du slette vedhæftede filer fra boardet. Referencer til en slettet vedhæftet fil vil stadig fremgå af det oprindelige indlæg, men selve filen vil ikke længere kunne vises, ud over filnavnet.</para>
+		</section>
 		<section id="ucp_usergroups">
 			<title>Brugergrupper</title>
-			<para>TODO<!-- Work in progress, might change, so not sure how this is going to be structured. --></para>
-		</section>
-				<section id="ucp_friends_foes">
-			<title>Venner og ignorerede brugere</title>
-			<para>TODO<!-- Denne var anført efter Visning men fanen er sidst i UCP. For 3.0 this does not have much of an influence on the overall forum experience, this might change with 3.2, so leaving it here for now. Write a detailed explanation about what Friends and Foes are and how they affect the forum like hiding posts of foes, adding users to the friends list for fast access / online checks, and so forth. --></para>
+			<para>Medlemskab af brugergrupper administreres via sektionen Brugergrupper i UCP. Siden viser de grupper brugeren er medlem af, leder af, samt alle øvrige brugergrupper. Grupper der er åbne for medlemskab har en radioknap, der giver brugeren mulighed for at anmode om medlemskab. Brugere kan også selv melde sig ud af grupper de er medlem af. Har brugeren tilladelsen <guilabel>Kan ændre standardgruppe</guilabel>, kan denne her vælge hvilken gruppe der skal være standardgruppe. Standardgruppen bestemmer den brugernavnsfarve der vises for brugeren overalt på boardet.</para>
+			<para>Brugere der er udpeget som gruppeleder kan administrere gruppens medlemskab. Her kan brugere tilføjes, fjernes, afventende anmodninger om medlemskab godkendes eller afvises, og brugerens standardgruppe ændres.</para>
 		</section>
 	</section>
 	<section id="user_posting">
