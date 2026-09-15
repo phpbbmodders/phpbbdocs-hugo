@@ -250,16 +250,6 @@
 			<listitem><para><xref linkend="update_patch" /></para><para>Pour ceux qui sont à l'aise avec l'utilitaire <command>patch</command>, des fichiers patch sont disponibles.</para></listitem>
 		</orderedlist>
 
-		<important>
-			<para>Si vous avez précédemment abandonné une tentative de mise à jour pour essayer une méthode différente, vous devrez supprimer les fichiers suivants du serveur :
-			<itemizedlist>
-				<listitem><para><filename>store/install_config.php</filename></para></listitem>
-				<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
-			</itemizedlist>
-			</para>
-		</important>
-
-
 		<section id="update_full">
 			<sectioninfo>
 				<authorgroup>
@@ -299,6 +289,14 @@
 				</listitem>
 				<listitem><para>Mettez à jour la base de données :</para>
 					<orderedlist>
+						<important>
+							<para>Si vous avez précédemment abandonné une tentative de mise à jour pour essayer une méthode différente, vous devrez supprimer les fichiers suivants du serveur :
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
 							<para>Pour les grands forums, vous pouvez souhaiter effectuer la mise à jour via la ligne de commande plutôt qu'avec un navigateur web. Depuis la racine de votre forum, exécutez la commande suivante : <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
@@ -352,6 +350,14 @@
 				<listitem><para>Téléversez le contenu de la sous-archive sélectionnée</para></listitem>
 				<listitem><para>Mettez à jour la base de données :</para>
 					<orderedlist>
+						<important>
+							<para>Si vous avez précédemment abandonné une tentative de mise à jour pour essayer une méthode différente, vous devrez supprimer les fichiers suivants du serveur :
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
 							<para>Pour les grands forums, vous pouvez souhaiter effectuer la mise à jour via la ligne de commande plutôt qu'avec un navigateur web. Depuis la racine de votre forum, exécutez la commande suivante : <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
@@ -398,6 +404,14 @@
 				<listitem><para>Téléversez le répertoire <filename class="directory">vendor/</filename></para></listitem>
 				<listitem><para>Exécutez le programme de mise à jour :</para>
 					<orderedlist>
+						<important>
+							<para>Si vous avez précédemment abandonné une tentative de mise à jour pour essayer une méthode différente, vous devrez supprimer les fichiers suivants du serveur :
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
 							<para>Pour les grands forums, vous pouvez souhaiter mettre à jour la base de données via la ligne de commande plutôt qu'avec un navigateur web. Depuis la racine de votre forum, exécutez la commande suivante : <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>
@@ -455,6 +469,14 @@
 				</listitem>
 				<listitem><para>Mettez à jour la base de données :</para>
 					<orderedlist>
+						<important>
+							<para>Si vous avez précédemment abandonné une tentative de mise à jour pour essayer une méthode différente, vous devrez supprimer les fichiers suivants du serveur :
+							<itemizedlist>
+								<listitem><para><filename>store/install_config.php</filename></para></listitem>
+								<listitem><para><filename>store/io_lock.lock</filename></para></listitem>
+							</itemizedlist>
+							</para>
+						</important>
 						<tip>
 							<para>Pour les grands forums, vous pouvez souhaiter effectuer la mise à jour via la ligne de commande plutôt qu'avec un navigateur web. Depuis la racine de votre forum, exécutez la commande suivante : <code>php ./bin/phpbbcli.php db:migrate --safe-mode</code></para>
 						</tip>

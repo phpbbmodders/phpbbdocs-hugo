@@ -62,10 +62,10 @@
 			</listitem>
 			<listitem><para>Löschen Sie auf Ihrer Website alle Dateien Ihres Forums <emphasis role="bold">AUSSER</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>Der Datei config.php</para></listitem>
-					<listitem><para>Dem Verzeichnis files/</para></listitem>
-					<listitem><para>Dem Verzeichnis images/</para></listitem>
-					<listitem><para>Dem Verzeichnis store/</para></listitem>
+					<listitem><para>Die Datei config.php</para></listitem>
+					<listitem><para>Das Verzeichnis files/</para></listitem>
+					<listitem><para>Das Verzeichnis images/</para></listitem>
+					<listitem><para>Das Verzeichnis store/</para></listitem>
 				</itemizedlist>
 			</listitem>
 			<listitem><para>Laden Sie den Inhalt des Verzeichnisses phpBB3 von Ihrem Computer in das Verzeichnis Ihres Forums hoch. Möglicherweise werden Sie aufgefordert, die verbleibenden <emphasis>Dateien</emphasis> zu überschreiben. Werden Sie aufgefordert, <emphasis>Verzeichnisse</emphasis> zusammenzuführen oder zu überschreiben, wählen Sie das Zusammenführen.</para>
@@ -133,11 +133,11 @@
 			</listitem>
 			<listitem><para>Löschen Sie auf Ihrer Website alle Dateien Ihres Forums <emphasis role="bold">AUSSER</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>Der Datei config.php</para></listitem>
-					<listitem><para>Dem Verzeichnis ext/</para></listitem>
-					<listitem><para>Dem Verzeichnis images/</para></listitem>
-					<listitem><para>Dem Verzeichnis files/</para></listitem>
-					<listitem><para>Dem Verzeichnis store/</para></listitem>
+					<listitem><para>Die Datei config.php</para></listitem>
+					<listitem><para>Das Verzeichnis ext/</para></listitem>
+					<listitem><para>Das Verzeichnis images/</para></listitem>
+					<listitem><para>Das Verzeichnis files/</para></listitem>
+					<listitem><para>Das Verzeichnis store/</para></listitem>
 				</itemizedlist>
 			</listitem>
 			<listitem><para>Laden Sie den Inhalt des Verzeichnisses phpBB3 von Ihrem Computer in das Verzeichnis Ihres Forums hoch. Möglicherweise werden Sie aufgefordert, die verbleibenden <emphasis>Dateien</emphasis> zu überschreiben. Werden Sie aufgefordert, <emphasis>Verzeichnisse</emphasis> zusammenzuführen oder zu überschreiben, wählen Sie das Zusammenführen.</para>
@@ -205,11 +205,11 @@
 			</listitem>
 			<listitem><para>Löschen Sie auf Ihrer Website alle Dateien Ihres Forums <emphasis role="bold">AUSSER</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>Der Datei config.php</para></listitem>
-					<listitem><para>Dem Verzeichnis ext/</para></listitem>
-					<listitem><para>Dem Verzeichnis files/</para></listitem>
-					<listitem><para>Dem Verzeichnis images/</para></listitem>
-					<listitem><para>Dem Verzeichnis store/</para></listitem>
+					<listitem><para>Die Datei config.php</para></listitem>
+					<listitem><para>Das Verzeichnis ext/</para></listitem>
+					<listitem><para>Das Verzeichnis files/</para></listitem>
+					<listitem><para>Das Verzeichnis images/</para></listitem>
+					<listitem><para>Das Verzeichnis store/</para></listitem>
 				</itemizedlist>
 			</listitem>
 			<listitem><para>Laden Sie den Inhalt des Verzeichnisses phpBB3 von Ihrem Computer in das Verzeichnis Ihres Forums hoch. Möglicherweise werden Sie aufgefordert, die verbleibenden <emphasis>Dateien</emphasis> zu überschreiben. Werden Sie aufgefordert, <emphasis>Verzeichnisse</emphasis> zusammenzuführen oder zu überschreiben, wählen Sie das Zusammenführen.</para>
