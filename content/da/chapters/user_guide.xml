@@ -98,10 +98,30 @@
 				<para>Du kan gemme en kladde når du skriver nye emner eller indlæg ved at klikke på knappen <guilabel>Gem kladde</guilabel>. I oversigten over gemte kladder vises titlen på dit indlæg, det forum eller emne du skrev kladden til og datoen du gemte den.</para>
 				<para>For at fortsætte redigeringen af kladden klikkes på linket &quot;Indlæs kladde&quot;. Når du har færdiggjort redigeringen og vil indsende indlægget, klikker du på <guilabel>Udfør</guilabel>. For at slette en kladde vinges boksen til højre for kladden af og der klikkes på <guilabel>Slet valgte</guilabel>.</para>
 			</section>
-			<section id="ucp_attachments">
-			<title>Private beskeder</title>
-			<para>TODO<!-- The attachment section of the UCP shows you a list of all attachments that you have uploaded to the board so far ... --> </para>
-		</section>
+			<section id="ucp_notifications_overview">
+				<title>Notifikationer</title>
+				<para>Notifikationer gør dig opmærksom på begivenheder der er sket på boardet. De vises i notifikationsmenuen øverst på siden. Begivenheder kan bl.a. være:</para>
+				<itemizedlist>
+					<listitem><para>Der er modtaget en ny privat besked</para></listitem>
+					<listitem><para>Der er oprettet et nyt emne i et forum du overvåger</para></listitem>
+					<listitem><para>Der er indsendt et nyt indlæg i et emne du overvåger</para></listitem>
+					<listitem><para>Et nyt indlæg afventer godkendelse</para></listitem>
+					<listitem><para>Et indlæg er blevet rapporteret</para></listitem>
+					<listitem><para>Dit emne/indlæg er blevet godkendt/afvist</para></listitem>
+					<listitem><para>Der er citeret fra et af dine indlæg</para></listitem>
+				</itemizedlist>
+				<figure id="notifications_menu">
+					<title>Notifikationsmenu</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/notifications_menu.png" />
+						</imageobject>
+						<caption>
+							<para>Menuen med <glossterm>Notification</glossterm>er</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
 		</section>
 		<section id="ucp_profile">
 			<title>Profilindstillinger</title>
@@ -175,12 +195,60 @@
 			</section>
 			<section id="ucp_display">
 				<title>Visning</title>
-				<para>TODO<!-- Explain the settings you can edit here. --> </para>
+				<para>Visningsindstillingerne bestemmer hvordan indlæg og emner vises i boardets forskellige visninger.</para>
+				<para>
+					Følgende indstillinger bestemmer hvordan indholdet af indlæg og private beskeder vises.
+					<itemizedlist>
+						<listitem><para><guilabel>Vis billeder i indlæg</guilabel>: Vælges <guilabel>Ja</guilabel>, vises billeder.</para></listitem>
+						<listitem><para><guilabel>Vis Flash-animationer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises Flash-animationer.</para></listitem>
+						<listitem><para><guilabel>Vis smileys som billeder</guilabel>: Vælges <guilabel>Ja</guilabel>, vises smileys som billeder i stedet for deres tekstudgave.</para></listitem>
+						<listitem><para><guilabel>Vis signaturer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugernes signaturer.</para></listitem>
+						<listitem><para><guilabel>Vis avatarer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugernes avatarer.</para></listitem>
+						<listitem><para><guilabel>Aktivér ordcensur</guilabel>: Vælges <guilabel>Ja</guilabel>, censureres teksten i indlæg og private beskeder i henhold til den <link linkend="acp_posting_censors">liste over censurerede ord</link> administratoren har defineret.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Følgende indstillinger bestemmer hvordan emner vises i forumvisningen.
+					<itemizedlist>
+						<listitem><para><guilabel>Vis emner fra de seneste dage</guilabel>: Denne indstilling begrænser hvor gamle emner der skal vises. Som standard vises alle emner.</para></listitem>
+						<listitem><para><guilabel>Sortér emner efter</guilabel>: Denne indstilling ændrer rækkefølgen emnerne vises i. Emner kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>overskrift</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Sorteringsretning for emner</guilabel>: Emner kan vises i enten <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Følgende indstillinger bestemmer hvordan indlæg vises i emnevisningen.
+					<itemizedlist>
+						<listitem><para><guilabel>Vis indlæg fra de seneste dage</guilabel>: Denne indstilling begrænser hvor gamle indlæg der skal vises. Som standard vises alle indlæg.</para></listitem>
+						<listitem><para><guilabel>Sortér indlæg efter</guilabel>: Denne indstilling ændrer rækkefølgen indlæggene vises i. Indlæg kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>overskrift</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Sorteringsretning for emner</guilabel>: Indlæg kan vises i enten <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					</itemizedlist>
+				</para>
 			</section>
-		</section>
-		<section id="ucp_pm">
-			<title>Private beskeder</title>
-			<para>TODO<!-- Her er i EN udgave attachments - den er flyttet til 113 pb gennemgås i <section id="user_pm"> lin 318 --> </para>
+			<section id="ucp_notifications">
+				<title>Notifikationer</title>
+				<para>Notifikationsindstillingerne bestemmer hvilke begivenheder der udløser en notifikation, og hvordan du modtager den.</para>
+				<para>
+					Følgende indstillinger bestemmer begivenheder relateret til at skrive indlæg.
+					<itemizedlist>
+						<listitem><para><guilabel>Nogen svarer på et emne du har bogmærket</guilabel>: En bruger har svaret i et emne du har bogmærket.</para></listitem>
+						<listitem><para><guilabel>Nogen svarer på et emne du overvåger</guilabel>: En bruger har svaret i et emne du overvåger.</para></listitem>
+						<listitem><para><guilabel>Nogen citerer dig i et indlæg</guilabel>: Et af dine indlæg er blevet citeret af en anden bruger.</para></listitem>
+						<listitem><para><guilabel>Nogen opretter et emne i et forum du overvåger</guilabel>: En bruger har oprettet et nyt emne i et forum du overvåger.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Følgende indstillinger bestemmer begivenheder relateret til moderering.
+					<itemizedlist>
+						<listitem><para><guilabel>Et indlæg eller emne afventer godkendelse</guilabel>: En bruger har skrevet et nyt indlæg eller emne, der afventer godkendelse.</para></listitem>
+						<listitem><para><guilabel>Nogen rapporterer et indlæg</guilabel>: En bruger har rapporteret et indlæg.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Følgende indstillinger bestemmer diverse andre begivenheder.
+					<itemizedlist>
+						<listitem><para><guilabel>Nogen anmoder om at blive medlem af en gruppe du leder</guilabel>: En bruger har anmodet om medlemskab af en brugergruppe du er leder af.</para></listitem>
+						<listitem><para><guilabel>Nogen sender dig en privat besked</guilabel>: Du har modtaget en privat besked.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
 		</section>
 		<section id="ucp_usergroups">
 			<title>Brugergrupper</title>
