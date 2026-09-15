@@ -201,6 +201,18 @@
            <para>Udvidelser blev introduceret i phpBB 3.0.6. Mangler denne funktion i administratorkontrolpanelet er din phpBB-version sansynligvis tidligere end denne, og du bør overveje at opdatere til seneste version.</para>
         </tip>
 		</section>
+			<section id="acp_contact_page">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Noxwizard</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Indstillinger for kontaktside</title>
+				<para>Kontaktsiden giver brugerne mulighed for at sende en e-mail til boardets administratorer, hvis de oplever problemer med siden. Denne formular er synlig for alle brugere, inklusive gæster.</para>
+				<para>Du kan aktivere eller deaktivere denne funktion, samt indstille den besked du ønsker at brugerne skal se, når de besøger siden. Beskeden kan indeholde BBcodes, smileys og links, men ikke rå HTML.</para>
+			</section>
 		</section>
 		<section id="acp_general_client">
 			<sectioninfo>
@@ -1706,8 +1718,21 @@
 				<para>Vælges en standardgruppe med rang og avatar tilknyttet, overskrives brugeres eksisterende avatars og rang med gruppens.</para>
 			</important>
 		</section>
+		<section id="acp_groups_position">
+			<title>Gruppepositioner</title>
+			<para>Når grupper er indstillet til at blive vist i forklaringen, kan du ændre deres rækkefølge på denne side. De kan sorteres automatisk efter navn eller manuelt ved at indstille deres rækkefølge med pil op og pil ned. Hvis en gruppe ikke vises på listen, findes der en dropdownmenu, hvor den kan tilføjes til forklaringen.</para>
+			<para>Det er også muligt at ændre, hvilke grupper der vises på siden <guilabel>Team</guilabel>. Der er tre muligheder for, hvordan medlemmer vises på siden <guilabel>Team</guilabel>.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Kun første medlemskab</guilabel>: Af de grupper, der er valgt til at blive vist på teamsiden, vil medlemmer kun blive vist i deres første gruppe på listen.</para></listitem>
+				<listitem><para><guilabel>Kun brugerens standardgruppe</guilabel>: Af de grupper, der er valgt til at blive vist på teamsiden, vil medlemmer kun blive vist i deres standardgruppe.</para></listitem>
+				<listitem><para><guilabel>Alle medlemskaber</guilabel>: Brugere vises i hver gruppe, der er valgt til at blive vist på teamsiden, hvis de er medlem af den pågældende gruppe.</para></listitem>
+			</itemizedlist>
+			<para>Du kan også vælge at vise, hvilke fora hvert teammedlem er redaktør for.</para>
+			<para>Kategorier kan oprettes for at samle medlemmer af flere brugergrupper under en fælles titel.</para>
+			<para>Til sidst kan du vælge, hvilke grupper der skal betragtes som <guilabel>Team</guilabel>-positioner, og som skal vises på teamsiden.</para>
+		</section>
 	</section>
-	
+
 	<section id="acp_permissions">
 		<sectioninfo>
 			<authorgroup>
