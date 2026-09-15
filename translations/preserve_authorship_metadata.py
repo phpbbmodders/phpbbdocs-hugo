@@ -49,8 +49,14 @@ from lxml import etree
 
 
 def restore_chapter_level_block(root, previous_root, tag):
+    if previous_root is None:
+        # No previous target file at all (a language's first build) --
+        # nothing to preserve or drop, leave whatever itstool
+        # reconstructed from English untouched, per this module's own
+        # documented first-build behavior.
+        return
     current = root.find(tag)
-    previous = previous_root.find(tag) if previous_root is not None else None
+    previous = previous_root.find(tag)
     if previous is not None:
         if current is not None:
             root.replace(current, previous)
@@ -61,6 +67,8 @@ def restore_chapter_level_block(root, previous_root, tag):
             title = root.find("title")
             title.addprevious(previous) if title is not None else root.append(previous)
     elif current is not None:
+        # previous_root exists and deliberately has no such block --
+        # preserve that absence.
         root.remove(current)
 
 

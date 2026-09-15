@@ -13,6 +13,13 @@
 # to preserve here anyway.
 /upstream-phpbb-documentation/
 
+# translations.sh extract/check/audit — generated POT templates and
+# scratch reconstruction/alignment output under build/gettext/. Was
+# previously only excluded by a personal global gitignore, not this
+# project's own, so a different contributor's checkout wouldn't have
+# excluded it.
+/build/
+
 # convert_dev_docs_to_docbook.sh — pinned pandoc binary cache, and the
 # generated English DocBook conversion output. dev-docs-docbook/<lang>/
 # for any OTHER language (e.g. dev-docs-docbook/da/, dev-docs-docbook/fr/)

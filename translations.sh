@@ -178,6 +178,7 @@ cmd_update() {
 	else
 		echo ""
 		echo "One or more catalogs were missing; source revision NOT advanced." >&2
+		return 1
 	fi
 }
 
@@ -243,6 +244,7 @@ cmd_check() {
 	repo="$(languages_repo)"
 	local lang_dir="$repo/$lang"
 	local ok=1
+	local catalogs_found=0
 
 	echo "$lang Translation Validation"
 	echo "=============================="
@@ -251,13 +253,19 @@ cmd_check() {
 	for chapter in "${chapters[@]}"; do
 		local po="$lang_dir/documentation/$chapter.po"
 		[ -f "$po" ] || continue
+		catalogs_found=$((catalogs_found + 1))
 		if ! msgfmt --check -o /dev/null "$po" 2>/tmp/translations_check_err; then
 			echo "✗ $chapter.po: PO syntax invalid"
 			cat /tmp/translations_check_err
 			ok=0
 		fi
 	done
-	[ "$ok" -eq 1 ] && echo "✓ PO syntax valid"
+	if [ "$catalogs_found" -eq 0 ]; then
+		echo "✗ no PO catalogs found under $lang_dir/documentation/ -- nothing was validated"
+		ok=0
+	elif [ "$ok" -eq 1 ]; then
+		echo "✓ PO syntax valid ($catalogs_found catalog(s))"
+	fi
 
 	local recon_dir
 	recon_dir="$(mktemp -d)"
@@ -280,12 +288,16 @@ cmd_check() {
 			recon_ok=0
 		fi
 	done
-	[ "$recon_ok" -eq 1 ] && echo "✓ DocBook reconstruction successful"
-	[ "$recon_ok" -eq 1 ] && echo "✓ DocBook XML valid"
+	if [ "$catalogs_found" -gt 0 ] && [ "$recon_ok" -eq 1 ]; then
+		echo "✓ DocBook reconstruction successful"
+		echo "✓ DocBook XML valid"
+	fi
 	rm -rf "$recon_dir"
 
 	echo ""
 	cmd_status "$lang"
+
+	[ "$catalogs_found" -gt 0 ] && [ "$ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]
 }
 
 cmd_audit() {
@@ -306,6 +318,7 @@ cmd_audit() {
 	local audit_dir
 	audit_dir="$(mktemp -d)"
 	local overall_ok=1
+	local checked=0
 	for chapter in "${chapters[@]}"; do
 		local po="$lang_dir/documentation/$chapter.po"
 		local hand="$target_dir/$chapter.xml"
@@ -314,6 +327,7 @@ cmd_audit() {
 			echo "○ $chapter: skipped (no PO catalog or no hand file yet)"
 			continue
 		fi
+		checked=$((checked + 1))
 		local mo="$audit_dir/$chapter.mo"
 		local recon="$audit_dir/$chapter.xml"
 		msgfmt -o "$mo" "$po" 2>/dev/null
@@ -336,13 +350,17 @@ cmd_audit() {
 	rm -rf "$audit_dir"
 
 	echo ""
-	if [ "$overall_ok" -eq 1 ]; then
-		echo "All chapters round-trip clean."
+	if [ "$checked" -eq 0 ]; then
+		echo "No chapters were actually checked (no PO catalog + hand file pair found for" \
+			"any chapter) -- this is not the same as clean, nothing was compared."
+		overall_ok=0
+	elif [ "$overall_ok" -eq 1 ]; then
+		echo "All $checked chapter(s) round-trip clean."
 	else
 		echo "Some chapters have real mismatches -- see docs/gettext-workflow-checklist.md"
 		echo "for what to do next (check which side is correct, fix both to agree)."
 	fi
-	[ "$overall_ok" -eq 1 ]
+	[ "$checked" -gt 0 ] && [ "$overall_ok" -eq 1 ]
 }
 
 cmd_build() {
