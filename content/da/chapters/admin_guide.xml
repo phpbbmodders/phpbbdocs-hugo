@@ -2285,4 +2285,272 @@
 		</section>
 	</section>
 
+	<section id="acp_maintenance">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Claude</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Boardvedligeholdelse</title>
+
+		<para>At drive et phpBB 3.3-board er et meget vigtigt job, der er op til administratoren/administratorerne. At vedligeholde boardet for at sikre, at det kører så rent og korrekt som muligt, er administratorens opgave.</para>
+
+		<para><guimenuitem>Boardvedligeholdelse</guimenuitem> er en sektion i <acronym>ACP</acronym>, der giver dig mulighed for at holde styr på intern phpBB-information, såsom logs, samt vedligeholde din database (som indeholder dine phpBB-relaterede data), såsom sikkerhedskopiering og gendannelse af data.</para>
+
+		<section id="acp_maintenance_logs">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Forumlogs</title>
+			<para>Sektionen <guilabel>Forumlog</guilabel> i <acronym>ACP</acronym> giver et overblik over, hvad der er sket på boardet. Dette er vigtigt for dig, administratoren, at holde styr på. Der findes fire typer logs:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Administratorlog</term>
+					<listitem>
+						<para>Denne log registrerer alle handlinger udført inde i selve administrationspanelet.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Redaktørlog</term>
+					<listitem>
+						<para>Denne log registrerer de handlinger, dit boards redaktører udfører. Når et emne flyttes eller låses, registreres det her, så du kan se, hvem der udførte en bestemt handling.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Brugerlog</term>
+					<listitem>
+						<para>Denne log registrerer alle vigtige handlinger, udført enten af brugere eller på brugere. Alle ændringer af e-mail og adgangskode registreres i denne log.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Fejllog</term>
+					<listitem>
+						<para>Denne log viser eventuelle fejl, der er forårsaget af handlinger udført af selve boardet, såsom fejl ved afsendelse af e-mails. Har du problemer med at en bestemt funktion ikke virker, er denne log et godt sted at starte. Er det aktiveret, kan yderligere debug-information blive skrevet til denne log.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>Klik på et af logs-linkene i venstre sektion <guilabel>Forumlogs</guilabel>.</para>
+
+			<para>Har du de rette tilladelser, kan du fjerne enhver eller alle logposter fra ovenstående sektioner. For at fjerne logposter, gå til den relevante sektion for logposter, markér logposternes afkrydsningsfelter, og klik derefter på afkrydsningsfeltet <guilabel>Slet markerede</guilabel> for at slette logposterne.</para>
+
+		</section>
+
+		<section id="acp_maintenance_database">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Sikkerhedskopiering og gendannelse af database</title>
+			<para>phpBB bruger en database til at gemme alle de data, der bruges på boardet, herunder brugere, indlæg, emner osv. At sikkerhedskopiere databasen kan være nyttigt som en beskyttelsesforanstaltning i tilfælde af eventuelle uheld, der kan forårsage datatab eller skade på databasen. Skulle et sådant uheld ske, har du mulighed for at gendanne databasen til en tidligere tilstand fra sikkerhedskopien. Du kan bruge sikkerhedskopieringsværktøjet til at flytte dit board til en anden webhost - du opretter en sikkerhedskopi på din nuværende server og gendanner den på den nye, for at beholde alle data.</para>
+			<itemizedlist>
+				<title>Databasesikkerhedskopiering</title>
+				<listitem><para><guilabel>Sikkerhedskopitype</guilabel>: Du kan sikkerhedskopiere hele databasen, eller du kan enten sikkerhedskopiere <guilabel>strukturen</guilabel> eller <guilabel>dataene</guilabel>. Strukturen indeholder kun det hierarki, dataene er gemt i; sikkerhedskopierer du derimod kun dataene, skal du bruge en forudberedt struktur ved gendannelse/import af data.</para></listitem>
+				<listitem><para><guilabel>Filtype</guilabel>: Afhængigt af din serveropsætning kan du gemme sikkerhedskopien i flere formater. Muligheden <guilabel>Tekst</guilabel> gemmer sikkerhedskopien som ren tekst, andre muligheder komprimerer filen for at reducere størrelsen på dumpet.</para></listitem>
+				<listitem>
+					<para><guilabel>Tabelvalg</guilabel>: Du kan enten <guilabel>vælge alle</guilabel> tabeller, eller du kan vælge individuelle tabeller til sikkerhedskopiering. Sikkerhedskopierer du en stor database, kan du udelukke søgetabellerne (glem ikke at gendanne deres struktur) og genskabe søgeindekset på den nye server.</para>
+					<tip>
+						<para>Brug CTRL- og Skift-tasterne sammen med din mus til at vælge individuelle tabeller.</para>
+					</tip>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<title>Databasegendannelse</title>
+				<listitem><para>Filvalg: Du får vist en liste over databasesikkerhedskopier, der er gemt i store-mappen. Vælg den, du ønsker at gendanne, og klik på <guilabel>Start gendannelse</guilabel>. Gendannelsen kan tage et stykke tid, og den overskriver eventuelle eksisterende data på boardet.</para></listitem>
+			</itemizedlist>
+			<figure id="img_database_restore">
+				<title>Liste over tilgængelige sikkerhedskopier</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/database_restore.png"/>
+					</imageobject>
+					<caption>
+						<para>I denne liste, placeret på siden <guilabel>Gendan</guilabel>, kan du finde en liste over sikkerhedskopier oprettet gennem phpBB <acronym>ACP</acronym>, som kan vælges og gendannes.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<note><para>Muligheden for at downloade sikkerhedskopier fra ACP blev fjernet i 3.2.6. Sikkerhedskopier skal downloades fra serveren ved brug af FTP, SCP eller en anden mekanisme.</para></note>
+		</section>
+		<section id="acp_maintenance_search">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Søgeindeksering</title>
+			<para>phpBB 3.3 giver dig et kraftfuldt søgesystem, som kan bruges til at søge gennem hele dit board. De vigtigste kontroller for søgefunktionerne findes i sektionen <link linkend="acp_server_search">Søgeindstillinger</link>. Her kan du administrere <guilabel>søgeindekset</guilabel>, som bruges til at gemme de data, der er nødvendige for hurtige og præcise søgeresultater - det er noget i retning af en kæmpe indholdsfortegnelse. Som standard er to søgebackends tilgængelige - fulltext native, som er inkluderet i phpBB-koden og virker på alle <glossterm>DBMS</glossterm>'er, og fulltext mysql, som bruger MySQL's indbyggede fulltext-søgefunktion. Den første tilbyder mere fleksibel konfiguration, mens den anden ikke fylder for meget i databasen, og indekset oprettes meget hurtigere.</para>
+			<note>
+				<para>Oprettelse af et søgeindeks kan tage meget lang tid; et nyt vindue åbnes og opdateres selv, mens de nødvendige søgetabelposter oprettes. Vær venligst tålmodig, processen kan tage flere timer på store boards.</para>
+			</note>
+			<para>Fulltext native-backenden fungerer sådan: den bruger to tabeller, én der indeholder ordene brugt på boardet, hvor hvert ord har et numerisk ID tildelt, og en anden tabel, der forbinder indlægs-ID'er til ord-ID'er. Dette system er meget hurtigt, når du skal søge efter bestemte ord i hele databasen. Følgende statistikker, som tilbydes på siden Søgeindeks, beskriver hvor mange ord og relationer systemet indeholder:</para>
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Samlet antal indekserede ord</guilabel></term>
+					<listitem>
+						<para>Denne indstilling forklarer stort set sig selv; det er antallet af forskellige ord, der nogensinde er blevet postet på dit board. Kun ord, der matcher kriterierne for indeksering, angivet i <link linkend="acp_server_search">Søgeindstillinger</link>, medtages.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Samlet antal indekserede ord-til-indlæg-relationer</guilabel></term>
+					<listitem>
+						<para>Som beskrevet ovenfor indeholder den anden søgetabel en liste over relationer mellem indlæg og ord. Poster nogen f.eks. ordet "fly" i to forskellige indlæg, tilføjer systemet ordet én gang, og tilføjer to relationer, én til hvert indlæg.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Samlet antal indekserede indlæg</guilabel></term>
+					<listitem>
+						<para>Denne statistik vises for mysql fulltext-backenden, hvor søgningen udføres af en intern mekanisme i databasesystemet. Den fortæller dig, hvor mange indlæg på boardet der er indekseret.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+	</section>
+
+	<section id="acp_system">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Claude</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Systemkonfiguration</title>
+		<para>Kontroller, der påvirker hele boardet, og som er en central del af at konfigurere og drive phpBB, findes i sektionen System. De fleste af disse indstillinger kræver mere opmærksomhed fra administratoren og er ikke helt lige så nemme at konfigurere; heldigvis vil du sandsynligvis ikke skulle ændre dem for ofte. Dette omfatter at holde din installation opdateret, administrere boardets sprog eller redigere strukturen for phpBB's kontrolpaneler.</para>
+		<section id="acp_system_updates">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Tjek for opdateringer</title>
+			<para>phpBB 3.3.x-grenen opdateres som regel hver anden måned efter behov. Fejlrettelser, nye funktioner og andre ændringer inkluderes i disse opdateringer. Det mindre versionsnummer øges hver gang. Det anbefales kraftigt at holde din phpBB-installation opdateret. Opdatering fra ældre versioner er mere besværligt, og du vil have svært ved at finde løsninger på eventuelle konflikter. Du bør bruge den fulde pakkeopdatering til at opdatere dit board, især hvis dit board ikke har nogen ændringer i kernefilerne. Alternativt kan erfarne brugere ønske at opdatere med den avancerede opdateringspakke, som kan sammenlægge ændringer i kernefiler.</para>
+			<para>Du bliver underrettet i din ACP, hvis en ny version udgives; du vil også have et link til den nyeste udgivelsesmeddelelse, som briefer dig om de tilføjede funktioner og den samlede ændringslog.</para>
+			<para>Det er meget enkelt at opdatere med den fulde pakke. Først går du til den linkede downloadside på phpBB.com og downloader den fulde pakke af den nyeste version. Du udpakker indholdet på din pc, fjerner config.php samt mapperne images/, files/ og store/ fra den udpakkede pakke, og uploader dem til boardets rodmappe, hvor du overskriver eventuelle gamle filer og sammenlægger mapper. Boardet vil være offline for almindelige brugere i mellemtiden. Gå derefter blot til mappen <filename class='directory'>install/</filename>, vælg fanen <guilabel>Opdater</guilabel>, og fortsæt med at opdatere dit board ved at klikke på "Opdater kun database".</para>
+			<para>Se venligst de mere detaljerede instruktioner for <ulink url="https://www.phpbb.com/support/docs/en/3.3/ug/upgradeguide/update_full/">fuld pakkeopdatering</ulink></para>
+		</section>
+		<section id="acp_system_spiders">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Administration af søgerobotter</title>
+			<para>phpBB 3 introducerede et nyt system til administration af søgeindekserings- og botkonti. Det giver dig mulighed for at identificere disse automatiske bots ud fra deres IP eller en del af deres user-agent, hvilket er en indstilling, der normalt identificerer brugerens browser. Efter du har tilføjet en bot, og den genkendes, behandler phpBB ikke sessionen som anonym, men bruger den oprettede botkonto. Bots bruger tilladelser angivet af den foruddefinerede Bots-gruppe. Identifikation af bots er vigtig, så phpBB kan levere indhold til dem, der er mere passende for søgemaskiner - døde links til sider uden indhold udelades, f.eks. sider til indlæg, rapportering af indlæg osv. Bots modtager aldrig et session-ID i URL'en, som ikke bør fremgå i søgeresultaterne. Du kan også tildele bots en bestemt typografi og et bestemt sprog.</para>
+			<para>Du kan nemt følge med i, om en bestemt søgeindekserer har besøgt dit site for nylig, ved at tjekke kolonnen <guilabel>Sidste besøg</guilabel> på botlistesiden.</para>
+			<note>
+				<para>Bots bruger ikke tilladelser fra gæstegruppen, men tilladelser fra Bots-gruppen. For mere om foruddefinerede grupper, læs venligst <xref linkend="acp_groups_types"/></para>
+			</note>
+			<itemizedlist>
+				<title>Tilføjelse af en bot</title>
+				<listitem><para><guilabel>Botnavn</guilabel>: Dette er titlen på den bot, der bruges på forummet. Du ser den i listen over bots i <acronym>ACP</acronym> og i listerne Hvem er online.</para></listitem>
+				<listitem><para><guilabel>Bottypografi</guilabel>: Du kan vælge den typografi, der vises til botten, fra listen over installerede typografier på boardet.</para></listitem>
+				<listitem><para><guilabel>Botsprog</guilabel>: Du kan gøre det samme med sproget. Botten bruger det sprog, der er valgt her.</para></listitem>
+				<listitem><para><guilabel>Bot aktiv</guilabel>: Botsessionen oprettes kun, hvis en bot er aktiv; er den ikke, bruges de data for en bot, der er angivet i denne formular, ikke nogen steder.</para></listitem>
+				<listitem><para><guilabel>User-agent-match</guilabel>: Du kan matche en bot enten via dens user-agent eller dens IP. Du kan angive en del af user-agenten, der skal søges efter. Google-søgeindeksereren har f.eks. "Googlebot" i sin user-agent, så du skal indtaste dette her for at identificere, når Google gennemsøger dit board.</para></listitem>
+				<listitem><para><guilabel>Bottens IP-adresse</guilabel>: Dette felt bruges også til at identificere botten. Kan en bot ikke genkendes ud fra user-agenten, kan du angive hvilken <glossterm>IP-adresse</glossterm> der skal bruges til at identificere den. Delvise matches er tilladt, hvilket betyder at du kan angive kun de første to eller tre oktetter af IP'en, hvis resten ændres dynamisk. Du kan også indtaste flere IP'er adskilt med et komma.</para></listitem>
+			</itemizedlist>
+			<note>
+				<para>Angiver du både en user-agent og en <glossterm>IP-adresse</glossterm>, skal begge matche for at identificere botten.</para>
+			</note>
+		</section>
+		<section id="acp_system_mail">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Masse-e-mail</title>
+			<para>phpBB giver dig mulighed for at sende en e-mail eller besked til alle brugere på boardet, som tillader dette i deres <link linkend="ucp_preferences">boardindstillinger</link>. Beskeden kan fungere som et nyhedsbrev, en notifikation om ændringer på boardet osv. Du kan vælge om e-mailen skal sendes til alle brugere, en bestemt gruppe eller en liste af specifikke brugere. E-mailen sendes fra administratorens e-mailadresse, og alle modtagere inkluderes i en BCC - Blind Carbon Copy.</para>
+			<para>På nogle webhosts kan afsendelse af en masse-e-mail være et problem, da hostingfirmaet nogle gange begrænser antallet af e-mails, der kan sendes på én gang. phpBB inkluderer kun 50 modtagere pr. e-mail og sender en ny til den næste batch for at forhindre dette; kan du stadig ikke sende en masse-e-mail, så kontakt din webhost om situationen.</para>
+			<itemizedlist>
+				<title>Skriv en masse-e-mail</title>
+				<listitem><para><guilabel>Send til gruppe</guilabel>: Vælg den gruppe, du ønsker at sende e-mailen til. Gruppen Tilmeldte brugere indeholder alle brugerne på boardet.</para></listitem>
+				<listitem><para><guilabel>Send til brugere</guilabel>: Du kan også angive en liste af brugere. Indtaster du brugernavne i dette felt, tilsidesættes den første indstilling. Hvert brugernavn bør stå på en ny linje.</para></listitem>
+				<listitem><para><guilabel>Emne</guilabel>: Dette er emnet for beskeden, som du plejer at indtaste, når du sender en e-mail.</para></listitem>
+				<listitem><para><guilabel>Din besked</guilabel>: Dette felt indeholder beskeden; du kan kun indtaste ren tekst. <glossterm>BBkode</glossterm> eller HTML kodes som HTML-entiteter og vises som de er, uden formatering af teksten, når brugeren modtager e-mailen.</para></listitem>
+				<listitem><para><guilabel>Mailprioritet</guilabel>: Dette er prioriteten for e-mailen, sendt med e-mailheaderne.</para></listitem>
+				<listitem><para><guilabel>Send til udelukkede brugere</guilabel>: Som standard modtager udelukkede brugere ikke masse-e-mails. Markér denne boks, hvis du ønsker at inkludere disse brugere i udsendelsen.</para></listitem>
+				<listitem><para><guilabel>Send straks</guilabel>: Du kan vælge, om e-mailen skal sendes med det samme, eller om beskederne skal gives videre til cachesystemet og sendes gradvist.</para></listitem>
+			</itemizedlist>
+			<note>
+				<para>Afsendelse af e-mails til alle brugere på boardet eller en stor gruppe kan tage lang tid. Vent til scriptet bekræfter, at e-mailene er sendt.</para>
+			</note>
+		</section>
+		<section id="acp_system_phpinfo">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>PHP-information</title>
+			<para>Denne mulighed giver dig information om den version af PHP, der er installeret på din server, sammen med information om indlæste moduler og den konfiguration, der gælder for den aktuelle placering. Denne information kan være nyttig for phpBB-teammedlemmer til at hjælpe dig med at diagnosticere problemer, der påvirker din phpBB-installation. Informationen her kan være sikkerhedsfølsom, og det anbefales, at du kun giver adgang til denne mulighed til de brugere, der har brug for adgang til informationen, og ikke videregiver informationen, medmindre det er nødvendigt.</para>
+			<para>Bemærk venligst at nogle webhostingudbydere kan begrænse den information, der er tilgængelig for dig på denne side, af sikkerhedsmæssige årsager.</para>
+		</section>
+		<section id="acp_system_reasons">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Administrer årsager til rapportering og afvisning af indlæg</title>
+			<para>phpBB har en funktion, der giver dig mulighed for at sætte nye indlæg i kø, hvor indlægget venter, indtil det godkendes eller afvises af en redaktør; dette kan indstilles med tilladelser eller i <guilabel>Indlægsindstillinger</guilabel> for brugere, som ikke har nok indlæg. Vælger en redaktør at afvise et indlæg i køen, har vedkommende mulighed for at angive en årsag til afvisningen. De foruddefinerede muligheder, redaktøren kan vælge imellem, angives her. Disse årsager tilbydes også til brugere, der rapporterer et indlæg på boardet.</para>
+			<para>For mere information om kømoderation, se <xref linkend="mcp_queue"/>.</para>
+			<figure id="img_denial_reasons">
+				<title>Side til rapporterings-/afvisningsårsager</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/denial_reasons.png"/>
+					</imageobject>
+					<caption>
+						<para>Dette er siden, hvorfra du kan administrere årsager vist ved afvisning eller rapportering af et indlæg. Fire standardårsager til stede i en standard phpBB-installation vises. Den femte er tilføjet manuelt og er ikke lokaliseret; dette kan opnås ved at angive en identifikator i <guilabel>Årsagstitel</guilabel>, der kun indeholder bogstaver og understregninger, og derefter tilføje lokaliserede titler og årsager i sprogfilen kaldet <filename>mcp.php</filename>, placeret i mappen <filename>language/</filename>. De foruddefinerede årsager findes nederst i filen; du skal tilføje din årsag på samme måde, som de andre er gemt. Lokaliserer du en årsag, vises den i den korrekte oversættelse for hver sprogpakke, der bruges på boardet.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+		</section>
+		<section id="acp_system_modules">
+		 	<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Modulstyring</title>
+			<para>Moduler bruges til at danne strukturen og indholdet af <acronym>UCP</acronym>, <acronym>MCP</acronym> og <acronym>ACP</acronym>. Individuelle moduler kan valgfrit deaktiveres, og det er muligt at omorganisere dem i en anden struktur. Moduler til brugerkontrolpanelet og redaktørkontrolpanelet har en tostrenget kategori » modul-struktur, mens administrationsmodulerne har tre niveauer: Kategori (faner øverst) » Kategori (overskrifter i venstre side) » Modul (individuelle sektioner).</para>
+			<para>Meget ofte tilføjer extensions med styrbare funktioner moduler til ACP, for at gøre det nemt at redigere forskellige indstillinger.</para>
+			<para>For at oprette en modulkategori, brug tekstfeltet ved siden af knappen <guilabel>Opret nyt modul</guilabel>. Indtast kategorititlen, klik på knappen, og sørg på den næste side for at <guilabel>Modultype</guilabel> er <guilabel>Kategori</guilabel>, at modulet er <guilabel>aktiveret</guilabel>, og at <guilabel>Modulets overordnede</guilabel> er angivet korrekt. Efter du har oprettet en kategori, kan du navigere til den gennem listen over moduler og tilføje et specifikt modul, der er gemt i en fil. Moduler gemmes i den relevante mappe (acp/, mcp/ eller /ucp) i mappen <filename>includes/</filename>.</para>
+			<warning><para>Ved at deaktivere modulet Modulstyring kan du afskære dig selv fra ACP og andre kontrolpaneler. Vær forsigtig, når du redigerer moduler.</para></warning>
+			<itemizedlist>
+				<title>Tilføjelse af et modul</title>
+				<listitem><para><guilabel>Modulets sprognavn</guilabel>: Dette bør sættes til den sprogkonstant, der indeholder modulnavnet på de forskellige sprog, der bruges på boardet. Du kan også angive en almindelig titel her, hvis du ikke har modultitlen oversat.</para></listitem>
+				<listitem><para><guilabel>Modultype</guilabel>: Du kan tilføje en kategori eller et modul. Som nævnt ovenfor indeholder kategorier endnu et niveau af kategorier eller moduler; de bruges til at organisere kontrolpanelerne.</para></listitem>
+				<listitem><para><guilabel>Overordnet</guilabel>: Denne indstilling angiver under hvilken kategori modulet eller kategorien vises.</para></listitem>
+				<listitem><para><guilabel>Modul aktiveret</guilabel>: Er et modul deaktiveret, er det slet ikke tilgængeligt; du skal aktivere det for at bruge det.</para></listitem>
+				<listitem><para><guilabel>Modul vist</guilabel>: Er modulet aktiveret, men ikke vist, kan du tilgå det med en direkte URL, men det vises ikke i menuerne. Denne indstilling vises kun, hvis <guilabel>Modultype</guilabel> er sat til Modul.</para></listitem>
+				<listitem><para><guilabel>Vælg modul</guilabel>: Individuelle modulfiler indeholder de forskellige kontrolpaneler. Lignende moduler grupperes i én fil og kaldes ved at angive en tilstand. Her vælger du den fil, hvori det specifikke modul du ønsker, er placeret. Denne indstilling vises kun, hvis <guilabel>Modultype</guilabel> er sat til Modul.</para></listitem>
+				<listitem><para><guilabel>Vælg modultilstand</guilabel>: Her angiver du, hvilken tilstand der skal bruges i den ovenfor valgte modulfil. Modulets endelige indhold baseres på denne indstilling. Denne indstilling vises kun, hvis <guilabel>Modultype</guilabel> er sat til Modul.</para></listitem>
+			</itemizedlist>
+		</section>
+	</section>
 </chapter>
