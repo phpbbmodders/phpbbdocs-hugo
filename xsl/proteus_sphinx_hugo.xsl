@@ -653,6 +653,176 @@
 	</xsl:choose>
 </xsl:template>
 
+<!-- ".. |name| replace:: ..." substitution definitions: Docutils/Sphinx
+     already resolves every use site (a "|name|" reference) into the
+     substitution's actual content directly inline before this XML is
+     produced (confirmed empirically, a real corpus file using
+     several of these has zero substitution_reference elements left in
+     its XML), so this element only still exists here as bookkeeping
+     for its own definition site, which is never itself rendered
+     content. Without this template the catch-all would render the
+     definition a SECOND time, wrongly, at the definition site as well
+     as the (correct) resolved use sites. -->
+<xsl:template match="substitution_definition"/>
+
+<!-- format="html" is this project's Hugo config's own enabled escape
+     hatch (site/config.toml sets markup.goldmark.renderer.unsafe =
+     true specifically so raw HTML passes through untouched), reading
+     the content via string() (bypassing text()'s escaping, matching
+     literal_block) and emitting it verbatim is exactly right for that
+     case, matching how the DocBook pipeline's own "br" template
+     already emits a raw "<br>" the same way. Any other @format (LaTeX,
+     etc.) has no meaning for a web page and is dropped rather than
+     leaked as literal source text into rendered prose. -->
+<xsl:template match="raw[@format = 'html']">
+	<xsl:value-of select="string(.)"/>
+</xsl:template>
+<xsl:template match="raw"/>
+
+<!-- Docutils' own real, sourced-shaped semantic representation of a
+     term/definition pair (`Term\n    Definition text.` in RST), no
+     clean CommonMark/GFM equivalent exists and this project's Goldmark
+     config doesn't enable a definition-list extension, so this emits
+     real "<dl><dt><dd>" HTML directly (the same "raw HTML for
+     something Markdown can't cleanly express" reasoning as "raw"
+     above), rather than faking it with bullets or bold text that would
+     lose the actual term/definition structure. -->
+<xsl:template match="definition_list">
+	<xsl:text>&#10;&lt;dl&gt;&#10;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/dl&gt;&#10;&#10;</xsl:text>
+</xsl:template>
+
+<xsl:template match="definition_list_item">
+	<xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="term">
+	<xsl:text>&lt;dt&gt;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/dt&gt;&#10;</xsl:text>
+</xsl:template>
+
+<xsl:template match="definition">
+	<xsl:text>&lt;dd&gt;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/dd&gt;&#10;</xsl:text>
+</xsl:template>
+
+<!-- A field list (":Field Name: value" RST syntax, confirmed real
+     corpus use: docstring-style ":Class:"/":Interface:" metadata
+     blocks) has the identical term/definition shape as
+     definition_list above, just with different element names ,
+     reuses the exact same real "<dl>" rendering rather than a second,
+     parallel implementation of the same idea. -->
+<xsl:template match="field_list">
+	<xsl:text>&#10;&lt;dl&gt;&#10;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/dl&gt;&#10;&#10;</xsl:text>
+</xsl:template>
+
+<xsl:template match="field">
+	<xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="field_name">
+	<xsl:text>&lt;dt&gt;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/dt&gt;&#10;</xsl:text>
+</xsl:template>
+
+<xsl:template match="field_body">
+	<xsl:text>&lt;dd&gt;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/dd&gt;&#10;</xsl:text>
+</xsl:template>
+
+<!-- ":abbr:`UCP (User Control Panel)`", @explanation carries the
+     parenthesized expansion (confirmed real corpus use). Real "<abbr
+     title="...">" is both simpler and more correct than trying to fake
+     the tooltip behavior any other way in Markdown, and this project's
+     Hugo config already allows raw HTML through. -->
+<!-- HTML-attribute quote escaping ("&amp;quot;", not the Markdown/YAML
+     backslash-quote quote-escape uses elsewhere in this file, this
+     text is going straight into a raw HTML attribute, not Markdown/YAML
+     text). -->
+<xsl:template name="escape-quote-as-html-entity">
+	<xsl:param name="text"/>
+	<xsl:choose>
+		<xsl:when test="contains($text, '&quot;')">
+			<xsl:value-of select="substring-before($text, '&quot;')"/>
+			<xsl:text>&amp;quot;</xsl:text>
+			<xsl:call-template name="escape-quote-as-html-entity">
+				<xsl:with-param name="text" select="substring-after($text, '&quot;')"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise><xsl:value-of select="$text"/></xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="abbreviation">
+	<xsl:variable name="escaped-explanation">
+		<xsl:call-template name="escape-quote-as-html-entity">
+			<xsl:with-param name="text" select="@explanation"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:text>&lt;abbr title=&quot;</xsl:text>
+	<xsl:value-of select="$escaped-explanation"/>
+	<xsl:text>&quot;&gt;</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>&lt;/abbr&gt;</xsl:text>
+</xsl:template>
+
+<!-- Sphinx's own auto-generated output for ".. contents:: :local:"
+     (confirmed via real corpus content: classes="contents local") is
+     a self-contained mini table-of-contents duplicating the page's own
+     heading structure, suppressed for the same reason toctree
+     navigation is suppressed above: Hugo generates real page
+     navigation already, and this is Sphinx's own internal-to-RST
+     navigation aid, not real page content. A genuinely generic
+     ".. topic::" (a titled aside, distinct from a contents listing)
+     isn't in the real corpus this was verified against, so it's left
+     to the catch-all rather than guessed at. -->
+<xsl:template match="topic[contains(concat(' ', @classes, ' '), ' contents ')]"/>
+
+<!-- A ".. code-block:: lang\n   :caption: some/path" directive:
+     Sphinx wraps the resulting literal_block in this container
+     alongside a <caption> sibling holding the caption text (confirmed
+     via real corpus content). Render the caption as a bold label line
+     immediately above the code fence the wrapped literal_block's own
+     template still produces via the normal apply-templates below. Any
+     other @classes on a generic container is a structural/CSS-only
+     wrapper with no distinct rendering of its own, pass through
+     rather than treat as unsupported. -->
+<xsl:template match="container[contains(concat(' ', @classes, ' '), ' literal-block-wrapper ')]">
+	<xsl:apply-templates/>
+</xsl:template>
+<xsl:template match="container">
+	<xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="caption">
+	<xsl:text>&#10;**</xsl:text>
+	<xsl:apply-templates/>
+	<xsl:text>**&#10;</xsl:text>
+</xsl:template>
+
+<!-- Docutils' own marker for a genuine RST syntax error in the SOURCE
+     (e.g. an inline-markup start-string with no matching end-string) ,
+     confirmed against a real corpus file that also independently
+     produced a real sphinx-build WARNING for the same line. This is a
+     source-content defect, not a missing converter feature, so it gets
+     its own clearly-worded diagnostic rather than the generic
+     "unsupported element" one, while staying just as loud (still an
+     xsl:message, still a visible inline marker), silently prettifying
+     it would hide a real upstream RST bug instead of surfacing it. -->
+<xsl:template match="problematic">
+	<xsl:message>
+		<xsl:text>WARNING: Docutils flagged this content as a genuine RST source error (a "problematic" node), not an unimplemented converter feature -- fix the source.</xsl:text>
+	</xsl:message>
+	<xsl:text> [SOURCE RST ERROR: </xsl:text><xsl:apply-templates/><xsl:text>] </xsl:text>
+</xsl:template>
+
 <xsl:template match="line_block">
 	<xsl:apply-templates/>
 	<xsl:text>&#10;</xsl:text>
@@ -678,11 +848,24 @@
 
 <!-- ===================== admonitions ===================== -->
 
+<!-- $exclude-title: only the generic ".. admonition:: Custom Label"
+     directive (unlike note/warning/tip/seealso/important/caution, all
+     of which use a fixed label and have no <title> child of their
+     own) carries a real <title> element holding its custom label text
+    , apply-templates on all children would otherwise hit that title
+     with the catch-all "unsupported element" template (confirmed: this
+     is exactly what a real corpus file's one "title" catch-all hit
+     turned out to be), so the generic case explicitly excludes it from
+     the body and uses it as the label instead. -->
 <xsl:template name="admonition">
 	<xsl:param name="label"/>
+	<xsl:param name="exclude-title" select="false()"/>
 	<xsl:variable name="body">
 		<xsl:text>**</xsl:text><xsl:value-of select="$label"/><xsl:text>:** </xsl:text>
-		<xsl:apply-templates/>
+		<xsl:choose>
+			<xsl:when test="$exclude-title"><xsl:apply-templates select="node()[not(self::title)]"/></xsl:when>
+			<xsl:otherwise><xsl:apply-templates/></xsl:otherwise>
+		</xsl:choose>
 	</xsl:variable>
 	<xsl:text>&#10;</xsl:text>
 	<xsl:call-template name="prefix-lines">
@@ -696,6 +879,30 @@
 <xsl:template match="warning"><xsl:call-template name="admonition"><xsl:with-param name="label">Warning</xsl:with-param></xsl:call-template></xsl:template>
 <xsl:template match="tip"><xsl:call-template name="admonition"><xsl:with-param name="label">Tip</xsl:with-param></xsl:call-template></xsl:template>
 <xsl:template match="seealso"><xsl:call-template name="admonition"><xsl:with-param name="label">See also</xsl:with-param></xsl:call-template></xsl:template>
+<xsl:template match="important"><xsl:call-template name="admonition"><xsl:with-param name="label">Important</xsl:with-param></xsl:call-template></xsl:template>
+<xsl:template match="caution"><xsl:call-template name="admonition"><xsl:with-param name="label">Caution</xsl:with-param></xsl:call-template></xsl:template>
+<!-- Docutils' complete standard admonition set is note/warning/tip/
+     hint/important/caution/danger/attention/error, only hint showed
+     up in the real corpus swept so far (the others above were already
+     confirmed real), but these three are the same one-line pattern and
+     cost nothing to cover now rather than waiting for a future sweep
+     of different content to hit the catch-all on them. -->
+<xsl:template match="hint"><xsl:call-template name="admonition"><xsl:with-param name="label">Hint</xsl:with-param></xsl:call-template></xsl:template>
+<xsl:template match="danger"><xsl:call-template name="admonition"><xsl:with-param name="label">Danger</xsl:with-param></xsl:call-template></xsl:template>
+<xsl:template match="attention"><xsl:call-template name="admonition"><xsl:with-param name="label">Attention</xsl:with-param></xsl:call-template></xsl:template>
+<xsl:template match="error"><xsl:call-template name="admonition"><xsl:with-param name="label">Error</xsl:with-param></xsl:call-template></xsl:template>
+
+<!-- Generic ".. admonition:: Custom Title", the @classes attribute
+     (e.g. "error", confirmed via real corpus content: ".. admonition::
+     Deprecated" produces classes="error") is a styling hint this plain
+     Markdown rendering has no use for; the title's own text is the
+     actual label. -->
+<xsl:template match="admonition">
+	<xsl:call-template name="admonition">
+		<xsl:with-param name="label" select="normalize-space(title)"/>
+		<xsl:with-param name="exclude-title" select="true()"/>
+	</xsl:call-template>
+</xsl:template>
 
 <!-- ===================== lists ===================== -->
 

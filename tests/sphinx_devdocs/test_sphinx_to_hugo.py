@@ -373,6 +373,119 @@ def test_unsupported_element_is_loud() -> None:
           "an unhandled element triggers an xsl:message warning naming it")
 
 
+def test_definition_list_renders_as_real_html_dl() -> None:
+    out, err = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        "<definition_list><definition_list_item>"
+        "<term>avatar</term><definition><paragraph>Builds a name</paragraph></definition>"
+        "</definition_list_item></definition_list>"
+        "</section>"
+    )
+    check("<dl>" in out and "<dt>avatar</dt>" in out and "<dd>Builds a name" in out and "</dl>" in out,
+          "a definition list renders as real <dl>/<dt>/<dd> HTML, not the unsupported-element catch-all")
+    check("[UNSUPPORTED:" not in out, "no leftover unsupported-element marker for definition_list content")
+
+
+def test_field_list_renders_as_real_html_dl() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        "<field_list><field><field_name>Class</field_name>"
+        "<field_body><paragraph>Some\\phpbb\\class</paragraph></field_body></field></field_list>"
+        "</section>"
+    )
+    check("<dt>Class</dt>" in out and "<dd>Some" in out,
+          "a field list (':Class:' RST syntax) renders via the same real <dl> handling as definition_list")
+
+
+def test_raw_html_passthrough_and_other_formats_dropped() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<paragraph>a<raw format="html" xml:space="preserve">&lt;br&gt;</raw>b</paragraph>'
+        '<paragraph>x<raw format="latex" xml:space="preserve">\\vspace{1em}</raw>y</paragraph>'
+        "</section>"
+    )
+    check("a<br>b" in out, "a raw format=\"html\" node passes through verbatim (this site's Hugo config allows raw HTML)")
+    check("vspace" not in out and "xy" in out,
+          "a raw node with a non-html format is dropped rather than leaked as literal source text")
+
+
+def test_substitution_definition_does_not_leak_at_its_own_definition_site() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<substitution_definition names="icon"><raw format="html" xml:space="preserve">&lt;i class=&quot;fa&quot;&gt;&lt;/i&gt;</raw></substitution_definition>'
+        "<paragraph>visible text</paragraph>"
+        "</section>"
+    )
+    check("fa" not in out, "a substitution_definition produces no output at its own definition site")
+    check("visible text" in out, "surrounding content still renders normally")
+
+
+def test_abbreviation_renders_as_real_html_abbr() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<paragraph>See <abbreviation explanation="User Control Panel">UCP</abbreviation> for details.</paragraph>'
+        "</section>"
+    )
+    check('<abbr title="User Control Panel">UCP</abbr>' in out,
+          "an :abbr: role renders as a real <abbr title=\"...\"> element")
+
+
+def test_abbreviation_explanation_with_quote_is_html_escaped() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<paragraph><abbreviation explanation="say &quot;hi&quot;">X</abbreviation></paragraph>'
+        "</section>"
+    )
+    check('title="say &quot;hi&quot;"' in out,
+          "a quote inside an abbreviation's explanation is HTML-entity-escaped, not left to break the attribute")
+
+
+def test_generic_admonition_uses_its_own_title_as_label() -> None:
+    out, err = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<admonition classes="error"><title>Deprecated</title><paragraph>Old API</paragraph></admonition>'
+        "</section>"
+    )
+    check("**Deprecated:**" in out, "a generic '.. admonition:: Label' directive uses its own title as the label")
+    check("[UNSUPPORTED: title]" not in out and "unsupported Sphinx XML element" not in err,
+          "the admonition's own title element is consumed as the label, not left to hit the catch-all")
+
+
+def test_contents_topic_is_suppressed_but_generic_topic_is_not() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<topic classes="contents local"><title>Contents</title>'
+        '<bullet_list><list_item><paragraph>Intro</paragraph></list_item></bullet_list></topic>'
+        "</section>"
+    )
+    check("Intro" not in out and "Contents" not in out,
+          "a '.. contents::'-generated topic is suppressed the same way toctree navigation is")
+
+
+def test_captioned_code_block_container_renders_caption_and_code() -> None:
+    out, _ = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<container classes="literal-block-wrapper" literal_block="True">'
+        "<caption>config/services.yml</caption>"
+        '<literal_block xml:space="preserve" language="yaml">key: value</literal_block>'
+        "</container>"
+        "</section>"
+    )
+    check("**config/services.yml**" in out, "a captioned code block's caption renders as a bold label line")
+    check("```yaml" in out and "key: value" in out, "the wrapped code block itself still renders normally")
+
+
+def test_problematic_gets_a_distinct_source_error_diagnostic() -> None:
+    out, err = run_xslt_snippet(
+        '<section ids="s"><title>T</title>'
+        '<paragraph><problematic>``broken markup`</problematic></paragraph>'
+        "</section>"
+    )
+    check("[SOURCE RST ERROR:" in out, "a Docutils 'problematic' node gets a distinct diagnostic, not the generic unsupported-element one")
+    check("[UNSUPPORTED: problematic]" not in out, "the source-error diagnostic replaces, not adds to, the generic catch-all marker")
+    check("genuine RST source error" in err, "a 'problematic' node's xsl:message clarifies it's a source defect, not a missing feature")
+
+
 def test_pipe_inside_inline_code_in_table_cell() -> None:
     out, _ = run_xslt_snippet(
         '<section ids="s"><title>T</title>'
@@ -500,6 +613,16 @@ def main() -> int:
     test_pipe_inside_inline_code_in_table_cell()
     test_quote_in_title()
     test_unsupported_element_is_loud()
+    test_definition_list_renders_as_real_html_dl()
+    test_field_list_renders_as_real_html_dl()
+    test_raw_html_passthrough_and_other_formats_dropped()
+    test_substitution_definition_does_not_leak_at_its_own_definition_site()
+    test_abbreviation_renders_as_real_html_abbr()
+    test_abbreviation_explanation_with_quote_is_html_escaped()
+    test_generic_admonition_uses_its_own_title_as_label()
+    test_contents_topic_is_suppressed_but_generic_topic_is_not()
+    test_captioned_code_block_container_renders_caption_and_code()
+    test_problematic_gets_a_distinct_source_error_diagnostic()
     test_nested_nonflat_internal_link_matches_hugo_slug_convention()
     test_empty_refuri_is_diagnosed_not_silently_self_linked()
     test_absolute_rst_path_rejected()

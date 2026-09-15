@@ -1,6 +1,6 @@
 # Sphinx dev-docs pipeline: spike results and real converter (Phases 0-2)
 
-## Status: real converter implemented (Phase 2), not yet committed; production integration not started
+## Status: real converter implemented and validated against the full corpus (Phase 2); production integration not started
 
 `docs/phpbb-gettext-translation-plan.md` proposes a Sphinx-native gettext
 pipeline for developer docs (`dev-docs-docbook/`), as a replacement for
@@ -124,12 +124,11 @@ Spike files kept as scratch, not committed — same reasoning as Phase 0:
 proving element coverage and finding real problems, not delivering a
 general-purpose tool yet.
 
-## Phase 2: the real converter (implemented, not yet committed)
+## Phase 2: the real converter
 
 The three Phase 1 problems, plus the internal cross-reference URL gap
-Phase 0/1 both flagged as unattempted, are now implemented as a real
-tool, not scratch — files exist in the working tree but have not been
-committed yet:
+Phase 0/1 both flagged as unattempted, are now implemented as a real,
+committed tool, not scratch:
 
 - `xsl/proteus_sphinx_hugo.xsl` — the transform, covering the full
   element vocabulary both spikes proved.
@@ -198,11 +197,57 @@ separate problems for whenever full rollout is scoped:
   and `docs/gettext-workflow-checklist.md`; a Sphinx-side version needs
   designing once there's real per-language content to audit against).
 
+## Full 55-file corpus sweep: clean
+
+Ran the real converter against every `.rst` file in a real upstream
+`development/` checkout (after `fix_csv_table_headers.py`, its own
+documented prerequisite), each with a synthetic `[XX]`-prefixed
+translation — the same discipline both spikes and the fixture test
+suite already used, now at full scale instead of 3 representative
+files.
+
+**First pass: 0 hard failures, 0 unresolved internal links, but real
+element-coverage gaps** the 3 fixtures hadn't happened to exercise —
+most significantly RST definition lists (87 occurrences across the
+corpus) and field lists, both entirely unhandled; `raw` HTML passthrough
+(24, mostly `<br>` line breaks and FontAwesome icon substitutions);
+`important`/`caution`/generic `.. admonition::` (Sphinx has more
+admonition types than note/warning/tip/seealso); a `.. contents::
+:local:` directive's auto-generated mini-TOC; a captioned code block's
+wrapper `container`/`caption`; and `:abbr:` roles.
+
+**All fixed and re-verified**: definition/field lists render as real
+`<dl>/<dt>/<dd>` HTML (this site's Goldmark config has no
+definition-list Markdown extension, but does allow raw HTML through);
+`raw[@format='html']` passes through verbatim, any other format is
+dropped rather than leaked as literal source text;
+`substitution_definition` is suppressed at its own definition site
+(confirmed Sphinx already resolves every actual use site inline before
+XML output, so nothing is lost); `:abbr:` becomes a real
+`<abbr title="...">`; every standard Docutils admonition type
+(hint/danger/attention/error added alongside the ones already handled)
+and the generic `.. admonition:: Custom Label` form (using its own
+`<title>` as the label) are covered; a `.. contents::`-generated topic
+is suppressed like toctree navigation; a captioned code block's caption
+renders as a bold label line above the fence.
+
+**Second pass, after those fixes: fully clean** — 0 hard failures, 0
+unresolved internal links, 0 unsupported elements, across all 55 files.
+The one remaining flagged item is a genuine upstream RST authoring bug
+in `language/validation.rst` (a mismatched double-backtick/single-backtick
+inline-literal marker), independently confirmed by Sphinx's own build
+warning on the same line — correctly surfaced as a loud diagnostic, not
+a converter gap, and not fixed here (it's a source content issue, not
+this tool's job to silently paper over).
+
+All new element handling has permanent regression coverage in
+`tests/sphinx_devdocs/test_sphinx_to_hugo.py` (test count 37 → 53).
+
 ## Recommended next step
 
-With the real converter now implemented (Phase 2), the remaining
-big-ticket items are genuinely separate, larger commitments, not more
-walking-skeleton work:
+With the real converter implemented (Phase 2) and now validated against
+the full real corpus, the remaining big-ticket items are genuinely
+separate, larger commitments, not more walking-skeleton work:
 
 - **`translations.sh` `development`-family support** — real architecture
   work (source-revision tracking against a separate upstream checkout,
@@ -211,9 +256,5 @@ walking-skeleton work:
   problem, not an audit; `de`/`de_x_sie` are already at 50 files vs.
   `en`/`da`/`fr`/`it`'s 55, so drift needs reconciling before any
   migration tooling can assume 1:1 file correspondence.
-- **Running the converter against the full 55-file corpus** — the
-  fixture suite proves the transform on a representative sample, not
-  every element/directive combination the real corpus uses; expect to
-  find and fix a few more cases the fixtures didn't happen to cover.
 
 Each is a fresh scoping decision, not a continuation of this spike.
