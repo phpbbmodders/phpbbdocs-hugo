@@ -150,12 +150,26 @@
 				<para>Din avatar er et lille billede som vises i din profil ved hvert indlæg du skriver. Afhængig af boardets indstillinger kan brugen af avatars være slået fra. Din avatar tilknyttes din profil på en eller flere måder: &quot;<guilabel>Upload fra din maskine</guilabel>&quot;, &quot;<guilabel>Upload fra ekstern URL</guilabel>&quot; og &quot;<guilabel>Link til ekstern placering</guilabel>&quot;.</para>
 				<para>
 					<itemizedlist>
+						<listitem><para><guilabel>Gravatar</guilabel>: Bruger du Gravatar.com's avatartjeneste, kan du angive din Gravatar-e-mailadresse her for at bruge dit Gravatar-billede som din avatar.</para></listitem>
 						<listitem><para><guilabel>Upload fra din maskine</guilabel>: Du kan uploade en avatar fra din maskine og den gemmes på boardets server.</para></listitem>
 						<listitem><para><guilabel>Upload fra ekstern URL</guilabel>: Du kan angive URL til et eksisterende billede. Herefter kopieres dette til boardets server og gemmes her.</para></listitem>
 						<listitem><para><guilabel>Link til ekstern placering</guilabel>: Du kan angive URL til et eksisterende billede. Det gemmes ikke på boardets server, der linkes blot til dette.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Yderligere kan boardadministrator have givet mulighed for at vælge i et avatargalleri. Disse billeder er tilgængelige for alle tilmeldte brugere på boardet.</para>
+			</section>
+			<section id="ucp_login_keys">
+				<title>Login-nøgler</title>
+				<para>Vælger du at lade boardet logge dig ind automatisk, når du besøger det (afkrydsningsfeltet "Husk mig"), får din browser tildelt en login-nøgle, som bruges hver gang du besøger siden. Så længe din browser har denne nøgle, bliver du automatisk logget ind. Når du logger ud, slettes nøglen kun fra din browser og ikke fra boardet.</para>
+				<para>Dette afsnit giver dig mulighed for at se alle login-nøgler, der er tilknyttet din konto, hvornår de blev oprettet, og fra hvilken IP-adresse. Du kan også slette login-nøgler fra denne side.</para>
+				<note><para>Sletter du en login-nøgle, du i øjeblikket bruger, bliver du logget ud af boardet.</para></note>
+			</section>
+			<section id="ucp_external_auth">
+				<title>Eksterne konti</title>
+				<para>Hvis boardadministratoren har aktiveret <link linkend="acp_client_auth">OAuth-godkendelse</link>, vil du kunne logge ind med din konto fra OAuth-udbydere såsom Bitly, Facebook og Google.</para>
+				<para>Klik på knappen <guilabel>Sammenkæd</guilabel> for hver tjeneste for at sammenkæde dine konti med boardet. Du bliver bedt om at logge ind igen. Brug dine loginoplysninger til boardet. <emphasis role="strong">BRUG IKKE</emphasis> din eksterne konto endnu. Når du logger ind, sendes du til din kontoside, som vil vise, at der er genereret et ID til din eksterne konto.</para>
+				<para>Når en konto er sammenkædet, kan du fjerne sammenkædningen fra samme side.</para>
+				<para>Efter du har sammenkædet kontoen, kan du nu bruge den til at logge ind på boardet. Klik blot på den relevante tjenesteknap på loginsiden.</para>
 			</section>
 		</section>
 		<section id="ucp_preferences">
