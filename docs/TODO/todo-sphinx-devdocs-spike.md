@@ -1,6 +1,6 @@
-# Sphinx dev-docs pipeline: Phase 0 spike results
+# Sphinx dev-docs pipeline: spike results (Phase 0 and 1)
 
-## Status: spike successful — full mechanical path proven on one file
+## Status: spikes successful — mechanical path proven, element coverage widened
 
 `docs/phpbb-gettext-translation-plan.md` proposes a Sphinx-native gettext
 pipeline for developer docs (`dev-docs-docbook/`), as a replacement for
@@ -56,38 +56,73 @@ in the original plan as needed but never set) — no vendoring of
 `fabpot/sphinx-php` needed. Revisit only if future upstream content
 actually starts using PHP-domain roles.
 
-## What a real (non-spike) transform needs, beyond this spike's coverage
+## Phase 1: widened element coverage, still successful
 
-The spike's XSLT (kept as scratch, not committed — it only covers one
-file's element vocabulary, explicitly not meant to generalize as-is)
-handled: `section` (recursive, arbitrary depth), `title`, `paragraph`,
-`literal_block` (with `@language`), `enumerated_list`/`list_item`,
-`literal`, `strong`, `reference`, `target` (suppressed — anchor-only, no
-visible content). A production transform needs at minimum, based on
-element types visible elsewhere in the 55-file corpus but not exercised by
-this one file:
+Ran the same walking-skeleton approach one size up: two more real files
+— `development/development/git.rst` (555 lines: admonitions, internal
+`:doc:` cross-references, bullet lists, line blocks, block quotes, an
+image, and the *already-fixed* csv-table case, run through
+`fix_csv_table_headers.py` on a copy first) and
+`extensions/database_types_list.rst` (list-table-driven tables across
+five sections) — chosen together to hit every element type Phase 0
+identified as missing, in the fewest extra files. Same synthetic
+`[XX]`-prefixed translation, same full pipeline, same discipline of
+inspecting real output at every stage.
 
-- `bullet_list` (unordered lists) alongside `enumerated_list`
-- `emphasis` (italic) alongside `strong`
-- `table`/`tgroup`/`thead`/`tbody`/`row`/`entry` (Docutils' table
-  structure — same general shape problem `proteus_hugo_devdocs.xsl`
-  already solved for DocBook's `informaltable`, different vocabulary)
-- `note`/`warning`/`tip`-equivalent admonition directives (RST's
-  `.. note::` etc. — need to confirm Docutils' exact XML element names
-  for these before generalizing)
-- Internal cross-references (`:doc:`/`:ref:` roles) resolving to Hugo
-  page links, not just the external `reference`/`target` pair this file
-  happened to use
-- The `names` attribute quirk noted during the spike: Sphinx keeps a
-  section's *original* (untranslated) name alongside the translated one
-  for cross-reference stability (e.g. `names="running unit tests [xx]
-  running unit tests"`) — a real transform should anchor on `ids`, not
-  `names`, and should be aware this attribute holds multiple
-  space-separated values, not one
+**Extended element coverage, all confirmed working through a real Hugo
+build** (`<table>`, `<blockquote>`, headings, `<code>`/`<pre>`, `<img>`,
+`<ul>`/`<ol>`, `<em>`/`<strong>` all present and correct in the rendered
+HTML): `bullet_list`, `emphasis`, the full `table`/`tgroup`/`colspec`/
+`thead`/`tbody`/`row`/`entry` structure, `note`/`warning`/`tip`/`seealso`
+(Sphinx uses a distinct element per admonition type, not one generic
+wrapper — confirmed by direct inspection), `title_reference` (the
+single-backtick RST role — rendered as inline code, matching how this
+corpus actually uses it for command/branch-name-like text), `block_quote`,
+`line_block`/`line`, internal `reference[@internal='True']`, and a basic
+`image`.
 
-None of this was proven or disproven by the spike — it's scoped-out
-follow-up work, listed here so the next phase isn't rediscovering it from
-scratch.
+**Three real problems found, not just missing coverage:**
+
+1. **Angle-bracket placeholder text causes silent content loss in Hugo,
+   not just a cosmetic issue.** git.rst's prose includes literal
+   `<category>/<user>/<name-or-id>`-style placeholders. Emitted as raw
+   `<`/`>` into Markdown, Goldmark (Hugo's renderer) interprets them as
+   unrecognized HTML tags and **silently drops them** — confirmed in the
+   actual rendered HTML: "renamed to `<category>/<user>/<name-or-id>`"
+   became "renamed to `//`" (the placeholder text vanished entirely, not
+   just re-rendered oddly). A real transform must HTML-escape `<`/`>` in
+   text content before emitting it.
+2. **`block_quote` containing a `literal_block` produces invalid Markdown
+   blockquote continuation.** The spike's transform prefixes the code
+   fence's opening/closing lines with `>` but not the code content lines
+   between them — Markdown requires every line of a blockquote to carry
+   the `>` prefix, code fences included, or rendering breaks out of the
+   blockquote partway through. Confirmed in the rendered output: the
+   `<blockquote>` count was still correct, but this specific pattern
+   needs its `>`-prefixing fixed to be reliable, not just directionally
+   right.
+3. **Toctree-generated navigation entries carry no real link target.**
+   git.rst's `.. toctree::` directive expands into `paragraph`/
+   `reference` pairs in the XML with `refuri=""` — genuinely empty, not
+   just unresolved-looking. These aren't real page links to fix; they're
+   Sphinx's own internal navigation construct. A real transform should
+   likely skip toctree-generated links entirely and let Hugo generate its
+   own section navigation instead (matching how `phpbbdocs_hugo_devdocs.sh`
+   already hand-builds its own `_index.md` navigation rather than
+   preserving DocBook's).
+
+**Confirmed still accurate from Phase 0, unaffected by Phase 1:** the
+`names`-vs-`ids` attribute quirk (Sphinx keeps a section's original,
+untranslated name alongside the translated one for cross-reference
+stability — anchor a real transform on `ids`), and the internal
+cross-reference URL-resolution gap (`refuri` for a `:doc:`/`:ref:` role is
+a Sphinx-relative path like `../testing/index`, not a real Hugo URL — a
+production transform needs to resolve it against Hugo's actual content
+path structure, which this spike does not attempt).
+
+Spike files kept as scratch, not committed — same reasoning as Phase 0:
+proving element coverage and finding real problems, not delivering a
+general-purpose tool yet.
 
 ## Still open, unrelated to whether the pipeline works
 
@@ -129,9 +164,20 @@ separate problems for whenever full rollout is scoped:
 
 ## Recommended next step
 
-Given the spike succeeded, the natural Phase 1 would be generalizing the
-transform against a wider slice of real files (enough to hit every
-element type above) before committing to `translations.sh` integration or
-touching any real language's content — same walking-skeleton approach,
-next size up. Not started as part of this plan; a decision for whenever
-that's prioritized.
+With Phase 0 and 1 both successful, the remaining big-ticket items are
+genuinely separate, larger commitments, not more of the same
+walking-skeleton work:
+
+- **Build a real, committed transform** (not scratch) covering the full
+  element vocabulary proven across Phases 0-1, with the three Phase 1
+  problems actually fixed (HTML-escaping, blockquote-continuation,
+  toctree-link skipping) rather than just documented.
+- **`translations.sh` `development`-family support** — real architecture
+  work (source-revision tracking against a separate upstream checkout,
+  not this repo's own git history).
+- **Migrating existing hand-translated dev-docs content** — a real design
+  problem, not an audit; `de`/`de_x_sie` are already at 50 files vs.
+  `en`/`da`/`fr`/`it`'s 55, so drift needs reconciling before any
+  migration tooling can assume 1:1 file correspondence.
+
+Each is a fresh scoping decision, not a continuation of this spike.
