@@ -428,7 +428,155 @@
 	</section>
 	<section id="user_search">
 		<title>Søgning - finder det du leder efter</title>
-		<para>TODO<!-- Explain how to use the search system. This should also include the results page, and the refine function. Also note, that the title (Search: search term) is a link that one can copy and paste into a post to directly link to the results. Egosearch and the global search field should also be included here. --></para>
+		<para>Efterhånden som boardet vokser og der ophobes flere indlæg, bliver det sværere hurtigt at finde bestemt indhold. Som hjælp til at finde indlæg indeholder phpBB et søgeværktøj. De mest almindelige søgninger er tilgængelige som links på forsiden (nye indlæg, ubesvarede indlæg osv.), søgning efter nøgleord kan udføres fra headeren, forumvisningen og emnevisningen (i de stilarter der understøtter det), og du kan lave dine egne søgeforespørgsler med den avancerede søgefunktion.</para>
+
+		<section id="user_search_predefined">
+			<title>Foruddefinerede søgninger</title>
+			<para>phpBB leveres med flere foruddefinerede søgninger, så du nemt kan udføre bestemte typer forespørgsler.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Dine indlæg</guilabel> - Viser en liste over emner du har skrevet i, sorteret efter tidspunktet for det seneste indlæg i emnet.</para></listitem>
+				<listitem><para><guilabel>Ubesvarede emner</guilabel> - Viser alle emner der ikke indeholder nogen svar.</para></listitem>
+				<listitem><para><guilabel>Ulæste indlæg</guilabel> - Viser en liste over emner der indeholder indlæg du endnu ikke har læst.</para></listitem>
+				<listitem><para><guilabel>Nye indlæg</guilabel> - Viser en liste over emner der indeholder indlæg skrevet siden du sidst var logget ind.</para></listitem>
+				<listitem><para><guilabel>Aktive emner</guilabel> - Viser en liste over emner der er skrevet i inden for de seneste dage. Antallet af dage kan ændres efter søgesiden er indlæst.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="user_search_forums_topics">
+			<title>Søgning i fora og emner</title>
+			<para>Nogle stilarter har søgefelter i forumvisningen og emnevisningen. Med disse felter kan du søge efter nøgleord inden for det aktuelle forum eller emne.</para>
+
+			<figure id="user_search_topic">
+				<title>Søgning i emner</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/search_topic.png" />
+					</imageobject>
+					<caption>
+						<para>Søgefelt i et emne.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+		</section>
+
+		<section id="user_search_advanced">
+			<title>Avanceret søgning</title>
+			<para>Ud over de foruddefinerede søgninger phpBB tilbyder, kan du også lave dine egne søgeforespørgsler. Søgninger kan baseres på nøgleord, forfatter og valg af forum.</para>
+			<section id="user_search_query">
+				<title>Søgeforespørgslen</title>
+				<para>For at søge på boardet skal du angive hvad du vil søge efter. Du kan angive nøgleord at søge efter samt en forfatter til indlægget. Der findes to muligheder for hvordan søgningen udføres:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Søg efter alle ord eller brug forespørgslen som indtastet</guilabel> - Hvis der angives flere nøgleord, skal <emphasis role="strong">alle</emphasis> nøgleord findes i resultatet. Alternativt kan du angive en forespørgsel ved hjælp af særlige identifikatorer.</para></listitem>
+					<listitem><para><guilabel>Søg efter et hvilket som helst ord</guilabel> - Hvis der angives flere nøgleord, vises resultater der indeholder <emphasis role="strong">mindst et</emphasis> af de angivne nøgleord.</para></listitem>
+				</itemizedlist>
+				<section id="user_search_query_keywords">
+					<title>Nøgleord</title>
+					<para>Ud over at angive nøgleord kan du bruge særlige identifikatorer til at tillægge bestemte ord større eller mindre betydning.</para>
+					<variablelist>
+						<title>Identifikatorer</title>
+						<varlistentry>
+							<term>+</term>
+							<listitem>
+								<para>Når dette placeres foran et nøgleord, skal ordet findes i resultatteksten.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>-</term>
+							<listitem>
+								<para>Når dette placeres foran et nøgleord, må ordet ikke forekomme i resultatteksten.</para>
+								<variablelist>
+									<title>Eksempler</title>
+									<varlistentry>
+										<term>+hund -kat</term>
+										<listitem>
+											<para>Viser resultater der indeholder ordet "hund", men ikke "kat".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>|</term>
+							<listitem>
+								<para>Dette tegn kan bruges til at adskille en liste af nøgleord, hvoraf mindst et af ordene skal findes i teksten. Ord kan placeres i parentes og kombineres med et + eller - for at angive at mindst et af ordene skal eller ikke må forekomme i hvert resultat.</para>
+								<variablelist>
+									<title>Eksempler</title>
+									<varlistentry>
+										<term>hund|kat</term>
+										<listitem>
+											<para>Viser resultater der indeholder enten ordet "hund" eller ordet "kat".</para>
+										</listitem>
+									</varlistentry>
+									<varlistentry>
+										<term>-(hund|kat)</term>
+										<listitem>
+											<para>Viser resultater der hverken indeholder ordet "hund" eller ordet "kat".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>*</term>
+							<listitem>
+								<para>En stjerne i et nøgleord gør det muligt at finde delvise ordmatch.</para>
+								<variablelist>
+									<title>Eksempler</title>
+									<varlistentry>
+										<term>kat*</term>
+										<listitem>
+											<para>Viser resultater der begynder med ordet "kat", såsom "katte" og "katastrofe".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</section>
+
+				<section id="user_search_query_author">
+					<title>Forfatter</title>
+					<para>Søgeforespørgslen kan indsnævres yderligere ved at angive forfatteren til indlægget. Hvis der angives en forfatter, vises kun indlæg skrevet af denne forfatter, der også opfylder de øvrige søgekrav. Forfatterfeltet understøtter jokertegn (*) til delvis søgning på brugernavnet.</para>
+				</section>
+			</section>
+
+			<section id="user_search_options">
+				<title>Søgemuligheder</title>
+				<para>Søgninger kan indsnævres yderligere til bestemte fora eller bestemte dele af emnerne.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Søg i fora</guilabel> - Her kan du vælge de specifikke fora søgningen skal udføres i. Flere fora kan vælges ved at holde "Ctrl"- eller "Cmd"-tasten nede.</para></listitem>
+					<listitem><para><guilabel>Søg i underfora</guilabel> - Hvis denne mulighed vælges, vil eventuelle underfora til de valgte fora også blive gennemsøgt.</para></listitem>
+					<listitem>
+						<para><guilabel>Søg i</guilabel> - Her kan du angive hvilken del af indlæggene der skal gennemsøges.</para>
+						<itemizedlist>
+							<listitem><para><guilabel>Indlæggets overskrift og beskedfelt</guilabel> - Både overskriften og selve indlægget gennemsøges.</para></listitem>
+							<listitem><para><guilabel>Søg kun i beskedfeltet</guilabel> - Kun selve indlægget gennemsøges, ikke overskriften.</para></listitem>
+							<listitem><para><guilabel>Emnets overskrift</guilabel> - Kun emnets overskrift gennemsøges.</para></listitem>
+							<listitem><para><guilabel>Kun første indlæg i emnet</guilabel> - Kun det første indlæg i hvert emne gennemsøges, ikke de øvrige indlæg i emnet.</para></listitem>
+						</itemizedlist>
+					</listitem>
+					<listitem><para><guilabel>Vis resultater som</guilabel> - Denne mulighed formaterer søgeresultaterne, så de enten kun viser indlæggenes indhold eller kun emnernes overskrifter.</para></listitem>
+					<listitem><para><guilabel>Sorter efter</guilabel> - Sorterer resultaterne efter enten <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>forum</guilabel>, <guilabel>emnets overskrift</guilabel> eller <guilabel>indlæggets overskrift</guilabel>. Resultaterne kan vises i <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					<listitem><para><guilabel>Afgræns resultater til forrige</guilabel> - Begrænser resultaterne til indlæg skrevet inden for en bestemt tidsperiode.</para></listitem>
+					<listitem><para><guilabel>Vis første</guilabel> - Formaterer resultaterne, så kun et bestemt antal tegn af de matchende indlæg vises.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="user_search_refinement">
+				<title>Yderligere indsnævring</title>
+				<para>På resultatsiden er det muligt at indsnævre din søgning yderligere ved at angive flere søgeord.</para>
+				<figure id="user_search_refinement_image">
+					<title>Indsnævring af søgning</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/search_refinement.png" />
+						</imageobject>
+						<caption>
+							<para>Indsnævring af søgeresultaterne til at inkludere ordet "kat".</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
+		</section>
 	</section>
 	
 	<section id="user_memberlist">
