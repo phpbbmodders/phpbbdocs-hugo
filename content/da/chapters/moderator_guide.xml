@@ -108,11 +108,18 @@
 			<title>Slet et emne eller indlæg</title>
 			<para>Hvis det er tilladt i <link linkend="admin_control_panel">administratorkontrolpanelets</link> tilladelsesystem kan brugerne slette egne indlæg, enten når et emne læses eller når indlægget redigeres. Emner og indlæg kan kun slettes af brugere hvis der endnu ikke er svaret på disse.</para>
 			<para>For kunne slette andre brugeres indlæg, skal man have de rette forumbaserede tilladelser - <guilabel>Kan slette indlæg</guilabel>. Ved at bruge redaktørværktøjerne nederst i emnet kan et indlæg hurtigt fjernes. I <link linkend="moderator_mcp">redaktørkontrolpanelet</link> kan flere indlæg udvælges og slettes.</para>
+			<para>Når du sletter et emne eller indlæg, bliver du bedt om at angive en årsag til sletningen. Denne besked vil fremgå af redaktørloggen. Hvis du derudover har redaktørtilladelsen <guilabel>Blød sletning</guilabel>, bliver du spurgt om du ønsker at slette emnet/indlægget permanent eller ej. Hvis du vælger nej, vil det blot blive skjult fra visning, med mulighed for at gendanne det.</para>
 			<tip>
-				<para>Bemærk venligst at slettede emner og indlæg ikke kan gendannes. Overvej eventuelt at oprette et skjult forum og i stedet flytte emner og indlæg hertil til brug for fremtidig reference.</para>
+				<para>Bemærk venligst at hvis du vælger at slette et emne eller indlæg permanent, kan dette ikke fortrydes.</para>
 			</tip>
 		</section>
-		
+
+		<section id="modtools_restore">
+			<title>Gendannelse af et emne eller indlæg</title>
+			<para>Hvis et emne eller indlæg er blevet slettet, kan det være muligt at gendanne det. Hvis en bruger valgte ikke at slette emnet eller indlægget permanent, vil det være markeret med et ikon, der angiver at det kan gendannes.</para>
+			<para>Hvis en bruger har valgt at slette et indlæg eller emne permanent, kan det ikke gendannes.</para>
+		</section>
+
 		<section id="modtools_move">
 			<sectioninfo>
 				<authorgroup>

@@ -174,12 +174,40 @@
 			</varlistentry>
 			
 			<varlistentry>
+				<term>Event</term>
+				<listitem>
+					<para>Events er injektionspunkter i phpBB's kernekode, svarende til et anker. Når et event udløses, kan en <glossterm>listener</glossterm> i en <glossterm>extension</glossterm>, der abonnerer på eventet, injicere kode på dette sted, uden at redigere kernefilen.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Extension</term>
+				<listitem>
+					<para>Er efterfølgeren til et <glossterm>MOD</glossterm>. Ligesom MODs tilføjer eller fjerner de funktioner eller ændrer på anden vis standardsoftwarens opførsel. De adskiller sig fra MODs ved at være indeholdt i deres egne mapper og ikke foretager ændringer i kernesoftwaren. I stedet gør de brug af <glossterm>Events</glossterm> og <glossterm>Listeners</glossterm>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>Listener</term>
+				<listitem>
+					<para>En listener udløses af et <glossterm>event</glossterm>. Den kan benyttes af en <glossterm>extension</glossterm> til at behandle indkommende data og manipulere variabler inden for eventets rækkevidde. På den måde kan den ændre phpBB's opførsel, tilføje eller fjerne funktioner, eller, hvis den bruges i skabelonsammenhæng, ændre outputtet. Et alternativt navn for en listener er en &quot;hook&quot;.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
 				<term>MOD</term>
 				<listitem>
 					<para>Et <abbrev>MOD</abbrev> er en kodemodifikation til phpBB som ændrer, tilføjer eller udvider phpBB's funktioner. <abbrev>MODs</abbrev> kodes og frigives af selvstændige udviklere. phpBB Group påtager sig ikke ansvaret for om installation af MODs medfører fejl eller lignende.</para>
 				</listitem>
 			</varlistentry>
-			
+
+			<varlistentry>
+				<term>Notifikationer</term>
+				<listitem>
+					<para>Når en bruger udfører bestemte handlinger på boardet, genereres der notifikationer til de berørte brugere. Redaktører kan for eksempel vælge at blive notificeret, når et indlæg skal godkendes. Notifikationsmetoder omfatter notifikation på boardet og notifikation via e-mail.</para>
+				</listitem>
+			</varlistentry>
+
 			<varlistentry>
 				<term>PHP</term>
 				<listitem>
@@ -248,12 +276,19 @@
 			</varlistentry>
 			
 			<varlistentry>
+				<term>Twig</term>
+				<listitem>
+					<para>phpBB benytter <ulink url="http://twig.sensiolabs.org/">Twig</ulink>-skabelonmotoren til at kombinere data og <glossterm>skabelon</glossterm>filer for at generere dynamiske websider on demand.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
 				<term>Typografi</term>
 				<listitem>
 					<para>En typografi består af en skabelon, et tema og en grafikpakke. Typografien bestemmer det overordnede udseende af dit board.</para>
 				</listitem>
 			</varlistentry>
-			
+
 			<varlistentry>
 				<term>UCP</term>
 				<listitem>

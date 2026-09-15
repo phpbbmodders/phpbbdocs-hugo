@@ -65,7 +65,6 @@
 		<para>Brugerkontrolpanelet (<glossterm>UCP</glossterm>) giver mulighed for bl. a. at ændre personlige indstillinger, administrere overvågninger og bogmærker, sende og læse private beskeder. For at få adgang til UCP klikkes på linket &quot;Brugerkontrolpanel&quot; som ses øverst på siden når du er logget ind.</para>
 		<para>UCP er opdelt i seks faner: Oversigt, Profil, Boardindstillinger, Private beskeder, Brugergrupper og Venner og ignorerede brugere. Hver fane indeholder yderligere underpunkter i venstre side af skærmbilledet. Afhængig af de tilladelser du er tildelt af administrator, kan du have færre tilgængelige underpunkter.</para>
 		<para>Alle siderne i UCP viser også listen over dine venner. Du kan til enhver tid sende en privat besked til dem blot ved at klkke på brugernavnet.</para>
-		<para><!-- TODO: Note that Private messaging will be discussed in its own section --></para>
 		<section id="ucp_overview">
 			<title>Oversigt</title>
 			<para>Forsiden viser en status over din aktivitet og historik på boardet, med mulighed for se dine overvågninger, bogmærker og gemte kladder.</para>
@@ -98,10 +97,30 @@
 				<para>Du kan gemme en kladde når du skriver nye emner eller indlæg ved at klikke på knappen <guilabel>Gem kladde</guilabel>. I oversigten over gemte kladder vises titlen på dit indlæg, det forum eller emne du skrev kladden til og datoen du gemte den.</para>
 				<para>For at fortsætte redigeringen af kladden klikkes på linket &quot;Indlæs kladde&quot;. Når du har færdiggjort redigeringen og vil indsende indlægget, klikker du på <guilabel>Udfør</guilabel>. For at slette en kladde vinges boksen til højre for kladden af og der klikkes på <guilabel>Slet valgte</guilabel>.</para>
 			</section>
-			<section id="ucp_attachments">
-			<title>Private beskeder</title>
-			<para>TODO<!-- The attachment section of the UCP shows you a list of all attachments that you have uploaded to the board so far ... --> </para>
-		</section>
+			<section id="ucp_notifications_overview">
+				<title>Notifikationer</title>
+				<para>Notifikationer gør dig opmærksom på begivenheder der er sket på boardet. De vises i notifikationsmenuen øverst på siden. Begivenheder kan bl.a. være:</para>
+				<itemizedlist>
+					<listitem><para>Der er modtaget en ny privat besked</para></listitem>
+					<listitem><para>Der er oprettet et nyt emne i et forum du overvåger</para></listitem>
+					<listitem><para>Der er indsendt et nyt indlæg i et emne du overvåger</para></listitem>
+					<listitem><para>Et nyt indlæg afventer godkendelse</para></listitem>
+					<listitem><para>Et indlæg er blevet rapporteret</para></listitem>
+					<listitem><para>Dit emne/indlæg er blevet godkendt/afvist</para></listitem>
+					<listitem><para>Der er citeret fra et af dine indlæg</para></listitem>
+				</itemizedlist>
+				<figure id="notifications_menu">
+					<title>Notifikationsmenu</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/notifications_menu.png" />
+						</imageobject>
+						<caption>
+							<para>Menuen med <glossterm>Notification</glossterm>er</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
 		</section>
 		<section id="ucp_profile">
 			<title>Profilindstillinger</title>
@@ -131,12 +150,26 @@
 				<para>Din avatar er et lille billede som vises i din profil ved hvert indlæg du skriver. Afhængig af boardets indstillinger kan brugen af avatars være slået fra. Din avatar tilknyttes din profil på en eller flere måder: &quot;<guilabel>Upload fra din maskine</guilabel>&quot;, &quot;<guilabel>Upload fra ekstern URL</guilabel>&quot; og &quot;<guilabel>Link til ekstern placering</guilabel>&quot;.</para>
 				<para>
 					<itemizedlist>
+						<listitem><para><guilabel>Gravatar</guilabel>: Bruger du Gravatar.com's avatartjeneste, kan du angive din Gravatar-e-mailadresse her for at bruge dit Gravatar-billede som din avatar.</para></listitem>
 						<listitem><para><guilabel>Upload fra din maskine</guilabel>: Du kan uploade en avatar fra din maskine og den gemmes på boardets server.</para></listitem>
 						<listitem><para><guilabel>Upload fra ekstern URL</guilabel>: Du kan angive URL til et eksisterende billede. Herefter kopieres dette til boardets server og gemmes her.</para></listitem>
 						<listitem><para><guilabel>Link til ekstern placering</guilabel>: Du kan angive URL til et eksisterende billede. Det gemmes ikke på boardets server, der linkes blot til dette.</para></listitem>
 					</itemizedlist>
 				</para>
 				<para>Yderligere kan boardadministrator have givet mulighed for at vælge i et avatargalleri. Disse billeder er tilgængelige for alle tilmeldte brugere på boardet.</para>
+			</section>
+			<section id="ucp_login_keys">
+				<title>Login-nøgler</title>
+				<para>Vælger du at lade boardet logge dig ind automatisk, når du besøger det (afkrydsningsfeltet "Husk mig"), får din browser tildelt en login-nøgle, som bruges hver gang du besøger siden. Så længe din browser har denne nøgle, bliver du automatisk logget ind. Når du logger ud, slettes nøglen kun fra din browser og ikke fra boardet.</para>
+				<para>Dette afsnit giver dig mulighed for at se alle login-nøgler, der er tilknyttet din konto, hvornår de blev oprettet, og fra hvilken IP-adresse. Du kan også slette login-nøgler fra denne side.</para>
+				<note><para>Sletter du en login-nøgle, du i øjeblikket bruger, bliver du logget ud af boardet.</para></note>
+			</section>
+			<section id="ucp_external_auth">
+				<title>Eksterne konti</title>
+				<para>Hvis boardadministratoren har aktiveret <link linkend="acp_client_auth">OAuth-godkendelse</link>, vil du kunne logge ind med din konto fra OAuth-udbydere såsom Bitly, Facebook og Google.</para>
+				<para>Klik på knappen <guilabel>Sammenkæd</guilabel> for hver tjeneste for at sammenkæde dine konti med boardet. Du bliver bedt om at logge ind igen. Brug dine loginoplysninger til boardet. <emphasis role="strong">BRUG IKKE</emphasis> din eksterne konto endnu. Når du logger ind, sendes du til din kontoside, som vil vise, at der er genereret et ID til din eksterne konto.</para>
+				<para>Når en konto er sammenkædet, kan du fjerne sammenkædningen fra samme side.</para>
+				<para>Efter du har sammenkædet kontoen, kan du nu bruge den til at logge ind på boardet. Klik blot på den relevante tjenesteknap på loginsiden.</para>
 			</section>
 		</section>
 		<section id="ucp_preferences">
@@ -175,20 +208,73 @@
 			</section>
 			<section id="ucp_display">
 				<title>Visning</title>
-				<para>TODO<!-- Explain the settings you can edit here. --> </para>
+				<para>Visningsindstillingerne bestemmer hvordan indlæg og emner vises i boardets forskellige visninger.</para>
+				<para>
+					Følgende indstillinger bestemmer hvordan indholdet af indlæg og private beskeder vises.
+					<itemizedlist>
+						<listitem><para><guilabel>Vis billeder i indlæg</guilabel>: Vælges <guilabel>Ja</guilabel>, vises billeder.</para></listitem>
+						<listitem><para><guilabel>Vis Flash-animationer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises Flash-animationer.</para></listitem>
+						<listitem><para><guilabel>Vis smileys som billeder</guilabel>: Vælges <guilabel>Ja</guilabel>, vises smileys som billeder i stedet for deres tekstudgave.</para></listitem>
+						<listitem><para><guilabel>Vis signaturer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugernes signaturer.</para></listitem>
+						<listitem><para><guilabel>Vis avatarer</guilabel>: Vælges <guilabel>Ja</guilabel>, vises brugernes avatarer.</para></listitem>
+						<listitem><para><guilabel>Aktivér ordcensur</guilabel>: Vælges <guilabel>Ja</guilabel>, censureres teksten i indlæg og private beskeder i henhold til den <link linkend="acp_posting_censors">liste over censurerede ord</link> administratoren har defineret.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Følgende indstillinger bestemmer hvordan emner vises i forumvisningen.
+					<itemizedlist>
+						<listitem><para><guilabel>Vis emner fra de seneste dage</guilabel>: Denne indstilling begrænser hvor gamle emner der skal vises. Som standard vises alle emner.</para></listitem>
+						<listitem><para><guilabel>Sortér emner efter</guilabel>: Denne indstilling ændrer rækkefølgen emnerne vises i. Emner kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>overskrift</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Sorteringsretning for emner</guilabel>: Emner kan vises i enten <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>Følgende indstillinger bestemmer hvordan indlæg vises i emnevisningen.
+					<itemizedlist>
+						<listitem><para><guilabel>Vis indlæg fra de seneste dage</guilabel>: Denne indstilling begrænser hvor gamle indlæg der skal vises. Som standard vises alle indlæg.</para></listitem>
+						<listitem><para><guilabel>Sortér indlæg efter</guilabel>: Denne indstilling ændrer rækkefølgen indlæggene vises i. Indlæg kan sorteres efter <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>antal svar</guilabel>, <guilabel>overskrift</guilabel> eller <guilabel>antal visninger</guilabel>.</para></listitem>
+						<listitem><para><guilabel>Sorteringsretning for emner</guilabel>: Indlæg kan vises i enten <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="ucp_notifications">
+				<title>Notifikationer</title>
+				<para>Notifikationsindstillingerne bestemmer hvilke begivenheder der udløser en notifikation, og hvordan du modtager den.</para>
+				<para>
+					Følgende indstillinger bestemmer begivenheder relateret til at skrive indlæg.
+					<itemizedlist>
+						<listitem><para><guilabel>Nogen svarer på et emne du har bogmærket</guilabel>: En bruger har svaret i et emne du har bogmærket.</para></listitem>
+						<listitem><para><guilabel>Nogen svarer på et emne du overvåger</guilabel>: En bruger har svaret i et emne du overvåger.</para></listitem>
+						<listitem><para><guilabel>Nogen citerer dig i et indlæg</guilabel>: Et af dine indlæg er blevet citeret af en anden bruger.</para></listitem>
+						<listitem><para><guilabel>Nogen opretter et emne i et forum du overvåger</guilabel>: En bruger har oprettet et nyt emne i et forum du overvåger.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Følgende indstillinger bestemmer begivenheder relateret til moderering.
+					<itemizedlist>
+						<listitem><para><guilabel>Et indlæg eller emne afventer godkendelse</guilabel>: En bruger har skrevet et nyt indlæg eller emne, der afventer godkendelse.</para></listitem>
+						<listitem><para><guilabel>Nogen rapporterer et indlæg</guilabel>: En bruger har rapporteret et indlæg.</para></listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					Følgende indstillinger bestemmer diverse andre begivenheder.
+					<itemizedlist>
+						<listitem><para><guilabel>Nogen anmoder om at blive medlem af en gruppe du leder</guilabel>: En bruger har anmodet om medlemskab af en brugergruppe du er leder af.</para></listitem>
+						<listitem><para><guilabel>Nogen sender dig en privat besked</guilabel>: Du har modtaget en privat besked.</para></listitem>
+					</itemizedlist>
+				</para>
 			</section>
 		</section>
-		<section id="ucp_pm">
-			<title>Private beskeder</title>
-			<para>TODO<!-- Her er i EN udgave attachments - den er flyttet til 113 pb gennemgås i <section id="user_pm"> lin 318 --> </para>
+		<section id="ucp_friends_foes">
+			<title>Venner og ignorerede brugere</title>
+			<para>Brugere kan markeres som <guilabel>Ven</guilabel> eller <guilabel>Ignoreret bruger</guilabel>, så det bliver muligt at filtrere deres beskeder. Understøtter stilarten det, skjules indlæg fra brugere på din liste over ignorerede brugere, mens indlæg fra brugere på din venneliste fremhæves. Regler for private beskeder kan gøre brug af venne- og ignorérlisten til at filtrere indkomne private beskeder.</para>
+		</section>
+		<section id="ucp_attachments">
+			<title>Vedhæftede filer</title>
+			<para>Sektionen for vedhæftede filer i UCP viser en liste over alle filer du har vedhæftet på boardet. Hver linje indeholder et link til det indlæg filen er vedhæftet, filens størrelse, antallet af gange den er downloadet, samt tidspunktet den blev uploadet. Fra denne side kan du slette vedhæftede filer fra boardet. Referencer til en slettet vedhæftet fil vil stadig fremgå af det oprindelige indlæg, men selve filen vil ikke længere kunne vises, ud over filnavnet.</para>
 		</section>
 		<section id="ucp_usergroups">
 			<title>Brugergrupper</title>
-			<para>TODO<!-- Work in progress, might change, so not sure how this is going to be structured. --></para>
-		</section>
-				<section id="ucp_friends_foes">
-			<title>Venner og ignorerede brugere</title>
-			<para>TODO<!-- Denne var anført efter Visning men fanen er sidst i UCP. For 3.0 this does not have much of an influence on the overall forum experience, this might change with 3.2, so leaving it here for now. Write a detailed explanation about what Friends and Foes are and how they affect the forum like hiding posts of foes, adding users to the friends list for fast access / online checks, and so forth. --></para>
+			<para>Medlemskab af brugergrupper administreres via sektionen Brugergrupper i UCP. Siden viser de grupper brugeren er medlem af, leder af, samt alle øvrige brugergrupper. Grupper der er åbne for medlemskab har en radioknap, der giver brugeren mulighed for at anmode om medlemskab. Brugere kan også selv melde sig ud af grupper de er medlem af. Har brugeren tilladelsen <guilabel>Kan ændre standardgruppe</guilabel>, kan denne her vælge hvilken gruppe der skal være standardgruppe. Standardgruppen bestemmer den brugernavnsfarve der vises for brugeren overalt på boardet.</para>
+			<para>Brugere der er udpeget som gruppeleder kan administrere gruppens medlemskab. Her kan brugere tilføjes, fjernes, afventende anmodninger om medlemskab godkendes eller afvises, og brugerens standardgruppe ændres.</para>
 		</section>
 	</section>
 	<section id="user_posting">
@@ -200,7 +286,6 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Skrivning af indlæg</title>
-		<para><!-- TODO: How to write a new post and how to reply. Special items like attachments or polls are subsections. Don't forget to mention the "someone has replied before you replied" feature, the topic review, and so forth. Topic icons, smilies, post options, usage of HTML ... it would probably best to add a screenshot with arrows to the different sections. --></para>
 		<para>Indsendelse af indlæg er et af de primære formål ved bulletin boards. Der findes to overordnede typer indlæg: et emne eller et svar. Ved at vælge knappen <guilabel>Nyt emne</guilabel> i et forum bliver du ledt til et skærmbillede hvor indlæg kan skrives. Ved at klikke på udfør nederst indsendes indlægget som et nyt emne i forummet. Andre kan nu deltage i debatten ved at klikke på knappen <guilabel>Skriv indlæg</guilabel>. Også her bliver man ledt til det skærmbillede hvor indlæg skrives.</para>
 		<section id="posting_form">
 			<title>Skriv indlæg</title>
@@ -223,11 +308,9 @@
 		
 		<section id="posting_bbcodes">
 			<title>BBkoder</title>
-			<para><!-- TODO: What are BBcodes. Again, permission based which ones you can use. Explain syntax of the default ones (quote and URL for instance). How to disable BBcode by default, how to disable/enable it for one post. --></para>
 			<para>BBkode er en speciel implementering af HTML. Hvorvidt du aktuelt har muligheden for at anvende BBkode i dine indlæg, er defineret af administratoren. Du kan selv fravælge denne mulighed pr. emne når du skriver et indlæg. BBkode skrives på samme måde som HTML, hvor teksten omsluttes af en start- og en slutkode, koderne er omsluttet af hakparenteser [ og ] i stedet for &lt; og &gt;.</para>
 			<para>En mere detaljeret vejledning i brugen af BBkode kan findes ved at klikke på linket <guilabel>BBkode</guilabel> til højre for teksfeltet hvor du skriver indlægget. Bemærk også at administrator har mulighed for at tilføje yderligere tilpassede BBkoder, så der kan være flere end nedennævnte tilgængelige.</para>
 			<para>Standard BBkoder og måden de vises på:</para>
-			<para>TODO: Hvordan ønsker vi at vise outputtet?</para>
 			<para>[b]Fed tekst[/b]:</para>
 			<para>[i]Kursiv tekst[/i]: <emphasis>Kursiv tekst</emphasis></para>
 			<para>[u]Understreget tekst[/u]:</para>
@@ -241,7 +324,6 @@
 		
 		<section id="posting_options">
 			<title>Indlægsindstillinger</title>
-			<para><!-- TODO: Gather various screenshots of the basic post options box. When posting a topic/reply and/or moderation functions, etc. --></para>
 			<para>Når du skriver et indlæg eller et svar, har du adskillige muligheder for at ændre i standardindstillingerne for dette specifikke indlæg. Umiddelbart under feltet hvor du skriver dit svar findes fanen <guilabel>handling</guilabel>, og afhængig af de tilladelser administratoren har tildelt dig har du forskellige muligheder. Valgmulighederne varierer også afhængig af om du skriver et nyt indlæg eller svarer i et eksisterende emne.</para>
 			<itemizedlist>	
 				<listitem><para><guilabel>Anvend ikke BBkode</guilabel>: Er BBkode aktiveret på boardet, og du har tilladelse til bruge den, er denne mulighed tilgængelig. Vinges boksen bliver ingen BBkoder fortolket som sådan. Som eksempel vil kombinationen [b]Fed tekst[/b] blive vist nøjagtig sådan [b]Fed tekst[/b] i indlægget.</para></listitem> 
@@ -327,7 +409,19 @@
 		</section>
 		<section id="pm_new">
 			<title>Skriv en besked</title>
-			<para>TODO<!-- Similar to the posting screen, so a reference for the basic functions should be enough. What needs to be explained are the To and Bcc fields, how they integrate with the friends list and how to find members (which could also be a link to the memberlist section). --></para>
+			<para>Skærmbilledet der vises når du skriver en privat besked er næsten identisk med skærmbilledet til at skrive et nyt indlæg. Den væsentligste forskel er tilføjelsen af et adressefelt til at angive modtagere.</para>
+			<figure id="user_private_message_fields">
+			<title>Felter til private beskeder</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/private_messsage_fields.png" />
+					</imageobject>
+					<caption>
+						<para>Felter til at tilføje modtagere af en privat besked.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<para>Brugernavne indtastes i tekstfeltet, hvorefter enten <guilabel>Tilføj</guilabel> eller <guilabel>Tilføj [BCC]</guilabel> bruges til at tilføje brugeren til den ønskede modtagerliste. Er du i tvivl om en brugers navn, kan du bruge linket <guilabel>Find et medlem</guilabel> til at søge efter brugeren i medlemslisten. Sæt kryds ud for den eller de ønskede brugere i medlemslisten, og klik på <guilabel>Vælg markerede</guilabel> for at tilføje brugeren til modtagerfeltet.</para>
 		</section>
 		<section id="pm_folders">
 			<sectioninfo>
@@ -421,14 +515,245 @@
 				</note>
 			</section>
 		</section>
-		<section id="pm_filters">
+		<section id="pm_rules">
 			<title>Meddelelsefiltre</title>
-			<para>TODO<!-- How to work with message filters. That is quite a complex system --></para>
+			<para>Private beskeder kan filtreres ved at oprette regler, der udfører handlinger på beskeden baseret på dens metadata. Når en privat besked ankommer, kan den automatisk sorteres i bestemte mapper, slettes eller farvemarkeres.</para>
+			<note>
+				<para>Regler for private beskeder kan ikke redigeres. Skal en regel ændres, skal den nuværende regel slettes og oprettes på ny.</para>
+			</note>
+			<section id="pm_rule_fields">
+				<title>Felter der kan matches</title>
+				<para>Beskeder kan filtreres baseret på følgende felter:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Emne</guilabel> - Beskedens emne.</para></listitem>
+					<listitem><para><guilabel>Afsender</guilabel> - Brugernavnet på den der afsendte beskeden.</para></listitem>
+					<listitem><para><guilabel>Besked</guilabel> - Indholdet af beskeden.</para></listitem>
+					<listitem><para><guilabel>Beskedstatus</guilabel> - Om beskeden er blevet besvaret eller videresendt.</para></listitem>
+					<listitem><para><guilabel>Sendt til</guilabel> - Om beskeden blev sendt direkte til dig, eller til en brugergruppe du er medlem af.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="pm_rule_conditions">
+				<title>Matchbetingelser</title>
+				<para>Der findes flere betingelser til at filtrere felterne med. Ikke alle betingelserne nedenfor er tilgængelige for hvert felt. Følgende er den fulde liste over tilgængelige betingelser:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Indeholder</guilabel> - Feltet indeholder den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Indeholder ikke</guilabel> - Feltet indeholder <emphasis role="strong">ikke</emphasis> den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Er</guilabel> - Feltet matcher præcis den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Er ikke</guilabel> - Feltets indhold er <emphasis role="strong">ikke</emphasis> det samme som den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Begynder med</guilabel> - Feltet begynder med den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Slutter med</guilabel> - Feltet slutter med den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Er ven</guilabel> - Hvis afsenderen står på din venneliste.</para></listitem>
+					<listitem><para><guilabel>Er ignoreret bruger</guilabel> - Hvis afsenderen står på din liste over ignorerede brugere.</para></listitem>
+					<listitem><para><guilabel>Er bruger</guilabel> - Afsenderens navn matcher den angivne tekststreng.</para></listitem>
+					<listitem><para><guilabel>Er i brugergruppe</guilabel> - Afsenderen er medlem af den angivne brugergruppe.</para></listitem>
+					<listitem><para><guilabel>Besvaret</guilabel> - Om beskeden er blevet besvaret.</para></listitem>
+					<listitem><para><guilabel>Videresendt</guilabel> - Om beskeden er blevet videresendt.</para></listitem>
+					<listitem><para><guilabel>Til min standardgruppe</guilabel> - Om beskeden er sendt til din brugergruppe.</para></listitem>
+					<listitem><para><guilabel>Til mig</guilabel> - Om en besked er sendt direkte til dig.</para></listitem>
+				</itemizedlist>
+				<para>Følgende liste viser hvilke betingelser der er tilgængelige for hvert felt:</para>
+				<variablelist>
+					<varlistentry>
+						<term>Emne</term>
+						<listitem>
+							<para><guilabel>Indeholder</guilabel>, <guilabel>Indeholder ikke</guilabel>, <guilabel>Er</guilabel>, <guilabel>Er ikke</guilabel>, <guilabel>Begynder med</guilabel>, <guilabel>Slutter med</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Afsender</term>
+						<listitem>
+							<para><guilabel>Indeholder</guilabel>, <guilabel>Indeholder ikke</guilabel>, <guilabel>Er</guilabel>, <guilabel>Er ikke</guilabel>, <guilabel>Begynder med</guilabel>, <guilabel>Slutter med</guilabel>, <guilabel>Er ven</guilabel>, <guilabel>Er ignoreret bruger</guilabel>, <guilabel>Er bruger</guilabel>, <guilabel>Er i brugergruppe</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Besked</term>
+						<listitem>
+							<para><guilabel>Indeholder</guilabel>, <guilabel>Indeholder ikke</guilabel>, <guilabel>Er</guilabel>, <guilabel>Er ikke</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Beskedstatus</term>
+						<listitem>
+							<para><guilabel>Besvaret</guilabel>, <guilabel>Videresendt</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Sendt til</term>
+						<listitem>
+							<para><guilabel>Til min standardgruppe</guilabel>, <guilabel>Til mig</guilabel></para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</section>
+
+			<section id="pm_rule_actions">
+				<title>Regelhandling</title>
+				<para>Når en besked er matchet, kan der udføres en handling på den. De tilgængelige handlinger er:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Placér i mappe -&gt; X</guilabel> - Placerer beskeden i den angivne mappe.</para></listitem>
+					<listitem><para><guilabel>Markér som læst</guilabel> - Beskeden markeres straks som læst. Du bliver stadig gjort opmærksom på den nye besked via notifikationer, men beskeden vil allerede være markeret som læst når du ser din liste over private beskeder.</para></listitem>
+					<listitem><para><guilabel>Markér besked</guilabel> - Beskeden markeres som vigtig og fremhæves i din liste over private beskeder.</para></listitem>
+					<listitem><para><guilabel>Slet besked</guilabel> - Beskeden slettes i stedet for at blive vist. Der vises en besked, der informerer om at beskeder er blevet modtaget og slettet i henhold til dine meddelelsesfiltre. Beskeder sendt fra boardets administratorer og redaktører vil <emphasis role="strong">ikke</emphasis> blive slettet.</para></listitem>
+				</itemizedlist>
+			</section>
 		</section>
 	</section>
 	<section id="user_search">
 		<title>Søgning - finder det du leder efter</title>
-		<para>TODO<!-- Explain how to use the search system. This should also include the results page, and the refine function. Also note, that the title (Search: search term) is a link that one can copy and paste into a post to directly link to the results. Egosearch and the global search field should also be included here. --></para>
+		<para>Efterhånden som boardet vokser og der ophobes flere indlæg, bliver det sværere hurtigt at finde bestemt indhold. Som hjælp til at finde indlæg indeholder phpBB et søgeværktøj. De mest almindelige søgninger er tilgængelige som links på forsiden (nye indlæg, ubesvarede indlæg osv.), søgning efter nøgleord kan udføres fra headeren, forumvisningen og emnevisningen (i de stilarter der understøtter det), og du kan lave dine egne søgeforespørgsler med den avancerede søgefunktion.</para>
+
+		<section id="user_search_predefined">
+			<title>Foruddefinerede søgninger</title>
+			<para>phpBB leveres med flere foruddefinerede søgninger, så du nemt kan udføre bestemte typer forespørgsler.</para>
+			<itemizedlist>
+				<listitem><para><guilabel>Dine indlæg</guilabel> - Viser en liste over emner du har skrevet i, sorteret efter tidspunktet for det seneste indlæg i emnet.</para></listitem>
+				<listitem><para><guilabel>Ubesvarede emner</guilabel> - Viser alle emner der ikke indeholder nogen svar.</para></listitem>
+				<listitem><para><guilabel>Ulæste indlæg</guilabel> - Viser en liste over emner der indeholder indlæg du endnu ikke har læst.</para></listitem>
+				<listitem><para><guilabel>Nye indlæg</guilabel> - Viser en liste over emner der indeholder indlæg skrevet siden du sidst var logget ind.</para></listitem>
+				<listitem><para><guilabel>Aktive emner</guilabel> - Viser en liste over emner der er skrevet i inden for de seneste dage. Antallet af dage kan ændres efter søgesiden er indlæst.</para></listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="user_search_forums_topics">
+			<title>Søgning i fora og emner</title>
+			<para>Nogle stilarter har søgefelter i forumvisningen og emnevisningen. Med disse felter kan du søge efter nøgleord inden for det aktuelle forum eller emne.</para>
+
+			<figure id="user_search_topic">
+				<title>Søgning i emner</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/user_guide/search_topic.png" />
+					</imageobject>
+					<caption>
+						<para>Søgefelt i et emne.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+		</section>
+
+		<section id="user_search_advanced">
+			<title>Avanceret søgning</title>
+			<para>Ud over de foruddefinerede søgninger phpBB tilbyder, kan du også lave dine egne søgeforespørgsler. Søgninger kan baseres på nøgleord, forfatter og valg af forum.</para>
+			<section id="user_search_query">
+				<title>Søgeforespørgslen</title>
+				<para>For at søge på boardet skal du angive hvad du vil søge efter. Du kan angive nøgleord at søge efter samt en forfatter til indlægget. Der findes to muligheder for hvordan søgningen udføres:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Søg efter alle ord eller brug forespørgslen som indtastet</guilabel> - Hvis der angives flere nøgleord, skal <emphasis role="strong">alle</emphasis> nøgleord findes i resultatet. Alternativt kan du angive en forespørgsel ved hjælp af særlige identifikatorer.</para></listitem>
+					<listitem><para><guilabel>Søg efter et hvilket som helst ord</guilabel> - Hvis der angives flere nøgleord, vises resultater der indeholder <emphasis role="strong">mindst et</emphasis> af de angivne nøgleord.</para></listitem>
+				</itemizedlist>
+				<section id="user_search_query_keywords">
+					<title>Nøgleord</title>
+					<para>Ud over at angive nøgleord kan du bruge særlige identifikatorer til at tillægge bestemte ord større eller mindre betydning.</para>
+					<variablelist>
+						<title>Identifikatorer</title>
+						<varlistentry>
+							<term>+</term>
+							<listitem>
+								<para>Når dette placeres foran et nøgleord, skal ordet findes i resultatteksten.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>-</term>
+							<listitem>
+								<para>Når dette placeres foran et nøgleord, må ordet ikke forekomme i resultatteksten.</para>
+								<variablelist>
+									<title>Eksempler</title>
+									<varlistentry>
+										<term>+hund -kat</term>
+										<listitem>
+											<para>Viser resultater der indeholder ordet "hund", men ikke "kat".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>|</term>
+							<listitem>
+								<para>Dette tegn kan bruges til at adskille en liste af nøgleord, hvoraf mindst et af ordene skal findes i teksten. Ord kan placeres i parentes og kombineres med et + eller - for at angive at mindst et af ordene skal eller ikke må forekomme i hvert resultat.</para>
+								<variablelist>
+									<title>Eksempler</title>
+									<varlistentry>
+										<term>hund|kat</term>
+										<listitem>
+											<para>Viser resultater der indeholder enten ordet "hund" eller ordet "kat".</para>
+										</listitem>
+									</varlistentry>
+									<varlistentry>
+										<term>-(hund|kat)</term>
+										<listitem>
+											<para>Viser resultater der hverken indeholder ordet "hund" eller ordet "kat".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>*</term>
+							<listitem>
+								<para>En stjerne i et nøgleord gør det muligt at finde delvise ordmatch.</para>
+								<variablelist>
+									<title>Eksempler</title>
+									<varlistentry>
+										<term>kat*</term>
+										<listitem>
+											<para>Viser resultater der begynder med ordet "kat", såsom "katte" og "katastrofe".</para>
+										</listitem>
+									</varlistentry>
+								</variablelist>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</section>
+
+				<section id="user_search_query_author">
+					<title>Forfatter</title>
+					<para>Søgeforespørgslen kan indsnævres yderligere ved at angive forfatteren til indlægget. Hvis der angives en forfatter, vises kun indlæg skrevet af denne forfatter, der også opfylder de øvrige søgekrav. Forfatterfeltet understøtter jokertegn (*) til delvis søgning på brugernavnet.</para>
+				</section>
+			</section>
+
+			<section id="user_search_options">
+				<title>Søgemuligheder</title>
+				<para>Søgninger kan indsnævres yderligere til bestemte fora eller bestemte dele af emnerne.</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Søg i fora</guilabel> - Her kan du vælge de specifikke fora søgningen skal udføres i. Flere fora kan vælges ved at holde "Ctrl"- eller "Cmd"-tasten nede.</para></listitem>
+					<listitem><para><guilabel>Søg i underfora</guilabel> - Hvis denne mulighed vælges, vil eventuelle underfora til de valgte fora også blive gennemsøgt.</para></listitem>
+					<listitem>
+						<para><guilabel>Søg i</guilabel> - Her kan du angive hvilken del af indlæggene der skal gennemsøges.</para>
+						<itemizedlist>
+							<listitem><para><guilabel>Indlæggets overskrift og beskedfelt</guilabel> - Både overskriften og selve indlægget gennemsøges.</para></listitem>
+							<listitem><para><guilabel>Søg kun i beskedfeltet</guilabel> - Kun selve indlægget gennemsøges, ikke overskriften.</para></listitem>
+							<listitem><para><guilabel>Emnets overskrift</guilabel> - Kun emnets overskrift gennemsøges.</para></listitem>
+							<listitem><para><guilabel>Kun første indlæg i emnet</guilabel> - Kun det første indlæg i hvert emne gennemsøges, ikke de øvrige indlæg i emnet.</para></listitem>
+						</itemizedlist>
+					</listitem>
+					<listitem><para><guilabel>Vis resultater som</guilabel> - Denne mulighed formaterer søgeresultaterne, så de enten kun viser indlæggenes indhold eller kun emnernes overskrifter.</para></listitem>
+					<listitem><para><guilabel>Sorter efter</guilabel> - Sorterer resultaterne efter enten <guilabel>forfatter</guilabel>, <guilabel>tidspunkt</guilabel>, <guilabel>forum</guilabel>, <guilabel>emnets overskrift</guilabel> eller <guilabel>indlæggets overskrift</guilabel>. Resultaterne kan vises i <guilabel>stigende</guilabel> eller <guilabel>faldende</guilabel> rækkefølge.</para></listitem>
+					<listitem><para><guilabel>Afgræns resultater til forrige</guilabel> - Begrænser resultaterne til indlæg skrevet inden for en bestemt tidsperiode.</para></listitem>
+					<listitem><para><guilabel>Vis første</guilabel> - Formaterer resultaterne, så kun et bestemt antal tegn af de matchende indlæg vises.</para></listitem>
+				</itemizedlist>
+			</section>
+			<section id="user_search_refinement">
+				<title>Yderligere indsnævring</title>
+				<para>På resultatsiden er det muligt at indsnævre din søgning yderligere ved at angive flere søgeord.</para>
+				<figure id="user_search_refinement_image">
+					<title>Indsnævring af søgning</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata format="PNG" fileref="../images/user_guide/search_refinement.png" />
+						</imageobject>
+						<caption>
+							<para>Indsnævring af søgeresultaterne til at inkludere ordet "kat".</para>
+						</caption>
+					</mediaobject>
+				</figure>
+			</section>
+		</section>
 	</section>
 	
 	<section id="user_memberlist">

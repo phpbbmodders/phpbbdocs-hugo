@@ -159,9 +159,27 @@
 		<section id="quick_installation_advanced">
 			<title>Avancerede indstillinger</title>
 			<para>De <guilabel>Avancerede indstillinger</guilabel> giver mulighed for at ændre på nogle af boardets parametre. De er valgfrie og kan altid ændres senere. Fortsæt til sidste trin og afslut installationen, hvis du er usikker på hvad disse indstillinger betyder.</para>
+		</section>
+		<section id="final_steps">
+			<title>Sidste trin</title>
+			<para>I slutningen af installationen kan du angive standardsproget for dit board, en titel til boardet samt en kort beskrivelse af det. I en almindelig (grundlæggende) installation af phpBB 3.3 medfølger kun <guilabel>English [GB]</guilabel>. Du kan downloade flere sprog fra <ulink url="https://www.phpbb.com/languages/">www.phpbb.com</ulink> og tilføje dem senere.</para>
+			<para>Efter at have klikket på <guilabel>Send</guilabel> vises der en statusbjælke, som opdateres med status for boardinstallationen. Vær tålmodig, da dette kan tage et øjeblik.</para>
 			<para>Hvis installationen blev gennemført, kan du nu bruge <guilabel>Login</guilabel>-knappen og besøge <guilabel>Administratorkontrolpanelet</guilabel>. Tillykke, du har nu korrekt gennemført installationen af phpBB3. Men der ligger stadig arbejde forude!</para>
 			<para>Hvis du, efter at have læst denne vejledning, ikke er i stand til at installere phpBB3, kan du i afsnittet <link linkend="quick_support">Få support</link>, læse hvor du kan få yderligere assistance.</para>
 			<para>Skal du videre med en konvertering fra phpBB 2.0.x eller et andet boardsystem, bør du nu læse videre i <link linkend="upgrade_guide">kapitlet om konvertering</link>. Hvis ikke, skal du nu slette install-mappen fra din server, da du kun kan tilgå administratorkontrolpanelet så længe denne mappe er tilstede.</para>
+		</section>
+		<section id="support_phpbb">
+			<title>Støt phpBB-organisationen</title>
+			<para>Når du besøger administratorkontrolpanelet for første gang efter installationen af phpBB, vises der en skærm, som giver dig mulighed for at hjælpe phpBB-organisationen.</para>
+			<itemizedlist>
+				<listitem>
+					<para><guilabel>Send statistik</guilabel> - Sender os oplysninger om din server, såsom PHP-version, valgt databasetype, visse PHP-indstillinger, osv. Alle følsomme oplysninger er fjernet. Ved at klikke på linket <guilabel>Vis detaljer</guilabel> kan du se præcis hvilke oplysninger der bliver sendt. Disse oplysninger hjælper os med at træffe designbeslutninger til fremtidige versioner af phpBB.</para>
+				</listitem>
+				<listitem>
+					<para><guilabel>VigLink</guilabel> - Denne indstilling tilføjer henvisningskoder til bestemte links, som dine brugere poster på dit board. Når der foretages bestemte handlinger på disse links (f.eks. køb af en vare via et postet Amazon-link), modtager VigLink en provision, hvoraf en del doneres til phpBB-projektet. Disse midler bruges til at videreudvikle phpBB. Du kan også vælge at bruge din egen VigLink-konto ved at klikke på <guilabel>Konverter konto</guilabel> under <guilabel>VigLink-indstillinger</guilabel> i afsnittet <guilabel>Boardkonfiguration</guilabel> i administratorkontrolpanelet.</para>
+				</listitem>
+			</itemizedlist>
+			<para>Begge disse handlinger er valgfrie og vil <emphasis role="strong">ikke</emphasis> blive aktiveret uden dit udtrykkelige samtykke. Klikker du væk fra denne side uden at trykke på <guilabel>Send</guilabel>, deaktiveres indstillingerne. Hvis du ønsker at aktivere eller deaktivere disse indstillinger på et senere tidspunkt, kan dette gøres via siden <guilabel>Hjælp med at støtte phpBB</guilabel> i administratorkontrolpanelet under <guilabel>Serverkonfiguration</guilabel>.</para>
 		</section>
 	</section>
 	<section id="quick_settings">
@@ -192,7 +210,7 @@
 			<para>Her er desuden mulighed for ændre tidszone (<guilabel>Tidszone for board</guilabel>) og måden dato vises på (<guilabel>Datoformat</guilabel>).</para>
 			<para>Du kan vælge en ny standardtypografi for boardet, blandt de installerede. Typografien vil også blive gældende for alle de fora hvor du ikke specificeret en anden. Læs flere detaljer om hvor man kan hente nye typografier og hvordan de installeres i <ulink url="http://www.phpbb.com/styles/">typografiforummet</ulink> på <ulink url="http://www.phpbb.com/">phpbb.com</ulink>.</para>
 			<note>Allerede oprettede brugere bibeholder den oprindelige typografi, selv om der vælges en ny standardtypografi. Det er brugers valg af typografi i UCP der er bestemmende. Den eneste måde at gennemtvinge et andet valg, er at afinstallere tidligere typografier, herved tvinges alle brugere over på standardtypografien.</note>
-			<para>Skal dit board hovedsaglig anvendes nationalt, kan du også her ændre standardsproget fra engelsk til det <guilabel>standardsprog</guilabel> gæster vil blive præsenteret for ved besøg på boardet. Tilmeldte brugere kan i brugerkontrolpanelet selv vælge standardsprog imellem de sprogpakker der er installeret. Som standard downloades phpBB3 kun med den engelske sprogpakke. For at give mulighed for valg mellem flere sprog i førnævnte felt, skal den rette sprogpakke installeres. Læs flere detaljer her: <link linkend="acp_system_language">Sprogpakker</link>.</para>
+			<para>Skal dit board hovedsaglig anvendes nationalt, kan du også her ændre standardsproget fra engelsk til det <guilabel>standardsprog</guilabel> gæster vil blive præsenteret for ved besøg på boardet. Tilmeldte brugere kan i brugerkontrolpanelet selv vælge standardsprog imellem de sprogpakker der er installeret. Som standard downloades phpBB3 kun med den engelske sprogpakke. For at give mulighed for valg mellem flere sprog i førnævnte felt, skal den rette sprogpakke installeres. Læs flere detaljer her: <link linkend="acp_customise_language">Sprogpakker</link>.</para>
 		</section>
 		<!--/board_settings-->
 		<section id="quick_settings_boardfeatures">
