@@ -378,7 +378,7 @@ cmd_audit() {
 		echo "Some chapters have real mismatches -- see docs/gettext-workflow-checklist.md"
 		echo "for what to do next (check which side is correct, fix both to agree)."
 	fi
-	[ "$checked" -gt 0 ] && [ "$overall_ok" -eq 1 ]
+	[ "$checked" -eq "${#chapters[@]}" ] && [ "$overall_ok" -eq 1 ]
 }
 
 cmd_build() {
