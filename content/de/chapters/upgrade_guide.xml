@@ -62,10 +62,10 @@
 			</listitem>
 			<listitem><para>Lösche auf deiner Website alle Dateien deines Forums <emphasis role="bold">AUSSER</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>Der Datei config.php</para></listitem>
-					<listitem><para>Dem Verzeichnis files/</para></listitem>
-					<listitem><para>Dem Verzeichnis images/</para></listitem>
-					<listitem><para>Dem Verzeichnis store/</para></listitem>
+					<listitem><para>Die Datei config.php</para></listitem>
+					<listitem><para>Das Verzeichnis files/</para></listitem>
+					<listitem><para>Das Verzeichnis images/</para></listitem>
+					<listitem><para>Das Verzeichnis store/</para></listitem>
 				</itemizedlist>
 			</listitem>
 			<listitem><para>Lade den Inhalt des Verzeichnisses phpBB3 von deinem Computer in das Verzeichnis deines Forums hoch. Möglicherweise wirst du aufgefordert, die verbleibenden <emphasis>Dateien</emphasis> zu überschreiben. Wirst du aufgefordert, <emphasis>Verzeichnisse</emphasis> zusammenzuführen oder zu überschreiben, wähle das Zusammenführen.</para>
@@ -95,7 +95,7 @@
 		</important>
 		<important>
 			<para>Stelle beim Sichern deiner Dateien sicher, dass sich dein FTP-Client im Binärmodus befindet oder Dateien ohne Erweiterung im Binärmodus überträgt.</para>
-			<para>Weitere Informationen finden du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
+			<para>Weitere Informationen findest du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
 		</important>
 	</section>
 
@@ -133,11 +133,11 @@
 			</listitem>
 			<listitem><para>Lösche auf deiner Website alle Dateien deines Forums <emphasis role="bold">AUSSER</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>Der Datei config.php</para></listitem>
-					<listitem><para>Dem Verzeichnis ext/</para></listitem>
-					<listitem><para>Dem Verzeichnis images/</para></listitem>
-					<listitem><para>Dem Verzeichnis files/</para></listitem>
-					<listitem><para>Dem Verzeichnis store/</para></listitem>
+					<listitem><para>Die Datei config.php</para></listitem>
+					<listitem><para>Das Verzeichnis ext/</para></listitem>
+					<listitem><para>Das Verzeichnis images/</para></listitem>
+					<listitem><para>Das Verzeichnis files/</para></listitem>
+					<listitem><para>Das Verzeichnis store/</para></listitem>
 				</itemizedlist>
 			</listitem>
 			<listitem><para>Lade den Inhalt des Verzeichnisses phpBB3 von deinem Computer in das Verzeichnis deines Forums hoch. Möglicherweise wirst du aufgefordert, die verbleibenden <emphasis>Dateien</emphasis> zu überschreiben. Wirst du aufgefordert, <emphasis>Verzeichnisse</emphasis> zusammenzuführen oder zu überschreiben, wähle das Zusammenführen.</para>
@@ -167,7 +167,7 @@
 		</important>
 		<important>
 			<para>Stelle beim Sichern deiner Dateien sicher, dass sich dein FTP-Client im Binärmodus befindet oder Dateien ohne Erweiterung im Binärmodus überträgt.</para>
-			<para>Weitere Informationen finden du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
+			<para>Weitere Informationen findest du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
 		</important>
 	</section>
 
@@ -205,11 +205,11 @@
 			</listitem>
 			<listitem><para>Lösche auf deiner Website alle Dateien deines Forums <emphasis role="bold">AUSSER</emphasis>:</para>
 				<itemizedlist>
-					<listitem><para>Der Datei config.php</para></listitem>
-					<listitem><para>Dem Verzeichnis ext/</para></listitem>
-					<listitem><para>Dem Verzeichnis files/</para></listitem>
-					<listitem><para>Dem Verzeichnis images/</para></listitem>
-					<listitem><para>Dem Verzeichnis store/</para></listitem>
+					<listitem><para>Die Datei config.php</para></listitem>
+					<listitem><para>Das Verzeichnis ext/</para></listitem>
+					<listitem><para>Das Verzeichnis files/</para></listitem>
+					<listitem><para>Das Verzeichnis images/</para></listitem>
+					<listitem><para>Das Verzeichnis store/</para></listitem>
 				</itemizedlist>
 			</listitem>
 			<listitem><para>Lade den Inhalt des Verzeichnisses phpBB3 von deinem Computer in das Verzeichnis deines Forums hoch. Möglicherweise wirst du aufgefordert, die verbleibenden <emphasis>Dateien</emphasis> zu überschreiben. Wirst du aufgefordert, <emphasis>Verzeichnisse</emphasis> zusammenzuführen oder zu überschreiben, wähle das Zusammenführen.</para>
@@ -239,7 +239,7 @@
 		</important>
 		<important>
 			<para>Stelle beim Sichern deiner Dateien sicher, dass sich dein FTP-Client im Binärmodus befindet oder Dateien ohne Erweiterung im Binärmodus überträgt.</para>
-			<para>Weitere Informationen finden du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
+			<para>Weitere Informationen findest du unter: <ulink url="https://www.phpbb.com/support/docs/en/3.0/kb/article/transferring-attachment-files-with-filezilla/">Wissensdatenbank: Übertragen von Anhangsdateien mit Filezilla</ulink></para>
 		</important>
 	</section>
 
