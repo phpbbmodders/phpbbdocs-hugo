@@ -17,6 +17,9 @@
 #   update <lang>                Refresh POT and merge into <lang>'s catalogs
 #   status <lang>                Show translation completion for <lang>
 #   check <lang>                 Validate <lang>'s PO files and reconstructed XML
+#   audit <lang>                 Diff each chapter's reconstruction against
+#                                 content/<lang>/chapters/ for real content
+#                                 mismatches (see docs/TODO/todo-po-roundtrip-audit.md)
 #   build <lang>                 Reconstruct translated DocBook and build Hugo
 #
 # Canonical PO catalogs live in the sibling phpbbdocs-languages repo,
@@ -285,6 +288,63 @@ cmd_check() {
 	cmd_status "$lang"
 }
 
+cmd_audit() {
+	local lang="$1"
+	require_lang_arg "$lang"
+	local repo
+	repo="$(languages_repo)"
+	local lang_dir="$repo/$lang"
+	local target_dir="$script_dir/content/$lang/chapters"
+
+	echo "$lang PO round-trip content audit"
+	echo "================================"
+	echo "Reconstructs each chapter from its PO catalog and diffs every"
+	echo "paragraph against content/$lang/chapters/ -- see"
+	echo "docs/TODO/todo-po-roundtrip-audit.md for what this catches and why."
+	echo ""
+
+	local audit_dir
+	audit_dir="$(mktemp -d)"
+	local overall_ok=1
+	for chapter in "${chapters[@]}"; do
+		local po="$lang_dir/documentation/$chapter.po"
+		local hand="$target_dir/$chapter.xml"
+		local src="$script_dir/content/en/chapters/$chapter.xml"
+		if [ ! -f "$po" ] || [ ! -f "$hand" ]; then
+			echo "○ $chapter: skipped (no PO catalog or no hand file yet)"
+			continue
+		fi
+		local mo="$audit_dir/$chapter.mo"
+		local recon="$audit_dir/$chapter.xml"
+		msgfmt -o "$mo" "$po" 2>/dev/null
+		if ! itstool -m "$mo" -l "$lang" -o "$recon" "$src" 2>/tmp/translations_audit_err; then
+			echo "✗ $chapter: reconstruction failed"
+			cat /tmp/translations_audit_err
+			overall_ok=0
+			continue
+		fi
+		python3 "$script_dir/translations/preserve_authorship_metadata.py" "$recon" "$hand"
+		local audit_output
+		if audit_output="$(python3 "$script_dir/translations/audit_roundtrip.py" "$chapter" "$hand" "$recon" 2>&1)"; then
+			echo "✓ $audit_output"
+		else
+			echo "✗ $chapter: real mismatches found"
+			echo "$audit_output" | sed 's/^/    /'
+			overall_ok=0
+		fi
+	done
+	rm -rf "$audit_dir"
+
+	echo ""
+	if [ "$overall_ok" -eq 1 ]; then
+		echo "All chapters round-trip clean."
+	else
+		echo "Some chapters have real mismatches -- see docs/gettext-workflow-checklist.md"
+		echo "for what to do next (check which side is correct, fix both to agree)."
+	fi
+	[ "$overall_ok" -eq 1 ]
+}
+
 cmd_build() {
 	local lang="$1"
 	require_lang_arg "$lang"
@@ -334,9 +394,10 @@ case "$command" in
 	update) cmd_update "$@" ;;
 	status) cmd_status "$@" ;;
 	check) cmd_check "$@" ;;
+	audit) cmd_audit "$@" ;;
 	build) cmd_build "$@" ;;
 	""|-h|--help)
-		sed -n '2,20p' "${BASH_SOURCE[0]}" | sed 's/^# \?//'
+		sed -n '2,31p' "${BASH_SOURCE[0]}" | sed 's/^# \?//'
 		;;
 	*)
 		echo "error: unknown command '$command'" >&2
