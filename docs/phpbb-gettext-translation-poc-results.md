@@ -398,6 +398,49 @@ left standing is the csv-table parse-error issue below, which is a
 can render a table whose data never reached the XML in the first
 place.
 
+## Follow-up 3 — itstool reconstruction can silently fall back to English for specific paragraphs, even with a correct PO catalog
+
+Discovered while migrating the Danish (`da`) translation's existing
+hand-authored `content/da/chapters/*.xml` into PO catalogs via
+`translations/align_existing_translation.py`, then verifying the
+result by reconstructing (`msgfmt` → `itstool -m`) and diffing every
+`<para>` against the authoritative hand-translated file.
+
+**What happened:** `admin_guide.xml`'s `acp_posting_bbcodes` section —
+one `<title>` plus six `<para>` elements, all beginning with or
+containing `<glossterm>BBCode(s)</glossterm>` — reconstructs as raw,
+untranslated English, even though the compiled `.mo` file demonstrably
+contains the correct Danish `msgstr` for the exact `msgid` text
+(verified directly against the `.mo` with `polib`, bypassing itstool
+entirely). Everywhere else in the same 924-entry catalog, including
+other `<glossterm>`-wrapped paragraphs elsewhere in the same file
+(IP address, Attachments, etc.), reconstruction is correct.
+
+**What this isn't:** not a bad translation, not a bad alignment, not a
+duplicate-msgid collision (`msgfmt --check` passes clean), and not
+something specific to this project's XML — the six paragraphs have
+the same tab-indented structure as every surrounding, correctly-
+reconstructing paragraph. It looks like `itstool -m`'s own re-parse of
+the live English source (a separate pass from the `-o` extraction that
+built the POT) is, in this one isolated spot, computing a different
+extraction key than the one stored in the compiled catalog — narrow
+enough that no root cause was found within the time this deserved.
+
+**Practical impact:** none on the live site today. Hugo builds from
+the hand-maintained `content/<lang>/chapters/*.xml` files directly;
+`translations.sh build <lang>` (PO → reconstructed XML) is a
+maintainer tool for a *future* gettext-driven workflow, not the
+current pipeline. Running it today would silently regress exactly
+these six paragraphs back to English — a real trap for whoever
+eventually flips that switch, worth knowing about in advance rather
+than discovering via a diff nobody thought to run.
+
+**How this was caught:** title-only diffing (`<title>` tags) is not
+enough — it missed this entirely, since only `<para>` content is
+affected here. The reconstruction-vs-authoritative comparison needs to
+walk every translatable node, not just titles, to catch a gap this
+narrow.
+
 ## What this report does not answer
 
 Per the plan's own scope: no production code changed, no
