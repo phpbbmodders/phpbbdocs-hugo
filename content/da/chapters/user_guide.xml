@@ -373,7 +373,7 @@
 		</section>
 
 		<section id="posting_attachments">
-			<title>Vedhæfte filer</title>
+			<title>Vedhæftede filer</title>
 			<para>Vedhæftede filer giver brugere mulighed for at uploade filer og vedhæfte dem til deres indlæg. Muligheden for at vedhæfte og downloade vedhæftede filer bestemmes af henholdsvis tilladelserne "Kan vedhæfte filer" og "Kan downloade filer".</para>
 			<para>For at tilføje en vedhæftet fil, find sektionen <guilabel>Vedhæftede filer</guilabel> på indlægssiden og klik på knappen <guilabel>Tilføj filer</guilabel>. En kommentar kan angives i tekstfeltet <guilabel>Filkommentar</guilabel>. Klik på <guilabel>Tilføj filen</guilabel> for at uploade og vedhæfte filen til indlægget. Gentag processen for at uploade flere filer. Vedhæftede filer kan også uploades ved at trække og slippe en fil på indlægsfeltet.</para>
 			<para>For at slette en vedhæftet fil, find listen over vedhæftede filer nederst i sektionen <guilabel>Vedhæftede filer</guilabel> på indlægssiden og klik på knappen <guilabel>Slet fil</guilabel> for den ønskede fil.</para>
@@ -397,7 +397,7 @@
 			</itemizedlist>
 		</section>
 		<section id="posting_drafts">
-			<title>Kladde</title>
+			<title>Kladder</title>
 			<para>Når du opretter et indlæg, kan det gemmes eller indlæses med kladdefunktionen. Tillader boardets tilladelser at kladder gemmes, vises knapperne <guilabel>Gem</guilabel> og <guilabel>Indlæs</guilabel> på indlægssiden.</para>
 			<itemizedlist>
 				<listitem><para><guilabel>Gem</guilabel> - Gemmer et indlæg som en kladde. Når en kladde gemmes, gemmes kun indlæggets emne og besked. Emneikoner, vedhæftede filer osv. mistes.</para></listitem>

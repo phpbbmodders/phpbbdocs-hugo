@@ -47,10 +47,21 @@ def excluded_line_ranges(xml_path):
     English chapters but deliberately dropped in French's, so it's
     never translatable content to align, only ever a source of count
     mismatches. Same reasoning proteus_hugo_devdocs.xsl already
-    applies when excluding articleinfo from dev-docs body content."""
+    applies when excluding articleinfo from dev-docs body content.
+
+    <sectioninfo> (per-section authorgroup/othername translator
+    credits) is excluded for the same reason: its block COUNT matches
+    1:1 between English and a translation (confirmed across all 7
+    chapters), but the number of <othername> entries inside each block
+    varies freely — a translated section is usually credited to
+    whoever translated it, not to however many original English
+    authors are listed, which is never a real count-mismatch signal
+    about missing content. Discovered via Danish's glossary.xml, which
+    credits 1 translator across sectioninfo where English lists 4
+    original authors."""
     text = open(xml_path, encoding='utf-8').read()
     ranges = []
-    for pattern in (r'<chapterinfo>.*?</chapterinfo>', r'<abstract>.*?</abstract>'):
+    for pattern in (r'<chapterinfo>.*?</chapterinfo>', r'<abstract>.*?</abstract>', r'<sectioninfo>.*?</sectioninfo>'):
         for m in re.finditer(pattern, text, re.S):
             start = text[:m.start()].count('\n') + 1
             end = text[:m.end()].count('\n') + 1
