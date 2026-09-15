@@ -1105,4 +1105,594 @@
 			<para>For at slette en forældreløs vedhæftet fil, markér den forældreløse vedhæftede fils afkrydsningsfelt <guilabel>Slet</guilabel>, klik derefter på <guilabel>Send</guilabel>. Bemærk at dette ikke kan fortrydes.</para>
 		</section>
 	</section>
+
+	<section id="acp_users">
+		<sectioninfo>
+			<authorgroup>
+				<author>
+					<othername>Claude</othername>
+				</author>
+			</authorgroup>
+		</sectioninfo>
+		<title>Brugeradministration</title>
+
+		<section id="acp_users_manage">
+			<title>Administrer brugere</title>
+			<para>Brugere er grundlaget for dit forum. Som forumadministrator er det meget vigtigt at kunne administrere dine brugere. At administrere dine brugere og deres oplysninger samt specifikke indstillinger er nemt og kan gøres via <acronym>ACP</acronym>.</para>
+
+			<para>Log ind og gå til din <acronym>ACP</acronym> for at begynde. Find og klik på <guimenuitem>Brugere og grupper</guimenuitem> for at komme til den nødvendige side. Ser du ikke <guimenuitem>Brugeradministration</guimenuitem>, find og klik blot på <guimenuitem>Administrer brugere</guimenuitem> i navigationsmenuen i venstre side af siden.</para>
+
+			<para>For at fortsætte og administrere en bruger, skal du kende det/de brugernavn(e), du ønsker at administrere. I tekstfeltet for feltet <guilabel>"Find et medlem:"</guilabel>, indtast brugernavnet på den bruger, hvis oplysninger og indstillinger du ønsker at administrere. Vil du derimod finde et medlem, klik på <guilabel>[ Find et medlem ]</guilabel> (som findes under tekstfeltet), og følg de nødvendige trin for at finde og vælge en bruger. Ønsker du at administrere oplysninger og indstillinger for den anonyme bruger (enhver besøgende, der ikke er logget ind, angives som den anonyme bruger), markér afkrydsningsfeltet mærket <guilabel>"Vælg anonym bruger"</guilabel>. Når du har valgt en bruger, klik på <guilabel>Send</guilabel>.</para>
+
+			<para>Der er mange sektioner relateret til en brugers indstillinger. Følgende er undersektioner med flere oplysninger om hver formular. Hver formular giver dig mulighed for at administrere specifikke indstillinger for den bruger, du har valgt. Når du er færdig med at redigere data på hver formular, klik på <guilabel>Send</guilabel> (placeret nederst på hver formular) for at indsende dine ændringer.</para>
+
+			<section id="acp_users_manage_overview">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugeroversigt</title>
+				<para>Dette er den første formular, der vises, når du første gang vælger en bruger at administrere. Her vises alle de generelle oplysninger og indstillinger for hver bruger.</para>
+
+				<variablelist>
+					<varlistentry>
+						<term>Brugernavn</term>
+						<listitem>
+							<para>Dette er navnet på den bruger, du aktuelt administrerer. Ønsker du at ændre brugerens brugernavn, indtast et nyt brugernavn mellem tre og tyve tegn langt i tekstfeltet mærket <guilabel>Brugernavn:</guilabel></para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Tilmeldt</term>
+						<listitem>
+							<para>Dette er den fulde dato, brugeren tilmeldte sig. Du kan ikke redigere denne værdi.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Tilmeldt fra IP</term>
+						<listitem>
+							<para>Dette er den <acronym>IP</acronym>-adresse, brugeren tilmeldte sin konto fra. Ønsker du at bestemme <acronym>IP</acronym>-værtsnavnet, klik på selve IP-adressen. Den aktuelle side genindlæses og viser de relevante oplysninger. Ønsker du at foretage et whois-opslag på <acronym>IP</acronym>-adressen, klik på linket <guilabel>Whois</guilabel>. Et nyt vindue åbnes med disse data.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Senest aktiv</term>
+						<listitem>
+							<para>Dette er den fulde dato, brugeren senest var aktiv.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Indlæg</term>
+						<listitem>
+							<para>Dette tal angiver, hvor mange indlæg brugeren har skrevet på boardet.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Advarsler</term>
+						<listitem>
+							<para>Dette er antallet af advarsler, brugeren aktuelt har.</para>
+							<para>For mere information om advarsler, se <xref linkend="mcp_warnings"/>.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Grundlægger</term>
+						<listitem>
+							<para>Grundlæggere er brugere, der har alle administratortilladelser, og som aldrig kan udelukkes, slettes eller ændres af medlemmer, der ikke er grundlæggere. Ønsker du at gøre denne bruger til grundlægger, vælg radioknappen <guilabel>Ja</guilabel>. For at fjerne grundlæggerstatus fra en bruger, vælg radioknappen <guilabel>Nej</guilabel>.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>E-mail</term>
+						<listitem>
+							<para>Dette er brugerens aktuelt angivne e-mailadresse. For at ændre e-mailadressen, udfyld tekstfeltet <guilabel>E-mail:</guilabel> med en gyldig e-mail.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Bekræft e-mailadresse</term>
+						<listitem>
+							<para>Dette tekstfelt bør kun udfyldes, hvis du ændrer brugerens e-mailadresse. Ændrer du e-mailadressen, bør både tekstfeltet <guilabel>E-mail:</guilabel> og dette felt udfyldes med samme e-mailadresse. Udfylder du ikke dette, ændres brugerens e-mailadresse ikke.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Ny adgangskode</term>
+						<listitem>
+							<para>Som administrator kan du ikke se nogen af dine brugeres adgangskoder. Det er dog muligt at ændre adgangskoder. For at ændre brugerens adgangskode, indtast en ny adgangskode i tekstfeltet <guilabel>Ny adgangskode:</guilabel>. Den nye adgangskode skal være mellem seks og tredive tegn lang.</para>
+
+							<important><para>Før du indsender nogen ændringer til brugeren, sørg for at dette felt er tomt, medmindre du virkelig ønsker at ændre brugerens adgangskode. Ændrer du ved et uheld brugerens adgangskode, kan den oprindelige adgangskode ikke gendannes!</para></important>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Bekræft ny adgangskode</term>
+						<listitem>
+							<para>Dette tekstfelt bør kun udfyldes, hvis du ændrer brugerens adgangskode. Ændrer du brugerens adgangskode, skal tekstfeltet <guilabel>Bekræft ny adgangskode:</guilabel> udfyldes med den samme adgangskode, du udfyldte i ovenstående tekstfelt <guilabel>Ny adgangskode:</guilabel>.</para>
+						</listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term>Hurtige værktøjer</term>
+						<listitem>
+							<para>Mulighederne i dropdownmenuen <guilabel>Hurtige værktøjer</guilabel> giver dig mulighed for hurtigt og nemt at ændre en af brugerens indstillinger. De tilgængelige muligheder er <guilabel>Slet signatur</guilabel>, <guilabel>Slet avatar</guilabel>, <guilabel>Flyt alle indlæg</guilabel>, <guilabel>Slet alle indlæg</guilabel> og <guilabel>Slet alle vedhæftede filer</guilabel>.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</section>
+
+			<section id="acp_users_manage_feedback">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugerfeedback</title>
+				<para>Et andet aspekt af at administrere en bruger er at redigere dennes feedbackdata. Feedback består af enhver form for brugeradvarsel, udstedt til brugeren af en forumadministrator.</para>
+
+				<para>For at tilpasse visningen af brugerens eksisterende logposter, vælg eventuelle kriterier for din tilpasning ved at vælge dine indstillinger i dropdownmenuerne <guilabel>Vis poster fra de foregående:</guilabel> og <guilabel>Sortér efter:</guilabel>. <guilabel>Vis poster fra de foregående:</guilabel> giver dig mulighed for at angive en bestemt tidsperiode, feedbacken blev udstedt i. <guilabel>Sortér efter:</guilabel> giver dig mulighed for at sortere de eksisterende logposter efter <guimenuitem>Brugernavn</guimenuitem>, <guimenuitem>Dato</guimenuitem>, <guimenuitem>IP-adresse</guimenuitem> og <guimenuitem>Loghandling</guimenuitem>. Logposterne kan derefter sorteres i stigende eller faldende rækkefølge. Når du er færdig med at angive disse indstillinger, klik på knappen <guilabel>Gå</guilabel> for at opdatere siden med dine tilpasninger.</para>
+
+				<para>En anden måde at administrere en brugers feedbackdata på er ved at tilføje feedback. Find blot sektionen mærket <guilabel>Tilføj feedback</guilabel>, og indtast din besked i tekstfeltet <guilabel>FEEDBACK</guilabel>. Når du er færdig, klik på <guilabel>Send</guilabel> for at tilføje feedbacken.</para>
+			</section>
+
+			<section id="acp_users_manage_profile">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugerprofil</title>
+
+				<para>Brugere kan nogle gange have indhold i deres forumprofil, der skal opdateres eller slettes. Ønsker du ikke at ændre et felt, lad det stå tomt. Følgende er de profilfelter, du kan ændre:
+					<itemizedlist>
+						<listitem><para><guilabel>ICQ-nummer</guilabel> skal være et tal på mindst tre cifre.</para></listitem>
+						<listitem><para><guilabel>AOL Instant Messenger</guilabel> kan have alfanumeriske tegn og symboler.</para></listitem>
+						<listitem><para><guilabel>MSN Messenger</guilabel> kan have alfanumeriske tegn, men bør ligne en e-mailadresse (jensjensen@example.com).</para></listitem>
+						<listitem><para><guilabel>Yahoo Messenger</guilabel> kan have alfanumeriske tegn og symboler.</para></listitem>
+						<listitem><para><guilabel>Jabber-adresse</guilabel> kan have alfanumeriske tegn, men skal ligne en e-mailadresse (jensjensen@example.com).</para></listitem>
+						<listitem><para><guilabel>Hjemmeside</guilabel> kan have alfanumeriske tegn og symboler, men skal indeholde protokollen (f.eks. http://www.example.com).</para></listitem>
+						<listitem><para><guilabel>Sted</guilabel> kan have alfanumeriske tegn og symboler.</para></listitem>
+						<listitem><para><guilabel>Beskæftigelse</guilabel> kan have alfanumeriske tegn og symboler.</para></listitem>
+						<listitem><para><guilabel>Interesser</guilabel> kan have alfanumeriske tegn og symboler.</para></listitem>
+						<listitem><para><guilabel>Fødselsdag</guilabel> kan angives med tre forskellige dropdownmenuer: <guilabel>Dag:</guilabel>, <guilabel>Måned:</guilabel> og <guilabel>År:</guilabel>. Angivelse af et år viser brugerens alder, når det er dennes fødselsdag.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+
+			<section id="acp_users_manage_preferences">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugerindstillinger</title>
+
+				<para>Brugere har mange indstillinger, de kan bruge til deres konto. Som administrator kan du ændre alle disse indstillinger. Brugerindstillingerne er grupperet i tre hovedkategorier: <guilabel>Generelle indstillinger</guilabel>, <guilabel>Standardindstillinger for indlæg</guilabel> og <guilabel>Visningsmuligheder</guilabel>.</para>
+			</section>
+
+			<section id="acp_users_manage_avatar">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugerens avatar</title>
+
+				<para>Her kan du administrere brugerens <glossterm>avatar</glossterm>. Har brugeren allerede angivet en avatar for sig selv, kan du se avatarbilledet.</para>
+				<para>Afhængigt af dine avatarindstillinger (for mere information om avatarindstillinger, se <link linkend="acp_board_avatars">Indstillinger for avatarer</link>), kan du vælge enhver tilgængelig mulighed for at ændre brugerens avatar: <guilabel>Upload fra din maskine</guilabel>, <guilabel>Upload fra ekstern URL</guilabel> eller <guilabel>Link til ekstern placering</guilabel>. Du kan også vælge en avatar fra boardets avatargalleri ved at klikke på knappen <guilabel>Vis galleri</guilabel> ved siden af <guilabel>Lokalt galleri:</guilabel>.</para>
+				<note>
+					<para>De ændringer, du foretager til brugerens avatar, skal stadig overholde de begrænsninger, du har angivet i avatarindstillingerne.</para>
+				</note>
+				<para>For at slette avatarbilledet, markér blot afkrydsningsfeltet <guilabel>Slet billede</guilabel> under avatarbilledet.</para>
+				<para>Når du er færdig med at vælge hvilken avatar brugeren skal have, klik på <guilabel>Send</guilabel> for at opdatere brugerens avatar.</para>
+			</section>
+
+			<section id="acp_users_manage_rank">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugerens rang</title>
+
+				<para>Her kan du angive brugerens <glossterm>rang</glossterm>. Du kan angive brugerens rang ved at vælge rangen fra dropdownmenuen <guilabel>Brugerrang:</guilabel>. Efter du har valgt rangen, klik på <guilabel>Send</guilabel> for at opdatere brugerens rang.</para>
+				<para>For mere information om rangordninger, se <xref linkend="acp_user_ranks"/>.</para>
+			</section>
+
+			<section id="acp_users_manage_signature">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Brugerens signatur</title>
+
+				<para>Her kan du tilføje, redigere eller slette brugerens <glossterm>signatur</glossterm>.</para>
+				<para>Brugerens aktuelle signatur bør vises i formularen <guilabel>Signatur</guilabel>. Rediger blot signaturen ved at skrive hvad du ønsker i tekstfeltet. Du kan bruge <glossterm>BBkode</glossterm> og anden speciel formatering med hvad der er til rådighed. Når du er færdig med at redigere brugerens signatur, klik på <guilabel>Send</guilabel> for at opdatere brugerens signatur.</para>
+				<note>
+					<para>Den signatur, du angiver, skal overholde boardets signaturbegrænsninger, som du aktuelt har indstillet.</para>
+				</note>
+			</section>
+
+			<section id="acp_users_manage_groups">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Grupper</title>
+
+				<para>Her kan du se alle de <glossterm>brugergrupper</glossterm>, brugeren er i. Fra denne side kan du nemt fjerne brugeren fra enhver brugergruppe, eller tilføje brugeren til en eksisterende gruppe. Tabellen mærket <guilabel>Specielle grupper brugeren er medlem af</guilabel> viser de brugergrupper, brugeren aktuelt er medlem af.</para>
+				<para>Det er meget nemt at tilføje brugeren til en ny brugergruppe. For at gøre dette, find dropdownmenuen mærket <guilabel>Tilføj bruger til gruppe:</guilabel>, og vælg en brugergruppe fra denne menu. Når brugergruppen er valgt, klik på <guilabel>Send</guilabel>. Din tilføjelse træder øjeblikkeligt i kraft.</para>
+				<para>For at slette brugeren fra en gruppe, denne aktuelt er medlem af, find den række, brugergruppen er i, og klik på <guilabel>Slet</guilabel>. Du mødes med en bekræftelsesskærm; ønsker du at fortsætte, klik på <guilabel>Ja</guilabel>.</para>
+			</section>
+
+			<section id="acp_users_manage_permissions">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Tilladelser</title>
+
+				<para>Her kan du se alle de tilladelser, der aktuelt er angivet for brugeren. For hver gruppe brugeren er i, er der en separat sektion på siden for de tilladelser, der relaterer sig til den kategori. For faktisk at angive brugerens tilladelser, se <xref linkend="acp_permissions"/>.</para>
+			</section>
+
+			<section id="acp_users_manage_attachments">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Vedhæftede filer</title>
+
+				<para>Afhængigt af de aktuelle indstillinger for vedhæftede filer, kan dine brugere allerede have <glossterm>vedhæftede filer</glossterm> postet. Har brugeren allerede uploadet mindst én vedhæftet fil, kan du se listen over vedhæftede fil(er) i tabellen. De tilgængelige data for hver vedhæftet fil består af: <guilabel>Filnavn</guilabel>, <guilabel>Emnetitel</guilabel>, <guilabel>Indlægstidspunkt</guilabel>, <guilabel>Filstørrelse</guilabel> og <guilabel>Downloads</guilabel>.</para>
+				<para>For at hjælpe dig med at administrere brugerens vedhæftede fil(er), kan du vælge sorteringsrækkefølgen for listen over vedhæftede filer. Find dropdownmenuen <guilabel>Sortér efter:</guilabel>, og vælg den kategori, du vil bruge til at sortere listen (de mulige muligheder er <guimenuitem>Filnavn</guimenuitem>, <guimenuitem>Filendelse</guimenuitem>, <guimenuitem>Filstørrelse</guimenuitem>, <guimenuitem>Downloads</guimenuitem>, <guimenuitem>Indlægstidspunkt</guimenuitem> og <guimenuitem>Emnetitel</guimenuitem>). For at vælge sorteringsrækkefølgen, vælg enten <guimenuitem>Faldende</guimenuitem> eller <guimenuitem>Stigende</guimenuitem> fra dropdownmenuen ved siden af sorteringskategorien. Når du er færdig, klik på <guilabel>Gå</guilabel>.</para>
+				<para>For at se den vedhæftede fil, klik på den vedhæftede fils filnavn. Den vedhæftede fil åbnes i det samme browservindue. Du kan også se det emne, den vedhæftede fil blev postet i, ved at klikke på linket ved siden af mærkaten <guilabel>Emne:</guilabel>, som findes under filnavnet. At slette brugerens vedhæftede fil(er) er meget nemt. I listen over vedhæftede filer, markér afkrydsningsfelterne ved siden af den/de vedhæftede fil(er), du ønsker at slette. Når du har valgt alt, du ønsker, klik på <guilabel>Slet markerede</guilabel>, som findes under listen over vedhæftede filer.</para>
+				<tip>
+					<para>For at vælge alle de vedhæftede filer, der vises på siden, klik på linket <guilabel>Markér alle</guilabel>, som findes under listen over vedhæftede filer. Dette hjælper især, hvis du ønsker at slette alle de vedhæftede filer, der vises på siden, på én gang.</para>
+				</tip>
+			</section>
+		</section>
+		<section id="acp_users_inactive">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Inaktive brugere</title>
+			<para>Her kan du se detaljer om alle brugere, der aktuelt er markeret som inaktive, sammen med årsagen til at deres konto er markeret som inaktiv, og hvornår dette skete.</para>
+			<para>Ved brug af afkrydsningsfelterne på denne side er det muligt at udføre massehandlinger på brugerne, herunder at aktivere kontiene, sende dem en påmindelses-e-mail om at de skal aktivere deres konto, eller slette kontoen.</para>
+			<para>Der er 5 årsager, der kan angives for at en konto er inaktiv:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Konto deaktiveret af administrator</term>
+					<listitem>
+						<para>Denne konto er manuelt blevet deaktiveret af en administrator via <link linkend="acp_users_manage">brugeradministrationsværktøjerne</link>. Flere detaljer om hvem der udførte denne handling og årsagerne kan være tilgængelige via brugernotater.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Profildetaljer ændret</term>
+					<listitem>
+						<para>Boardet er konfigureret til at kræve brugeraktivering, og denne bruger har ændret vigtige oplysninger relateret til sin konto, såsom e-mailadressen, og skal genaktivere kontoen for at bekræfte disse ændringer.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Nyligt tilmeldt konto</term>
+					<listitem>
+						<para>Boardet er konfigureret til at kræve brugeraktivering, og enten brugeren eller en administrator (afhængigt af indstillingerne) har endnu ikke aktiveret denne nye konto.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Gennemtvunget genaktivering af brugerkonto</term>
+					<listitem>
+						<para>En administrator har tvunget denne bruger til at genaktivere sin konto via <link linkend="acp_users_manage">brugeradministrationsværktøjerne</link>. Flere detaljer om hvem der udførte denne handling og årsagerne kan være tilgængelige via brugernotater.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ukendt</term>
+					<listitem>
+						<para>Ingen årsag blev registreret til, at denne bruger er inaktiv; det er sandsynligt, at ændringen blev foretaget af en ekstern applikation, eller at denne bruger blev tilføjet fra en anden kilde.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+
+		<section id="acp_users_permissions">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Brugertilladelser</title>
+			<para>Ud over at kunne administrere brugeres oplysninger er det også vigtigt at kunne jævnligt vedligeholde og styre tilladelser for brugerne på dit board. Brugertilladelser omfatter kapaciteter såsom brug af avatarer og afsendelse af private beskeder. Globale redaktørtilladelser omfatter blandt andet muligheder som godkendelse af indlæg, administration af emner og administration af udelukkelser. Endelig administratortilladelser såsom ændring af tilladelser, definering af brugerdefinerede BBkoder og administration af fora.</para>
+
+			<para>For at begynde at administrere en brugers tilladelser, find fanen <guimenuitem>Brugere og grupper</guimenuitem>, og klik på <guimenuitem>Brugertilladelser</guimenuitem> i navigationsmenuen i venstre side. Her kan du tildele globale tilladelser til brugere. I feltet <guilabel>Find en bruger</guilabel>, indtast brugernavnet på den bruger, hvis tilladelser du ønsker at redigere. (Ønsker du at redigere den anonyme bruger, markér afkrydsningsfeltet <guilabel>Vælg anonym bruger</guilabel>.) Klik på <guilabel>Send</guilabel>.</para>
+
+			<para>Tilladelser er grupperet i tre forskellige kategorier: bruger, redaktør og administrator. Hver bruger kan have specifikke indstillinger i hver tilladelseskategori. For at lette redigeringen af brugertilladelser er det muligt at tildele specifikke foruddefinerede roller til brugeren.</para>
+
+			<important>
+				<para>For de følgende beskrevne handlinger til redigering af tilladelser skal du vælge mellem tre muligheder. Du kan enten vælge <guilabel>Ja</guilabel>, <guilabel>Nej</guilabel> eller <guilabel>Aldrig</guilabel>. Vælges <guilabel>Ja</guilabel>, aktiveres den valgte tilladelse for brugeren, mens valg af <guilabel>Nej</guilabel> forhindrer brugeren i at have tilladelse til den valgte indstilling, <emphasis>medmindre en anden tilladelsesindstilling fra et andet område tilsidesætter indstillingen</emphasis>. Ønsker du helt at forhindre brugeren i nogensinde at have den valgte tilladelse, vælg <guilabel>Aldrig</guilabel>. Indstillingen <guilabel>Aldrig</guilabel> tilsidesætter alle andre værdier tildelt indstillingen.</para>
+			</important>
+
+			<para>For at redigere brugerens <guilabel>Brugertilladelser</guilabel>, vælg "<guimenuitem>Brugertilladelser</guimenuitem> i dropdownmenuen <guilabel>Vælg type</guilabel>, tryk derefter på <guilabel>Gå</guilabel>. Vælg den rolle, der skal anvendes på brugeren. Ønsker du at bruge den avancerede formular, der tilbyder mere detaljeret konfiguration af tilladelser, klik på linket <guilabel>Avancerede tilladelser</guilabel>. En ny formular vises under dropdownmenuen <guilabel>Rolle</guilabel>. Der er fire kategorier af tilladelser, du kan redigere: <guilabel>Indlæg</guilabel>, <guilabel>Profil</guilabel>, <guilabel>Diverse</guilabel> og <guilabel>Private beskeder</guilabel>.</para>
+
+			<para>For at redigere brugerens <guilabel>Redaktørtilladelser</guilabel>, vælg "<guimenuitem>Redaktørtilladelser</guimenuitem> i dropdownmenuen <guilabel>Vælg type</guilabel>, tryk derefter på <guilabel>Gå</guilabel>. Vælg den rolle, der skal anvendes på brugeren. Ønsker du at bruge den avancerede formular, der tilbyder mere detaljeret konfiguration af tilladelser, klik på linket <guilabel>Avancerede tilladelser</guilabel>. En ny formular vises under dropdownmenuen <guilabel>Rolle</guilabel>. Der er tre kategorier af tilladelser, du kan redigere: <guilabel>Indlægshandlinger</guilabel>, <guilabel>Diverse</guilabel> og <guilabel>Emnehandlinger</guilabel>.</para>
+
+			<para>For at redigere brugerens <guilabel>Administratortilladelser</guilabel>, vælg "<guimenuitem>Administratortilladelser</guimenuitem> i dropdownmenuen <guilabel>Vælg type</guilabel>, tryk derefter på <guilabel>Gå</guilabel>. Vælg den rolle, der skal anvendes på brugeren. Ønsker du at bruge den avancerede formular, der tilbyder mere detaljeret konfiguration af tilladelser, klik på linket <guilabel>Avancerede tilladelser</guilabel>. En ny formular vises under dropdownmenuen <guilabel>Rolle</guilabel>. Der er seks kategorier af tilladelser, du kan redigere: <guilabel>Tilladelser</guilabel>, <guilabel>Indlæg</guilabel>, <guilabel>Diverse</guilabel>, <guilabel>Brugere og grupper</guilabel>, <guilabel>Indstillinger</guilabel> og <guilabel>Fora</guilabel>.</para>
+		</section>
+
+		<section id="acp_users_forum_permissions">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Brugeres forumtilladelser</title>
+
+			<para>Ud over at redigere dine brugeres brugerkontorelaterede tilladelser, kan du også redigere deres forumtilladelser, som relaterer sig til foraene på dit board. Forumtilladelser adskiller sig fra brugertilladelser ved, at de er direkte relateret til og knyttet til foraene. <guimenuitem>Brugeres forumtilladelser</guimenuitem> giver dig mulighed for at redigere dine brugeres forumtilladelser. Når du gør dette, kan du kun tildele forumtilladelser til én bruger ad gangen.</para>
+
+			<para>For at begynde at redigere en brugers forumtilladelser, begynd med at indtaste brugerens brugernavn i tekstfeltet <guilabel>Find et medlem</guilabel>. Ønsker du at redigere de forumtilladelser, der vedrører den anonyme bruger, markér tekstfeltet <guilabel>Vælg anonym bruger</guilabel>. Klik på <guilabel>Send</guilabel> for at fortsætte.</para>
+
+			<figure id="img_acp_u_forum_permissions">
+				<title>Valg af fora til brugeres forumtilladelser</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="PNG" fileref="../images/admin_guide/users_forum_permissions.png"/>
+					</imageobject>
+					<caption>
+						<para>Valg af fora til at tildele forumtilladelser til brugere. I dette eksempel er underforaene "Katte" og "Hunde" (deres overordnede forum er "Kæledyr") valgt. Brugerens forumtilladelser for disse to fora redigeres/opdateres.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+
+			<para>Du bør nu kunne tildele forumtilladelser til brugeren. Du har nu to måder at tildele forumtilladelser til brugeren på: du kan enten vælge forummet/forummene manuelt med en flervalgsmenu, eller vælge et bestemt forum eller kategori, sammen med dets tilhørende underfora. Klik på <guilabel>Send</guilabel> for at fortsætte med det/de forum(-er), du har valgt. Du bør nu mødes med skærmbilledet <guilabel>Indstil tilladelser</guilabel>, hvor du faktisk kan tildele forumtilladelserne til brugeren. Du bør nu vælge hvilken slags forumtilladelser du vil redigere nu; du kan enten redigere brugerens <guimenuitem>Forumtilladelser</guimenuitem> eller <guimenuitem>Redaktørtilladelser</guimenuitem>. Klik på <guilabel>Gå</guilabel>. Du bør nu kunne vælge den rolle, der skal tildeles brugeren for hvert forum, du tidligere valgte. Ønsker du at konfigurere disse tilladelser mere detaljeret, klik på linket <guilabel>Avancerede tilladelser</guilabel>, placeret i det relevante felt for forumtilladelser, og opdater derefter tilladelserne tilsvarende. Når du er færdig, klik på <guilabel>Anvend alle tilladelser</guilabel>, hvis du er i området <guilabel>Avancerede tilladelser</guilabel>, eller klik på <guilabel>Anvend alle tilladelser</guilabel> nederst på siden for at indsende alle dine ændringer på siden.</para>
+		</section>
+
+		<section id="acp_users_custom_profile_fields">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Brugerdefinerede profilfelter</title>
+
+			<para>En af de mange nye funktioner i phpBB3, der forbedrer brugeroplevelsen, er <guilabel>Brugerdefinerede profilfelter</guilabel>. Tidligere kunne brugere kun udfylde oplysninger i de almindelige profilfelter, der blev vist; administratorer måtte tilføje MODifikationer til deres board for at imødekomme deres individuelle behov. I phpBB3 kan administratorer dog komfortabelt oprette brugerdefinerede profilfelter via <acronym>ACP</acronym>.</para>
+
+			<para>For at oprette dit brugerdefinerede profilfelt, log ind på din ACP. Klik på fanen <guimenuitem>Brugere og grupper</guimenuitem>, og find derefter linket <guimenuitem>Brugerdefinerede profilfelter</guimenuitem> i venstre menu at klikke på. Du bør nu være på den rette side. Find det tomme tekstfelt under overskrifterne for brugerdefinerede profilfelter, som er ved siden af en dropdownmenu og en knap <guilabel>Opret nyt felt</guilabel>. Indtast først navnet på det nye profilfelt, du vil oprette, i det tomme tekstfelt. Vælg derefter felttypen i dropdownmenuen. Tilgængelige muligheder er <guimenuitem>Tal</guimenuitem>, <guimenuitem>Enkelt tekstfelt</guimenuitem>, <guimenuitem>Tekstboks</guimenuitem>, <guimenuitem>Boolesk (Ja/Nej)</guimenuitem>, <guimenuitem>Dropdownboks</guimenuitem> og <guimenuitem>Dato</guimenuitem>. Klik på knappen <guilabel>Opret nyt felt</guilabel> for at fortsætte. Følgende beskriver hver af de tre sæt indstillinger, det nye brugerdefinerede profilfelt vil have.
+				<itemizedlist>
+					<title>Tilføj profilfelt</title>
+					<listitem><para><guilabel>Felttype:</guilabel> Dette er den slags felt, dit nye brugerdefinerede profilfelt er. Det betyder, at det kan bestå af tal, datoer osv. Dette bør allerede være angivet.</para></listitem>
+					<listitem><para><guilabel>Feltidentifikation:</guilabel> Dette er navnet på profilfeltet. Dette navn identificerer profilfeltet i phpBB3's database og skabeloner.</para></listitem>
+					<listitem><para><guilabel>Vis profilfelt:</guilabel> Denne indstilling bestemmer om det nye profilfelt overhovedet vises. Profilfeltet vises på emnesider, profiler og medlemslisten, hvis dette er aktiveret i belastningsindstillingerne. Kun visning i brugerens profil er aktiveret som standard.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Synlighedsindstilling</title>
+					<listitem><para><guilabel>Vis i brugerkontrolpanelet:</guilabel> Denne indstilling bestemmer om dine brugere kan ændre profilfeltet i <acronym>UCP</acronym>.</para></listitem>
+					<listitem><para><guilabel>Vis på tilmeldingsside:</guilabel> Er denne indstilling aktiveret, vises profilfeltet på tilmeldingssiden. Brugere kan ændre dette felt i <acronym>UCP</acronym>.</para></listitem>
+					<listitem><para><guilabel>Påkrævet felt:</guilabel> Denne indstilling bestemmer om du ønsker at tvinge dine brugere til at udfylde dette profilfelt. Dette vil vise profilfeltet ved tilmelding og i brugerkontrolpanelet.</para></listitem>
+					<listitem><para><guilabel>Skjul profilfelt:</guilabel> Er denne indstilling aktiveret, vises dette profilfelt kun i brugeres profiler. Kun administratorer og redaktører kan i så fald se eller udfylde dette felt.</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Sprogspecifikke indstillinger</title>
+					<listitem><para><guilabel>Feltnavn/titel vist til brugeren:</guilabel> Dette er det egentlige navn på profilfeltet, der vises til dine brugere.</para></listitem>
+					<listitem><para><guilabel>Feltbeskrivelse:</guilabel> Dette er en simpel beskrivelse/forklaring til dine brugere, der udfylder dette felt.</para></listitem>
+				</itemizedlist>
+			</para>
+
+			<para>Når du er færdig med ovenstående indstillinger, klik på knappen <guilabel>Felttypespecifikke indstillinger</guilabel> for at fortsætte. Udfyld de relevante indstillinger efter ønske, klik derefter på knappen <guilabel>Næste</guilabel>. Blev dit nye brugerdefinerede profilfelt oprettet med succes, bør du mødes med en grøn succesbesked. Tillykke!</para>
+		</section>
+
+		<section id="acp_user_ranks">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Administration af rangordninger</title>
+
+			<para>Rangordninger er specielle titler, der kan tildeles forumbrugere. Som administrator er det op til dig at oprette og administrere de rangordninger, der findes på dit board. De faktiske navne på rangordningerne bestemmer du helt selv; det er som regel bedst at skræddersy dem til det primære formål med dit board.</para>
+
+			<note>
+				<para>Når du tildeler en speciel rangnavn til en bruger, husk at der ikke følger nogen tilladelser med. Opretter du f.eks. en rang "Supportredaktør" og tildeler den til en bruger, får denne bruger ikke automatisk redaktørtilladelser. Du skal tildele brugeren de specielle tilladelser separat.</para>
+			</note>
+
+			<para>For at administrere dit boards rangordninger, log ind på din <acronym>ACP</acronym>, klik på fanen <guimenuitem>Brugere og grupper</guimenuitem>, og klik derefter på linket <guimenuitem>Administrer rangordninger</guimenuitem> i venstre menu. Du bør nu være på siden til administration af rangordninger. Alle aktuelt eksisterende rangordninger vises.</para>
+
+			<para>For at oprette en ny rang, klik på knappen <guilabel>Tilføj ny rang</guilabel> under den eksisterende liste over rangordninger. Udfyld det første felt <guilabel>Rangtitel</guilabel> med navnet på rangen. Har du uploadet et billede, du vil tilknytte rangen, til mappen <filename>/images/ranks/</filename>, kan du vælge et billede fra dropdownmenuen. Den sidste indstilling, du kan angive, er om du ønsker at rangen skal være en "speciel" rang. Specielle rangordninger er rangordninger, administratorer tildeler brugere; de tildeles ikke automatisk til brugere baseret på deres indlægsantal. Valgte du <guilabel>Nej</guilabel>, kan du udfylde feltet <guilabel>Minimumsantal indlæg</guilabel> med det minimale antal indlæg, dine brugere skal have, før de tildeles denne rang. Når du er færdig, klik på knappen <guilabel>Send</guilabel> for at tilføje denne nye rang.</para>
+
+			<para>For at redigere en rangs aktuelle indstillinger, find rangens række, og klik derefter på dens "Rediger"-knap i kolonnen <guilabel>Handling</guilabel>.</para>
+
+			<para>For at slette en rang, find rangens række, og klik derefter på dens "Slet"-knap i kolonnen <guilabel>Handling</guilabel>. Du skal derefter bekræfte handlingen ved at klikke på knappen <guilabel>Ja</guilabel>, når du bliver spurgt.</para>
+		</section>
+
+		<section id="acp_user_security">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>Claude</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Brugersikkerhed</title>
+			<para>Ud over at kunne administrere dine brugere på dit board, er det også vigtigt at kunne beskytte dit board og forhindre uønskede tilmeldinger og brugere. Sektionen <guilabel>Brugersikkerhed</guilabel> giver dig mulighed for at administrere udelukkede e-mails, IP'er og brugernavne, samt administrere ikke-tilladte brugernavne og oprydning af brugere. Udelukkede brugere, der udviser oplysninger, der matcher nogen af disse udelukkelsesregler, kan ikke tilgå nogen del af dit board.</para>
+
+			<section id="acp_ban_emails">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Udeluk e-mails</title>
+				<para>Nogle gange er det nødvendigt at udelukke e-mails for at forhindre uønskede tilmeldinger. Der kan være bestemte brugere eller spambots, der bruger e-mails, du er opmærksom på. Her, i sektionen <guimenuitem>Udeluk e-mails</guimenuitem>, kan du gøre dette. Du kan styre hvilke e-mailadresser der udelukkes, hvor længe en udelukkelse er i kraft, samt den/de angivne årsag(er) til udelukkelsen.</para>
+
+				<para>For at udelukke eller undtage en eller flere e-mailadresser, udfyld formularen <guilabel>Udeluk en eller flere e-mailadresser</guilabel>. Når du er færdig med dine ændringer, klik på <guilabel>Send</guilabel>.</para>
+				<itemizedlist>
+					<title>Udeluk en eller flere e-mailadresser</title>
+					<listitem><para><guilabel>E-mailadresse</guilabel>: Dette tekstfelt bør indeholde alle de e-mails, du ønsker at udelukke under en enkelt regel. Ønsker du at udelukke mere end én e-mail på én gang, placér hver e-mail på sin egen linje. Du kan også bruge jokertegn (*) til at matche delvise adresser.</para></listitem>
+					<listitem><para><guilabel>Udelukkelseslængde</guilabel>: Dette er, hvor længe du ønsker at udelukke e-mailadressen/-adresserne. De tilgængelige muligheder inkluderer nogle almindelige varigheder, såsom antal timer eller dage. Du kan også angive en dato, som e-mailadressen/-adresserne udelukkes indtil; for at angive dette, vælg <guilabel>Indtil -></guilabel> fra dropdownmenuen, og angiv en dato i formatet "ÅÅÅÅ-MM-DD" i tekstfeltet placeret under dropdownmenuen.</para></listitem>
+					<listitem><para><guilabel>Undtag fra udelukkelse</guilabel>: Du bør aktivere dette, ønsker du at undtage den angivne e-mailadresse fra alle nuværende udelukkelser.</para></listitem>
+					<listitem><para><guilabel>Årsag til udelukkelse</guilabel>: Dette er en kort årsag til hvorfor du ønsker at udelukke e-mailadressen/-adresserne. Dette er valgfrit og kan hjælpe dig med at huske i fremtiden, hvorfor du udelukkede e-mailadressen/-adresserne.</para></listitem>
+					<listitem><para><guilabel>Årsag vist til den udelukkede</guilabel>: Dette er en kort forklaring, der faktisk vises til brugerne med den udelukkede e-mailadresse/-adresser. Dette kan være anderledes end ovenstående <guilabel>Årsag til udelukkelse</guilabel>.</para></listitem>
+				</itemizedlist>
+
+				<para>Ud over at tilføje e-mails der skal udelukkes, kan du også ophæve udelukkelsen af eller fjerne undtagelser for e-mailadresser. For at ophæve udelukkelsen af eller undtage en eller flere e-mailadresser fra udelukkelser, udfyld formularen <guilabel>Ophæv udelukkelse eller undtagelse for e-mails</guilabel>. Når du er færdig, klik på <guilabel>Send</guilabel>.</para>
+				<itemizedlist>
+					<title>Ophæv udelukkelse eller undtagelse for e-mails</title>
+					<listitem><para><guilabel>E-mailadresse</guilabel>: Denne flervalgsmenu viser alle aktuelt udelukkede e-mails. Vælg den e-mail, du ønsker at ophæve udelukkelsen af eller undtage, ved at klikke på e-mailen i flervalgsmenuen. <tip><para>For at vælge mere end én e-mailadresse skal du bruge den rette kombination af mus- og tastaturkommandoer. Den mest almindelige måde at gøre dette på er at trykke på og holde CTRL-tasten på dit tastatur nede, og derefter klikke på alle de e-mails, du ønsker at vælge. Slip CTRL-tasten, når du er færdig.</para></tip></para></listitem>
+					<listitem><para><guilabel>Udelukkelseslængde</guilabel>: Dette er en ikke-redigerbar infoboks, der viser udelukkelsens længde for den aktuelt valgte e-mail. Er mere end én e-mailadresse valgt, vises kun en af udelukkelseslængderne.</para></listitem>
+					<listitem><para><guilabel>Årsag til udelukkelse</guilabel>: Dette er en ikke-redigerbar infoboks, der viser årsagen til udelukkelsen for den aktuelt valgte e-mail. Er mere end én e-mailadresse valgt, vises kun en af udelukkelsesårsagerne.</para></listitem>
+					<listitem><para><guilabel>Årsag vist til den udelukkede</guilabel>: Dette er en ikke-redigerbar infoboks, der viser den årsag, der vises til den udelukkede, for den aktuelt valgte e-mail. Er mere end én e-mailadresse valgt, vises kun en af de viste udelukkelsesårsager.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_ban_ips">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Udeluk IP'er</title>
+				<para>Nogle gange er det nødvendigt at udelukke <glossterm>IP-adresser</glossterm> eller værtsnavne for at forhindre uønskede brugere. Der kan være bestemte brugere eller spambots, der bruger IP'er eller værtsnavne, du er opmærksom på. Her, i sektionen <guimenuitem>Udeluk IP'er</guimenuitem>, kan du gøre dette. Du kan styre hvilke IP-adresser eller værtsnavne der udelukkes, hvor længe en udelukkelse er i kraft, samt den/de angivne årsag(er) til udelukkelsen.</para>
+
+				<para>For at udelukke eller undtage en eller flere IP-adresser og/eller værtsnavne, udfyld formularen <guilabel>Udeluk en eller flere e-mailadresser</guilabel>. Når du er færdig med dine ændringer, klik på <guilabel>Send</guilabel>.</para>
+				<itemizedlist>
+					<title>Udeluk en eller flere IP'er</title>
+					<listitem><para><guilabel>IP-adresser eller værtsnavne</guilabel>: Dette tekstfelt bør indeholde alle de IP-adresser og/eller værtsnavne, du ønsker at udelukke under en enkelt regel. Ønsker du at udelukke mere end én IP-adresse og/eller værtsnavn på én gang, placér hver IP-adresse og/eller værtsnavn på sin egen linje. Du kan også bruge jokertegn (*) til at matche delvise adresser.</para></listitem>
+					<listitem><para><guilabel>Udelukkelseslængde</guilabel>: Dette er, hvor længe du ønsker at udelukke IP-adressen/-adresserne og/eller værtsnavnet/-navnene. De tilgængelige muligheder inkluderer nogle almindelige varigheder, såsom antal timer eller dage. Du kan også angive en dato, som IP-adressen/-adresserne og/eller værtsnavnet/-navnene udelukkes indtil; for at angive dette, vælg <guilabel>Indtil -></guilabel> fra dropdownmenuen, og angiv en dato i formatet "ÅÅÅÅ-MM-DD" i tekstfeltet placeret under dropdownmenuen.</para></listitem>
+					<listitem><para><guilabel>Undtag fra udelukkelse</guilabel>: Du bør aktivere dette, ønsker du at undtage den/de angivne IP-adresse(r) og/eller værtsnavn(e) fra alle nuværende udelukkelser.</para></listitem>
+					<listitem><para><guilabel>Årsag til udelukkelse</guilabel>: Dette er en kort årsag til hvorfor du ønsker at udelukke IP-adressen/-adresserne og/eller værtsnavnet/-navnene. Dette er valgfrit og kan hjælpe dig med at huske i fremtiden, hvorfor du udelukkede IP-adressen/-adresserne og/eller værtsnavnet/-navnene.</para></listitem>
+					<listitem><para><guilabel>Årsag vist til den udelukkede</guilabel>: Dette er en kort forklaring, der faktisk vises til brugerne med den udelukkede IP-adresse/-adresser og/eller værtsnavn(e). Dette kan være anderledes end ovenstående <guilabel>Årsag til udelukkelse</guilabel>.</para></listitem>
+				</itemizedlist>
+
+				<para>Ud over at tilføje IP-adresse(r) og/eller værtsnavn(e) der skal udelukkes, kan du også ophæve udelukkelsen af eller fjerne undtagelser for IP-adresse(r) og/eller værtsnavn(e). For at ophæve udelukkelsen af eller undtage en eller flere IP-adresse(r) og/eller værtsnavn(e) fra udelukkelser, udfyld formularen <guilabel>Ophæv udelukkelse eller undtagelse for IP'er</guilabel>. Når du er færdig, klik på <guilabel>Send</guilabel>.</para>
+				<itemizedlist>
+					<title>Ophæv udelukkelse eller undtagelse for IP'er</title>
+					<listitem><para><guilabel>IP-adresser eller værtsnavne</guilabel>: Denne flervalgsmenu viser alle aktuelt udelukkede IP-adresse(r) og/eller værtsnavn(e). Vælg den/de IP-adresse(r) og/eller værtsnavn(e), du ønsker at ophæve udelukkelsen af eller undtage, ved at klikke på IP-adressen/-adresserne og/eller værtsnavnet/-navnene i flervalgsmenuen. <tip><para>For at vælge mere end én IP-adresse og/eller værtsnavn skal du bruge den rette kombination af mus- og tastaturkommandoer. Den mest almindelige måde at gøre dette på er at trykke på og holde CTRL-tasten på dit tastatur nede, og derefter klikke på alle de IP-adresse(r) og/eller værtsnavn(e), du ønsker at vælge. Slip CTRL-tasten, når du er færdig.</para></tip></para></listitem>
+					<listitem><para><guilabel>Udelukkelseslængde</guilabel>: Dette er en ikke-redigerbar infoboks, der viser udelukkelsens længde for den aktuelt valgte IP-adresse eller værtsnavn. Er mere end én IP-adresse eller værtsnavn valgt, vises kun en af udelukkelseslængderne.</para></listitem>
+					<listitem><para><guilabel>Årsag til udelukkelse</guilabel>: Dette er en ikke-redigerbar infoboks, der viser årsagen til udelukkelsen for den aktuelt valgte IP-adresse eller værtsnavn. Er mere end én IP-adresse eller værtsnavn valgt, vises kun en af udelukkelsesårsagerne.</para></listitem>
+					<listitem><para><guilabel>Årsag vist til den udelukkede</guilabel>: Dette er en ikke-redigerbar infoboks, der viser den årsag, der vises til den udelukkede, for den aktuelt valgte IP-adresse eller værtsnavn. Er mere end én IP-adresse eller værtsnavn valgt, vises kun en af de viste udelukkelsesårsager.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_ban_users">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Udeluk brugere</title>
+				<para>Støder du på problematiske brugere på dit board, kan du blive nødt til at udelukke dem. På siden <guimenuitem>Udeluk brugernavne</guimenuitem> kan du gøre netop dette. På denne side kan du administrere alle udelukkede brugernavne.</para>
+
+				<para>For at udelukke eller undtage en eller flere brugere, udfyld formularen <guilabel>Udeluk en eller flere brugere</guilabel>. Når du er færdig med dine ændringer, klik på <guilabel>Send</guilabel>.</para>
+				<itemizedlist>
+					<title>Udeluk et eller flere brugernavne</title>
+					<listitem><para><guilabel>Brugernavn</guilabel>: Dette tekstfelt bør indeholde alle de brugernavne, du ønsker at udelukke under en enkelt regel. Ønsker du at udelukke mere end ét brugernavn på én gang, placér hvert brugernavn på sin egen linje. Du kan også bruge jokertegn (*) til delvist at matche brugernavne.</para></listitem>
+					<listitem><para><guilabel>Udelukkelseslængde</guilabel>: Dette er, hvor længe du ønsker at udelukke brugernavnet/-navnene. De tilgængelige muligheder inkluderer nogle almindelige varigheder, såsom antal timer eller dage. Du kan også angive en dato, som brugernavnet/-navnene udelukkes indtil; for at angive dette, vælg <guilabel>Indtil -></guilabel> fra dropdownmenuen, og angiv en dato i formatet "ÅÅÅÅ-MM-DD" i tekstfeltet placeret under dropdownmenuen.</para></listitem>
+					<listitem><para><guilabel>Undtag fra udelukkelse</guilabel>: Du bør aktivere dette, ønsker du at undtage det/de angivne brugernavn(e) fra alle nuværende udelukkelser.</para></listitem>
+					<listitem><para><guilabel>Årsag til udelukkelse</guilabel>: Dette er en kort årsag til hvorfor du ønsker at udelukke brugernavnet/-navnene. Dette er valgfrit og kan hjælpe dig med at huske i fremtiden, hvorfor du udelukkede brugeren/brugerne.</para></listitem>
+					<listitem><para><guilabel>Årsag vist til den udelukkede</guilabel>: Dette er en kort forklaring, der faktisk vises til den/de udelukkede bruger(e). Dette kan være anderledes end ovenstående <guilabel>Årsag til udelukkelse</guilabel>.</para></listitem>
+				</itemizedlist>
+
+				<para>Ud over at tilføje brugere, der skal udelukkes, kan du også ophæve udelukkelsen af eller fjerne undtagelser for brugernavne. For at ophæve udelukkelsen af eller undtage en eller flere brugere fra udelukkelser, udfyld formularen <guilabel>Ophæv udelukkelse eller undtagelse for brugernavne</guilabel>. Når du er færdig, klik på <guilabel>Send</guilabel>.</para>
+				<itemizedlist>
+					<title>Ophæv udelukkelse eller undtagelse for brugernavne</title>
+					<listitem><para><guilabel>Brugernavn</guilabel>: Denne flervalgsmenu viser alle aktuelt udelukkede brugernavne. Vælg det/de brugernavn(e), du ønsker at ophæve udelukkelsen af eller undtage, ved at klikke på brugernavnet/-navnene i flervalgsmenuen. <tip><para>For at vælge mere end ét brugernavn skal du bruge den rette kombination af mus- og tastaturkommandoer. Den mest almindelige måde at gøre dette på er at trykke på og holde CTRL-tasten på dit tastatur nede, og derefter klikke på alle de brugernavne, du ønsker at vælge. Slip CTRL-tasten, når du er færdig.</para></tip></para></listitem>
+					<listitem><para><guilabel>Udelukkelseslængde</guilabel>: Dette er en ikke-redigerbar infoboks, der viser udelukkelsens længde for det aktuelt valgte brugernavn. Er mere end ét brugernavn valgt, vises kun en af udelukkelseslængderne.</para></listitem>
+					<listitem><para><guilabel>Årsag til udelukkelse</guilabel>: Dette er en ikke-redigerbar infoboks, der viser årsagen til udelukkelsen for det aktuelt valgte brugernavn. Er mere end ét brugernavn valgt, vises kun en af udelukkelsesårsagerne.</para></listitem>
+					<listitem><para><guilabel>Årsag vist til den udelukkede</guilabel>: Dette er en ikke-redigerbar infoboks, der viser den årsag, der vises til den udelukkede, for det aktuelt valgte brugernavn. Er mere end ét brugernavn valgt, vises kun en af de viste udelukkelsesårsager.</para></listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="acp_disallow_users">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Ikke-tilladte brugernavne</title>
+
+				<para>I phpBB3 er det også muligt at forhindre tilmelding af bestemte brugernavne, der matcher ethvert brugernavn, du konfigurerer. (Dette er nyttigt, ønsker du at forhindre brugere i at tilmelde sig med brugernavne, der kan forveksles med et vigtigt boardmedlem.) For at administrere ikke-tilladte brugernavne, gå til ACP, klik på fanen <guimenuitem>Brugere og grupper</guimenuitem>, og klik derefter på <guimenuitem>Ikke-tilladte brugernavne</guimenuitem>, som findes i sidenavigationsmenuen.</para>
+
+				<para>For at tilføje et ikke-tilladt brugernavn, find formularen <guilabel>Tilføj et ikke-tilladt brugernavn</guilabel>, og indtast derefter brugernavnet i tekstfeltet mærket <guilabel>Brugernavn</guilabel>. <tip><para>Du kan bruge jokertegn (*) til at matche ethvert tegn. For eksempel kan du, for at forhindre ethvert brugernavn der matcher "JensJensen", skrive "Jens*". Dette forhindrer alle brugere i at tilmelde et brugernavn, der begynder med "Jens".</para></tip> Når du er færdig, klik på <guilabel>Send</guilabel>.</para>
+
+				<para>For at fjerne et ikke-tilladt brugernavn, find formularen <guilabel>Fjern et ikke-tilladt brugernavn</guilabel>. Vælg det ikke-tilladte brugernavn, du ønsker at fjerne, fra dropdownmenuen <guilabel>Brugernavn</guilabel>. Klik på <guilabel>Send</guilabel> for at fjerne det valgte ikke-tilladte brugernavn.</para>
+			</section>
+
+			<section id="acp_prune_users">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>Claude</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Beskær brugere</title>
+
+				<para>I phpBB3 er det muligt at beskære brugere fra dit board, for at beholde kun dine aktive medlemmer. Du kan også slette en hel brugerkonto, sammen med alt hvad der er tilknyttet brugerkontoen. <guimenuitem>Beskær brugere</guimenuitem> giver dig mulighed for at beskære og deaktivere brugerkonti på dit board efter indlægsantal, sidst besøgte dato med mere.</para>
+
+				<para>For at starte beskæringsprocessen, find formularen <guilabel>Beskær brugere</guilabel>. Du kan beskære brugere baseret på enhver kombination af de tilgængelige kriterier. (Med andre ord, udfyld hvert felt i formularen, der gælder for den/de bruger(e), du målretter mod beskæring.) Når du er klar til at beskære brugere, der matcher dine angivne indstillinger, klik på <guilabel>Send</guilabel>.</para>
+
+				<itemizedlist>
+					<title>Beskær brugere</title>
+					<listitem><para><guilabel>Brugernavn</guilabel>: Indtast et brugernavn, du ønsker beskåret. Du kan bruge jokertegn (*) til at beskære brugere, hvis brugernavn matcher det angivne mønster.</para></listitem>
+					<listitem><para><guilabel>E-mail</guilabel>: Den e-mail, du ønsker beskåret. Du kan bruge jokertegn (*) til at beskære brugere, hvis e-mailadresse matcher det angivne mønster.</para></listitem>
+					<listitem><para><guilabel>Tilmeldt</guilabel>: Du kan også beskære brugere baseret på deres tilmeldingsdato. For at beskære brugere, der tilmeldte sig før en bestemt dato (vær forsigtig med denne indstilling), vælg <guilabel>Før</guilabel> fra dropdownmenuen. For at beskære brugere, der tilmeldte sig efter en bestemt dato, vælg <guilabel>Efter</guilabel> fra dropdownmenuen. Datoen skal være i formatet ÅÅÅÅ-MM-DD.</para></listitem>
+					<listitem><para><guilabel>Senest aktiv</guilabel>: Du kan også beskære brugere baseret på sidste gang, de var aktive. For at beskære brugere, der senest var aktive før en bestemt dato (vær forsigtig med denne indstilling), vælg <guilabel>Før</guilabel> fra dropdownmenuen. For at beskære brugere, der senest var aktive efter en bestemt dato (nyttigt til at beskære brugere, der er forsvundet fra dit board), vælg <guilabel>Efter</guilabel> fra dropdownmenuen. Datoen skal være i formatet ÅÅÅÅ-MM-DD.</para></listitem>
+					<listitem><para><guilabel>Indlæg</guilabel>: Du kan også beskære brugere baseret på deres indlægsantal. Kriteriet for indlægsantal kan være over, under eller lig med et angivet tal. Værdien du angiver, skal være et positivt heltal.</para></listitem>
+					<listitem><para><guilabel>Beskær brugere</guilabel>: Brugernavnene på de brugere, du ønsker at beskære. Hvert brugernavn, du ønsker at beskære, bør stå på sin egen linje. Du kan også bruge jokertegn (*) i brugernavnsmønstre.</para></listitem>
+					<listitem><para><guilabel>Slet beskårne brugeres indlæg</guilabel>: Når brugere fjernes (faktisk slettes og ikke blot deaktiveres), skal du vælge, hvad der skal ske med deres indlæg. For at slette alle indlæg, der tilhører den/de beskårne bruger(e), vælg radioknappen mærket <guilabel>Ja</guilabel>. Vælg ellers <guilabel>Nej</guilabel>, og den/de beskårne brugers/brugeres indlæg forbliver på boardet, urørt.</para></listitem>
+					<listitem><para><guilabel>Deaktivér eller slet</guilabel>: Du skal vælge, om du ønsker at deaktivere den/de beskårne brugers/brugeres konto/konti, eller fuldstændigt slette og fjerne dem fra boardets database.</para></listitem>
+				</itemizedlist>
+
+				<warning>
+					<para>Beskæring af brugere kan ikke fortrydes! Vær forsigtig med de kriterier, du vælger, når du beskærer brugere.</para>
+				</warning>
+			</section>
+		</section>
+	</section>
 </chapter>
