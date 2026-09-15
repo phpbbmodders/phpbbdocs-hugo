@@ -16,3 +16,7 @@ plans live under `docs/TODO/`; this file stays a concise summary.
   chapter/language combinations swept and clean as of 2026-09-15; kept as
   the reference method for re-auditing after future catalog/hand-file
   changes, not an open item.
+- [Sphinx dev-docs pipeline: Phase 0 spike](TODO/todo-sphinx-devdocs-spike.md)
+  — proved the proposed Sphinx-native gettext pipeline end to end on one
+  real file; recommends proceeding, with a concrete list of what a full
+  transform still needs before real rollout.
