@@ -12,6 +12,7 @@ plans live under `docs/TODO/`; this file stays a concise summary.
   remaining phpBB language packs (English, Danish, French, and German are
   done) from highest to lowest priority for the next translation, with the
   reasoning behind each tier.
-- [PO round-trip content audit](TODO/todo-po-roundtrip-audit.md) — sweep
-  every chapter/language PO catalog against its hand-maintained XML now
-  that the build tooling is trustworthy; 1 of 35 combinations done.
+- [PO round-trip content audit](TODO/todo-po-roundtrip-audit.md) — all 35
+  chapter/language combinations swept and clean as of 2026-09-15; kept as
+  the reference method for re-auditing after future catalog/hand-file
+  changes, not an open item.

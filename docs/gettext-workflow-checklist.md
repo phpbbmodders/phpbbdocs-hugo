@@ -29,9 +29,10 @@ investigation and fixes on 2026-09-15 (see
       noise), then diff every `<para>` against the current hand file —
       not just `xmllint` validity, which corrupted or stale output
       still passes.
-  - `glossary.xml` needs a **term-name-keyed** comparison, not a
-    positional one — languages may deliberately resort it
-    alphabetically by the translated term (Danish does).
+  - `glossary.xml` needs `translations/align_glossary_by_term.py`
+    (term-name-keyed, not positional) instead — languages may
+    deliberately resort it alphabetically by the translated term
+    (Danish does).
 - [ ] If there's a real mismatch, don't assume either side is right by
       default. Check which one is actually correct (a native-language
       read, or cross-check against the real phpBB language pack) and
