@@ -94,10 +94,19 @@ scratch.
 These don't block the Sphinx-native decision above, but remain real,
 separate problems for whenever full rollout is scoped:
 
-- **CSV-table content-loss bug** (13 files) — real, upstream-caused,
-  currently masked by the Pandoc path tolerating it silently. Needs its
-  own fix script (the POC's `fix_csv_table_headers.py` was verified
-  working but never committed — this spike didn't touch it).
+- ~~**CSV-table content-loss bug** (13 files)~~ — **fixed.**
+  `fix_csv_table_headers.py` (repo root) is now a real, committed,
+  idempotent script, re-verified against the real upstream checkout
+  (52 headers across the same 13 files the original POC found) and
+  confirmed end-to-end: a real `sphinx-build` against the unfixed source
+  drops the table entirely (`ERROR: '|' expected after '"'`, 0
+  `<table>` elements in the output XML); against the fixed source, the
+  same build succeeds cleanly with the table's real content present.
+  Not yet wired into any pipeline — `convert_dev_docs_to_docbook.sh`
+  doesn't need it (confirmed: Pandoc already tolerates the malformed
+  headers fine, this bug is Sphinx-specific), so it stays a standalone
+  tool until an actual Sphinx-based pipeline entry point exists to call
+  it from.
 - **`translations.sh` has no `development` family support.** Its
   `lib.py` metadata schema already anticipates one (`record-source`/
   `read-source` accept `family=development`), but the PO-path/
