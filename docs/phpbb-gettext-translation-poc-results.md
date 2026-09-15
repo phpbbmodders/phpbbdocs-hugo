@@ -488,15 +488,19 @@ What's left before Phase A/B/D can be called fully "done":
 1. Per-tag po4a wrap overrides, tested for real (or: drop po4a in
    favor of itstool and solve *its* diff-noise problem instead —
    still an open call, not made here).
-2. A real, production-appropriate `development/conf.py` — resolve
-   what to do about the Symfony extensions phpBB's own config
-   declares but current content doesn't exercise.
-3. Promote `fix_csv_table_headers.py` from POC scratch into this
-   project's actual pipeline (its own script, run before Sphinx,
-   alongside `convert_dev_docs_to_docbook.sh`'s existing
-   Pandoc-output fixups) — the fix itself is done and verified;
-   what's left is wiring it in for real, only worth doing once/if
-   Sphinx is the adopted path.
+2. ~~A real, production-appropriate `development/conf.py`~~ —
+   **resolved 2026-09-15**, see `docs/TODO/todo-sphinx-devdocs-spike.md`:
+   grepped all 55 real `.rst` files for every role/directive the
+   declared Symfony/phpdomain extensions provide, found zero usage,
+   so they're dropped entirely rather than vendored.
+3. ~~Promote `fix_csv_table_headers.py` from POC scratch into this
+   project's actual pipeline~~ — **the script is now real and
+   committed** (repo root), re-verified against the actual upstream
+   checkout and confirmed end-to-end against a real `sphinx-build`
+   (table silently dropped without the fix, present with it). Not yet
+   wired into any pipeline entry point, since none exists yet that
+   needs it — `convert_dev_docs_to_docbook.sh`'s Pandoc path doesn't
+   (confirmed: Pandoc already tolerates the malformed headers fine).
 4. Eyes-on review of the 47-file full-tree transform output beyond
    "it didn't crash" — `note`/`table`/code/list/heading templates are
    now in place and spot-verified on a few files, but a real
