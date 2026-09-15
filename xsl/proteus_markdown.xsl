@@ -58,6 +58,86 @@
 	</xsl:if>
 </xsl:template>
 
+<!-- Collapses whitespace runs in a text node: a run with no newline in
+     it collapses to a single space; a run that DOES contain a newline
+     collapses to a single bare newline instead of swallowing it into
+     a space. xsl:strip-space only drops whitespace-only text nodes
+     between elements, not whitespace inside one that has real content
+     — so a <para> whose source is itself line-wrapped (common once
+     translated content round-trips through a PO-based pipeline rather
+     than staying hand-authored as dense single-line XML) would
+     otherwise carry that line-wrapping's leading spaces/tabs straight
+     into the generated Markdown. Markdown treats a 4-space indent as
+     an indented code block, so the *symptom* is prose (and any links
+     inside it) rendering as an unstyled, unlinked black code box
+     instead of a normal paragraph.
+
+     Preserving the newline itself (rather than flattening it to a
+     space the way proteus_hugo_devdocs.xsl does — see that file's
+     header comment for the original writeup this was ported from)
+     matters here specifically: unlike Pandoc's devdocs output, this
+     grammar lets a <para> directly contain a nested block-level child
+     (<itemizedlist>, <note>, etc. — see e.g. the "General Options"
+     paragraph in admin_guide.xml, whose intro sentence is followed by
+     a nested <itemizedlist> on the next source line). A bare '\n' with
+     no leading spaces after it is enough to fix the original bug
+     (Markdown's code-block trigger is about a line STARTING with 4+
+     spaces, not about a lone line break in the middle of a paragraph)
+     while keeping that block child starting on its own line instead
+     of getting run into the preceding sentence as if it read
+     "...on your board. - Allow Mass PMs:...". -->
+<xsl:template match="text()">
+	<xsl:variable name="tabs-cr-as-spaces" select="translate(., '&#9;&#13;', '  ')"/>
+	<xsl:variable name="newline-runs-collapsed">
+		<xsl:call-template name="collapse-newline-adjacent-space">
+			<xsl:with-param name="text" select="$tabs-cr-as-spaces"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:call-template name="collapse-whitespace">
+		<xsl:with-param name="text" select="$newline-runs-collapsed"/>
+	</xsl:call-template>
+</xsl:template>
+
+<!-- Eats any space adjacent to a newline (either side) and collapses
+     consecutive newlines, so a run like "\n      " or "  \n\n  "
+     reduces to a single bare "\n" before the space-only collapse
+     below ever sees it. -->
+<xsl:template name="collapse-newline-adjacent-space">
+	<xsl:param name="text"/>
+	<xsl:choose>
+		<xsl:when test="contains($text, ' &#10;')">
+			<xsl:call-template name="collapse-newline-adjacent-space">
+				<xsl:with-param name="text" select="concat(substring-before($text, ' &#10;'), '&#10;', substring-after($text, ' &#10;'))"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:when test="contains($text, '&#10; ')">
+			<xsl:call-template name="collapse-newline-adjacent-space">
+				<xsl:with-param name="text" select="concat(substring-before($text, '&#10; '), '&#10;', substring-after($text, '&#10; '))"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:when test="contains($text, '&#10;&#10;')">
+			<xsl:call-template name="collapse-newline-adjacent-space">
+				<xsl:with-param name="text" select="concat(substring-before($text, '&#10;&#10;'), '&#10;', substring-after($text, '&#10;&#10;'))"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise><xsl:value-of select="$text"/></xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<!-- Collapses runs of plain spaces (no newlines left in them by this
+     point) down to a single space. -->
+<xsl:template name="collapse-whitespace">
+	<xsl:param name="text"/>
+	<xsl:choose>
+		<xsl:when test="contains($text, '  ')">
+			<xsl:call-template name="collapse-whitespace">
+				<xsl:with-param name="text" select="concat(substring-before($text, '  '), ' ', substring-after($text, '  '))"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise><xsl:value-of select="$text"/></xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
 <xsl:template match="para">
 	<xsl:apply-templates/>
 	<xsl:text>&#10;&#10;</xsl:text>
