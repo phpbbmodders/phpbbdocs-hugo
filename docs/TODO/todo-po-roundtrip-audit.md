@@ -57,27 +57,27 @@ now round-trip clean. Issues found and fixed along the way:
 
 ## Method
 
-For each `<lang>`/`<chapter>` pair (all chapters except `glossary.xml`):
+`./translations.sh audit <lang>` runs this directly — reconstructs every
+chapter, applies `preserve_authorship_metadata.py` so structural metadata
+doesn't create false positives, diffs paragraphs (or glossary terms, by
+name, for `glossary.xml`) against `content/<lang>/chapters/`, and reports
+real mismatches. It never writes to `content/`, unlike `build`, so it's
+safe to run any time.
 
-1. Build a `.mo` from the PO catalog: `msgfmt -o /tmp/x.mo <lang>/documentation/<chapter>.po`
-2. Reconstruct: `itstool -m /tmp/x.mo -l <lang> -o /tmp/x.xml content/en/chapters/<chapter>.xml` (use `translations/vendor/itstool-patched`, not the system `itstool`)
-3. Run `translations/preserve_authorship_metadata.py /tmp/x.xml content/<lang>/chapters/<chapter>.xml` so chapterinfo/abstract/sectioninfo don't produce false-positive noise
-4. Extract every `<para>` from both the reconstruction and the current hand file, normalize whitespace/quotes/entities (including `&quot;`/`&gt;`/`&lt;` — a real false-positive source if skipped), and diff them index-by-index
-5. For each real mismatch: check which side is actually correct (don't assume the PO catalog wins) and fix both to agree; if the divergence turns out to be a genuine structural choice (like French's deduplication above) rather than a translation gap, either restructure the hand file to match English (preferred, keeps the PO pipeline lossless) or document the exception clearly if restructuring isn't appropriate
-
-**`glossary.xml` needs `translations/align_glossary_by_term.py` instead**
-of the paragraph diff above — some languages (Danish) deliberately
-resort their glossary alphabetically by the *translated* term, so a
-positional comparison produces mass false positives. That script matches
-terms by name (exact match, or the English term appearing parenthetically
-in the target term) and fills PO gaps directly; run it with `--dry-run`
-first to review matches before saving.
+When a real mismatch turns up: check which side is actually correct
+(don't assume the PO catalog wins) and fix both to agree. If the
+divergence turns out to be a genuine structural choice (like French's
+deduplication above) rather than a translation gap, either restructure
+the hand file to match English (preferred, keeps the PO pipeline
+lossless) or document the exception clearly if restructuring isn't
+appropriate — see `translations/audit_roundtrip.py` and
+`translations/align_glossary_by_term.py` for the actual diff/matching
+logic if you need to extend either.
 
 ## Re-running this audit later
 
 This is a point-in-time sweep, not a standing guarantee — a future PO
-catalog update or hand-file edit could reintroduce a divergence. Re-run
-the method above (a short script looping every chapter/language pair,
-same shape as described here) whenever there's reason to suspect drift,
-such as before trusting `translations.sh build` output for a language
-that hasn't been checked recently.
+catalog update or hand-file edit could reintroduce a divergence. Run
+`./translations.sh audit <lang>` whenever there's reason to suspect
+drift, such as before trusting `translations.sh build` output for a
+language that hasn't been checked recently.

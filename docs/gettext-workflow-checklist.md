@@ -23,16 +23,10 @@ investigation and fixes on 2026-09-15 (see
 
 ## After running `build`, or after editing a PO catalog by hand
 
-- [ ] Round-trip verify: rebuild the chapter, run
-      `translations/preserve_authorship_metadata.py` against it (so
-      chapterinfo/abstract/sectioninfo don't create false-positive
-      noise), then diff every `<para>` against the current hand file —
-      not just `xmllint` validity, which corrupted or stale output
-      still passes.
-  - `glossary.xml` needs `translations/align_glossary_by_term.py`
-    (term-name-keyed, not positional) instead — languages may
-    deliberately resort it alphabetically by the translated term
-    (Danish does).
+- [ ] Round-trip verify: `./translations.sh audit <lang>` — not just
+      `xmllint`/`translations.sh check` validity, which corrupted or
+      stale content still passes. It's read-only and safe to run any
+      time (see `docs/TODO/todo-po-roundtrip-audit.md`).
 - [ ] If there's a real mismatch, don't assume either side is right by
       default. Check which one is actually correct (a native-language
       read, or cross-check against the real phpBB language pack) and
@@ -42,8 +36,12 @@ investigation and fixes on 2026-09-15 (see
       *both* the hand file and the PO catalog (nothing ever diverged,
       so nothing ever caught it), that's still a real bug — fix it, the
       same as a divergence.
-- [ ] Update `docs/TODO/todo-po-roundtrip-audit.md`'s progress table for
-      whichever chapter/language combination was just checked.
+- [ ] If a glossary term exists in the hand file but not the
+      reconstruction (or vice versa), check whether it's a genuine gap
+      or a permanent structural exception first — a term one language's
+      glossary has that English's doesn't (like Danish's `CAPTCHA`
+      entry) can never round-trip through PO, and that's expected, not
+      a bug to chase.
 
 ## Any time a rebuild touches `content/<lang>/chapters/`
 
