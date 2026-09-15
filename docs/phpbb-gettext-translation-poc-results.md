@@ -474,6 +474,11 @@ affected here. The reconstruction-vs-authoritative comparison needs to
 walk every translatable node, not just titles, to catch a gap this
 narrow.
 
+See `docs/gettext-workflow-checklist.md` for the standing checklist this
+investigation produced — the round-trip verification, authorship-metadata
+preservation, and attribution steps that should happen automatically
+whenever this pipeline is touched, not just when specifically asked for.
+
 ## What this report does not answer
 
 Per the plan's own scope: no production code changed, no

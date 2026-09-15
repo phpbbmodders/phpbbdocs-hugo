@@ -21,6 +21,11 @@
 #
 # Canonical PO catalogs live in the sibling phpbbdocs-languages repo,
 # resolved via translation.conf (LANGUAGES_REPO env var overrides it).
+#
+# Before/after touching this pipeline (build output, PO catalogs, a
+# manual itstool invocation), see docs/gettext-workflow-checklist.md —
+# round-trip verification, authorship-metadata preservation, and
+# attribution steps that should happen every time, not just when asked.
 set -Eeuo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
