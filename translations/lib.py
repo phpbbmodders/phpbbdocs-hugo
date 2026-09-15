@@ -97,8 +97,7 @@ def write_language_toml(languages_repo, lang, name, native_name, locale, status=
         "status": status,
     }
     with open(path, "w", encoding="utf-8") as f:
-        for key in ("code", "name", "native_name", "locale", "status"):
-            f.write(f'{key} = "{data[key]}"\n')
+        toml.dump(data, f)
     return path
 
 
@@ -202,7 +201,12 @@ if __name__ == "__main__":
 
     elif args.action == "record-source":
         data = read_source_metadata(languages_repo)
-        data.setdefault("upstream", {"repository": "phpbb/documentation", "branch": "3.3.x"})
+        # setdefault() only fires when the key is absent, not when it's
+        # present-but-empty (e.g. a source.json written before this
+        # default existed, which persisted "upstream": {}) -- check for
+        # that explicitly so the default actually lands.
+        if not data.get("upstream"):
+            data["upstream"] = {"repository": "phpbb/documentation", "branch": "3.3.x"}
         data.setdefault("languages", {})
         data["languages"].setdefault(args.lang, {})
         data["languages"][args.lang][args.family] = {"commit": args.commit}
