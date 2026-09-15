@@ -1717,44 +1717,20 @@
 			</authorgroup>
 		</sectioninfo>
 		<title>Tilladelser</title>
-		<para>Du får brug for at kontrollere hvad brugere kan og ikke kan på dit board. Med det fleksible og fintmaskede tilladelsesystem i Olympus har du meget store muligheder at specificere og administrere bruger- og gruppetilladelser. Grundlæggende opereres med to typer tilladelser - <guilabel>Globale tilladelser</guilabel> som gælder for hele boardet og ikke er knyttet til fora eller indlæg, og <guilabel>Forumbaserede tilladelser</guilabel> som anvendes til at bestemme tilladelser for hvert forum.</para>
-		<para>For at forstå hvordan tilladelser indstilles og hvordan tilladelsesystemet betjenes, er det vigtigt at få identificeret de forskellige typer tilladelser og de skærmbilleder som findes under fanen <guilabel>Tilladelser</guilabel> i <acronym>ACP</acronym>:</para>
-		<variablelist>
-			<varlistentry>
-				<term>Globale Tilladelser</term>
-				<listitem><para>Har effekt på hele boardet og er ikke knyttet til specifikke fora. Disse tilladelser inkluderer brugertilladelser, som kan begrænse brugen af <acronym>UCP</acronym>, søgninger, private beskeder, avatars, signaturer etc. Administratortilladelser hører også under globale tilladelser.</para></listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term>Forumbaserede tilladelser</term>
-				<listitem><para>Har kun betydning for specifikke fora og indstilles for hvert forum pr. bruger eller gruppe individuelt. Tilladelserne er opdelt i to typer: Bruger- og redaktørtilladelser. Den første bestemmer om en bruger eller en gruppe kan se forummet, skrive indlæg osv. Den anden om brugere eller en gruppe kan udføre redaktørhandlinger i forummet.</para></listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term>Rollebaserede tilladelser</term>
-				<listitem><para>For at lette instillingerne, kan der oprettes specifikke sammensætninger af tilladelser som knyttes til roller eller opgaver på boardet. Rollerne kan efterfølgende bruges til at tildele ensartede tilladelser til brugere eller grupper. phpBB er udstyret med nogle standardroller du kan gøre brug af. F.eks er det under forumbaserede tilladelser muligt at tildele brugere rollerne <guilabel>Standardredaktør</guilabel>, <guilabel>Simpel redaktør</guilabel> eller <guilabel>Fuldgyldig redaktør</guilabel> m.fl. Var denne mulighed ikke tilstede, måtte alle tilladelser tildeles brugere individuelt.</para></listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term>Tilladelsemasker</term>
-				<listitem><para>I dette afsnit skal du ikke indstille eller ændre noget. Men du kan få et overblik over brugeres eller gruppers endelige tilladelser og se resultatet af de ændringer der er foretaget i de øvrige afsnit. Dette overblik kan være særdeles nyttigt når du har behov for at fejlrette i tilladelser, når brugere f.eks. tilsyneladende ikke har de tilladelser de burde have.</para></listitem>
-			</varlistentry>
-		</variablelist>
-		<figure id="img_quick_permissions_types_admin">
-				<title>Globale og lokal tilladelser</title>
-				<mediaobject>
-					<imageobject>
-						<imagedata format="PNG" fileref="../images/quick_start_guide/permissions_types.png" />
-					</imageobject>
-					<caption>
-						<para>Globale og lokale tilladelser</para>
-					</caption>
-				</mediaobject>
-			</figure>
-		<note id="user_group_permission_note"><para>Hver tilladelse kan knyttes til en gruppe eller en bruger. Hvis det er muligt, anbefales det at tildele tilladelsen til en gruppe. Et eksempel på hvorfor: Når du vil tilføje en ny redaktør til et forum, kan du blot tilføje ham til den gruppe, der allerede har disse beføjelser. Alternativet ville være at give brugeren individuelle redaktørtilladelser i forummet.</para></note>
-		<!-- TODO add link when masks section is finished -->
-		<para>Når tilladelser vælges, vil du se tre mulige valg - NEJ, JA og ALDRIG. NEJ er standardværdien i alle tilladelser. Vælger du JA, har dette valg forrang for et NEJ valgt andre steder. Men vælges ALDRIG får dette valg forrang for et JA valgt andre steder i brugeres indstillinger. Dette gennemgås nøjere i afsnittet tilladelsemasker.</para>
-		
+		<para>På dit board skal du kunne styre, hvad brugere kan og ikke kan gøre, og hvad de kan og ikke kan se. Med det fleksible og detaljerede system, som Proteus stiller til rådighed, har du omfattende muligheder for at administrere tilladelser. Der findes fem typer tilladelser i phpBB3:</para>
+		<itemizedlist>
+			<listitem><para>Globale brugertilladelser</para></listitem>
+			<listitem><para>Globale redaktørtilladelser</para></listitem>
+			<listitem><para>Globale administratortilladelser</para></listitem>
+			<listitem><para>Brugertilladelser for forum</para></listitem>
+			<listitem><para>Redaktørtilladelser for forum</para></listitem>
+		</itemizedlist>
+		<para>De tre <guilabel>Globale tilladelser</guilabel> er dem, som gælder for alle fora, eller som slet ikke er knyttet til fora.</para>
+		<para>De to <guilabel>Forumtilladelser</guilabel> er dem, som kun gælder for ét forum ad gangen.</para>
+		<para>Enhver af disse fem tilladelsestyper kan tildeles individuelle brugere eller brugergrupper.</para>
+		<para>Når du indstiller tilladelser, vil du støde på tre mulige værdier - <guilabel>NEJ</guilabel>, <guilabel>JA</guilabel> og <guilabel>ALDRIG</guilabel>, hvor <guilabel>NEJ</guilabel> er standardværdien for hver tilladelse. Vælger du <guilabel>JA</guilabel>, har dette forrang for et <guilabel>NEJ</guilabel>. Men er tilladelsen sat til <guilabel>ALDRIG</guilabel>, kan du ikke tilsidesætte dette ved at vælge <guilabel>JA</guilabel> et andet sted. Har du stadig svært ved at forstå dette system, så se afsnittet <link linkend="acp_permissions_mask">Tilladelsesmasker</link>.</para>
+		<para>For at forstå hvordan du indstiller tilladelser og betjener grænsefladen, er det vigtigt at kende de forskellige typer af tilladelser og de værktøjer, som fanen <guilabel>Tilladelser</guilabel> i <acronym>ACP</acronym> stiller til rådighed:</para>
+
 		<section id="acp_permissions_global">
 			<sectioninfo>
 				<authorgroup>
@@ -1764,66 +1740,256 @@
 				</authorgroup>
 			</sectioninfo>
 			<title>Globale tilladelser</title>
-			<para>De globale indstillinger er den første sektion du finder under fanen <guilabel>Tilladelser</guilabel>. Her tildeles tilladelser til brugere, globale redaktører og administratorer. Sektionen indeholder fire underafsnit:</para>
-			<variablelist>
-			<varlistentry>
-				<term><guilabel>Brugertilladelser</guilabel></term>
-				<listitem><para>Her kan ovennævnte tilladelser tildeles til specifikke brugere. For at lette det administrationen af tilladelser anbefales det generelt at tildele tilladelser til grupper, som beskrevet <link linkend="user_group_permission_note">her</link>.</para></listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term><guilabel>Gruppetilladelser</guilabel></term>
-				<listitem><para>Samme som ovennævnte, med den forskel at her angiver du en gruppe som skal tildeles eller have ændret tilladelser.</para></listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term><guilabel>Administratorer</guilabel></term>
-				<listitem><para>På denne side bestemmer du hvilke af boardets brugere eller grupper der skal have adgang til <acronym>ACP</acronym>. Her er det muligt at ændre nuværende tilladelser og at tilføje nye administratorer eller administratorgrupper.</para></listitem>
-			</varlistentry>
-			
-			<varlistentry>
-				<term><guilabel>Globale redaktører</guilabel></term>
-				<listitem><para>Her ses boardets globale redaktører, altså brugere som kan redigere i alle boardets fora. phpBB er udstyret med standardgruppen globale redaktører, hvor de rette og nødvendige tilladelser er tildelt.</para></listitem>
-			</varlistentry>
-		</variablelist>
-		
-		<para>For at tilføje eller ændre tilladelser vælges det afsnit. Vælg herefter gruppenavn i dropdownmenuen eller indtast brugernavn. Se <xref linkend="img_choose_group_permissions" /> skærmbilledet.</para>
-		
-		<figure id="img_choose_group_permissions">
-			<title>Vælg en gruppe når tilladelser ændres</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata format="PNG" fileref="../images/admin_guide/choose_group_permissions.png"/>
-				</imageobject>
-				<caption>
-					<para>Denne side vises når du klikker på <guilabel>Gruppetilladelser</guilabel>. Her vælges den gruppe du ønsker at ændre tilladelser for.</para>
-				</caption>
-			</mediaobject>
-		</figure>
-		
-		<para>Når du har valgt bruger eller gruppe, vises en side hvor du kan vælge specifikke tilladelser. Bemærk nogle få punkter på dene side - dropdownmenuen, hvor der vælges hvilken typ tilladelser der skal ændres, linket til <guilabel>Avancerede tilladelser</guilabel>, hvor der er mulighed for meget fintmasket tildeling af tilladelser, og dropdownmenuen <guilabel>Rolle</guilabel>, som giver mulighed for at tildele et helt foruddefineret tilladelsesæt som passer til den givne opgave.</para>
-		
-		<figure id="img_setting_global_group_permissions">
-			<title>Indstilling af globale tilladelser for brugere og grupper</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata format="PNG" fileref="../images/admin_guide/setting_global_group_permissions.png" />
-				</imageobject>
-				<caption>
-					<para>Dette skærmbillede vises når du har har valgt en bruger eller gruppe i en af de to første sektioner af de globale tilladelser. Her ændrer du globale tilladelser som f.eks kontrol over profilindstillinger, søgning, private beskeder etc. Ved at vælge <guilabel>Globale redaktørtilladelser</guilabel> eller <guilabel>Administratortilladelser</guilabel> i dropdownmenuen kan yderligere indstillinger ændres for bruger eller gruppe.</para>
-				</caption>
-			</mediaobject>
-		</figure>
-		
+			<para>Disse påvirker hele boardet og er ikke bundet til specifikke fora. De omfatter brugertilladelser, som begrænser brugen af <acronym>UCP</acronym>'en, søgning, private beskeder, brug af avatarer/signaturer m.m. Administratortilladelser indstilles også her, da de er globale.</para>
+
+			<section id="acp_permissions_global_user">
+				<title>Globale brugertilladelser</title>
+				<para>Globale brugertilladelser er de tilladelser, som gælder for alle fora, såsom tilladelse til at vedhæfte eller downloade filer eller bruge en signatur, eller tilladelser der slet ikke er knyttet til et forum, såsom tilladelser vedrørende profiler, private beskeder og e-mail.</para>
+
+				<para>Selvom globale brugertilladelser kan tildeles brugere ved at klikke på <guilabel>Brugertilladelser</guilabel> under fanen Tilladelser i ACP, vælge en bruger og derefter vælge <guilabel>Brugertilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>, er det generelt langt at foretrække at undgå brugertilladelser og i stedet bruge gruppetilladelser. Det gør det lettere at administrere tilladelser fremover og at tildele tilladelser til brugere senere. Den eneste praktiske forskel mellem bruger- og gruppetilladelser er, at brugertilladelser kræver, at du indstiller tilladelser for hver bruger individuelt, mens gruppetilladelser lader dig oprette en gruppe og tildele dens medlemmer et sæt tilladelser. Ønsker du herefter at give andre brugere de samme tilladelser, kan du blot tilføje dem til gruppen.</para>
+
+				<para>Globale brugertilladelser kan tildeles brugergrupper ved at klikke på <guilabel>Gruppetilladelser</guilabel> under fanen Tilladelser i ACP, vælge en brugergruppe og derefter vælge <guilabel>Brugertilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>I begge tilfælde kan du vælge en standard brugerrolle i dropdownmenuen, eller du kan klikke på <guilabel>Avancerede tilladelser</guilabel> for at tilpasse tilladelserne. Den bedste måde at tilpasse en af standardrollerne på er dog at oprette en ny brugerrolle baseret på indstillingerne for en eksisterende rolle. Du kan også oprette en helt ny brugerrolle fra bunden. Roller bruger færre ressourcer, end hvis du foretager ændringer ved at redigere de avancerede tilladelser.</para>
+			</section>
+			<section id="acp_permissions_global_moderator">
+				<title>Globale redaktørtilladelser</title>
+				<para>Globale redaktørtilladelser er de tilladelser, som gælder for redigering, sletning eller på anden vis påvirkning af andre brugeres emner og indlæg, eller for at påvirke andre brugere gennem anmeldelser, advarsler eller udelukkelser. Tilladelser, der gives her, gælder for ethvert forum, som brugeren eller brugergruppen kan se.</para>
+
+				<para>Globale redaktørtilladelser kan tildeles brugere ved at klikke på <guilabel>Brugertilladelser</guilabel> under fanen Tilladelser i ACP, vælge en bruger og derefter vælge <guilabel>Globale redaktørtilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Globale redaktørtilladelser kan tildeles brugergrupper ved at klikke på <guilabel>Gruppetilladelser</guilabel> under fanen Tilladelser i ACP, vælge en brugergruppe og derefter vælge <guilabel>Globale redaktørtilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Globale redaktørtilladelser kan også tildeles både brugere og brugergrupper ved at klikke på <guilabel>Globale redaktører</guilabel> under fanen Tilladelser i ACP. Denne mulighed viser alle brugere og brugergrupper, der aktuelt har globale redaktørtilladelser. Herfra kan du tilføje, redigere eller slette brugere og brugergrupper.</para>
+
+				<para>I begge tilfælde kan du vælge en standard redaktørrolle i rolledropdownmenuen, eller du kan klikke på <guilabel>Avancerede tilladelser</guilabel> for at tilpasse tilladelserne, eller, hvilket er at foretrække, oprette en ny rolle med det ønskede tilladelsessæt.</para>
+			</section>
+			<section id="acp_permissions_global_administrator">
+				<title>Globale administratortilladelser</title>
+				<para>Globale administratortilladelser er de tilladelser, som gælder for vedligeholdelse af dit board via administratorkontrolpanelet. De omfatter tilladelser til at vedligeholde fora, brugere og brugergrupper, vedligeholde og tildele tilladelser, ændre boardets konfigurationsindstillinger og andre lignende vedligeholdelsesopgaver.</para>
+
+				<para>Globale administratortilladelser kan tildeles brugere ved at klikke på <guilabel>Brugertilladelser</guilabel> under fanen Tilladelser i ACP, vælge en bruger og derefter vælge <guilabel>Globale administratortilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Globale administratortilladelser kan tildeles brugergrupper ved at klikke på <guilabel>Gruppetilladelser</guilabel> under fanen Tilladelser i ACP, vælge en brugergruppe og derefter vælge <guilabel>Globale administratortilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Globale administratortilladelser kan også tildeles både brugere og brugergrupper ved at klikke på <guilabel>Administratorer</guilabel> under fanen Tilladelser i ACP. Denne mulighed viser alle brugere og brugergrupper, der aktuelt har administratortilladelser. Herfra kan du tilføje, redigere eller slette brugere og brugergrupper.</para>
+
+				<para>I begge tilfælde kan du vælge en standard administratorrolle i rolledropdownmenuen, eller du kan klikke på <guilabel>Avancerede tilladelser</guilabel> for at tilpasse tilladelserne, eller, hvilket er at foretrække, oprette en ny rolle med det ønskede tilladelsessæt.</para>
+			</section>
 		</section>
 		<section id="acp_permissions_forumbased">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>jask</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
 			<title>Forumbaserede tilladelser</title>
+			<para>Disse tilladelser indstilles individuelt for hver kombination af forum/bruger eller -gruppe. De kan opdeles i to typer: Brugertilladelser og redaktørtilladelser. Den første styrer, om en bruger eller gruppe kan se forummet, skrive indlæg i det osv., mens redaktørtilladelserne styrer, om brugeren eller gruppen kan udføre redaktørrelaterede handlinger i det.</para>
+
+			<section id="acp_permissions_forumbased_user">
+				<title>Brugertilladelser for forum</title>
+				<para>Brugertilladelser for forum er dem, der gælder for oprettelse og redigering af egne indlæg i et bestemt forum samt udskrivning og anmeldelse af emner. De bestemmer også, om indlæg kræver godkendelse eller tæller med i indlægstælleren, samt andre brugerrettigheder i et bestemt forum.</para>
+
+				<para>Brugertilladelser for forum kan tildeles brugere ved at klikke på <guilabel>Brugeres forumtilladelser</guilabel> under fanen Tilladelser i ACP, vælge en bruger, vælge et eller flere fora fra listen og derefter vælge <guilabel>Forumtilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Brugertilladelser for forum kan tildeles brugergrupper ved at klikke på <guilabel>Gruppers forumtilladelser</guilabel> under fanen Tilladelser i ACP, vælge en brugergruppe, vælge et eller flere fora fra listen og derefter vælge <guilabel>Forumtilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Brugertilladelser for forum kan også tildeles både brugere og brugergrupper ved at klikke på <guilabel>Forumtilladelser</guilabel> under fanen Tilladelser i ACP og derefter vælge et eller flere fora fra listen. Denne mulighed viser alle brugere og brugergrupper, der aktuelt har brugertilladelser for det pågældende forum. Herfra kan du tilføje, redigere eller slette brugere og brugergrupper.</para>
+
+				<para>I begge tilfælde kan du vælge en standard forumrolle i rolledropdownmenuen, eller du kan klikke på <guilabel>Avancerede tilladelser</guilabel> for at tilpasse tilladelserne, eller, hvilket er at foretrække, oprette en ny rolle med det ønskede tilladelsessæt.</para>
+			</section>
+			<section id="acp_permissions_forumbased_moderator">
+				<title>Redaktørtilladelser for forum</title>
+				<para>Redaktørtilladelser for forum er dem, der gælder for redigering, sletning eller på anden vis påvirkning af andre brugeres emner og indlæg i ét bestemt forum, eller for at påvirke andre brugere gennem anmeldelser, advarsler eller udelukkelser.</para>
+
+				<para>Redaktørtilladelser for forum kan tildeles brugere ved at klikke på <guilabel>Brugeres forumtilladelser</guilabel> under fanen Tilladelser i ACP, vælge en bruger, vælge et eller flere fora fra listen og derefter vælge <guilabel>Redaktørtilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Redaktørtilladelser for forum kan tildeles brugergrupper ved at klikke på <guilabel>Gruppers forumtilladelser</guilabel> under fanen Tilladelser i ACP, vælge en brugergruppe, vælge et eller flere fora fra listen og derefter vælge <guilabel>Redaktørtilladelser</guilabel> i dropdownmenuen <guilabel>Vælg type</guilabel>.</para>
+
+				<para>Redaktørtilladelser for forum kan også tildeles både brugere og brugergrupper ved at klikke på <guilabel>Forumredaktører</guilabel> under fanen Tilladelser i ACP og derefter vælge et eller flere fora fra listen. Denne mulighed viser alle brugere og brugergrupper, der aktuelt har redaktørtilladelser for det pågældende forum. Herfra kan du tilføje, redigere eller slette brugere og brugergrupper.</para>
+
+				<para>I begge tilfælde kan du vælge en standard redaktørrolle i rolledropdownmenuen, eller du kan klikke på <guilabel>Avancerede tilladelser</guilabel> for at tilpasse tilladelserne, eller, hvilket er at foretrække, oprette en ny rolle med det ønskede tilladelsessæt.</para>
+			</section>
 		</section>
 		<section id="acp_permissions_roles">
 			<title>Rollebaserede tilladelser</title>
+			<para>For at lette indstillingen af tilladelser kan du oprette roller med et foruddefineret sæt tilladelser, som du derefter kan tildele til brugere eller grupper. phpBB har allerede oprettet nogle foruddefinerede roller til dig - f.eks. kan du under forumbaserede tilladelser gøre en bruger til Standardredaktør, Fuldgyldig redaktør eller Begrænset redaktør m.fl.</para>
+
+			<para>Der findes fire typer tilladelsesroller:
+				<itemizedlist>
+					<listitem><para>Administratorroller, bruges sammen med <guilabel>Globale administratortilladelser</guilabel></para></listitem>
+					<listitem><para>Brugerroller, bruges sammen med <guilabel>Globale brugertilladelser</guilabel></para></listitem>
+					<listitem><para>Redaktørroller, bruges sammen med <guilabel>Globale redaktørtilladelser</guilabel> og <guilabel>Redaktørtilladelser for forum</guilabel></para></listitem>
+					<listitem><para>Forumroller, bruges sammen med <guilabel>Brugertilladelser for forum</guilabel></para></listitem>
+				</itemizedlist>
+			</para>
+
+			<para>Tilladelsesroller kan vedligeholdes ved at klikke på det tilsvarende link under fanen Tilladelser i ACP. Roller giver en praktisk tilladelsesskabelon, som kan bruges, når du tildeler tilladelser til brugere eller brugergrupper. En rolles tilladelsesindstillinger kan ses eller redigeres ved at klikke på det grønne tandhjul for den pågældende rolle.</para>
+
+			<para>De fleste standardroller bruger kombinationer af <guilabel>Ja</guilabel> og <guilabel>Nej</guilabel>. Det betyder, at hvis en bruger får tildelt to forskellige roller ved at være medlem af to forskellige grupper - for eksempel Begrænset adgang og Almindelig adgang - vil et <guilabel>Ja</guilabel> have forrang for et <guilabel>Nej</guilabel>, hvilket giver brugeren Almindelig adgang.</para>
+
+			<para>Undtagelserne er dem med <guilabel>Aldrig</guilabel>-indstillinger, såsom brugerrollerne <guilabel>Ingen avatar</guilabel>, <guilabel>Ingen private beskeder</guilabel> og <guilabel>Nyligt registrerede brugeres funktioner</guilabel>, samt forumrollen <guilabel>I moderationskø</guilabel>. Disse fire roller bruger <guilabel>Aldrig</guilabel>-indstillinger og tilsidesætter derfor de <guilabel>Ja</guilabel>-indstillinger, der ellers ville være givet af andre roller.</para>
+
+			<para>Du bør aldrig bruge en af disse fire roller, eller andre <guilabel>Aldrig</guilabel>-indstillinger, på din gruppe af registrerede brugere. Gør du det, fratages alle - dig selv inklusive - disse tilladelser.</para>
+
+			<para>Hvis en rolles tilladelsesindstillinger ikke helt passer til dit forum - hvis du for eksempel ikke ønsker, at nogen skal kunne skjule deres onlinestatus - kan du tilføje eller fjerne en tilladelse fra en standardrolle. Ændringen slår derefter igennem alle steder, hvor rollen bruges.</para>
+
+			<para>Du kan også oprette dine egne brugerdefinerede roller ved at indtaste et nyt navn i feltet <guilabel>Opret rolle</guilabel>, vælge en rolle at kopiere fra i dropdownmenuen <guilabel>Brug indstillinger fra</guilabel> og klikke på send. Derefter kan du tilpasse din nye rolle og bruge den til at tildele disse tilladelser.</para>
+
+			<para>At bruge sådanne brugerdefinerede roller er enklere end at redigere de avancerede tilladelser for flere fora hver for sig, og det bør reducere de ressourcer, dit forum bruger ved tjek af tilladelser.</para>
 		</section>
-		<section id="acp_permissions_masks">
-			<title>Tilladelseroller</title>
+		<section id="acp_permissions_mask">
+			<title>Tilladelsesmasker</title>
+			<para>I dette afsnit indstiller eller ændrer du ikke noget, men du kan se de endelige tilladelser, en bruger eller gruppe har, baseret på det samlede resultat af de tilladelser, brugeren har fra sine brugertilladelser eller gruppemedlemskaber. Denne funktion er særligt nyttig, når du skal fejlfinde dine tilladelser, og du f.eks. ikke kan finde ud af, hvorfor nogen ikke har den tilladelse, du ønsker de skal have. Tilladelsesmasker er et værktøj til at se tilladelsesindstillingerne for alle fem tilladelsestyper for både brugere og brugergrupper.</para>
+
+			<para>Hvert link i afsnittet Tilladelsesmasker under fanen Tilladelser i ACP svarer til en af de fem tilladelsestyper:
+				<itemizedlist>
+					<listitem><para>Se administrative tilladelser for <guilabel>Globale administratortilladelser</guilabel></para></listitem>
+					<listitem><para>Se brugerbaserede tilladelser for <guilabel>Globale brugertilladelser</guilabel></para></listitem>
+					<listitem><para>Se globale moderationstilladelser for <guilabel>Globale redaktørtilladelser</guilabel></para></listitem>
+					<listitem><para>Se forummoderationstilladelser for <guilabel>Redaktørtilladelser for forum</guilabel></para></listitem>
+					<listitem><para>Se forumbaserede tilladelser for <guilabel>Brugertilladelser for forum</guilabel></para></listitem>
+				</itemizedlist>
+			Hvert af disse fem links fører dig til en side, der viser de brugere og brugergrupper, som er tildelt de pågældende globale eller forumtilladelser.</para>
+
+			<para>Vælger du en eller flere brugergrupper, vises tilladelserne for disse grupper på samme måde, som de vises på siderne for redigering af tilladelser, så der er ingen ekstra nytte i at køre maskerne på gruppenavne. Tilladelsesmasker er mest nyttige, når de køres på et brugernavn og ikke et gruppenavn, da det sidste kun giver dig de samme oplysninger, som du får ved at se gruppens tilladelser.</para>
+
+			<para>At se en brugers tilladelser er noget helt andet. Hvis du indtaster en brugers navn i feltet <guilabel>Find et medlem</guilabel> for en af de fem tilladelsestyper og klikker på <guilabel>Se tilladelser</guilabel>, vises brugerens resulterende tilladelser under hensyntagen til alle brugerens gruppers tilladelser. Desuden tager <guilabel>forummoderations</guilabel>masken også højde for globale moderationstilladelser.</para>
+
+			<para>Hver enkelt tilladelse har en cirkelpil, som er et link, der viser alle brugerens grupper, og hvilke grupper der giver eller nægter den pågældende tilladelse.</para>
+			<figure id="img_choose_group_permissions">
+				<title>Tilladelsesmasker</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata format="GIF" fileref="../images/admin_guide/permission_masks.gif"/>
+					</imageobject>
+					<caption>
+						<para>De skærmbilleder du ser, når du sporer tilladelser med værktøjet <guilabel>Tilladelsesmasker</guilabel>.</para>
+					</caption>
+				</mediaobject>
+			</figure>
+			<note><para>I dette eksempel ser du, hvordan et <guilabel>Ja</guilabel> fra global moderation tilsidesætter et <guilabel>Aldrig</guilabel> fra forummoderation. Dette er én undtagelse fra reglen om, at <guilabel>Aldrig</guilabel> tilsidesætter <guilabel>Ja</guilabel>.
+			Den anden undtagelse er <guilabel>grundlæggere</guilabel>. Hvis en bruger er markeret som grundlægger på sin brugeradministrationsoversigt, tildeles vedkommende alle globale administratortilladelser, hvilket tilsidesætter enhver <guilabel>Nej</guilabel>- eller <guilabel>Aldrig</guilabel>-indstilling givet til den pågældende bruger eller dennes brugergrupper.</para></note>
+		</section>
+		<section id="acp_permissions_shortcuts">
+			<title>Andre genveje</title>
+			<para>Genvejene under fanen Tilladelser i ACP er spredt rundt omkring andre steder i ACP.
+				<itemizedlist>
+					<listitem><para>Linkene Brugertilladelser, Brugeres forumtilladelser, Gruppetilladelser og Gruppers forumtilladelser er duplikeret under fanen <guilabel>Brugere og grupper</guilabel> i ACP</para></listitem>
+					<listitem><para>Linkene Forumtilladelser, Forumredaktører, Brugeres forumtilladelser og Gruppers forumtilladelser er duplikeret under fanen <guilabel>Fora</guilabel> i ACP</para></listitem>
+					<listitem><para>På siden <guilabel>Administrer brugere</guilabel> kan du, efter at have valgt en bruger, vælge <guilabel>Tilladelser</guilabel> i dropdownmenuen <guilabel>Vælg formular</guilabel>:
+						<itemizedlist>
+							<listitem><para>De tre globale tilladelsesmasker vises som standard</para></listitem>
+							<listitem><para>Dropdownmenuen <guilabel>Vælg et forum</guilabel> viser de to forumtilladelsesmasker</para></listitem>
+							<listitem><para>Linket Indstil brugertilladelser fører til opdatering af de tre globale tilladelser</para></listitem>
+							<listitem><para>Linket Indstil brugerens forumtilladelser fører til opdatering af de to forumtilladelser</para></listitem>
+						</itemizedlist>
+					</para></listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		<section id="acp_permissions_quickstart">
+			<title>Hurtig start med tilladelser</title>
+			<para>Følgende tilladelser kan indstilles for at hjælpe med at starte et nyt forum.</para>
+			<section id="acp_permissions_quickstart_global_admin">
+				<title>Globale administratortilladelser</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Som standard har brugergruppen Administratorer rollen Standardadministrator. Dette forhindrer alle undtagen grundlæggeren i at tildele andre administratorer, redigere roller og installere sprogpakker, typografier eller moduler på dit forum.</para></listitem>
+						<listitem><para>Som standard kan rollen Standardadministrator ikke bruge andres tilladelser. Dette gør vedligeholdelse af tilladelser vanskeligere, så det anbefales at redigere administratorrollen <guilabel>Standardadministrator</guilabel> og tilføje tilladelsen <guilabel>Kan bruge andres tilladelser</guilabel>.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_global_mod">
+				<title>Globale redaktørtilladelser</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Som standard har brugergruppen Globale redaktører rollen Standardredaktør. Dette giver dem mulighed for at redigere ethvert forum, de kan se, men tillader dem ikke at ændre et indlægs forfatter eller udelukke brugere.</para></listitem>
+						<listitem><para>Tilføj rollen <guilabel>Standardredaktør</guilabel> eller <guilabel>Fuldgyldig redaktør</guilabel> til brugergruppen Administratorer. Dette giver dine administratorer mulighed for at redigere ethvert forum uden at skulle tilføjes til brugergruppen Globale redaktører.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_global_user">
+				<title>Globale brugertilladelser</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Brugergrupperne Administratorer og Globale redaktører starter med rollen Alle funktioner, hvilket er fint.</para></listitem>
+						<listitem><para>Registrerede brugere starter med rollen Standardfunktioner, som giver dem de fleste almindelige brugerrettigheder, men ikke tillader dem at ændre deres brugernavn eller standardbrugergruppe samt nogle få andre ting.</para></listitem>
+						<listitem><para>Rollen Standardfunktioner tillader brugere at skjule deres onlinestatus. Du ønsker måske at redigere rollen <guilabel>Standardfunktioner</guilabel> og sætte denne tilladelse til <guilabel>Nej</guilabel>.</para></listitem>
+						<listitem><para>Gæster starter med brugerdefinerede globale brugertilladelser, som kun tillader download og søgning.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_forum_mod">
+				<title>Redaktørtilladelser for forum</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>Administratorer og globale redaktører har allerede globale redaktørtilladelser, så det er unødvendigt at tildele dem som <guilabel>Forumredaktører</guilabel>.</para></listitem>
+						<listitem><para>Har du juniorredaktører, som skal redigere individuelle fora, kan du tilføje disse brugere til de pågældende foras redaktørlister eller oprette redaktørbrugergrupper til dem og tilføje brugergrupperne her. Tildel brugerne eller brugergrupperne passende redaktørroller.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section id="acp_permissions_quickstart_user_forum">
+				<title>Brugertilladelser for forum</title>
+				<para>
+					<itemizedlist>
+						<listitem><para>For de fleste fora bør du give dine brugergrupper Administratorer og Globale redaktører forumrollen Fuld adgang. Dette giver dem mulighed for at oprette fastgjorte emner og bekendtgørelser.</para></listitem>
+						<listitem><para>Giv din brugergruppe Registrerede brugere forumrollen <guilabel>Standardadgang</guilabel> til alle fora, bortset fra dine fora, der kun er for administratorer/redaktører, eller andre skjulte fora.</para></listitem>
+						<listitem><para>Giv forumrollen <guilabel>Kun læsning</guilabel> til brugergruppen Gæster for de fora, du ønsker, at ikke-registrerede gæster skal kunne læse.</para></listitem>
+						<listitem><para>Tilføj forumrollen <guilabel>Bot-adgang</guilabel> til brugergruppen Bots for de samme fora, du ønsker gæster skal kunne læse, så webcrawler-søgerobotter kan indeksere disse fora.</para></listitem>
+						<listitem><para>Forumrollen <guilabel>Ingen adgang</guilabel> ville være mere nyttig med <guilabel>Aldrig</guilabel>-tilladelser end de nuværende <guilabel>Nej</guilabel>-tilladelser. Rediger forumrollen <guilabel>Ingen adgang</guilabel>, og skift <guilabel>Kan se forum</guilabel> og <guilabel>Kan læse forum</guilabel> fra <guilabel>Nej</guilabel> til <guilabel>Aldrig</guilabel>. Dette giver dig mulighed for at bruge denne rolle til at blokere adgang til et forum for en lille gruppe.</para></listitem>
+					</itemizedlist>
+				</para>
+			</section>
+		</section>
+		<section id="acp_permissions_quick_answers">
+			<title>Hurtige svar</title>
+			<variablelist>
+				<varlistentry>
+					<term>Ingen kan se mine nye fora</term>
+					<listitem>
+						<para>Som standard har nye fora ingen tildelte tilladelser. Du skal tildele forumtilladelser eller kopiere dem fra et andet forum, før nogen kan se dem.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Jeg har fulde administratortilladelser. Hvorfor kan jeg ikke se mine nye fora?</term>
+					<listitem>
+						<para>Administratortilladelser har intet at gøre med forumtilladelser. Du skal tildele forumtilladelser til dig selv eller din brugergruppe, før du kan se eller skrive indlæg i et forum.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Jeg har tilføjet tilladelser til mine nye fora, men kan stadig ikke se dem.</term>
+					<listitem>
+						<para>Du skal også tilføje tilladelser til dine foras overordnede kategorier.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Jeg har tilføjet en ny kategori med korrekte tilladelser, men kan ikke se den.</term>
+					<listitem>
+						<para>Kategorier vises ikke, medmindre der findes synlige fora under dem.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Hvordan tillader jeg mine redaktører at oprette fastgjorte emner eller bekendtgørelser?</term>
+					<listitem>
+						<para>Tilladelser til fastgjorte emner og bekendtgørelser findes under forumtilladelser. Tildeling af forumrollen <guilabel>Fuld adgang</guilabel> giver dem mulighed for at oprette fastgjorte emner og bekendtgørelser.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Jeg har indstillet et underforum til at kopiere tilladelser fra det overordnede forum, men da jeg ændrede tilladelserne for det overordnede forum, ændrede underforummet sig ikke.</term>
+					<listitem>
+						<para><guilabel>Kopiér tilladelser</guilabel> er en handling, ikke en indstilling. Når du vælger at kopiere tilladelser, kopieres tilladelserne, når du klikker på Send. Det kopierer ikke fremtidige ændringer, medmindre du vælger at kopiere dem igen under Administrer fora, Rediger.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Jeg har oprettet et privat forum med en speciel gruppe, som har tilladelse til at se forummet. Nu kan selv medlemmer af den gruppe ikke se forummet.</term>
+					<listitem>
+						<para>Du har sandsynligvis sat <guilabel>Aldrig</guilabel>-tilladelser for gruppen Registrerede brugere. Da medlemmer af din specielle gruppe også er medlemmer af Registrerede brugere, tilsidesætter den Aldrig-tilladelse det Ja, som er tildelt af den nye brugergruppe. Du bør slette gruppen Registrerede brugere fra forummets liste over forumtilladelser i stedet for at tildele Aldrig-tilladelser.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 		</section>
 	</section>
 
