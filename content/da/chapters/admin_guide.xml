@@ -79,7 +79,7 @@
 					<listitem><para>Den første indstilling du kan ændre er måske den vigtigste af dem alle, nemlig navnet på boardet. Besøgende identificerer dit board med dette navn. Skriv boardets navn i tekstfeltet <guilabel>Boardnavn</guilabel>, og det vises øverst i boardets hovede. Samtidig vises navnet som præfiks i de besøgendes browsertitel.</para></listitem>
 					<listitem><para><guilabel>Boardbeskrivelse</guilabel> er dit boards slogan eller formål, og vises under <guilabel>Boardnavn</guilabel>et i boardets hoved.</para></listitem>
 					<listitem><para>Har du i forbindelse med vedligeholdelse, for eksempel ved opdateringer, brug for at lukke boardet, kan det gøres ved at bruge switchen <guilabel>Deaktiver boardet</guilabel> . Vælg <guilabel>Ja</guilabel> for midlertidigt at lukke boardet. Det forhindrer alle, undtagen administratorer og redaktører, i at få adgang til boardet. Når boardet er slået fra, møder man nu enten en standardmeddelelse, eller en du selv komponerer. Du tilføjer din egen meddelelse i teksfeltet umiddelbart under radioknapperne ja/nej i <guilabel>Deaktiver boardet</guilabel>. Administratorer og redaktører vil stadig have adgang til deres kontrolpaneler mens boardet er slået fra.</para></listitem>
-					<listitem><para>Du skal også vælge boardets <guilabel>Standardsprog</guilabel>. Det er det sprog gæster vil se når de besøger boardet. Du kan tillade at tilmeldte brugere kan vælge andre sprog. Som standard er kun <guilabel>British English</guilabel> installeret, men du kan <ulink url="http://www.phpbb.com/languages">downloade flere sprog på phpBB websitet</ulink> og installere disse på boardet. Læs mere om sprog i <link linkend="acp_system_language">sektionen for konfiguration af sprogpakker</link>.</para></listitem>
+					<listitem><para>Du skal også vælge boardets <guilabel>Standardsprog</guilabel>. Det er det sprog gæster vil se når de besøger boardet. Du kan tillade at tilmeldte brugere kan vælge andre sprog. Som standard er kun <guilabel>British English</guilabel> installeret, men du kan <ulink url="http://www.phpbb.com/languages">downloade flere sprog på phpBB websitet</ulink> og installere disse på boardet. Læs mere om sprog i <link linkend="acp_customise_language">sektionen for konfiguration af sprogpakker</link>.</para></listitem>
 					<listitem><para>Du kan indstille dit boards standarddatoformat. phpBB3 giver mulighed for at vælge mellem nogle meget almindelig måder at vise tid og dato på. Er ingen af disse tilfredsstillende, kan du tilpasse datoformatet ved at vælge <guimenuitem>Brugertilpasset</guimenuitem> i dropdownmenuen for <guilabel>Datoformat</guilabel>. Herefter skriver du det ønskede datoformat i teksfeltet ved siden af. Syntaks for datoformat er det samme som <ulink url="http://www.php.net/date">PHP's date() funktion</ulink>.</para></listitem>
 					<listitem><para>Sammen med indstilling af hvordan tiden skal vises, kan du også vælge boardets tidszone. De tilgængelige tidszoner kan vælges i dropdownmenuen <guilabel>Tidszone for gæster</guilabel>, som alle er relative i forhold til <acronym>UTC</acronym> (som næsten er identisk med det tidligere anvendte <acronym>GMT</acronym> eller Greenwich Mean Time) tider. Desuden kan du vælge om boardet skal køre med sommertid ved at vælge ja eller net ved punktet <guilabel>Vælg sommertid/DST</guilabel>.</para></listitem>
 					<listitem><para>Den typografi der vises for gæster og som standardvalg for brugere vælges i <guilabel>Standardtypografi</guilabel>. Som standard er phpBB installeret med typografien prosilver med mulighed for også at installere subsilver2. Du kan give brugere mulighed for selv kan vælge mellem de installerede typografier ved at vælge <guilabel>Nej</guilabel> til <guilabel>Tilsidesæt brugeres valg af typografi</guilabel>. Læs i <link linkend="acp_styles">typografisektion</link> hvordan nye typografier tilføjes og hvor de kan findes.</para></listitem>
@@ -2018,195 +2018,145 @@
 		</section>
 	</section>
 
-	<section id="acp_styles">
-		<sectioninfo>
-			<authorgroup>
-				<author>
-					<othername>jask</othername>
-				</author>
-				
-			</authorgroup>
-		</sectioninfo>
-		<title>Typografier</title>
-		<para>Boardets fremtræden bestemmes af den valgte typografi, og det er ganske enkelt at vælge en anden og dermed ændre boardets udseende radikalt. Netop muligheden for at give boardet sit helt eget og unikke præg er vigtigt når man ønsker et interessant board. Valg af typografi kan eventuelt også anvendes til at signalere formålet med boardet. I <guimenuitem>Typografier</guimenuitem> kan alle tilgængelige typografier på boardet administreres.</para>
-		
-		<para>En typografi i phpBB 3.0 består af tre hovedelementer: skabeloner, temaer og grafikpakker.
-			<variablelist>
+	<section id="acp_customise">
+		<title>Tilpasning</title>
+		<para>phpBB 3.3 giver dig mulighed for at tilpasse dets udseende og funktioner på flere måder:</para>
+		<variablelist>
 				<varlistentry>
-					<term>Skabeloner</term>
-					<listitem><para>Skabeloner er de HTML-filer som bestemmer typografiens layout.</para></listitem>
+					<term>Typografier</term>
+					<listitem>
+						<para>Boardets udseende kan ændres ved at installere nye typografier eller ændre standardtypografien.</para>
+					</listitem>
 				</varlistentry>
-				
 				<varlistentry>
-					<term>Temaer</term>
-					<listitem><para>Temaer er en kombination af farveskemaer og grafik som bestemmer boardets basale udseende.</para></listitem>
+					<term>Extensions</term>
+					<listitem>
+						<para>Extensions giver dig mulighed for nemt at tilføje ny funktionalitet til dit board.</para>
+					</listitem>
 				</varlistentry>
-				
 				<varlistentry>
-					<term>Grafikpakker</term>
-					<listitem><para>Grafikpakker indeholder de billeder og den grafik boardet benytter sig af. Grafikpakkerne er uafhængig af den valgte typografi, og kan derfor i princippet anvendes på tværs i alle typografier.</para></listitem>
+					<term>Sprogpakker</term>
+					<listitem>
+						<para>Hvis dine brugere taler et andet sprog end engelsk, kan du installere en sprogpakke for at oversætte systemteksterne (ikke boardets indhold) til et andet sprog.</para>
+					</listitem>
 				</varlistentry>
-			</variablelist>
-		</para>
-		
-		<figure id="img_styles_overview">
+		</variablelist>
+
+		<section id="acp_customise_styles">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>jask</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Typografier</title>
+			<para>Typografi er et af aspekterne af denne tilpasningsmulighed. Evnen til at administrere de typografier, dit board bruger, er vigtig for at holde et interessant board. Boardets typografi kan endda afspejle boardets formål. <guimenuitem>Typografier</guimenuitem> giver dig mulighed for at administrere alle de typografier, der er tilgængelige på dit board.</para>
+
+			<figure id="img_styles_overview">
 				<title>Typografioversigt</title>
 				<mediaobject>
 					<imageobject>
 						<imagedata format="PNG" fileref="../images/admin_guide/styles_overview.png"/>
 					</imageobject>
 					<caption>
-						<para>Her vises alle boardet typografier, både installerede og ikke installerede, og hvor mange brugere der anvender de enkelte typografier. Herfra er det også muligt at ændre en typografis oplysninger.</para>
+						<para>Dette er en liste over de typografier, der er installeret på boardet. Du kan se antallet af brugere, der anvender typografien, og du kan følge linkene for at ændre typografiens detaljer.</para>
 					</caption>
 				</mediaobject>
-		</figure>
-			
-		<para>Det er ikke en simpel opgave at oprette en ny typografi og er normalt særdeles tidskrævende. phpBB-communityets talentfulde designere gør deres typografier offentligt tilgængelige for alle. Ønsker du ikke selv at bruge ressourcer på at oprette din egen typografi, men gerne vil installere en anden typografi, er det første sted at søge <ulink url="http://www.phpbb.com/styles/">typografisektionen på phpBB.com</ulink>, hvor der findes en række nyttige links, blandt andet:
-		<variablelist>
-				<varlistentry>
-					<term><ulink url="http://www.phpbb.com/styles/demo/3.0/">Typografidemoer</ulink></term>
-					<listitem><para>Her er der mulighed for at afprøve og se de tilgængelige typografier i funktion på et kørende board, og afprøve hvordan alle elementer på boardet ser ud. Du kan browse alle typografier indtil du finder en der falder i din smag. Demoen giver samtidig links til download af de enkelte typografier og til typografidatabasen.</para></listitem>
-				</varlistentry>
-				
-				<varlistentry>
-					<term><ulink url="http://www.phpbb.com/styles/db/">Typografidatabase</ulink></term>
-					<listitem><para>Indeholder alle typografier valideret og godkendt af phpBB.com's Styles Team. Typografierne kontrolleres for at sikre at de ikke implementerer sikkerhedshuller på boardet og at de virker korrekt. Typografierne kan sorteres efter versionnumre, farve og kategori for at gøre det enklere at finde en bestemt slags typografi. Alle typografier i databasen har link til demoen, hvor det er muligt at se dem i funktion.</para></listitem>
-				</varlistentry>
+			</figure>
 
-			</variablelist>
-		</para>
-		
-		<section id="acp_styles_manage">
-			<sectioninfo>
-				<authorgroup>
-					<author>
-						<othername>jask</othername>
-					</author>
-				</authorgroup>
-			</sectioninfo>
-			<title>Installation og administration af typografier</title>
-			<para>Når du har valgt og downloadet en ny typografi udpakkes filen lokalt på din PC, herefter uploades hele det udpakkede indhold til boardets server. Vær omhyggelig med at uploade hele typografimappen indeholde undermapperne <filename class='directory'>template</filename>, <filename class='directory'>theme</filename> og <filename class='directory'>imageset</filename> til serverens <filename class='directory'>styles</filename>-mappe. Eneste undtagelse er når en typografi baserer sine skabeloner, tema eller grafikpakke på en andens. Du bliver ved download informeret, hvis dette er tilfældet og hvilken typografi der arves elementer fra. Den typografi, der genbruges elementer fra, skal også være installeret.</para>
-		
-			<para>Når alle nødvendige filer er uploadet, kan den nye typografi installeres. Installation foretages i fanen <guilabel>Typografier</guilabel> i ACP. Her vises en oversigt med flere typografier, den forudinstallerede prosilver, subsilver2, og også de typografier du netop har uploadet. Oversigtet er delt i to, den første indeholdende allerede installerede typografier og den anden uploadede, men ikke installerede typografier. Sidstnævnte installeres ved at klikke på linket <guilabel>Installer</guilabel> udfor typografiens navn.</para>
-		
-			<para>Når du klikker på <guilabel>Installer</guilabel> bliver du bedt om at tage stilling til to spørgsmål:</para>
-			<itemizedlist>
-						<listitem><para><guilabel>Aktiv</guilabel>: Vælges Nej, vil typografien ikke være tilgængelig for brugere, kun administratorer kan afprøve den fra ACP.</para></listitem>
-						<listitem><para><guilabel>Standardtypografi for boardet</guilabel>: Her vælges om typografien skal være boardets fremtidige standard, den som nye brugere og gæster ser. Læs mere om indstilling og ændring af boardets standardtypografi i <xref linkend="acp_general_settings"/>.</para></listitem>
-			</itemizedlist>
-			<para>Klik på <guilabel>Udfør</guilabel> når disse valg er foretaget.</para>
-		
-			<para>Nu har vi gennemgået installationen af en typografi. Imidlertid sprang vi over de resterende muligheder på oversigtsiden, de er:</para>
-			<itemizedlist>
-				<listitem><para><guilabel>Oplysninger</guilabel>: Linket leder til typografiens detaljer, med mulighed for at ændre dens navn, copyrights og de elementer den anvender. Desuden er der mulighed for at bestemme om den skal være aktiv eller ej.</para></listitem>
-				<listitem><para><guilabel>Aktiver/Deaktiver</guilabel>: Linket giver mulighed for, let og hurtigt, at sætte typografien inaktiv eller aktiv.</para></listitem>
-				<listitem><para><guilabel>Eksporter</guilabel>: Giver mulighed for at eksportere typografien inklusive ønskede elementer. Der kan vælges mellem at downloade filen eller at gemme den i serverens store-mappe. Det er nyttigt at pakke hele typografien, så den kan anvendes et andet sted eller af andre.</para></listitem>
-				<listitem><para><guilabel>Slet</guilabel>: Brug dette link til at slette typografier. I forbindelse med sletning af en typografi, bliver du bedt om at vælge en anden til erstatning for de brugere som har valgt denne som standard. I dropdownmenuen ud for <guilabel>Erstat typografi med</guilabel> vælges den erstattende, klik på <guilabel>Slet</guilabel> for at afslutte handlingent. Selvom en typografi slettes bevares alle filer, og den vil stadig kunne ses i oversigten <guilabel>Ikke installerede typografier</guilabel>.</para></listitem>
-				<listitem><para><guilabel>Vis prøve</guilabel>: En nyttig mulighed for administratorer. Klikkes på linket vil du se dit board med denne typografi, det er god mulighed for at sikre om udseendet er tilfredstillende, inden typografien aktiveres og gøres tilgængelige for brugere. Typografiens ID kaldes automatisk i URL'en, og derfor kan alle boardets sider vises med denne typografi.</para></listitem>
-			</itemizedlist>
+			<para>At oprette en typografi er ikke en nem opgave, og det tager ganske lang tid. Dygtige designere fra phpBB-communityet opretter typografier, som er offentligt tilgængelige, og som alle kan downloade. Dette er et godt sted at starte, hvis du vil downloade og installere en ny typografi, og du ikke har mulighed for at oprette din egen, uanset årsagen. Det første sted, du bør kigge, er <ulink url="https://www.phpbb.com/styles/">Typografisektionen på phpBB.com</ulink>, hvor du finder en liste over nyttige links til blandt andet:
+				<variablelist>
+					<varlistentry>
+						<term><ulink url="https://www.phpbb.com/styles/demo/3.3/">Typografidemo</ulink></term>
+						<listitem><para>Typografidemoen giver dig mulighed for at vise hver typografi på et kørende forum og se, hvordan hver del af boardet ser ud med den valgte typografi. Du kan browse gennem typografierne, indtil du finder en, der passer til dig og/eller dit board. Typografidemoen giver links til at downloade typografien og se dens opslag i typografidatabasen.</para></listitem>
+					</varlistentry>
+
+					<varlistentry>
+						<term><ulink url="https://www.phpbb.com/styles/db/">Typografidatabase</ulink></term>
+						<listitem><para>Typografidatabasen indeholder alle de typografier, som er blevet valideret af phpBB.com's Styles Team. Alle typografier valideres for at sikre, at de er sikre at bruge, fungerer korrekt og ikke har andre faldgruber. Du kan filtrere typografier efter parametre som version, farve eller kategori for nemt at finde en typografi, du kunne tænke dig. Hvert typografiopslag i databasen indeholder et link til typografidemoen for at vise et levende eksempel på typografien i brug.</para></listitem>
+					</varlistentry>
+
+				</variablelist>
+			</para>
+
+
+			<section id="acp_styles_manage">
+				<sectioninfo>
+					<authorgroup>
+						<author>
+							<othername>jask</othername>
+						</author>
+					</authorgroup>
+				</sectioninfo>
+				<title>Installation og administration af typografier</title>
+				<para>Når du har valgt en typografi og er klar til at installere den, udpakkes den på din pc, og mappen med typografien uploades til boardets server. Sørg for, at den mappe, du uploader til serverens <filename class='directory'>styles</filename>, indeholder mapperne <filename class='directory'>template</filename> og <filename class='directory'>theme</filename> samt en fil <filename class='file'>style.cfg</filename>. Den eneste undtagelse er, når en typografi har sin skabelon eller sit tema baseret på en anden, hvilket du dog vil blive informeret om, når du downloader typografien. Den typografi, elementet stammer fra, skal også være installeret.</para>
+
+				<para>Når du har uploadet alle de nødvendige filer, kan du fortsætte med at installere din typografi. Gå til fanen <guilabel>Tilpasning</guilabel> i ACP, og klik på linket <guilabel>Installer typografier</guilabel>. Du bør se en tabel med en liste over dine uploadede typografier. Hvis du vil installere din downloadede typografi, skal du klikke på linket <guilabel>Installer typografi</guilabel> ud for dens navn.</para>
+
+				<para>På dette tidspunkt bør du vide, hvordan du installerer en ny typografi. Der er dog nogle links og funktioner på oversigtssiden for typografier, som vi ikke har nævnt. De er:</para>
+				<itemizedlist>
+					<listitem><para><guilabel>Oplysninger</guilabel>: Dette link fører dig til typografiens detaljer, hvor du kan ændre dens navn, angive om typografien er aktiv eller ej, samt om den skal være boardets standardtypografi.</para></listitem>
+					<listitem><para><guilabel>Aktiver/Deaktiver</guilabel>: Ret selvforklarende - dette link giver dig mulighed for hurtigt og nemt at slå typografien til og fra.</para></listitem>
+					<listitem><para><guilabel>Afinstaller</guilabel>: Hvis du eller dine brugere ikke længere kan lide typografien, kan du bruge dette link. Når du afinstallerer en typografi, skiftes brugerne af den til boardets standardtypografi. Du har også mulighed for at slette typografien helt, hvis du markerer feltet <guilabel>Slet fra filsystem</guilabel>. Dette afinstallerer typografien og sletter dens filer, hvilket ikke kan fortrydes.</para></listitem>
+					<listitem><para><guilabel>Vis prøve</guilabel>: Dette er en meget nyttig og kraftfuld funktion for administratorer. Klikker du på dette link, føres du til boardet, og den valgte typografi anvendes - dette er fremragende, når du vil se, om typografien ser godt ud på dit board, og du vil sikre dig, at du bør aktivere den. Denne funktion kan bruges selv med deaktiverede typografier. Typografiens ID sendes gennem URL'en, så du kan browse rundt på boardet og se enhver side, du har brug for.</para></listitem>
+				</itemizedlist>
+			</section>
+
 		</section>
-		
-		<section id="acp_styles_templates">
-			<sectioninfo>
-				<authorgroup>
-					<author>
-						<othername>jask</othername>
-					</author>
-				</authorgroup> 
-			</sectioninfo>
-			<title>Skabeloner</title>
-			<para>Skabelonerne danner boardets basale opbygning, de indeholder al HTML opmærkning og bestemmer strukturen på indholdet. Skabelonfilerne gør brug af tema- og grafikpakkens indhold af knapper og danner hermed hver enkelt sides udseende. Ved installation af et <glossterm>MOD</glossterm> bliver du ofte bedt om at ændre i en eller flere skabelonfiler. Da hver typografi indeholder sit eget sæt skabelonfiler (eneste undtagelser er hvis den arver skabeloner fra en anden typografi), skal denne ændring foretages for samtlige installerede typografier. Skabelonfilerne findes normalt i mappen <filename class="directory">styles/[din_typografi]/template/</filename>.</para>
-			<note>
-				<para>Ved enhver ændring i filerne tilhørende en typografi, er det vigtigt at få tømt cachen. Cachen kan tømmes direkte fra administratorindekset.</para>
-			</note>
-			<warning>
-				<para>Ændrer du i skabelonfilerne via ACP og efterfølgende genopfrisker skabelonerne, vil ændringerne blive overskrevet af indholdet af filerne på serveren.</para>
-			</warning>
-			<para>På siden <guimenuitem>Skabeloner</guimenuitem> findes adskillige links til sider hvor der kan ændres og arbejdes med skabelonerne. I det efterfølgende gennemgår vi disse og ser på hvad de kan anvendes til.</para>
-			<itemizedlist>
-				<title>Muligheder på siden <guimenuitem>Skabeloner</guimenuitem></title>
-					<listitem><para><guilabel>Rediger</guilabel>: Fra denne side kan alle de enkelte skabelonfiler ændres via ACP. Ved et klik på linket præsenteres en dropdownmenu, hvor alle skabelonfiler kan vælges. Ved valg af en af filerne dirigeres du til en editor som giver mulighed for at ændre direkte i filen. Hvis filen du ændrer i, ikke er <glossterm>skrivbar</glossterm>, gemmes alle skabelonerne i databasen. Det kan medføre fremadrettede problemer, for eksempel vil du ikke kunne ændre skabelonfilerne direkte i filsystemet. Alle skabelonfilerne bør derfor være skrivbare, inklusiv mappen <filename class="directory">template/</filename>, for at sikre at de ændringer scriptet forsøger at ændre i filen også bliver udført</para></listitem>
-					<listitem><para><guilabel>Mellemlager</guilabel>: phpBB mellemlagrer eller cacher alle templatefiler, og øger dermed boardets ydelse. Filerne kompileres og gøres klar til brug, for efterfølgende, med mellemrum at rekompilere dem, for at afspejle de ændringer der måtte være foretaget. På denne side vises alle mellemlagrede skabelonfiler. Foretager du ændringer i en af disse, markeres den pågældende fil og klik på <guilabel>Slet valgte</guilabel> nederst. phpBB regenererer filen med de foretagne ændringer. Der er ingen fare ved at slette mellemlagrede filer, de er kun midlertidige og du kan ikke ødelægge noget.</para></listitem>
-					<listitem><para><guilabel>Oplysninger</guilabel>: Her kan skabelonens navn og dens copyrights ses, og sidst men ikke mindst, hvor skabelonen gemmes. Gemmes den i filsystemet, kan filerne ændres i en teksteditor efter download fra serveren. Ved genupload skal cachen tømmes. Gemmes skabelonen i databasen, skal filerne ændres via editoren i <glossterm>ACP</glossterm>. Her er tømning af cachen unødvendig. Databaselagring af skabeloner er mere resourcekrævende af serveren, end lagring i filsystem.</para></listitem>
-					<listitem><para><guilabel>Genopfrisk</guilabel>: Meget lig mellemlager funktionen, ved at klikke <guilabel>Genopfrisk</guilabel> slettes samtlige denne skabelons mellemlagrede filer. En nyttig funktion efter ændring af filer i filsystemet, og du ønsker disse ændringer synlige. Alle gemte data i databasen overskrives med indholdet af filerne på serveren.</para></listitem>
-					<listitem><para><guilabel>Eksporter</guilabel>: Brug denne mulighed hvis du har behov for at downloade samtlige skabelonens filer for at anvende dem andre steder. Du bliver spurgt om du vil downloade til din PC eller gemme i boardets store-mappe. Du kan også vælge metode til komprimering, valgmulighederne afhænger af din serverkonfiguration.</para></listitem>
-					<listitem><para><guilabel>Slet</guilabel>: Sletter alle skabelonens referencer i databasen. Imidlertid efterlades skabelonfilerne intakte på serverens filsystem. Når en skabelon slettes, bliver du bedt om at vælge en anden skabelon til erstatning for den der slettes.</para></listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="acp_styles_themes">
-			<sectioninfo>
-				<authorgroup>
-					<author>
-						<othername>jask</othername>
-					</author>
-				</authorgroup>
-			</sectioninfo>
-			<title>Temaer</title>
-			<para>Nu, da vi har gennemgået skabelonerne som bestemmer boardets struktur, fortsætter vi med temaet. Typografitemaet sørger for at tilføje farver, dimensioner, formatering og skrifttyper. Temaet består af en eller flere CSS-filer som samlet set bestemmer boardets endelige udseende. Temafilerne kan normalt findes i mappen <filename class="directory">styles/[din_typografi]/theme/</filename>.</para>
-			
-			<para>Der er to mulige modeller for opsætning af temaer. Det første model anvendes i subsilver2, som anvender en stylesheet-fil, som hentes direkte ved at specificere dens URL i skabelonerne. Ændres i denne en fil, er genopfriskning af temaet unødvendig, det er nok at genfriske siden i browseren. Den anden model afvendes i prosilver, her er en fil som inkluderer alle de andre og herved kompilerer det komplette typografiark som gemmes i databasen. Når der foretages ændringer i en af disse temafiler, er det derfor nødvendigt at <guilabel>genopfriske</guilabel> temaet.</para>
-			
-			<warning>
-				<para>Ændringer i typografiarket foretaget via ACP, vil ved genopfriskning af temaet bliver overskrevet med indholdet af filerne placeret på serveren.</para>
-			</warning>
-			
-			<para>Siden <guimenuitem>Temaer</guimenuitem> er opbygget som skabelonsiden, med mange lighedspunkter. Den primære forskel er at temaer indeholder en anden type filer.</para>
-			
-			<itemizedlist>
-				<title>Muligheder på siden <guimenuitem>Temaer</guimenuitem></title>
-					<listitem><para><guilabel>Rediger</guilabel>: Herfra kan ændres i boardets typografiark. Består temaet af flere filer gemt i databasen, bliver alle samlet i et typografiark som kan ændres. Gem ændringer ved at klikke på <guilabel>Udfør</guilabel>. Ønsker du at ændre i den enkelte fil direkte, findes den i typografiens mappe <filename class="directory">theme/</filename>.</para></listitem>
-					<listitem><para><guilabel>Oplysninger</guilabel>: Her kan temaets navn og dets copyrights ses, og sidst men ikke mindst, hvor det gemmes. Gemmes det i filsystemet, kan filerne ændres i en teksteditor efter download fra serveren. Ved genupload skal temaet genindlæses, som beskrevet umiddelbart herunder. Gemmes temaet i databasen, kan typografiarket ændres via editoren i <glossterm>ACP</glossterm>. Her er genopfriskning unødvendig.</para></listitem>
-					<listitem><para><guilabel>Genindlæs</guilabel>: Vær forsigtig med denne mulighed, den indlæser data fra filerne og overskriver typografiark gemt i databasen. Ændringer foretaget via ACP mistes herved. Hvis du ønsker at gemme ændringerne, kan temaet <guilabel>Eksporteres</guilabel> til din PC, herved kan de tilføjes igen.</para></listitem>
-					<listitem><para><guilabel>Eksporter</guilabel>: Brug denne mulighed hvis du har behov for at downloade samtlige temaets filer for at anvende dem andre steder. Du bliver bedt om at tage stilling til om download skal ske til din PC eller til boardets store-mappe. Du kan også vælge metode til komprimering, valgmulighederne afhænger af din serverkonfiguration.</para></listitem>
-					<listitem><para><guilabel>Slet</guilabel>: Sletter alle temaets referencer i databasen. Imidlertid efterlades temafilerne intakte på serverens filsystem. Når et tema slettes, bliver du bedt om at vælge et andet til erstatning for det der slettes.</para></listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="acp_styles_imagesets">
-			<sectioninfo>
-				<authorgroup>
-					<author>
-						<othername>jask</othername>
-					</author>
-				</authorgroup>
-			</sectioninfo>
-			<title>Grafikpakker</title>
-			<para>Det sidste komponent i en typografi er grafikpakken. Den indeholder alle grafikelementer som ikke er inkluderet i temaet. Eksempler er knapper der anvendes ved indsendelse af nye emner og besvarelse af disse, emne- og forummarkeringer. De filer som udgør grafikpakken findes normalt i mappen <filename class="directory">styles/[your_style]/imageset/</filename>.</para>
-			<para>Grafikpakken gemmes altid i databasen. Grafikfilernes specifikationer (placering og dimensioner) er listet i filen <filename>imageset.cfg</filename>, placeret i mappen imageset og gemt i databasen, hvorfra de indlæses.</para>
-			<para>I <acronym>ACP</acronym>s brugerflade kan der ændres i en grafikpakke, men før vi beskriver disse muligheder, gennemgår vi hvordan filen imageset.cfg er opbygget, i fald du får brug for at ændre i denne manuelt. En typisk linie i filen ser sådan ud: <code>img_sticky_read = sticky_read.gif*27*27</code>. Teksten før lighedstegnet er selve elementets navn og og efter lighedstegnet den tilsvarende grafikfil med angivelse af dens højde og bredde (i denne rækkefølge). Disse sidste tre specifikationer er adskilt af en asterisk og ingen mellemrum.</para>			
-			<itemizedlist>
-				<title>Muligheder på siden <guimenuitem>Ændre grafikpakke</guimenuitem></title>
-					<listitem>
-						<para><guilabel>Rediger</guilabel>: Her ændres de individuelle elementer i pakken. Grafikpakken består af en række grafikelementer med specifikke egenskaber. &quot;Sticky topic icon&quot; er for eksempel et element med egenskaberne grafikfil, højde og bredde tilknyttet. Herunder gennemgås hvilke muligheder der er tilgængelige på denne side:</para>
-						<itemizedlist>
-							<listitem><para><guilabel>Vælg grafikelement</guilabel>: I dropdownmenuen vælges det element der ønskes ændret.</para></listitem>
-							<listitem><para><guilabel>Nuværende grafik</guilabel>: Viser den grafikfil der er i øjeblikket er tilknyttet elementet.</para></listitem>
-							<listitem><para><guilabel>Valgte grafikfil</guilabel>: Viser den fil du har valgt i dropdownmenuen <guilabel>Grafikfil</guilabel> umiddelbart herunder.</para></listitem>
-							<listitem><para><guilabel>Grafikfil</guilabel>: <acronym>ACP</acronym> henter alle grafikfiler placeret i mappen <filename class="directory">imageset/</filename> og lister dem i dropdownmenuen. Her kan enhver grafikfil tilknyttes et grafikelement på boardet.</para></listitem>
-							<listitem><para><guilabel>Inkluder dimensioner</guilabel>: Vælges <guilabel>Ja</guilabel> vil dimensionerne herunder blive anvendt, ellers bliver størrelsen automatisk detekteret.</para></listitem>
-							<listitem><para><guilabel>Grafikbredde</guilabel>: Bestemmer grafikkens bredde.</para></listitem>
-							<listitem><para><guilabel>Grafikhøjde</guilabel>: Bestemmer grafikkens højde.</para></listitem>				
-						</itemizedlist>				
-					</listitem>
-					<listitem><para><guilabel>Oplysninger</guilabel>: Her har du mulighed for at ændre grafikpakkens navn og dens copyright. Husk at respektere den oprindelige skaber af pakken.</para></listitem>
-					<listitem><para><guilabel>Genindlæs</guilabel>: Ved at klikke her bliver alle grafikelementers specifikationer genindlæst fra filen <filename>imageset.cfg</filename> og gemt i databasen. Handlingen vil derfor <emphasis>overskrive</emphasis> enhver ændring du har foretaget via ACP-editoren og som ikke er gemt på filesystemet.</para></listitem>
-					<listitem><para><guilabel>Eksporter</guilabel>: Brug denne mulighed hvis du har behov for at downloade hele grafikpakken for eventuelt at anvende den andre steder. Du bliver bedt om at tage stilling til om download skal ske til din PC eller til boardets store-mappe. Du kan også vælge metode til komprimering, valgmulighederne afhænger af din serverkonfiguration.</para></listitem>
-					<listitem><para><guilabel>Slet</guilabel>: Sletter alle grafikpakkens referencer i databasen. Imidlertid efterlades alle pakkens filer intakte på serverens filsystem. Når en grafikpakke slettes, bliver du bedt om at vælge en anden til erstatning for den der slettes. Der skal altid være mindst en grafikpakke installeret.</para></listitem>
-			</itemizedlist>
-			<figure id="img_acp_imageset_edit">
-				<title>Skærmbilledet ved ændring af grafikpakke</title>
+		<section id="acp_customise_extensions">
+			<title>Extensions</title>
+			<para>Extensions er selvstændige pakker, som uploades til boardets mappe <filename class='directory'>ext</filename>. Ved hjælp af <guilabel>Extension Manager</guilabel> kan du installere og administrere de extensions, der kører på dit board.</para>
+			<figure id="img_extensions_overview">
+				<title>Oversigt over extensions</title>
 				<mediaobject>
 					<imageobject>
-						<imagedata format="PNG" fileref="../images/admin_guide/imageset_edit.png"/>
+						<imagedata format="PNG" fileref="../images/admin_guide/extensions_overview.png"/>
 					</imageobject>
 					<caption>
-						<para>På denne side kan hvert grafikelements detaljer ændres individuelt.</para>
+						<para>Dette er en liste over de extensions, der er aktiveret eller klar til brug på dit board.</para>
 					</caption>
 				</mediaobject>
-			</figure>			
+			</figure>
+			<para>Efter du har uploadet en extension, vil den fremgå i <guilabel>Extension Manager</guilabel>, hvor du blot skal klikke på linket <guilabel>Aktiver</guilabel> for at aktivere den. Når en extension er aktiveret, vil en fane <guilabel>Extensions</guilabel> fremgå i administratorkontrolpanelet, hvis extensionen har konfigurationsindstillinger. Linket <guilabel>Oplysninger</guilabel> viser information om extensionen, såsom dens forfattere, hjemmeside, beskrivelse og versionskrav. Kolonnen <guilabel>Nuværende version</guilabel> angiver, om du har den nyeste version af extensionen. Linket <guilabel>Indstillinger</guilabel> øverst på siden giver dig mulighed for at tjekke for opdateringer af prerelease-extensions, som endnu ikke anses for stabile. Dit board vil periodisk tjekke, om du kører de nyeste extensions, men du kan klikke på linket <guilabel>Gentjek alle versioner</guilabel> for at gennemtvinge et gentjek af dine extensions' versioner.</para>
+
+			<para>Hvis en nyere version af din extension er tilgængelig, kan du opdatere den ved at følge disse trin:</para>
+			<orderedlist>
+				<listitem><para>Deaktiver extensionen ved at klikke på linket <guilabel>Deaktiver</guilabel> i kolonnen <guilabel>Handlinger</guilabel>.</para></listitem>
+				<listitem><para>Slet extensionens filer fra boardets mappe <filename class='directory'>ext</filename>. Slet kun den mappe, der svarer til den extension, du ønsker at opdatere.</para></listitem>
+				<listitem><para>Upload den nyeste version af filerne til mappen <filename class='directory'>ext</filename>.</para></listitem>
+				<listitem><para>Aktiver extensionen ved at klikke på linket <guilabel>Aktiver</guilabel> i kolonnen <guilabel>Handlinger</guilabel>.</para></listitem>
+			</orderedlist>
+
+			<para>Hvis du ønsker at fjerne en extension fra dit board fuldstændigt, skal du følge disse trin:</para>
+			<orderedlist>
+				<listitem><para>Deaktiver extensionen ved at klikke på linket <guilabel>Deaktiver</guilabel> i kolonnen <guilabel>Handlinger</guilabel>.</para></listitem>
+				<listitem><para>Slet alle data tilføjet af extensionen ved at klikke på linket <guilabel>Slet data</guilabel> i kolonnen <guilabel>Handlinger</guilabel>.</para></listitem>
+				<listitem><para>Slet extensionens filer fra boardets mappe <filename class='directory'>ext</filename>. Slet kun den mappe, der svarer til den extension, du ønsker at opdatere.</para></listitem>
+			</orderedlist>
+
 		</section>
-		
+		<section id="acp_customise_language">
+			<sectioninfo>
+				<authorgroup>
+					<author>
+						<othername>jask</othername>
+					</author>
+				</authorgroup>
+			</sectioninfo>
+			<title>Sprogpakker</title>
+			<para>I phpBB kan du uploade flere sprogpakker til dine brugere. Enhver tekststreng, som systemet viser, bør oversættes, efter du har uploadet en ny sprogpakke. Brug af en anden sprogpakke ændrer ikke indholdet af indlæg, da det ikke er muligt at oversætte dem på grund af det varierede indhold, de kan have, samt begrænsningerne ved maskinoversættelse.</para>
+			<para>Sprogpakker kan downloades fra siden <ulink url="https://www.phpbb.com/downloads/">Downloads</ulink> på phpbb.com.</para>
+			<para>For at tilføje en sprogpakke skal du udpakke den downloadede fil og uploade indholdet - det vil sige mapperne <filename class='directory'>language</filename> og <filename class='directory'>styles</filename> - til boardets rodmappe. Boardets mappe <filename class='directory'>language/</filename> bør derefter indeholde en ekstra mappe med navnet på det tilføjede sprogs ISO-kode - hvis der for eksempel tilføjes fransk ud over standardpakken britisk engelsk, mappen <filename class='directory'>en/</filename>, vil der også være en mappe <filename class='directory'>fr/</filename>. Når du har uploadet filerne til systemet, bør pakken fremgå i listen <guilabel>Ikke-installerede sprogpakker</guilabel>. Klik på <guilabel>Installer</guilabel> for at tilføje den til boardet og gøre den tilgængelig for brugerne.</para>
+			<para>Når sprogpakken er installeret, kan brugere vælge den under Brugerkontrolpanel » Boardindstillinger » Rediger globale indstillinger.</para>
+			<note>
+				<para>For at gøre en sprogpakke til boardets standardsprog skal du ændre <link linkend="acp_general_config">Boardkonfigurationen</link>.</para>
+			</note>
+			<para>Har du flere sprogpakker installeret og vælger en anden end standardpakken, vil du se en liste over ikke-oversatte variabler, hvis pakkerne ikke er synkroniserede. Dette er nyttigt, når du installerer MODs til ét sprog, og du ikke kan finde, hvilke sprogstrenge der mangler i de andre.</para>
+			<important>
+				<para>Sprogpakker, ud over standardpakken britisk engelsk, opdateres ikke automatisk, når boardet opdateres. Har du installeret andre sprogpakker, skal du også opdatere disse.</para>
+			</important>
+		</section>
 	</section>
 
 	<section id="acp_maintenance">
@@ -2414,23 +2364,6 @@
 			<note>
 				<para>Afsending af emails til alle boardets brugere eller en meget stor brugergruppe kan medføre lang ekspeditionstid. Afvent at scriptet bekræfter at emailen er afsendt.</para>
 			</note>
-		</section>
-		<section id="acp_system_language">
-			<sectioninfo>
-				<authorgroup>
-					<author>
-						<othername>jask</othername>
-					</author>
-				</authorgroup>
-			</sectioninfo>
-			<title>Sprogpakker</title>
-			<para>I phpBB kan installeres flere sprog som dine brugere kan vælge imellem. Enhver af boardets tekststrenge skulle blive oversat når en ny pakke installeres og vælges som sprog af brugere. Valg af et andet standardsprog ændrer ikke sprogbrug i boardets indsendte indlæg.</para>
-			<para>Sprogpakker kan hentes på phpBB.com's downloadside. For at tilføje installere en sprogpakke udpakkes dens indhold, det fulde indhold uploades til mappen <filename>language/</filename>. Alle sprogpakkens filer skulle være indholdt i en mappe navngivet med sprogets ISO-kode, for eksempel er standardsproget British English indeholdt i mappen <filename>en/</filename>. Når filerne er uploadet, vil sprogpakken være synlig i listen <guilabel>Ikke installerede sprogpakker</guilabel>. Klik på <guilabel>Installer</guilabel> for at tilføje den til boardet og herved gøre sproget tilgængelig for brugere.</para>
-			<note>
-					<para>I <link linkend="acp_general_config">Board grundlæggende</link> er det muligt at vælge en sprogpakke som boardets standardsprog.</para>
-			</note>
-			<para>Hvis du ikke er fortrolig med at redigere i PHP-filer i en teksteditor og alligevel gerne vil ændre tekststrenge vist på boardet, kan den indbyggede funktion til at rette sproglinier med tages i anvendelse. I oversigten <guilabel>Installerede sprogpakker</guilabel> klikkes på sprogpakkens navn i kolonnen til venstre. Herefter kan sprogpakkeinformationer og indholdet i de inkluderede sprogpakkefiler redigeres. Er der flere sprogpakker installeret og du vælger en anden end standardpakken, vises øverst en oversigt over ikke oversatte sprognøgler hvis pakkerne ikke synkroniseret. Det er nyttigt når der installeres MODs på et sprog og du ikke kan finde de sproglinier der mangler for et andet sprog.</para>
-			<para>Vælger du at redigere en fil med det indbyggede værktøj, er der to metoder hvormed oversættelsen kan opdateres på boardet. Du kan vælge at <guilabel>Udfør</guilabel>e eller <guilabel>Indsend og download</guilabel>e filen, som lagre den ændrede fil i mappen <filename>store/</filename> og bliver desuden tilbudt som download hvis du vælger sidstnævnte. Herefter skal du manuelt med FTP flytte filen fra store-mappen til sprogpakken, og herved overskrive den tidligere udgave af filen. Den anden mulighed, som findes umiddelbart under de to førnævnte knapper, giver mulighed for at flytte filen til sprogpakken direkte med FTP. Du vil her blive afkrævet FTP-login informationer, og filen kan gemmes og opdateres direkte af scriptet.</para>
 		</section>
 		<section id="acp_system_phpinfo">
 			<sectioninfo>
