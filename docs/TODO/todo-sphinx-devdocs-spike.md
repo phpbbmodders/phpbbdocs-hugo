@@ -1,6 +1,6 @@
-# Sphinx dev-docs pipeline: spike results and real converter (Phases 0-2)
+# Sphinx dev-docs pipeline: spike results and real converter (Phases 0-3)
 
-## Status: real converter implemented and validated against the full corpus (Phase 2); production integration not started
+## Status: converter + translations.sh CLI support implemented and validated (Phases 0-3); content migration and live-site cutover not started
 
 `docs/phpbb-gettext-translation-plan.md` proposes a Sphinx-native gettext
 pipeline for developer docs (`dev-docs-docbook/`), as a replacement for
@@ -155,9 +155,10 @@ unresolvable target gets a loud inline diagnostic and an `xsl:message`
 warning instead of a silent or broken link.
 
 Still explicitly out of scope, unchanged from the "Recommended next
-step" below: `translations.sh` `development`-family CLI support,
-migrating existing hand-translated dev-docs content, running the
-converter against the full 55-file corpus, and CI.
+step" below: migrating existing hand-translated dev-docs content, and
+CI. (`translations.sh` `development`-family CLI support and running the
+converter against the full 55-file corpus were both completed in later
+phases below — see "Phase 3" and "Full 55-file corpus sweep".)
 
 ## Still open, unrelated to whether the pipeline works
 
@@ -177,14 +178,10 @@ separate problems for whenever full rollout is scoped:
   headers fine, this bug is Sphinx-specific), so it stays a standalone
   tool until an actual Sphinx-based pipeline entry point exists to call
   it from.
-- **`translations.sh` has no `development` family support.** Its
-  `lib.py` metadata schema already anticipates one (`record-source`/
-  `read-source` accept `family=development`), but the PO-path/
-  source-path helpers and every `cmd_*` function are hard-coded to
-  `content/*/chapters/`. Needs its own source-revision tracking against
-  the separate `upstream-phpbb-documentation` checkout, not this repo's
-  own git history (`current_hugo_commit()`'s current approach doesn't
-  apply).
+- ~~**`translations.sh` has no `development` family support.**~~ —
+  **fixed in Phase 3.** Six `devdocs-*` subcommands now exist, with
+  their own `current_devdocs_commit()` tracking the separate
+  `upstream-phpbb-documentation` checkout's own git history.
 - **Existing hand-translated dev-docs content isn't migrated.**
   `da`/`fr`/`it` have 55 hand-translated files, `de`/`de_x_sie` only 50 —
   real drift already exists, a migration path needs designing (the
@@ -243,18 +240,47 @@ this tool's job to silently paper over).
 All new element handling has permanent regression coverage in
 `tests/sphinx_devdocs/test_sphinx_to_hugo.py` (test count 37 → 53).
 
+## Phase 3: translations.sh development-family support
+
+`translations.sh` gained six `devdocs-*` subcommands
+(`devdocs-extract`/`init`/`update`/`status`/`check`/`build`), giving the
+55-file dev-docs tree the same gettext workflow the `documentation`
+family already has, using the Phase 2 converter as the real per-file
+worker. PO catalogs mirror the RST tree exactly
+(`<lang>/development/<docname>.po`); `current_devdocs_commit()` tracks
+`upstream-phpbb-documentation/`'s own git history (a real separate
+upstream, unlike `documentation`'s hand-authored-in-this-repo source);
+`metadata/source.json`'s `upstream` object is now per-family.
+`devdocs-build` writes to `build/devdocs-preview/`, a preview-only
+location — it does **not** touch `site/content/<lang>/development/`,
+which stays fully owned by the existing Pandoc/DocBook pipeline until a
+deliberate future cutover. No `devdocs-audit` yet (nothing real to audit
+against). Verified against the full real corpus, not just fixtures: a
+complete `devdocs-check fr` run against all 55 real files came back
+`Result: COMPLETE`. 27 new regression tests in
+`tests/translations_sh/test_devdocs_workflow.py`.
+
+Still explicitly not started: any real language actually being
+translated through this pipeline (no real per-language dev-docs content
+exists in it yet — everything verified so far used synthetic `[XX]`
+translations), and CI.
+
 ## Recommended next step
 
-With the real converter implemented (Phase 2) and now validated against
-the full real corpus, the remaining big-ticket items are genuinely
-separate, larger commitments, not more walking-skeleton work:
+With the converter (Phase 2) and CLI support (Phase 3) both implemented
+and validated, the remaining big-ticket item is the one deferred when
+Phase 3 was chosen over it:
 
-- **`translations.sh` `development`-family support** — real architecture
-  work (source-revision tracking against a separate upstream checkout,
-  not this repo's own git history).
-- **Migrating existing hand-translated dev-docs content** — a real design
-  problem, not an audit; `de`/`de_x_sie` are already at 50 files vs.
+- **Migrating existing hand-translated dev-docs content** — a real
+  design problem, not an audit. `de`/`de_x_sie` are at 50 files vs.
   `en`/`da`/`fr`/`it`'s 55, so drift needs reconciling before any
-  migration tooling can assume 1:1 file correspondence.
+  migration tooling can assume 1:1 file correspondence. The existing
+  content lives as hand-translated DocBook (`dev-docs-docbook/<lang>/`,
+  produced by the Pandoc pipeline) — a completely different storage
+  model from the new pipeline's PO catalogs, so this isn't a format
+  conversion so much as a genuine re-authoring/alignment problem: no
+  automated tool can honestly claim to preserve translator intent going
+  from hand-translated prose to gettext msgstrs without a human
+  checking the result.
 
-Each is a fresh scoping decision, not a continuation of this spike.
+A fresh scoping decision, not a continuation of this spike.
