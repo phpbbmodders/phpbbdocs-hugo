@@ -25,6 +25,18 @@ DOCBOOK_CHAPTERS = [
 
 HUGO_ROOT = Path(__file__).resolve().parent.parent
 
+# The "development" family's real, separate upstream checkout (a real
+# sparse-cloned phpbb/documentation repo, unlike the "documentation"
+# family's English source, which is hand-authored directly in this repo
+# with no upstream checkout of its own -- see current_hugo_commit() vs
+# current_devdocs_commit() below). DEVDOCS_UPSTREAM_CHECKOUT env var
+# overrides, mirroring translations.sh's own override of the same name
+# for its devdocs_checkout_dir -- mainly so tests can point both the
+# bash and Python sides at the same small local checkout consistently.
+DEVDOCS_UPSTREAM_CHECKOUT = Path(os.environ.get("DEVDOCS_UPSTREAM_CHECKOUT", str(HUGO_ROOT / "upstream-phpbb-documentation")))
+DEVDOCS_SOURCE_SUBDIR = "development"
+DEVDOCS_BUILD_DIR = HUGO_ROOT / "build" / "gettext" / "development"
+
 
 def load_translation_conf():
     """Resolve LANGUAGES_REPO: env var override, else translation.conf,
@@ -105,12 +117,30 @@ def source_json_path(languages_repo):
     return languages_repo / "metadata" / "source.json"
 
 
+def migrate_upstream_metadata(data):
+    """Upgrades a legacy flat "upstream": {"repository": ..., "branch": ...}
+    object (written before the "development" family existed, when there
+    was only ever one family to record an upstream label for) into the
+    per-family shape {"documentation": {"repository": ..., "branch": ...}}
+    -- "development" has a genuinely different, real external upstream
+    (an actual sparse-cloned checkout) from "documentation"'s label-only
+    entry, so a single flat object can no longer represent both.
+    Idempotent: does nothing if "upstream" is already per-family shaped
+    or empty/absent. Mutates and returns data in place so callers can
+    treat this as a normalizing pass over whatever was just read."""
+    upstream = data.get("upstream")
+    if upstream and "repository" in upstream and "branch" in upstream:
+        data["upstream"] = {"documentation": dict(upstream)}
+    return data
+
+
 def read_source_metadata(languages_repo):
     path = source_json_path(languages_repo)
     if not path.exists():
         return {"upstream": {}, "languages": {}}
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+    return migrate_upstream_metadata(data)
 
 
 def write_source_metadata(languages_repo, data):
@@ -134,6 +164,69 @@ def current_hugo_commit():
     return result.stdout.strip()
 
 
+def current_devdocs_commit():
+    """The commit upstream-phpbb-documentation/ was last pulled from --
+    a real external phpbb/documentation commit, unlike
+    current_hugo_commit(), which reads THIS repo's own history because
+    the documentation family's English source has no separate upstream
+    checkout of its own. Used as the 'development' family's source
+    revision."""
+    checkout = DEVDOCS_UPSTREAM_CHECKOUT
+    if not (checkout / ".git").is_dir():
+        print(
+            f"error: {checkout} not found -- run "
+            "'./translations.sh devdocs-extract' first",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    result = subprocess.run(
+        ["git", "-C", str(checkout), "log", "-1", "--format=%H", "--", DEVDOCS_SOURCE_SUBDIR],
+        capture_output=True, text=True, check=True,
+    )
+    return result.stdout.strip()
+
+
+def write_devdocs_conf_py(conf_dir):
+    """Writes sphinx_to_hugo.py's own synthesized minimal Sphinx conf.py
+    verbatim into conf_dir -- reused rather than a second, driftable
+    copy of that string, so POT extraction (this module) and per-file
+    conversion (sphinx_to_hugo.py) parse the same RST under identical
+    Sphinx settings."""
+    import sphinx_to_hugo
+
+    conf_dir = Path(conf_dir)
+    conf_dir.mkdir(parents=True, exist_ok=True)
+    (conf_dir / "conf.py").write_text(sphinx_to_hugo.CONF_PY, encoding="utf-8")
+
+
+def devdocs_discover_docnames(source_root):
+    """Every known dev-docs docname under source_root -- delegates to
+    sphinx_to_hugo's own discovery function rather than reimplementing
+    the same rglob("*.rst") logic a second time, so this module and the
+    converter always agree on what counts as a docname."""
+    import sphinx_to_hugo
+
+    return sphinx_to_hugo.discover_known_docnames(Path(source_root))
+
+
+def devdocs_po_path(languages_repo, lang, docname):
+    """docname may itself contain "/" (e.g. "migrations/tools/config")
+    -- Path handles the extra segments with no special-casing, mirroring
+    the RST tree exactly rather than flattening it (see translations.sh's
+    devdocs-* commands for why: avoids importing Hugo's own
+    chapter/slug-flattening collision history into canonical PO
+    storage)."""
+    return lang_dir(languages_repo, lang) / "development" / f"{docname}.po"
+
+
+def devdocs_pot_path(docname):
+    return DEVDOCS_BUILD_DIR / f"{docname}.pot"
+
+
+def devdocs_source_path(source_root, docname):
+    return Path(source_root) / f"{docname}.rst"
+
+
 def po_stats(po_path):
     """Return (translated, fuzzy, untranslated, obsolete) counts for a
     PO file. Matches gettext's own conventions: an obsolete entry
@@ -152,6 +245,12 @@ def docbook_po_path(languages_repo, lang, chapter):
 
 def docbook_source_path(chapter):
     return HUGO_ROOT / "content" / "en" / "chapters" / f"{chapter}.xml"
+
+
+UPSTREAM_DEFAULTS = {
+    "documentation": {"repository": "phpbb/documentation", "branch": "3.3.x"},
+    "development": {"repository": "phpbb/documentation", "branch": "3.3.x", "path": "development"},
+}
 
 
 if __name__ == "__main__":
@@ -184,6 +283,15 @@ if __name__ == "__main__":
     p.add_argument("lang", help="Language code")
     p.add_argument("family", choices=["documentation", "development"], help="Source family")
 
+    p = sub.add_parser("list-devdocs-docnames", help="Print every known dev-docs docname under a source root, one per line")
+    p.add_argument("source_root", help="Root of the Sphinx/RST dev-docs source tree")
+
+    p = sub.add_parser("extract-devdocs-pot", help="Extract POT templates for every dev-docs file into build_dir")
+    p.add_argument("source_root", help="Root of the Sphinx/RST dev-docs source tree")
+    p.add_argument("build_dir", help="Directory to write extracted .pot files into")
+
+    p = sub.add_parser("current-devdocs-commit", help="Print the commit upstream-phpbb-documentation/ was last pulled from")
+
     args = parser.parse_args()
     languages_repo = load_translation_conf()
 
@@ -204,9 +312,12 @@ if __name__ == "__main__":
         # setdefault() only fires when the key is absent, not when it's
         # present-but-empty (e.g. a source.json written before this
         # default existed, which persisted "upstream": {}) -- check for
-        # that explicitly so the default actually lands.
-        if not data.get("upstream"):
-            data["upstream"] = {"repository": "phpbb/documentation", "branch": "3.3.x"}
+        # that explicitly so the default actually lands. migrate_upstream_metadata()
+        # (already applied by read_source_metadata() above) has already
+        # upgraded a legacy flat upstream object to the per-family shape,
+        # so this only needs to fill in whichever family is still missing.
+        data.setdefault("upstream", {})
+        data["upstream"].setdefault(args.family, dict(UPSTREAM_DEFAULTS[args.family]))
         data.setdefault("languages", {})
         data["languages"].setdefault(args.lang, {})
         data["languages"][args.lang][args.family] = {"commit": args.commit}
@@ -217,3 +328,36 @@ if __name__ == "__main__":
         data = read_source_metadata(languages_repo)
         commit = data.get("languages", {}).get(args.lang, {}).get(args.family, {}).get("commit")
         print(commit or "unknown")
+
+    elif args.action == "list-devdocs-docnames":
+        for docname in devdocs_discover_docnames(args.source_root):
+            print(docname)
+
+    elif args.action == "extract-devdocs-pot":
+        import tempfile
+
+        build_dir = Path(args.build_dir)
+        build_dir.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix="devdocs_extract_") as tmp:
+            tmp_path = Path(tmp)
+            conf_dir_obj = tmp_path / "conf"
+            write_devdocs_conf_py(conf_dir_obj)
+            doctrees_dir = tmp_path / "doctrees"
+            result = subprocess.run(
+                [
+                    "sphinx-build", "-b", "gettext", "-q",
+                    "-c", str(conf_dir_obj),
+                    "-d", str(doctrees_dir),
+                    str(args.source_root), str(build_dir),
+                ],
+                capture_output=True, text=True,
+            )
+        if result.stderr.strip():
+            print(result.stderr, file=sys.stderr)
+        if result.returncode != 0:
+            sys.exit(f"sphinx-build failed (exit {result.returncode})")
+        pot_count = len(list(build_dir.rglob("*.pot")))
+        print(f"extracted {pot_count} .pot file(s) into {build_dir}")
+
+    elif args.action == "current-devdocs-commit":
+        print(current_devdocs_commit())
