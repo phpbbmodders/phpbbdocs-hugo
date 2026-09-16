@@ -1,15 +1,26 @@
 #!/usr/bin/env bash
 #
-# translations.sh — gettext-based translation workflow for
-# dev-docs-docbook/ and content/*/chapters/ translations.
+# translations.sh — gettext-based translation workflow for two source
+# families: the seven hand-authored end-user "documentation" chapters
+# (content/en/chapters/*.xml -> <lang>/documentation/*.po), and the
+# 55-file Sphinx/RST "development" (dev-docs) tree, pulled from a real
+# separate upstream checkout (upstream-phpbb-documentation/) rather than
+# hand-authored in this repo.
 #
-# DocBook engine: itstool (see docs/phpbb-gettext-translation-poc-results.md
-# for why itstool over po4a/poxml). Currently covers the seven
-# hand-authored end-user chapters (content/en/chapters/*.xml ->
-# <lang>/documentation/*.po in the sibling phpbbdocs-languages repo).
-# Sphinx/RST dev-docs support is not implemented yet (see that same
-# report's open items — the Symfony conf.py extensions question isn't
-# resolved).
+# DocBook "documentation" family engine: itstool (see
+# docs/phpbb-gettext-translation-poc-results.md for why itstool over
+# po4a/poxml). Sphinx "development" family engine: translations/sphinx_to_hugo.py
+# + xsl/proteus_sphinx_hugo.xsl (see docs/TODO/todo-sphinx-devdocs-spike.md
+# for that pipeline's own validation history).
+#
+# The devdocs-* commands below are CLI/architecture scaffolding only —
+# no real language has any development-family catalogs yet, and
+# devdocs-build writes to a preview-only location (build/devdocs-preview/),
+# never to the live site/content/<lang>/development/ tree, which stays
+# fully owned by the existing phpbbdocs_hugo_devdocs.sh (Pandoc/DocBook)
+# pipeline until a deliberate future migration/cutover decision. There is
+# no devdocs-audit yet either — nothing to audit against until real
+# per-language content exists.
 #
 # Usage: ./translations.sh <command> [args]
 #   extract                      Generate POT templates (maintainer command)
@@ -21,6 +32,14 @@
 #                                 content/<lang>/chapters/ for real content
 #                                 mismatches (see docs/TODO/todo-po-roundtrip-audit.md)
 #   build <lang>                 Reconstruct translated DocBook and build Hugo
+#
+#   devdocs-extract               Generate dev-docs POT templates (maintainer command)
+#   devdocs-init <lang>           Initialize a new language's dev-docs catalogs
+#   devdocs-update <lang>         Refresh POT and merge into <lang>'s dev-docs catalogs
+#   devdocs-status <lang>         Show dev-docs translation coverage/completion for <lang>
+#   devdocs-check <lang>          Validate <lang>'s dev-docs PO files and reconstruction
+#   devdocs-build <lang>          Reconstruct translated dev-docs Markdown into
+#                                 build/devdocs-preview/ (preview only, not the live site)
 #
 # Canonical PO catalogs live in the sibling phpbbdocs-languages repo,
 # resolved via translation.conf (LANGUAGES_REPO env var overrides it).
@@ -66,6 +85,64 @@ require_lang_arg() {
 		echo "error: missing <lang> argument" >&2
 		exit 1
 	fi
+}
+
+# DEVDOCS_UPSTREAM_CHECKOUT overrides the checkout location, mirroring
+# LANGUAGES_REPO's own override pattern above — mainly so tests can point
+# this at a small, real (but local) git checkout instead of the full
+# 55-file real upstream checkout.
+devdocs_checkout_dir="${DEVDOCS_UPSTREAM_CHECKOUT:-$script_dir/upstream-phpbb-documentation}"
+
+# Clones (first run) or pulls (subsequent runs) the real upstream
+# phpbb/documentation repo's "development/" subtree into
+# upstream-phpbb-documentation/ — the same checkout directory
+# pull_upstream_docs.sh already uses for the "documentation/" subtree.
+# Uses "sparse-checkout add", not "set", specifically so a prior
+# pull_upstream_docs.sh run's "documentation" subtree isn't silently
+# wiped from the working tree by this one (convert_dev_docs_to_docbook.sh
+# uses "set" for the same "development" subtree, a pre-existing, unrelated
+# minor inconsistency between those two scripts — not fixed here).
+ensure_devdocs_checkout() {
+	if [ -d "$devdocs_checkout_dir/.git" ]; then
+		echo "Existing checkout found at '$devdocs_checkout_dir' — pulling latest..."
+		git -C "$devdocs_checkout_dir" pull --ff-only
+		git -C "$devdocs_checkout_dir" sparse-checkout add development
+	else
+		echo "Cloning the 'development/' subtree from https://github.com/phpbb/documentation.git..."
+		rm -rf "$devdocs_checkout_dir"
+		git clone --depth 1 --filter=blob:none --sparse https://github.com/phpbb/documentation.git "$devdocs_checkout_dir"
+		git -C "$devdocs_checkout_dir" sparse-checkout set development
+	fi
+	[ -d "$devdocs_checkout_dir/development" ] || {
+		echo "error: $devdocs_checkout_dir/development not found — sparse-checkout may have failed" >&2
+		exit 1
+	}
+}
+
+# Read-only guard for commands that must not silently trigger a network
+# pull (status/check/build) — errors clearly instead.
+require_devdocs_checkout() {
+	if [ ! -d "$devdocs_checkout_dir/development" ]; then
+		echo "error: $devdocs_checkout_dir/development not found — run 'devdocs-extract' first" >&2
+		exit 1
+	fi
+}
+
+# Echoes a fresh mktemp -d path containing a fix_csv_table_headers.py-fixed
+# copy of the checkout's development/ tree, ready as sphinx_to_hugo.py's
+# --source-root. Caller is responsible for `rm -rf`ing the returned dir.
+# A throwaway copy, not the shared checkout in place: sphinx_to_hugo.py's
+# own docstring requires the CSV-header fix run against a disposable copy
+# (13 real files affected), and fixing in place would leave local
+# modifications that could break pull_upstream_docs.sh's/
+# convert_dev_docs_to_docbook.sh's own `git pull --ff-only` expectations
+# against this same shared checkout.
+prepare_devdocs_source_copy() {
+	local copy_dir
+	copy_dir="$(mktemp -d)"
+	cp -r "$devdocs_checkout_dir/development/." "$copy_dir/"
+	python3 "$script_dir/fix_csv_table_headers.py" "$copy_dir" >/dev/null
+	echo "$copy_dir"
 }
 
 cmd_extract() {
@@ -421,6 +498,341 @@ cmd_build() {
 	echo "bookinfo front matter is not generated by this tool — see README.md step 1)."
 }
 
+cmd_devdocs_extract() {
+	ensure_devdocs_checkout
+	local copy_dir
+	copy_dir="$(prepare_devdocs_source_copy)"
+	python3 "$lib" extract-devdocs-pot "$copy_dir" "$script_dir/build/gettext/development"
+	rm -rf "$copy_dir"
+}
+
+cmd_devdocs_init() {
+	local lang="$1"
+	python3 "$lib" validate-lang "$lang" >/dev/null
+
+	local repo
+	repo="$(languages_repo)"
+	local lang_dir="$repo/$lang"
+
+	if [ -d "$lang_dir/development" ] && [ -n "$(find "$lang_dir/development" -name '*.po' -print -quit 2>/dev/null)" ]; then
+		echo "error: $lang_dir/development already has catalogs — devdocs-init does not overwrite existing work" >&2
+		echo "       use 'devdocs-update $lang' to refresh an existing language instead" >&2
+		exit 1
+	fi
+
+	echo "Initializing '$lang' dev-docs catalogs in $repo"
+
+	if [ ! -f "$lang_dir/language.toml" ]; then
+		echo "No language.toml yet for '$lang'."
+		read -rp "  English name (e.g. French): " name
+		read -rp "  Native name (e.g. Français): " native_name
+		read -rp "  Locale (e.g. fr_FR): " locale
+		python3 "$lib" write-language-toml "$lang" --name "$name" --native-name "$native_name" --locale "$locale"
+	fi
+
+	cmd_devdocs_extract
+
+	mkdir -p "$lang_dir/development"
+	local commit
+	commit="$(python3 "$lib" current-devdocs-commit)"
+
+	local pot_count=0
+	while IFS= read -r -d '' pot; do
+		local docname="${pot#"$script_dir/build/gettext/development/"}"
+		docname="${docname%.pot}"
+		local po="$lang_dir/development/$docname.po"
+		mkdir -p "$(dirname -- "$po")"
+		msginit --no-translator -i "$pot" -o "$po" -l "${lang}.UTF-8" >/dev/null 2>&1 || \
+			msginit --no-translator -i "$pot" -o "$po" -l "en.UTF-8" >/dev/null 2>&1
+		# Same Language: header fix cmd_init already needs — msginit's
+		# locale guess is not always right for codes like de_x_sie.
+		sed -i "s/^\"Language: .*\\\\n\"/\"Language: $lang\\\\n\"/" "$po"
+		pot_count=$((pot_count + 1))
+	done < <(find "$script_dir/build/gettext/development" -name '*.pot' -print0)
+	echo "  $pot_count development/*.po file(s) created"
+
+	python3 "$lib" record-source "$lang" development "$commit"
+	echo "Done. Edit $lang_dir/development/**/*.po, then run 'devdocs-check $lang' and 'devdocs-build $lang'."
+}
+
+cmd_devdocs_update() {
+	local lang="$1"
+	require_lang_arg "$lang"
+	local repo
+	repo="$(languages_repo)"
+	local lang_dir="$repo/$lang"
+
+	if [ ! -d "$lang_dir/development" ]; then
+		echo "error: '$lang' has no dev-docs catalogs — run 'devdocs-init $lang' first" >&2
+		exit 1
+	fi
+
+	cmd_devdocs_extract
+
+	local commit
+	commit="$(python3 "$lib" current-devdocs-commit)"
+
+	echo ""
+	echo "Updating '$lang' development catalogs in $lang_dir/development"
+	local before_commit
+	before_commit="$(python3 "$lib" read-source "$lang" development)"
+	echo "Source: $before_commit -> $commit"
+	echo ""
+
+	# Unlike cmd_update's fixed 7-chapter set (where a missing catalog
+	# means init was never finished), partial coverage among the 55
+	# possible dev-docs catalogs is the expected, normal state
+	# indefinitely — no real per-language content exists yet, and full
+	# coverage isn't a near-term goal. So the source revision is only
+	# withheld here if msgmerge actually FAILS for a catalog that
+	# exists, not merely because some of the 55 don't exist yet.
+	local any_failed=0
+	local updated_count=0
+	while IFS= read -r -d '' po; do
+		local docname="${po#"$lang_dir/development/"}"
+		docname="${docname%.po}"
+		local pot="$script_dir/build/gettext/development/$docname.pot"
+		if [ ! -f "$pot" ]; then
+			echo "  $docname.po  no matching .pot (source file may have been removed upstream) — skipped"
+			continue
+		fi
+		read -r before_t before_f before_u before_o < <(python3 "$lib" po-stats "$po")
+		if ! msgmerge --update --backup=off --previous "$po" "$pot" >/tmp/translations_devdocs_update_err 2>&1; then
+			echo "  $docname.po  msgmerge FAILED"
+			cat /tmp/translations_devdocs_update_err
+			any_failed=1
+			continue
+		fi
+		read -r after_t after_f after_u after_o < <(python3 "$lib" po-stats "$po")
+		updated_count=$((updated_count + 1))
+		if [ "$before_t $before_f $before_u $before_o" = "$after_t $after_f $after_u $after_o" ]; then
+			echo "  $docname.po  unchanged"
+		else
+			echo "  $docname.po  updated  (translated $before_t->$after_t, fuzzy $before_f->$after_f, untranslated $before_u->$after_u, obsolete $before_o->$after_o)"
+		fi
+	done < <(find "$lang_dir/development" -name '*.po' -print0)
+	echo ""
+	echo "$updated_count existing catalog(s) refreshed."
+
+	if [ "$any_failed" -eq 0 ]; then
+		python3 "$lib" record-source "$lang" development "$commit"
+		echo "Source metadata updated: $repo/metadata/source.json"
+	else
+		echo "One or more existing catalogs failed to merge; source revision NOT advanced." >&2
+		return 1
+	fi
+}
+
+cmd_devdocs_status() {
+	local lang="$1"
+	require_lang_arg "$lang"
+	require_devdocs_checkout
+	local repo
+	repo="$(languages_repo)"
+	local lang_dir="$repo/$lang"
+
+	if [ ! -d "$lang_dir/development" ]; then
+		echo "error: '$lang' has no dev-docs catalogs — run 'devdocs-init $lang' first" >&2
+		exit 1
+	fi
+
+	local name
+	name="$(grep '^name' "$lang_dir/language.toml" 2>/dev/null | cut -d'"' -f2)"
+	echo "${name:-$lang} Developer Documentation Status"
+	echo "===================================="
+	echo ""
+
+	local docnames
+	docnames="$(python3 "$lib" list-devdocs-docnames "$devdocs_checkout_dir/development")"
+	local total_docs=0
+	local covered=0
+	local total_t=0 total_f=0 total_u=0 total_o=0
+	while IFS= read -r docname; do
+		[ -n "$docname" ] || continue
+		total_docs=$((total_docs + 1))
+		local po="$lang_dir/development/$docname.po"
+		if [ ! -f "$po" ]; then
+			printf "  %-45s MISSING\n" "$docname.po"
+			continue
+		fi
+		covered=$((covered + 1))
+		read -r t f u o < <(python3 "$lib" po-stats "$po")
+		total_t=$((total_t + t)); total_f=$((total_f + f)); total_u=$((total_u + u)); total_o=$((total_o + o))
+		printf "  %-45s translated %-4d fuzzy %-4d untranslated %-4d obsolete %-4d\n" "$docname.po" "$t" "$f" "$u" "$o"
+	done <<< "$docnames"
+
+	local total=$((total_t + total_f + total_u))
+	local pct="n/a"
+	if [ "$total" -gt 0 ]; then
+		pct="$(awk -v t="$total_t" -v n="$total" 'BEGIN{printf "%.1f", (t/n)*100}')"
+	fi
+	echo ""
+	echo "Catalogs present: $covered/$total_docs files"
+	echo "Translated:       $total_t"
+	echo "Fuzzy:            $total_f  (needs review)"
+	echo "Untranslated:     $total_u"
+	echo "Obsolete:         $total_o  (excluded from completion)"
+	echo "Completion:       ${pct}%  (of catalogs that exist — not of all $total_docs files)"
+
+	local recorded current
+	recorded="$(python3 "$lib" read-source "$lang" development)"
+	current="$(python3 "$lib" current-devdocs-commit)"
+	echo ""
+	if [ "$recorded" = "$current" ]; then
+		echo "Source: up to date ($recorded)"
+	else
+		echo "Source: DRIFTED — recorded $recorded, current $current (run 'devdocs-update $lang')"
+	fi
+}
+
+cmd_devdocs_check() {
+	local lang="$1"
+	require_lang_arg "$lang"
+	require_devdocs_checkout
+	local repo
+	repo="$(languages_repo)"
+	local lang_dir="$repo/$lang"
+
+	echo "$lang Dev-Docs Translation Validation"
+	echo "======================================"
+	echo ""
+
+	local docnames
+	docnames="$(python3 "$lib" list-devdocs-docnames "$devdocs_checkout_dir/development")"
+	local total_docs=0
+	local catalogs_found=0
+	local missing_docs=()
+	local syntax_ok=1
+	while IFS= read -r docname; do
+		[ -n "$docname" ] || continue
+		total_docs=$((total_docs + 1))
+		local po="$lang_dir/development/$docname.po"
+		if [ ! -f "$po" ]; then
+			missing_docs+=("$docname")
+			continue
+		fi
+		catalogs_found=$((catalogs_found + 1))
+		if ! msgfmt --check -o /dev/null "$po" 2>/tmp/translations_devdocs_check_err; then
+			echo "✗ $docname.po: PO syntax invalid"
+			cat /tmp/translations_devdocs_check_err
+			syntax_ok=0
+		fi
+	done <<< "$docnames"
+
+	if [ "${#missing_docs[@]}" -gt 0 ]; then
+		echo "✗ missing catalog(s) for ${#missing_docs[@]}/$total_docs file(s)"
+	fi
+	if [ "$catalogs_found" -eq 0 ]; then
+		echo "✗ no PO catalogs found under $lang_dir/development/ -- nothing was validated"
+	elif [ "$syntax_ok" -eq 1 ]; then
+		echo "✓ PO syntax valid ($catalogs_found/$total_docs catalog(s) present)"
+	fi
+
+	local copy_dir
+	copy_dir="$(prepare_devdocs_source_copy)"
+	local check_dir
+	check_dir="$(mktemp -d)"
+	local recon_ok=1
+	while IFS= read -r docname; do
+		[ -n "$docname" ] || continue
+		local po="$lang_dir/development/$docname.po"
+		[ -f "$po" ] || continue
+		local out_dir
+		out_dir="$check_dir/$(dirname -- "$docname")"
+		mkdir -p "$out_dir"
+		if ! python3 "$script_dir/translations/sphinx_to_hugo.py" \
+			--source-root "$copy_dir" "$docname.rst" "$po" \
+			--language "$lang" --output "$check_dir/$docname.md" \
+			2>/tmp/translations_devdocs_check_err; then
+			echo "✗ $docname: reconstruction failed"
+			cat /tmp/translations_devdocs_check_err
+			recon_ok=0
+		fi
+	done <<< "$docnames"
+	rm -rf "$copy_dir" "$check_dir"
+
+	if [ "$catalogs_found" -gt 0 ] && [ "$recon_ok" -eq 1 ]; then
+		echo "✓ dev-docs reconstruction successful ($catalogs_found/$total_docs catalog(s) present)"
+	fi
+
+	echo ""
+	cmd_devdocs_status "$lang"
+	echo ""
+	if [ "${#missing_docs[@]}" -eq 0 ] && [ "$catalogs_found" -gt 0 ] && [ "$syntax_ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]; then
+		echo "Result: COMPLETE -- all $total_docs expected catalogs present and valid."
+	else
+		echo "Result: INCOMPLETE -- do not treat this as full-language validation."
+	fi
+
+	[ "${#missing_docs[@]}" -eq 0 ] && [ "$catalogs_found" -gt 0 ] && [ "$syntax_ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]
+}
+
+cmd_devdocs_build() {
+	local lang="$1"
+	require_lang_arg "$lang"
+	require_devdocs_checkout
+	local repo
+	repo="$(languages_repo)"
+	local lang_dir="$repo/$lang"
+
+	if [ ! -d "$lang_dir/development" ]; then
+		echo "error: '$lang' has no dev-docs catalogs — run 'devdocs-init $lang' first" >&2
+		exit 1
+	fi
+
+	local target_dir="$script_dir/build/devdocs-preview/$lang/development"
+	mkdir -p "$target_dir"
+
+	local copy_dir
+	copy_dir="$(prepare_devdocs_source_copy)"
+
+	echo "Reconstructing dev-docs for '$lang' into build/devdocs-preview/$lang/development/"
+	echo "(preview only -- this does not touch site/content/$lang/development/,"
+	echo "which stays owned by the existing Pandoc/DocBook dev-docs pipeline)"
+	echo ""
+
+	local current_chapter=""
+	local weight=0
+	local built=0
+	while IFS= read -r -d '' po; do
+		local docname="${po#"$lang_dir/development/"}"
+		docname="${docname%.po}"
+		local chapter="${docname%%/*}"
+		local rest="${docname#*/}"
+		if [ "$rest" = "$docname" ]; then
+			# Single-segment docname (only "index" in the real corpus) —
+			# skipped, matching phpbbdocs_hugo_devdocs.sh's own existing
+			# silent non-handling of the dev-docs root index file.
+			echo "  $docname: root-level file, skipped (no chapter to publish it under)"
+			continue
+		fi
+		local slug="${rest//\//-}"
+		if [ "$chapter" != "$current_chapter" ]; then
+			current_chapter="$chapter"
+			weight=1
+		else
+			weight=$((weight + 1))
+		fi
+		local out="$target_dir/$chapter/$slug/index.md"
+		mkdir -p "$(dirname -- "$out")"
+		python3 "$script_dir/translations/sphinx_to_hugo.py" \
+			--source-root "$copy_dir" "$docname.rst" "$po" \
+			--language "$lang" --output "$out" \
+			--weight "$weight" \
+			--translation-key "development-$chapter-$slug" \
+			--hugo-section development
+		built=$((built + 1))
+		echo "  $chapter/$slug/index.md"
+	done < <(find "$lang_dir/development" -name '*.po' -print0 | sort -z)
+	rm -rf "$copy_dir"
+
+	echo ""
+	echo "Built $built page(s) into build/devdocs-preview/$lang/development/."
+	echo "For an actual local preview: hugo --source site --contentDir ../build/devdocs-preview/$lang"
+	echo "(this is a preview build target, not the live site — wiring this into the"
+	echo "real site build is a deliberate, separate future migration decision)."
+}
+
 command="${1:-}"
 shift || true
 
@@ -432,8 +844,14 @@ case "$command" in
 	check) cmd_check "$@" ;;
 	audit) cmd_audit "$@" ;;
 	build) cmd_build "$@" ;;
+	devdocs-extract) cmd_devdocs_extract "$@" ;;
+	devdocs-init) cmd_devdocs_init "$@" ;;
+	devdocs-update) cmd_devdocs_update "$@" ;;
+	devdocs-status) cmd_devdocs_status "$@" ;;
+	devdocs-check) cmd_devdocs_check "$@" ;;
+	devdocs-build) cmd_devdocs_build "$@" ;;
 	""|-h|--help)
-		sed -n '2,31p' "${BASH_SOURCE[0]}" | sed 's/^# \?//'
+		sed -n '2,50p' "${BASH_SOURCE[0]}" | sed 's/^# \?//'
 		;;
 	*)
 		echo "error: unknown command '$command'" >&2
