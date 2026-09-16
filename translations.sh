@@ -128,8 +128,8 @@ require_devdocs_checkout() {
 	fi
 }
 
-# Echoes a fresh mktemp -d path containing a fix_csv_table_headers.py-fixed
-# copy of the checkout's development/ tree, ready as sphinx_to_hugo.py's
+# Echoes a stable build/-relative path containing a fix_csv_table_headers.py
+# -fixed copy of the checkout's development/ tree, ready as sphinx_to_hugo.py's
 # --source-root. Caller is responsible for `rm -rf`ing the returned dir.
 # A throwaway copy, not the shared checkout in place: sphinx_to_hugo.py's
 # own docstring requires the CSV-header fix run against a disposable copy
@@ -137,9 +137,16 @@ require_devdocs_checkout() {
 # modifications that could break pull_upstream_docs.sh's/
 # convert_dev_docs_to_docbook.sh's own `git pull --ff-only` expectations
 # against this same shared checkout.
+# A fixed path (not `mktemp -d`) on purpose: sphinx-build embeds this
+# path's location, relative to build/gettext/development/, into every
+# extracted POT/PO file's "#:" occurrence comments (mirroring cmd_extract's
+# own cd-into-a-fixed-directory trick for the documentation family, just
+# below). A random mktemp name would make that comment churn on every
+# single extraction, drowning real content diffs in phpbbdocs-languages.
 prepare_devdocs_source_copy() {
-	local copy_dir
-	copy_dir="$(mktemp -d)"
+	local copy_dir="$script_dir/build/devdocs-source-copy"
+	rm -rf "$copy_dir"
+	mkdir -p "$copy_dir"
 	cp -r "$devdocs_checkout_dir/development/." "$copy_dir/"
 	python3 "$script_dir/fix_csv_table_headers.py" "$copy_dir" >/dev/null
 	echo "$copy_dir"
