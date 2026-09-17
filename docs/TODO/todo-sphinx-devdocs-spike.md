@@ -1,6 +1,6 @@
 # Sphinx dev-docs pipeline: spike results and real converter (Phases 0-3)
 
-## Status: converter + translations.sh CLI support implemented and validated (Phases 0-3); content migration and live-site cutover not started
+## Status: converter, translations.sh CLI support, and full 5-language translation rollout (fr/da/it/de/de_x_sie, 5498/5498 msgids each) all complete; only the live-site cutover remains
 
 `docs/phpbb-gettext-translation-plan.md` proposes a Sphinx-native gettext
 pipeline for developer docs (`dev-docs-docbook/`), as a replacement for
@@ -182,13 +182,15 @@ separate problems for whenever full rollout is scoped:
   **fixed in Phase 3.** Six `devdocs-*` subcommands now exist, with
   their own `current_devdocs_commit()` tracking the separate
   `upstream-phpbb-documentation` checkout's own git history.
-- **Existing hand-translated dev-docs content isn't migrated.**
-  `da`/`fr`/`it` have 55 hand-translated files, `de`/`de_x_sie` only 50 —
-  real drift already exists, a migration path needs designing (the
-  `align_existing_translation.py`/`align_glossary_by_term.py` scripts
-  built for the DocBook end-user-docs pipeline don't transfer: they
-  assume itstool's `#. path: ...` POT comments and DocBook element names,
-  neither of which apply to Sphinx/RST).
+- ~~**Existing hand-translated dev-docs content isn't migrated.**~~ —
+  **superseded, not fixed.** No migration path was ever designed or
+  needed: all 5 languages were translated directly against the new
+  pipeline's PO catalogs instead (see "Full translation rollout" below).
+  The old pipeline's own file-count drift (`da`/`fr`/`it` have 55
+  hand-translated `dev-docs-docbook/<lang>/` files, `de`/`de_x_sie` only
+  50) is real but now belongs entirely to the old Pandoc/DocBook
+  pipeline's own upkeep — irrelevant to the new pipeline, which has no
+  DocBook dependency at all.
 - **No round-trip audit equivalent** for this pipeline yet (the DocBook
   side has `translations.sh audit` — see `docs/TODO/todo-po-roundtrip-audit.md`
   and `docs/gettext-workflow-checklist.md`; a Sphinx-side version needs
@@ -260,27 +262,60 @@ complete `devdocs-check fr` run against all 55 real files came back
 `Result: COMPLETE`. 27 new regression tests in
 `tests/translations_sh/test_devdocs_workflow.py`.
 
-Still explicitly not started: any real language actually being
-translated through this pipeline (no real per-language dev-docs content
-exists in it yet — everything verified so far used synthetic `[XX]`
-translations), and CI.
+Still explicitly not started at the time Phase 3 landed: any real
+language actually being translated through this pipeline (everything
+verified through Phase 3 used synthetic `[XX]` translations), and CI.
+**Since resolved** — see "Full translation rollout" below.
+
+## Full translation rollout: complete (all 5 languages, 2026-09-16/17)
+
+Rather than migrating the old pipeline's hand-translated DocBook content
+(`dev-docs-docbook/<lang>/` in the `phpbbdocs-hugo` repo — a completely
+different storage model, and a genuine re-authoring/alignment problem
+with no honest automated shortcut), every language was translated
+directly against the new pipeline's real PO catalogs in the
+`phpbbdocs-languages` repo, file by file, using
+`translations.sh devdocs-init <lang>` to create empty catalogs, then
+hand-translation swept across all 55 files per language (5498 msgids
+each, including the 2690-entry `events_list.po`).
+
+**French, Danish, Italian** were each translated from scratch and merged
+(`phpbbdocs-languages` PR #9 for da+it, fr merged earlier the same
+session).
+
+**German** used a two-variant approach: `de` (Casual, "du" address) was
+translated from scratch the same way; `de_x_sie` (Formal, "Sie" address)
+reused `de`'s translations directly for the ~91% of entries that are
+impersonal/technical (no second-person address, so casual vs. formal is
+identical), and only the ~518 entries with actual direct address were
+hand-translated into Sie/Ihnen/Ihr forms. Both merged together as
+`phpbbdocs-languages` [PR #10](https://github.com/phpbbmodders/phpbbdocs-languages/pull/10).
+
+All five languages — `fr`, `da`, `it`, `de`, `de_x_sie` — are at
+`devdocs-status` 100.0% (5498/5498 translated, 0 fuzzy, 0 untranslated)
+and passed `devdocs-check` (`Result: COMPLETE`) as of this rollout. This
+fully supersedes the "migrating existing hand-translated dev-docs
+content" plan below — no DocBook migration tooling was built or needed.
 
 ## Recommended next step
 
-With the converter (Phase 2) and CLI support (Phase 3) both implemented
-and validated, the remaining big-ticket item is the one deferred when
-Phase 3 was chosen over it:
+With the converter (Phase 2), CLI support (Phase 3), and full
+translation rollout (above) all complete, what remains is exactly the
+piece Phase 3 deliberately deferred:
 
-- **Migrating existing hand-translated dev-docs content** — a real
-  design problem, not an audit. `de`/`de_x_sie` are at 50 files vs.
-  `en`/`da`/`fr`/`it`'s 55, so drift needs reconciling before any
-  migration tooling can assume 1:1 file correspondence. The existing
-  content lives as hand-translated DocBook (`dev-docs-docbook/<lang>/`,
-  produced by the Pandoc pipeline) — a completely different storage
-  model from the new pipeline's PO catalogs, so this isn't a format
-  conversion so much as a genuine re-authoring/alignment problem: no
-  automated tool can honestly claim to preserve translator intent going
-  from hand-translated prose to gettext msgstrs without a human
-  checking the result.
+- **The live-site cutover.** `devdocs-build` currently writes only to
+  `build/devdocs-preview/` — a preview-only location that does not touch
+  `site/content/<lang>/development/`, which still stays fully owned by
+  the existing Pandoc/DocBook pipeline. Switching the live site to
+  render from the new Sphinx-native pipeline instead is a deliberate,
+  separate cutover decision (build wiring, verifying rendered output
+  across all 5 languages, and retiring or archiving the old
+  `dev-docs-docbook/<lang>/` content and its Pandoc pipeline), not
+  something this spike or the translation rollout decided on its own.
+- **No `devdocs-audit` / round-trip check yet** for this pipeline (the
+  DocBook side has `translations.sh audit`; a Sphinx-side equivalent
+  needs designing now that there's real per-language content — all 5
+  languages — to audit against instead of synthetic `[XX]` translations).
+- **CI** for the new pipeline still doesn't exist.
 
 A fresh scoping decision, not a continuation of this spike.
