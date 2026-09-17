@@ -65,6 +65,16 @@ audit" onward.
 
 ## 2. Exhaustive terminology audit
 
+**Who does this:** the mechanical matching work below (fetching
+phpBB's real language-pack files, building key/value maps, grep/diff
+pipelines, categorizing every unmatched string) is normally run by
+Claude on the project's behalf, not the volunteer translator. A
+translator's own part of the review is the lighter, judgment-based
+piece in section 3's `translation-human-review.md`: a native-speaker
+prose read-through, plus confirming or filling in entries in the
+supplementary glossary this section produces. Don't hand a translator
+this whole section expecting them to run it themselves.
+
 The goal: verify every literal UI string (button, field, menu item,
 page name) the translation quotes actually matches what the real phpBB
 software calls it — not just that the prose reads fluently.
@@ -170,21 +180,30 @@ matching that repo's own directory convention) with:
   audit's methodology and results: what was fixed (with real examples),
   what's clean, and the reasoning for each category of non-issue left
   unmatched. Include a "How to do this" section so the process is
-  repeatable without re-deriving it.
+  repeatable without re-deriving it. Claude's own deliverable, per the
+  "who does this" note at the top of section 2, not something the
+  translator writes. It's written primarily so a future audit (by
+  Claude, on this language or the next) doesn't have to re-derive the
+  method, but it's still worth a translator's skim to see what's
+  already been checked before starting the human-review pass below.
 - **`todo-<language>-<hyphenated-code>-translation-human-review.md`** —
   a separate document for a native speaker to do a qualitative prose
   read-through (content that's never been read, judgment calls worth
   double-checking) — this is a different task from the mechanical
   audit above and needs a different reviewer skill, so keep it a
   separate file, not a merged one. Link to the audit doc and glossary
-  for status numbers rather than restating them.
+  for status numbers rather than restating them. This is the
+  translator's actual review task, the whole reason to loop them in
+  after the mechanical audit's done.
 - **`<language>-<hyphenated-code>-supplementary-glossary.md`** — one
   fillable table (English source, current translation, exact location,
   why it's unconfirmed, blank columns for agreed term / confirmed by /
   date in `YYYY-MM-DD` format) for every genuinely-unconfirmed term.
   Don't split this into a separate "reference" doc and a separate
   "fillable" doc — one file with a reasoning column plus the fillable
-  columns is enough.
+  columns is enough. Claude drafts the rows; the translator's job is
+  filling in the blank columns (agreed term, confirmed by, date) for
+  the ones in their language.
 
 Filenames keep phpBB's code exactly as published, hyphens included
 (`de-x-sie`), even though the containing directory is underscored
