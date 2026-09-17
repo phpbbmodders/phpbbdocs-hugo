@@ -23,9 +23,10 @@ audit" onward.
 > `site/content/<lang>/development/*` directly. Both are generated
 > from the PO catalogs and get silently overwritten on the next build.
 > Every per-language directory is named after phpBB's own ISO Code for
-> that language pack (see `docs/phpbb-hugo-languages.md`): underscored
-> in `content/` (e.g. `de_x_sie`), hyphenated everywhere else in the
-> repo's own docs (e.g. `docs/TODO/de-x-sie/`). Read
+> that language pack, underscored (e.g. `de_x_sie`), in every directory
+> across both repos: `content/`, `site/content/`, and the sibling
+> `phpbbdocs-languages` repo's `<lang>/` and `terminology/<lang>/`
+> directories (see `docs/phpbb-hugo-languages.md`). Read
 > `docs/phpbb-hugo-languages.md` and the repo Wiki's Translator Workflow
 > page before starting.
 
@@ -158,10 +159,13 @@ dev-docs) rather than skipping the files the easy method doesn't fit.**
 
 ## 3. Write up the results
 
-Create `docs/TODO/<hyphenated-code>/` with:
+This writeup lives in the sibling `phpbbdocs-languages` repo, next to
+the PO catalogs it audits, not in `phpbbdocs-hugo`. Create
+`terminology/<code>/` there (underscored, e.g. `terminology/de_x_sie/`,
+matching that repo's own directory convention) with:
 
 - **`README.md`** — index linking the files below (see
-  `docs/TODO/de-x-sie/README.md` for the pattern).
+  `terminology/de_x_sie/README.md` for the pattern).
 - **`todo-<language>-<hyphenated-code>-terminology-audit.md`** — the
   audit's methodology and results: what was fixed (with real examples),
   what's clean, and the reasoning for each category of non-issue left
@@ -182,10 +186,17 @@ Create `docs/TODO/<hyphenated-code>/` with:
   "fillable" doc — one file with a reasoning column plus the fillable
   columns is enough.
 
+Filenames keep phpBB's code exactly as published, hyphens included
+(`de-x-sie`), even though the containing directory is underscored
+(`de_x_sie`). The filename is descriptive text, not a path, so it has
+no reason to substitute the hyphen.
+
 Then wire it in:
-- Add the language to `docs/TODO/language.md`'s index.
-- `docs/TODO.md` needs no new line — it already points at
-  `docs/TODO/language.md` for every language.
+- Add the language to `terminology/README.md`'s index, in the same
+  `phpbbdocs-languages` repo.
+- `phpbbdocs-hugo`'s `docs/TODO.md` needs no change: it already links
+  to the `phpbbdocs-languages` `terminology/` directory generically,
+  not per language.
 - Check `README.md` and `docs/phpbb-hugo-languages.md` for staleness:
   does the new language need adding to workflow examples, or does
   descriptive prose there already say "translations" generically

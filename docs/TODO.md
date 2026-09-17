@@ -5,9 +5,10 @@ plans live under `docs/TODO/`; this file stays a concise summary.
 
 ## Detailed TODOs
 
-- [Language TODOs](TODO/language.md) — index of per-language TODO
-  directories (terminology audits, translation review notes,
-  supplementary glossaries).
+- [Language terminology writeups](https://github.com/phpbbmodders/phpbbdocs-languages/tree/main/terminology)
+  — per-language terminology audits, translation review notes, and
+  supplementary glossaries now live in the sibling `phpbbdocs-languages`
+  repo, next to the PO catalogs they audit.
 - [Next translation priority](TODO/todo-language-priority.md) — ranks the
   remaining phpBB language packs (English, Danish, French, and German are
   done) from highest to lowest priority for the next translation, with the

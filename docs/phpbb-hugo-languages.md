@@ -9,33 +9,30 @@ blocks. Compiled 08/30/2026.
 phpBB currently lists 55 language packs; all 55 are captured below.
 
 **Directory naming convention:** every per-language directory in this
-project is named after phpBB's own ISO Code for that pack, not the Hugo
-locale and not a generic English language name. The point is to keep
-the register/variant unambiguous for both future maintenance and
+project (and in the sibling `phpbbdocs-languages` repo) is named after
+phpBB's own ISO Code for that pack, underscored, not the Hugo locale
+and not a generic English language name: `content/<code>/`,
+`site/content/<code>/`, `phpbbdocs-languages/<code>/`, and
+`phpbbdocs-languages/terminology/<code>/` all use `de_x_sie`, not
+`de-x-sie` or `german`, for German (Formal Honorifics). The point is to
+keep the register/variant unambiguous for both future maintenance and
 translators: a bare `de` would leave it unclear whether a directory
 holds the casual (`de`) or formal (`de-x-sie`) German pack, whereas
 naming it after the exact code removes the ambiguity.
 
-- **Hugo content directories** (`content/<code>/`, `dev-docs-docbook/<code>/`)
-  use the code with underscores in place of hyphens, since that's what
-  this project's existing directories already do — `de_x_sie`, not
-  `de-x-sie` or `german`, for German (Formal Honorifics).
-- **Plain repository documentation** (e.g. `docs/TODO/<code>/` for
-  per-language TODO notes) uses phpBB's code exactly as published,
-  hyphens included — `docs/TODO/de-x-sie/`, not `de_x_sie` — since
-  these aren't Hugo content and have no reason to substitute the
-  hyphen.
+Filenames within those directories are free to keep phpBB's code
+exactly as published, hyphens included (e.g.
+`german-de-x-sie-supplementary-glossary.md`). A filename is descriptive
+text, not a path, so it has no reason to substitute the hyphen the way
+a directory name does.
 
-**One master-TODO entry total for languages, three levels deep:**
-`docs/TODO/<code>/` holds its own `README.md` indexing every detailed
-TODO for that language (terminology audit, translation review notes,
-supplementary glossary, etc.). `docs/TODO/language.md` indexes every
-language that currently has an active `docs/TODO/<code>/` directory,
-linking to each one's `README.md`. `docs/TODO.md` links only to
-`docs/TODO/language.md` — a single "Language TODOs" entry, not one
-line per language and not a direct link to any per-language file. This
-is what keeps the master TODO a concise summary no matter how many
-languages accumulate detail docs.
+**Language writeups live in `phpbbdocs-languages`, not here:**
+terminology audits, translation review notes, and supplementary
+glossaries live in that repo's `terminology/<code>/`, next to the PO
+catalogs they audit, each with its own `README.md` indexing its
+detailed files. `terminology/README.md` indexes every language that
+has one. `phpbbdocs-hugo`'s own `docs/TODO.md` links to that directory
+generically, once, rather than duplicating a per-language entry here.
 
 Apply the same rule to every future language added to this project —
 including honorific splits (Spanish `es` vs `es-x-tu`, Dutch `nl` vs
@@ -118,4 +115,4 @@ individually, since a region can't be mechanically re-cased out of them.
 - **French** — `fr` in this project, phpBB's **French** pack, Hugo locale `fr-FR` (see row above). Screenshots reuse the English set (`content/en/images`, copied verbatim) since this project has no live French-language phpBB install to source real localized captures from, unlike the Danish set.
 - **German (Formal)** — `de_x_sie` in this project (matching phpBB's own code exactly, not the plain `de` casual base pack), phpBB's **German (Formal Honorifics)** pack, Hugo locale `de-DE` (see row above). Formal register ("Sie") translated first, from English, with a full terminology audit against the real pack. Screenshots reuse the English set, same reasoning as French.
 - **German (Casual)** — `de` in this project, phpBB's **German (Casual Honorifics)** pack, Hugo locale `de-DE` (see row above; same base locale as German (Formal) — the two are distinguished in this project only by content directory and Hugo language key, not by locale). Produced as a low-cost grammatical-register conversion of the already-audited `de_x_sie` content (pronouns, verb conjugation, possessives) rather than a fresh translation from English, since the real UI strings phpBB ships don't change between the two registers. Screenshots reuse the English set.
-- **Italian** — `it` in this project, phpBB's **Italian** pack, Hugo locale `it-IT` (see row above). No honorific split (single register). Screenshots reuse the English set, same reasoning as French. `content/it/` (all seven end-user chapters) and `dev-docs-docbook/it/` (all 55 developer-docs files) are both done, with a full terminology audit against the real pack (see `docs/TODO/it/`).
+- **Italian** — `it` in this project, phpBB's **Italian** pack, Hugo locale `it-IT` (see row above). No honorific split (single register). Screenshots reuse the English set, same reasoning as French. `content/it/` (all seven end-user chapters) and `phpbbdocs-languages`'s `it/development/` (all 55 dev-docs catalogs) are both done, with a full terminology audit against the real pack (see `phpbbdocs-languages`'s `terminology/it/`).
