@@ -19,7 +19,8 @@ plans live under `docs/TODO/`; this file stays a concise summary.
 - [Sphinx dev-docs pipeline: spike results and real converter](TODO/todo-sphinx-devdocs-spike.md)
   — the Sphinx-native gettext pipeline (proposed replacement for the
   current Pandoc-based dev-docs pipeline) has a real, committed
-  converter validated against the full 55-file upstream corpus, and
-  `translations.sh` now has full `devdocs-*` CLI support for it. Not
-  started: migrating existing hand-translated dev-docs content into it,
-  and any actual cutover of the live site.
+  converter validated against the full 55-file upstream corpus,
+  `translations.sh` has full `devdocs-*` CLI support for it, and all 5
+  languages (fr, da, it, de, de_x_sie) are translated to 100% in its PO
+  catalogs. Not started: the actual cutover of the live site to render
+  from this pipeline instead of the old Pandoc/DocBook one.
