@@ -14,41 +14,49 @@ audit" onward.
 > You're working in `phpbbdocs-hugo`, a Hugo-based rebuild of the phpBB
 > documentation pipeline. It pulls the current upstream English
 > end-user docs (hand-authored XML/DocBook in this repo) and developer
-> docs (real upstream Sphinx/RST, translated via gettext PO catalogs in
-> the sibling `phpbbdocs-languages` repo — see
-> `docs/TODO/todo-sphinx-devdocs-spike.md` for that pipeline), and adds
-> hand-authored translations of both. Every per-language directory is
-> named after phpBB's own ISO Code for that language pack (see
-> `docs/phpbb-hugo-languages.md`) — underscored in `content/` (e.g.
-> `de_x_sie`), hyphenated everywhere else in the repo's own docs (e.g.
-> `docs/TODO/de-x-sie/`). Read `docs/phpbb-hugo-languages.md` and
-> `README.md`'s "Adding another language" section before starting.
+> docs (real upstream Sphinx/RST), and translates both the same way:
+> hand-translated gettext PO catalogs in the sibling
+> `phpbbdocs-languages` repo, reconstructed into site content by
+> `translations.sh`'s `build`/`devdocs-build` commands (see
+> `docs/TODO/todo-sphinx-devdocs-spike.md` for the dev-docs pipeline's
+> own history). Never hand-edit `content/<lang>/chapters/*.xml` or
+> `site/content/<lang>/development/*` directly. Both are generated
+> from the PO catalogs and get silently overwritten on the next build.
+> Every per-language directory is named after phpBB's own ISO Code for
+> that language pack (see `docs/phpbb-hugo-languages.md`): underscored
+> in `content/` (e.g. `de_x_sie`), hyphenated everywhere else in the
+> repo's own docs (e.g. `docs/TODO/de-x-sie/`). Read
+> `docs/phpbb-hugo-languages.md` and the repo Wiki's Translator Workflow
+> page before starting.
 
 ## 1. Adding a brand-new language: the translation itself
 
 1. Confirm the language's real phpBB ISO Code and register/variant
    (casual vs. formal honorifics, script variant, spelling variant —
    `docs/phpbb-hugo-languages.md` has the full phpBB→Hugo mapping).
-2. Translate every end-user chapter: copy `content/en/chapters/*.xml`
-   into `content/<code>/chapters/`, translate the prose, and follow
-   `README.md` step 1's guidance — `proteus_doc_<lang>.xml`'s
-   `<bookinfo>` needs hand-written title/abstract/authorgroup/copyright
-   too, it isn't synced automatically for any language.
-3. Translate the developer docs: follow `README.md`'s "Adding another
-   language to the developer docs" section exactly —
-   `./translations.sh devdocs-init <code>` creates empty PO catalogs
-   under `<languages-repo>/<code>/development/` mirroring the real
-   upstream Sphinx/RST tree file-for-file; translate the prose
-   (`msgstr`) in each `.po` file, preserving code samples, file paths,
-   RST inline-markup roles (`` ``literal`` ``, `` `text <url>`_ ``),
-   and any internal `` `Named Reference`_ `` targets untouched. Run
-   `./translations.sh devdocs-check <code>` to validate every catalog
-   and its reconstruction before building — it reports per-file
-   translated/fuzzy/untranslated counts and a `COMPLETE`/`INCOMPLETE`
-   verdict, the PO-catalog equivalent of the old `.dbk` row/entry-count
-   check.
-4. Build and verify: `./phpbbdocs_hugo.sh <code>` and
-   `./translations.sh devdocs-build <code> site/content/<code>/development`.
+2. Translate every end-user chapter: `./translations.sh init <code>`
+   creates empty PO catalogs under `<languages-repo>/<code>/documentation/`
+   (one per chapter); hand-translate the `msgstr` of each entry,
+   preserving DocBook tags/attributes untouched. Run
+   `./translations.sh check <code>` to validate every catalog and its
+   reconstruction, then `./translations.sh build <code>` to reconstruct
+   `content/<code>/chapters/*.xml` from the translated catalogs.
+   `proteus_doc_<lang>.xml`'s `<bookinfo>` (title/abstract/authorgroup/
+   copyright) is a separate, hand-written file. It isn't generated
+   from the PO catalogs for any language.
+3. Translate the developer docs: `./translations.sh devdocs-init <code>`
+   creates empty PO catalogs under `<languages-repo>/<code>/development/`
+   mirroring the real upstream Sphinx/RST tree file-for-file; translate
+   the prose (`msgstr`) in each `.po` file, preserving code samples,
+   file paths, RST inline-markup roles (`` ``literal`` ``,
+   `` `text <url>`_ ``), and any internal `` `Named Reference`_ ``
+   targets untouched. Run `./translations.sh devdocs-check <code>` to
+   validate every catalog and its reconstruction before building. It
+   reports per-file translated/fuzzy/untranslated counts and a
+   `COMPLETE`/`INCOMPLETE` verdict.
+4. Build and verify: `./translations.sh devdocs-build <code> site/content/<code>/development`
+   to write the real dev-docs content, then `./phpbbdocs_hugo.sh all`
+   to fold both families into a real Hugo build.
 5. Run `./fill_translation_fallbacks.sh en <code> ...` (with every
    other language already in the project) so any page this new
    language doesn't have yet gets a flagged fallback instead of a
@@ -63,8 +71,9 @@ software calls it — not just that the prose reads fluently.
 **Scope: "full review" means every end-user chapter (all seven —
 `admin_guide.xml`, `user_guide.xml`, `moderator_guide.xml`,
 `quick_start_guide.xml`, `upgrade_guide.xml`, `server_guide.xml`,
-`glossary.xml`) *and* every file under `dev-docs-docbook/<code>/`, not
-whichever subset is convenient or has the clearest tooling available.
+`glossary.xml`) *and* every file under
+`<languages-repo>/<code>/development/`, not whichever subset is
+convenient or has the clearest tooling available.
 Report progress as "N of M files done" while working, and don't report
 the audit complete until every file — chapters and dev-docs alike —
 has actually been covered, adapting the review method per file type
@@ -105,9 +114,14 @@ dev-docs) rather than skipping the files the easy method doesn't fit.**
    identical English text for unrelated features — a key match isn't
    proof unless the file/context fits what the doc is describing).
    Then categorize:
-   - **Genuine mismatch** → fix the document to match the real value,
-     verify with a real build (`./phpbbdocs_hugo.sh <code>` or the
-     devdocs equivalent) afterward.
+   - **Genuine mismatch** → fix the `msgstr` in the relevant PO catalog
+     (`<languages-repo>/<code>/documentation/<chapter>.po` or
+     `<languages-repo>/<code>/development/<docname>.po`), not the
+     generated `content/<code>/chapters/*.xml` or
+     `site/content/<code>/development/*` directly: those are
+     overwritten on the next `build`/`devdocs-build`. Re-run
+     `build <code>`/`devdocs-build <code> site/content/<code>/development`
+     and `./phpbbdocs_hugo.sh all` to verify the fix.
    - **Confirmed-correct false positive** → the crude string
      comparison missed it: inline `<code>`/`<em>` markup in the PHP
      source, curly vs. straight quotes, or a label built by
@@ -130,13 +144,12 @@ dev-docs) rather than skipping the files the easy method doesn't fit.**
      fetched reference files. Add it to that language's supplementary
      glossary (see below) rather than guessing.
 5. **Dev-docs get a different check.** They rarely quote literal UI
-   strings (`grep -rl ':guilabel:\|:menuselection:' <languages-repo>/<code>/development/`
-   to confirm — the RST/Sphinx roles the PO msgids now carry, in place
-   of the old `<guilabel>`/`<guimenuitem>` DocBook tags), so the review
-   there is translation fidelity and technical accuracy against the
-   English msgid text, not string-matching. If a numeric, factual, or
-   logical error appears identically in both languages, it's a
-   pre-existing English-source issue — flag it, don't silently diverge
+   strings (confirm with `grep -rl ':guilabel:\|:menuselection:' <languages-repo>/<code>/development/`,
+   checking for the RST/Sphinx roles the PO msgids carry), so the
+   review there is translation fidelity and technical accuracy against
+   the English msgid text, not string-matching. If a numeric, factual,
+   or logical error appears identically in both languages, it's a
+   pre-existing English-source issue: flag it, don't silently diverge
    the translation from its source.
 6. This is exhaustive, not sampled: every unmatched string reaches one
    of the categories above before the audit is reported done. A
