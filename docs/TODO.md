@@ -17,10 +17,18 @@ plans live under `docs/TODO/`; this file stays a concise summary.
   the reference method for re-auditing after future catalog/hand-file
   changes, not an open item.
 - [Sphinx dev-docs pipeline: spike results and real converter](TODO/todo-sphinx-devdocs-spike.md)
-  — the Sphinx-native gettext pipeline (proposed replacement for the
-  current Pandoc-based dev-docs pipeline) has a real, committed
+  — the Sphinx-native gettext pipeline has replaced the old Pandoc-based
+  dev-docs pipeline as the documented build path: a real, committed
   converter validated against the full 55-file upstream corpus,
-  `translations.sh` has full `devdocs-*` CLI support for it, and all 5
-  languages (fr, da, it, de, de_x_sie) are translated to 100% in its PO
-  catalogs. Not started: the actual cutover of the live site to render
-  from this pipeline instead of the old Pandoc/DocBook one.
+  `translations.sh` full `devdocs-*` CLI support, all 5 languages (fr,
+  da, it, de, de_x_sie) translated to 100% in its PO catalogs, and the
+  live-site cutover itself (toctree-derived chapter/page ordering,
+  `_index.md` generation, `site/content/<lang>/development/` as the
+  real build target) all complete and verified.
+- [Old dev-docs pipeline cleanup](TODO/todo-old-devdocs-pipeline-cleanup.md)
+  — the old Pandoc/DocBook pipeline (`dev-docs-docbook/`,
+  `phpbbdocs_hugo_devdocs.sh`, `convert_dev_docs_to_docbook.sh`,
+  `xsl/proteus_hugo_devdocs.xsl`) gets no more maintenance and is left
+  in place only until the live-site cutover above has proven itself,
+  then should be physically removed — tracked separately so it isn't
+  forgotten.

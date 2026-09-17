@@ -1,6 +1,6 @@
 # Sphinx dev-docs pipeline: spike results and real converter (Phases 0-3)
 
-## Status: converter, translations.sh CLI support, and full 5-language translation rollout (fr/da/it/de/de_x_sie, 5498/5498 msgids each) all complete; only the live-site cutover remains
+## Status: converter, translations.sh CLI support, full 5-language translation rollout, and the live-site cutover are all complete
 
 `docs/phpbb-gettext-translation-plan.md` proposes a Sphinx-native gettext
 pipeline for developer docs (`dev-docs-docbook/`), as a replacement for
@@ -297,25 +297,55 @@ and passed `devdocs-check` (`Result: COMPLETE`) as of this rollout. This
 fully supersedes the "migrating existing hand-translated dev-docs
 content" plan below — no DocBook migration tooling was built or needed.
 
-## Recommended next step
+## Live-site cutover: complete
 
-With the converter (Phase 2), CLI support (Phase 3), and full
-translation rollout (above) all complete, what remains is exactly the
-piece Phase 3 deliberately deferred:
+`devdocs-build <lang> [target_content_dir]` now accepts an optional
+target directory (defaulting to the old `build/devdocs-preview/<lang>/development`
+preview location for backward compatibility), and the documented build
+recipe (`README.md`, `docs/translation-process-prompt.md`) calls it
+with the real site path —
+`./translations.sh devdocs-build <lang> site/content/<lang>/development`
+— for all six languages (`en` plus the five translated languages).
+This replaces the old Pandoc/DocBook pipeline
+(`phpbbdocs_hugo_devdocs.sh`/`dev-docs-docbook/`) as the documented
+dev-docs build path; those old files still exist in the repo but get
+no further maintenance (see
+[`docs/TODO/todo-old-devdocs-pipeline-cleanup.md`](todo-old-devdocs-pipeline-cleanup.md)
+for their eventual removal).
 
-- **The live-site cutover.** `devdocs-build` currently writes only to
-  `build/devdocs-preview/` — a preview-only location that does not touch
-  `site/content/<lang>/development/`, which still stays fully owned by
-  the existing Pandoc/DocBook pipeline. Switching the live site to
-  render from the new Sphinx-native pipeline instead is a deliberate,
-  separate cutover decision (build wiring, verifying rendered output
-  across all 5 languages, and retiring or archiving the old
-  `dev-docs-docbook/<lang>/` content and its Pandoc pipeline), not
-  something this spike or the translation rollout decided on its own.
+Chapter and page order come from the real upstream `.. toctree::`
+structure (`translations/devdocs_toc_order.py`, a new depth-first
+toctree parser/resolver), not an alphabetical directory walk — this
+matches the old pipeline's own reading order rather than regressing
+it. `cmd_devdocs_build` also gained `_index.md` generation
+(chapter-level and top-level landing pages, ported from the old
+pipeline's `pretty_title()`/heredoc shape) and full regeneration
+(`rm -rf` + rebuild) so stale pages from a prior run don't linger.
+
+English is built through the same pipeline as every other language:
+`devdocs-init en` creates real PO catalogs with English msgids, and
+`msginit`'s own same-language auto-fill behavior sets `msgstr = msgid`
+at creation time — confirmed empirically before relying on it. No
+English-specific code exists anywhere in the new pipeline.
+
+Verified end-to-end: unit tests
+(`tests/translations_sh/test_devdocs_toc_order.py`, new;
+`tests/translations_sh/test_devdocs_workflow.py`, extended), a real
+6-language build into `site/content/`, a real `hugo` build with
+page-count parity confirmed against the old pipeline's output (131/129
+pages per language, matching a pre-cutover reference build), and a
+live browser check confirming rendering, toctree-derived ordering,
+nested-page slugs, title-quoting, the cross-language `translationKey`
+switcher, and the `de`/`de_x_sie` casual/formal distinction all work
+in the real running site.
+
+## What's still open
+
 - **No `devdocs-audit` / round-trip check yet** for this pipeline (the
   DocBook side has `translations.sh audit`; a Sphinx-side equivalent
   needs designing now that there's real per-language content — all 5
-  languages — to audit against instead of synthetic `[XX]` translations).
+  translated languages plus English — to audit against instead of
+  synthetic `[XX]` translations).
 - **CI** for the new pipeline still doesn't exist.
-
-A fresh scoping decision, not a continuation of this spike.
+- **Old-pipeline file removal** — see
+  [`docs/TODO/todo-old-devdocs-pipeline-cleanup.md`](todo-old-devdocs-pipeline-cleanup.md).

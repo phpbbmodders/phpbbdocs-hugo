@@ -13,14 +13,16 @@ audit" onward.
 
 > You're working in `phpbbdocs-hugo`, a Hugo-based rebuild of the phpBB
 > documentation pipeline. It pulls the current upstream English
-> end-user docs and developer docs (converted from Sphinx/RST to
-> DocBook), and adds hand-authored translations. Every per-language
-> directory is named after phpBB's own ISO Code for that language pack
-> (see `docs/phpbb-hugo-languages.md`) — underscored in `content/` and
-> `dev-docs-docbook/` (e.g. `de_x_sie`), hyphenated everywhere else in
-> the repo's own docs (e.g. `docs/TODO/de-x-sie/`). Read
-> `docs/phpbb-hugo-languages.md` and `README.md`'s "Adding another
-> language" section before starting.
+> end-user docs (hand-authored XML/DocBook in this repo) and developer
+> docs (real upstream Sphinx/RST, translated via gettext PO catalogs in
+> the sibling `phpbbdocs-languages` repo — see
+> `docs/TODO/todo-sphinx-devdocs-spike.md` for that pipeline), and adds
+> hand-authored translations of both. Every per-language directory is
+> named after phpBB's own ISO Code for that language pack (see
+> `docs/phpbb-hugo-languages.md`) — underscored in `content/` (e.g.
+> `de_x_sie`), hyphenated everywhere else in the repo's own docs (e.g.
+> `docs/TODO/de-x-sie/`). Read `docs/phpbb-hugo-languages.md` and
+> `README.md`'s "Adding another language" section before starting.
 
 ## 1. Adding a brand-new language: the translation itself
 
@@ -33,15 +35,20 @@ audit" onward.
    `<bookinfo>` needs hand-written title/abstract/authorgroup/copyright
    too, it isn't synced automatically for any language.
 3. Translate the developer docs: follow `README.md`'s "Adding another
-   language to the developer docs" section exactly — translate every
-   `.dbk` file in `dev-docs-docbook/en/` into
-   `dev-docs-docbook/<code>/`, preserving code samples, file paths,
-   `<literal>` identifiers, `<ulink>` URLs, XML structure, and `id`
-   attributes untouched. Validate each file (`xmllint --noout --nonet
-   <file>`) and verify row/entry counts match the English source 1:1
-   before building.
+   language to the developer docs" section exactly —
+   `./translations.sh devdocs-init <code>` creates empty PO catalogs
+   under `<languages-repo>/<code>/development/` mirroring the real
+   upstream Sphinx/RST tree file-for-file; translate the prose
+   (`msgstr`) in each `.po` file, preserving code samples, file paths,
+   RST inline-markup roles (`` ``literal`` ``, `` `text <url>`_ ``),
+   and any internal `` `Named Reference`_ `` targets untouched. Run
+   `./translations.sh devdocs-check <code>` to validate every catalog
+   and its reconstruction before building — it reports per-file
+   translated/fuzzy/untranslated counts and a `COMPLETE`/`INCOMPLETE`
+   verdict, the PO-catalog equivalent of the old `.dbk` row/entry-count
+   check.
 4. Build and verify: `./phpbbdocs_hugo.sh <code>` and
-   `./phpbbdocs_hugo_devdocs.sh <code>`.
+   `./translations.sh devdocs-build <code> site/content/<code>/development`.
 5. Run `./fill_translation_fallbacks.sh en <code> ...` (with every
    other language already in the project) so any page this new
    language doesn't have yet gets a flagged fallback instead of a
@@ -123,13 +130,14 @@ dev-docs) rather than skipping the files the easy method doesn't fit.**
      fetched reference files. Add it to that language's supplementary
      glossary (see below) rather than guessing.
 5. **Dev-docs get a different check.** They rarely quote literal UI
-   strings (`grep -l '<guilabel>\|<guimenuitem>' dev-docs-docbook/<code>/**/*.dbk`
-   to confirm), so the review there is translation fidelity and
-   technical accuracy against the English `.dbk` source, not
-   string-matching. If a numeric, factual, or logical error appears
-   identically in both languages, it's a pre-existing English-source
-   issue — flag it, don't silently diverge the translation from its
-   source.
+   strings (`grep -rl ':guilabel:\|:menuselection:' <languages-repo>/<code>/development/`
+   to confirm — the RST/Sphinx roles the PO msgids now carry, in place
+   of the old `<guilabel>`/`<guimenuitem>` DocBook tags), so the review
+   there is translation fidelity and technical accuracy against the
+   English msgid text, not string-matching. If a numeric, factual, or
+   logical error appears identically in both languages, it's a
+   pre-existing English-source issue — flag it, don't silently diverge
+   the translation from its source.
 6. This is exhaustive, not sampled: every unmatched string reaches one
    of the categories above before the audit is reported done. A
    residual "still unmatched but probably fine" count is unfinished

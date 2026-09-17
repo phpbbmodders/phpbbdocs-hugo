@@ -13,14 +13,21 @@
 # + xsl/proteus_sphinx_hugo.xsl (see docs/TODO/todo-sphinx-devdocs-spike.md
 # for that pipeline's own validation history).
 #
-# The devdocs-* commands below are CLI/architecture scaffolding only —
-# no real language has any development-family catalogs yet, and
-# devdocs-build writes to a preview-only location (build/devdocs-preview/),
-# never to the live site/content/<lang>/development/ tree, which stays
-# fully owned by the existing phpbbdocs_hugo_devdocs.sh (Pandoc/DocBook)
-# pipeline until a deliberate future migration/cutover decision. There is
-# no devdocs-audit yet either — nothing to audit against until real
-# per-language content exists.
+# All 55 development-family catalogs are now translated to 100% for
+# fr/da/it/de/de_x_sie (plus en, whose catalogs are trivially "translated"
+# via msginit's own same-language identity fill), verified via
+# devdocs-check. devdocs-build defaults to writing into a preview-only
+# location (build/devdocs-preview/) when called with just a language,
+# but accepts an optional second argument — a target content directory —
+# for writing real content directly into site/content/<lang>/development/,
+# which is how the live site is meant to actually consume this pipeline
+# going forward (see docs/TODO/todo-sphinx-devdocs-spike.md for the
+# cutover's own history). Chapter/page order comes from
+# translations/devdocs_toc_order.py, which parses the real upstream RST
+# `.. toctree::` structure rather than an alphabetical directory walk.
+# There is no devdocs-audit yet — nothing has needed it so far, but it's
+# worth designing now that real per-language content exists to audit
+# against.
 #
 # Usage: ./translations.sh <command> [args]
 #   extract                      Generate POT templates (maintainer command)
@@ -38,8 +45,10 @@
 #   devdocs-update <lang>         Refresh POT and merge into <lang>'s dev-docs catalogs
 #   devdocs-status <lang>         Show dev-docs translation coverage/completion for <lang>
 #   devdocs-check <lang>          Validate <lang>'s dev-docs PO files and reconstruction
-#   devdocs-build <lang>          Reconstruct translated dev-docs Markdown into
-#                                 build/devdocs-preview/ (preview only, not the live site)
+#   devdocs-build <lang> [dir]    Reconstruct translated dev-docs Markdown into [dir]
+#                                 (default: build/devdocs-preview/<lang>/development,
+#                                 a preview-only location — pass e.g.
+#                                 site/content/<lang>/development to write the real site)
 #
 # Canonical PO catalogs live in the sibling phpbbdocs-languages repo,
 # resolved via translation.conf (LANGUAGES_REPO env var overrides it).
@@ -774,6 +783,20 @@ cmd_devdocs_check() {
 	[ "${#missing_docs[@]}" -eq 0 ] && [ "$catalogs_found" -gt 0 ] && [ "$syntax_ok" -eq 1 ] && [ "$recon_ok" -eq 1 ]
 }
 
+# A handful of the top-level directory names are abbreviations that
+# look better with a specific human title than a bare capitalized first
+# letter would give ("Db" / "Cli") — everything else falls through to
+# the generic capitalize-first-letter default below. Mirrors
+# phpbbdocs_hugo_devdocs.sh's own pretty_title() exactly, since both
+# pipelines need the same chapter-name-to-title mapping.
+pretty_title() {
+	case "$1" in
+		db) echo "Database Abstraction Layer" ;;
+		cli) echo "CLI" ;;
+		*) printf '%s' "$1" | sed -e 's/_/ /g' -e 's/\b\(.\)/\u\1/g' ;;
+	esac
+}
+
 cmd_devdocs_build() {
 	local lang="$1"
 	require_lang_arg "$lang"
@@ -787,41 +810,65 @@ cmd_devdocs_build() {
 		exit 1
 	fi
 
-	local target_dir="$script_dir/build/devdocs-preview/$lang/development"
+	local target_dir="${2:-$script_dir/build/devdocs-preview/$lang/development}"
+	# Always a full regeneration, never stale leftovers from a previous
+	# run (e.g. a page or chapter removed upstream) — matching
+	# phpbbdocs_hugo_devdocs.sh's own "rm -rf; mkdir -p" behavior.
+	rm -rf "$target_dir"
 	mkdir -p "$target_dir"
 
 	local copy_dir
 	copy_dir="$(prepare_devdocs_source_copy)"
 
-	echo "Reconstructing dev-docs for '$lang' into build/devdocs-preview/$lang/development/"
-	echo "(preview only -- this does not touch site/content/$lang/development/,"
-	echo "which stays owned by the existing Pandoc/DocBook dev-docs pipeline)"
+	if [ -n "${2:-}" ]; then
+		echo "Reconstructing dev-docs for '$lang' into $target_dir/"
+	else
+		echo "Reconstructing dev-docs for '$lang' into build/devdocs-preview/$lang/development/"
+		echo "(preview only -- pass a second argument to write elsewhere, e.g. into"
+		echo "site/content/$lang/development/ once you're ready to use the real content)"
+	fi
 	echo ""
 
 	local current_chapter=""
-	local weight=0
+	local chapter_page_links=""
+	local all_chapter_links=""
 	local built=0
-	while IFS= read -r -d '' po; do
-		local docname="${po#"$lang_dir/development/"}"
-		docname="${docname%.po}"
-		local chapter="${docname%%/*}"
+
+	flush_chapter_index() {
+		[ -n "$current_chapter" ] || return 0
+		local chapter_title
+		chapter_title="$(pretty_title "$current_chapter")"
+		cat > "$target_dir/$current_chapter/_index.md" <<EOF
+---
+title: "${chapter_title//\"/\\\"}"
+translationKey: development-$current_chapter
+---
+
+# $chapter_title
+
+## Contents
+
+$chapter_page_links
+EOF
+		all_chapter_links="$all_chapter_links- [$chapter_title]($current_chapter/)
+"
+	}
+
+	while IFS=$'\t' read -r chapter docname weight; do
 		local rest="${docname#*/}"
-		if [ "$rest" = "$docname" ]; then
-			# Single-segment docname (only "index" in the real corpus) —
-			# skipped, matching phpbbdocs_hugo_devdocs.sh's own existing
-			# silent non-handling of the dev-docs root index file.
-			echo "  $docname: root-level file, skipped (no chapter to publish it under)"
-			continue
-		fi
 		local slug="${rest//\//-}"
 		if [ "$chapter" != "$current_chapter" ]; then
+			flush_chapter_index
 			current_chapter="$chapter"
-			weight=1
-		else
-			weight=$((weight + 1))
+			chapter_page_links=""
 		fi
 		local out="$target_dir/$chapter/$slug/index.md"
 		mkdir -p "$(dirname -- "$out")"
+		local po="$lang_dir/development/$docname.po"
+		if [ ! -f "$po" ]; then
+			echo "  $docname: no catalog found at $po, skipped" >&2
+			continue
+		fi
 		python3 "$script_dir/translations/sphinx_to_hugo.py" \
 			--source-root "$copy_dir" "$docname.rst" "$po" \
 			--language "$lang" --output "$out" \
@@ -830,14 +877,44 @@ cmd_devdocs_build() {
 			--hugo-section development
 		built=$((built + 1))
 		echo "  $chapter/$slug/index.md"
-	done < <(find "$lang_dir/development" -name '*.po' -print0 | sort -z)
+
+		# Pull the title back out of the front matter this just wrote, so
+		# the chapter's own contents list uses the same title text the
+		# page itself does, rather than re-deriving it a second time.
+		# Same sed trick phpbbdocs_hugo_devdocs.sh already uses: the XSL
+		# emits it YAML-double-quoted (titles can contain a colon, e.g.
+		# "Tutorial: Modules"), so strip the quotes and un-escape \" back
+		# to " for plain display as markdown link text here.
+		local page_title
+		page_title=$(sed -n 's/^title: "\(.*\)"$/\1/p' "$out" | sed 's/\\"/"/g' | head -1)
+		chapter_page_links="$chapter_page_links- [$page_title]($slug/)
+"
+	done < <(python3 "$script_dir/translations/devdocs_toc_order.py" "$copy_dir")
+	flush_chapter_index
 	rm -rf "$copy_dir"
 
+	cat > "$target_dir/_index.md" <<EOF
+---
+title: Development
+translationKey: development-home
+---
+
+# Development Documentation
+
+## Contents
+
+$all_chapter_links
+EOF
+
 	echo ""
-	echo "Built $built page(s) into build/devdocs-preview/$lang/development/."
-	echo "For an actual local preview: hugo --source site --contentDir ../build/devdocs-preview/$lang"
-	echo "(this is a preview build target, not the live site — wiring this into the"
-	echo "real site build is a deliberate, separate future migration decision)."
+	echo "Built $built page(s) into $target_dir/."
+	if [ -n "${2:-}" ]; then
+		echo "Run './phpbbdocs_hugo.sh all' (or just '$lang') to fold this into a real hugo build."
+	else
+		echo "For an actual local preview: hugo --source site --contentDir $(cd -- "$target_dir/.." && pwd)"
+		echo "(this was written to build/devdocs-preview/ — pass a second argument, e.g."
+		echo "site/content/$lang/development, to write directly into the real site instead)"
+	fi
 }
 
 command="${1:-}"
