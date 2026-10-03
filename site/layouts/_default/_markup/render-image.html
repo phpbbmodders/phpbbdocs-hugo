@@ -1,0 +1,15 @@
+{{- $alt := .PlainText -}}
+{{- if not (strings.TrimSpace $alt) -}}
+  {{- $knownImages := dict
+    "development-extensions-skeleton_extension/skeleton-web-ui.png" "imageAltSkeletonWeb"
+    "development-extensions-skeleton_extension/skeleton-cli.png" "imageAltSkeletonCLI"
+    "development-development-processes/new_feature_process.svg" "imageAltFeatureProcess"
+    "development-development-git/Phpbb-git-workflow.png" "imageAltGitWorkflow"
+  -}}
+  {{- $key := printf "%s/%s" .Page.TranslationKey (path.Base .Destination) -}}
+  {{- with index $knownImages $key -}}
+    {{- $alt = i18n . -}}
+  {{- end -}}
+{{- end -}}
+<img src="{{ .Destination | safeURL }}" alt="{{ $alt }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- /* Keep inline image spacing unchanged. */ -}}

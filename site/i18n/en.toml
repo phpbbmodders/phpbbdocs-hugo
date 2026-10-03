@@ -17,7 +17,7 @@ other = "Browse documentation"
 [filter]
 other = "Filter"
 [filterPlaceholder]
-other = "Find a page…"
+other = "Filter page titles…"
 [overview]
 other = "Documentation overview"
 [pageNavigation]
@@ -28,3 +28,27 @@ other = "Previous"
 other = "Next"
 [fallbackNotice]
 other = "This page hasn't been translated yet — showing the English version."
+
+[tooltipACP]
+other = "Administration Control Panel"
+[tooltipMCP]
+other = "Moderator Control Panel"
+[tooltipCLI]
+other = "Command Line Interface"
+[tooltipDBAL]
+other = "Database Abstraction Layer"
+[tooltipPlacement]
+other = "The source file or template where this event is triggered."
+[tooltipArguments]
+other = "Variables made available to listeners when this event is triggered."
+[tooltipRelease]
+other = "The first phpBB release that includes this event."
+
+[imageAltSkeletonWeb]
+other = "Skeleton extension generator form with extension metadata, author details, version requirements, and component selections."
+[imageAltSkeletonCLI]
+other = "Terminal running phpbbcli.php extension:create, with the Skeleton generator prompting for a vendor name."
+[imageAltFeatureProcess]
+other = "New feature process from proposal through discussion, acceptance, implementation and code review, to finalisation and merge; rejected proposals leave the process."
+[imageAltGitWorkflow]
+other = "phpBB Git workflow showing feature and bugfix branches merging into development branches, release preparation branches, release tags, and the 3.1 feature freeze."

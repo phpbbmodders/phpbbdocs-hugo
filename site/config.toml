@@ -5,6 +5,18 @@ defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
+[page]
+  nextPrevInSectionSortOrder = "asc"
+
+[outputs]
+  home = ["HTML", "RSS", "SearchIndex"]
+
+[outputFormats.SearchIndex]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
+  notAlternative = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
