@@ -41,6 +41,10 @@ __pycache__/
 # build output. config.toml, layouts/, i18n/, and static/css|js/ are
 # hand-authored site files and stay tracked; content/, public/,
 # resources/, and the copied-in static/<lang>/images/ are all derived.
+!/site/
+/site/*
+!/site/layouts/
+!/site/static/
 /site/content/*
 !/site/content/.gitkeep
 /site/public/*

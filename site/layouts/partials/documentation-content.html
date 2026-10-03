@@ -1,0 +1,8 @@
+{{ $abbreviations := dict "ACP" (i18n "tooltipACP") "MCP" (i18n "tooltipMCP") "CLI" (i18n "tooltipCLI") "DBAL" (i18n "tooltipDBAL") }}
+{{ $headings := dict }}
+{{ if eq .TranslationKey "development-extensions-events_list" }}
+  {{ $headings = dict "Placement" (i18n "tooltipPlacement") "Prosilver Placement (If applicable)" (i18n "tooltipPlacement") "Arguments" (i18n "tooltipArguments") "Added in Release" (i18n "tooltipRelease") }}
+{{ end }}
+<div data-doc-abbreviations="{{ $abbreviations | jsonify }}" data-doc-event-headings="{{ $headings | jsonify }}">
+  {{ .Content }}
+</div>

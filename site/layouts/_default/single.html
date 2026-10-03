@@ -5,6 +5,6 @@
   {{ if .Params.fallback }}
     <div class="fallback-notice">{{ i18n "fallbackNotice" }}</div>
   {{ end }}
-  {{ .Content }}
+  {{ partial "documentation-content.html" . }}
   {{ partial "page-nav.html" . }}
 {{ end }}

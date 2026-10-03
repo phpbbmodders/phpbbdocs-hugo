@@ -6,6 +6,7 @@
   <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.tagline }}{{ end }}">
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/documentation-tooltips.css" | relURL }}">
 </head>
 <body>
   <div class="site-shell">
@@ -57,5 +58,6 @@
     {{ partial "footer.html" . }}
   </div>
   <script src="{{ "js/docs.js" | relURL }}" defer></script>
+  <script src="{{ "js/documentation-tooltips.js" | relURL }}" defer></script>
 </body>
 </html>

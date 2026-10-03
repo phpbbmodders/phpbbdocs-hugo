@@ -21,6 +21,30 @@ repo Wiki, not here:
 - **[Translator Workflow](https://github.com/phpbbmodders/phpbbdocs-hugo/wiki/Translator-Workflow)**
   — adding or updating one language's translation, end to end.
 
+## Documentation tooltips
+
+Normal Hugo builds add tooltip definitions through
+`site/layouts/partials/documentation-content.html`. The browser displays
+explanations for the Events List headings and the first occurrence of ACP,
+MCP, CLI, and DBAL on each page. Links and code are left alone. Hover,
+keyboard focus, and tapping show the explanation; Escape dismisses it.
+Without JavaScript, the original page text is unchanged.
+
+Definitions live in `site/i18n/en.toml`. Other Hugo language files can
+translate those keys; missing translations use Hugo's English fallback.
+No imported Markdown or `.po` files need edits, and future builds need no AI.
+
+Images with non-empty alt text also show that description as a tooltip.
+The image render hook supplies missing descriptions for four known
+developer documentation images using the `imageAlt*` language keys.
+Existing descriptions take precedence; unknown or decorative empty-alt
+images remain unchanged. Real alt attributes are present even without JavaScript.
+
+The documentation extension ships copies of
+`site/static/js/documentation-tooltips.js` and
+`site/static/css/documentation-tooltips.css`. Keep those copies in sync when
+changing tooltip behaviour or styling; changing definitions only needs a rebuild.
+
 ## TODO
 
 Ideas not yet built, practical and speculative alike: [`docs/TODO.md`](docs/TODO.md).

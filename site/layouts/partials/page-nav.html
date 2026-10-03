@@ -1,6 +1,30 @@
-{{ if or .PrevInSection .NextInSection }}
+{{/* Follow the same chapter and page order as docs-nav.html. */}}
+{{ $pages := slice }}
+{{ range .Site.Home.Sections.ByWeight }}
+  {{ range .RegularPages.ByWeight }}
+    {{ $pages = $pages | append . }}
+  {{ end }}
+  {{ range .Sections.ByWeight }}
+    {{ range .RegularPages.ByWeight }}
+      {{ $pages = $pages | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $previous := false }}
+{{ $next := false }}
+{{ range $position, $page := $pages }}
+  {{ if eq $page.RelPermalink $.RelPermalink }}
+    {{ if gt $position 0 }}
+      {{ $previous = index $pages (sub $position 1) }}
+    {{ end }}
+    {{ if lt (add $position 1) (len $pages) }}
+      {{ $next = index $pages (add $position 1) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if or $previous $next }}
 <nav class="page-nav" aria-label="{{ i18n "pageNavigation" }}">
-  {{ with .PrevInSection }}<a class="previous" href="{{ .RelPermalink }}"><span>{{ i18n "previous" }}</span>{{ .Title }}</a>{{ end }}
-  {{ with .NextInSection }}<a class="next" href="{{ .RelPermalink }}"><span>{{ i18n "next" }}</span>{{ .Title }}</a>{{ end }}
+  {{ with $previous }}<a class="previous" href="{{ .RelPermalink }}"><span>{{ i18n "previous" }}</span>{{ .Title }}</a>{{ end }}
+  {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><span>{{ i18n "next" }}</span>{{ .Title }}</a>{{ end }}
 </nav>
 {{ end }}
