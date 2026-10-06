@@ -1,0 +1,15 @@
+{{ define "main" }}
+  {{/* One Pagefind bundle per top-level section; see build_search_index.sh. */}}
+  {{ $bundles := slice }}
+  {{ range .Site.Home.Sections.ByWeight }}
+    {{ $bundles = $bundles | append (printf "%spagefind/" .RelPermalink) }}
+  {{ end }}
+  <h1>{{ i18n "searchResults" }}</h1>
+  <div class="docs-search-results-panel" data-doc-search
+    data-doc-search-base-url="{{ "/" | relURL }}"
+    data-doc-search-bundles="{{ $bundles | jsonify }}"
+    data-doc-search-messages="{{ dict "length" (i18n "searchLength") "noResults" (i18n "searchNoResults") "unavailable" (i18n "searchUnavailable") "loading" (i18n "searchLoading") | jsonify }}">
+    <noscript><p>{{ i18n "searchNeedsJS" }}</p></noscript>
+  </div>
+  <script src="{{ "js/documentation-search.js" | relURL }}" defer></script>
+{{ end }}

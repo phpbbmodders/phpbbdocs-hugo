@@ -46,7 +46,8 @@
 # table/code-block/line-break support the end-user docs never needed
 # but this content does).
 #
-# Requires xsltproc and hugo on PATH. Building "en" also transitively
+# Requires xsltproc and hugo on PATH, plus Pagefind for the search
+# indexes (see build_search_index.sh). Building "en" also transitively
 # requires whatever convert_dev_docs_to_docbook.sh needs (git, curl,
 # tar, xmllint) — see that script's own header.
 #
@@ -199,5 +200,12 @@ translationKey: development-home
 $chapter_links
 EOF
 
+# Hugo resolves a relative destination against --source; make it absolute
+# so the search indexer below gets the same directory.
+case "$destination_dir" in
+	/*) ;;
+	*) destination_dir="$site_dir/$destination_dir" ;;
+esac
 hugo --source "$site_dir" --destination "$destination_dir"
+"$script_dir/build_search_index.sh" "$destination_dir"
 echo "Built Hugo site (with development docs) in $destination_dir"

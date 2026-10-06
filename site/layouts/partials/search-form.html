@@ -1,0 +1,9 @@
+{{/* Full-text search form. Kept outside .docs-nav-panel because the phpBB
+     Documentation extension reuses that panel and supplies its own form. */}}
+<form class="docs-search-form" action="{{ "search.html" | relLangURL }}" method="get" role="search">
+  <label for="docs-search-{{ . }}">{{ i18n "search" }}</label>
+  <div class="docs-search-controls">
+    <input id="docs-search-{{ . }}" class="docs-search-input" type="search" name="q" minlength="2" maxlength="100" required autocomplete="off">
+    <button type="submit">{{ i18n "search" }}</button>
+  </div>
+</form>

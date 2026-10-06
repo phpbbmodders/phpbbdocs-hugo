@@ -28,3 +28,18 @@ other = "Forrige"
 other = "Næste"
 [fallbackNotice]
 other = "Denne side er endnu ikke oversat — viser den engelske version."
+
+[search]
+other = "Søg"
+[searchResults]
+other = "Søgeresultater"
+[searchLength]
+other = "Indtast mellem 2 og 100 tegn."
+[searchNoResults]
+other = "Ingen matchende dokumentationssider fundet."
+[searchUnavailable]
+other = "Søgning i dokumentationen er ikke tilgængelig. Byg dokumentationen igen for at oprette søgeindekset."
+[searchLoading]
+other = "Søger…"
+[searchNeedsJS]
+other = "Søgning kræver JavaScript."

@@ -41,15 +41,19 @@
 
     <details class="mobile-docs-nav">
       <summary>{{ i18n "browseDocs" }}</summary>
+      {{ partial "search-form.html" "mobile" }}
       {{ partial "docs-nav.html" . }}
     </details>
 
     <div class="docs-grid">
       <aside class="docs-sidebar" aria-label="{{ i18n "browseDocs" }}">
+        {{ partial "search-form.html" "sidebar" }}
         {{ partial "docs-nav.html" . }}
       </aside>
       <main class="docs-main" id="main-content">
-        <article class="docs-article">
+        <article class="docs-article" data-pagefind-body>
+          {{/* Search result title; some pages have no <h1> for Pagefind to use. */}}
+          <span data-pagefind-meta="title" hidden>{{ .Title }}</span>
           {{ block "main" . }}{{ end }}
         </article>
       </main>

@@ -9,12 +9,16 @@ disableKinds = ["taxonomy", "term"]
   nextPrevInSectionSortOrder = "asc"
 
 [outputs]
-  home = ["HTML", "RSS", "SearchIndex"]
+  home = ["HTML", "RSS", "SearchPage"]
 
-[outputFormats.SearchIndex]
-  mediaType = "application/json"
-  baseName = "search-index"
-  isPlainText = true
+# Each language's full-text search page, /<lang>/search.html. Written as a
+# file rather than a search/ directory so it is never mistaken for a
+# documentation section. Results come from the Pagefind bundles that
+# build_search_index.sh adds after the Hugo build.
+[outputFormats.SearchPage]
+  mediaType = "text/html"
+  baseName = "search"
+  isHTML = true
   notAlternative = true
 
 [markup]

@@ -45,6 +45,8 @@ __pycache__/
 /site/*
 !/site/layouts/
 !/site/static/
+!/site/config.toml
+!/site/i18n/
 /site/content/*
 !/site/content/.gitkeep
 /site/public/*

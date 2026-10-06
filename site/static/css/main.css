@@ -114,6 +114,19 @@ a:hover { color: var(--burgundy-light); text-decoration: underline; }
 .docs-tree-subsection ul { padding-left: 10px; }
 .docs-tree-subsection li { border-bottom: 1px solid var(--line); }
 
+.docs-search-form { margin-bottom: 5px; padding: 8px; background: var(--panel); border-radius: 4px; }
+.docs-search-form label { display: block; margin-bottom: 4px; color: var(--heading); font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.docs-search-controls { display: flex; gap: 5px; }
+.docs-search-input { flex: 1; min-width: 0; padding: 8px 9px; border: 1px solid #b7b7b7; border-radius: 4px; background: white; color: var(--heading); }
+.docs-search-controls button { padding: 0 10px; border: 0; border-radius: 4px; color: var(--white); background: var(--burgundy); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+.docs-search-controls button:hover { background: var(--burgundy-light); }
+.mobile-docs-nav .docs-search-form { margin-top: 8px; }
+.doc-search-results { margin: 0; padding: 0; list-style: none; }
+.doc-search-results li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.doc-search-results h3 { margin: 0 0 4px; font-size: 16px; }
+.doc-search-results p { margin: 0; font-size: 14px; }
+.doc-search-results mark { background: #f5e3a3; color: inherit; }
+
 .fallback-notice { margin-bottom: 16px; padding: 10px 14px; border-left: 4px solid var(--burgundy); background: var(--panel-alt); color: var(--ink); border-radius: 4px; font-size: 14px; }
 
 .docs-main { min-width: 0; }
