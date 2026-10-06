@@ -7,6 +7,7 @@
   <h1>{{ i18n "searchResults" }}</h1>
   <div class="docs-search-results-panel" data-doc-search
     data-doc-search-base-url="{{ "/" | relURL }}"
+    data-doc-search-max-results="{{ site.Params.searchMaxResults | default 50 }}"
     data-doc-search-bundles="{{ $bundles | jsonify }}"
     data-doc-search-messages="{{ dict "length" (i18n "searchLength") "noResults" (i18n "searchNoResults") "unavailable" (i18n "searchUnavailable") "loading" (i18n "searchLoading") | jsonify }}">
     <noscript><p>{{ i18n "searchNeedsJS" }}</p></noscript>

@@ -1,0 +1,11 @@
+{{- /* Every page of a top-level section (its own index page, nested
+  sections and regular pages) as {url, title, text}. url is site-rooted
+  (/<lang>/...), like Pagefind's result URLs. See
+  [outputFormats.SearchIndex] in config.toml. */ -}}
+{{- $pages := slice -}}
+{{- if eq .Parent .Site.Home -}}
+  {{- range where .Site.Pages "Section" .Section -}}
+    {{- $pages = $pages | append (dict "url" .RelPermalink "title" .Title "text" .Plain) -}}
+  {{- end -}}
+{{- end -}}
+{{- $pages | jsonify -}}
