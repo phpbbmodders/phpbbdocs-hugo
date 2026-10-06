@@ -20,6 +20,10 @@
  *                             Hugo paths to phpBB routes).
  *   data-doc-search-max-results  Optional number of results to show,
  *                             10-200; defaults to 50.
+ *
+ * A child element carrying data-doc-search-fallback holds results the
+ * server already rendered. It stays when Pagefind can't run and is
+ * replaced once Pagefind's results arrive.
  */
 (function () {
   "use strict";
@@ -47,6 +51,7 @@
   var query = panel.getAttribute("data-doc-search-query");
   var baseUrl = panel.getAttribute("data-doc-search-base-url") || "/";
   var maxResults = parseInt(panel.getAttribute("data-doc-search-max-results"), 10);
+  var fallback = panel.querySelector("[data-doc-search-fallback]");
 
   if (!(maxResults >= MIN_MAX_RESULTS && maxResults <= MAX_MAX_RESULTS)) {
     maxResults = DEFAULT_MAX_RESULTS;
@@ -102,7 +107,15 @@
     return url;
   }
 
+  function dropFallback() {
+    if (fallback) {
+      fallback.remove();
+      fallback = null;
+    }
+  }
+
   function render(results) {
+    dropFallback();
     if (!results.length) {
       showStatus(messages.noResults);
       return;
@@ -130,13 +143,18 @@
     panel.appendChild(list);
   }
 
+  // Server-rendered results, if any, already cover these cases.
   if (query.length < 2 || query.length > 100) {
-    showStatus(messages.length);
+    if (!fallback) {
+      showStatus(messages.length);
+    }
     return;
   }
 
   if (!bundles.length) {
-    showStatus(messages.unavailable);
+    if (!fallback) {
+      showStatus(messages.unavailable);
+    }
     return;
   }
 
@@ -165,6 +183,6 @@
     })
     .then(render)
     .catch(function () {
-      showStatus(messages.unavailable);
+      showStatus(fallback ? "" : messages.unavailable);
     });
 }());
