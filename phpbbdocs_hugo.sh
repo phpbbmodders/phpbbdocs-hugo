@@ -13,7 +13,8 @@
 # and proteus_markdown.sh (plain Markdown) are separate scripts for the
 # other output formats this same DocBook source can produce.
 #
-# Requires xsltproc and hugo on PATH.
+# Requires xsltproc and hugo on PATH, plus Pagefind for the search
+# indexes (see build_search_index.sh).
 #
 # Usage: ./phpbbdocs_hugo.sh [language|all] [destination_dir]
 #   language        A language code with a matching proteus_doc_<lang>.xml
@@ -109,5 +110,12 @@ fi
 
 # All languages' Markdown content is now in place under $site_dir/content/
 # and $site_dir/static/ — build the actual static site from it.
+# Hugo resolves a relative destination against --source; make it absolute
+# so the search indexer below gets the same directory.
+case "$destination_dir" in
+	/*) ;;
+	*) destination_dir="$site_dir/$destination_dir" ;;
+esac
 hugo --source "$site_dir" --destination "$destination_dir"
+"$script_dir/build_search_index.sh" "$destination_dir"
 echo "Built Hugo site in $destination_dir"

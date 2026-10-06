@@ -28,3 +28,18 @@ other = "Precedente"
 other = "Successivo"
 [fallbackNotice]
 other = "Questa pagina non è ancora stata tradotta — viene mostrata la versione inglese."
+
+[search]
+other = "Cerca"
+[searchResults]
+other = "Risultati della ricerca"
+[searchLength]
+other = "Inserisci da 2 a 100 caratteri."
+[searchNoResults]
+other = "Nessuna pagina della documentazione corrispondente."
+[searchUnavailable]
+other = "La ricerca nella documentazione non è disponibile. Ricompila la documentazione per generare l’indice di ricerca."
+[searchLoading]
+other = "Ricerca in corso…"
+[searchNeedsJS]
+other = "La ricerca richiede JavaScript."

@@ -29,6 +29,21 @@ other = "Next"
 [fallbackNotice]
 other = "This page hasn't been translated yet — showing the English version."
 
+[search]
+other = "Search"
+[searchResults]
+other = "Search results"
+[searchLength]
+other = "Enter between 2 and 100 characters."
+[searchNoResults]
+other = "No matching documentation pages found."
+[searchUnavailable]
+other = "Documentation search is unavailable. Rebuild the documentation to generate its search index."
+[searchLoading]
+other = "Searching…"
+[searchNeedsJS]
+other = "Search requires JavaScript."
+
 [tooltipACP]
 other = "Administration Control Panel"
 [tooltipMCP]

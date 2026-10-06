@@ -1,5 +1,0 @@
-{{- $pages := slice -}}
-{{- range .Site.RegularPages -}}
-  {{- $pages = $pages | append (dict "path" (strings.TrimPrefix "/" .Path) "title" .Title "text" .Plain) -}}
-{{- end -}}
-{{- $pages | jsonify -}}

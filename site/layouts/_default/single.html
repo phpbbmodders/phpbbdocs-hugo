@@ -3,7 +3,7 @@
        another language to fill a translation gap — the content below
        is real, just not actually written in this page's own language. */}}
   {{ if .Params.fallback }}
-    <div class="fallback-notice">{{ i18n "fallbackNotice" }}</div>
+    <div class="fallback-notice" data-pagefind-ignore>{{ i18n "fallbackNotice" }}</div>
   {{ end }}
   {{ partial "documentation-content.html" . }}
   {{ partial "page-nav.html" . }}

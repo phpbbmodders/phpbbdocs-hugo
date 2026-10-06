@@ -21,6 +21,22 @@ repo Wiki, not here:
 - **[Translator Workflow](https://github.com/phpbbmodders/phpbbdocs-hugo/wiki/Translator-Workflow)**
   — adding or updating one language's translation, end to end.
 
+## Documentation search
+
+Full-text search uses [Pagefind](https://pagefind.app/) 1.5.2.
+`phpbbdocs_hugo.sh` and `phpbbdocs_hugo_devdocs.sh` run
+`build_search_index.sh` after Hugo, which writes one Pagefind bundle per
+language and top-level section to `site/public/<lang>/<section>/pagefind/`.
+Install the `pagefind` 1.5.2 binary on `PATH` for fast builds; otherwise the
+script falls back to `npx`, which needs Node.js.
+
+Each language's search page, `/<lang>/search.html`, merges that language's
+section bundles in the browser and needs JavaScript. The phpBB Documentation
+extension serves only the bundles for sections a user may read, so keep
+sections in separate bundles. It ships a copy of
+`site/static/js/documentation-search.js`; keep the two copies in sync. The
+sidebar **Filter** is separate and still filters page titles only.
+
 ## Documentation tooltips
 
 Normal Hugo builds add tooltip definitions through

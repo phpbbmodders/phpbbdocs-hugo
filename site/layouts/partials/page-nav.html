@@ -23,7 +23,7 @@
   {{ end }}
 {{ end }}
 {{ if or $previous $next }}
-<nav class="page-nav" aria-label="{{ i18n "pageNavigation" }}">
+<nav class="page-nav" data-pagefind-ignore aria-label="{{ i18n "pageNavigation" }}">
   {{ with $previous }}<a class="previous" href="{{ .RelPermalink }}"><span>{{ i18n "previous" }}</span>{{ .Title }}</a>{{ end }}
   {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><span>{{ i18n "next" }}</span>{{ .Title }}</a>{{ end }}
 </nav>

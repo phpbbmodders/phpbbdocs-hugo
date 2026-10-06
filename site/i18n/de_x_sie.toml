@@ -34,11 +34,11 @@ other = "Suchen"
 [searchResults]
 other = "Suchergebnisse"
 [searchLength]
-other = "Gib zwischen 2 und 100 Zeichen ein."
+other = "Geben Sie zwischen 2 und 100 Zeichen ein."
 [searchNoResults]
 other = "Keine passenden Dokumentationsseiten gefunden."
 [searchUnavailable]
-other = "Die Dokumentationssuche ist nicht verfügbar. Erstelle die Dokumentation neu, um den Suchindex zu erzeugen."
+other = "Die Dokumentationssuche ist nicht verfügbar. Erstellen Sie die Dokumentation neu, um den Suchindex zu erzeugen."
 [searchLoading]
 other = "Suche läuft…"
 [searchNeedsJS]
