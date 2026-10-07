@@ -10,6 +10,7 @@ disableKinds = ["taxonomy", "term"]
 
 [outputs]
   home = ["HTML", "RSS", "SearchPage"]
+  section = ["HTML", "RSS", "SearchIndex"]
 
 # Each language's full-text search page, /<lang>/search.html. Written as a
 # file rather than a search/ directory so it is never mistaken for a
@@ -21,6 +22,16 @@ disableKinds = ["taxonomy", "term"]
   isHTML = true
   notAlternative = true
 
+# Server-side search index for visitors without JavaScript, written per
+# section as <lang>/<section>/search-index.json so the phpBB Documentation
+# extension only reads sections a user may see. Only top-level sections
+# carry pages; nested sections write an empty list.
+[outputFormats.SearchIndex]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
+  notAlternative = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -29,6 +40,10 @@ disableKinds = ["taxonomy", "term"]
 [params]
   forumURL = "https://www.phpbbmodders.com/community/"
   projectURL = "https://www.phpbbmodders.com/"
+
+  # Most search results the search page shows, 10-200. Each result loads
+  # its own excerpt, so higher values make large result sets slower.
+  searchMaxResults = 50
 
 [languages]
   [languages.en]

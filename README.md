@@ -37,6 +37,16 @@ sections in separate bundles. It ships a copy of
 `site/static/js/documentation-search.js`; keep the two copies in sync. The
 sidebar **Filter** is separate and still filters page titles only.
 
+The search page shows up to `searchMaxResults` results (in `site/config.toml`,
+10-200, default 50). Each result loads its own excerpt, so a higher limit
+makes searches with many matches slower.
+
+Hugo also writes `<lang>/<section>/search-index.json` for each top-level
+section: every page's site-rooted URL, title and plain text. The phpBB
+Documentation extension searches these on the server for visitors without
+JavaScript, reading only the sections a user may see. Nested sections get an
+empty list.
+
 ## Documentation tooltips
 
 Normal Hugo builds add tooltip definitions through
